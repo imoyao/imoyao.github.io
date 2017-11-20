@@ -61,7 +61,6 @@ MegaCli -AdpGetTime –aALL
 ```shell
 MegaCli -AdpAllInfo –aAll 
 ```
-<br>
 
 - 显示RAID卡型号，RAID设置，Disk相关信息      
 ```shell
@@ -124,16 +123,19 @@ MegaCli -LDBI -ProgDsply -LALL -aALL
 ### 设置磁盘缓存策略 
 
 缓存策略解释：
-代码|含义
----|---
-WT|(Write through)
-WB|(Write back)
-NORA|(No read ahead) 
-RA|(Read ahead) 
-ADRA|(Adaptive read ahead) 
-Cached|-- 
-Direct|-- 
+
+|代码|含义|
+|:------|:--------------|
+|WT    | (Write through)|
+|WB    |(Write back)|
+|NORA  |(No read ahead) |
+|RA    |(Read ahead) |
+|ADRA  |(Adaptive read ahead) |
+|Cached|-    |
+|Direct|-    |
+
 eg：
+
 ```shell
 MegaCli -LDSetProp WT|WB|NORA|RA|ADRA -L0 -a0 
 # or 
@@ -144,10 +146,10 @@ MegaCli -LDSetProp -EnDskCache|-DisDskCache -L0 -a0
 ```
 ### 热备管理
 
-- 创建热备 
+- 创建热备
+
 ```shell
 # [1:5]---->[E:S]
-
 # 指定第 5 块盘作为全局热备
 MegaCli -PDHSP -Set [-EnclAffinity] [-nonRevertible] -PhysDrv[1:5] -a0 
 # eg：
@@ -155,7 +157,9 @@ MegaCli -PDHSP   -Set   -Dedicated  -Array0  -physdrv[E:S] -a0
 # 为某个阵列指定专用热备 
 MegaCli -PDHSP -Set [-Dedicated [-Array1]] [-EnclAffinity] [-nonRevertible] -PhysDrv[1:5] -a0 
 ```
+
 - 删除热备
+
 ```shell
 MegaCli -PDHSP -rmv -PhysDrv[1:5] -a0 
 ```
@@ -226,8 +230,9 @@ MegaCli -CfgForeign -Scan -a0
 ("Failed", "Online, Spun Up", "Online, Spun Down", "Unconfigured(bad)", "Unconfigured(good), Spun down", "Hotspare, Spun down", "Hotspare, Spun up" or "not Online")
 ```
 
-## Unsolve
+## Unsolved
 - 扩展 RAID（加盘）
+
 ```shell
 MegaCli -LDRecon -Start -r1 -Add -PhysDrv[252:1] -L1 -a0                                     
 # 报错
@@ -238,6 +243,7 @@ FW error description:
 
 Exit Code: 0x03
 ```
+
 [参见这里1](http://en.community.dell.com/support-forums/servers/f/956/t/19531272)
 
 ## 参考资料
