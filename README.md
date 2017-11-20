@@ -8,7 +8,7 @@
 ```shell
 git clone https://github.com/yourname/hexo-test.github.io.git
 ```
-把克隆到本地的文件除了git的文件都删掉，找不到git的文件的话就到删了吧。不要用hexo init初始化。
+把克隆到本地的文件除了git的文件都删掉，找不到git的文件的话就到删了吧。不要用`hexo init`初始化。
 
 将之前使用hexo写博客时候的整个目录（所有文件）搬过来。把该忽略的文件忽略了
 ```shell
