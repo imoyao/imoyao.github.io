@@ -16,7 +16,7 @@ timezone:
 url: https://imoyao.github.io/
 root: /
 #permalink: :year/:month/:day/:title/
-permalink: :year-:month-:day/:title/
+permalink: blog/:year-:month-:day/:title/
 permalink_defaults:
 
 # Directory

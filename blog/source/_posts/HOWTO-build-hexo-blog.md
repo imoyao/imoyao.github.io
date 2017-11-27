@@ -7,7 +7,7 @@ tags:
 - Hexo
 - Hexo-Next
 categories:
-- 教程
+- 教程记录
 ---
 ![Github loves Hexo](http://oh6j8wijn.bkt.clouddn.com/19799699-file_1490864137282_6f72.png)
 

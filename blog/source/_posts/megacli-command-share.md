@@ -247,7 +247,12 @@ Exit Code: 0x03
 [参见这里1](http://en.community.dell.com/support-forums/servers/f/956/t/19531272)
 
 ## 参考资料
-1. [DELL磁盘阵列控制卡（RAID卡）MegaCli常用管理命令汇总](http://zh.community.dell.com/techcenter/b/weblog/archive/2013/03/07/megacli-command-share)
-2. [Linux下查看Raid磁盘阵列信息的方法](http://www.ha97.com/4073.html)
-3. [Megacli 常用命令](http://www.mamicode.com/info-detail-860128.html)
+
+- [Dell – PERC/LSI MegaCLI – How to install](https://techedemic.com/2014/08/07/dell-perclsi-megacli-how-to-install/)
+- [LSIMegaRAIDSAS](https://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS#a3.1.megactl)
+- [DELL磁盘阵列控制卡（RAID卡）MegaCli常用管理命令汇总](http://zh.community.dell.com/techcenter/b/weblog/archive/2013/03/07/megacli-command-share)
+- [MegaCli命令总结 - CSDN博客](http://blog.csdn.net/heart_2011/article/details/7254404)
+- [Linux下查看Raid磁盘阵列信息的方法](http://www.ha97.com/4073.html)
+- [Megacli 常用命令](http://www.mamicode.com/info-detail-860128.html)
+- [一些可能有用的文档或资料](https://www.broadcom.com/site-search?q=megacli)
   
