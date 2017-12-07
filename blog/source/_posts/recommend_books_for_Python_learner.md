@@ -18,7 +18,7 @@ tags:
 
 - 《"笨办法"学`Python`》    （《Learn Python the Hard Way》）
 
-[笨办法学Python-Gitbook](https://www.gitbook.com/book/flyouting/learn-python-the-hard-way-cn/details)
+[笨办法学 Python -Gitbook](https://www.gitbook.com/book/flyouting/learn-python-the-hard-way-cn/details)
 
 学习一门语言的最好办法就是多敲多用，妄图靠眼睛**看**会一门技术的人，希望能够早点丢掉幻想，准备战斗！
 >这本简单书的目的是让你起步编程。 虽然书名说是“笨办法”,但其实并非如此. 所谓的“笨办法”是指本书教授的方式。这本书的
@@ -29,23 +29,22 @@ tags:
 
 - 《简明`Python`教程》    （《A Byte of Python》）
 
-[简明`Python`教程-Gitbook](https://www.gitbook.com/book/lenkimo/byte-of-python-chinese-edition/details)
+[简明 Python 教程-Gitbook](https://www.gitbook.com/book/lenkimo/byte-of-python-chinese-edition/details)
 
 看一下激动人心的前言介绍：
 
->本书将以指南或教程的形式向你介绍`Python`这门编程语言。它以新手为主要目标。同时本书
-也对有经验的程序员有所帮助。
+>本书将以指南或教程的形式向你介绍`Python`这门编程语言。它以新手为主要目标。同时本书也对有经验的程序员有所帮助。
 如果你对电脑的所有了解仅止步于如何保存文本文件的话，那本书的目标便是协助你通过本书学习`Python`。如果在此之前你已经有了编程经验，你同样可以通过本书来学习`Python`。
 如果你已经有过编程经验，你或许会对`Python`与其它你所喜爱的编程语言间有何区别抱有兴趣——而我将会你展现许多这种区别。顺便提醒你一下，`Python`将会很快成为你最喜欢的编程语言！
 
 - 《 Python 3.3 官方教程》
 
-[`Python`入门指南中文版](http://www.pythondoc.com/pythontutorial3/index.html)
-[`Python`官方教程（英文原版）](https://docs.python.org/3/)
+[ Python 入门指南中文版](http://www.pythondoc.com/pythontutorial3/index.html)
+[ Python 官方教程（英文原版）](https://docs.python.org/3/)
 
 更新、权威、条理化的官方`tutorial` ，最原汁原味的`Python`指南。
 
-- 《零基础学Python》/《跟老齐学Python》
+- 《零基础学 Python》/《跟老齐学 Python》
 
 [零基础学Python](https://www.gitbook.com/book/looly/python-basic/details)
 
@@ -76,4 +75,4 @@ tags:
 ## More
 
 [免费中文Python电子书（教程）](https://foofish.net/python-free-ebook.html)
-[Awesome`Python`Books](https://github.com/Junnplus/awesome-python-books/blob/master/README-ZH_CN.md)
+[Awesome Python Books](https://github.com/Junnplus/awesome-python-books/blob/master/README-ZH_CN.md)
