@@ -1,5 +1,5 @@
 ---
-title: 使用Python进行技术统计
+title: 使用Python进行计数统计
 date: 2017-11-21 11:29:44
 tags:
 - Python
