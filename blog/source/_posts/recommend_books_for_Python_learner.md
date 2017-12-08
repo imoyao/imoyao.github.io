@@ -16,7 +16,7 @@ tags:
 
 ## 入门篇
 
-- 《"笨办法"学`Python`》    （《Learn Python the Hard Way》）
+- 《"笨办法"学 Python》    （《Learn Python the Hard Way》）
 
 [笨办法学 Python -Gitbook](https://www.gitbook.com/book/flyouting/learn-python-the-hard-way-cn/details)
 
@@ -27,7 +27,7 @@ tags:
 意味着你已经学会了编程，但至少你会对编程语言以及编程这个行业有一个初步的了解。
 
 
-- 《简明`Python`教程》    （《A Byte of Python》）
+- 《简明 Python 教程》    （《A Byte of Python》）
 
 [简明 Python 教程-Gitbook](https://www.gitbook.com/book/lenkimo/byte-of-python-chinese-edition/details)
 
