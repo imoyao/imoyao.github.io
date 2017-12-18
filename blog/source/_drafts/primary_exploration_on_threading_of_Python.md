@@ -139,10 +139,11 @@ Do things together(intermediate_time) cost:2.00200009346        # 线程耗时
 Exception in thread Thread-1 (most likely raised during interpreter shutdown):
 [Finished in 3.2s]
 ```
-有了项目经理之后，项目限定 2 个月完成。于是在计时完成后，直接结束。此时，我们的项目并没有完成。
+有了项目经理之后，项目限定 2 个月完成。于是在计时完成后，直接结束。注意：此时我们的项目并没有正常完成。
 > Exception in thread Thread-1 (most likely raised during interpreter shutdown)
 
-很明显，这也不是我们想要的结果。
+很明显，这不是我们想要的结果。
+
 于是，老板高薪聘请大牛：调用 `threading` 中的 `join()`方法。该方法能够阻塞当前上下文环境的线程，直到调用此方法的线程终止或到达指定的 timeout（ 可选参数）。利用该方法可以方便地控制主线程和子线程以及子线程之间的执行。
 ```python
 
@@ -174,7 +175,12 @@ For 2,I am doing job:Debug at 1512719427.38.
 Do things together(intermediate_time) cost:9.007999897
 [Finished in 10.2s]
 ```
-与单线程对比，程序运行时间减少 2s ，这样我们就有时间约喜欢的女孩子出来一起吃着火锅唱着歌啦。
+与单线程对比，程序运行时间减少 2s ，这样我们就有更多的时间约喜欢的女孩子一起吃着火锅唱着歌啦。
 
 ## 参考来源
+
 [python 多线程就这么简单 - 虫师 - 博客园](https://www.cnblogs.com/fnng/p/3670789.html)
+
+深入理解：
+
+[python 专题八.多线程编程之thread和threading](http://blog.csdn.net/eastmount/article/details/50155353)
