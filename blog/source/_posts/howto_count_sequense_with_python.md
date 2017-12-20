@@ -8,6 +8,11 @@ tags:
 categories:
 - Python
 ---
+
+from collections import Counter
+
+<!--more-->
+
 ## 使用常规`for`循环
 ```python
 
