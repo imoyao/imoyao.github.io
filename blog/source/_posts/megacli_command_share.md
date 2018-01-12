@@ -9,7 +9,7 @@ tags:
 categories:
 - 教程记录
 ---
-在进行存储相关开发时肯定要创建磁盘阵列，本文主要记录 RAID 卡管理工具`MegaCli`的使用。
+进行存储开发时需要创建磁盘阵列，本文主要记录 RAID 卡管理工具`MegaCli`的使用。需要注意的是，目前该管理工具因为商业收购已经被官方“弃坑”，`StorCLI`作为后继者整合了`LSI`和原来`3ware`的产品支持，兼容`MegaCLI`命令的同时更加简洁，参阅[此篇](https://imoyao.github.io/blog/2017-12-27/storcli_command_share/)。
 <!--more-->
 
 ## 巡读
@@ -34,7 +34,9 @@ MegaCli -AdpPR -SetStartTime yyyymmdd hh -a0
 ```
 
 ## cc校验
+
 - 立即开始cc校验
+
 ```shell
 #L0表示Target ID 为0的raid组
 MegaCli -ldcc -start -L0 –a0
@@ -278,7 +280,7 @@ MegaCli -AdpSetProp -AutoEnhancedImportEnbl -a0
 MegaCli -AdpSetVerify -f fileName -a0
 ```
 
-## Raid卡相关
+## RAID卡相关
 ```shell
 #查看raid的配置信息
 MegaCli -adpallinfo -a0
@@ -359,6 +361,7 @@ MegaCli -AdpSetProp BatWarnDsbl -val -a0
 ```
 
 ## 纠错码相关
+
 ```shell
 #设置纠错码漏桶的字节数
 MegaCli -AdpSetProp EccBucketSize -val -a0
@@ -371,30 +374,39 @@ MegaCli -AdpSetProp EccBucketSize -val -a0
 扩容时不能建raid，不能添加热备盘;
 rebuild的优先级高于copyback;
 
-## Raid的创建与删除
+## RAID 的创建与删除
 - 创建raid 0，1，5，6
 
 ```shell
 #MegaCli -CfgLdAdd -rX[E0:S0,E1:S1,...] [WT|WB] [NORA|RA|ADRA] [Direct|Cached] [CachedBadBBU|NoCachedBadBBU] [-szXXX [-szYYY ...]] [-strpszM] [-Hsp[E0:S0,...]] [-AfterLdX] [-Force]|[FDE|CtrlBased] -a0 可以设置写模式(wt，wb)，读模式(ra，nora，adra)，缓存模式(direct，cached)，大小(sz)，条块大小(strpszM)等。比如1000G，只用指定盘的一部分(sz1000G)，设置条块的大小strpsz(设置为16k，则为strpsz16)
 MegaCli -cfgldadd -r5[117:1,117:3,117:11] -wb -ra -cached -cachedbadbbu -force -a0
 ```
+
 - 创建raid 10，50，60
+
 ```shell
 #MegaCli -CfgSpanAdd -rX-Array0[E0:S0,E1:S1] -Array1[E0:S0,E1:S1] [-ArrayX[E0:S0,E1:S1] ...] [WT|WB] [NORA|RA|ADRA] [Direct|Cached] [CachedBadBBU| NoCachedBadBBU] [-szXXX[-szYYY ...]][-strpszM][-AfterLdX][-Force] |[FDE|CtrlBased] -aN
 MegaCli -CfgSpanAdd -r10 -Array0[245:0,245:1] Array1[245:2,245:3] -WB -RA -Cached -Cachedbadbbu -a0
+```
 - 批量创建raid0
+
+```shell
 #把每个槽位的磁盘都创建为只有一个盘的raid0
 MegaCli -CfgEachDskRaid0 -wb -ra -cached -cachedbadbbu -a0
 #把所有的空闲盘都加入到raid中
 MegaCli -CfgAllFreeDrv -r5 -SATAOnly -wb -ra -cached -cachedbadbbu -a0
+```
+
 - 删除raid组
+
+```shell
 #清除所有的raid组的配置
 MegaCli -cfgclr -a0
 #删除指定的raid组(Target Id: 0)的raid组
 MegaCli -cfglddel -L0 -a0
 ```
 
-## 设置raid组的属性
+## 设置RAID组的属性
 
 ```shell
 #设置raid组的名字
@@ -647,11 +659,11 @@ Exit Code: 0x03
 
 ## 参考资料
 
+- [官方资源下载-broadcom](https://www.broadcom.com/site-search?q=megacli)
 - [Dell – PERC/LSI MegaCLI – How to install](https://techedemic.com/2014/08/07/dell-perclsi-megacli-how-to-install/)
 - [LSIMegaRAIDSAS](https://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS#a3.1.megactl)
 - [DELL磁盘阵列控制卡（RAID卡）MegaCli常用管理命令汇总](http://zh.community.dell.com/techcenter/b/weblog/archive/2013/03/07/megacli-command-share)
 - [MegaCli命令总结 - CSDN博客](http://blog.csdn.net/heart_2011/article/details/7254404)
 - [Linux下查看Raid磁盘阵列信息的方法](http://www.ha97.com/4073.html)
 - [Megacli 常用命令](http://www.mamicode.com/info-detail-860128.html)
-- [一些可能有用的文档或资料](https://www.broadcom.com/site-search?q=megacli)
   
