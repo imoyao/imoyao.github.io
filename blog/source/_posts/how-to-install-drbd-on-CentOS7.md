@@ -34,7 +34,7 @@ yum -y update
 yum -y install gcc make automake autoconf libxslt libxslt-devel flex rpm-build wget
 ```
 
-**注意：** 安装`kernel-devel`一定要和你` uname -r `一致。
+**注意：** 安装`kernel-devel`一定要和` uname -r `获取结果一致。
 
 ```shell
 rpm -q kernel-devel
@@ -58,6 +58,10 @@ MORE：http://www.linbit.com/www.linbit.com/downloads/drbd/
 ```shell
 wget https://xxx.tar.gz
 ```
+
+当然，如果需要你也可以通过我的分享下载编译好的`rpm`包（示例版本）：
+
+> 链接:  https://pan.baidu.com/s/1huncgDI       密码:  b41i
 
 ### 解压下载的两个`tar`包
 
