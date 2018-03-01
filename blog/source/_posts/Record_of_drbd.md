@@ -95,7 +95,7 @@ Connected
 ```
 
 一个资源可能有以下连接状态中的一种
-
+Unconfigured：设备在等待配置
 StandAlone： 独立，网络配置不可用；资源还没有被连接或是被管理断开（使用 `drbdadm disconnect` 命令），或是由于出现认证失败或是脑裂的情况
 Disconnecting： 断开，断开只是临时状态，下一个状态是StandAlone独立的
 Unconnected： 悬空，是尝试连接前的临时状态，可能下一个状态为WFconnection和WFReportParams
@@ -301,7 +301,7 @@ drbd0 minor 0 (/dev/ is optional) or /dev/drbd0
 
 The raw device that is replicated between nodes. Note, in this example the devices are the same on both nodes. If you need different devices, move the disk parameter into the on host.
 
-4.`meta-disk`参数通常包含隐式值，但是你也可以指定一个显式设备保存元数据。详情参见：
+4.`meta-disk`参数通常包含隐式值，但是你也可以指定一个显式设备保存元数据。详情参见：[这里>>>](http://www.drbd.org/users-guide-emb/ch-internals.html#s-metadata)
 
 The meta-disk parameter usually contains the value internal, but it is possible to specify an explicit device to hold the meta data. See http://www.drbd.org/users-guide-emb/ch-internals.html#s-metadata for more information.
 
@@ -379,7 +379,7 @@ cp ~/.ssh/id_dsa.pub ~/.ssh/authorized_keys
 scp -r ~/.ssh controller-2:         #双控对端hostname
 ```
 
-## 参考及阅读
+## 参考阅读
 
 - [官方手册](https://docs.linbit.com/docs/users-guide-8.4/)
 
