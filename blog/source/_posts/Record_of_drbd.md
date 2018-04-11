@@ -396,3 +396,9 @@ http://www.3mu.me/centos%E4%B8%8B%E5%AE%9E%E7%8E%B0heartbeatdrbdmysql%E5%8F%8C%E
 
 - [记一次DRBD Unknown故障处理过程](https://yq.aliyun.com/articles/52043)
 
+- [DRBD 管理、故障处理部分](https://www.linuxidc.com/wap.aspx?nid=93422&cid=9&sp=654)(https://www.linuxidc.com/Linux/2013-12/93422.htm)
+
+- [DRBD编译安装中出现的问题及解决小结 - CSDN博客](http://blog.csdn.net/t1anyuan/article/details/52143789)
+
+- [DRBD配置参数](https://www.linuxidc.com/Linux/2012-01/51661.htm)
+

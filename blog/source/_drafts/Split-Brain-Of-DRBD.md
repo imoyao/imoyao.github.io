@@ -39,6 +39,7 @@ r0: Failure: (102) Local address(port) already in use.
 drbdadm -- --discard-my-data connect all 
 6
 就可以了
+
 如何模拟Split-Brain
 
 (1) 往主节点写入大文件，在未写入完前停止备节点的DRBD
@@ -64,3 +65,6 @@ http://www.3mu.me/%E4%BB%80%E4%B9%88%E6%98%AFdrbd%E8%84%91%E8%A3%82%E5%8F%8A%E5%
 
 drbd中metadata的理解[原创] – 蚊子世界
 http://www.wenzizone.cn/2009/10/29/drbd%e4%b8%admetadata%e7%9a%84%e7%90%86%e8%a7%a3%e5%8e%9f%e5%88%9b.html
+
+drbd脑裂处理 | IT瘾
+http://itindex.net/detail/50197-drbd
