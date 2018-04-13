@@ -43,8 +43,11 @@ drbdadm -- --discard-my-data connect all
 如何模拟Split-Brain
 
 (1) 往主节点写入大文件，在未写入完前停止备节点的DRBD
+
 (2) 停止主节点的DRBD
+
 (3) 启动备节点的DRBD，设置为主节点.
+
 (4) 启动原主节点的DRBD，这时发现它的状态就是Unknown，Split-Brain 情况出现。
 
 一次DRBD脑裂行为的模拟

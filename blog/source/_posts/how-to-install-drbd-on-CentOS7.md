@@ -78,6 +78,8 @@ mkdir -p rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
 ```
 ### 编译`DRBD`
 
+#### 制作 `rpm` 包
+
 ```shell
 cd drbd-8.4.5/
 make clean
@@ -87,10 +89,9 @@ make km-rpm KDIR=/usr/src/kernels/`uname -r`/       # 启用内核模块 自动�
 # /root/rpmbuild/RPMS/x86_64/drbd-km-3.10.0_693.11.6.el7.x86_64-8.4.5-1.x86_64.rpm
 # /root/rpmbuild/RPMS/x86_64/drbd-km-debuginfo-8.4.5-1.x86_64.rpmmakeinsta
 ```
-
-以下可能为不必操作项，由于本人对源码安装也不是很熟悉，所以列出来仅备参考。
-
 ---
+
+#### 直接编译安装
 
 ```shell
 ## drbd模块
@@ -103,6 +104,7 @@ cp drbd.ko /lib/modules/`uname -r`/kernel/lib/
 
 ## 安装模块
 modprobe drbd
+## 验证drbd模块是否加载（部分系统默认有该模块）
 lsmod|grep drbd
 
 # drbd                  364858  0
@@ -148,6 +150,7 @@ make[1]: *** [drbdsetup.8] Error 4
 ```shell
 yum -y install docbook-style-xsl
 ```
+
 TODO: 此处暂未找到别的解决方法，欢迎读者留言。
 
 ## 安装
@@ -158,7 +161,7 @@ TODO: 此处暂未找到别的解决方法，欢迎读者留言。
 cd /root/rpmbuild/RPMS/x86_64/
 rpm -ivh drbd-* --force
 ```
-### 安装模块
+### 加载模块（参见分割线部分）
 
 ```shell
 modprobe drbd
@@ -168,7 +171,7 @@ modprobe drbd
 
 ```shell
 lsmod|grep drbd
-# 返回（可能略有不同）：
+# 返回（`depends` 可能略有不同）：
 # drbd                  373375  4
 # libcrc32c              12644  2 xfs,drbd
 
