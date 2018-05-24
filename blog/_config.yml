@@ -82,8 +82,8 @@ theme: material
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-#  repo: https://github.com/imoyao/imoyao.github.io.git
-  repo: git@github.com:imoyao/imoyao.github.io.git
+  repo: https://github.com/imoyao/imoyao.github.io.git
+#  repo: git@github.com:imoyao/imoyao.github.io.git
 
   branch: master
 # Local Search
