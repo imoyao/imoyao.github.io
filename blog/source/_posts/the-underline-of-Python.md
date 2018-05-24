@@ -7,10 +7,14 @@ categories:
 - Python
 thumbnail:
 ---
+## Py乙己
+
 孔乙己自己知道不能和架构师谈天，便只好向实习生说话。有一回对我说道，“你写过`Python`么？”我略略点一点头。他说，“写过代码，……我便考你一考。`Python`中的下划线，怎样用的？”我想，搬砖一样的人，也配考我么？便回过脸去，不再理会。孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些用法应该记着。将来做面试官的时候要用。”我暗想我和面试官的等级还很远呢，而且我们面试官也从不将这些问题拿来考应聘者；又好笑，又不耐烦，懒懒的答他道，“谁要你教，不就是命名变量，增加代码的可读性吗？”孔乙己显出极高兴的样子，将两个指头的长指甲敲着键盘，点头说，“对呀对呀！……下划线有四种写法，你知道么？”我愈不耐烦了，努着嘴走远。孔乙己刚用纸巾擦了擦键盘上的咖啡渍，想在`IDE`里写代码，见我毫不热心，便又叹一口气，显出极惋惜的样子。
 
+---
+## 正文
 
-1. 在交互式解释器中获取上一个语句执行的结果；
+- 在交互式解释器中获取上一个语句执行的结果；
 
 ```python
 >>> 1+1
@@ -21,12 +25,14 @@ thumbnail:
 10
 ```
 
-2. 用来在函数、模块、包、变量名中分隔单词，增加可读性；
+- 用来在函数、模块、包、变量名中分隔单词，增加可读性；
+
 ```python
 var_foo_bar = 'hello,world!'
 ```
 
-3. 内部使用的变量、属性、方法、函数、类或模块（约定）；
+- 内部使用的变量、属性、方法、函数、类或模块（约定）；
+
 ```python
 # 假定存在foo.py中定义变量：
 _var = 9527
@@ -42,11 +48,14 @@ print(_var)
 9527
 ```
 
-4. 避免与 `Python` 保留的关键字冲突（约定）；
+- 避免与 `Python` 保留的关键字冲突（约定）；
+
 ```python
 Tkinter.Toplevel(master, class_='ClassName')        # 注意class为Python內建名称
 ```
-5. 在类内的私有变量（`private`），类外部无法直接使用原名称访问，需要通过`instance._ClassName__var`的形式访问（`name mangling`）；
+
+- 在类内的私有变量（`private`），类外部无法直接使用原名称访问，需要通过`instance._ClassName__var`的形式访问（`name mangling`）；
+
 ```python
 class Person(object):
 
@@ -69,12 +78,14 @@ if __name__ == '__main__':
     print(pi._Person__say_hello)
     print(pi.get_age())
 ```
+
 我们可以使用`dir(pi)`看一下对象中的中的属性和方法：
-```
+
+```shell
 ['_Person__say_hello', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'age', 'get_age', 'get_name', 'name']
 ```
 
-`Python` 解释器触发名称修饰，它这样做是为了防止变量在子类中被重写。
+这里 `Python` 解释器触发名称修饰，它这样做是为了防止变量在子类中被重写。
 
 ```python
 # 新建一个集成Person的AI类
@@ -92,25 +103,30 @@ if __name__ == '__main__':
     ai = AI(*ai_attr)
     print(dir(ai))
 ```
+
 我们可以看到继承关系：
+
 ```Python
 # 返回
 ['_AI__say_hello', '_Person__gender', '_Person__say_hello', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_age', 'name']
 ```
+
 这点在 `《Python Cookbook》- 8.5 在类中封装属性名` 中也有提及和解释。
 
-6. 在类内的保护变量（这一条存疑）；
+- 在类内的保护变量（这一条存疑）；
 
 ```python
 _var_
 ```
-7. `Python` 内置的“魔法”方法或属性，你也可以自己定义，但强烈 **不推荐**。比如：
+
+- `Python` 内置的“魔法”方法或属性，你也可以自己定义，但强烈 **不推荐**。比如：
 
 ```python
 __init__, __file__, __main__
 ```
 
-8. 作为内部使用的一次性变量
+- 作为内部使用的一次性变量；
+
 ```python
 通常在循环里使用,比如：
 foo_list = [_ for _ in range(10)]
@@ -119,13 +135,13 @@ for _, a in [(1,2),(3,4)]:
     print a
 ```
 
-9. `i18n` 里作为 `gettext()` 的缩写；
+- `i18n` 里作为 `gettext()` 的缩写；
 
 ```python
 _()
 ```
 
-10. 用来分隔数值以增加可读性（`Python 3.6` 新增）；
+- 用来分隔数值以增加可读性（`Python 3.6` 新增）；
 
 ```python
 >>> num = 1_000_000 
@@ -135,12 +151,13 @@ _()
 ```
 ### 参考来源
 
-[PEP 8 -- Style Guide for Python Code](http://pep8.org/#descriptive-naming-styles)
-[Python basic cheatsheet](https://www.pythonsheets.com/notes/python-basic.html#python-naming-rule)
+1. [PEP 8 -- Style Guide for Python Code](http://pep8.org/#descriptive-naming-styles)
 
-[The Meaning of Underscores in Python – dbader.org](https://dbader.org/blog/meaning-of-underscores-in-python)
+2. [Python basic cheatsheet](https://www.pythonsheets.com/notes/python-basic.html#python-naming-rule)
 
-[Python中的下划线_有多少个意思？- 知乎](https://www.zhihu.com/question/268940585/answer/344852737)
+3. [The Meaning of Underscores in Python – dbader.org](https://dbader.org/blog/meaning-of-underscores-in-python)
+
+4. [Python中的下划线_有多少个意思？- 知乎](https://www.zhihu.com/question/268940585/answer/344852737)
 
 ## 派森多一点
 
