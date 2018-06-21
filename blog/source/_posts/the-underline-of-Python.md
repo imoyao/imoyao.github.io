@@ -31,7 +31,7 @@ thumbnail:
 var_foo_bar = 'hello,world!'
 ```
 
-- 内部使用的变量、属性、方法、函数、类或模块（约定）；
+- 内部使用的变量、属性、方法、函数、类或模块，（约定）又称为内部实现；
 
 ```python
 # 假定存在foo.py中定义变量：
@@ -111,7 +111,9 @@ if __name__ == '__main__':
 ['_AI__say_hello', '_Person__gender', '_Person__say_hello', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_age', 'name']
 ```
 
-这点在 `《Python Cookbook》- 8.5 在类中封装属性名` 中也有提及和解释。
+这点在 `《Python Cookbook》- 8.5 在类中封装属性名` 中对于单下划线和双下划线的使用场景也有提及和解释：
+
+> 大多数而言，你应该让你的非公共名称以单下划线开头。但是，如果你清楚你的代码会涉及到子类，并且有些内部属性应该在子类中隐藏起来，那么才考虑使用双下划线方案。
 
 - 在类内的保护变量（这一条存疑）；
 
