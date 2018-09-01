@@ -118,9 +118,14 @@ resource r0 {
     }
 }
 ```
-`注意：`本机主机名(`hostname`)和地址(`ip`)必须严格按照真实情况配置，两边`res`文件内容一致。
+`注意：`本机主机名(`hostname`)和地址(`ip`)必须严格按照真实情况配置，两边`.res`文件内容尽量保持一致。
 
 配置文件创建完成之后，在两个服务器上分别执行如下命令，创建`DRBD`资源，当然你也可以通过`scp`把配置文件拷过去，然后执行相关命令。
+
+其中上述配置文件的meta-disk有三种记录方式：internal/device/device[index_num]。其中不管是哪种方式，metadata存放的分区不能格式化，哪怕使用internal时metadata和一般data在同一个分区也不能格式化该分区。
+
+internal是将元数据也写入到数据分区的尾部，即数据和元数据同分区。如果指定的device没有给定index时，则表示元数据存储到该设备中。如果某节点指定device[index_num]，那么指定几次元数据分区索引就必须大于128M的几倍，例如上述文件中drbd1.longshuai.com节点指定了/dev/sdb1[0]，那么sdb1就必须大于128M，如果此时其他资源的节点也指定了同一台服务器的/dev/sdb1[1]，则指定了两次就必须大于256M。指定为internal和device时，元数据区的大小是drbd自行计算的。
+上面index的说法来自[这里](http://www.cnblogs.com/f-ck-need-u/p/8678883.html#1-drbd-)，具体没有实际验证。
 
 ```shell
 drbdadm create-md r0

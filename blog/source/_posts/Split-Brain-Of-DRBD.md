@@ -188,7 +188,7 @@ GI作为DRBD的内部机制主要被用来：
 
 - 当前`UUID（C-UUID）`和位图`UUID(B-UUID)`都不匹配
 
-本地节点检测到它的当前`UUID`与对等节点的当前`UUID`不同，并且位图`UUID`不匹配。这是两份数据与无关父代产生的一种裂脑，因此即使配置了自动恢复策略也没有意义。 `DRBD`断开连接并等待手动恢复。
+本地节点检测到它的当前`UUID`与对等节点的当前`UUID`不同，并且位图`UUID`不匹配。这是两份数据与无关父代产生的一种裂脑，因此即使配置了自动恢复策略也没有意义。 `DRBD`处于断开连接并等待手动恢复状态。
 
 
 - 没有`UUID`匹配
@@ -383,7 +383,7 @@ _提示_：`DRBD`还可以理解这三个选项下额外的关键字，这些关
 ```shell
 resource <resource> {
   handlers {
-    split-brain "/usr/lib/drbd/notify-split-brain.sh root"
+    split-brain "/usr/lib/drbd/notify-split-brain.sh root"      # 脚本通知root用户，此处可以使用邮件提醒
     ...
   }
   net {
