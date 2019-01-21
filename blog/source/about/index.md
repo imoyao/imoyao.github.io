@@ -1,13 +1,15 @@
 ---
+title: 深深别院，潜潜牧志！
 date: 2017-11-18 15:24:37
 ---
+
 ## 自述
 
 牧志铭，或许对于敏感的人听起来带着点死亡的气息。本处主要寓意《施氏食狮史》、《季姬击鸡记》这样的大家名篇：听不明白是因为写得不够清楚，当你写得清楚的时候，读者总会理解你要表达的意思。
 
 牧志：牧：治、滋养；志：雄心、意向；铭：铸、刻或写在器物上记述生平、事迹或警诫自己的文字。化用姜文电影作品——《让子弹飞》中人物`牧之`而来。
 
-本人从事`Python`后端开发工作，目前还是一个`noob`，希望做一个有趣的人，最好能有点小钱钱 _(:з」∠)_
+本人主要从事`Python`后端开发工作，目前还是一个菜鸟，希望做一个有趣的人，最好能有点小钱钱 _(:з」∠)_
 
 本博客由**`imoyao`**个人创作及维护，主要记录一些在工作中遇到的问题及解决方案，当然也会有一部分生活随笔。
 
@@ -32,6 +34,10 @@ Email: immoyao#gmail.com
 QQ: NDQ1NTY3ODg5
 
 Others: imoyao or None :-)
+
+个人公众号：
+
+![别院牧志（idealyard）](http://mp.weixin.qq.com/rr?timestamp=1548062678&src=3&ver=1&signature=vu*dQBpji33gsumOPp33aOY32Vw8vRp*yOZIZdo1313SJa9p-uko0-QI5LpKIqxROZvN43OQMmp-Mk6*PZnNpVX5KE*nVZMfhnQa0VbOFWo=)
 
 ## 版权声明
 <font size = 2>（特殊声明除外）</font>

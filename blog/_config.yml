@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: IMOYAO
-subtitle: 牧志
+title: 别院牧志
+subtitle: IMOYAO
 description: Valar Dohaeris.
 author: imoyao
 #language: zh-Hans    # for next
@@ -76,7 +76,9 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 #主题更改
 #theme: next
-theme: material
+#theme: material
+#theme: cafe
+theme: freemind
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

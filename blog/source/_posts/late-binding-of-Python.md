@@ -8,6 +8,7 @@ tags:
 ---
 # 延迟绑定(`late binding`)闭包
 `Python` 使用中一个常见的困惑是 `Python` 在闭包(或在周围全局作用域（`surrounding global scope`）)中绑定变量的方式。
+<!--more-->
 你所写的函数：
 ```python
 def multi_expression():

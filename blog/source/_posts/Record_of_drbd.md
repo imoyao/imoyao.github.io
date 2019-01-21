@@ -9,7 +9,7 @@ categories:
 - 教程记录
 ---
 
-
+这是一个关于 `DRBD` 的使用备忘录。
 <!--more-->
 
 ![DRBD在Linux内核I/O栈的位置](https://docs.linbit.com/ug-src/users-guide-8.4/images/drbd-in-kernel.png)

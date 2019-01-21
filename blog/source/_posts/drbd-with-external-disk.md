@@ -7,7 +7,7 @@ tags:
 - 元数据
 - 存储
 ---
-裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。
+裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。mathjax
 <!--more-->
 
 ## `meta data`存放位置优缺点比较
@@ -40,10 +40,13 @@ meta-data和数据存放在同一个底层设备之上，它通过在设备末�
 **注意：** 如果我们希望在已经存在数据的设备上面建立drbd的资源，并且不希望丢失该设备上面的数据，又没办法增大底层设备的容量，而且上层文件系统不支持收缩，我们就只能将meta data创建成external方式。
 
 ## 估算元数据大小
+注意：如果公式渲染出错，可以去[这里](https://zohooo.github.io/jaxedit/)预览
 
 你可以使用以下公式计算 DRBD 元数据的精确空间要求:
 
 ![精确计算元数据大小](https://docs.linbit.com/ug-src/users-guide-8.4/images/metadata-size-exact.png)
+
+$$M_{S}= \lceil\frac{C_{s}}{2^{18}} \rceil \ast 8 \ast N + 72$$
 
 Cs 是存储设备扇区大小。N是对端的数量，一般情况下drbd实现的是双节点，因此N=1，可以不用考虑。
 
@@ -63,6 +66,8 @@ Out[23]: 0.06640625
 在实践中, 你可以使用一个合理的好的近似, 下面给出。请注意, 在此公式中, 单位为兆字节(megabytes), 而非扇区:
 
 ![预估计算元数据大小](https://docs.linbit.com/ug-src/users-guide-8.4/images/metadata-size-approx.png)
+
+$$M_{MB} \lt \frac{C_{MB}}{32768} \ast N + 1$$
 
 ```shell
 # 获取块设备大小
@@ -198,6 +203,7 @@ drbdadm down <resource>
 ```
 
 - 在缩小前保存元数据到一个文件中：
+
 ```shell
 drbdadm dump-md <resource> > /tmp/metadata
 ```

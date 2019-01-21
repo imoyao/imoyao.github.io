@@ -1,5 +1,5 @@
 ---
-title: 关于在 Python 中 MySQL 的 WHERE 子句中执行 IN 操作（list，tuple）的问题浅析Python中的延迟绑定
+title: 关于在 Python 中 MySQL 的 WHERE 子句中执行 IN 操作（list，tuple）的问题
 date: 2018-05-10 15:41:35
 tags:
 - Python
@@ -7,7 +7,9 @@ tags:
 - SQL
 ---
 
-今天在写代码的时候，有一处查询语句需要执行 `IN` 操作，结果直接`join`操作会出错：
+今天在写代码的时候，有一处查询语句需要执行 `IN` 操作，结果直接`join`操作会出错。
+<!--more-->
+
 ```Python
 list_of_datas = [u'sde', u'sdf', u'sdb', u'sdc']
 sql = "SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used='2' AND Name IN (%s)" % ','.join(list_of_datas)
