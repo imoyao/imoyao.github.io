@@ -3,6 +3,7 @@ title: DRBD用户手册之命令篇
 date: 2018-06-22 10:10:23
 tags:
 - DRBD
+toc: true
 ---
 本文基于`DRBD-8.4`版编写。
 <!--more-->
