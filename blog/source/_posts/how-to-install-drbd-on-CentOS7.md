@@ -7,6 +7,7 @@ tags:
 - CentOS
 categories:
 - 教程记录
+toc: true
 ---
 最近开发中又要用到`DRBD`做远程复制的功能，网上搜到很多都是`yum`安装的办法，这里记录一下源码安装的办法。
 <!--more-->

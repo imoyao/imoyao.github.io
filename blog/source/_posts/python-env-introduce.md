@@ -1,11 +1,12 @@
 ---
-title: Python环境管理介绍（venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv等的区别）
+title: Python环境管理介绍
 date: 2018-01-18 14:18:31
 thumbnail:
 
 tags:
 - Python
 ---
+venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv 等工具的区别与介绍。
 项目开发中可能需要用到不同版本的`Python`及相关的开发环境。比如`Python2`及`Python3`，或者有的项目需要 `Django1.5` ，有的需要`2.0`，这个时候借助一些工具，往往可以达到事半功倍的效果。
 
 <!--more-->
