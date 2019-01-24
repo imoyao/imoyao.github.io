@@ -1,0 +1,89 @@
+slogan: "Valar Dohaeris."
+
+theme: journal
+inverse: false
+
+menu:
+  - title: 归档
+    url: archives
+    intro: "All the articles."
+    icon: "fa fa-archive"
+  - title: 分类
+    url: categories
+    intro: "All the categories."
+    icon: "fa fa-folder"
+  - title: 标签
+    url: tags
+    intro: "All the tags."
+    icon: "fa fa-tags"
+  - title: 关于我
+    url: about
+    intro: "About me."
+    icon: "fa fa-user"
+
+links:
+  - title: RealPython
+    url: https://realpython.com
+    intro: "一个关于 Python 的网站。"
+    icon: "fa fa-code"
+  - title: "My Github"
+    url: http://www.github.com/imoyao
+    intro: "My Github account."
+    icon: "fa fa-github"
+  - title: "Email"
+    url: mailto:immoyao@gmail.com
+    intro: "My Email."
+    icon: "fa fa-envelope-o"
+
+widgets:
+- search
+- recent_comments
+- category
+- tagcloud
+- recent_posts
+- links
+
+rss:
+fancybox: true
+favicon: favicon.ico
+duoshuo_shortname: #freemindtheme
+
+# Recommended posts
+# Dependency: https://github.com/huiwang/hexo-recommended-posts
+recommended_posts:
+  enabled: false
+
+# Analytics
+google_analytics:
+  enable: false
+  siteid:
+baidu_tongji:
+  enable: false
+  siteid:
+
+# search
+# swiftype_key: ZP2ZSuHgipSZfRyU8uTR
+
+# share widgets
+bdshare: true
+jiathis: false
+
+# built-in comment system
+comment_js:
+  type: "github"
+  user: "imoyao"
+  repo: "imoyao.github.io"
+#  client_id: "bf7d4ba11877db88543e"
+#  client_secret: "bff8a6b06b745c0bfcdccbe225623ea8e2a057bb"
+  count: 5
+
+# Markdown    解决 bootstrap 折行问题，好像没用？
+## https://github.com/chjj/marked
+markdown:
+  gfm: true
+  pedantic: false
+  sanitize: false
+  tables: true
+  breaks: false
+  smartLists: true
+  smartypants: true
