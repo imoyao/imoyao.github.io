@@ -6864,13 +6864,23 @@ a {
 a:hover {
   color: #e22620;
 }
+/*修改gotop显示样式*/
+#gotop a {
+  color: #ffffff;
+  display: inline;
+  text-align: center;
+  line-height: 36px;
+}
 #gotop {
   background-color: #eb6864;
 }
-#gotop span {
+#gotop:hover {
+  background-color: #B94A48;
+}
+#gotop i {
   color: #ffffff;
 }
-#gotop span:hover {
+#gotop i:hover {
   color: #ffffff;
 }
 #local-search-result {
