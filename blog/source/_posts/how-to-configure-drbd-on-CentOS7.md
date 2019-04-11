@@ -6,7 +6,7 @@ tags:
 - Linux
 - CentOS
 categories:
-- 教程记录
+- 工作日常
 ---
 本文主要记录`DRBD`的配置过程和功能验证。
 <!--more-->
