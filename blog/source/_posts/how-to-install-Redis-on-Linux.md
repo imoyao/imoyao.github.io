@@ -19,19 +19,27 @@ toc: true
 
 - `Linux`版本
 
-    ```Ubuntu 18.04 LTS && NeoKylin 3.2```
+    ```
+    Ubuntu 18.04 LTS && NeoKylin 3.2
+    ```
 
 - `Python`版本
 
-    ```Python 2.7.15rc1 && Python 2.6.6```
+    ```
+    Python 2.7.15rc1 && Python 2.6.6
+    ```
 
 - `Redis`版本
 
-    ```redis-5.0.4```
+    ```
+    redis-5.0.4
+    ```
 
 - `redis-py`版本
 
-    ```redis-3.2.1 && redis-2.10.6```
+    ```
+    redis-3.2.1 && redis-2.10.6
+    ```
 
 
 ## 下载
