@@ -1,0 +1,650 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于 DRBD 裂脑问题的总结 | 别院牧志</title>
+  <meta name="author" content="imoyao">
+  
+  <meta name="description" content="Valar Dohaeris.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="关于 DRBD 裂脑问题的总结"/>
+  <meta property="og:site_name" content="别院牧志"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/themes/journal.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight-default.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-sham.min.js"></script>
+  <![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+    <script src="/js/marked.js"></script>
+    <script src="/js/comment.js"></script>
+    <script src="/js/timeago.min.js"></script>
+    <script src="/js/highlight.min.js"></script>
+	<script src="/js/spin.min.js"></script>
+  
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar  navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">别院牧志</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>分类
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>标签
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>关于我
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header ">		
+			<h1 class="title "> 关于 DRBD 裂脑问题的总结</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">
+	  		
+
+	  <script src="/assets/js/APlayer.min.js"> </script><p>裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。<br><a id="more"></a></p>
+<h2 id="什么是DRBD裂脑"><a href="#什么是DRBD裂脑" class="headerlink" title="什么是DRBD裂脑"></a>什么是<code>DRBD</code>裂脑</h2><p>裂脑(<code>split brain</code>)实际上是指在某种情况下，由集群节点间的网络连接临时故障、集群软件管理干预或者是人为错误，导致两个节点都切换为主节点（<code>primary</code>）而断开连接。这种状态是一个潜在的有害状态，因为它意味着不能复制数据到对等节点，这样就可能导致两个节点的数据产生分歧，产生不可合并的分裂。</p>
+<h2 id="怎么判定裂脑"><a href="#怎么判定裂脑" class="headerlink" title="怎么判定裂脑"></a>怎么判定裂脑</h2><h3 id="查看日志信息"><a href="#查看日志信息" class="headerlink" title="查看日志信息"></a>查看日志信息</h3><p>如果<code>DRBD</code>出现裂脑，会在 <code>/var/log/message</code> 出现一条日志：</p>
+<pre><code>Split-Brain detected but unresolved, dropping connection!
+</code></pre><p>当发生<code>split brain</code>之后，如果查看连接状态，其中至少会有一个是<code>StandAlone</code>状态，另外一个可能也是<code>StandAlone</code>（如果是同时发现<code>split brain</code>状态），也有可能是 <code>WFConnection</code> 状态。</p>
+<h3 id="裂脑自动通知"><a href="#裂脑自动通知" class="headerlink" title="裂脑自动通知"></a>裂脑自动通知</h3><p>如果进行配置，DRBD会调用裂脑处理程序，当裂脑发生时就会被探测到。要配置这个程序，需要对资源<code>/etc/drbd.d/global_common.conf</code>添加如下配置：</p>
+<pre><code class="shell">resource &lt;resource&gt;
+
+  handlers {
+
+    split-brain &lt;handler&gt;;
+
+    ...
+
+  }
+
+  ...
+
+}
+</code></pre>
+<p><code>&lt;handler&gt;</code>可能是目前系统中一个可执行的文件。</p>
+<p><code>Drbd</code>自带一个裂脑处理程序脚本<code>/usr/lib/drbd/notify-split-brain.sh</code>。它可以通过电子邮件的方式发送到指定的地址。要配合程序发送信息到root@localhost（这假设是设置的系统管理员的邮件地址），配置如下：</p>
+<pre><code class="shell">resource &lt;resource&gt;
+
+  handlers {
+
+    split-brain &quot;/usr/lib/drbd/notify-split-brain.sh root&quot;;
+
+    ...
+
+  }
+
+  ...
+
+}
+</code></pre>
+<p>当配置已经在资源上进行修改（同步到两个节点上），就不需要添加其他的处理就可以启动处理程序。<code>Drbd</code>会在下一次检测到裂脑时直接调用该处理程序。</p>
+<p>如果要配置真实可用的报警邮箱地址，则除了将上面的通知地址改为真实邮件地址:</p>
+<pre><code class="shell">split-brain &quot;/usr/lib/drbd/notify-split-brain.sh foo@bar.com
+</code></pre>
+<p>还需要修改一下<code>ssmtp</code>配置文件：</p>
+<pre><code class="shell">vim /etc/ssmtp/ssmtp.conf
+# 填写真实收件服务器信息
+mailhub=idealyard.imoyao.com:25
+</code></pre>
+<p>更多配置参见 <a href="http://iqjar.com/jar/sending-emails-from-the-raspberry-pi/" target="_blank" rel="noopener">这里</a></p>
+<h3 id="世代标识符元组（GI）"><a href="#世代标识符元组（GI）" class="headerlink" title="世代标识符元组（GI）"></a>世代标识符元组（GI）</h3><p>参见<a href="https://docs.linbit.com/docs/users-guide-8.4/#s-gi" target="_blank" rel="noopener">16.2. Generation Identifiers</a></p>
+<p>DRBD 将其备份的数据的更新变化过程比拟成人类世代繁衍的过程。每个时点同一个双机的DRBD的两个节点上的数据都来自于同一份原始数据，我们可认为这个时点上两分数据源于同一祖先。主备节点的DRBD都会用一个叫作GI(Generation ID)的标识符来标识当前的数据是哪个世代的，同样也会记录最近两个数据祖先的GI用于追朔当前数据的历史来源。DRBD可以据此来判断两个节点是否是属于同一个双机,因为同一个双机的两份数据应该是从同一个祖先而来。<br>GI作为DRBD的内部机制主要被用来：</p>
+<ol>
+<li>确定这两个节点是否是事实上的同一个集群的成员（而不是意外连接的两个节点）；</li>
+<li>确定触发全盘同步（<code>full re-synchronization</code>）还是只触发部分同步（<code>partial re-synchronization</code>）。</li>
+<li>确定后台重新同步的方向（如果需要全盘同步）；</li>
+<li>确定裂脑。</li>
+</ol>
+<h4 id="数据迭代"><a href="#数据迭代" class="headerlink" title="数据迭代"></a>数据迭代</h4><p>当出现下列情形里<code>DRBD</code>会生成一个新的<code>GI</code>，用来标识新一代的数据：</p>
+<ol>
+<li>第一次全盘同步时；</li>
+<li>一个<code>Disconnected</code>的资源转换为<code>Primary</code>时；</li>
+<li>一个<code>Primary</code>的资源转换为<code>Disconnected</code>时。</li>
+</ol>
+<p>因此,我们可以总结出：只要一个<code>DRBD</code>资源处于<code>Connected</code>的状态，并且两边磁盘的状态为<code>UpToDate</code>，那么此<code>DRBD</code>资源在两个节点上的<code>GI</code>一定是一样的。此结论反过来也同样成立。请注意，<strong>当前实现使用最低位来编码节点的角色(<code>Primary/Secondary</code>)。 因此，即使它们被认为具有相同的数据生成，最低位在不同节点上也可能不同。</strong></p>
+<p>每个新的数据生成都由一个<code>8</code>字节的通用唯一标识符（<code>UUID</code>）来标识。</p>
+<h4 id="GI元祖"><a href="#GI元祖" class="headerlink" title="GI元祖"></a><code>GI</code>元祖</h4><p><code>DRBD</code>在本地资源元数据中保存有关当前和历史数据生成的四条信息：</p>
+<ul>
+<li><p>当前<code>UUID(C-UUID)</code><br>从本地节点的角度来看，这是当前数据生成的生成标识符。 当资源被连接并完全同步时，当前<code>UUID</code>在节点之间是相同的。</p>
+</li>
+<li><p>位图<code>UUID(B-UUID)</code><br>这是磁盘上同步位图跟踪的生成的<code>UUID</code>更改。 作为磁盘上的同步位图本身，此标识符仅在断开模式下才有用。 如果资源已连接，则此<code>UUID</code>始终为空（零）。</p>
+</li>
+<li><p>两个<code>历史UUID</code></p>
+</li>
+</ul>
+<p>这些是当前之前两个数据世代的标识符。</p>
+<ol>
+<li>上一代数据的<code>UUID(H1-UUID)</code>；</li>
+<li>最近第二代数据的<code>UUID(H2-UUID)</code>，即上一代数据的上一代数据的<code>UUID</code>。</li>
+</ol>
+<p>总的来说，这四个项目被称为代码标识符元组，或简称为<code>GI元组</code>。</p>
+<h4 id="GI如何变化？"><a href="#GI如何变化？" class="headerlink" title="GI如何变化？"></a><code>GI</code>如何变化？</h4><ul>
+<li>开始新的数据生成代</li>
+</ul>
+<p>当节点与其对等方失去连接时（网络故障或人工干预都有可能），DRBD将按照以下方式修改其本地生成标识符：</p>
+<p><img src="https://docs.linbit.com/ug-src/users-guide-8.4/images/gi-changes-newgen.png" alt="图1 GI元祖在生成新的数据代时改变"></p>
+<ol>
+<li>为新的数据代生成新的<code>UUID</code>，变为主节点的<code>C-UUID</code>；</li>
+<li>之前的UUID现在指向位图（<code>B-UUID</code>）以跟踪数据变化，因此它成为主节点的新位图<code>UUID</code>；</li>
+<li>备节点GI元祖保持不变。</li>
+</ol>
+<ul>
+<li>开始重新同步</li>
+</ul>
+<p>在开始重新同步时，<code>DRBD</code>在本地代标识符上执行如下修改：</p>
+<p><img src="https://docs.linbit.com/ug-src/users-guide-8.4/images/gi-changes-syncstart.png" alt="图2 GI元祖在重新开始同步是改变"></p>
+<ol>
+<li>在同步源端的<code>当前UUID</code>（C-UUID）保持不变；</li>
+<li>同步源端的<code>位图UUID</code>轮转为<code>第一历史UUID</code>（H1-UUID）；</li>
+<li>同步源端生成新的<code>位图UUID</code>（B-UUID）;</li>
+<li>该UUID（<em>应指同步源端生成的<code>B-UUID</code></em>）变为同步目标端的新的<code>当前UUID</code>（C-UUID）；</li>
+<li>同步目标端的<code>位图UUID</code>（B-UUID）和<code>历史UUID</code>（H1-UUID,H2-UUID）保持不变。</li>
+</ol>
+<ul>
+<li>重新同步结束</li>
+</ul>
+<p>当重新同步结束后，将执行以下更改：</p>
+<p><img src="https://docs.linbit.com/ug-src/users-guide-8.4/images/gi-changes-synccomplete.png" alt="图3 当重新同步结束后，GI元祖发生改变"></p>
+<ol>
+<li>同步源端<code>当前UUID</code>(C-UUID)保持不变；</li>
+<li>同步源端的<code>位图UUID</code>(B-UUID)轮转为<code>第一历史UUID</code>（H1-UUID），同时该UUID(指<code>H1-UUID</code>)轮转为<code>第二历史UUID</code>(现有的第二历史uuid被丢弃)；</li>
+<li>同步源端的<code>位图UUID</code>(B-UUID)清空（置零）；</li>
+<li>同步目标端采用同步源端整个<code>GI元祖</code>。</li>
+</ol>
+<p>当节点之间建立连接之后，两个节点之间会交换当前可用的代标识符,然后根据比对的结果采取相应的操作。以下是可能的几种结果：</p>
+<ul>
+<li>两个节点上的当前<code>UUID(C-UUID)</code>都为空</li>
+</ul>
+<p>本地节点检测到它的当前<code>UUID</code>和对方的当前<code>UUID</code>都是空的。这通常是发生于尚未启动初始完全同步的新配置资源的正常情况。此时没有同步发生;须手动人为触发启动。</p>
+<ul>
+<li>单一节点上的当前<code>UUID(C-UUID)</code>为空</li>
+</ul>
+<p>本地节点检测到对方的当前<code>UUID</code>为空，而其本身非空。这是新配置资源的正常情况，此时初始全盘同步刚刚触发，本地节点被选为初始同步源（<code>sync source</code>）。 <code>DRBD</code>将磁盘上的同步位图(<code>sync bitmap</code>)中的所有位全部置位（意味着它认为整个设备不同步），并开始将其作为同步源同步。相反，（即本地当前<code>UUID</code>为空，对等节点非空），除了本地节点成为同步目标（<code>sync target</code>）之外，<code>DRBD</code>执行相同的步骤。</p>
+<ul>
+<li>当前<code>UUID(C-UUID)</code>相等</li>
+</ul>
+<p>本地节点检测到它的当前<code>UUID</code>和对等节点的当前<code>UUID</code>非空且相等时。这是资源在<code>secondary</code>状态进入断开连接（<code>disconnected</code>）模式时的正常情况，并且在断开连接时并未在任一节点上升为 <code>primary</code> 状态。此时不会触发同步，因为两边的数据一致，没有必要。</p>
+<ul>
+<li>位图<code>UUID（B-UUID）</code>匹配对等节点的当前<code>UUID（`C-UUID`）</code></li>
+</ul>
+<p>本地节点检测到其位图<code>UUID</code>匹配对等节点的当前<code>UUID</code>，且对等节点的位图<code>UUID</code>为空。这是本地节点处于 <code>primary</code> 状态，次要节点故障后正常且预期的情况。这意味着对端在此期间永远不会变为<code>primary</code>状态，并始终以相同的数据生成为前提运行。 <code>DRBD</code>此时以本地节点作为同步源（<code>sync source</code>）启动正常的后台重新同步（<code>re-sync</code>）。相反，如果本地节点检测到其位图<code>UUID</code>为空，且对等节点的位图与本地节点的当前<code>UUID</code>匹配，那么这是本地节点失败后的正常和预期情况。同样地，<code>DRBD</code>此时启动正常的后台重新同步，只不过本地节点成为同步目标（<code>sync target</code>）。</p>
+<ul>
+<li>当前<code>UUID(C-UUID)</code>匹配对等节点的历史<code>UUID（h-UUID）</code></li>
+</ul>
+<p>本地节点检测到其当前<code>UUID</code>与对等节点的历史<code>UUID</code>之一(<code>h1/h2</code>)匹配。这意味着尽管两个数据集共享一个共同的祖先且对等节点具有最新的数据，但保存在对等节点的位图中的信息已过时并且不可用。因此，简单的正常同步不够的。 <code>DRBD</code>此时将整个设备标记为未同步（<code>out-of-sync</code>）并启动以本地节点作为同步目标（<code>sync target</code>）的全盘后台重新同步。在相反的情况下（本地节点的某个历史<code>UUID</code>与对等节点的当前<code>UUID</code>相匹配），除了本地节点成为同步源（<code>sync source</code>）之外，<code>DRBD</code>执行相同的步骤。</p>
+<ul>
+<li>位图<code>UUID（B-UUID）</code>匹配，当前 <code>UUID(C-UUID)</code>不匹配</li>
+</ul>
+<p>本地节点检测到其当前<code>UUID</code>与对等节点的当前<code>UUID</code>不同且位图<code>UUID</code>匹配。这是裂脑（<code>split brain</code>）的一种情况，两份数据有相同的父代。这意味着<code>DRBD</code>可以调用裂脑自动恢复策略进行数据恢复（如果已配置）。否则，<code>DRBD</code>断开连接并等待手动恢复。</p>
+<ul>
+<li>当前<code>UUID（C-UUID）</code>和位图<code>UUID(B-UUID)</code>都不匹配</li>
+</ul>
+<p>本地节点检测到它的当前<code>UUID</code>与对等节点的当前<code>UUID</code>不同，并且位图<code>UUID</code>不匹配。这是两份数据与无关父代产生的一种裂脑，因此即使配置了自动恢复策略也没有意义。 <code>DRBD</code>处于断开连接并等待手动恢复状态。</p>
+<ul>
+<li>没有<code>UUID</code>匹配</li>
+</ul>
+<p>最后，如果<code>DRBD</code>未能检测到两个节点之间的<code>GI</code>元组中的单个元素匹配，则会记录关于无关数据（<code>unrelated data</code>）的警告并断开连接。这是<code>DRBD</code>的防范措施，可防止之前无关联的两个集群节点的意外连接导致数据破坏。</p>
+<p>以上逻辑使用代码表示如下：</p>
+<pre><code class="Python">
+empty_uuid = &#39;0000000000000000&#39;
+
+def slice_seq(seq):
+    &quot;&quot;&quot;
+    对GI元祖内元素进行切片操作
+    :param seq: GI元祖
+    :return:type:list
+    &quot;&quot;&quot;
+    global empty_uuid
+    sliced_seq = [item[:-1] if item != empty_uuid else item for item in seq]
+    return sliced_seq
+
+
+def cmp_both(seqa,seqb):
+    for i in seqa:
+        if i not in seqb:
+            return 1
+    return 0
+
+
+def get_gi_action(drbdname):
+    &quot;&quot;&quot;
+    调用&#39;drbdadm get-gi DRBDNAME&#39;命令获取drbd的 GI(Generation ID) 信息
+    :param drbdname:type:str,drbd名称 like:&#39;drbds1/drbdn301&#39;
+    :return:获取正常返回元祖(c_uuid, b_uuid, h1_uuid, h2_uuid)，获取失败返回None
+    &quot;&quot;&quot;
+    get_gi_cmd = &quot;drbdadm get-gi %s |awk -F: &#39;{print $1,$2,$3,$4}&#39;&quot;%(drbdname)
+    retcode,proc = utils.cust_popen(get_gi_cmd)
+    message = proc.stderr.read(), proc.stdout.read()
+    retstr = message[1]
+    if retstr:
+        c_uuid,b_uuid,h1_uuid,h2_uuid = tuple(retstr.split())
+        return c_uuid,b_uuid,h1_uuid,h2_uuid
+    else:
+        debug.write_debug(debug.LINE(), &quot;peradrbd&quot;, message)
+        return None
+
+
+def get_remote_gi(params):
+    rtndata = {}
+    result = {}
+    drbdname = &#39;drbdname&#39; in params and params[&#39;drbdname&#39;] or &#39;&#39;
+    if drbdname:
+        if hasthedrbd(drbdname):
+            gi_uuids = get_gi_action(drbdname)
+            if gi_uuids is not None:
+                rtndata[&#39;state&#39;] = &#39;0&#39;
+                result[&#39;message&#39;] = &#39;&#39;
+                result[&#39;gi_id&#39;] = gi_uuids
+            else:
+                rtndata[&#39;state&#39;] = &#39;1&#39;
+                result[&#39;message&#39;] = &#39;11069&#39;     # 获取 gi_id 出错
+                result[&#39;gi_id&#39;] = None
+        else:
+            rtndata[&#39;state&#39;] = &#39;1&#39;
+            result[&#39;message&#39;] = &#39;11060&#39;  # the drbd not found
+
+        rtndata[&#39;result&#39;] = result
+    else:
+        rtndata = {&#39;state&#39;: &#39;1&#39;, &#39;result&#39;: {&#39;message&#39;: &#39;11059&#39;}}  # drbdname error
+    return rtndata
+
+
+def exchange_gi_process(drbdname):
+    &quot;&quot;&quot;
+    see:https://docs.linbit.com/docs/users-guide-8.4/#s-gi (16.2.4. How DRBD uses generation identifiers)
+    :param drbdname:
+    :return:type:str
+    &quot;&quot;&quot;
+    local_gis = get_gi_action(drbdname)
+    remote_gis = None
+    global remoteip
+    retresult = hautils.socketclient(ip=remoteip,
+                                     **{&#39;target&#39;: &#39;drbd&#39;, &#39;op&#39;: &#39;getremotegi&#39;, &#39;params&#39;: {&#39;drbdname&#39;:drbdname}})
+    if retresult:
+        if retresult[&#39;state&#39;] == &#39;0&#39;:
+            remote_gis = retresult[&#39;result&#39;][&#39;gi_id&#39;]
+        drbd_next = &#39;&#39;
+        if local_gis is not None and remote_gis is not None:
+            local_gis_sliced = slice_seq(local_gis)
+            remote_gis_sliced = slice_seq(remote_gis)
+            global empty_uuid
+            print(&#39;sliced&#39;, local_gis_sliced, remote_gis_sliced)
+            if local_gis_sliced[0] == empty_uuid and remote_gis_sliced[0] == empty_uuid:
+                drbd_next = &#39;no_sync:(manual_sync)&#39;
+
+            elif local_gis_sliced[0] == empty_uuid or remote_gis_sliced[0] == empty_uuid:
+                if remote_gis_sliced[0] == empty_uuid and local_gis_sliced[0] != empty_uuid:
+                    drbd_next = &#39;full_re_sync:(local_source)&#39;
+                elif local_gis_sliced[0] == empty_uuid and remote_gis_sliced[0] != empty_uuid:
+                    drbd_next = &#39;full_re_sync:(local_target)&#39;
+
+            elif local_gis_sliced[0] != empty_uuid and remote_gis_sliced[0] != empty_uuid and local_gis_sliced[0] == remote_gis_sliced[0]:
+                drbd_next = &#39;consistent:(both_secondary)&#39;
+
+            elif local_gis_sliced[1] == remote_gis_sliced[0] and remote_gis_sliced[1] == empty_uuid:
+                drbd_next = &#39;partial_re_sync:(local_source)&#39;
+            elif local_gis_sliced[1] == empty_uuid and remote_gis_sliced[1] == local_gis_sliced[0]:
+                drbd_next = &#39;partial_re_sync:(local_target)&#39;
+
+            elif local_gis_sliced[0] in [remote_gis_sliced[2], remote_gis_sliced[3]]:
+                drbd_next = &#39;full_re_sync:(local_target)&#39;
+            elif remote_gis_sliced[0] in [local_gis_sliced[2], local_gis_sliced[3]]:
+                drbd_next = &#39;full_re_sync:(local_source)&#39;
+
+            elif local_gis_sliced[0] != remote_gis_sliced[0]:
+                if local_gis_sliced[1] == remote_gis_sliced[1]:
+                    drbd_next = &#39;split_brain:(auto_recover_able)&#39;
+                elif local_gis_sliced[1] != remote_gis_sliced[1]:
+                    drbd_next = &#39;split_brain:(wait_for_manual_recover)&#39;
+
+            elif cmp_both(local_gis_sliced,remote_gis_sliced):
+                drbd_next = &#39;unrelated_data:(wait_for_manual_recover)&#39;
+            else:
+                debug.write_debug(debug.LINE(), &quot;peradrbd&quot;, (local_gis_sliced, remote_gis_sliced))
+        else:
+            debug.write_debug(debug.LINE(), &quot;peradrbd&quot;, (local_gis,remote_gis))
+        return drbd_next
+</code></pre>
+<p><strong>注意</strong>：</p>
+<p>经分析官方文档中的’matches’并不是完全相等，而 ‘UUID is always empty (zero)’ 是指 “‘0’*16” 的字符串</p>
+<h2 id="如何模拟一个-Split-Brain状态"><a href="#如何模拟一个-Split-Brain状态" class="headerlink" title="如何模拟一个 Split-Brain状态"></a>如何模拟一个 <code>Split-Brain</code>状态</h2><ol>
+<li>往主节点写入大文件，在未写入完前停止备节点的<code>DRBD</code>；<pre><code># on secondary
+drbdadm down drbdxx
+</code></pre></li>
+<li>停止主节点的<code>DRBD</code>；<pre><code># on primary
+drbdadm down drbdxx
+</code></pre></li>
+<li>启动备节点的<code>DRBD</code>，设置为主节点；<pre><code># on secondary
+drbdadm up drbdxx
+drbdadm primary drbdxx
+</code></pre></li>
+<li>启动原主节点的<code>DRBD</code>，这时发现它的状态就是<code>StandAlone Secondary/Unknown UpToDate/DUnknown</code>，<code>Split-Brain</code> 情况出现。<pre><code># on primary
+drbdadm up drbdxx
+</code></pre></li>
+</ol>
+<h2 id="解决DRBD裂脑状态"><a href="#解决DRBD裂脑状态" class="headerlink" title="解决DRBD裂脑状态"></a>解决DRBD裂脑状态</h2><h3 id="设置自动修复"><a href="#设置自动修复" class="headerlink" title="设置自动修复"></a>设置自动修复</h3><p><a href="https://docs.linbit.com/docs/users-guide-8.4/#s-configure-split-brain-behavior" target="_blank" rel="noopener">5.17.2. Automatic split brain recovery policies</a></p>
+<p><strong>警告</strong>：配置<code>DRBD</code>自动修复裂脑（或其他状况）导致的数据分歧情况可能是正在配置的数据丢失，如果你不知道你在干什么，那最好别干。（NO ZUO NO DIE）</p>
+<p><em>提示</em> ：您更应该查看系统防护策略，集群管理集成和冗余集群管理器通信连接状态，以避免出现数据分歧。（防患于未然而不是亡羊补牢）<br>在启用和配置<code>DRBD</code>的自动裂脑恢复策略之前，您必须了解<code>DRBD</code>为此提供了多种配置选项。 DRBD根据检测到裂脑时主节点（<code>Primary role</code>）的数量应用其裂脑恢复程序。为此，DRBD检查以下关键字，这些关键字均可在资源的网络配置部分中找到：</p>
+<h4 id="after-sb-0pri"><a href="#after-sb-0pri" class="headerlink" title="after-sb-0pri"></a>after-sb-0pri</h4><p>裂脑被检测到的同时该资源在任一节点不是主节点。对于这种状况，<code>DRBD</code>可以理解以下关键字：</p>
+<ul>
+<li>disconnect: 不自动恢复，只调用裂脑通知程序（如果已配置），断开连接并保持断开；</li>
+<li>discard-younger-primary: 丢弃并回滚最后升主节点的改动；</li>
+<li>discard-least-changes: 丢弃并回滚修改更少节点的修改；</li>
+<li>discard-zero-changes: 如果有某一节点一点未改动，只需应用对另一主机所做的修改并继续；</li>
+</ul>
+<h4 id="after-sb-1pri"><a href="#after-sb-1pri" class="headerlink" title="after-sb-1pri"></a>after-sb-1pri</h4><p>裂脑刚被检测到的同时该资源在一个节点上是主节点。对于这种状况，<code>DRBD</code>理解以下关键字：</p>
+<ul>
+<li>disconnect:同上</li>
+<li>consensus：应用上一步的策略之后，如果裂脑受害者可以选择拆分则会自动解决。否则，与<code>disconnect</code>指令相同。</li>
+<li>call-pri-lost-after-sb：应用上一步的策略之后，如果裂脑受害者节点可以选择拆分则调用<code>pri-lost-after-sb</code>处理程序，该处理程序必须在处理程序中进行配置，并且需要强制从集群中删除该节点。</li>
+<li>discard-secondary：将从端（<code>Secondary role</code>）节点视为裂脑受害者。</li>
+</ul>
+<h4 id="after-sb-2pri"><a href="#after-sb-2pri" class="headerlink" title="after-sb-2pri"></a>after-sb-2pri</h4><p>裂脑刚被检测到时该资源在两个节点都处于主端。该选项接受与除<code>discard-secondary</code> 和 <code>consensus</code> 之外与 <code>after-sb-1pri</code> 相同的关键字。</p>
+<p><em>提示</em>：<code>DRBD</code>还可以理解这三个选项下额外的关键字，这些关键字在这里被省略，因为它们很少被使用。请参阅<code>drbd.conf</code>的手册页以获取有关裂脑恢复关键字的详细信息，此处不再讨论。<br>例如，用作双主模式下<code>GFS</code>或<code>OCFS2</code>文件系统的块设备的资源可能会将其恢复策略定义如下：</p>
+<pre><code class="shell">resource &lt;resource&gt; {
+  handlers {
+    split-brain &quot;/usr/lib/drbd/notify-split-brain.sh root&quot;      # 脚本通知root用户，此处可以使用邮件提醒
+    ...
+  }
+  net {
+    after-sb-0pri discard-zero-changes;
+    after-sb-1pri discard-secondary;
+    after-sb-2pri disconnect;
+    ...
+  }
+  ...
+}
+</code></pre>
+<h3 id="手动恢复"><a href="#手动恢复" class="headerlink" title="手动恢复"></a>手动恢复</h3><p><a href="https://docs.linbit.com/docs/users-guide-8.4/#s-resolve-split-brain" target="_blank" rel="noopener">6.3. Manual split brain recovery</a></p>
+<p>在检测到裂脑后，一个节点将始终使资源处于<code>StandAlone</code>连接状态。另一个可能也处于<code>StandAlone</code>状态（如果两个节点同时检测到裂脑）或<code>WFConnection</code>（如果某方节点在另一节点检测到裂脑之前断开连接）。</p>
+<p>此时，除非已将<code>DRBD</code>配置为自动从裂脑状态中恢复，否则必须通过选择一个节点进行手动干预，该节点的修改将被丢弃（此节点称为裂脑受害者）。这个干预使用下面步骤完成：</p>
+<p>裂脑受害者需要处于<code>StandAlone</code>的连接状态，否则以下命令将返回错误。您可以通过发出以下内容确保它是<code>StandAlone</code>的：</p>
+<pre><code class="shell">drbdadm disconnect &lt;resource&gt;
+drbdadm secondary &lt;resource&gt;
+drbdadm connect --discard-my-data &lt;resource&gt;    # 8.4+  if 8.3,use &#39;drbdadm -- --discard-my-data connect &lt;resource&gt;&#39; instead
+</code></pre>
+<p>在另一个节点（裂脑幸存者）上，如果它的连接状态也是<code>StandAlone</code>，你可以输入：</p>
+<pre><code class="shell">drbdadm connect &lt;resource&gt;
+</code></pre>
+<p>如果节点已处于<code>WFConnection</code>状态，则可以省略此步骤;它会自动重新连接。</p>
+<p>如果受裂脑影响的资源是<strong>堆叠</strong>资源，请使用<code>drbdadm --stacked</code>而不是<code>drbdadm</code>。</p>
+<p>连接后，裂脑受害者立即将其连接状态更改为<code>SyncTarget</code>，并将其导致裂脑的修改由其余主节点的数据覆盖。</p>
+<p>裂脑受害者不会引发全盘同步。相反，它的局部修改已经被回滚，对裂脑幸存者的任何修改都会传递给受害者。<br>重新同步完成后，裂脑被视为已解决（<code>resolved</code>），两个节点再次形成完全一致的冗余复制存储系统（<code>DRBD</code>）。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://docs.linbit.com/docs/users-guide-8.4/" target="_blank" rel="noopener">User’s Guide 8.4.x</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_a30f2be401016d04.html" target="_blank" rel="noopener">关于DRBD v8.3的同步机制</a></li>
+<li><a href="http://myhat.blog.51cto.com/391263/606318/" target="_blank" rel="noopener">一次DRBD裂脑行为的模拟</a></li>
+<li><a href="http://itindex.net/detail/50197-drbd" target="_blank" rel="noopener">drbd裂脑处理 | IT瘾</a></li>
+</ul>
+<p><a href="http://www.3mu.me/%E4%BB%80%E4%B9%88%E6%98%AFdrbd%E8%84%91%E8%A3%82%E5%8F%8A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9Fdrbd%E8%84%91%E8%A3%82/" target="_blank" rel="noopener">http://www.3mu.me/%E4%BB%80%E4%B9%88%E6%98%AFdrbd%E8%84%91%E8%A3%82%E5%8F%8A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9Fdrbd%E8%84%91%E8%A3%82/</a></p>
+<p>drbd中metadata的理解(原创) – 蚊子世界<br><a href="http://www.wenzizone.cn/2009/10/29/drbd%e4%b8%admetadata%e7%9a%84%e7%90%86%e8%a7%a3%e5%8e%9f%e5%88%9b.html" target="_blank" rel="noopener">http://www.wenzizone.cn/2009/10/29/drbd%e4%b8%admetadata%e7%9a%84%e7%90%86%e8%a7%a3%e5%8e%9f%e5%88%9b.html</a></p>
+	  
+	</div>
+
+	<!-- recommended posts -->
+	
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/blog/2018-06-22/commonds-of-drbd/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/blog/2018-05-10/executing-select-where-in-using-mysqldb/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+    <div class="bdsharebuttonbox">
+        <a href="#" class="bds_more" data-cmd="more"></a>
+        <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+        <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+        <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+        <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+        <a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+        <a href="#" class="bds_evernotecn" data-cmd="evernotecn" title="分享到印象笔记"></a>
+        <a href="#" class="bds_youdao" data-cmd="youdao" title="分享到有道云笔记"></a>
+        <a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+    </div>
+    <script>
+        window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};
+        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+    	 
+	 <div id="comment-thread"></div>
+	 <div id="loading-spin"></div>
+	 <script type="text/javascript">
+	   getComments({
+           type: "github" ? "github" : "github",       
+	       user: "imoyao",
+	       repo: "imoyao.github.io",
+		   client_id: "",
+           client_secret: "",
+		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
+		   go_to_comment: "去留言",
+		   no_issue: "no_issue",
+		   issue_title: "关于 DRBD 裂脑问题的总结",
+		   issue_id: "",
+		   btn_class: "btn btn-primary",
+		   comments_target: "#comment-thread",
+		   loading_target: "#loading_spin"
+		   });
+	 </script>
+  
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2018-05-27 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/存储/">存储<span>5</span></a></li> <li><a href="/tags/DRBD/">DRBD<span>7</span></a></li> <li><a href="/tags/裂脑/">裂脑<span>1</span></a></li>
+    </ul>
+	</div>
+	
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2019 imoyao
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#" style="text-align: center;line-height: 36px;">
+  <i class="fa fa-chevron-up"></i>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+
+<!-- syntax highlighting -->
+
+  <script>
+  marked.setOptions({
+    highlight: function (code, lang) {
+        return hljs.highlightAuto(code).value;
+    }
+  });
+  function Highlighting(){
+    var markdowns = document.getElementsByClassName('markdown');
+    for(var i=0;i<markdowns.length;i++){
+        if(markdowns[i].innerHTML) markdowns[i].innerHTML =marked(markdowns[i].innerHTML);
+    }
+  }
+  window.addEventListener('DOMContentLoaded', Highlighting, false);
+  window.addEventListener('load', Highlighting, false);
+  </script>
+
+
+</body>
+   </html>
