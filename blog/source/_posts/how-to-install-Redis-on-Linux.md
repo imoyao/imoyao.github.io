@@ -363,6 +363,8 @@ pip install redis
 
 **小插曲**
 
+关于redis-py的Python低版本支持
+
 在`CentOS`上安装`redis-3.2.1`的时候由于`python`版本较低（`2.6.6`）出现以下问题
 ```shell
 [root@master redis-3.2.1]# python setup.py install
@@ -404,4 +406,5 @@ Requires: Python >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
 
 - [Redis Quick Start](https://redis.io/topics/quickstart)
 - [Ubuntu安装Redis并设置为开机自启动服务](https://blog.csdn.net/softwave/article/details/53838194)
+- [Python操作Redis数据库](https://www.cnblogs.com/cnkai/p/7642787.html)
 
