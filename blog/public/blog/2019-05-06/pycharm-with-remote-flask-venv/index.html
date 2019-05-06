@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>🐍PyTricks | Python技巧写法记录 | 别院牧志</title>
+  <title>如何使 Pycharm 使用远程的 Flask 虚拟开发环境？ | 别院牧志</title>
   <meta name="author" content="imoyao">
   
   <meta name="description" content="Valar Dohaeris.">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="🐍PyTricks | Python技巧写法记录"/>
+  <meta property="og:title" content="如何使 Pycharm 使用远程的 Flask 虚拟开发环境？"/>
   <meta property="og:site_name" content="别院牧志"/>
 
   
@@ -103,7 +103,7 @@
 
 	
 		<div class="page-header ">		
-			<h1 class="title "> 🐍PyTricks | Python技巧写法记录</h1>
+			<h1 class="title "> 如何使 Pycharm 使用远程的 Flask 虚拟开发环境？</h1>
 		</div>		
 	
 
@@ -123,45 +123,30 @@
 	<div class="mypage">
 	  		
 
-	  <script src="/assets/js/APlayer.min.js"> </script><p>写出<code>Pythonic</code>的代码应该是每个<code>Pythonista</code>的基本追求，本文主要记录在开发中遇到的一些有关<code>Python</code>技巧。</p>
+	  <script src="/assets/js/APlayer.min.js"> </script><p>学习<code>Flask</code>开发的时候，因为主机是<code>Windows</code>环境，而日常跑服务的是<code>Linux</code>环境，所以需要通过配置<code>pycharm</code>使之使用远端的虚拟环境。</p>
 <a id="more"></a>
-<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
-<li><code>JSON</code>字典内按照某个键值排序</li>
-</ul>
-<pre><code class="python">
-In [15]: alist = [{&#39;create&#39;: &#39;2017-12-28 11:05:48&#39;, &#39;id&#39;: &#39;0_1&#39;, &#39;path&#39;: &#39;foo.py&#39;, &#39;size&#39;: 0},
-   ....:  {&#39;create&#39;: &#39;2017-12-28 11:00:29&#39;, &#39;id&#39;: &#39;0_2&#39;, &#39;path&#39;: &#39;bar.py&#39;, &#39;size&#39;: 0},
-   ....:  {&#39;create&#39;: &#39;2017-12-28 11:05:55&#39;, &#39;id&#39;: &#39;0_3&#39;, &#39;path&#39;: &#39;baz.py&#39;, &#39;size&#39;: 0}]
-
-In [16]: alist.sort(key=lambda x:x[&#39;create&#39;])    # 按照创建时间排序 
-
-In [17]: alist
-Out[17]:``
-[{&#39;create&#39;: &#39;2017-12-28 11:00:29&#39;, &#39;id&#39;: &#39;0_2&#39;, &#39;path&#39;: &#39;bar.py&#39;, &#39;size&#39;: 0},
- {&#39;create&#39;: &#39;2017-12-28 11:05:48&#39;, &#39;id&#39;: &#39;0_1&#39;, &#39;path&#39;: &#39;foo.py&#39;, &#39;size&#39;: 0},
- {&#39;create&#39;: &#39;2017-12-28 11:05:55&#39;, &#39;id&#39;: &#39;0_3&#39;, &#39;path&#39;: &#39;baz.py&#39;, &#39;size&#39;: 0}]
+<h2 id="创建虚拟机Flask环境"><a href="#创建虚拟机Flask环境" class="headerlink" title="创建虚拟机Flask环境"></a>创建虚拟机<code>Flask</code>环境</h2><p>略</p>
+<p>此处在网上可以找到很多写好的教程，不需要我再次叠床架屋了。</p>
+<h2 id="配置Pycharm环境"><a href="#配置Pycharm环境" class="headerlink" title="配置Pycharm环境"></a>配置<code>Pycharm</code>环境</h2><h3 id="打开Pycharm的setting对话框，按照如下配置"><a href="#打开Pycharm的setting对话框，按照如下配置" class="headerlink" title="打开Pycharm的setting对话框，按照如下配置"></a>打开Pycharm的setting对话框，按照如下配置</h3><p><img src="./images/snipaste_20190506_141224.jpg" alt="setting_start"></p>
+<p>依次输入真实远端信息之后，点击下一步，直到出现下方对话框</p>
+<p><img src="./images/snipaste_20190506_142141.jpg" alt="setting_end"></p>
+<p>依次修改将要使用的解释器和主机与远端需要保持同步的目录；</p>
+<p><img src="./images/snipaste_20190506_143428.jpg" alt="setting_flask"></p>
+<p>如图设置之后运行，<code>Run</code>出现如下结果</p>
+<pre><code class="shell">FLASK_APP = app
+FLASK_ENV = development
+FLASK_DEBUG = 1
+In folder D:/MYcode/flk
+ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --host=0.0.0.0
+ * Serving Flask app &quot;app&quot; (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 820-491-228
 </code></pre>
-<ul>
-<li>字典排序</li>
-</ul>
-<pre><code class="python">
-In [35]: languages = {&#39;JAVA&#39;:15,&#39;Python&#39;:12,&#39;Go&#39;:13,&#39;PHP&#39;:14}
-
-In [35]: sorted(languages.items(),key=lambda x:x[0])        # 以key排序
-Out[35]: [(&#39;Go&#39;, 13), (&#39;JAVA&#39;, 15), (&#39;PHP&#39;, 12), (&#39;Python&#39;, 12)]
-
-In [36]: sorted(languages.items(),key=lambda x:x[1])        # 以value排序
-Out[36]: [(&#39;Python&#39;, 12), (&#39;PHP&#39;, 12), (&#39;Go&#39;, 13), (&#39;JAVA&#39;, 15)]
-
-In [37]: sorted(languages.items(),key=lambda x:-x[1])       # 以value倒序
-Out[37]: [(&#39;JAVA&#39;, 15), (&#39;Go&#39;, 13), (&#39;Python&#39;, 12), (&#39;PHP&#39;, 12)]
-</code></pre>
-<p><strong>注意</strong>：<code>sort()</code>与<code>sorted()</code>的区别，前者返回值为<code>None</code>，后者可重新赋值；</p>
-<p>参考阅读</p>
-<ul>
-<li><a href="https://www.python.org/dev/peps/pep-0008/" target="_blank" rel="noopener">PEP 8 – Style Guide for Python Code | Python.org</a></li>
-<li><a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/contents/" target="_blank" rel="noopener">Python 风格指南 — Google 开源项目风格指南</a></li>
-</ul>
+<p>之后在本机访问虚拟机<code>ip</code>，比如本例中的<code>192.168.116.21:5000</code>，即可进入<code>app</code>首页。</p>
 	  
 	</div>
 
@@ -173,14 +158,14 @@ Out[37]: [(&#39;JAVA&#39;, 15), (&#39;Go&#39;, 13), (&#39;Python&#39;, 12), (&#3
 	<div class="pagination">
 <ul class="pagination">
 	 
-				
-    	<li class="prev"><a href="/blog/2018-01-11/how-to-install-drbd-on-CentOS7/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
-  		
+		
+          <li class="prev disabled"><a><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+        
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/blog/2017-12-28/Annual_record_of_2017/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/blog/2019-04-13/python-pass-by-object-reference/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -230,7 +215,7 @@ Out[37]: [(&#39;JAVA&#39;, 15), (&#39;Go&#39;, 13), (&#39;Python&#39;, 12), (&#3
 		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
 		   go_to_comment: "去留言",
 		   no_issue: "no_issue",
-		   issue_title: "🐍PyTricks | Python技巧写法记录",
+		   issue_title: "如何使 Pycharm 使用远程的 Flask 虚拟开发环境？",
 		   issue_id: "",
 		   btn_class: "btn btn-primary",
 		   comments_target: "#comment-thread",
@@ -251,12 +236,23 @@ Out[37]: [(&#39;JAVA&#39;, 15), (&#39;Go&#39;, 13), (&#39;Python&#39;, 12), (&#3
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2018-01-02 
+	2019-05-06 
 	</div>
 	
 
 	<!-- categories -->
     
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/工作日常/">工作日常<span>4</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
 
 	<!-- tags -->
 	
@@ -264,7 +260,7 @@ Out[37]: [(&#39;JAVA&#39;, 15), (&#39;Go&#39;, 13), (&#39;Python&#39;, 12), (&#3
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/Python/">Python<span>10</span></a></li>
+  <li><a href="/tags/HOWTO/">HOWTO<span>4</span></a></li> <li><a href="/tags/PyCharm/">PyCharm<span>1</span></a></li> <li><a href="/tags/Flask/">Flask<span>1</span></a></li>
     </ul>
 	</div>
 	

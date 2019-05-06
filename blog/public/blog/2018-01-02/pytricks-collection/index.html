@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Python中exec()和eval()的区别 | 别院牧志</title>
+  <title>🐍PyTricks | Python技巧写法记录 | 别院牧志</title>
   <meta name="author" content="imoyao">
   
   <meta name="description" content="Valar Dohaeris.">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Python中exec()和eval()的区别"/>
+  <meta property="og:title" content="🐍PyTricks | Python技巧写法记录"/>
   <meta property="og:site_name" content="别院牧志"/>
 
   
@@ -103,7 +103,7 @@
 
 	
 		<div class="page-header ">		
-			<h1 class="title "> Python中exec()和eval()的区别</h1>
+			<h1 class="title "> 🐍PyTricks | Python技巧写法记录</h1>
 		</div>		
 	
 
@@ -123,76 +123,45 @@
 	<div class="mypage">
 	  		
 
-	  <script src="/assets/js/APlayer.min.js"> </script><p>Python 动态执行字符串代码片段（也可以是文件）， 一般会用到exec,eval。那么这两个方法有什么区别呢？</p>
+	  <script src="/assets/js/APlayer.min.js"> </script><p>写出<code>Pythonic</code>的代码应该是每个<code>Pythonista</code>的基本追求，本文主要记录在开发中遇到的一些有关<code>Python</code>技巧。</p>
 <a id="more"></a>
-<h2 id="exec方法"><a href="#exec方法" class="headerlink" title="exec方法"></a>exec方法</h2><p>注意：<code>exec</code> 是一个语法声明，不是一个函数。也就是说和<code>if</code>、<code>for</code>一样。</p>
-<p>官方文档对于exec的解释</p>
-<blockquote>
-<p>This statement supports dynamic execution of Python code.</p>
-</blockquote>
-<p>exec的第一个表达式可以是：</p>
-<ol>
-<li>代码字符串</li>
-<li>文件对象</li>
-<li>代码对象</li>
-<li>tuple</li>
-</ol>
-<p>前面三种情况差不多，第四种比较特殊最后讲</p>
-<p>如果忽略后面的可选表达式,exec后面代码将在当前域执行</p>
-<pre><code>&gt;&gt;&gt; a=2
-&gt;&gt;&gt; exec &quot;a=1&quot;
-&gt;&gt;&gt; a
-1
-</code></pre><p>如果在表达式之后使用in选项指定一个<code>dict</code>，它将作为<code>global</code>和<code>local</code>变量作用域</p>
-<pre><code>&gt;&gt;&gt; a=10 
-&gt;&gt;&gt; b=20 
-&gt;&gt;&gt; g={&#39;a&#39;:6,&#39;b&#39;:8} 
-&gt;&gt;&gt; exec &quot;global a;print a,b&quot; in g 
-6 8
-</code></pre><p>如果<code>in</code>后详指定两个表达式，它们将分别用作<code>global</code>和<code>local</code>变量作用域</p>
-<pre><code>&gt;&gt;&gt; a=10 
-&gt;&gt;&gt; b=20 
-&gt;&gt;&gt; c=20 
-&gt;&gt;&gt; g={&#39;a&#39;:6,&#39;b&#39;:8} 
-&gt;&gt;&gt; l={&#39;b&#39;:9,&#39;c&#39;:10} 
-&gt;&gt;&gt; exec &quot;global a;print a,b,c&quot; in g,l 
-6 9 10
-</code></pre><p>现在说下<code>tuple</code>的情况，这也是导致很多人误以为<code>exec</code>是一个函数的原因。</p>
-<p>如果第一个表达式是<code>tuple</code></p>
-<pre><code>exec(expr, globals) #它等效于 `exec expr in globals`
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
+<li><code>JSON</code>字典内按照某个键值排序</li>
+</ul>
+<pre><code class="python">
+In [15]: alist = [{&#39;create&#39;: &#39;2017-12-28 11:05:48&#39;, &#39;id&#39;: &#39;0_1&#39;, &#39;path&#39;: &#39;foo.py&#39;, &#39;size&#39;: 0},
+   ....:  {&#39;create&#39;: &#39;2017-12-28 11:00:29&#39;, &#39;id&#39;: &#39;0_2&#39;, &#39;path&#39;: &#39;bar.py&#39;, &#39;size&#39;: 0},
+   ....:  {&#39;create&#39;: &#39;2017-12-28 11:05:55&#39;, &#39;id&#39;: &#39;0_3&#39;, &#39;path&#39;: &#39;baz.py&#39;, &#39;size&#39;: 0}]
 
-exec(expr, globals, locals) #它等效于  `exec expr in globals,locals`
-</code></pre><h2 id="eval-方法"><a href="#eval-方法" class="headerlink" title="eval()方法"></a>eval()方法</h2><p><code>eval</code>通常用来执行一个字符串表达式，并返回表达式的值。</p>
-<pre><code class="python">eval(expression[, globals[, locals]])
+In [16]: alist.sort(key=lambda x:x[&#39;create&#39;])    # 按照创建时间排序 
+
+In [17]: alist
+Out[17]:``
+[{&#39;create&#39;: &#39;2017-12-28 11:00:29&#39;, &#39;id&#39;: &#39;0_2&#39;, &#39;path&#39;: &#39;bar.py&#39;, &#39;size&#39;: 0},
+ {&#39;create&#39;: &#39;2017-12-28 11:05:48&#39;, &#39;id&#39;: &#39;0_1&#39;, &#39;path&#39;: &#39;foo.py&#39;, &#39;size&#39;: 0},
+ {&#39;create&#39;: &#39;2017-12-28 11:05:55&#39;, &#39;id&#39;: &#39;0_3&#39;, &#39;path&#39;: &#39;baz.py&#39;, &#39;size&#39;: 0}]
 </code></pre>
-<p>有三个参数，表达式字符串，globals变量作用域，locals变量作用域。 其中第二个和第三个参数是可选的。</p>
-<p>如果忽略后面两个参数，则<code>eval</code>在当前作用域执行。</p>
-<pre><code>&gt;&gt;&gt; a=1 
-&gt;&gt;&gt; eval(&quot;a+1&quot;) 
-2
-</code></pre><p>如果指定globals参数</p>
-<pre><code>&gt;&gt;&gt; a=1 
-&gt;&gt;&gt; g={&#39;a&#39;:10} 
-&gt;&gt;&gt; eval(&quot;a+1&quot;,g) 
-11
-</code></pre><p>如果指定<code>locals</code>参数</p>
-<pre><code>&gt;&gt;&gt; a=10 
-&gt;&gt;&gt; b=20 
-&gt;&gt;&gt; c=20 
-&gt;&gt;&gt; g={&#39;a&#39;:6,&#39;b&#39;:8} 
-&gt;&gt;&gt; l={&#39;b&#39;:9,&#39;c&#39;:10} 
-&gt;&gt;&gt; eval(&quot;a+b+c&quot;,g,l) 
-25
-</code></pre><p>如果要严格限制<code>eval</code>执行，可以设置<code>globals</code>为<code>__builtins__</code>,这样 这个表达式只可以访问<code>__builtin__</code> module。</p>
-<pre><code class="pyhton"># coding=utf-8
-exec &#39;print(&quot;hello&quot;)&#39;   #支持str的表达式动态代码执行    &gt;&gt;hello
-exec (&#39;a = 3*4&#39;)
-print a     # &gt;&gt;12
-b = eval(&#39;3*4&#39;)     #不支持表达式 有返回值
-print b     # &gt;&gt;12
+<ul>
+<li>字典排序</li>
+</ul>
+<pre><code class="python">
+In [35]: languages = {&#39;JAVA&#39;:15,&#39;Python&#39;:12,&#39;Go&#39;:13,&#39;PHP&#39;:14}
+
+In [35]: sorted(languages.items(),key=lambda x:x[0])        # 以key排序
+Out[35]: [(&#39;Go&#39;, 13), (&#39;JAVA&#39;, 15), (&#39;PHP&#39;, 12), (&#39;Python&#39;, 12)]
+
+In [36]: sorted(languages.items(),key=lambda x:x[1])        # 以value排序
+Out[36]: [(&#39;Python&#39;, 12), (&#39;PHP&#39;, 12), (&#39;Go&#39;, 13), (&#39;JAVA&#39;, 15)]
+
+In [37]: sorted(languages.items(),key=lambda x:-x[1])       # 以value倒序
+Out[37]: [(&#39;JAVA&#39;, 15), (&#39;Go&#39;, 13), (&#39;Python&#39;, 12), (&#39;PHP&#39;, 12)]
 </code></pre>
-<p>参考来源：</p>
-<p><a href="http://www.coolpython.com/index.php?aid=12" target="_blank" rel="noopener">python的exec、eval详解 - 疯狂奔跑的猪</a></p>
+<p><strong>注意</strong>：<code>sort()</code>与<code>sorted()</code>的区别，前者返回值为<code>None</code>，后者可重新赋值；</p>
+<p>参考阅读</p>
+<ul>
+<li><a href="https://www.python.org/dev/peps/pep-0008/" target="_blank" rel="noopener">PEP 8 – Style Guide for Python Code | Python.org</a></li>
+<li><a href="https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/contents/" target="_blank" rel="noopener">Python 风格指南 — Google 开源项目风格指南</a></li>
+</ul>
 	  
 	</div>
 
@@ -205,13 +174,13 @@ print b     # &gt;&gt;12
 <ul class="pagination">
 	 
 				
-    	<li class="prev"><a href="/blog/2017-11-18/howto_build_hexo_blog/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+    	<li class="prev"><a href="/blog/2018-01-11/how-to-install-drbd-on-CentOS7/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
   		
 
         <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
 
 		
-		   <li class="next"><a href="/blog/2017-11-11/fo_or_gril/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+		   <li class="next"><a href="/blog/2017-12-28/Annual-record-of-2017/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
         
 	
 </ul>
@@ -261,7 +230,7 @@ print b     # &gt;&gt;12
 		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
 		   go_to_comment: "去留言",
 		   no_issue: "no_issue",
-		   issue_title: "Python中exec()和eval()的区别",
+		   issue_title: "🐍PyTricks | Python技巧写法记录",
 		   issue_id: "",
 		   btn_class: "btn btn-primary",
 		   comments_target: "#comment-thread",
@@ -282,23 +251,12 @@ print b     # &gt;&gt;12
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2017-11-17 
+	2018-01-02 
 	</div>
 	
 
 	<!-- categories -->
     
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
-    <ul id="categorys" class="tag_box list-unstyled collapse in">
-          
-  <li>
-    <li><a href="/categories/Python/">Python<span>3</span></a></li>
-  </li>
-
-    </ul>
-	</div>
-	
 
 	<!-- tags -->
 	

@@ -18,7 +18,7 @@ author: 一唏
 你说五蕴皆空。可谁的心里总还藏着一个不穿衣服的姑娘；你说观法自在，可那姑娘夜夜钻我的被窝，又让我如何是好？
 <!--more-->
 
-#TODO:
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=28308561&auto=1&height=32"></iframe>
 
 <br>
 
