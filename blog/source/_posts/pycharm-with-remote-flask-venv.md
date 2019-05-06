@@ -48,4 +48,8 @@ ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --h
 ```
 之后在本机访问虚拟机`ip`，比如本例中的`192.168.116.21:5000`，即可进入`app`首页。
 
+## 参考链接
+
+- [配置`flask`服务进行调试](https://www.jetbrains.com/help/pycharm/run-debug-configuration-flask-server.html)
+- [配置`Python`解释器](https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html)
 
