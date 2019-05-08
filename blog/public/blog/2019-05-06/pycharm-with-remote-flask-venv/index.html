@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>如何使 Pycharm 使用远程的 Flask 虚拟开发环境？ | 别院牧志</title>
+  <title>如何配置 Pycharm 使用远程的 Flask 虚拟开发环境？ | 别院牧志</title>
   <meta name="author" content="imoyao">
   
   <meta name="description" content="Valar Dohaeris.">
@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="如何使 Pycharm 使用远程的 Flask 虚拟开发环境？"/>
+  <meta property="og:title" content="如何配置 Pycharm 使用远程的 Flask 虚拟开发环境？"/>
   <meta property="og:site_name" content="别院牧志"/>
 
   
@@ -103,7 +103,7 @@
 
 	
 		<div class="page-header ">		
-			<h1 class="title "> 如何使 Pycharm 使用远程的 Flask 虚拟开发环境？</h1>
+			<h1 class="title "> 如何配置 Pycharm 使用远程的 Flask 虚拟开发环境？</h1>
 		</div>		
 	
 
@@ -147,6 +147,8 @@ ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --h
  * Debugger PIN: 820-491-228
 </code></pre>
 <p>之后在本机访问虚拟机<code>ip</code>，比如本例中的<code>192.168.116.21:5000</code>，即可进入<code>app</code>首页。</p>
+<h2 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h2><p>在配置好上述选项之后，运行可能会提示 <code>NoAppException: Could not import &quot;app&quot;.</code>。这个问题暂时不知道是什么原因引起，可能是<code>Pycharm</code>识别路径有误导致，暂时没有找到很好的解决办法。大家可以参考下图尝试配置（递归手动设置目录，可能有用）。</p>
+<p><img src="./images/snipaste_20190507_133810.jpg" alt="can&#39;t_import_app"></p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li><a href="https://www.jetbrains.com/help/pycharm/run-debug-configuration-flask-server.html" target="_blank" rel="noopener">配置<code>flask</code>服务进行调试</a></li>
 <li><a href="https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html" target="_blank" rel="noopener">配置<code>Python</code>解释器</a></li>
@@ -219,7 +221,7 @@ ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --h
 		   no_comment: "暂时还没有留言呢，点击下面的按钮去留言吧！",
 		   go_to_comment: "去留言",
 		   no_issue: "no_issue",
-		   issue_title: "如何使 Pycharm 使用远程的 Flask 虚拟开发环境？",
+		   issue_title: "如何配置 Pycharm 使用远程的 Flask 虚拟开发环境？",
 		   issue_id: "",
 		   btn_class: "btn btn-primary",
 		   comments_target: "#comment-thread",

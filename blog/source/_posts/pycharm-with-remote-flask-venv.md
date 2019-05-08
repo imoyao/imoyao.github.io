@@ -1,5 +1,5 @@
 ---
-title: 如何使 Pycharm 使用远程的 Flask 虚拟开发环境？
+title: 如何配置 Pycharm 使用远程的 Flask 虚拟开发环境？
 date: 2019-05-06 13:56:35
 tags:
 - PyCharm
@@ -47,6 +47,11 @@ ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --h
  * Debugger PIN: 820-491-228
 ```
 之后在本机访问虚拟机`ip`，比如本例中的`192.168.116.21:5000`，即可进入`app`首页。
+## 注意问题
+在配置好上述选项之后，运行可能会提示 `NoAppException: Could not import "app".`。这个问题暂时不知道是什么原因引起，可能是`Pycharm`识别路径有误导致，暂时没有找到很好的解决办法。大家可以参考下图尝试配置（递归手动设置目录，可能有用）。
+
+![can't_import_app](./images/snipaste_20190507_133810.jpg)
+
 
 ## 参考链接
 
