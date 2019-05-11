@@ -17,7 +17,7 @@ toc: true
 ---
 今天在项目开发时，遇到需要在数据库中存储ip地址，那么应该选用何种数据类型更加高效呢？
 如果存储的是`IPV4`地址，可以选择使用`INT UNSIGNED`，然后借助 `MySQL` 自带的 `INET_ATON()` 和  `INET_NTOA()`来存取数据；
-如果存储的是`IPV6`地址，可以选择使用`VARBINARY()`，然后借助 `INET6_ATON()` (`MySQL5.6+`支持)方法存取数据。
+如果存储的是`IPV6`地址，可以选择使用`VARBINARY()`，然后借助 `INET6_ATON()`和`INET6_NTOA()` (`MySQL5.6+`支持)方法存取数据。
 
 <!--more-->
 
@@ -59,7 +59,7 @@ mysql> select inet_ntoa(2130706433);
 
 ### `Python`实现
 
-对于上面的代码，如果我们不想使用内置的MySQL方法，也可以自己封装方法：
+对于上面的代码，如果我们不想使用内置的`MySQL`方法，也可以在应用层使用自己封装的方法：
 
 ```python
 import socket, struct
