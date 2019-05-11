@@ -42,6 +42,7 @@ mysql> select inet_ntoa(2130706433);
 
 ```
 ### 数据存取
+
 - 存数据
 
     ```sql
@@ -55,6 +56,7 @@ mysql> select inet_ntoa(2130706433);
     SELECT id, INET_NTOA(`ip_address`) AS ip
     FROM `ip_addresses`;
     ```
+
 ### `Python`实现
 
 对于上面的代码，如果我们不想使用内置的MySQL方法，也可以自己封装方法：
