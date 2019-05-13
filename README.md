@@ -36,3 +36,8 @@ git push --set-upstream origin hexo
 git clone -b hexo https://github.com/yourname/hexo-test.github.io.git
 ```
 因为上面创建的是一个名字叫hexo的分支，所以这里-b后面的是hexo，再把后面的gitHub的地址换成你自己的博客的地址就可以了。
+
+## `LaTex` 在线公式编辑器
+
+- [国内版](http://latex.91maths.com/)
+- [国际版](http://latex.codecogs.com/eqneditor/editor.php)
