@@ -50,34 +50,6 @@ UpToDate/UpToDate （同步完成，数据一致）
 - C drbd的复制协议，即A、B、C协议。
 - r-----是IO标记，反映的是该资源的IO状态信息。共有6种IO状态标记符号。
 
-## 性能指标
-
-习惯上，我们使用`cat /proc/drbd `获取`drbd`状态信息。
-```shell
-[root@Storage ~]# cat /proc/drbd 
-version: 8.4.3 (api:1/proto:86-101)
-srcversion: 9D811F04CD6DC2C9A9A608F 
-
- 3: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----
-    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0
-
-301: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----
-    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0
-```
-- ns(network send)：通过网络连接发送到对端的数据量，单位KB.
-- nr(network receive)：通过网络连接从对点接收的数据量，单位KB.
-- dw(disk write)：向本地硬盘写入网络数据，单位KB.
-- dr(disk read)：网络从本地硬盘读取的数据量，单位KB.
-- al(activity log)：元数据活动日志的更新次数。
-- bm(bit map)：元数据区域更新的资源。
-- lo(local count)：由DRBD产生的本地I/O请求数据。
-- pe(pending)：就是等待响应，已经发送到圣战，但是还没有得到对端回应的数量。
-- ua(unacknow wledged)：就是未确认，通过网络连接收到对方的请求，但是还没有做出处理的数量.
-- ap(application pending)：转发到DRBD的I/O请求，仍然没有被DRBD所响应。
-- ep(epochs)：epoch对象的数，通常为1。当使用barrier或者none写顺序方法时，可能会增加底层I/O负荷。
-- wo(write order)：当前使用的写顺序的方法：b(barrier)/f(flush)/d(drain)/n(none)。
-- oos(out of sync)：当前没有同步的数据总数量，单位为KB.
-
 ## 连接状态
 
 节点间通过TCP连接进行通信，在建立连接、断开连接、特殊情况下有很多种连接状态。
@@ -172,7 +144,18 @@ IO状态标记表示的是当前资源的IO操作状态。共有6种状态：
 
 ## 性能指标
 
-主要是一些计数器和计量器的值。
+习惯上，我们使用`cat /proc/drbd `获取`drbd`状态信息。主要是一些计数器和计量器的值。
+```shell
+[root@Storage ~]# cat /proc/drbd 
+version: 8.4.3 (api:1/proto:86-101)
+srcversion: 9D811F04CD6DC2C9A9A608F 
+
+ 3: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----
+    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0
+
+301: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----
+    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0
+```
 
 drbd84中使用缩写符号来标记性能指标，而drbd9中使用全称来表示。例如drbd84中的ns和drbd9中的send是同一个意思。
 
