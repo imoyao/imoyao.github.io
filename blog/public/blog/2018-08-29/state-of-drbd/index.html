@@ -142,7 +142,16 @@ m:res          cs            ro                 ds                 p       mount
 ……
 6:drbd6        Connected     Primary/Secondary  UpToDate/UpToDate  C       /xxx  ext4
 </code></pre>
-<p>习惯上，我们使用<code>cat /proc/drbd</code>获取<code>drbd</code>状态信息。</p>
+<p>缩写解释</p>
+<ul>
+<li>res：资源名称</li>
+<li>cs：connect state,资源连接状态</li>
+<li>ro：role，表示节点角色信息<br>第一次启动drbd时，两个drbd节点默认都处于Secondary状态，<br>Primary/Secondary（代表这个是主节点）<br>Secondary/Primary（代表这个是副节点）</li>
+<li>ds：disk state,磁盘状态信息<br>Inconsistent/Inconsisten，即为“不一致/不一致”状态，表示两个节点的磁盘数据处于不一致状态。<br>UpToDate/Inconsistent（正在同步，数据还没有一致）<br>UpToDate/UpToDate （同步完成，数据一致）</li>
+<li>C drbd的复制协议，即A、B、C协议。</li>
+<li>r—–是IO标记，反映的是该资源的IO状态信息。共有6种IO状态标记符号。</li>
+</ul>
+<h2 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h2><p>习惯上，我们使用<code>cat /proc/drbd</code>获取<code>drbd</code>状态信息。</p>
 <pre><code class="shell">[root@Storage ~]# cat /proc/drbd 
 version: 8.4.3 (api:1/proto:86-101)
 srcversion: 9D811F04CD6DC2C9A9A608F 
@@ -153,14 +162,20 @@ srcversion: 9D811F04CD6DC2C9A9A608F
 301: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----
     ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0
 </code></pre>
-<p>缩写解释</p>
 <ul>
-<li>res：资源名称</li>
-<li>cs：connect state,资源连接状态</li>
-<li>ro：role，表示节点角色信息<br>第一次启动drbd时，两个drbd节点默认都处于Secondary状态，<br>Primary/Secondary（代表这个是主节点）<br>Secondary/Primary（代表这个是副节点）</li>
-<li>ds：disk state,磁盘状态信息<br>Inconsistent/Inconsisten，即为“不一致/不一致”状态，表示两个节点的磁盘数据处于不一致状态。<br>UpToDate/Inconsistent（正在同步，数据还没有一致）<br>UpToDate/UpToDate （同步完成，数据一致）</li>
-<li>C drbd的复制协议，即A、B、C协议。</li>
-<li>r—–是IO标记，反映的是该资源的IO状态信息。共有6种IO状态标记符号。</li>
+<li>ns(network send)：通过网络连接发送到对端的数据量，单位KB.</li>
+<li>nr(network receive)：通过网络连接从对点接收的数据量，单位KB.</li>
+<li>dw(disk write)：向本地硬盘写入网络数据，单位KB.</li>
+<li>dr(disk read)：网络从本地硬盘读取的数据量，单位KB.</li>
+<li>al(activity log)：元数据活动日志的更新次数。</li>
+<li>bm(bit map)：元数据区域更新的资源。</li>
+<li>lo(local count)：由DRBD产生的本地I/O请求数据。</li>
+<li>pe(pending)：就是等待响应，已经发送到圣战，但是还没有得到对端回应的数量。</li>
+<li>ua(unacknow wledged)：就是未确认，通过网络连接收到对方的请求，但是还没有做出处理的数量.</li>
+<li>ap(application pending)：转发到DRBD的I/O请求，仍然没有被DRBD所响应。</li>
+<li>ep(epochs)：epoch对象的数，通常为1。当使用barrier或者none写顺序方法时，可能会增加底层I/O负荷。</li>
+<li>wo(write order)：当前使用的写顺序的方法：b(barrier)/f(flush)/d(drain)/n(none)。</li>
+<li>oos(out of sync)：当前没有同步的数据总数量，单位为KB.</li>
 </ul>
 <h2 id="连接状态"><a href="#连接状态" class="headerlink" title="连接状态"></a>连接状态</h2><p>节点间通过TCP连接进行通信，在建立连接、断开连接、特殊情况下有很多种连接状态。</p>
 <p>DRBD连接建立完成，表示元数据区、数据区等一切都已准备好，可以进行任何数据同步的操作。</p>
@@ -241,7 +256,7 @@ UpToDate/UpToDate
 </li>
 <li>Activity Log更新挂起：当al更新被挂起时，处于该状态，标记为”s”，通常该状态栏应该处于”-“。(如果不知道什么是Active Log，请无视本标记)</li>
 </ul>
-<h2 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h2><p>主要是一些计数器和计量器的值。</p>
+<h2 id="性能指标-1"><a href="#性能指标-1" class="headerlink" title="性能指标"></a>性能指标</h2><p>主要是一些计数器和计量器的值。</p>
 <p>drbd84中使用缩写符号来标记性能指标，而drbd9中使用全称来表示。例如drbd84中的ns和drbd9中的send是同一个意思。</p>
 <ul>
 <li>ns/send (network send)：通过网络连接发送给对端的数据量，单位为Kb。</li>
