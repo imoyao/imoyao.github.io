@@ -2,6 +2,11 @@
 title: 深深别院，潜潜牧志！
 date: 2017-11-18 15:24:37
 ---
+![病木重生](./images/A-withered-tree-comes-to-life-again.jpg)
+<center>
+    <span> 2018 年摄于北京·香山</span>
+</center>
+
 <div class="slogan">
   <i class="fa fa-user"></i>    自述
 </div>
