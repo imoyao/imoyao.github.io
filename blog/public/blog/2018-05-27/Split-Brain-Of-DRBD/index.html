@@ -111,7 +111,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DRBD裂脑"><span class="toc-number">1.</span> <span class="toc-text">什么是DRBD裂脑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么判定裂脑"><span class="toc-number">2.</span> <span class="toc-text">怎么判定裂脑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看日志信息"><span class="toc-number">2.1.</span> <span class="toc-text">查看日志信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#裂脑自动通知"><span class="toc-number">2.2.</span> <span class="toc-text">裂脑自动通知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#世代标识符元组（GI）"><span class="toc-number">2.3.</span> <span class="toc-text">世代标识符元组（GI）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据迭代"><span class="toc-number">2.3.1.</span> <span class="toc-text">数据迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GI元祖"><span class="toc-number">2.3.2.</span> <span class="toc-text">GI元祖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GI如何变化？"><span class="toc-number">2.3.3.</span> <span class="toc-text">GI如何变化？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何模拟一个-Split-Brain状态"><span class="toc-number">3.</span> <span class="toc-text">如何模拟一个 Split-Brain状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决DRBD裂脑状态"><span class="toc-number">4.</span> <span class="toc-text">解决DRBD裂脑状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置自动修复"><span class="toc-number">4.1.</span> <span class="toc-text">设置自动修复</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#after-sb-0pri"><span class="toc-number">4.1.1.</span> <span class="toc-text">after-sb-0pri</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#after-sb-1pri"><span class="toc-number">4.1.2.</span> <span class="toc-text">after-sb-1pri</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#after-sb-2pri"><span class="toc-number">4.1.3.</span> <span class="toc-text">after-sb-2pri</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动恢复"><span class="toc-number">4.2.</span> <span class="toc-text">手动恢复</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DRBD裂脑"><span class="toc-number">1.</span> <span class="toc-text">什么是DRBD裂脑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么判定裂脑"><span class="toc-number">2.</span> <span class="toc-text">怎么判定裂脑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看日志信息"><span class="toc-number">2.1.</span> <span class="toc-text">查看日志信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#裂脑自动通知"><span class="toc-number">2.2.</span> <span class="toc-text">裂脑自动通知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#世代标识符元组（GI）"><span class="toc-number">2.3.</span> <span class="toc-text">世代标识符元组（GI）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据迭代"><span class="toc-number">2.3.1.</span> <span class="toc-text">数据迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GI元祖"><span class="toc-number">2.3.2.</span> <span class="toc-text">GI元祖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GI如何变化？"><span class="toc-number">2.3.3.</span> <span class="toc-text">GI如何变化？</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#on-secondary"><span class="toc-number"></span> <span class="toc-text">on secondary</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#on-primary"><span class="toc-number"></span> <span class="toc-text">on primary</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#on-secondary-1"><span class="toc-number"></span> <span class="toc-text">on secondary</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#on-primary-1"><span class="toc-number"></span> <span class="toc-text">on primary</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#手动恢复"><span class="toc-number">0.1.</span> <span class="toc-text">手动恢复</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">1.</span> <span class="toc-text">参考链接</span></a></li>
     </div>
   </span>
 </div>
@@ -158,48 +158,14 @@
     <script src="/assets/js/APlayer.min.js"> </script><p>裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。<br><a id="more"></a></p>
 <h2 id="什么是DRBD裂脑"><a href="#什么是DRBD裂脑" class="headerlink" title="什么是DRBD裂脑"></a>什么是<code>DRBD</code>裂脑</h2><p>裂脑(<code>split brain</code>)实际上是指在某种情况下，由集群节点间的网络连接临时故障、集群软件管理干预或者是人为错误，导致两个节点都切换为主节点（<code>primary</code>）而断开连接。这种状态是一个潜在的有害状态，因为它意味着不能复制数据到对等节点，这样就可能导致两个节点的数据产生分歧，产生不可合并的分裂。</p>
 <h2 id="怎么判定裂脑"><a href="#怎么判定裂脑" class="headerlink" title="怎么判定裂脑"></a>怎么判定裂脑</h2><h3 id="查看日志信息"><a href="#查看日志信息" class="headerlink" title="查看日志信息"></a>查看日志信息</h3><p>如果<code>DRBD</code>出现裂脑，会在 <code>/var/log/message</code> 出现一条日志：</p>
-<pre><code>Split-Brain detected but unresolved, dropping connection!
-</code></pre><p>当发生<code>split brain</code>之后，如果查看连接状态，其中至少会有一个是<code>StandAlone</code>状态，另外一个可能也是<code>StandAlone</code>（如果是同时发现<code>split brain</code>状态），也有可能是 <code>WFConnection</code> 状态。</p>
-<h3 id="裂脑自动通知"><a href="#裂脑自动通知" class="headerlink" title="裂脑自动通知"></a>裂脑自动通知</h3><p>如果进行配置，DRBD会调用裂脑处理程序，当裂脑发生时就会被探测到。要配置这个程序，需要对资源<code>/etc/drbd.d/global_common.conf</code>添加如下配置：</p>
-<pre><code class="shell">resource &lt;resource&gt;
-
-  handlers {
-
-    split-brain &lt;handler&gt;;
-
-    ...
-
-  }
-
-  ...
-
-}
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Split-Brain detected but unresolved, dropping connection!</span><br></pre></td></tr></table></figure>
+<p>当发生<code>split brain</code>之后，如果查看连接状态，其中至少会有一个是<code>StandAlone</code>状态，另外一个可能也是<code>StandAlone</code>（如果是同时发现<code>split brain</code>状态），也有可能是 <code>WFConnection</code> 状态。</p>
+<h3 id="裂脑自动通知"><a href="#裂脑自动通知" class="headerlink" title="裂脑自动通知"></a>裂脑自动通知</h3><p>如果进行配置，DRBD会调用裂脑处理程序，当裂脑发生时就会被探测到。要配置这个程序，需要对资源<code>/etc/drbd.d/global_common.conf</code>添加如下配置：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">resource &lt;resource&gt;</span><br><span class="line"></span><br><span class="line">  handlers &#123;</span><br><span class="line"></span><br><span class="line">    split-brain &lt;handler&gt;;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>&lt;handler&gt;</code>可能是目前系统中一个可执行的文件。</p>
-<p><code>Drbd</code>自带一个裂脑处理程序脚本<code>/usr/lib/drbd/notify-split-brain.sh</code>。它可以通过电子邮件的方式发送到指定的地址。要配合程序发送信息到root@localhost（这假设是设置的系统管理员的邮件地址），配置如下：</p>
-<pre><code class="shell">resource &lt;resource&gt;
-
-  handlers {
-
-    split-brain &quot;/usr/lib/drbd/notify-split-brain.sh root&quot;;
-
-    ...
-
-  }
-
-  ...
-
-}
-</code></pre>
+<p><code>Drbd</code>自带一个裂脑处理程序脚本<code>/usr/lib/drbd/notify-split-brain.sh</code>。它可以通过电子邮件的方式发送到指定的地址。要配合程序发送信息到root@localhost（这假设是设置的系统管理员的邮件地址），配置如下：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">resource &lt;resource&gt;</span><br><span class="line"></span><br><span class="line">  handlers &#123;</span><br><span class="line"></span><br><span class="line">    split-brain "/usr/lib/drbd/notify-split-brain.sh root";</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>当配置已经在资源上进行修改（同步到两个节点上），就不需要添加其他的处理就可以启动处理程序。<code>Drbd</code>会在下一次检测到裂脑时直接调用该处理程序。</p>
-<p>如果要配置真实可用的报警邮箱地址，则除了将上面的通知地址改为真实邮件地址:</p>
-<pre><code class="shell">split-brain &quot;/usr/lib/drbd/notify-split-brain.sh foo@bar.com
-</code></pre>
-<p>还需要修改一下<code>ssmtp</code>配置文件：</p>
-<pre><code class="shell">vim /etc/ssmtp/ssmtp.conf
-# 填写真实收件服务器信息
-mailhub=idealyard.imoyao.com:25
-</code></pre>
+<p>如果要配置真实可用的报警邮箱地址，则除了将上面的通知地址改为真实邮件地址:<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">split-brain "/usr/lib/drbd/notify-split-brain.sh foo@bar.com</span><br></pre></td></tr></table></figure></p>
+<p>还需要修改一下<code>ssmtp</code>配置文件：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/ssmtp/ssmtp.conf</span><br><span class="line"><span class="meta">#</span> 填写真实收件服务器信息</span><br><span class="line">mailhub=idealyard.imoyao.com:25</span><br></pre></td></tr></table></figure></p>
 <p>更多配置参见 <a href="http://iqjar.com/jar/sending-emails-from-the-raspberry-pi/" target="_blank" rel="noopener">这里</a></p>
 <h3 id="世代标识符元组（GI）"><a href="#世代标识符元组（GI）" class="headerlink" title="世代标识符元组（GI）"></a>世代标识符元组（GI）</h3><p>参见<a href="https://docs.linbit.com/docs/users-guide-8.4/#s-gi" target="_blank" rel="noopener">16.2. Generation Identifiers</a></p>
 <p>DRBD 将其备份的数据的更新变化过程比拟成人类世代繁衍的过程。每个时点同一个双机的DRBD的两个节点上的数据都来自于同一份原始数据，我们可认为这个时点上两分数据源于同一祖先。主备节点的DRBD都会用一个叫作GI(Generation ID)的标识符来标识当前的数据是哪个世代的，同样也会记录最近两个数据祖先的GI用于追朔当前数据的历史来源。DRBD可以据此来判断两个节点是否是属于同一个双机,因为同一个双机的两份数据应该是从同一个祖先而来。<br>GI作为DRBD的内部机制主要被用来：</p>
@@ -299,188 +265,16 @@ mailhub=idealyard.imoyao.com:25
 </ul>
 <p>最后，如果<code>DRBD</code>未能检测到两个节点之间的<code>GI</code>元组中的单个元素匹配，则会记录关于无关数据（<code>unrelated data</code>）的警告并断开连接。这是<code>DRBD</code>的防范措施，可防止之前无关联的两个集群节点的意外连接导致数据破坏。</p>
 <p>以上逻辑使用代码表示如下：</p>
-<pre><code class="Python">
-empty_uuid = &#39;0000000000000000&#39;
-
-def slice_seq(seq):
-    &quot;&quot;&quot;
-    对GI元祖内元素进行切片操作
-    :param seq: GI元祖
-    :return:type:list
-    &quot;&quot;&quot;
-    global empty_uuid
-    sliced_seq = [item[:-1] if item != empty_uuid else item for item in seq]
-    return sliced_seq
-
-
-def cmp_both(seqa,seqb):
-    for i in seqa:
-        if i not in seqb:
-            return 1
-    return 0
-
-
-def get_gi_action(drbdname):
-    &quot;&quot;&quot;
-    调用&#39;drbdadm get-gi DRBDNAME&#39;命令获取drbd的 GI(Generation ID) 信息
-    :param drbdname:type:str,drbd名称 like:&#39;drbds1/drbdn301&#39;
-    :return:获取正常返回元祖(c_uuid, b_uuid, h1_uuid, h2_uuid)，获取失败返回None
-    &quot;&quot;&quot;
-    get_gi_cmd = &quot;drbdadm get-gi %s |awk -F: &#39;{print $1,$2,$3,$4}&#39;&quot;%(drbdname)
-    retcode,proc = utils.cust_popen(get_gi_cmd)
-    message = proc.stderr.read(), proc.stdout.read()
-    retstr = message[1]
-    if retstr:
-        c_uuid,b_uuid,h1_uuid,h2_uuid = tuple(retstr.split())
-        return c_uuid,b_uuid,h1_uuid,h2_uuid
-    else:
-        debug.write_debug(debug.LINE(), &quot;peradrbd&quot;, message)
-        return None
-
-
-def get_remote_gi(params):
-    rtndata = {}
-    result = {}
-    drbdname = &#39;drbdname&#39; in params and params[&#39;drbdname&#39;] or &#39;&#39;
-    if drbdname:
-        if hasthedrbd(drbdname):
-            gi_uuids = get_gi_action(drbdname)
-            if gi_uuids is not None:
-                rtndata[&#39;state&#39;] = &#39;0&#39;
-                result[&#39;message&#39;] = &#39;&#39;
-                result[&#39;gi_id&#39;] = gi_uuids
-            else:
-                rtndata[&#39;state&#39;] = &#39;1&#39;
-                result[&#39;message&#39;] = &#39;11069&#39;     # 获取 gi_id 出错
-                result[&#39;gi_id&#39;] = None
-        else:
-            rtndata[&#39;state&#39;] = &#39;1&#39;
-            result[&#39;message&#39;] = &#39;11060&#39;  # the drbd not found
-
-        rtndata[&#39;result&#39;] = result
-    else:
-        rtndata = {&#39;state&#39;: &#39;1&#39;, &#39;result&#39;: {&#39;message&#39;: &#39;11059&#39;}}  # drbdname error
-    return rtndata
-
-
-def exchange_gi_process(drbdname):
-    &quot;&quot;&quot;
-    see:https://docs.linbit.com/docs/users-guide-8.4/#s-gi (16.2.4. How DRBD uses generation identifiers)
-    :param drbdname:
-    :return:type:str
-    &quot;&quot;&quot;
-    local_gis = get_gi_action(drbdname)
-    remote_gis = None
-    global remoteip
-    retresult = hautils.socketclient(ip=remoteip,
-                                     **{&#39;target&#39;: &#39;drbd&#39;, &#39;op&#39;: &#39;getremotegi&#39;, &#39;params&#39;: {&#39;drbdname&#39;:drbdname}})
-    if retresult:
-        if retresult[&#39;state&#39;] == &#39;0&#39;:
-            remote_gis = retresult[&#39;result&#39;][&#39;gi_id&#39;]
-        drbd_next = &#39;&#39;
-        if local_gis is not None and remote_gis is not None:
-            local_gis_sliced = slice_seq(local_gis)
-            remote_gis_sliced = slice_seq(remote_gis)
-            global empty_uuid
-            print(&#39;sliced&#39;, local_gis_sliced, remote_gis_sliced)
-            if local_gis_sliced[0] == empty_uuid and remote_gis_sliced[0] == empty_uuid:
-                drbd_next = &#39;no_sync:(manual_sync)&#39;
-
-            elif local_gis_sliced[0] == empty_uuid or remote_gis_sliced[0] == empty_uuid:
-                if remote_gis_sliced[0] == empty_uuid and local_gis_sliced[0] != empty_uuid:
-                    drbd_next = &#39;full_re_sync:(local_source)&#39;
-                elif local_gis_sliced[0] == empty_uuid and remote_gis_sliced[0] != empty_uuid:
-                    drbd_next = &#39;full_re_sync:(local_target)&#39;
-
-            elif local_gis_sliced[0] != empty_uuid and remote_gis_sliced[0] != empty_uuid and local_gis_sliced[0] == remote_gis_sliced[0]:
-                drbd_next = &#39;consistent:(both_secondary)&#39;
-
-            elif local_gis_sliced[1] == remote_gis_sliced[0] and remote_gis_sliced[1] == empty_uuid:
-                drbd_next = &#39;partial_re_sync:(local_source)&#39;
-            elif local_gis_sliced[1] == empty_uuid and remote_gis_sliced[1] == local_gis_sliced[0]:
-                drbd_next = &#39;partial_re_sync:(local_target)&#39;
-
-            elif local_gis_sliced[0] in [remote_gis_sliced[2], remote_gis_sliced[3]]:
-                drbd_next = &#39;full_re_sync:(local_target)&#39;
-            elif remote_gis_sliced[0] in [local_gis_sliced[2], local_gis_sliced[3]]:
-                drbd_next = &#39;full_re_sync:(local_source)&#39;
-
-            elif local_gis_sliced[0] != remote_gis_sliced[0]:
-                if local_gis_sliced[1] == remote_gis_sliced[1]:
-                    drbd_next = &#39;split_brain:(auto_recover_able)&#39;
-                elif local_gis_sliced[1] != remote_gis_sliced[1]:
-                    drbd_next = &#39;split_brain:(wait_for_manual_recover)&#39;
-
-            elif cmp_both(local_gis_sliced,remote_gis_sliced):
-                drbd_next = &#39;unrelated_data:(wait_for_manual_recover)&#39;
-            else:
-                debug.write_debug(debug.LINE(), &quot;peradrbd&quot;, (local_gis_sliced, remote_gis_sliced))
-        else:
-            debug.write_debug(debug.LINE(), &quot;peradrbd&quot;, (local_gis,remote_gis))
-        return drbd_next
-
-</code></pre>
-<p><strong>注意</strong>：</p>
-<p>经分析官方文档中的’matches’并不是完全相等，而 ‘UUID is always empty (zero)’ 是指 “‘0’*16” 的字符串</p>
-<h2 id="如何模拟一个-Split-Brain状态"><a href="#如何模拟一个-Split-Brain状态" class="headerlink" title="如何模拟一个 Split-Brain状态"></a>如何模拟一个 <code>Split-Brain</code>状态</h2><ol>
-<li>往主节点写入大文件，在未写入完前停止备节点的<code>DRBD</code>；<pre><code># on secondary
-drbdadm down drbdxx
-</code></pre></li>
-<li>停止主节点的<code>DRBD</code>；<pre><code># on primary
-drbdadm down drbdxx
-</code></pre></li>
-<li>启动备节点的<code>DRBD</code>，设置为主节点；<pre><code># on secondary
-drbdadm up drbdxx
-drbdadm primary drbdxx
-</code></pre></li>
-<li>启动原主节点的<code>DRBD</code>，这时发现它的状态就是<code>StandAlone Secondary/Unknown UpToDate/DUnknown</code>，<code>Split-Brain</code> 情况出现。<pre><code># on primary
-drbdadm up drbdxx
-</code></pre></li>
-</ol>
-<h2 id="解决DRBD裂脑状态"><a href="#解决DRBD裂脑状态" class="headerlink" title="解决DRBD裂脑状态"></a>解决DRBD裂脑状态</h2><h3 id="设置自动修复"><a href="#设置自动修复" class="headerlink" title="设置自动修复"></a>设置自动修复</h3><p><a href="https://docs.linbit.com/docs/users-guide-8.4/#s-configure-split-brain-behavior" target="_blank" rel="noopener">5.17.2. Automatic split brain recovery policies</a></p>
-<p><strong>警告</strong>：配置<code>DRBD</code>自动修复裂脑（或其他状况）导致的数据分歧情况可能是正在配置的数据丢失，如果你不知道你在干什么，那最好别干。（NO ZUO NO DIE）</p>
-<p>_提示_ ：您更应该查看系统防护策略，集群管理集成和冗余集群管理器通信连接状态，以避免出现数据分歧。（防患于未然而不是亡羊补牢）<br>在启用和配置<code>DRBD</code>的自动裂脑恢复策略之前，您必须了解<code>DRBD</code>为此提供了多种配置选项。 DRBD根据检测到裂脑时主节点（<code>Primary role</code>）的数量应用其裂脑恢复程序。为此，DRBD检查以下关键字，这些关键字均可在资源的网络配置部分中找到：</p>
-<h4 id="after-sb-0pri"><a href="#after-sb-0pri" class="headerlink" title="after-sb-0pri"></a>after-sb-0pri</h4><p>裂脑被检测到的同时该资源在任一节点不是主节点。对于这种状况，<code>DRBD</code>可以理解以下关键字：</p>
-<ul>
-<li>disconnect: 不自动恢复，只调用裂脑通知程序（如果已配置），断开连接并保持断开；</li>
-<li>discard-younger-primary: 丢弃并回滚最后升主节点的改动；</li>
-<li>discard-least-changes: 丢弃并回滚修改更少节点的修改；</li>
-<li>discard-zero-changes: 如果有某一节点一点未改动，只需应用对另一主机所做的修改并继续；</li>
-</ul>
-<h4 id="after-sb-1pri"><a href="#after-sb-1pri" class="headerlink" title="after-sb-1pri"></a>after-sb-1pri</h4><p>裂脑刚被检测到的同时该资源在一个节点上是主节点。对于这种状况，<code>DRBD</code>理解以下关键字：</p>
-<ul>
-<li>disconnect:同上</li>
-<li>consensus：应用上一步的策略之后，如果裂脑受害者可以选择拆分则会自动解决。否则，与<code>disconnect</code>指令相同。</li>
-<li>call-pri-lost-after-sb：应用上一步的策略之后，如果裂脑受害者节点可以选择拆分则调用<code>pri-lost-after-sb</code>处理程序，该处理程序必须在处理程序中进行配置，并且需要强制从集群中删除该节点。</li>
-<li>discard-secondary：将从端（<code>Secondary role</code>）节点视为裂脑受害者。</li>
-</ul>
-<h4 id="after-sb-2pri"><a href="#after-sb-2pri" class="headerlink" title="after-sb-2pri"></a>after-sb-2pri</h4><p>裂脑刚被检测到时该资源在两个节点都处于主端。该选项接受与除<code>discard-secondary</code> 和 <code>consensus</code> 之外与 <code>after-sb-1pri</code> 相同的关键字。</p>
-<p>_提示_：<code>DRBD</code>还可以理解这三个选项下额外的关键字，这些关键字在这里被省略，因为它们很少被使用。请参阅<code>drbd.conf</code>的手册页以获取有关裂脑恢复关键字的详细信息，此处不再讨论。<br>例如，用作双主模式下<code>GFS</code>或<code>OCFS2</code>文件系统的块设备的资源可能会将其恢复策略定义如下：</p>
-<pre><code class="shell">resource &lt;resource&gt; {
-  handlers {
-    split-brain &quot;/usr/lib/drbd/notify-split-brain.sh root&quot;      # 脚本通知root用户，此处可以使用邮件提醒
-    ...
-  }
-  net {
-    after-sb-0pri discard-zero-changes;
-    after-sb-1pri discard-secondary;
-    after-sb-2pri disconnect;
-    ...
-  }
-  ...
-}
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">empty_uuid = <span class="string">'0000000000000000'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">slice_seq</span><span class="params">(seq)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    对GI元祖内元素进行切片操作</span></span><br><span class="line"><span class="string">    :param seq: GI元祖</span></span><br><span class="line"><span class="string">    :return:type:list</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">global</span> empty_uuid</span><br><span class="line">    sliced_seq = [item[:<span class="number">-1</span>] <span class="keyword">if</span> item != empty_uuid <span class="keyword">else</span> item <span class="keyword">for</span> item <span class="keyword">in</span> seq]</span><br><span class="line">    <span class="keyword">return</span> sliced_seq</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cmp_both</span><span class="params">(seqa,seqb)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> seqa:</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> seqb:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_gi_action</span><span class="params">(drbdname)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    调用'drbdadm get-gi DRBDNAME'命令获取drbd的 GI(Generation ID) 信息</span></span><br><span class="line"><span class="string">    :param drbdname:type:str,drbd名称 like:'drbds1/drbdn301'</span></span><br><span class="line"><span class="string">    :return:获取正常返回元祖(c_uuid, b_uuid, h1_uuid, h2_uuid)，获取失败返回None</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    get_gi_cmd = <span class="string">"drbdadm get-gi %s |awk -F: '&#123;print $1,$2,$3,$4&#125;'"</span>%(drbdname)</span><br><span class="line">    retcode,proc = utils.cust_popen(get_gi_cmd)</span><br><span class="line">    message = proc.stderr.read(), proc.stdout.read()</span><br><span class="line">    retstr = message[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> retstr:</span><br><span class="line">        c_uuid,b_uuid,h1_uuid,h2_uuid = tuple(retstr.split())</span><br><span class="line">        <span class="keyword">return</span> c_uuid,b_uuid,h1_uuid,h2_uuid</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        debug.write_debug(debug.LINE(), <span class="string">"peradrbd"</span>, message)</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line">  </span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_remote_gi</span><span class="params">(params)</span>:</span></span><br><span class="line">    rtndata = &#123;&#125;</span><br><span class="line">    result = &#123;&#125;</span><br><span class="line">    drbdname = <span class="string">'drbdname'</span> <span class="keyword">in</span> params <span class="keyword">and</span> params[<span class="string">'drbdname'</span>] <span class="keyword">or</span> <span class="string">''</span></span><br><span class="line">    <span class="keyword">if</span> drbdname:</span><br><span class="line">        <span class="keyword">if</span> hasthedrbd(drbdname):</span><br><span class="line">            gi_uuids = get_gi_action(drbdname)</span><br><span class="line">            <span class="keyword">if</span> gi_uuids <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">                rtndata[<span class="string">'state'</span>] = <span class="string">'0'</span></span><br><span class="line">                result[<span class="string">'message'</span>] = <span class="string">''</span></span><br><span class="line">                result[<span class="string">'gi_id'</span>] = gi_uuids</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                rtndata[<span class="string">'state'</span>] = <span class="string">'1'</span></span><br><span class="line">                result[<span class="string">'message'</span>] = <span class="string">'11069'</span>     <span class="comment"># 获取 gi_id 出错</span></span><br><span class="line">                result[<span class="string">'gi_id'</span>] = <span class="keyword">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            rtndata[<span class="string">'state'</span>] = <span class="string">'1'</span></span><br><span class="line">            result[<span class="string">'message'</span>] = <span class="string">'11060'</span>  <span class="comment"># the drbd not found</span></span><br><span class="line"></span><br><span class="line">        rtndata[<span class="string">'result'</span>] = result</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        rtndata = &#123;<span class="string">'state'</span>: <span class="string">'1'</span>, <span class="string">'result'</span>: &#123;<span class="string">'message'</span>: <span class="string">'11059'</span>&#125;&#125;  <span class="comment"># drbdname error</span></span><br><span class="line">    <span class="keyword">return</span> rtndata</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exchange_gi_process</span><span class="params">(drbdname)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    see:https://docs.linbit.com/docs/users-guide-8.4/#s-gi (16.2.4. How DRBD uses generation identifiers)</span></span><br><span class="line"><span class="string">    :param drbdname:</span></span><br><span class="line"><span class="string">    :return:type:str</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    local_gis = get_gi_action(drbdname)</span><br><span class="line">    remote_gis = <span class="keyword">None</span></span><br><span class="line">    <span class="keyword">global</span> remoteip</span><br><span class="line">    retresult = hautils.socketclient(ip=remoteip,</span><br><span class="line">                                     **&#123;<span class="string">'target'</span>: <span class="string">'drbd'</span>, <span class="string">'op'</span>: <span class="string">'getremotegi'</span>, <span class="string">'params'</span>: &#123;<span class="string">'drbdname'</span>:drbdname&#125;&#125;)</span><br><span class="line">    <span class="keyword">if</span> retresult:</span><br><span class="line">        <span class="keyword">if</span> retresult[<span class="string">'state'</span>] == <span class="string">'0'</span>:</span><br><span class="line">            remote_gis = retresult[<span class="string">'result'</span>][<span class="string">'gi_id'</span>]</span><br><span class="line">        drbd_next = <span class="string">''</span></span><br><span class="line">        <span class="keyword">if</span> local_gis <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> remote_gis <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            local_gis_sliced = slice_seq(local_gis)</span><br><span class="line">            remote_gis_sliced = slice_seq(remote_gis)</span><br><span class="line">            <span class="keyword">global</span> empty_uuid</span><br><span class="line">            print(<span class="string">'sliced'</span>, local_gis_sliced, remote_gis_sliced)</span><br><span class="line">            <span class="keyword">if</span> local_gis_sliced[<span class="number">0</span>] == empty_uuid <span class="keyword">and</span> remote_gis_sliced[<span class="number">0</span>] == empty_uuid:</span><br><span class="line">                drbd_next = <span class="string">'no_sync:(manual_sync)'</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> local_gis_sliced[<span class="number">0</span>] == empty_uuid <span class="keyword">or</span> remote_gis_sliced[<span class="number">0</span>] == empty_uuid:</span><br><span class="line">                <span class="keyword">if</span> remote_gis_sliced[<span class="number">0</span>] == empty_uuid <span class="keyword">and</span> local_gis_sliced[<span class="number">0</span>] != empty_uuid:</span><br><span class="line">                    drbd_next = <span class="string">'full_re_sync:(local_source)'</span></span><br><span class="line">                <span class="keyword">elif</span> local_gis_sliced[<span class="number">0</span>] == empty_uuid <span class="keyword">and</span> remote_gis_sliced[<span class="number">0</span>] != empty_uuid:</span><br><span class="line">                    drbd_next = <span class="string">'full_re_sync:(local_target)'</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> local_gis_sliced[<span class="number">0</span>] != empty_uuid <span class="keyword">and</span> remote_gis_sliced[<span class="number">0</span>] != empty_uuid <span class="keyword">and</span> local_gis_sliced[<span class="number">0</span>] == remote_gis_sliced[<span class="number">0</span>]:</span><br><span class="line">                drbd_next = <span class="string">'consistent:(both_secondary)'</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> local_gis_sliced[<span class="number">1</span>] == remote_gis_sliced[<span class="number">0</span>] <span class="keyword">and</span> remote_gis_sliced[<span class="number">1</span>] == empty_uuid:</span><br><span class="line">                drbd_next = <span class="string">'partial_re_sync:(local_source)'</span></span><br><span class="line">            <span class="keyword">elif</span> local_gis_sliced[<span class="number">1</span>] == empty_uuid <span class="keyword">and</span> remote_gis_sliced[<span class="number">1</span>] == local_gis_sliced[<span class="number">0</span>]:</span><br><span class="line">                drbd_next = <span class="string">'partial_re_sync:(local_target)'</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> local_gis_sliced[<span class="number">0</span>] <span class="keyword">in</span> [remote_gis_sliced[<span class="number">2</span>], remote_gis_sliced[<span class="number">3</span>]]:</span><br><span class="line">                drbd_next = <span class="string">'full_re_sync:(local_target)'</span></span><br><span class="line">            <span class="keyword">elif</span> remote_gis_sliced[<span class="number">0</span>] <span class="keyword">in</span> [local_gis_sliced[<span class="number">2</span>], local_gis_sliced[<span class="number">3</span>]]:</span><br><span class="line">                drbd_next = <span class="string">'full_re_sync:(local_source)'</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> local_gis_sliced[<span class="number">0</span>] != remote_gis_sliced[<span class="number">0</span>]:</span><br><span class="line">                <span class="keyword">if</span> local_gis_sliced[<span class="number">1</span>] == remote_gis_sliced[<span class="number">1</span>]:</span><br><span class="line">                    drbd_next = <span class="string">'split_brain:(auto_recover_able)'</span></span><br><span class="line">                <span class="keyword">elif</span> local_gis_sliced[<span class="number">1</span>] != remote_gis_sliced[<span class="number">1</span>]:</span><br><span class="line">                    drbd_next = <span class="string">'split_brain:(wait_for_manual_recover)'</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">elif</span> cmp_both(local_gis_sliced,remote_gis_sliced):</span><br><span class="line">                drbd_next = <span class="string">'unrelated_data:(wait_for_manual_recover)'</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                debug.write_debug(debug.LINE(), <span class="string">"peradrbd"</span>, (local_gis_sliced, remote_gis_sliced))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            debug.write_debug(debug.LINE(), <span class="string">"peradrbd"</span>, (local_gis,remote_gis))</span><br><span class="line">        <span class="keyword">return</span> drbd_next</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line">**注意**：</span><br><span class="line"></span><br><span class="line">经分析官方文档中的<span class="string">'matches'</span>并不是完全相等，而 <span class="string">'UUID is always empty (zero)'</span> 是指 <span class="string">"'0'*16"</span> 的字符串</span><br><span class="line"></span><br><span class="line"><span class="comment">## 如何模拟一个 `Split-Brain`状态</span></span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 往主节点写入大文件，在未写入完前停止备节点的`DRBD`；</span><br></pre></td></tr></table></figure>
+<h1 id="on-secondary"><a href="#on-secondary" class="headerlink" title="on secondary"></a>on secondary</h1><p>drbdadm down drbdxx<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">2. 停止主节点的`DRBD`；</span><br></pre></td></tr></table></figure></p>
+<h1 id="on-primary"><a href="#on-primary" class="headerlink" title="on primary"></a>on primary</h1><p>drbdadm down drbdxx<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">3. 启动备节点的`DRBD`，设置为主节点；</span><br></pre></td></tr></table></figure></p>
+<h1 id="on-secondary-1"><a href="#on-secondary-1" class="headerlink" title="on secondary"></a>on secondary</h1><p>drbdadm up drbdxx<br>drbdadm primary drbdxx<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">4. 启动原主节点的`DRBD`，这时发现它的状态就是`StandAlone Secondary/Unknown UpToDate/DUnknown`，`Split-Brain` 情况出现。</span><br></pre></td></tr></table></figure></p>
+<h1 id="on-primary-1"><a href="#on-primary-1" class="headerlink" title="on primary"></a>on primary</h1><p>drbdadm up drbdxx<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 解决DRBD裂脑状态</span><br><span class="line"></span><br><span class="line">### 设置自动修复</span><br><span class="line">[5.17.2. Automatic split brain recovery policies](https://docs.linbit.com/docs/users-guide-8.4/#s-configure-split-brain-behavior )</span><br><span class="line"></span><br><span class="line">**警告**：配置`DRBD`自动修复裂脑（或其他状况）导致的数据分歧情况可能是正在配置的数据丢失，如果你不知道你在干什么，那最好别干。（NO ZUO NO DIE）</span><br><span class="line"></span><br><span class="line">_提示_ ：您更应该查看系统防护策略，集群管理集成和冗余集群管理器通信连接状态，以避免出现数据分歧。（防患于未然而不是亡羊补牢）</span><br><span class="line">在启用和配置`DRBD`的自动裂脑恢复策略之前，您必须了解`DRBD`为此提供了多种配置选项。 DRBD根据检测到裂脑时主节点（`Primary role`）的数量应用其裂脑恢复程序。为此，DRBD检查以下关键字，这些关键字均可在资源的网络配置部分中找到：</span><br><span class="line"></span><br><span class="line">#### after-sb-0pri</span><br><span class="line"></span><br><span class="line">裂脑被检测到的同时该资源在任一节点不是主节点。对于这种状况，`DRBD`可以理解以下关键字：</span><br><span class="line">- disconnect: 不自动恢复，只调用裂脑通知程序（如果已配置），断开连接并保持断开；</span><br><span class="line">- discard-younger-primary: 丢弃并回滚最后升主节点的改动；</span><br><span class="line">- discard-least-changes: 丢弃并回滚修改更少节点的修改；</span><br><span class="line">- discard-zero-changes: 如果有某一节点一点未改动，只需应用对另一主机所做的修改并继续；</span><br><span class="line"></span><br><span class="line">#### after-sb-1pri</span><br><span class="line"></span><br><span class="line">裂脑刚被检测到的同时该资源在一个节点上是主节点。对于这种状况，`DRBD`理解以下关键字：</span><br><span class="line">- disconnect:同上</span><br><span class="line">- consensus：应用上一步的策略之后，如果裂脑受害者可以选择拆分则会自动解决。否则，与`disconnect`指令相同。</span><br><span class="line">- call-pri-lost-after-sb：应用上一步的策略之后，如果裂脑受害者节点可以选择拆分则调用`pri-lost-after-sb`处理程序，该处理程序必须在处理程序中进行配置，并且需要强制从集群中删除该节点。</span><br><span class="line">- discard-secondary：将从端（`Secondary role`）节点视为裂脑受害者。</span><br><span class="line"></span><br><span class="line">#### after-sb-2pri</span><br><span class="line"></span><br><span class="line">裂脑刚被检测到时该资源在两个节点都处于主端。该选项接受与除`discard-secondary` 和 `consensus` 之外与 `after-sb-1pri` 相同的关键字。</span><br><span class="line"></span><br><span class="line">_提示_：`DRBD`还可以理解这三个选项下额外的关键字，这些关键字在这里被省略，因为它们很少被使用。请参阅`drbd.conf`的手册页以获取有关裂脑恢复关键字的详细信息，此处不再讨论。</span><br><span class="line">例如，用作双主模式下`GFS`或`OCFS2`文件系统的块设备的资源可能会将其恢复策略定义如下：</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">resource &lt;resource&gt; &#123;</span><br><span class="line">  handlers &#123;</span><br><span class="line">    split-brain &quot;/usr/lib/drbd/notify-split-brain.sh root&quot;      # 脚本通知root用户，此处可以使用邮件提醒</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  net &#123;</span><br><span class="line">    after-sb-0pri discard-zero-changes;</span><br><span class="line">    after-sb-1pri discard-secondary;</span><br><span class="line">    after-sb-2pri disconnect;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="手动恢复"><a href="#手动恢复" class="headerlink" title="手动恢复"></a>手动恢复</h3><p><a href="https://docs.linbit.com/docs/users-guide-8.4/#s-resolve-split-brain" target="_blank" rel="noopener">6.3. Manual split brain recovery</a></p>
 <p>在检测到裂脑后，一个节点将始终使资源处于<code>StandAlone</code>连接状态。另一个可能也处于<code>StandAlone</code>状态（如果两个节点同时检测到裂脑）或<code>WFConnection</code>（如果某方节点在另一节点检测到裂脑之前断开连接）。</p>
 <p>此时，除非已将<code>DRBD</code>配置为自动从裂脑状态中恢复，否则必须通过选择一个节点进行手动干预，该节点的修改将被丢弃（此节点称为裂脑受害者）。这个干预使用下面步骤完成：</p>
-<p>裂脑受害者需要处于<code>StandAlone</code>的连接状态，否则以下命令将返回错误。您可以通过发出以下内容确保它是<code>StandAlone</code>的：</p>
-<pre><code class="shell">drbdadm disconnect &lt;resource&gt;
-drbdadm secondary &lt;resource&gt;
-drbdadm connect --discard-my-data &lt;resource&gt;    # 8.4+  if 8.3,use &#39;drbdadm -- --discard-my-data connect &lt;resource&gt;&#39; instead
-</code></pre>
-<p>在另一个节点（裂脑幸存者）上，如果它的连接状态也是<code>StandAlone</code>，你可以输入：</p>
-<pre><code class="shell">drbdadm connect &lt;resource&gt;
-</code></pre>
+<p>裂脑受害者需要处于<code>StandAlone</code>的连接状态，否则以下命令将返回错误。您可以通过发出以下内容确保它是<code>StandAlone</code>的：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm disconnect &lt;resource&gt;</span><br><span class="line">drbdadm secondary &lt;resource&gt;</span><br><span class="line">drbdadm connect --discard-my-data &lt;resource&gt;    # 8.4+  if 8.3,use 'drbdadm -- --discard-my-data connect &lt;resource&gt;' instead</span><br></pre></td></tr></table></figure></p>
+<p>在另一个节点（裂脑幸存者）上，如果它的连接状态也是<code>StandAlone</code>，你可以输入：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm connect &lt;resource&gt;</span><br></pre></td></tr></table></figure></p>
 <p>如果节点已处于<code>WFConnection</code>状态，则可以省略此步骤;它会自动重新连接。</p>
 <p>如果受裂脑影响的资源是<strong>堆叠</strong>资源，请使用<code>drbdadm --stacked</code>而不是<code>drbdadm</code>。</p>
 <p>连接后，裂脑受害者立即将其连接状态更改为<code>SyncTarget</code>，并将其导致裂脑的修改由其余主节点的数据覆盖。</p>
@@ -522,7 +316,7 @@ drbdadm connect --discard-my-data &lt;resource&gt;    # 8.4+  if 8.3,use &#39;dr
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DRBD裂脑"><span class="toc-number">1.</span> <span class="toc-text">什么是DRBD裂脑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么判定裂脑"><span class="toc-number">2.</span> <span class="toc-text">怎么判定裂脑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看日志信息"><span class="toc-number">2.1.</span> <span class="toc-text">查看日志信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#裂脑自动通知"><span class="toc-number">2.2.</span> <span class="toc-text">裂脑自动通知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#世代标识符元组（GI）"><span class="toc-number">2.3.</span> <span class="toc-text">世代标识符元组（GI）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据迭代"><span class="toc-number">2.3.1.</span> <span class="toc-text">数据迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GI元祖"><span class="toc-number">2.3.2.</span> <span class="toc-text">GI元祖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GI如何变化？"><span class="toc-number">2.3.3.</span> <span class="toc-text">GI如何变化？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何模拟一个-Split-Brain状态"><span class="toc-number">3.</span> <span class="toc-text">如何模拟一个 Split-Brain状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决DRBD裂脑状态"><span class="toc-number">4.</span> <span class="toc-text">解决DRBD裂脑状态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#设置自动修复"><span class="toc-number">4.1.</span> <span class="toc-text">设置自动修复</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#after-sb-0pri"><span class="toc-number">4.1.1.</span> <span class="toc-text">after-sb-0pri</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#after-sb-1pri"><span class="toc-number">4.1.2.</span> <span class="toc-text">after-sb-1pri</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#after-sb-2pri"><span class="toc-number">4.1.3.</span> <span class="toc-text">after-sb-2pri</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动恢复"><span class="toc-number">4.2.</span> <span class="toc-text">手动恢复</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是DRBD裂脑"><span class="toc-number">1.</span> <span class="toc-text">什么是DRBD裂脑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#怎么判定裂脑"><span class="toc-number">2.</span> <span class="toc-text">怎么判定裂脑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看日志信息"><span class="toc-number">2.1.</span> <span class="toc-text">查看日志信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#裂脑自动通知"><span class="toc-number">2.2.</span> <span class="toc-text">裂脑自动通知</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#世代标识符元组（GI）"><span class="toc-number">2.3.</span> <span class="toc-text">世代标识符元组（GI）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据迭代"><span class="toc-number">2.3.1.</span> <span class="toc-text">数据迭代</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GI元祖"><span class="toc-number">2.3.2.</span> <span class="toc-text">GI元祖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GI如何变化？"><span class="toc-number">2.3.3.</span> <span class="toc-text">GI如何变化？</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#on-secondary"><span class="toc-number"></span> <span class="toc-text">on secondary</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#on-primary"><span class="toc-number"></span> <span class="toc-text">on primary</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#on-secondary-1"><span class="toc-number"></span> <span class="toc-text">on secondary</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#on-primary-1"><span class="toc-number"></span> <span class="toc-text">on primary</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#手动恢复"><span class="toc-number">0.1.</span> <span class="toc-text">手动恢复</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">1.</span> <span class="toc-text">参考链接</span></a></li>
     </div>
 
     <div id="share-footer" style="display: none">

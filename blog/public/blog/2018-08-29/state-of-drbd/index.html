@@ -157,25 +157,9 @@
 
   <div class="content" itemprop="articleBody">
     <script src="/assets/js/APlayer.min.js"> </script><p>在管理<code>DRBD</code>的时候，需要关注<code>drbd</code>相关的各种状态指标，本文主要记录相关的指令及显示含义。<br><a id="more"></a></p>
-<h2 id="DRBD状态概览"><a href="#DRBD状态概览" class="headerlink" title="DRBD状态概览"></a><code>DRBD</code>状态概览</h2><pre><code class="shell">drbd-overview
-drbd status
-cat /proc/drbd      # 9.0废止在drbd9中，更多的是使用drbdadm或drbdsetup来获取节点的状态信息。
-</code></pre>
+<h2 id="DRBD状态概览"><a href="#DRBD状态概览" class="headerlink" title="DRBD状态概览"></a><code>DRBD</code>状态概览</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbd-overview</span><br><span class="line">drbd status</span><br><span class="line">cat /proc/drbd      # 9.0废止在drbd9中，更多的是使用drbdadm或drbdsetup来获取节点的状态信息。</span><br></pre></td></tr></table></figure>
 <p>以上命令略有不同，可自行对照</p>
-<pre><code class="shell">[root@Storage drbd]# pwd
-/usr/lib/drbd
-[root@Storage drbd]# ./drbd status
-# 输出示例
-drbd driver loaded OK; device status:
-version: 8.4.3 (api:1/proto:86-101)
-GIT-hash: 89a2942***221f964d3ee515 build by root@third, 2017-07-20 10:58:42
-m:res          cs            ro                 ds                 p       mounted       fstype
-0:drbd0        Connected     Primary/Secondary  UpToDate/UpToDate  C
-1:drbd1^^0     StandAlone    Primary/Unknown    UpToDate/DUnknown  r----s
-……
-6:drbd6        Connected     Primary/Secondary  UpToDate/UpToDate  C       /xxx  ext4
-
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@Storage drbd]# pwd</span><br><span class="line">/usr/lib/drbd</span><br><span class="line">[root@Storage drbd]# ./drbd status</span><br><span class="line"><span class="meta">#</span> 输出示例</span><br><span class="line">drbd driver loaded OK; device status:</span><br><span class="line">version: 8.4.3 (api:1/proto:86-101)</span><br><span class="line">GIT-hash: 89a2942***221f964d3ee515 build by root@third, 2017-07-20 10:58:42</span><br><span class="line">m:res          cs            ro                 ds                 p       mounted       fstype</span><br><span class="line">0:drbd0        Connected     Primary/Secondary  UpToDate/UpToDate  C</span><br><span class="line">1:drbd1^^0     StandAlone    Primary/Unknown    UpToDate/DUnknown  r----s</span><br><span class="line">……</span><br><span class="line">6:drbd6        Connected     Primary/Secondary  UpToDate/UpToDate  C       /xxx  ext4</span><br></pre></td></tr></table></figure>
 <p>缩写解释</p>
 <ul>
 <li>res：资源名称</li>
@@ -186,10 +170,7 @@ m:res          cs            ro                 ds                 p       mount
 <li>r—–是IO标记，反映的是该资源的IO状态信息。共有6种IO状态标记符号。</li>
 </ul>
 <h2 id="连接状态"><a href="#连接状态" class="headerlink" title="连接状态"></a>连接状态</h2><p>节点间通过TCP连接进行通信，在建立连接、断开连接、特殊情况下有很多种连接状态。</p>
-<p>DRBD连接建立完成，表示元数据区、数据区等一切都已准备好，可以进行任何数据同步的操作。</p>
-<pre><code class="shell">[root@master ~]# drbdadm cstate drbd20
-Connected
-</code></pre>
+<p>DRBD连接建立完成，表示元数据区、数据区等一切都已准备好，可以进行任何数据同步的操作。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master ~]# drbdadm cstate drbd20</span><br><span class="line">Connected</span><br></pre></td></tr></table></figure></p>
 <p>一个资源可能有以下连接状态中的一种</p>
 <ul>
 <li>Unconfigured：设备在等待配置</li>
@@ -223,10 +204,7 @@ Connected
 <li>Ahead：数据同步操作被挂起，因为网络套接字中达到了一定的堵塞程度，无法应付更多的负载。该状态需要配置<code>on-congestion</code>选项来启用。</li>
 <li>Behind：对端将数据同步操作挂起，因为网络套接字中达到了一定的堵塞程度，无法应付更多的负载。该状态需要在对端节点上配置<code>on-congestion</code>选项来启用。</li>
 </ul>
-<h2 id="角色状态"><a href="#角色状态" class="headerlink" title="角色状态"></a>角色状态</h2><p>资源的角色状态既可以从/proc/drbd文件中获取，也可以使用下面的命令来获取。</p>
-<pre><code class="shell">[root@drbd1 ~]# drbdadm role data1
-Primary/Unknown
-</code></pre>
+<h2 id="角色状态"><a href="#角色状态" class="headerlink" title="角色状态"></a>角色状态</h2><p>资源的角色状态既可以从/proc/drbd文件中获取，也可以使用下面的命令来获取。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@drbd1 ~]# drbdadm role data1</span><br><span class="line">Primary/Unknown</span><br></pre></td></tr></table></figure></p>
 <p>在角色状态信息中，本地节点总是标记在第一位，远程节点标记在结尾。</p>
 <p>可能的节点角色状态有：</p>
 <ul>
@@ -234,9 +212,7 @@ Primary/Unknown
 <li>Secondary：资源的secondary角色。该角色状态下的drbd设备会接收来自primary端的数据更新(除非和对端不是primary)。且该角色的drbd设备不可挂载、不可读、不可写。</li>
 <li>Unknown：资源的角色未知。本地节点的角色状态绝对不可能会是这种状态。只有对端节点断开连接时对端节点才处于Unknown状态。</li>
 </ul>
-<h2 id="硬盘状态"><a href="#硬盘状态" class="headerlink" title="硬盘状态"></a>硬盘状态</h2><pre><code class="shell">[root@master ~]# drbdadm dstate drbd20
-UpToDate/UpToDate
-</code></pre>
+<h2 id="硬盘状态"><a href="#硬盘状态" class="headerlink" title="硬盘状态"></a>硬盘状态</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master ~]# drbdadm dstate drbd20</span><br><span class="line">UpToDate/UpToDate</span><br></pre></td></tr></table></figure>
 <p>在磁盘状态信息中，本地节点的磁盘状态总是标记在第一位，远程节点标记在结尾。本地和对等节点的硬盘有可能为下列状态之一：</p>
 <ul>
 <li>Diskless 无盘：本地没有块设备分配给<code>DRBD</code>使用，这意味着资源可能从没有和它的底层块设备进行关联绑定(attach)，也可能是手动detach解除了关联，还可能是出现了底层I/O错误时自动分离（detach）。</li>
@@ -264,17 +240,7 @@ UpToDate/UpToDate
 </li>
 <li>Activity Log更新挂起：当al更新被挂起时，处于该状态，标记为”s”，通常该状态栏应该处于”-“。(如果不知道什么是Active Log，请无视本标记)</li>
 </ul>
-<h2 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h2><p>习惯上，我们使用<code>cat /proc/drbd</code>获取<code>drbd</code>状态信息。主要是一些计数器和计量器的值。</p>
-<pre><code class="shell">[root@Storage ~]# cat /proc/drbd 
-version: 8.4.3 (api:1/proto:86-101)
-srcversion: 9D811F04CD6DC2C9A9A608F 
-
- 3: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----
-    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0
-
-301: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----
-    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0
-</code></pre>
+<h2 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h2><p>习惯上，我们使用<code>cat /proc/drbd</code>获取<code>drbd</code>状态信息。主要是一些计数器和计量器的值。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@Storage ~]# cat /proc/drbd </span><br><span class="line">version: 8.4.3 (api:1/proto:86-101)</span><br><span class="line">srcversion: 9D811F04CD6DC2C9A9A608F </span><br><span class="line"></span><br><span class="line"> 3: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----</span><br><span class="line">    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0</span><br><span class="line"></span><br><span class="line">301: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----</span><br><span class="line">    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0</span><br></pre></td></tr></table></figure></p>
 <p>drbd84中使用缩写符号来标记性能指标，而drbd9中使用全称来表示。例如drbd84中的ns和drbd9中的send是同一个意思。</p>
 <ul>
 <li>ns/send (network send)：通过网络连接发送给对端的数据量，单位为Kb。</li>

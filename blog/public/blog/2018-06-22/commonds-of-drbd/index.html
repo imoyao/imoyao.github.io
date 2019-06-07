@@ -156,8 +156,8 @@
 <h1 id="drbdmeata-元数据"><a href="#drbdmeata-元数据" class="headerlink" title="drbdmeata-元数据"></a>drbdmeata-元数据</h1><p>TODO</p>
 <h1 id="drbd"><a href="#drbd" class="headerlink" title="drbd"></a>drbd</h1><p>TODO</p>
 <h1 id="drbdadm-管理工具"><a href="#drbdadm-管理工具" class="headerlink" title="drbdadm-管理工具"></a>drbdadm-管理工具</h1><h2 id="名称"><a href="#名称" class="headerlink" title="名称"></a>名称</h2><p>drbdadm - <code>DRBD</code>管理工具</p>
-<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><pre><code>drbdadm [-d] [-c { file}] [-t {file}] [-s {cmd}] [-m { cmd}] [-S] [-h {host}] [-- { backend-options}] {command} [{all} | { resource[/volume&gt;]...}]
-</code></pre><h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>Drbdadm</code>是<code>DRBD</code>程序套件的高级工具。 <code>Drbdadm</code>与<code>drbdsetup</code>和<code>drbdmeta</code>的关系可类比于 <code>ifup / ifdown</code>与<code>ifconfig</code> 。 <code>Drbdadm</code>通过调用<code>drbdsetup</code>和（或）<code>drbdmeta</code>程序读取相关配置文件并执行指定的命令。<br><code>Drbdadm</code>可以运行整个资源或资源中的单个卷。 子命令： <code>attach</code> ， <code>detach</code> ， <code>primary</code> ， <code>secondary</code>， <code>invalidate</code> ， <code>invalidate-remote</code> ， <code>outdate</code> ， <code>resize</code> ， <code>verify</code> ， <code>pause-sync</code> ， <code>resume-sync</code> ， <code>role</code> ， <code>cstate</code> ， <code>dstate</code> ， <code>create-md</code> ， <code>show-gi</code> ， <code>get-gi</code> ， <code>dump-md</code> ， <code>wipe-md</code>可以作用于整个资源和单个卷上。<br>仅限资源级别的命令有：<code>connect</code>, <code>disconnect</code>, <code>up</code>, <code>down</code>, <code>wait-connect</code> 和 <code>dump</code> 。</p>
+<h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">drbdadm [-d] [-c &#123; file&#125;] [-t &#123;file&#125;] [-s &#123;cmd&#125;] [-m &#123; cmd&#125;] [-S] [-h &#123;host&#125;] [-- &#123; backend-options&#125;] &#123;command&#125; [&#123;all&#125; | &#123; resource[/volume&gt;]...&#125;]</span><br></pre></td></tr></table></figure>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p><code>Drbdadm</code>是<code>DRBD</code>程序套件的高级工具。 <code>Drbdadm</code>与<code>drbdsetup</code>和<code>drbdmeta</code>的关系可类比于 <code>ifup / ifdown</code>与<code>ifconfig</code> 。 <code>Drbdadm</code>通过调用<code>drbdsetup</code>和（或）<code>drbdmeta</code>程序读取相关配置文件并执行指定的命令。<br><code>Drbdadm</code>可以运行整个资源或资源中的单个卷。 子命令： <code>attach</code> ， <code>detach</code> ， <code>primary</code> ， <code>secondary</code>， <code>invalidate</code> ， <code>invalidate-remote</code> ， <code>outdate</code> ， <code>resize</code> ， <code>verify</code> ， <code>pause-sync</code> ， <code>resume-sync</code> ， <code>role</code> ， <code>cstate</code> ， <code>dstate</code> ， <code>create-md</code> ， <code>show-gi</code> ， <code>get-gi</code> ， <code>dump-md</code> ， <code>wipe-md</code>可以作用于整个资源和单个卷上。<br>仅限资源级别的命令有：<code>connect</code>, <code>disconnect</code>, <code>up</code>, <code>down</code>, <code>wait-connect</code> 和 <code>dump</code> 。</p>
 <h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><ul>
 <li>-d ，– dry-run</li>
 </ul>
@@ -216,12 +216,15 @@
 <p>是<code>attach</code>、<code>syncer</code>和 <code>connect</code>的快捷方式。</p>
 <p>实际上，可以将<code>drbdadm up</code>拆分为以下几个动作：</p>
 <ol>
-<li>将drbd的资源关联到底层设备(metadata和data区)上，使之能通过底层设备存、取数据。该过程调用的是drbdsetup程序。<pre><code>drbdadm attach drbd1
-</code></pre></li>
-<li>加载drbd资源的同步参数。<pre><code>drbdadm syncer drbd1
-</code></pre></li>
-<li>连接对端。<pre><code>drbdadm connect drbd1
-</code></pre></li>
+<li><p>将drbd的资源关联到底层设备(metadata和data区)上，使之能通过底层设备存、取数据。该过程调用的是drbdsetup程序。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">drbdadm attach drbd1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加载drbd资源的同步参数。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">drbdadm syncer drbd1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接对端。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">drbdadm connect drbd1</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 <p>这些命令在<code>drbdadm</code>中部分已弃用，放在这里只是为了说明<code>up</code>时所执行的几个步骤。</p>
 <ul>
@@ -247,9 +250,8 @@
 <ul>
 <li>resize</li>
 </ul>
-<p><code>DRBD</code>重新检查所有大小限制，并相应调整资源的设备大小。 例如，如果您增加了备份存储设备的大小（当然是在两个节点上均进行次操作），那么在您的某个节点上调用此命令后，DRBD将采用新的大小。 由于必须同步新的存储空间，因此只有存在至少一个主节点时，此命令才可用。<br><code>--size</code>选项可用于联机缩小<code>drbd</code>设备的可用大小。 用户必须负责确保设备上的文件系统不被该操作截断。<br><code>--assume-peer-have-space</code>允许你调整当前未连接到对等设备的设备。 使用时需要小心，因为如果您不重新调整对等磁盘的大小，则两者的进一步连接尝试将失败。<br><code>--assume-clean</code>允许您调整现有设备的大小并避免同步新的空间。 将附加空白存储添加到设备时，这样操作非常有用。 例：</p>
-<pre><code># drbdadm -- --assume-clean resize r0
-</code></pre><p>选项<code>-al-stripes</code>和<code>--al-stripe-size-kB</code>可用于在线更改 <code>activity log</code>的布局。 在使用内部元数据的情况下，这可能会同时缩小用户可见大小（使用<code>--size</code> ）或增加后备设备上的可用空间。</p>
+<p><code>DRBD</code>重新检查所有大小限制，并相应调整资源的设备大小。 例如，如果您增加了备份存储设备的大小（当然是在两个节点上均进行次操作），那么在您的某个节点上调用此命令后，DRBD将采用新的大小。 由于必须同步新的存储空间，因此只有存在至少一个主节点时，此命令才可用。<br><code>--size</code>选项可用于联机缩小<code>drbd</code>设备的可用大小。 用户必须负责确保设备上的文件系统不被该操作截断。<br><code>--assume-peer-have-space</code>允许你调整当前未连接到对等设备的设备。 使用时需要小心，因为如果您不重新调整对等磁盘的大小，则两者的进一步连接尝试将失败。<br><code>--assume-clean</code>允许您调整现有设备的大小并避免同步新的空间。 将附加空白存储添加到设备时，这样操作非常有用。 例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># drbdadm -- --assume-clean resize r0</span><br></pre></td></tr></table></figure></p>
+<p>选项<code>-al-stripes</code>和<code>--al-stripe-size-kB</code>可用于在线更改 <code>activity log</code>的布局。 在使用内部元数据的情况下，这可能会同时缩小用户可见大小（使用<code>--size</code> ）或增加后备设备上的可用空间。</p>
 <ul>
 <li>check-resize</li>
 </ul>
@@ -326,45 +328,12 @@
 <li>hidden-commands</li>
 </ul>
 <p>显示所有命令没有记录的命令。</p>
-<pre><code class="shell">
-[root@imoyao ~]# drbdadm hidden-commands
-
-These additional commands might be useful for writing   # 写脚本或许有用
-nifty shell scripts around drbdadm:
-
- sh-nop                             sh-resources                       
- sh-resource                        sh-mod-parms                       
- sh-dev                             sh-udev                            
- sh-minor                           sh-ll-dev                          
- sh-md-dev                          sh-md-idx                          
- sh-ip                              sh-lr-of                           
- sh-b-pri                           sh-status                          
- proxy-up                           proxy-down                         
- new-resource                       
-
-These commands are used by the kernel part of DRBD to   # drbd内核
-invoke user mode helper programs:
-
- before-resync-target               after-resync-target                
- before-resync-source               pri-on-incon-degr                  
- pri-lost-after-sb                  fence-peer                         
- local-io-error                     pri-lost                           
- initial-split-brain                split-brain                        
- out-of-sync                        
-
-These commands ought to be used by experts and developers:  # 开发人员
-
- sh-new-minor                       new-minor                          
- suspend-io                         resume-io                          
- set-gi                             new-current-uuid                   
- check-resize                       
-
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">[root@imoyao ~]# drbdadm hidden-commands</span><br><span class="line"></span><br><span class="line">These additional commands might be useful for writing   # 写脚本或许有用</span><br><span class="line">nifty shell scripts around drbdadm:</span><br><span class="line"></span><br><span class="line"> sh-nop                             sh-resources                       </span><br><span class="line"> sh-resource                        sh-mod-parms                       </span><br><span class="line"> sh-dev                             sh-udev                            </span><br><span class="line"> sh-minor                           sh-ll-dev                          </span><br><span class="line"> sh-md-dev                          sh-md-idx                          </span><br><span class="line"> sh-ip                              sh-lr-of                           </span><br><span class="line"> sh-b-pri                           sh-status                          </span><br><span class="line"> proxy-up                           proxy-down                         </span><br><span class="line"> new-resource                       </span><br><span class="line"></span><br><span class="line">These commands are used by the kernel part of DRBD to   # drbd内核</span><br><span class="line">invoke user mode helper programs:</span><br><span class="line"></span><br><span class="line"> before-resync-target               after-resync-target                </span><br><span class="line"> before-resync-source               pri-on-incon-degr                  </span><br><span class="line"> pri-lost-after-sb                  fence-peer                         </span><br><span class="line"> local-io-error                     pri-lost                           </span><br><span class="line"> initial-split-brain                split-brain                        </span><br><span class="line"> out-of-sync                        </span><br><span class="line"></span><br><span class="line">These commands ought to be used by experts and developers:  # 开发人员</span><br><span class="line"></span><br><span class="line"> sh-new-minor                       new-minor                          </span><br><span class="line"> suspend-io                         resume-io                          </span><br><span class="line"> set-gi                             new-current-uuid                   </span><br><span class="line"> check-resize</span><br></pre></td></tr></table></figure>
 <h1 id="drbddisk-8"><a href="#drbddisk-8" class="headerlink" title="drbddisk.8"></a>drbddisk.8</h1><p>TODO</p>
 <h1 id="drbdsetup-8-配置内核模块"><a href="#drbdsetup-8-配置内核模块" class="headerlink" title="drbdsetup.8-配置内核模块"></a>drbdsetup.8-配置内核模块</h1><p>TODO</p>
 <h1 id="版本信息"><a href="#版本信息" class="headerlink" title="版本信息"></a>版本信息</h1><p>本文档针对DRBD发行版本8.4.0进行了修订。</p>
-<h1 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h1><p>由Philipp Reisner <a href="mailto:&#112;&#x68;&#x69;&#108;&#105;&#x70;&#x70;&#x2e;&#x72;&#101;&#105;&#115;&#110;&#101;&#114;&#x40;&#108;&#x69;&#110;&#x62;&#x69;&#x74;&#46;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#112;&#x68;&#x69;&#108;&#105;&#x70;&#x70;&#x2e;&#x72;&#101;&#105;&#115;&#110;&#101;&#114;&#x40;&#108;&#x69;&#110;&#x62;&#x69;&#x74;&#46;&#99;&#x6f;&#109;</a>和Lars Ellenberg撰写<a href="mailto:&#x6c;&#97;&#114;&#115;&#46;&#101;&#108;&#108;&#101;&#110;&#x62;&#x65;&#x72;&#x67;&#64;&#108;&#105;&#110;&#x62;&#x69;&#x74;&#x2e;&#x63;&#111;&#x6d;" target="_blank" rel="noopener">&#x6c;&#97;&#114;&#115;&#46;&#101;&#108;&#108;&#101;&#110;&#x62;&#x65;&#x72;&#x67;&#64;&#108;&#105;&#110;&#x62;&#x69;&#x74;&#x2e;&#x63;&#111;&#x6d;</a>。中译版由<code>imoyao</code>首发于别院牧志（<code>idealyard</code>）</p>
-<h1 id="报告错误"><a href="#报告错误" class="headerlink" title="报告错误"></a>报告错误</h1><p>将错误报告给<a href="mailto:&#x64;&#x72;&#98;&#x64;&#x2d;&#x75;&#115;&#x65;&#x72;&#x40;&#x6c;&#x69;&#x73;&#116;&#115;&#46;&#108;&#x69;&#110;&#x62;&#105;&#x74;&#46;&#99;&#111;&#x6d;" target="_blank" rel="noopener">&#x64;&#x72;&#98;&#x64;&#x2d;&#x75;&#115;&#x65;&#x72;&#x40;&#x6c;&#x69;&#x73;&#116;&#115;&#46;&#108;&#x69;&#110;&#x62;&#105;&#x74;&#46;&#99;&#111;&#x6d;</a>。</p>
+<h1 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h1><p>由Philipp Reisner <a href="mailto:&#x70;&#x68;&#x69;&#108;&#x69;&#x70;&#x70;&#46;&#114;&#x65;&#x69;&#x73;&#110;&#x65;&#x72;&#x40;&#x6c;&#x69;&#110;&#x62;&#x69;&#116;&#x2e;&#x63;&#111;&#x6d;" target="_blank" rel="noopener">&#x70;&#x68;&#x69;&#108;&#x69;&#x70;&#x70;&#46;&#114;&#x65;&#x69;&#x73;&#110;&#x65;&#x72;&#x40;&#x6c;&#x69;&#110;&#x62;&#x69;&#116;&#x2e;&#x63;&#111;&#x6d;</a>和Lars Ellenberg撰写<a href="mailto:&#x6c;&#97;&#114;&#x73;&#x2e;&#x65;&#108;&#108;&#x65;&#110;&#x62;&#x65;&#114;&#103;&#64;&#108;&#x69;&#110;&#98;&#x69;&#116;&#x2e;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#x6c;&#97;&#114;&#x73;&#x2e;&#x65;&#108;&#108;&#x65;&#110;&#x62;&#x65;&#114;&#103;&#64;&#108;&#x69;&#110;&#98;&#x69;&#116;&#x2e;&#99;&#x6f;&#109;</a>。中译版由<code>imoyao</code>首发于别院牧志（<code>idealyard</code>）</p>
+<h1 id="报告错误"><a href="#报告错误" class="headerlink" title="报告错误"></a>报告错误</h1><p>将错误报告给<a href="mailto:&#100;&#114;&#x62;&#x64;&#45;&#x75;&#115;&#x65;&#114;&#x40;&#108;&#105;&#x73;&#116;&#115;&#x2e;&#108;&#105;&#x6e;&#98;&#105;&#x74;&#46;&#99;&#111;&#109;" target="_blank" rel="noopener">&#100;&#114;&#x62;&#x64;&#45;&#x75;&#115;&#x65;&#114;&#x40;&#108;&#105;&#x73;&#116;&#115;&#x2e;&#108;&#105;&#x6e;&#98;&#105;&#x74;&#46;&#99;&#111;&#109;</a>。</p>
 <h1 id="版权"><a href="#版权" class="headerlink" title="版权"></a>版权</h1><p>版权所有2001-2011 LINBIT信息技术公司，Philipp Reisner，Lars Ellenberg。 这是免费软件; 请参阅复制条件的来源。 没有保修; 甚至不适用于适销性或针对特定用途的适用性。</p>
 <h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><p>drbd.conf （5）， drbd （8）， drbddisk （8）， drbdsetup （8）， drbdmeta （8）和DRBD项目网站 [1]</p>
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>

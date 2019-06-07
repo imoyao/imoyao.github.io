@@ -158,71 +158,8 @@
   <div class="content" itemprop="articleBody">
     <script src="/assets/js/APlayer.min.js"> </script><p>使用<code>Ztree</code>时，<code>treeNode.children</code>只能获取到子节点，该如何拿到节点的叶子节点呢？</p>
 <a id="more"></a>
-<h2 id="创建初始化设置"><a href="#创建初始化设置" class="headerlink" title="创建初始化设置"></a>创建初始化设置</h2><pre><code class="javascript">var setting = {
-    data: {
-        simpleData: {
-            enable: true
-        }
-    },
-    callback: {
-        onCheck:onCheck,
-    }
-};
-</code></pre>
-<h2 id="创建点击响应事件"><a href="#创建点击响应事件" class="headerlink" title="创建点击响应事件"></a>创建点击响应事件</h2><pre><code class="javascript">function onCheck(event, treeId, treeNode, clickFlag) {
-        var treeObj = $(ELT).fn.zTree.getZTreeObj(&quot;datarecdirs&quot;);
-        var str = &quot;&quot;;
-        str = getAllChildNodes(treeNode,str);
-        // // 加上被选择节点自身
-        // str = str + &#39;,&#39; + treeNode.id;
-        // 去掉最前面的逗号
-        var ids = str.substring(1, str.length);
-        // 得到所有节点ID 的数组
-        var idsArray = ids.split(&#39;,&#39;);
-        // 过滤掉序列中的空元素 [1,2,&#39;3&#39;,&quot;&quot;, &#39;&#39;] &gt;&gt;&gt; [1,2,&#39;3&#39;]   (javascript 1.6 and above)
-        var filterArr = idsArray.filter(function(n){return n});       
-        // 得到节点总数量
-        var leafNodesLen = filterArr.length;
-        if(filterArr){
-            var nodeChecked = treeNode.checked;
-            if(nodeChecked){
-                for (var i=0; i &lt; leafNodesLen; i++) {
-                    var idVal = filterArr[i];
-                    var node = treeObj.getNodeByParam(&quot;id&quot;, idVal, null);
-                    treeObj.setChkDisabled(node,true,false,true);
-                }
-            }else{
-                for (var j=0; j &lt; leafNodesLen; j++) {
-                    idVal = filterArr[j];
-                    // 按照id获取节点，see:https://www.oschina.net/question/222309_131001
-                    node = treeObj.getNodeByParam(&quot;id&quot;, idVal, null);       // 注意：此处不可使用getNodeByTId()方法
-                    treeObj.setChkDisabled(node,false,false,true);  //取消禁用时，影响到子节点
-                }
-                var nodes = treeObj.getCheckedNodes();
-                console.log(nodes);
-                if (nodes.length&gt;0) {
-                    for(var c=0;c&lt;nodes.length;c++){
-                        treeObj.checkNode(nodes[c],false,true);     //注意，此处不可使用cancelSelectedNode()
-                    }
-                }
-            }
-        }
-    }
-
-// 递归，获取所有子节点
-function getAllChildNodes(treeNode,result){     // 获取节点的所有叶子节点
-    if (treeNode.isParent) {
-        var childrenNodes = treeNode.children;
-        if (childrenNodes) {
-            for (var i = 0; i &lt; childrenNodes.length; i++) {
-                result += &#39;,&#39; + childrenNodes[i].id;
-                result = getAllChildNodes(childrenNodes[i], result);
-            }
-        }
-    }
-    return result;
-}
-</code></pre>
+<h2 id="创建初始化设置"><a href="#创建初始化设置" class="headerlink" title="创建初始化设置"></a>创建初始化设置</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> setting = &#123;</span><br><span class="line">    data: &#123;</span><br><span class="line">        simpleData: &#123;</span><br><span class="line">            enable: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    callback: &#123;</span><br><span class="line">        onCheck:onCheck,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="创建点击响应事件"><a href="#创建点击响应事件" class="headerlink" title="创建点击响应事件"></a>创建点击响应事件</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onCheck</span>(<span class="params">event, treeId, treeNode, clickFlag</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> treeObj = $(ELT).fn.zTree.getZTreeObj(<span class="string">"datarecdirs"</span>);</span><br><span class="line">        <span class="keyword">var</span> str = <span class="string">""</span>;</span><br><span class="line">        str = getAllChildNodes(treeNode,str);</span><br><span class="line">        <span class="comment">// // 加上被选择节点自身</span></span><br><span class="line">        <span class="comment">// str = str + ',' + treeNode.id;</span></span><br><span class="line">        <span class="comment">// 去掉最前面的逗号</span></span><br><span class="line">        <span class="keyword">var</span> ids = str.substring(<span class="number">1</span>, str.length);</span><br><span class="line">        <span class="comment">// 得到所有节点ID 的数组</span></span><br><span class="line">        <span class="keyword">var</span> idsArray = ids.split(<span class="string">','</span>);</span><br><span class="line">        <span class="comment">// 过滤掉序列中的空元素 [1,2,'3',"", ''] &gt;&gt;&gt; [1,2,'3']   (javascript 1.6 and above)</span></span><br><span class="line">        <span class="keyword">var</span> filterArr = idsArray.filter(<span class="function"><span class="keyword">function</span>(<span class="params">n</span>)</span>&#123;<span class="keyword">return</span> n&#125;);       </span><br><span class="line">        <span class="comment">// 得到节点总数量</span></span><br><span class="line">        <span class="keyword">var</span> leafNodesLen = filterArr.length;</span><br><span class="line">        <span class="keyword">if</span>(filterArr)&#123;</span><br><span class="line">            <span class="keyword">var</span> nodeChecked = treeNode.checked;</span><br><span class="line">            <span class="keyword">if</span>(nodeChecked)&#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; leafNodesLen; i++) &#123;</span><br><span class="line">                    <span class="keyword">var</span> idVal = filterArr[i];</span><br><span class="line">                    <span class="keyword">var</span> node = treeObj.getNodeByParam(<span class="string">"id"</span>, idVal, <span class="literal">null</span>);</span><br><span class="line">                    treeObj.setChkDisabled(node,<span class="literal">true</span>,<span class="literal">false</span>,<span class="literal">true</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">0</span>; j &lt; leafNodesLen; j++) &#123;</span><br><span class="line">                    idVal = filterArr[j];</span><br><span class="line">                    <span class="comment">// 按照id获取节点，see:https://www.oschina.net/question/222309_131001</span></span><br><span class="line">                    node = treeObj.getNodeByParam(<span class="string">"id"</span>, idVal, <span class="literal">null</span>);       <span class="comment">// 注意：此处不可使用getNodeByTId()方法</span></span><br><span class="line">                    treeObj.setChkDisabled(node,<span class="literal">false</span>,<span class="literal">false</span>,<span class="literal">true</span>);  <span class="comment">//取消禁用时，影响到子节点</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">var</span> nodes = treeObj.getCheckedNodes();</span><br><span class="line">                <span class="built_in">console</span>.log(nodes);</span><br><span class="line">                <span class="keyword">if</span> (nodes.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">var</span> c=<span class="number">0</span>;c&lt;nodes.length;c++)&#123;</span><br><span class="line">                        treeObj.checkNode(nodes[c],<span class="literal">false</span>,<span class="literal">true</span>);     <span class="comment">//注意，此处不可使用cancelSelectedNode()</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 递归，获取所有子节点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getAllChildNodes</span>(<span class="params">treeNode,result</span>)</span>&#123;     <span class="comment">// 获取节点的所有叶子节点</span></span><br><span class="line">    <span class="keyword">if</span> (treeNode.isParent) &#123;</span><br><span class="line">        <span class="keyword">var</span> childrenNodes = treeNode.children;</span><br><span class="line">        <span class="keyword">if</span> (childrenNodes) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; childrenNodes.length; i++) &#123;</span><br><span class="line">                result += <span class="string">','</span> + childrenNodes[i].id;</span><br><span class="line">                result = getAllChildNodes(childrenNodes[i], result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <span class="label label-danger">注意</span>
 <blockquote>
 <p>zTree里严格区分了选中和勾选这两个概念，选中是指节点被选择背景颜色有变化，因此cancelSelectedNode()只是把你选择的节点，变成不选择状态，也就是节点的背景色发生变化。<br>而勾选是指节点的勾选框被选中，你要将节点的勾选状态由勾选变为不勾选，就不能使用cancelSelectedNode()方法，只能使用checknode()方法！</p>

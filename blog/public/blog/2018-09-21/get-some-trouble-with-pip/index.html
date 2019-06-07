@@ -152,72 +152,34 @@
 
   <div class="content" itemprop="articleBody">
     <script src="/assets/js/APlayer.min.js"> </script><p>今天用<code>pip</code>的时候突然不能正常使用，在这里简单记录一下。<br><a id="more"></a></p>
-<h2 id="提示pip版本不对"><a href="#提示pip版本不对" class="headerlink" title="提示pip版本不对"></a>提示<code>pip</code>版本不对</h2><h3 id="错误提示"><a href="#错误提示" class="headerlink" title="错误提示"></a>错误提示</h3><pre><code>You are using pip version 9.0.3, however version 18.0.1 is available.
-You should consider upgrading via the &#39;python -m pip install --upgrade pip&#39; command. 
-</code></pre><h3 id="处理过程"><a href="#处理过程" class="headerlink" title="处理过程"></a>处理过程</h3><p>去<a href="https://pypi.org/project/pip/" target="_blank" rel="noopener">官网</a>下载最新版的包，直接解压安装即可；</p>
+<h2 id="提示pip版本不对"><a href="#提示pip版本不对" class="headerlink" title="提示pip版本不对"></a>提示<code>pip</code>版本不对</h2><h3 id="错误提示"><a href="#错误提示" class="headerlink" title="错误提示"></a>错误提示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">You are using pip version 9.0.3, however version 18.0.1 is available.</span><br><span class="line">You should consider upgrading via the &apos;python -m pip install --upgrade pip&apos; command.</span><br></pre></td></tr></table></figure>
+<h3 id="处理过程"><a href="#处理过程" class="headerlink" title="处理过程"></a>处理过程</h3><p>去<a href="https://pypi.org/project/pip/" target="_blank" rel="noopener">官网</a>下载最新版的包，直接解压安装即可；</p>
 <h3 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h3><p><a href="https://blog.csdn.net/XavierDarkness/article/details/81234066" target="_blank" rel="noopener">Python2.7 自带的pip9.0 升级到pip18.0</a></p>
-<h2 id="明确已经安装pip，但是系统提示找不到pip"><a href="#明确已经安装pip，但是系统提示找不到pip" class="headerlink" title="明确已经安装pip，但是系统提示找不到pip"></a>明确已经安装<code>pip</code>，但是系统提示找不到<code>pip</code></h2><h3 id="错误提示-1"><a href="#错误提示-1" class="headerlink" title="错误提示"></a>错误提示</h3><pre><code>-bash: /home/imoyao/.local/bin/pip: No such file or directory
-</code></pre><h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><pre><code class="shell">1.which pip 
-/usr/local/bin/pip
-
-2.pip 
--su: /usr/bin/pip: No such file or directory
-
-3.type pip 
-pip is hashed (/usr/bin/pip) 
-So pip is definintely in /usr/local/bin/pip but it is been cached as in /usr/bin/pip, thanks to the Stackoverflow question, the solution is very simple:
-
-4.hash -r 
-When the cache is clear, pip is working again.
-
-</code></pre>
+<h2 id="明确已经安装pip，但是系统提示找不到pip"><a href="#明确已经安装pip，但是系统提示找不到pip" class="headerlink" title="明确已经安装pip，但是系统提示找不到pip"></a>明确已经安装<code>pip</code>，但是系统提示找不到<code>pip</code></h2><h3 id="错误提示-1"><a href="#错误提示-1" class="headerlink" title="错误提示"></a>错误提示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-bash: /home/imoyao/.local/bin/pip: No such file or directory</span><br></pre></td></tr></table></figure>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">1.which pip </span><br><span class="line">/usr/local/bin/pip</span><br><span class="line"></span><br><span class="line">2.pip </span><br><span class="line">-su: /usr/bin/pip: No such file or directory</span><br><span class="line"></span><br><span class="line">3.type pip </span><br><span class="line">pip is hashed (/usr/bin/pip) </span><br><span class="line">So pip is definintely in /usr/local/bin/pip but it is been cached as in /usr/bin/pip, thanks to the Stackoverflow question, the solution is very simple:</span><br><span class="line"></span><br><span class="line">4.hash -r </span><br><span class="line">When the cache is clear, pip is working again.</span><br></pre></td></tr></table></figure>
 <h3 id="参考来源-1"><a href="#参考来源-1" class="headerlink" title="参考来源"></a>参考来源</h3><p><a href="https://blog.csdn.net/qq_32755575/article/details/80443714" target="_blank" rel="noopener">/usr/bin/pip: No such file or directory</a></p>
-<h2 id="安装或升级pip时提示SSLError"><a href="#安装或升级pip时提示SSLError" class="headerlink" title="安装或升级pip时提示SSLError"></a>安装或升级<code>pip</code>时提示<code>SSLError</code></h2><h3 id="错误提示-2"><a href="#错误提示-2" class="headerlink" title="错误提示"></a>错误提示</h3><pre><code>Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;SSLError(SSLError(1, &#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&#39;),)&#39;: /simple/pip/
-Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;SSLError(SSLError(1, &#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&#39;),)&#39;: /simple/pip/
-Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;SSLError(SSLError(1, &#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&#39;),)&#39;: /simple/pip/
-Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;SSLError(SSLError(1, &#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&#39;),)&#39;: /simple/pip/
-Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by &#39;SSLError(SSLError(1, &#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&#39;),)&#39;: /simple/pip/
-Could not fetch URL https://pypi.python.org/simple/pip/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host=&#39;pypi.python.org&#39;, port=443): Max retries exceeded with url: /simple/pip/ (Caused by SSLError(SSLError(1, &#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&#39;),)) - skipping
-#其实本人遇到的错误是
-(Caused by SSLError(SSLError(1, u&#39;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:726)&#39;),))
-</code></pre><h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<h2 id="安装或升级pip时提示SSLError"><a href="#安装或升级pip时提示SSLError" class="headerlink" title="安装或升级pip时提示SSLError"></a>安装或升级<code>pip</code>时提示<code>SSLError</code></h2><h3 id="错误提示-2"><a href="#错误提示-2" class="headerlink" title="错误提示"></a>错误提示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by &apos;SSLError(SSLError(1, &apos;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&apos;),)&apos;: /simple/pip/</span><br><span class="line">Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by &apos;SSLError(SSLError(1, &apos;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&apos;),)&apos;: /simple/pip/</span><br><span class="line">Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by &apos;SSLError(SSLError(1, &apos;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&apos;),)&apos;: /simple/pip/</span><br><span class="line">Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by &apos;SSLError(SSLError(1, &apos;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&apos;),)&apos;: /simple/pip/</span><br><span class="line">Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by &apos;SSLError(SSLError(1, &apos;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&apos;),)&apos;: /simple/pip/</span><br><span class="line">Could not fetch URL https://pypi.python.org/simple/pip/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host=&apos;pypi.python.org&apos;, port=443): Max retries exceeded with url: /simple/pip/ (Caused by SSLError(SSLError(1, &apos;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)&apos;),)) - skipping</span><br><span class="line">#其实本人遇到的错误是</span><br><span class="line">(Caused by SSLError(SSLError(1, u&apos;[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:726)&apos;),))</span><br></pre></td></tr></table></figure>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
 <li>临时方案</li>
 </ul>
-<pre><code>安装时添加参数：
---trusted-host pypi.python.org
-此方式表示信任该域名，但是每一次安装包的时候都需要该操作，比较麻烦；
-</code></pre><ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">安装时添加参数：</span><br><span class="line">--trusted-host pypi.python.org</span><br><span class="line">此方式表示信任该域名，但是每一次安装包的时候都需要该操作，比较麻烦；</span><br></pre></td></tr></table></figure>
+<ul>
 <li>永久方案</li>
 </ul>
-<p>修改<code>pip.conf</code> 配置文件，该文件在<code>Linux</code>系统中的可能位置：</p>
-<pre><code>/etc/pip.conf
-
-~/.pip/pip.conf
-
-~/.config/pip/pip.conf 
-</code></pre><p>如果都没有的话，可以手动创建之后添加以下内容：</p>
-<pre><code>[global]
-index-url = http://mirrors.aliyun.com/pypi/simple/      # 本机使用阿里源代理
-[install]
-trusted-host=mirrors.aliyun.com
-
-# global字段还看到其他写法：
-[global]
-trusted-host = pypi.python.org
-               pypi.org
-               files.pythonhosted.org
-</code></pre><h3 id="参考来源-2"><a href="#参考来源-2" class="headerlink" title="参考来源"></a>参考来源</h3><p><a href="https://stackoverflow.com/questions/16370583/pip-issue-installing-almost-any-library" target="_blank" rel="noopener">pip issue installing almost any library</a><br><a href="https://www.cnblogs.com/yudar/p/4657511.html" target="_blank" rel="noopener">linux 设置pip 镜像 Pip Warning：–trusted-host 问题解决方案</a></p>
-<h2 id="安装MySQL-python时提示："><a href="#安装MySQL-python时提示：" class="headerlink" title="安装MySQL-python时提示："></a>安装<code>MySQL-python</code>时提示：</h2><h3 id="错误提示-3"><a href="#错误提示-3" class="headerlink" title="错误提示"></a>错误提示</h3><pre><code>EnvironmentError: mysql_config not found
-</code></pre><h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<p>修改<code>pip.conf</code> 配置文件，该文件在<code>Linux</code>系统中的可能位置：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">/etc/pip.conf</span><br><span class="line"></span><br><span class="line">~/.pip/pip.conf</span><br><span class="line"></span><br><span class="line">~/.config/pip/pip.conf</span><br></pre></td></tr></table></figure></p>
+<p>如果都没有的话，可以手动创建之后添加以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://mirrors.aliyun.com/pypi/simple/      # 本机使用阿里源代理</span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br><span class="line"></span><br><span class="line"># global字段还看到其他写法：</span><br><span class="line">[global]</span><br><span class="line">trusted-host = pypi.python.org</span><br><span class="line">               pypi.org</span><br><span class="line">               files.pythonhosted.org</span><br></pre></td></tr></table></figure>
+<h3 id="参考来源-2"><a href="#参考来源-2" class="headerlink" title="参考来源"></a>参考来源</h3><p><a href="https://stackoverflow.com/questions/16370583/pip-issue-installing-almost-any-library" target="_blank" rel="noopener">pip issue installing almost any library</a><br><a href="https://www.cnblogs.com/yudar/p/4657511.html" target="_blank" rel="noopener">linux 设置pip 镜像 Pip Warning：–trusted-host 问题解决方案</a></p>
+<h2 id="安装MySQL-python时提示："><a href="#安装MySQL-python时提示：" class="headerlink" title="安装MySQL-python时提示："></a>安装<code>MySQL-python</code>时提示：</h2><h3 id="错误提示-3"><a href="#错误提示-3" class="headerlink" title="错误提示"></a>错误提示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">EnvironmentError: mysql_config not found</span><br></pre></td></tr></table></figure>
+<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
 <li>CentOS</li>
 </ul>
-<pre><code>yum install libffi-devel 
-pip install mysql-connector-python
-</code></pre><ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install libffi-devel </span><br><span class="line">pip install mysql-connector-python</span><br></pre></td></tr></table></figure>
+<ul>
 <li>Ubuntu</li>
 </ul>
-<pre><code>sudo apt install default-libmysqlclient-dev
-</code></pre><h3 id="参考来源-3"><a href="#参考来源-3" class="headerlink" title="参考来源"></a>参考来源</h3><p><a href="https://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found" target="_blank" rel="noopener">pip install mysql-python fails with EnvironmentError: mysql_config not found</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install default-libmysqlclient-dev</span><br></pre></td></tr></table></figure>
+<h3 id="参考来源-3"><a href="#参考来源-3" class="headerlink" title="参考来源"></a>参考来源</h3><p><a href="https://stackoverflow.com/questions/5178292/pip-install-mysql-python-fails-with-environmenterror-mysql-config-not-found" target="_blank" rel="noopener">pip install mysql-python fails with EnvironmentError: mysql_config not found</a></p>
 
   </div>
 </article>

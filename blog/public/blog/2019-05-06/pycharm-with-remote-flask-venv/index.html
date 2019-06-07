@@ -170,20 +170,7 @@
 <p><img src="./images/snipaste_20190506_142141.jpg" alt="setting_end"></p>
 <p>依次修改将要使用的解释器和主机与远端需要保持同步的目录；</p>
 <p><img src="./images/snipaste_20190506_143428.jpg" alt="setting_flask"></p>
-<p>如图设置之后运行，<code>Run</code>出现如下结果</p>
-<pre><code class="shell">FLASK_APP = app
-FLASK_ENV = development
-FLASK_DEBUG = 1
-In folder D:/MYcode/flk
-ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --host=0.0.0.0
- * Serving Flask app &quot;app&quot; (lazy loading)
- * Environment: development
- * Debug mode: on
- * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
- * Restarting with stat
- * Debugger is active!
- * Debugger PIN: 820-491-228
-</code></pre>
+<p>如图设置之后运行，<code>Run</code>出现如下结果<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FLASK_APP = app</span><br><span class="line">FLASK_ENV = development</span><br><span class="line">FLASK_DEBUG = 1</span><br><span class="line">In folder D:/MYcode/flk</span><br><span class="line">ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --host=0.0.0.0</span><br><span class="line"> * Serving Flask app "app" (lazy loading)</span><br><span class="line"> * Environment: development</span><br><span class="line"> * Debug mode: on</span><br><span class="line"> * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger is active!</span><br><span class="line"> * Debugger PIN: 820-491-228</span><br></pre></td></tr></table></figure></p>
 <p>之后在本机访问虚拟机<code>ip</code>，比如本例中的<code>192.168.116.21:5000</code>，即可进入<code>app</code>首页。</p>
 <h2 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h2><p>在配置好上述选项之后，运行可能会提示 <code>NoAppException: Could not import &quot;app&quot;.</code>。这个问题暂时不知道是什么原因引起，可能是<code>Pycharm</code>识别路径有误导致，暂时没有找到很好的解决办法。大家可以参考下图尝试配置（递归手动设置目录，可能有用）。</p>
 <p><img src="./images/snipaste_20190507_133810.jpg" alt="can&#39;t_import_app"></p>

@@ -152,111 +152,32 @@
 
   <div class="content" itemprop="articleBody">
     <script src="/assets/js/APlayer.min.js"> </script><p>今天在写代码的时候，有一处查询语句需要执行 <code>IN</code> 操作，结果直接<code>join</code>操作会出错。<br><a id="more"></a></p>
-<pre><code class="Python">list_of_datas = [u&#39;sde&#39;, u&#39;sdf&#39;, u&#39;sdb&#39;, u&#39;sdc&#39;]
-sql = &quot;SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used=&#39;2&#39; AND Name IN (%s)&quot; % &#39;,&#39;.join(list_of_datas)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list_of_datas = [<span class="string">u'sde'</span>, <span class="string">u'sdf'</span>, <span class="string">u'sdb'</span>, <span class="string">u'sdc'</span>]</span><br><span class="line">sql = <span class="string">"SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used='2' AND Name IN (%s)"</span> % <span class="string">','</span>.join(list_of_datas)</span><br></pre></td></tr></table></figure>
 <p>执行结果：</p>
-<pre><code class="SQL">SELECT DiskId, Name, Sg, PhyId, ExpanderId
-    , EProduct
-FROM Disk
-WHERE Used = &#39;2&#39;
-    AND Name IN (sde, sdf, sdb, sdc)
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DiskId, <span class="keyword">Name</span>, Sg, PhyId, ExpanderId</span><br><span class="line">	, EProduct</span><br><span class="line"><span class="keyword">FROM</span> Disk</span><br><span class="line"><span class="keyword">WHERE</span> Used = <span class="string">'2'</span></span><br><span class="line">	<span class="keyword">AND</span> <span class="keyword">Name</span> <span class="keyword">IN</span> (sde, sdf, sdb, sdc)</span><br></pre></td></tr></table></figure>
 <p>很明显与预期的结果是不一样的。因为 <code>IN</code> 操作中的选取字段应该是带引号的字符串，而不是直接显示的字符串。也就是说我们期望的<code>WHERE</code>子句中是<code>WHERE Used = &#39;2&#39; AND Name IN (&#39;sde&#39;, &#39;sdf&#39;, &#39;sdb&#39;, &#39;sdc&#39;)</code>形式。</p>
-<pre><code class="Python">sql1 = &quot;SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used=&#39;2&#39; AND Name IN (%s)&quot; % &#39;,&#39;.join([&quot;&#39;%s&#39;&quot; % item for item in list_of_datas])
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sql1 = <span class="string">"SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used='2' AND Name IN (%s)"</span> % <span class="string">','</span>.join([<span class="string">"'%s'"</span> % item <span class="keyword">for</span> item <span class="keyword">in</span> list_of_datas])</span><br></pre></td></tr></table></figure>
 <p>执行结果：</p>
-<pre><code class="SQL">SELECT DiskId, Name, Sg, PhyId, ExpanderId
-    , EProduct
-FROM Disk
-WHERE Used = &#39;2&#39;
-    AND Name IN (&#39;sde&#39;, &#39;sdf&#39;, &#39;sdb&#39;, &#39;sdc&#39;)
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DiskId, <span class="keyword">Name</span>, Sg, PhyId, ExpanderId</span><br><span class="line">	, EProduct</span><br><span class="line"><span class="keyword">FROM</span> Disk</span><br><span class="line"><span class="keyword">WHERE</span> Used = <span class="string">'2'</span></span><br><span class="line">	<span class="keyword">AND</span> <span class="keyword">Name</span> <span class="keyword">IN</span> (<span class="string">'sde'</span>, <span class="string">'sdf'</span>, <span class="string">'sdb'</span>, <span class="string">'sdc'</span>)</span><br></pre></td></tr></table></figure>
 <p>至此，可以满足我们的要求。不过，由于上面字符化操作感觉有点暴力，我们可以稍微改进一下：</p>
-<pre><code class="Python">format_strings= &#39;,&#39;.join([repr(item) for item in list_of_datas])
-print(format_strings)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">format_strings= <span class="string">','</span>.join([repr(item) <span class="keyword">for</span> item <span class="keyword">in</span> list_of_datas])</span><br><span class="line">print(format_strings)</span><br></pre></td></tr></table></figure>
 <p>执行结果：</p>
-<pre><code class="Python">u&#39;sde&#39;,u&#39;sdf&#39;,u&#39;sdb&#39;,u&#39;sdc&#39;
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">u'sde'</span>,<span class="string">u'sdf'</span>,<span class="string">u'sdb'</span>,<span class="string">u'sdc'</span></span><br></pre></td></tr></table></figure>
 <p>此时 <code>SQL</code> 语句变成:</p>
-<pre><code class="SQL">SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used=&#39;2&#39; AND Name IN (u&#39;sde&#39;,u&#39;sdf&#39;,u&#39;sdb&#39;,u&#39;sdc&#39;)
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DiskId,<span class="keyword">Name</span>,Sg,PhyId,ExpanderId,EProduct <span class="keyword">FROM</span> Disk <span class="keyword">WHERE</span> Used=<span class="string">'2'</span> <span class="keyword">AND</span> <span class="keyword">Name</span> <span class="keyword">IN</span> (u<span class="string">'sde'</span>,u<span class="string">'sdf'</span>,u<span class="string">'sdb'</span>,u<span class="string">'sdc'</span>)</span><br></pre></td></tr></table></figure>
 <p>这个是没办法正常查询出结果的，因为查询字段是 <code>unicode</code> 编码。</p>
-<pre><code class="Python">format_unicode_strings = &#39;,&#39;.join([repr(item.encode(&#39;utf-8&#39;)) if isinstance(item,unicode) else repr(item) for item in list_of_datas])
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">format_unicode_strings = <span class="string">','</span>.join([repr(item.encode(<span class="string">'utf-8'</span>)) <span class="keyword">if</span> isinstance(item,unicode) <span class="keyword">else</span> repr(item) <span class="keyword">for</span> item <span class="keyword">in</span> list_of_datas])</span><br></pre></td></tr></table></figure>
 <p>此时结果满足我们的要求：</p>
-<pre><code class="SQL">SELECT DiskId, Name, Sg, PhyId, ExpanderId
-    , EProduct
-FROM Disk
-WHERE Used = &#39;2&#39;
-    AND Name IN (&#39;sde&#39;, &#39;sdf&#39;, &#39;sdb&#39;, &#39;sdc&#39;)
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> DiskId, <span class="keyword">Name</span>, Sg, PhyId, ExpanderId</span><br><span class="line">	, EProduct</span><br><span class="line"><span class="keyword">FROM</span> Disk</span><br><span class="line"><span class="keyword">WHERE</span> Used = <span class="string">'2'</span></span><br><span class="line">	<span class="keyword">AND</span> <span class="keyword">Name</span> <span class="keyword">IN</span> (<span class="string">'sde'</span>, <span class="string">'sdf'</span>, <span class="string">'sdb'</span>, <span class="string">'sdc'</span>)</span><br></pre></td></tr></table></figure>
 <p>至此，收工。</p>
 <p>因为公司的代码封装函数是只能执行真正的 <code>SQL</code> 语句的，所以只能用上面的方法，查询网络上别人的解决方案发现下面的写法，以备参考。</p>
-<pre><code class="Python">&gt;&gt;&gt; alist = [&#39;1.1.1.1&#39;,&#39;2.2.2.2&#39;,&#39;3.3.3.3&#39;]                                                    
-&gt;&gt;&gt; select_str = &#39;select * from server where ip in (%s)&#39; % &#39;,&#39;.join([&#39;%s&#39;] * len(alist))       
-&gt;&gt;&gt; select_str  
-&#39;select * from server where ip in (%s,%s,%s)&#39; 
- # 执行sql查询
-cursor.execute(select_str,a)  
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>alist = [<span class="string">'1.1.1.1'</span>,<span class="string">'2.2.2.2'</span>,<span class="string">'3.3.3.3'</span>]                                                    </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>select_str = <span class="string">'select * from server where ip in (%s)'</span> % <span class="string">','</span>.join([<span class="string">'%s'</span>] * len(alist))       </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>select_str  </span><br><span class="line"><span class="string">'select * from server where ip in (%s,%s,%s)'</span> </span><br><span class="line"> <span class="comment"># 执行sql查询</span></span><br><span class="line">cursor.execute(select_str,a)</span><br></pre></td></tr></table></figure>
 <p>后面的写法有很多种，比如：</p>
-<pre><code class="Python">args = [1, 2, 3]
-in_p = &#39;, &#39;.join((map(lambda x: &#39;%s&#39;, args)))
-realsql = sql % in_p
-cursor.execute(realsql, args)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">args = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">in_p = <span class="string">', '</span>.join((map(<span class="keyword">lambda</span> x: <span class="string">'%s'</span>, args)))</span><br><span class="line">realsql = sql % in_p</span><br><span class="line">cursor.execute(realsql, args)</span><br></pre></td></tr></table></figure>
 <p>再比如：</p>
-<pre><code class="Python">args = [1, 2, 3]
-in_p = &#39;, &#39;.join(itertools.repeat(&#39;%s&#39;, len(args)))
-cursor.execute(sql % in_p, args)
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">args = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">in_p = <span class="string">', '</span>.join(itertools.repeat(<span class="string">'%s'</span>, len(args)))</span><br><span class="line">cursor.execute(sql % in_p, args)</span><br></pre></td></tr></table></figure>
 <p>完整示例代码:</p>
-<pre><code class="Python">#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Created by imoyao at 2018/5/18 17:17
-import itertools
-import MySQLdb
-
-
-def excute_sql(sql):
-    db = MySQLdb.connect(host=&quot;localhost&quot;, user=&quot;imoyao&quot;, passwd=&quot;111111&quot;, db=&quot;ODSP&quot;, charset=&quot;utf8&quot;)
-    cr = db.cursor()
-    cr.execute(sql)
-    data = cr.fetchall()
-    cr.close()
-    db.close()
-    return data
-
-
-def excute_sql_datas(sqlstr, tupledata):
-    db = MySQLdb.connect(host=&quot;localhost&quot;, user=&quot;imoyao&quot;, passwd=&quot;111111&quot;, db=&quot;ODSP&quot;, charset=&quot;utf8&quot;)
-    cr = db.cursor()
-    cr.execute(sqlstr,tupledata)
-    data = cr.fetchall()
-    cr.close()
-    db.close()
-    return data
-
-
-if __name__ == &#39;__main__&#39;:
-    list_of_datas = [u&#39;sde&#39;, u&#39;sdf&#39;, u&#39;sdb&#39;, u&#39;sdc&#39;]
-    format_strings = &#39;,&#39;.join(
-        [repr(item.encode(&#39;utf-8&#39;)) if isinstance(item, unicode) else repr(item) for item in list_of_datas])
-    sql = &quot;SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used=&#39;2&#39; AND Name IN (%s)&quot; % format_strings
-    print(excute_sql(sql))
-
-    print(&#39;*&#39;*40)
-
-    sql2 = &quot;SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used=&#39;2&#39; AND Name IN (%s)&quot;
-    # format_strings2 = &#39;, &#39;.join(map(lambda x: &#39;%s&#39;, list_of_datas))
-    # format_strings2 = &#39;, &#39;.join([&#39;%s&#39;] * len(list_of_datas))
-    format_strings2 = &#39;, &#39;.join(itertools.repeat(&#39;%s&#39;, len(list_of_datas)))
-    sqlstr = sql2 % format_strings2
-    print(excute_sql_datas(sqlstr, list_of_datas))
-
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># Created by imoyao at 2018/5/18 17:17</span></span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="keyword">import</span> MySQLdb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">excute_sql</span><span class="params">(sql)</span>:</span></span><br><span class="line">    db = MySQLdb.connect(host=<span class="string">"localhost"</span>, user=<span class="string">"imoyao"</span>, passwd=<span class="string">"111111"</span>, db=<span class="string">"ODSP"</span>, charset=<span class="string">"utf8"</span>)</span><br><span class="line">    cr = db.cursor()</span><br><span class="line">    cr.execute(sql)</span><br><span class="line">    data = cr.fetchall()</span><br><span class="line">    cr.close()</span><br><span class="line">    db.close()</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">excute_sql_datas</span><span class="params">(sqlstr, tupledata)</span>:</span></span><br><span class="line">    db = MySQLdb.connect(host=<span class="string">"localhost"</span>, user=<span class="string">"imoyao"</span>, passwd=<span class="string">"111111"</span>, db=<span class="string">"ODSP"</span>, charset=<span class="string">"utf8"</span>)</span><br><span class="line">    cr = db.cursor()</span><br><span class="line">    cr.execute(sqlstr,tupledata)</span><br><span class="line">    data = cr.fetchall()</span><br><span class="line">    cr.close()</span><br><span class="line">    db.close()</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    list_of_datas = [<span class="string">u'sde'</span>, <span class="string">u'sdf'</span>, <span class="string">u'sdb'</span>, <span class="string">u'sdc'</span>]</span><br><span class="line">    format_strings = <span class="string">','</span>.join(</span><br><span class="line">        [repr(item.encode(<span class="string">'utf-8'</span>)) <span class="keyword">if</span> isinstance(item, unicode) <span class="keyword">else</span> repr(item) <span class="keyword">for</span> item <span class="keyword">in</span> list_of_datas])</span><br><span class="line">    sql = <span class="string">"SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used='2' AND Name IN (%s)"</span> % format_strings</span><br><span class="line">    print(excute_sql(sql))</span><br><span class="line"></span><br><span class="line">    print(<span class="string">'*'</span>*<span class="number">40</span>)</span><br><span class="line"></span><br><span class="line">    sql2 = <span class="string">"SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used='2' AND Name IN (%s)"</span></span><br><span class="line">    <span class="comment"># format_strings2 = ', '.join(map(lambda x: '%s', list_of_datas))</span></span><br><span class="line">    <span class="comment"># format_strings2 = ', '.join(['%s'] * len(list_of_datas))</span></span><br><span class="line">    format_strings2 = <span class="string">', '</span>.join(itertools.repeat(<span class="string">'%s'</span>, len(list_of_datas)))</span><br><span class="line">    sqlstr = sql2 % format_strings2</span><br><span class="line">    print(excute_sql_datas(sqlstr, list_of_datas))</span><br></pre></td></tr></table></figure>
 <p>参考链接：</p>
 <ol>
 <li><p><a href="https://blog.csdn.net/u011085172/article/details/79044490" target="_blank" rel="noopener">python mysql where in 对列表（list,,array）问题 - CSDN博客</a></p>

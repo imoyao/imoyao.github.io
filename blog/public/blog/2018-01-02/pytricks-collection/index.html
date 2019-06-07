@@ -156,36 +156,11 @@
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
 <li><code>JSON</code>字典内按照某个键值排序</li>
 </ul>
-<pre><code class="python">
-In [15]: alist = [{&#39;create&#39;: &#39;2017-12-28 11:05:48&#39;, &#39;id&#39;: &#39;0_1&#39;, &#39;path&#39;: &#39;foo.py&#39;, &#39;size&#39;: 0},
-   ....:  {&#39;create&#39;: &#39;2017-12-28 11:00:29&#39;, &#39;id&#39;: &#39;0_2&#39;, &#39;path&#39;: &#39;bar.py&#39;, &#39;size&#39;: 0},
-   ....:  {&#39;create&#39;: &#39;2017-12-28 11:05:55&#39;, &#39;id&#39;: &#39;0_3&#39;, &#39;path&#39;: &#39;baz.py&#39;, &#39;size&#39;: 0}]
-
-In [16]: alist.sort(key=lambda x:x[&#39;create&#39;])    # 按照创建时间排序 
-
-In [17]: alist
-Out[17]:``
-[{&#39;create&#39;: &#39;2017-12-28 11:00:29&#39;, &#39;id&#39;: &#39;0_2&#39;, &#39;path&#39;: &#39;bar.py&#39;, &#39;size&#39;: 0},
- {&#39;create&#39;: &#39;2017-12-28 11:05:48&#39;, &#39;id&#39;: &#39;0_1&#39;, &#39;path&#39;: &#39;foo.py&#39;, &#39;size&#39;: 0},
- {&#39;create&#39;: &#39;2017-12-28 11:05:55&#39;, &#39;id&#39;: &#39;0_3&#39;, &#39;path&#39;: &#39;baz.py&#39;, &#39;size&#39;: 0}]
-
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">In [<span class="number">15</span>]: alist = [&#123;<span class="string">'create'</span>: <span class="string">'2017-12-28 11:05:48'</span>, <span class="string">'id'</span>: <span class="string">'0_1'</span>, <span class="string">'path'</span>: <span class="string">'foo.py'</span>, <span class="string">'size'</span>: <span class="number">0</span>&#125;,</span><br><span class="line">   ....:  &#123;<span class="string">'create'</span>: <span class="string">'2017-12-28 11:00:29'</span>, <span class="string">'id'</span>: <span class="string">'0_2'</span>, <span class="string">'path'</span>: <span class="string">'bar.py'</span>, <span class="string">'size'</span>: <span class="number">0</span>&#125;,</span><br><span class="line">   ....:  &#123;<span class="string">'create'</span>: <span class="string">'2017-12-28 11:05:55'</span>, <span class="string">'id'</span>: <span class="string">'0_3'</span>, <span class="string">'path'</span>: <span class="string">'baz.py'</span>, <span class="string">'size'</span>: <span class="number">0</span>&#125;]</span><br><span class="line"></span><br><span class="line">In [<span class="number">16</span>]: alist.sort(key=<span class="keyword">lambda</span> x:x[<span class="string">'create'</span>])    <span class="comment"># 按照创建时间排序 </span></span><br><span class="line"></span><br><span class="line">In [<span class="number">17</span>]: alist</span><br><span class="line">Out[<span class="number">17</span>]:``</span><br><span class="line">[&#123;<span class="string">'create'</span>: <span class="string">'2017-12-28 11:00:29'</span>, <span class="string">'id'</span>: <span class="string">'0_2'</span>, <span class="string">'path'</span>: <span class="string">'bar.py'</span>, <span class="string">'size'</span>: <span class="number">0</span>&#125;,</span><br><span class="line"> &#123;<span class="string">'create'</span>: <span class="string">'2017-12-28 11:05:48'</span>, <span class="string">'id'</span>: <span class="string">'0_1'</span>, <span class="string">'path'</span>: <span class="string">'foo.py'</span>, <span class="string">'size'</span>: <span class="number">0</span>&#125;,</span><br><span class="line"> &#123;<span class="string">'create'</span>: <span class="string">'2017-12-28 11:05:55'</span>, <span class="string">'id'</span>: <span class="string">'0_3'</span>, <span class="string">'path'</span>: <span class="string">'baz.py'</span>, <span class="string">'size'</span>: <span class="number">0</span>&#125;]</span><br></pre></td></tr></table></figure>
 <ul>
 <li>字典排序</li>
 </ul>
-<pre><code class="python">
-In [35]: languages = {&#39;JAVA&#39;:15,&#39;Python&#39;:12,&#39;Go&#39;:13,&#39;PHP&#39;:14}
-
-In [35]: sorted(languages.items(),key=lambda x:x[0])        # 以key排序
-Out[35]: [(&#39;Go&#39;, 13), (&#39;JAVA&#39;, 15), (&#39;PHP&#39;, 12), (&#39;Python&#39;, 12)]
-
-In [36]: sorted(languages.items(),key=lambda x:x[1])        # 以value排序
-Out[36]: [(&#39;Python&#39;, 12), (&#39;PHP&#39;, 12), (&#39;Go&#39;, 13), (&#39;JAVA&#39;, 15)]
-
-In [37]: sorted(languages.items(),key=lambda x:-x[1])       # 以value倒序
-Out[37]: [(&#39;JAVA&#39;, 15), (&#39;Go&#39;, 13), (&#39;Python&#39;, 12), (&#39;PHP&#39;, 12)]
-
-</code></pre>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">In [<span class="number">35</span>]: languages = &#123;<span class="string">'JAVA'</span>:<span class="number">15</span>,<span class="string">'Python'</span>:<span class="number">12</span>,<span class="string">'Go'</span>:<span class="number">13</span>,<span class="string">'PHP'</span>:<span class="number">14</span>&#125;</span><br><span class="line"></span><br><span class="line">In [<span class="number">35</span>]: sorted(languages.items(),key=<span class="keyword">lambda</span> x:x[<span class="number">0</span>])        <span class="comment"># 以key排序</span></span><br><span class="line">Out[<span class="number">35</span>]: [(<span class="string">'Go'</span>, <span class="number">13</span>), (<span class="string">'JAVA'</span>, <span class="number">15</span>), (<span class="string">'PHP'</span>, <span class="number">12</span>), (<span class="string">'Python'</span>, <span class="number">12</span>)]</span><br><span class="line"></span><br><span class="line">In [<span class="number">36</span>]: sorted(languages.items(),key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>])        <span class="comment"># 以value排序</span></span><br><span class="line">Out[<span class="number">36</span>]: [(<span class="string">'Python'</span>, <span class="number">12</span>), (<span class="string">'PHP'</span>, <span class="number">12</span>), (<span class="string">'Go'</span>, <span class="number">13</span>), (<span class="string">'JAVA'</span>, <span class="number">15</span>)]</span><br><span class="line"></span><br><span class="line">In [<span class="number">37</span>]: sorted(languages.items(),key=<span class="keyword">lambda</span> x:-x[<span class="number">1</span>])       <span class="comment"># 以value倒序</span></span><br><span class="line">Out[<span class="number">37</span>]: [(<span class="string">'JAVA'</span>, <span class="number">15</span>), (<span class="string">'Go'</span>, <span class="number">13</span>), (<span class="string">'Python'</span>, <span class="number">12</span>), (<span class="string">'PHP'</span>, <span class="number">12</span>)]</span><br></pre></td></tr></table></figure>
 <p><strong>注意</strong>：<code>sort()</code>与<code>sorted()</code>的区别，前者返回值为<code>None</code>，后者可重新赋值；</p>
 <p>参考阅读</p>
 <ul>

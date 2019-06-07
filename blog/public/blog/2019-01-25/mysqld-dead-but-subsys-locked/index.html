@@ -158,52 +158,13 @@
   <div class="content" itemprop="articleBody">
     <script src="/assets/js/APlayer.min.js"> </script><p>记一次<code>MySQL</code>服务出错排查过程。</p>
 <a id="more"></a>
-<p>今天登录管理系统的时候输入账户信息没有反应，后台查看系统日志发现报错信息：</p>
-<pre><code class="shell"># in
-tailf /var/log/ODSP.log
-
-# out(部分有用信息)
-2019-01-25 11:30:07 database [line:263]: Can&#39;t connect to local MySQL server through socket &#39;/var/lib/mysql/mysql.sock&#39; (2)
-</code></pre>
-<h2 id="查看MySQL服务状态"><a href="#查看MySQL服务状态" class="headerlink" title="查看MySQL服务状态"></a>查看<code>MySQL</code>服务状态</h2><pre><code class="shell"># in
-/etc/init.d/mysqld status
-
-# out
-mysqld dead but subsys locked
-</code></pre>
-<h2 id="查看MySQL的log信息"><a href="#查看MySQL的log信息" class="headerlink" title="查看MySQL的log信息"></a>查看<code>MySQL</code>的<code>log</code>信息</h2><pre><code class="shell"># in
-tailf /var/log/mysqld.log
-
-# out（截取部分有用信息）
-700101 00:28:38 mysqld_safe mysqld from pid file /var/run/mysqld/mysqld.pid ended
-700101 00:28:42 mysqld_safe Starting mysqld daemon with databases from /secbox/var/db
-700101  0:28:42 [ERROR] This MySQL server doesn&#39;t support dates later then 2038
-700101  0:28:42 [ERROR] Aborting
-</code></pre>
-<h2 id="查看系统时间"><a href="#查看系统时间" class="headerlink" title="查看系统时间"></a>查看系统时间</h2><pre><code class="shell">[root@master digitools]# date
-Wed Jan  1 00:31:52 CST 2070
-</code></pre>
-<h2 id="重新设置系统时间"><a href="#重新设置系统时间" class="headerlink" title="重新设置系统时间"></a>重新设置系统时间</h2><pre><code class="shell">[root@master digitools]# date -s &quot;20190125 11:28:50&quot;
-Fri Jan 25 11:28:50 CST 2019
-</code></pre>
-<h2 id="重新启动MySQL服务"><a href="#重新启动MySQL服务" class="headerlink" title="重新启动MySQL服务"></a>重新启动<code>MySQL</code>服务</h2><pre><code class="shell">[root@master digitools]# /etc/init.d/mysqld status
-mysqld dead but subsys locked
-
-[root@master digitools]# /etc/init.d/mysqld stop
-Stopping mysqld:                                           [  OK  ]
-[root@master digitools]# /etc/init.d/mysqld start
-Starting mysqld:                                           [  OK  ]
-# 上面两步命令也可以直接合并为执行 `/etc/init.d/mysqld restart`
-[root@master digitools]# /etc/init.d/mysqld status
-mysqld (pid  19402) is running...
-</code></pre>
-<h2 id="日志恢复正常"><a href="#日志恢复正常" class="headerlink" title="日志恢复正常"></a>日志恢复正常</h2><pre><code class="shell">190125 11:30:10  InnoDB: Initializing buffer pool, size = 8.0M
-190125 11:30:10  InnoDB: Completed initialization of buffer pool
-190125 11:30:10  InnoDB: Started; log sequence number 0 398010
-190125 11:30:10 [Note] Event Scheduler: Loaded 0 events
-190125 11:30:10 [Note] /usr/libexec/mysqld: ready for connections.
-Version: &#39;5.1.71&#39;  socket: &#39;/var/lib/mysql/mysql.sock&#39;  port: 3306  Source distribution
-</code></pre>
+<p>今天登录管理系统的时候输入账户信息没有反应，后台查看系统日志发现报错信息：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> in</span><br><span class="line">tailf /var/log/ODSP.log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> out(部分有用信息)</span><br><span class="line">2019-01-25 11:30:07 database [line:263]: Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)</span><br></pre></td></tr></table></figure></p>
+<h2 id="查看MySQL服务状态"><a href="#查看MySQL服务状态" class="headerlink" title="查看MySQL服务状态"></a>查看<code>MySQL</code>服务状态</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> in</span><br><span class="line">/etc/init.d/mysqld status</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> out</span><br><span class="line">mysqld dead but subsys locked</span><br></pre></td></tr></table></figure>
+<h2 id="查看MySQL的log信息"><a href="#查看MySQL的log信息" class="headerlink" title="查看MySQL的log信息"></a>查看<code>MySQL</code>的<code>log</code>信息</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> in</span><br><span class="line">tailf /var/log/mysqld.log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> out（截取部分有用信息）</span><br><span class="line">700101 00:28:38 mysqld_safe mysqld from pid file /var/run/mysqld/mysqld.pid ended</span><br><span class="line">700101 00:28:42 mysqld_safe Starting mysqld daemon with databases from /secbox/var/db</span><br><span class="line">700101  0:28:42 [ERROR] This MySQL server doesn't support dates later then 2038</span><br><span class="line">700101  0:28:42 [ERROR] Aborting</span><br></pre></td></tr></table></figure>
+<h2 id="查看系统时间"><a href="#查看系统时间" class="headerlink" title="查看系统时间"></a>查看系统时间</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master digitools]# date</span><br><span class="line">Wed Jan  1 00:31:52 CST 2070</span><br></pre></td></tr></table></figure>
+<h2 id="重新设置系统时间"><a href="#重新设置系统时间" class="headerlink" title="重新设置系统时间"></a>重新设置系统时间</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master digitools]# date -s "20190125 11:28:50"</span><br><span class="line">Fri Jan 25 11:28:50 CST 2019</span><br></pre></td></tr></table></figure>
+<h2 id="重新启动MySQL服务"><a href="#重新启动MySQL服务" class="headerlink" title="重新启动MySQL服务"></a>重新启动<code>MySQL</code>服务</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master digitools]# /etc/init.d/mysqld status</span><br><span class="line">mysqld dead but subsys locked</span><br><span class="line"></span><br><span class="line">[root@master digitools]# /etc/init.d/mysqld stop</span><br><span class="line">Stopping mysqld:                                           [  OK  ]</span><br><span class="line">[root@master digitools]# /etc/init.d/mysqld start</span><br><span class="line">Starting mysqld:                                           [  OK  ]</span><br><span class="line"><span class="meta">#</span> 上面两步命令也可以直接合并为执行 `/etc/init.d/mysqld restart`</span><br><span class="line">[root@master digitools]# /etc/init.d/mysqld status</span><br><span class="line">mysqld (pid  19402) is running...</span><br></pre></td></tr></table></figure>
+<h2 id="日志恢复正常"><a href="#日志恢复正常" class="headerlink" title="日志恢复正常"></a>日志恢复正常</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">190125 11:30:10  InnoDB: Initializing buffer pool, size = 8.0M</span><br><span class="line">190125 11:30:10  InnoDB: Completed initialization of buffer pool</span><br><span class="line">190125 11:30:10  InnoDB: Started; log sequence number 0 398010</span><br><span class="line">190125 11:30:10 [Note] Event Scheduler: Loaded 0 events</span><br><span class="line">190125 11:30:10 [Note] /usr/libexec/mysqld: ready for connections.</span><br><span class="line">Version: '5.1.71'  socket: '/var/lib/mysql/mysql.sock'  port: 3306  Source distribution</span><br></pre></td></tr></table></figure>
 <p>至此，数据库异常问题修复，前台登录系统恢复正常。</p>
 <h2 id="参考阅读"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读</h2><ul>
 <li><a href="https://en.wikipedia.org/wiki/Year_2038_problem" target="_blank" rel="noopener">Year 2038 problem</a></li>
