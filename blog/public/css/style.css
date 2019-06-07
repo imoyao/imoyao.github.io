@@ -1112,6 +1112,7 @@ article .content blockquote {
   color: #cc2a41;
   quotes: "\201C" "\201D" "\2018" "\2019";
   font-weight: bold;
+  font-family: 'Open Sans', "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
 }
 article .content blockquote p {
   margin: 0;
