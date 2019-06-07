@@ -78,7 +78,8 @@ pagination_dir: page
 #theme: next
 #theme: material
 #theme: cafe
-theme: freemind
+#theme: freemind
+theme: cactus
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

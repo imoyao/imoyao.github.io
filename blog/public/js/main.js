@@ -1,54 +1,113 @@
-$(document).ready(function() {
-	$(window).scroll(function(){  //只要窗口滚动,就触发下面代码 
-        var scrollt = document.documentElement.scrollTop + document.body.scrollTop; //获取滚动后的高度 
-        if(scrollt>200){  //判断滚动后高度超过200px
-            $("#gotop").fadeIn(400); //淡出
-			if($(window).width() >= 1200){
-				$(".navbar").stop().fadeTo(400, 0.2);
-			}
-        }else{
-            $("#gotop").fadeOut(400); //如果返回或者没有超过,就淡入.必须加上stop()停止之前动画,否则会出现闪动
-            if($(window).width() >= 1200){
-				$(".navbar").stop().fadeTo(400, 1);
-            }
-        }
-    });
-    $("#gotop").click(function(){ //当点击标签的时候,使用animate在200毫秒的时间内,滚到顶部        
-		$("html,body").animate({scrollTop:"0px"},200);
-    });
-	$(".navbar").mouseenter(function(){
-		$(".navbar").fadeTo(100, 1);
-	});
-    $(".navbar").mouseleave(function(){
-		var scrollt = document.documentElement.scrollTop + document.body.scrollTop;
-		if (scrollt>200) {
-			$(".navbar").fadeTo(100, 0.2);
-		}
-	});
-
-	replaceMeta();
-
-	$(window).resize(function(){
-		replaceMeta();
-	});
-});
-
-replaceMeta = function(){
-	if ($(window).width() < 980) {
-		if ($("#side_meta #post_meta").length>0) {
-			$("#post_meta").appendTo("#top_meta");
-		}
-		if ($("#sidebar #site_search").length>0) {
-			$("#site_search").appendTo("#top_search");
-			$("#site_search #st-search-input").css("width", "95%");
-		}
-	} else {
-		if ($("#top_meta #post_meta").length>0) {
-			$("#post_meta").appendTo("#side_meta");
-		}
-		if ($("#top_search #site_search").length>0) {
-			$("#site_search").prependTo("#sidebar");
-			$("#site_search #st-search-input").css("width", "85%");
-		}
-	}
+/**
+ * Sets up Justified Gallery.
+ */
+if (!!$.prototype.justifiedGallery) {
+  var options = {
+    rowHeight: 140,
+    margins: 4,
+    lastRow: "justify"
+  };
+  $(".article-gallery").justifiedGallery(options);
 }
+
+$(document).ready(function() {
+
+  /**
+   * Shows the responsive navigation menu on mobile.
+   */
+  $("#header > #nav > ul > .icon").click(function() {
+    $("#header > #nav > ul").toggleClass("responsive");
+  });
+
+
+  /**
+   * Controls the different versions of  the menu in blog post articles 
+   * for Desktop, tablet and mobile.
+   */
+  if ($(".post").length) {
+    var menu = $("#menu");
+    var nav = $("#menu > #nav");
+    var menuIcon = $("#menu-icon, #menu-icon-tablet");
+
+    /**
+     * Display the menu on hi-res laptops and desktops.
+     */
+    if ($(document).width() >= 1440) {
+      menu.css("visibility", "visible");
+      menuIcon.addClass("active");
+    }
+
+    /**
+     * Display the menu if the menu icon is clicked.
+     */
+    menuIcon.click(function() {
+      if (menu.css("visibility") === "hidden") {
+        menu.css("visibility", "visible");
+        menuIcon.addClass("active");
+      } else {
+        menu.css("visibility", "hidden");
+        menuIcon.removeClass("active");
+      }
+      return false;
+    });
+
+    /**
+     * Add a scroll listener to the menu to hide/show the navigation links.
+     */
+    if (menu.length) {
+      $(window).on("scroll", function() {
+        var topDistance = menu.offset().top;
+
+        // hide only the navigation links on desktop
+        if (!nav.is(":visible") && topDistance < 50) {
+          nav.show();
+        } else if (nav.is(":visible") && topDistance > 100) {
+          nav.hide();
+        }
+
+        // on tablet, hide the navigation icon as well and show a "scroll to top
+        // icon" instead
+        if ( ! $( "#menu-icon" ).is(":visible") && topDistance < 50 ) {
+          $("#menu-icon-tablet").show();
+          $("#top-icon-tablet").hide();
+        } else if (! $( "#menu-icon" ).is(":visible") && topDistance > 100) {
+          $("#menu-icon-tablet").hide();
+          $("#top-icon-tablet").show();
+        }
+      });
+    }
+
+    /**
+     * Show mobile navigation menu after scrolling upwards,
+     * hide it again after scrolling downwards.
+     */
+    if ($( "#footer-post").length) {
+      var lastScrollTop = 0;
+      $(window).on("scroll", function() {
+        var topDistance = $(window).scrollTop();
+
+        if (topDistance > lastScrollTop){
+          // downscroll -> show menu
+          $("#footer-post").hide();
+        } else {
+          // upscroll -> hide menu
+          $("#footer-post").show();
+        }
+        lastScrollTop = topDistance;
+
+        // close all submenu"s on scroll
+        $("#nav-footer").hide();
+        $("#toc-footer").hide();
+        $("#share-footer").hide();
+
+        // show a "navigation" icon when close to the top of the page, 
+        // otherwise show a "scroll to the top" icon
+        if (topDistance < 50) {
+          $("#actions-footer > #top").hide();
+        } else if (topDistance > 100) {
+          $("#actions-footer > #top").show();
+        }
+      });
+    }
+  }
+});
