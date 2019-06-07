@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="Redis是一款高性能的key-value数据库，本文主要记录如何在Linux系统上进行安装，以及为Python开发安装对应的redis模块。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-07T10:10:11.281Z">
+<meta property="og:updated_time" content="2019-06-07T15:39:45.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下如何安装Redis？">
 <meta name="twitter:description" content="Redis是一款高性能的key-value数据库，本文主要记录如何在Linux系统上进行安装，以及为Python开发安装对应的redis模块。">
@@ -107,7 +107,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境"><span class="toc-number">1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">3.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOs"><span class="toc-number">3.2.</span> <span class="toc-text">CentOs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">Ubuntu</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#附：常用redis管理命令"><span class="toc-number">5.</span> <span class="toc-text">附：常用redis管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装提供Python支持"><span class="toc-number">6.</span> <span class="toc-text">安装提供Python支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip安装"><span class="toc-number">6.1.</span> <span class="toc-text">pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码安装"><span class="toc-number">6.2.</span> <span class="toc-text">源码安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境"><span class="toc-number">1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">3.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOs"><span class="toc-number">3.2.</span> <span class="toc-text">CentOs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CentOS"><span class="toc-number">4.0.2.</span> <span class="toc-text">CentOS</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#附：常用redis管理命令"><span class="toc-number">5.</span> <span class="toc-text">附：常用redis管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装提供Python支持"><span class="toc-number">6.</span> <span class="toc-text">安装提供Python支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip安装"><span class="toc-number">6.1.</span> <span class="toc-text">pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码安装"><span class="toc-number">6.2.</span> <span class="toc-text">源码安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li>
     </div>
   </span>
 </div>
@@ -201,25 +201,24 @@
 <p> 此时报错</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">In file included from adlist.c:34:</span><br><span class="line">zmalloc.h:50:31: error: jemalloc/jemalloc.h: No such file or directory</span><br><span class="line">zmalloc.h:55:2: error: #error "Newer version of jemalloc required"</span><br><span class="line">make[1]: *** [adlist.o] Error 1</span><br><span class="line">make[1]: Leaving directory `/root/temp/redis-5.0.4/src'</span><br><span class="line">make: *** [all] Error 2</span><br></pre></td></tr></table></figure>
 <p> 在构建<code>Redis</code>时选择非默认内存分配器是通过设置<code>MALLOC</code>环境变量完成的， 默认情况下Redis是使用<code>malloc</code>为<code>libc</code>编译和链接的。<br> 而<code>libc</code>并不是<code>Linux</code>上默认的分配器，默认的是 <code>jemalloc</code>, 因为 <code>jemalloc</code> 被证明比<code>libc</code>有更少的碎片问题（<code>fragmentation problems</code>）。<br> 但是如果你没有<code>jemalloc</code> 而只有<code>libc</code> 当然 <code>make</code> 出错。 所以有两种解决办法：</p>
-<ul>
-<li><p><del>方法一</del>（不推荐）</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make MALLOC=libc</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
 </li>
 </ol>
-<pre><code>---
-- 方法二
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd deps/</span><br><span class="line">make hiredis jemalloc linenoise lua geohash-int</span><br></pre></td></tr></table></figure>
-
-
-原因参见： [浅谈redis采用不同内存分配器tcmalloc和jemalloc](http://www.jb51.net/article/100575.htm)
-
-&gt;对于`tcmalloc`，`jemalloc`和`libc`对应的三个内存分配器。其性能和碎片率如何呢？
-&gt;下面是一个简单测试结果，使用`Redis`自带的`redis-benchmark`写入等量数据进行测试，数据摘自采用不同分配器时`Redis info`信息。
-&gt;我们可以看到，采用`tcmalloc`时碎片率是最低的，为`1.01`，`jemalloc`为`1.02`，而`libc`的分配器碎片率为`1.31`，
-</code></pre><ol start="4">
+<ul>
+<li><p><del>方法一</del>（不推荐）</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make MALLOC=libc</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>方法二</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd deps/</span><br><span class="line">make hiredis jemalloc linenoise lua geohash-int</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>原因参见： <a href="http://www.jb51.net/article/100575.htm" target="_blank" rel="noopener">浅谈redis采用不同内存分配器tcmalloc和jemalloc</a></p>
+<blockquote>
+<p>对于<code>tcmalloc</code>，<code>jemalloc</code>和<code>libc</code>对应的三个内存分配器。其性能和碎片率如何呢？<br>下面是一个简单测试结果，使用<code>Redis</code>自带的<code>redis-benchmark</code>写入等量数据进行测试，数据摘自采用不同分配器时<code>Redis info</code>信息。<br>我们可以看到，采用<code>tcmalloc</code>时碎片率是最低的，为<code>1.01</code>，<code>jemalloc</code>为<code>1.02</code>，而<code>libc</code>的分配器碎片率为<code>1.31</code>，</p>
+</blockquote>
+<ol start="4">
 <li><p>编译安装</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make $$ make install</span><br></pre></td></tr></table></figure>
 </li>
@@ -235,76 +234,55 @@
 <li><p>切换目录</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd utils/</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+<li><p>复制脚本文件</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp redis_init_script /etc/init.d/redisd</span><br></pre></td></tr></table></figure>
+<p> 将<code>redis_init_script</code>文件重新命名为<code>redisd</code>，作为系统启动服务名（以<code>d</code>结尾表示是自启动服务，约定俗成）。</p>
+</li>
+<li><p>修改配置</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi /etc/init.d/redisd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code>redisd</code>文件，注意要在文件头部加上两句注释来设定该服务的运行级别</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"><span class="meta">#</span> chkconfig:   2345 90 10</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<pre><code>2. 复制脚本文件
-
-    <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp redis_init_script /etc/init.d/redisd</span><br></pre></td></tr></table></figure>
-
-
-    将`redis_init_script`文件重新命名为`redisd`，作为系统启动服务名（以`d`结尾表示是自启动服务，约定俗成）。
-
-4. 修改配置
-
-    <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi /etc/init.d/redisd</span><br></pre></td></tr></table></figure>
-
-
-    修改`redisd`文件，注意要在文件头部加上两句注释来设定该服务的运行级别
-
-    <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"><span class="meta">#</span> chkconfig:   2345 90 10</span><br></pre></td></tr></table></figure>
-</code></pre><ol start="2">
+</li>
 <li><p>设置<code>Redis</code>控制脚本的配置文件</p>
 <ol>
 <li><p>切换目录</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd -</span><br><span class="line">cd ..</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
+<li><p>在<code>redis</code>安装目录下，找到<code>redis.conf</code>文件</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
+<p> 如下</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">00-RELEASENOTES  INSTALL     runtest           tests</span><br><span class="line">BUGS             Makefile    runtest-cluster   utils</span><br><span class="line">CONTRIBUTING     MANIFESTO   runtest-sentinel</span><br><span class="line">COPYING          README.md   sentinel.conf</span><br><span class="line">deps             redis.conf  src</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>复制配置文件并重命名</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp redis.conf /etc/redis/6379.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑<code>Redis</code>配置文件</p>
+<ol>
+<li><p>设置<code>daemonize</code>为<code>yes</code>，使服务可以后台运行：</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:136</span><br><span class="line">daemonize yes</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置<code>log</code>文件路径：</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:171</span><br><span class="line">logfile /var/log/redis/redis-server.log</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置持久化文件存放路径：</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:263</span><br><span class="line">dir /var/lib/redis</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<pre><code>2. 在`redis`安装目录下，找到`redis.conf`文件
-
-    <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
-
-
-    如下
-
-    <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">00-RELEASENOTES  INSTALL     runtest           tests</span><br><span class="line">BUGS             Makefile    runtest-cluster   utils</span><br><span class="line">CONTRIBUTING     MANIFESTO   runtest-sentinel</span><br><span class="line">COPYING          README.md   sentinel.conf</span><br><span class="line">deps             redis.conf  src</span><br></pre></td></tr></table></figure>
-
-
-3. 复制配置文件并重命名
-
-    <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp redis.conf /etc/redis/6379.conf</span><br></pre></td></tr></table></figure>
-
-4. 编辑`Redis`配置文件
-
-    1. 设置`daemonize`为`yes`，使服务可以后台运行：
-
-        <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:136</span><br><span class="line">daemonize yes</span><br></pre></td></tr></table></figure>
-
-
-    2. 设置`log`文件路径：
-
-        <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:171</span><br><span class="line">logfile /var/log/redis/redis-server.log</span><br></pre></td></tr></table></figure>
-
-
-    3. 设置持久化文件存放路径：
-
-        <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:263</span><br><span class="line">dir /var/lib/redis</span><br></pre></td></tr></table></figure>
-
-
-5. 保存退出，并创建相应的目录结构：
-
-    <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir /var/log/redis</span><br><span class="line">touch /var/log/redis/redis-server.log</span><br><span class="line">mkdir /var/lib/redis</span><br></pre></td></tr></table></figure>
-</code></pre><ol start="3">
+</li>
+<li><p>保存退出，并创建相应的目录结构：</p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir /var/log/redis</span><br><span class="line">touch /var/log/redis/redis-server.log</span><br><span class="line">mkdir /var/lib/redis</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
 <li><p>设置开机自启</p>
 <h4 id="Ubuntu-1"><a href="#Ubuntu-1" class="headerlink" title="Ubuntu"></a>Ubuntu</h4> <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> 赋权</span><br><span class="line">chmod +x /etc/init.d/redisd</span><br><span class="line"><span class="meta">#</span> 更新系统启动项</span><br><span class="line">update-rc.d redisd defaults</span><br></pre></td></tr></table></figure>
+<h4 id="CentOS"><a href="#CentOS" class="headerlink" title="CentOS"></a>CentOS</h4> <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master init.d]# chmod +x ./redisd</span><br><span class="line">[root@master init.d]# chkconfig redisd on</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<pre><code>#### CentOS
-
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master init.d]# chmod +x ./redisd</span><br><span class="line">[root@master init.d]# chkconfig redisd on</span><br></pre></td></tr></table></figure>
-</code></pre><h2 id="附：常用redis管理命令"><a href="#附：常用redis管理命令" class="headerlink" title="附：常用redis管理命令"></a>附：常用<code>redis</code>管理命令</h2><ul>
+<h2 id="附：常用redis管理命令"><a href="#附：常用redis管理命令" class="headerlink" title="附：常用redis管理命令"></a>附：常用<code>redis</code>管理命令</h2><ul>
 <li>启动<code>Redis</code>服务：</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service redisd start</span><br><span class="line">[root@master init.d]# service redisd start</span><br><span class="line">Starting Redis server...</span><br><span class="line"><span class="meta">#</span> 验证</span><br><span class="line">[root@master init.d]# ps aux|grep redis|grep -v grep</span><br><span class="line">root      6728  0.1  0.4  55572  9820 ?        Ssl  11:03   0:00 /usr/local/bin/redis-server 127.0.0.1:6379</span><br></pre></td></tr></table></figure>
@@ -383,7 +361,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境"><span class="toc-number">1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">3.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOs"><span class="toc-number">3.2.</span> <span class="toc-text">CentOs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">Ubuntu</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#附：常用redis管理命令"><span class="toc-number">5.</span> <span class="toc-text">附：常用redis管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装提供Python支持"><span class="toc-number">6.</span> <span class="toc-text">安装提供Python支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip安装"><span class="toc-number">6.1.</span> <span class="toc-text">pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码安装"><span class="toc-number">6.2.</span> <span class="toc-text">源码安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境"><span class="toc-number">1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">3.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOs"><span class="toc-number">3.2.</span> <span class="toc-text">CentOs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CentOS"><span class="toc-number">4.0.2.</span> <span class="toc-text">CentOS</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#附：常用redis管理命令"><span class="toc-number">5.</span> <span class="toc-text">附：常用redis管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装提供Python支持"><span class="toc-number">6.</span> <span class="toc-text">安装提供Python支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip安装"><span class="toc-number">6.1.</span> <span class="toc-text">pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码安装"><span class="toc-number">6.2.</span> <span class="toc-text">源码安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li>
     </div>
 
     <div id="share-footer" style="display: none">

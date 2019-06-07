@@ -121,25 +121,26 @@ toc: true
     而`libc`并不是`Linux`上默认的分配器，默认的是 `jemalloc`, 因为 `jemalloc` 被证明比`libc`有更少的碎片问题（`fragmentation problems`）。
     但是如果你没有`jemalloc` 而只有`libc` 当然 `make` 出错。 所以有两种解决办法：
     
-    - ~~方法一~~（不推荐）
-    
+- ~~方法一~~（不推荐）
+
     ```shell
     make MALLOC=libc
     ```
-    
-    ---
-    - 方法二
-    
+
+---
+
+- 方法二
+
     ```sehll
     cd deps/
     make hiredis jemalloc linenoise lua geohash-int
     ```
     
-    原因参见： [浅谈redis采用不同内存分配器tcmalloc和jemalloc](http://www.jb51.net/article/100575.htm)
-    
-    >对于`tcmalloc`，`jemalloc`和`libc`对应的三个内存分配器。其性能和碎片率如何呢？
-    >下面是一个简单测试结果，使用`Redis`自带的`redis-benchmark`写入等量数据进行测试，数据摘自采用不同分配器时`Redis info`信息。
-    >我们可以看到，采用`tcmalloc`时碎片率是最低的，为`1.01`，`jemalloc`为`1.02`，而`libc`的分配器碎片率为`1.31`，
+原因参见： [浅谈redis采用不同内存分配器tcmalloc和jemalloc](http://www.jb51.net/article/100575.htm)
+
+>对于`tcmalloc`，`jemalloc`和`libc`对应的三个内存分配器。其性能和碎片率如何呢？
+>下面是一个简单测试结果，使用`Redis`自带的`redis-benchmark`写入等量数据进行测试，数据摘自采用不同分配器时`Redis info`信息。
+>我们可以看到，采用`tcmalloc`时碎片率是最低的，为`1.01`，`jemalloc`为`1.02`，而`libc`的分配器碎片率为`1.31`，
 
 4. 编译安装
 
@@ -168,22 +169,18 @@ toc: true
         ```shell
         cd utils/
         ```
-    
     2. 复制脚本文件
     
         ```shell
         cp redis_init_script /etc/init.d/redisd
         ```
-    
         将`redis_init_script`文件重新命名为`redisd`，作为系统启动服务名（以`d`结尾表示是自启动服务，约定俗成）。
     
-    4. 修改配置
-    
+    3. 修改配置
         ```shell
         vi /etc/init.d/redisd
         ```
-    
-        修改`redisd`文件，注意要在文件头部加上两句注释来设定该服务的运行级别
+    4. 修改`redisd`文件，注意要在文件头部加上两句注释来设定该服务的运行级别
     
         ```shell
         #!/bin/sh
@@ -193,20 +190,15 @@ toc: true
 2.  设置`Redis`控制脚本的配置文件
 
     1. 切换目录
-    
         ```shell
         cd -
         cd ..
         ```
-    
     2. 在`redis`安装目录下，找到`redis.conf`文件
-    
         ```shell
         ls
         ```
-        
         如下
-        
         ```shell
         00-RELEASENOTES  INSTALL     runtest           tests
         BUGS             Makefile    runtest-cluster   utils
@@ -214,62 +206,46 @@ toc: true
         COPYING          README.md   sentinel.conf
         deps             redis.conf  src
         ```
-    
     3. 复制配置文件并重命名
-        
         ```shell
         cp redis.conf /etc/redis/6379.conf
         ```
-
     4. 编辑`Redis`配置文件
-    
         1. 设置`daemonize`为`yes`，使服务可以后台运行：
         
             ```shell
             # nu:136
             daemonize yes
             ```
-    
         2. 设置`log`文件路径：
-        
             ```shell
             # nu:171
             logfile /var/log/redis/redis-server.log
             ```
-        
         3. 设置持久化文件存放路径：
-        
             ```shell
             # nu:263
             dir /var/lib/redis
             ```
-    
     5. 保存退出，并创建相应的目录结构：
-    
         ```shell
         mkdir /var/log/redis
         touch /var/log/redis/redis-server.log
         mkdir /var/lib/redis
         ```
-
 3. 设置开机自启
-
     #### Ubuntu
-    
     ```shell
     # 赋权
     chmod +x /etc/init.d/redisd
     # 更新系统启动项
     update-rc.d redisd defaults
     ```
-    
     #### CentOS
-    
     ```shell
     [root@master init.d]# chmod +x ./redisd
     [root@master init.d]# chkconfig redisd on
     ```
-
 ## 附：常用`redis`管理命令
 
 - 启动`Redis`服务：
