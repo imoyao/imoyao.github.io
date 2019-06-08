@@ -17,7 +17,7 @@ date: 2017-11-18 15:24:37
 
 本博客由**`imoyao`**个人独立创作及维护，主要记录一些工作中遇到的问题及解决方案，可能也会有一部分~~没人看的~~生活随笔。
 > 唯有文字能担当此任，宣告生命曾经在场。
-<div align = right> <font size = 2>—— ——史铁生·《务虚笔记》 </font> </div>
+<div align = right> <font size = 2> ——史铁生·《务虚笔记》 </font> </div>
 
 <div class="slogan">
   <i class="fa fa-heartbeat"></i>   致敬
