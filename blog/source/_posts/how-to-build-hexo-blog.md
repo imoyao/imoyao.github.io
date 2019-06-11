@@ -9,7 +9,7 @@ tags:
 categories:
 - 教程记录
 ---
-![Github loves Hexo](http://oh6j8wijn.bkt.clouddn.com/19799699-file_1490864137282_6f72.png)
+![Github loves Hexo](/images/v2-4b229aa661f0d337bd16390761963842.jpg)
 
 <br>
 

@@ -242,7 +242,7 @@
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi /etc/init.d/redisd</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改<code>redisd</code>文件，注意要在文件头部加上两句注释来设定该服务的运行级别</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"><span class="meta">#</span> chkconfig:   2345 90 10</span><br></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig:   2345 90 10</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
@@ -262,13 +262,13 @@
 <li><p>编辑<code>Redis</code>配置文件</p>
 <ol>
 <li><p>设置<code>daemonize</code>为<code>yes</code>，使服务可以后台运行：</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:136</span><br><span class="line">daemonize yes</span><br></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> nu:136</span></span><br><span class="line">daemonize yes</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>设置<code>log</code>文件路径：</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:171</span><br><span class="line">logfile /var/log/redis/redis-server.log</span><br></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> nu:171</span></span><br><span class="line">logfile /var/log/redis/redis-server.log</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>设置持久化文件存放路径：</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> nu:263</span><br><span class="line">dir /var/lib/redis</span><br></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> nu:263</span></span><br><span class="line">dir /var/lib/redis</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
@@ -278,14 +278,14 @@
 </ol>
 </li>
 <li><p>设置开机自启</p>
-<h4 id="Ubuntu-1"><a href="#Ubuntu-1" class="headerlink" title="Ubuntu"></a>Ubuntu</h4> <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> 赋权</span><br><span class="line">chmod +x /etc/init.d/redisd</span><br><span class="line"><span class="meta">#</span> 更新系统启动项</span><br><span class="line">update-rc.d redisd defaults</span><br></pre></td></tr></table></figure>
+<h4 id="Ubuntu-1"><a href="#Ubuntu-1" class="headerlink" title="Ubuntu"></a>Ubuntu</h4> <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 赋权</span></span><br><span class="line">chmod +x /etc/init.d/redisd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新系统启动项</span></span><br><span class="line">update-rc.d redisd defaults</span><br></pre></td></tr></table></figure>
 <h4 id="CentOS"><a href="#CentOS" class="headerlink" title="CentOS"></a>CentOS</h4> <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master init.d]# chmod +x ./redisd</span><br><span class="line">[root@master init.d]# chkconfig redisd on</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="附：常用redis管理命令"><a href="#附：常用redis管理命令" class="headerlink" title="附：常用redis管理命令"></a>附：常用<code>redis</code>管理命令</h2><ul>
 <li>启动<code>Redis</code>服务：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service redisd start</span><br><span class="line">[root@master init.d]# service redisd start</span><br><span class="line">Starting Redis server...</span><br><span class="line"><span class="meta">#</span> 验证</span><br><span class="line">[root@master init.d]# ps aux|grep redis|grep -v grep</span><br><span class="line">root      6728  0.1  0.4  55572  9820 ?        Ssl  11:03   0:00 /usr/local/bin/redis-server 127.0.0.1:6379</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">service redisd start</span><br><span class="line">[root@master init.d]# service redisd start</span><br><span class="line">Starting Redis server...</span><br><span class="line"><span class="meta">#</span><span class="bash"> 验证</span></span><br><span class="line">[root@master init.d]# ps aux|grep redis|grep -v grep</span><br><span class="line">root      6728  0.1  0.4  55572  9820 ?        Ssl  11:03   0:00 /usr/local/bin/redis-server 127.0.0.1:6379</span><br></pre></td></tr></table></figure>
 <ul>
 <li>关闭服务：</li>
 </ul>
@@ -311,7 +311,7 @@
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>验证</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@local:~/temp/redis-3.2.1# python</span><br><span class="line">Python 2.7.15rc1 (default, Apr 15 2018, 21:51:34) </span><br><span class="line">[GCC 7.3.0] on linux2</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import redis</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; import redis</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; </span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; r = redis.Redis(host='localhost', port=6379, db=0)</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; ret = r.get('hello')</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print ret</span><br><span class="line">world</span><br></pre></td></tr></table></figure>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">root@local:~/temp/redis-3.2.1# python</span><br><span class="line">Python 2.7.15rc1 (default, Apr 15 2018, 21:51:34) </span><br><span class="line">[GCC 7.3.0] on linux2</span><br><span class="line">Type "help", "copyright", "credits" or "license" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import redis</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import redis</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; r = redis.Redis(host=<span class="string">'localhost'</span>, port=6379, db=0)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; ret = r.get(<span class="string">'hello'</span>)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; <span class="built_in">print</span> ret</span></span><br><span class="line">world</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <hr>

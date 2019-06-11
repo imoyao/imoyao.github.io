@@ -19,17 +19,17 @@ categories:
 此处在网上可以找到很多写好的教程，不需要我再次叠床架屋了。
 
 ## 配置`Pycharm`环境
-
-### 打开Pycharm的setting对话框，按照如下配置
-![setting_start](./images/snipaste_20190506_141224.jpg)
+打开Pycharm的setting对话框，按照如下配置  
+  
+![setting_start](/images/snipaste_20190506_141224.jpg)
 
 依次输入真实远端信息之后，点击下一步，直到出现下方对话框
 
-![setting_end](./images/snipaste_20190506_142141.jpg)
+![setting_end](/images/snipaste_20190506_142141.jpg)
 
 依次修改将要使用的解释器和主机与远端需要保持同步的目录；
 
-![setting_flask](./images/snipaste_20190506_143428.jpg)
+![setting_flask](/images/snipaste_20190506_143428.jpg)
 
 如图设置之后运行，`Run`出现如下结果
 ```shell
@@ -50,7 +50,7 @@ ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --h
 ## 注意问题
 在配置好上述选项之后，运行可能会提示 `NoAppException: Could not import "app".`。这个问题暂时不知道是什么原因引起，可能是`Pycharm`识别路径有误导致，暂时没有找到很好的解决办法。大家可以参考下图尝试配置（递归手动设置目录，可能有用）。
 
-![can't_import_app](./images/snipaste_20190507_133810.jpg)
+![can't_import_app](/images/snipaste_20190507_133810.jpg)
 
 
 ## 参考链接

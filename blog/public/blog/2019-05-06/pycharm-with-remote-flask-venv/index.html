@@ -7,22 +7,22 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="学习Flask开发的时候，因为主机是Windows环境，而日常跑服务的是Linux环境，所以需要通过配置pycharm使之使用远端的虚拟环境。">
-<meta name="keywords" content="HOWTO,PyCharm,Flask">
+<meta name="keywords" content="Flask,HOWTO,PyCharm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何配置 Pycharm 使用远程的 Flask 虚拟开发环境？">
 <meta property="og:url" content="https://imoyao.github.io/blog/2019-05-06/pycharm-with-remote-flask-venv/index.html">
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="学习Flask开发的时候，因为主机是Windows环境，而日常跑服务的是Linux环境，所以需要通过配置pycharm使之使用远端的虚拟环境。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://imoyao.github.io/blog/2019-05-06/pycharm-with-remote-flask-venv/images/snipaste_20190506_141224.jpg">
-<meta property="og:image" content="https://imoyao.github.io/blog/2019-05-06/pycharm-with-remote-flask-venv/images/snipaste_20190506_142141.jpg">
-<meta property="og:image" content="https://imoyao.github.io/blog/2019-05-06/pycharm-with-remote-flask-venv/images/snipaste_20190506_143428.jpg">
-<meta property="og:image" content="https://imoyao.github.io/blog/2019-05-06/pycharm-with-remote-flask-venv/images/snipaste_20190507_133810.jpg">
-<meta property="og:updated_time" content="2019-05-08T02:33:30.674Z">
+<meta property="og:image" content="https://imoyao.github.io/images/snipaste_20190506_141224.jpg">
+<meta property="og:image" content="https://imoyao.github.io/images/snipaste_20190506_142141.jpg">
+<meta property="og:image" content="https://imoyao.github.io/images/snipaste_20190506_143428.jpg">
+<meta property="og:image" content="https://imoyao.github.io/images/snipaste_20190507_133810.jpg">
+<meta property="og:updated_time" content="2019-06-11T01:50:19.196Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何配置 Pycharm 使用远程的 Flask 虚拟开发环境？">
 <meta name="twitter:description" content="学习Flask开发的时候，因为主机是Windows环境，而日常跑服务的是Linux环境，所以需要通过配置pycharm使之使用远端的虚拟环境。">
-<meta name="twitter:image" content="https://imoyao.github.io/blog/2019-05-06/pycharm-with-remote-flask-venv/images/snipaste_20190506_141224.jpg">
+<meta name="twitter:image" content="https://imoyao.github.io/images/snipaste_20190506_141224.jpg">
     
     
         
@@ -112,7 +112,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建虚拟机Flask环境"><span class="toc-number">1.</span> <span class="toc-text">创建虚拟机Flask环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置Pycharm环境"><span class="toc-number">2.</span> <span class="toc-text">配置Pycharm环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#打开Pycharm的setting对话框，按照如下配置"><span class="toc-number">2.1.</span> <span class="toc-text">打开Pycharm的setting对话框，按照如下配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意问题"><span class="toc-number">3.</span> <span class="toc-text">注意问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建虚拟机Flask环境"><span class="toc-number">1.</span> <span class="toc-text">创建虚拟机Flask环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置Pycharm环境"><span class="toc-number">2.</span> <span class="toc-text">配置Pycharm环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意问题"><span class="toc-number">3.</span> <span class="toc-text">注意问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -165,15 +165,16 @@
 <a id="more"></a>
 <h2 id="创建虚拟机Flask环境"><a href="#创建虚拟机Flask环境" class="headerlink" title="创建虚拟机Flask环境"></a>创建虚拟机<code>Flask</code>环境</h2><p>略</p>
 <p>此处在网上可以找到很多写好的教程，不需要我再次叠床架屋了。</p>
-<h2 id="配置Pycharm环境"><a href="#配置Pycharm环境" class="headerlink" title="配置Pycharm环境"></a>配置<code>Pycharm</code>环境</h2><h3 id="打开Pycharm的setting对话框，按照如下配置"><a href="#打开Pycharm的setting对话框，按照如下配置" class="headerlink" title="打开Pycharm的setting对话框，按照如下配置"></a>打开Pycharm的setting对话框，按照如下配置</h3><p><img src="./images/snipaste_20190506_141224.jpg" alt="setting_start"></p>
+<h2 id="配置Pycharm环境"><a href="#配置Pycharm环境" class="headerlink" title="配置Pycharm环境"></a>配置<code>Pycharm</code>环境</h2><p>打开Pycharm的setting对话框，按照如下配置  </p>
+<p><img src="/images/snipaste_20190506_141224.jpg" alt="setting_start"></p>
 <p>依次输入真实远端信息之后，点击下一步，直到出现下方对话框</p>
-<p><img src="./images/snipaste_20190506_142141.jpg" alt="setting_end"></p>
+<p><img src="/images/snipaste_20190506_142141.jpg" alt="setting_end"></p>
 <p>依次修改将要使用的解释器和主机与远端需要保持同步的目录；</p>
-<p><img src="./images/snipaste_20190506_143428.jpg" alt="setting_flask"></p>
+<p><img src="/images/snipaste_20190506_143428.jpg" alt="setting_flask"></p>
 <p>如图设置之后运行，<code>Run</code>出现如下结果<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">FLASK_APP = app</span><br><span class="line">FLASK_ENV = development</span><br><span class="line">FLASK_DEBUG = 1</span><br><span class="line">In folder D:/MYcode/flk</span><br><span class="line">ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --host=0.0.0.0</span><br><span class="line"> * Serving Flask app "app" (lazy loading)</span><br><span class="line"> * Environment: development</span><br><span class="line"> * Debug mode: on</span><br><span class="line"> * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)</span><br><span class="line"> * Restarting with stat</span><br><span class="line"> * Debugger is active!</span><br><span class="line"> * Debugger PIN: 820-491-228</span><br></pre></td></tr></table></figure></p>
 <p>之后在本机访问虚拟机<code>ip</code>，比如本例中的<code>192.168.116.21:5000</code>，即可进入<code>app</code>首页。</p>
 <h2 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h2><p>在配置好上述选项之后，运行可能会提示 <code>NoAppException: Could not import &quot;app&quot;.</code>。这个问题暂时不知道是什么原因引起，可能是<code>Pycharm</code>识别路径有误导致，暂时没有找到很好的解决办法。大家可以参考下图尝试配置（递归手动设置目录，可能有用）。</p>
-<p><img src="./images/snipaste_20190507_133810.jpg" alt="can&#39;t_import_app"></p>
+<p><img src="/images/snipaste_20190507_133810.jpg" alt="can&#39;t_import_app"></p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li><a href="https://www.jetbrains.com/help/pycharm/run-debug-configuration-flask-server.html" target="_blank" rel="noopener">配置<code>flask</code>服务进行调试</a></li>
 <li><a href="https://www.jetbrains.com/help/pycharm/configuring-python-interpreter.html" target="_blank" rel="noopener">配置<code>Python</code>解释器</a></li>
@@ -207,7 +208,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建虚拟机Flask环境"><span class="toc-number">1.</span> <span class="toc-text">创建虚拟机Flask环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置Pycharm环境"><span class="toc-number">2.</span> <span class="toc-text">配置Pycharm环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#打开Pycharm的setting对话框，按照如下配置"><span class="toc-number">2.1.</span> <span class="toc-text">打开Pycharm的setting对话框，按照如下配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意问题"><span class="toc-number">3.</span> <span class="toc-text">注意问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建虚拟机Flask环境"><span class="toc-number">1.</span> <span class="toc-text">创建虚拟机Flask环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置Pycharm环境"><span class="toc-number">2.</span> <span class="toc-text">配置Pycharm环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意问题"><span class="toc-number">3.</span> <span class="toc-text">注意问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
