@@ -27,7 +27,7 @@ CentOS Linux release 7.6.1810 (Core)
 [root@172 mysql]# mysql --version
 mysql  Ver 14.14 Distrib 5.7.26, for linux-glibc2.12 (x86_64) using  EditLine wrapper
 ```
-## 下载
+# 下载
 点击[此链接](https://dev.mysql.com/downloads/mysql/)选择适宜版本下载；  
 如图所示进行选择
 
@@ -38,7 +38,7 @@ mysql  Ver 14.14 Distrib 5.7.26, for linux-glibc2.12 (x86_64) using  EditLine wr
 wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz
 ```
 
-## 解压
+# 解压
 我一般习惯在工作目录新建`temp`文件夹，然后存放这些临时文件。
 ```bash
 pwd
@@ -47,7 +47,7 @@ tar -xzvf mysql-5.7.26-linux-glibc2.12-x86_64.tar.gz
 # 省略解压结果
 ……
 ```
-## 创建安装目录并切换
+# 创建安装目录并切换
 ```bash
 # 创建文件夹
 mkdir /usr/local/mysql
@@ -56,7 +56,7 @@ mv mysql-5.7.26-linux-glibc2.12-x86_64/* /usr/local/mysql/
 # 切换目录
 cd /usr/local/mysql
 ```
-## 检查并创建用户和用户组
+# 检查并创建用户和用户组
 ```bash
 [root@localhost local]# cat /etc/group | grep mysql
 [root@localhost local]# cat /etc/passwd |grep mysql
@@ -118,7 +118,6 @@ chgrp -R mysql mysql/
 2019-06-23T09:03:54.845647Z mysqld_safe Starting mysqld daemon with databases from /usr/local/mysql/data
 2019-06-23T09:03:55.148856Z mysqld_safe mysqld from pid file /var/run/mariadb/mariadb.pid ended
 ```
-
 ## 加入开机自启动项
 将`/usr/local/mysql/support-files/mysql.server` 拷贝为`/etc/init.d/mysql`并设置运行权限，这样就可以使用`service mysql`命令启动/停止服务，
 否则就只能使用`/usr/local/mysql/bin/mysqld_safe`命令来启动服务
@@ -140,9 +139,7 @@ Note: This output shows SysV services only and does not include native
 
 mysql          	0:off	1:off	2:on	3:on	4:on	5:on	6:off
 ```
-
 ## 启动服务
-
 ```bash
 # service mysql start
 Starting MySQL. ERROR! The server quit without updating PID file (/usr/local/mysql/data/172.18.1.117.pid).
