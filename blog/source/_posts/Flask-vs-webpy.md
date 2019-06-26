@@ -214,6 +214,7 @@ app/
 - [Welcome | Flask (A Python Microframework)](http://flask.pocoo.org/)
 - [Flask 中文文档](http://docs.jinkan.org/docs/flask/index.html)
 - [Flask Web 开发入门](https://www.ctolib.com/docs/sfile/head-first-flask/)
+- [欢迎进入Flask大型项目教程](http://www.pythondoc.com/flask-mega-tutorial/index.html)
 - [Flask Web开发：基于Python的Web应用开发实战 -（狗书）](https://book.douban.com/subject/26274202/)
 - [Flask Web开发实战 -（狼书）](https://book.douban.com/subject/30310340/)
 
