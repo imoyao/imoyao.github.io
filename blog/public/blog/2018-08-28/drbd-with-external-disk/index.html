@@ -16,7 +16,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://docs.linbit.com/ug-src/users-guide-8.4/images/metadata-size-exact.png">
 <meta property="og:image" content="https://docs.linbit.com/ug-src/users-guide-8.4/images/metadata-size-approx.png">
-<meta property="og:updated_time" content="2019-06-07T10:10:11.277Z">
+<meta property="og:updated_time" content="2019-05-08T02:31:13.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 DRBD 使用外部元数据">
 <meta name="twitter:description" content="裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。mathjax">
@@ -177,14 +177,14 @@
 <h2 id="估算元数据大小"><a href="#估算元数据大小" class="headerlink" title="估算元数据大小"></a>估算元数据大小</h2><p>注意：如果公式渲染出错，可以去<a href="https://zohooo.github.io/jaxedit/" target="_blank" rel="noopener">这里</a>预览</p>
 <p>你可以使用以下公式计算 DRBD 元数据的精确空间要求:</p>
 <p><img src="https://docs.linbit.com/ug-src/users-guide-8.4/images/metadata-size-exact.png" alt="精确计算元数据大小"></p>
-<p>$$M_{S}= \lceil\frac{C_{s}}{2^{18}} \rceil \ast 8 \ast N + 72$$</p>
+<p>$$M<em>{S}= \lceil\frac{C</em>{s}}{2^{18}} \rceil \ast 8 \ast N + 72$$</p>
 <p>Cs 是存储设备扇区大小。N是对端的数量，一般情况下drbd实现的是双节点，因此N=1，可以不用考虑。</p>
 <p>您可以通过发出 blockdev –getsz <device>来检索设备大小。</device></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@Storage ~]# blockdev --getsz /dev/StorPool1/SANLun2</span><br><span class="line">2097152</span><br></pre></td></tr></table></figure>
 <p>结果中的Ms的大小也是用扇区表示的,要转换为 MB, 请除以 2048。(对于512字节的扇区大小, 这是除 s390 之外的所有 Linux 平台上的默认值)。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">23</span>]: (math.ceil(<span class="number">2097152</span>/<span class="number">2</span>**<span class="number">18</span>)*<span class="number">8</span>+<span class="number">72</span>)/float(<span class="number">2048</span>)</span><br><span class="line">Out[<span class="number">23</span>]: <span class="number">0.06640625</span></span><br></pre></td></tr></table></figure></p>
 <p>在实践中, 你可以使用一个合理的好的近似, 下面给出。请注意, 在此公式中, 单位为兆字节(megabytes), 而非扇区:</p>
 <p><img src="https://docs.linbit.com/ug-src/users-guide-8.4/images/metadata-size-approx.png" alt="预估计算元数据大小"></p>
-<p>$$M_{MB} \lt \frac{C_{MB}}{32768} \ast N + 1$$</p>
+<p>$$M<em>{MB} \lt \frac{C</em>{MB}}{32768} \ast N + 1$$</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取块设备大小</span></span><br><span class="line">[root@Storage ~]# lsblk /dev/StorPool1/SANLun2</span><br><span class="line">NAME              MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span><br><span class="line">StorPool1-SANLun2 253:3    0   1G  0 lvm</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 预估元数据设备大小</span></span><br><span class="line">In [<span class="number">30</span>]: <span class="number">1024</span>/float(<span class="number">32768</span>)+<span class="number">1</span></span><br><span class="line">Out[<span class="number">30</span>]: <span class="number">1.03125</span></span><br></pre></td></tr></table></figure>
 <p>此处插播一个小的知识点,来源参考<a href="https://blog.csdn.net/starshine/article/details/8226320" target="_blank" rel="noopener">这里</a>（解释）和<a href="http://www.maixj.net/ict/kbkib-mbmib-gbgib-15095" target="_blank" rel="noopener">这里</a>（区别）。</p>
@@ -284,7 +284,7 @@
 <li>资源被配置为external meta data时</li>
 </ol>
 <p>当DRBD在处于非活动情况下，在两个节点的支持设备被扩展时，且DRBD资源使用的是external meta data，那么新的大小会自动被识别，不需要管理员干预。DRBD设备将在下次两个节点活动并且成功建立网络连接之后，显示增加后的新容量。</p>
-<ol start="2">
+<ol>
 <li>资源被配置为internal meta data时</li>
 </ol>
 <p>当DRBD资源被配置为使用 internal meta data时，在新大小变为可用之前, 则必须将此元数据移动到已扩容设备的末尾。为此, 请完成以下步骤:</p>
