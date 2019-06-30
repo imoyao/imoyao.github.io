@@ -1,5 +1,5 @@
 ---
-title: Storcli常用管理命令汇总
+title: Storcli 常用管理命令汇总
 date: 2017-12-27 11:38:45
 tags:
 - RAID
@@ -15,14 +15,14 @@ categories:
 
 ## 安装`Storcli`
 
-### Ubuntu:
+### Ubuntu
 
 ```shell
 unzip ul_avago_storcli_1.18.11_anyos.zip
 dpkg -i storcli_all_os/Ubuntu/storcli_1.18.11_all.deb
 dpkg -l | grep -i storcli
 ```
-### Centos:
+### Centos
 
 ```shell
 unzip ul_avago_storcli_1.18.11_anyos.zip
@@ -31,7 +31,7 @@ rpm -qi storcli
 ln -s /opt/MegaRAID/storcli/storcli64 /usr/local/bin/storcli
 ```
 
-### ESXi 5.5 & ESXi 6.0:
+### ESXi 5.5 & ESXi 6.0
 
 ```shell
 unzip ul_avago_storcli_1.18.11_anyos.zip
@@ -134,7 +134,7 @@ storcli /cx add vd type=raid10 size=all names=VD1 drives=32:2-7 PDperArray=2 wb 
 ```
 - `shell`之初始化`VD`
 
-```
+```plain
 storcli /cx/vx start init (force)
 ```
 - 监视初始化进度
@@ -151,7 +151,7 @@ storcli /cx/vx del (force)
 
 ## 缓存加速
 
-- `shell`之创建`CacheCade`设备（SSD缓存加速）
+- `shell`之创建`CacheCade`设备（SSD 缓存加速）
 
 ```shell
 storcli /cx add vd cc type=r[0,1,10] drives=[EnclosureID:SlotID|:SlotID-SlotID|:SlotID,SlotID]  WT|WB (assignvds=0,1,2)
@@ -179,7 +179,7 @@ storcli /cx/vx del cc
 
 ## 误插拔设备合并
 
-如果不正确地移除设备并重新连接到RAID控制器，它将被识别为UBAD(Unconfigured Bad)。
+如果不正确地移除设备并重新连接到 RAID 控制器，它将被识别为 UBAD(Unconfigured Bad)。
 
 ```shell
 storcli /c0 /eall /sall show
@@ -206,7 +206,7 @@ EID:Slt DID State DG       Size Intf Med SED PI SeSz Model                  Sp
 ```
 此时`252:3`必需置为`UGOOD`
 
-- `UBad `置为`UGOOD`
+- `UBad`置为`UGOOD`
 
 ```shell
 storcli /cx /ex /sx set good
@@ -259,7 +259,7 @@ Total foreign drive groups = 1
 ```shell
 storcli /cx /fall import
 ```
-如果设备是RAID的一部分，则会自动执行重建（请参阅概述中的状态：Rbld）。 可用以下命令监视进度：
+如果设备是 RAID 的一部分，则会自动执行重建（请参阅概述中的状态：Rbld）。 可用以下命令监视进度：
 
 ```shell
 storcli /cx /ex /sx show rebuild
@@ -287,7 +287,7 @@ storcli /c0/e8/s2 start/stop locate
 ## 参考来源
 
 - [官方相关资源下载-broadcom](https://www.broadcom.com/site-search?q=storcli)
-- [StorCLI官方手册下载](https://docs.broadcom.com/docs-and-downloads/raid-controllers/raid-controllers-common-files/StorCLI_RefMan_revf.pdf)
+- [StorCLI 官方手册下载](https://docs.broadcom.com/docs-and-downloads/raid-controllers/raid-controllers-common-files/StorCLI_RefMan_revf.pdf)
 - [StorCLI _Thomas-Krenn](https://www.thomas-krenn.com/en/wiki/StorCLI)
 - [STORCLI-wiki（个人博主维护）](https://www.xargs.cn/doku.php/lsi:storcli%E6%89%8B%E5%86%8C)
 

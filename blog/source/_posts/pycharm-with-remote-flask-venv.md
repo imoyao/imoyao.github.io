@@ -19,7 +19,7 @@ categories:
 此处在网上可以找到很多写好的教程，不需要我再次叠床架屋了。
 
 ## 配置`Pycharm`环境
-打开Pycharm的setting对话框，按照如下配置  
+打开 Pycharm 的 setting 对话框，按照如下配置  
   
 ![setting_start](/images/snipaste_20190506_141224.jpg)
 

@@ -85,10 +85,10 @@ function getAllChildNodes(treeNode,result){     // 获取节点的所有叶子�
 ```
 {% label 注意 danger %}
 
-> zTree里严格区分了选中和勾选这两个概念，选中是指节点被选择背景颜色有变化，因此cancelSelectedNode()只是把你选择的节点，变成不选择状态，也就是节点的背景色发生变化。
-而勾选是指节点的勾选框被选中，你要将节点的勾选状态由勾选变为不勾选，就不能使用cancelSelectedNode()方法，只能使用checknode()方法！
+> zTree 里严格区分了选中和勾选这两个概念，选中是指节点被选择背景颜色有变化，因此 cancelSelectedNode()只是把你选择的节点，变成不选择状态，也就是节点的背景色发生变化。
+而勾选是指节点的勾选框被选中，你要将节点的勾选状态由勾选变为不勾选，就不能使用 cancelSelectedNode()方法，只能使用 checknode()方法！
 
 ## 参考来源
 
 * [zTree 插件 - 获取当前选择节点下的全部子节点](https://blog.csdn.net/qq_15071263/article/details/82797734) 
-* [为什么cancelSelectedNode()取消不了节点的选中状态？](https://tieba.baidu.com/p/4157358359?red_tag=3393089686) 
+* [为什么 cancelSelectedNode()取消不了节点的选中状态？](https://tieba.baidu.com/p/4157358359?red_tag=3393089686) 

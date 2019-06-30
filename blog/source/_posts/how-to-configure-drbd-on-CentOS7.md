@@ -1,5 +1,5 @@
 ---
-title: CentOS7环境下配置DRBD
+title: CentOS7 环境下配置 DRBD
 date: 2018-01-11 11:26:43
 tags:
 - DRBD
@@ -91,11 +91,11 @@ drbd0                 147:0    0    2G  0 disk /media
 
 ## 修改配置文件
 
-### 更改DRBD全局配置
+### 更改 DRBD 全局配置
 
 首先根据需求更改`DRBD`全局配置`/etc/drbd.d/global_common.conf`:
 
-此处可参阅另一篇文章：[DRBD全局配置](https://imoyao.github.io/blog/2017-09-11/Record_of_drbd/#global-common-conf配置（示例）)
+此处可参阅另一篇文章：[DRBD 全局配置](https://imoyao.github.io/blog/2017-09-11/Record_of_drbd/#global-common-conf配置（示例）)
 
 ### 创建`DRBD`配置文件
 
@@ -122,20 +122,20 @@ resource r0 {
 
 配置文件创建完成之后，在两个服务器上分别执行如下命令，创建`DRBD`资源，当然你也可以通过`scp`把配置文件拷过去，然后执行相关命令。
 
-其中上述配置文件的meta-disk有三种记录方式：internal/device/device[index_num]。其中不管是哪种方式，metadata存放的分区不能格式化，哪怕使用internal时metadata和一般data在同一个分区也不能格式化该分区。
+其中上述配置文件的 meta-disk 有三种记录方式：internal/device/device[index_num]。其中不管是哪种方式，metadata 存放的分区不能格式化，哪怕使用 internal 时 metadata 和一般 data 在同一个分区也不能格式化该分区。
 
-internal是将元数据也写入到数据分区的尾部，即数据和元数据同分区。如果指定的device没有给定index时，则表示元数据存储到该设备中。如果某节点指定device[index_num]，那么指定几次元数据分区索引就必须大于128M的几倍，例如上述文件中drbd1.longshuai.com节点指定了/dev/sdb1[0]，那么sdb1就必须大于128M，如果此时其他资源的节点也指定了同一台服务器的/dev/sdb1[1]，则指定了两次就必须大于256M。指定为internal和device时，元数据区的大小是drbd自行计算的。
-上面index的说法来自[这里](http://www.cnblogs.com/f-ck-need-u/p/8678883.html#1-drbd-)，具体没有实际验证。
+internal 是将元数据也写入到数据分区的尾部，即数据和元数据同分区。如果指定的 device 没有给定 index 时，则表示元数据存储到该设备中。如果某节点指定 device[index_num]，那么指定几次元数据分区索引就必须大于 128M 的几倍，例如上述文件中 drbd1.longshuai.com 节点指定了/dev/sdb1[0]，那么 sdb1 就必须大于 128M，如果此时其他资源的节点也指定了同一台服务器的/dev/sdb1[1]，则指定了两次就必须大于 256M。指定为 internal 和 device 时，元数据区的大小是 drbd 自行计算的。
+上面 index 的说法来自[这里](http://www.cnblogs.com/f-ck-need-u/p/8678883.html#1-drbd-)，具体没有实际验证。
 
 ```shell
 drbdadm create-md r0
 ```
-然后启动DRBD：
+然后启动 DRBD：
 
 ```shell
 drbdadm up r0
 ```
-我在测试时没有操作下一步操作，但是数据也可以完成同步。查询了一下，网上说`drbdadm up`这个命令相当于`attach`、`syncer`、`connect`的总集合。但是后台使用`systemctl status drbd `获取到的状态还是`inactive (dead)`，欢迎大家提出自己的看法。
+我在测试时没有操作下一步操作，但是数据也可以完成同步。查询了一下，网上说`drbdadm up`这个命令相当于`attach`、`syncer`、`connect`的总集合。但是后台使用`systemctl status drbd`获取到的状态还是`inactive (dead)`，欢迎大家提出自己的看法。
 
 ------
 在两个服务器上分别启动`DRBD`服务：

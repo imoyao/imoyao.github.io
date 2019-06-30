@@ -1,5 +1,5 @@
 ---
-title: CentOS7下源码安装DRBD
+title: CentOS7 下源码安装 DRBD
 date: 2018-01-11 10:43:17
 tags:
 - DRBD
@@ -21,7 +21,7 @@ systemctl disable firewalld
 systemctl stop firewalld
 ```
 
-### 关闭SELinux
+### 关闭 SELinux
 
 ```shell
 sed -i -e "s/=enforcing/=disabled/g" /etc/selinux/config
@@ -35,7 +35,7 @@ yum -y update
 yum -y install gcc make automake autoconf libxslt libxslt-devel flex rpm-build wget
 ```
 
-**注意：** 安装`kernel-devel`一定要和` uname -r `获取结果一致。
+**注意：** 安装`kernel-devel`一定要和`uname -r`获取结果一致。
 
 ```shell
 rpm -q kernel-devel
@@ -113,7 +113,7 @@ lsmod|grep drbd
 ```
 ---
 
-### 编译drbd-utils组件
+### 编译 drbd-utils 组件
 
 ```shell
 cd ../../drbd-utils-8.9.0/   
@@ -195,4 +195,4 @@ DRBDADM_VERSION=8.9.0
 
 - [CentOS 安装配置 DRBD – WTF Daily Blog](http://blog.topspeedsnail.com/archives/8381)
 
-- [CentOS下实现Heartbeat+DRBD+MySQL双机热备硬件故障自动切换高可用(HA)方案 | 三木的人生——3mu.me](http://www.3mu.me/centos%E4%B8%8B%E5%AE%9E%E7%8E%B0heartbeatdrbdmysql%E5%8F%8C%E6%9C%BA%E7%83%AD%E5%A4%87%E7%A1%AC%E4%BB%B6%E6%95%85%E9%9A%9C%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E9%AB%98%E5%8F%AF%E7%94%A8ha/#respond)
+- [CentOS 下实现 Heartbeat+DRBD+MySQL 双机热备硬件故障自动切换高可用(HA)方案 | 三木的人生——3mu.me](http://www.3mu.me/centos%E4%B8%8B%E5%AE%9E%E7%8E%B0heartbeatdrbdmysql%E5%8F%8C%E6%9C%BA%E7%83%AD%E5%A4%87%E7%A1%AC%E4%BB%B6%E6%95%85%E9%9A%9C%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E9%AB%98%E5%8F%AF%E7%94%A8ha/#respond)

@@ -1,5 +1,5 @@
 ---
-title: 如何在Linux上安装MySQL？
+title: 如何在 Linux 上安装 MySQL？
 date: 2019-06-23 17:26:26
 tags:
 - MySQL
@@ -21,7 +21,7 @@ Linux 172.18.1.117 3.10.0-957.el7.x86_64 #1 SMP Thu Nov 8 23:39:32 UTC 2018 x86_
 [root@172 mysql]# cat /etc/redhat-release
 CentOS Linux release 7.6.1810 (Core) 
 ```
-## MySQL版本
+## MySQL 版本
 ```bash
 # 安装完成之后才可以查询到
 [root@172 mysql]# mysql --version
@@ -93,7 +93,7 @@ chgrp -R mysql mysql/
     2019-06-23T08:52:37.416821Z 1 [Note] A temporary password is generated for root@localhost: PDRO-ab.a8jd
     ```
 4. 最容易出现这个错误：`Starting MySQL. ERROR! The server quit without updating PID file`，网上搜到的解决方案没有啥用，我本次安装走到这里没有出现这个错误，但是下面*启动服务*环节出现该报错，使用`rm  /etc/my.cnf -rf`居然有用，暂时不知道造成原因。
-## 使用mysqld_safe启动服务
+## 使用 mysqld_safe 启动服务
 ```bash
 /usr/local/mysql/bin/mysqld_safe --user=mysql
 2019-06-23T09:00:10.100530Z mysqld_safe error: log-error set to '/var/log/mariadb/mariadb.log', however file don't exists. Create writable for user 'mysql'.
@@ -109,7 +109,7 @@ chgrp -R mysql mysql/
 2019-06-23T09:00:58.541328Z mysqld_safe Logging to '/var/log/mariadb/mariadb.log'.
 2019-06-23T09:00:58.546897Z mysqld_safe Directory '/var/lib/mysql' for UNIX socket file don't exists.
 ```
-## 根据报错信息修改my.cnf中的配置项
+## 根据报错信息修改 my.cnf 中的配置项
 ```bash
 [root@172 mysql]# vi /etc/my.cnf
 # 此处省略，每个人的配置不一样（我已经将该文件删除了，没办法记住怎么配置的了，这里的错误信息很明确，根据错误修改到不报错即可）
@@ -169,10 +169,10 @@ mysql> quit
 Bye
 ```
 ## 添加环境变量
-上一步中启动mysql的时候使用的是全路径，有的时候会比较麻烦，可以通过配置环境变量修改；
+上一步中启动 mysql 的时候使用的是全路径，有的时候会比较麻烦，可以通过配置环境变量修改；
 执行`vi ~/.bash_profile`修改文件中`PATH`一行，将`/usr/local/mysql/bin` 加入到`PATH=$PATH:$HOME/bin`一行之后
 **注意**：这种方法只对当前登录用户生效。
 
 # 参考阅读
-[linux安装mysql5.7.24 - 绿色落日的博客 - CSDN博客](https://blog.csdn.net/qq_30000313/article/details/85333971)
-[linux安装mysql5.7.19](https://blog.csdn.net/zhou920786312/article/details/77750604)
+[linux 安装 mysql5.7.24 - 绿色落日的博客 - CSDN 博客](https://blog.csdn.net/qq_30000313/article/details/85333971)
+[linux 安装 mysql5.7.19](https://blog.csdn.net/zhou920786312/article/details/77750604)

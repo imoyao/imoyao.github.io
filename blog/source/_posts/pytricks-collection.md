@@ -1,5 +1,5 @@
 ---
-title: 🐍PyTricks | Python技巧写法记录
+title: 🐍PyTricks | Python 技巧写法记录
 date: 2018-01-02 17:00:59
 tags:
 - Python

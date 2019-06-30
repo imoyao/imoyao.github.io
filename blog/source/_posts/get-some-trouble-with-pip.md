@@ -1,5 +1,5 @@
 ---
-title: pip小老弟，你怎么肥四？
+title: pip 小老弟，你怎么肥四？
 date: 2018-09-21 15:52:52
 tags: 
 - Python
@@ -12,7 +12,7 @@ tags:
 
 ### 错误提示
 
-```
+```plain
 You are using pip version 9.0.3, however version 18.0.1 is available.
 You should consider upgrading via the 'python -m pip install --upgrade pip' command. 
 ```
@@ -22,13 +22,13 @@ You should consider upgrading via the 'python -m pip install --upgrade pip' comm
 
 ### 参考来源
 
-[Python2.7 自带的pip9.0 升级到pip18.0](https://blog.csdn.net/XavierDarkness/article/details/81234066)
+[Python2.7 自带的 pip9.0 升级到 pip18.0](https://blog.csdn.net/XavierDarkness/article/details/81234066)
 
 ## 明确已经安装`pip`，但是系统提示找不到`pip`
 
 ### 错误提示
 
-```
+```plain
 -bash: /home/imoyao/.local/bin/pip: No such file or directory
 ```
 ### 解决方案
@@ -56,7 +56,7 @@ When the cache is clear, pip is working again.
 
 ### 错误提示
 
-```
+```plain
 Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)'),)': /simple/pip/
 Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)'),)': /simple/pip/
 Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:833)'),)': /simple/pip/
@@ -70,7 +70,7 @@ Could not fetch URL https://pypi.python.org/simple/pip/: There was a problem con
 
 - 临时方案
 
-```
+```plain
 安装时添加参数：
 --trusted-host pypi.python.org
 此方式表示信任该域名，但是每一次安装包的时候都需要该操作，比较麻烦；
@@ -78,7 +78,7 @@ Could not fetch URL https://pypi.python.org/simple/pip/: There was a problem con
 - 永久方案
 
 修改`pip.conf` 配置文件，该文件在`Linux`系统中的可能位置：
-```
+```plain
 /etc/pip.conf
 
 ~/.pip/pip.conf
@@ -87,7 +87,7 @@ Could not fetch URL https://pypi.python.org/simple/pip/: There was a problem con
 ```
 如果都没有的话，可以手动创建之后添加以下内容：
 
-```
+```plain
 [global]
 index-url = http://mirrors.aliyun.com/pypi/simple/      # 本机使用阿里源代理
 [install]
@@ -102,26 +102,26 @@ trusted-host = pypi.python.org
 ### 参考来源
 
 [pip issue installing almost any library](https://stackoverflow.com/questions/16370583/pip-issue-installing-almost-any-library)
-[linux 设置pip 镜像 Pip Warning：–trusted-host 问题解决方案](https://www.cnblogs.com/yudar/p/4657511.html)
+[linux 设置 pip 镜像 Pip Warning：–trusted-host 问题解决方案](https://www.cnblogs.com/yudar/p/4657511.html)
 
-## 安装`MySQL-python`时提示：
+## 安装`MySQL-python`时提示
 
 ### 错误提示
-```
+```plain
 EnvironmentError: mysql_config not found
 ```
 ### 解决方案
 
 - CentOS
 
-```
+```plain
 yum install libffi-devel 
 pip install mysql-connector-python
 ```
 
 - Ubuntu
 
-```
+```plain
 sudo apt install default-libmysqlclient-dev
 ```
 ### 参考来源

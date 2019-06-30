@@ -156,6 +156,6 @@ if __name__ == '__main__':
 
 参考链接：
 
-1. [python mysql where in 对列表（list,,array）问题 - CSDN博客](https://blog.csdn.net/u011085172/article/details/79044490)
+1. [python mysql where in 对列表（list,,array）问题 - CSDN 博客](https://blog.csdn.net/u011085172/article/details/79044490)
 
 2. [python - Executing "SELECT ... WHERE ... IN ..." using MySQLdb - Stack Overflow](https://stackoverflow.com/questions/4574609/executing-select-where-in-using-mysqldb)

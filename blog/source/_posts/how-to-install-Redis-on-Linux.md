@@ -1,5 +1,5 @@
 ---
-title: Linux下如何安装Redis？
+title: Linux 下如何安装 Redis？
 
 date: 2019-04-11 10:03:08
 
@@ -19,25 +19,25 @@ toc: true
 
 - `Linux`版本
 
-    ```
+    ```plain
     Ubuntu 18.04 LTS && NeoKylin 3.2
     ```
 
 - `Python`版本
 
-    ```
+    ```plain
     Python 2.7.15rc1 && Python 2.6.6
     ```
 
 - `Redis`版本
 
-    ```
+    ```plain
     redis-5.0.4
     ```
 
 - `redis-py`版本
 
-    ```
+    ```plain
     redis-3.2.1 && redis-2.10.6
     ```
 
@@ -97,13 +97,13 @@ toc: true
     make: *** [all] Error 2
     ```
 
-2. 安装gcc
+2. 安装 gcc
 
     ```shell
     yum install gcc -y
     ```
     
-3. 重新make
+3. 重新 make
 
     ```shell
     make
@@ -117,7 +117,7 @@ toc: true
     make[1]: Leaving directory `/root/temp/redis-5.0.4/src'
     make: *** [all] Error 2
     ```
-    在构建`Redis`时选择非默认内存分配器是通过设置`MALLOC`环境变量完成的， 默认情况下Redis是使用`malloc`为`libc`编译和链接的。
+    在构建`Redis`时选择非默认内存分配器是通过设置`MALLOC`环境变量完成的， 默认情况下 Redis 是使用`malloc`为`libc`编译和链接的。
     而`libc`并不是`Linux`上默认的分配器，默认的是 `jemalloc`, 因为 `jemalloc` 被证明比`libc`有更少的碎片问题（`fragmentation problems`）。
     但是如果你没有`jemalloc` 而只有`libc` 当然 `make` 出错。 所以有两种解决办法：
     
@@ -136,7 +136,7 @@ toc: true
     make hiredis jemalloc linenoise lua geohash-int
     ```
     
-原因参见： [浅谈redis采用不同内存分配器tcmalloc和jemalloc](http://www.jb51.net/article/100575.htm)
+原因参见： [浅谈 redis 采用不同内存分配器 tcmalloc 和 jemalloc](http://www.jb51.net/article/100575.htm)
 
 >对于`tcmalloc`，`jemalloc`和`libc`对应的三个内存分配器。其性能和碎片率如何呢？
 >下面是一个简单测试结果，使用`Redis`自带的`redis-benchmark`写入等量数据进行测试，数据摘自采用不同分配器时`Redis info`信息。
@@ -150,7 +150,7 @@ toc: true
 
 5. 验证
 
-    ```shell
+    ```shellplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     redis-server -v
     Redis server v=5.0.4 sha=00000000:0 malloc=jemalloc-5.1.0 bits=64 build=b139020f90f1d493
     whereis redis-server
@@ -278,7 +278,7 @@ service redisd restart
 
 - 在控制台中登录`redis`客户端：
 
-```
+```plain
 [root@master init.d]# redis-cli
 # 测试redis连通性
 127.0.0.1:6379> ping
@@ -292,7 +292,7 @@ OK
 
 ## 安装提供`Python`支持
 
-### pip安装
+### pip 安装
 
 ```shell
 pip install redis
@@ -339,7 +339,7 @@ pip install redis
 
 **小插曲**
 
-关于redis-py的Python低版本支持
+关于 redis-py 的 Python 低版本支持
 
 在`CentOS`上安装`redis-3.2.1`的时候由于`python`版本较低（`2.6.6`）出现以下问题
 ```shell
@@ -381,6 +381,6 @@ Requires: Python >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
 ## 参考链接
 
 - [Redis Quick Start](https://redis.io/topics/quickstart)
-- [Ubuntu安装Redis并设置为开机自启动服务](https://blog.csdn.net/softwave/article/details/53838194)
-- [Python操作Redis数据库](https://www.cnblogs.com/cnkai/p/7642787.html)
+- [Ubuntu 安装 Redis 并设置为开机自启动服务](https://blog.csdn.net/softwave/article/details/53838194)
+- [Python 操作 Redis 数据库](https://www.cnblogs.com/cnkai/p/7642787.html)
 

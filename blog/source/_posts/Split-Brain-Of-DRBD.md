@@ -20,14 +20,14 @@ tags:
 
 如果`DRBD`出现裂脑，会在 `/var/log/message` 出现一条日志：
 
-```
+```plain
 Split-Brain detected but unresolved, dropping connection!
 ```
 当发生`split brain`之后，如果查看连接状态，其中至少会有一个是`StandAlone`状态，另外一个可能也是`StandAlone`（如果是同时发现`split brain`状态），也有可能是 `WFConnection` 状态。
 
 ### 裂脑自动通知
 
-如果进行配置，DRBD会调用裂脑处理程序，当裂脑发生时就会被探测到。要配置这个程序，需要对资源`/etc/drbd.d/global_common.conf `添加如下配置：
+如果进行配置，DRBD 会调用裂脑处理程序，当裂脑发生时就会被探测到。要配置这个程序，需要对资源`/etc/drbd.d/global_common.conf`添加如下配置：
 ```shell
 resource <resource>
 
@@ -46,7 +46,7 @@ resource <resource>
 
 `<handler>`可能是目前系统中一个可执行的文件。
 
-`Drbd`自带一个裂脑处理程序脚本`/usr/lib/drbd/notify-split-brain.sh`。它可以通过电子邮件的方式发送到指定的地址。要配合程序发送信息到root@localhost（这假设是设置的系统管理员的邮件地址），配置如下：
+`Drbd`自带一个裂脑处理程序脚本`/usr/lib/drbd/notify-split-brain.sh`。它可以通过电子邮件的方式发送到指定的地址。要配合程序发送信息到 root@localhost（这假设是设置的系统管理员的邮件地址），配置如下：
 ```shell
 resource <resource>
 
@@ -81,8 +81,8 @@ mailhub=idealyard.imoyao.com:25
 ### 世代标识符元组（GI）
 参见[16.2. Generation Identifiers](https://docs.linbit.com/docs/users-guide-8.4/#s-gi)
 
-DRBD 将其备份的数据的更新变化过程比拟成人类世代繁衍的过程。每个时点同一个双机的DRBD的两个节点上的数据都来自于同一份原始数据，我们可认为这个时点上两分数据源于同一祖先。主备节点的DRBD都会用一个叫作GI(Generation ID)的标识符来标识当前的数据是哪个世代的，同样也会记录最近两个数据祖先的GI用于追朔当前数据的历史来源。DRBD可以据此来判断两个节点是否是属于同一个双机,因为同一个双机的两份数据应该是从同一个祖先而来。
-GI作为DRBD的内部机制主要被用来：
+DRBD 将其备份的数据的更新变化过程比拟成人类世代繁衍的过程。每个时点同一个双机的 DRBD 的两个节点上的数据都来自于同一份原始数据，我们可认为这个时点上两分数据源于同一祖先。主备节点的 DRBD 都会用一个叫作 GI(Generation ID)的标识符来标识当前的数据是哪个世代的，同样也会记录最近两个数据祖先的 GI 用于追朔当前数据的历史来源。DRBD 可以据此来判断两个节点是否是属于同一个双机,因为同一个双机的两份数据应该是从同一个祖先而来。
+GI 作为 DRBD 的内部机制主要被用来：
 
 1. 确定这两个节点是否是事实上的同一个集群的成员（而不是意外连接的两个节点）；
 2. 确定触发全盘同步（`full re-synchronization`）还是只触发部分同步（`partial re-synchronization`）。
@@ -119,17 +119,17 @@ GI作为DRBD的内部机制主要被用来：
 
 总的来说，这四个项目被称为代码标识符元组，或简称为`GI元组`。
 
-#### `GI`如何变化？
+#### `GI`如何变化
 
 - 开始新的数据生成代
 
-当节点与其对等方失去连接时（网络故障或人工干预都有可能），DRBD将按照以下方式修改其本地生成标识符：
+当节点与其对等方失去连接时（网络故障或人工干预都有可能），DRBD 将按照以下方式修改其本地生成标识符：
 
 ![图1 GI元祖在生成新的数据代时改变](https://docs.linbit.com/ug-src/users-guide-8.4/images/gi-changes-newgen.png)
 
 1. 为新的数据代生成新的`UUID`，变为主节点的`C-UUID`；
-2. 之前的UUID现在指向位图（`B-UUID`）以跟踪数据变化，因此它成为主节点的新位图`UUID`；
-3. 备节点GI元祖保持不变。
+2. 之前的 UUID 现在指向位图（`B-UUID`）以跟踪数据变化，因此它成为主节点的新位图`UUID`；
+3. 备节点 GI 元祖保持不变。
 
 - 开始重新同步
 
@@ -140,7 +140,7 @@ GI作为DRBD的内部机制主要被用来：
 1. 在同步源端的`当前UUID`（C-UUID）保持不变；
 2. 同步源端的`位图UUID`轮转为`第一历史UUID`（H1-UUID）；
 3. 同步源端生成新的`位图UUID`（B-UUID）;
-4. 该UUID（_应指同步源端生成的`B-UUID`_）变为同步目标端的新的`当前UUID`（C-UUID）；
+4. 该 UUID（_应指同步源端生成的`B-UUID`_）变为同步目标端的新的`当前UUID`（C-UUID）；
 5. 同步目标端的`位图UUID`（B-UUID）和`历史UUID`（H1-UUID,H2-UUID）保持不变。
 
 - 重新同步结束
@@ -150,7 +150,7 @@ GI作为DRBD的内部机制主要被用来：
 ![图3 当重新同步结束后，GI元祖发生改变](https://docs.linbit.com/ug-src/users-guide-8.4/images/gi-changes-synccomplete.png)
 
 1. 同步源端`当前UUID`(C-UUID)保持不变；
-2. 同步源端的`位图UUID`(B-UUID)轮转为`第一历史UUID`（H1-UUID），同时该UUID(指`H1-UUID`)轮转为`第二历史UUID`(现有的第二历史uuid被丢弃)；
+2. 同步源端的`位图UUID`(B-UUID)轮转为`第一历史UUID`（H1-UUID），同时该 UUID(指`H1-UUID`)轮转为`第二历史UUID`(现有的第二历史 uuid 被丢弃)；
 3. 同步源端的`位图UUID`(B-UUID)清空（置零）；
 4. 同步目标端采用同步源端整个`GI元祖`。
 
@@ -168,7 +168,7 @@ GI作为DRBD的内部机制主要被用来：
 
 - 当前`UUID(C-UUID)`相等
 
-本地节点检测到它的当前`UUID`和对等节点的当前`UUID`非空且相等时。这是资源在` secondary `状态进入断开连接（`disconnected`）模式时的正常情况，并且在断开连接时并未在任一节点上升为 `primary` 状态。此时不会触发同步，因为两边的数据一致，没有必要。
+本地节点检测到它的当前`UUID`和对等节点的当前`UUID`非空且相等时。这是资源在`secondary`状态进入断开连接（`disconnected`）模式时的正常情况，并且在断开连接时并未在任一节点上升为 `primary` 状态。此时不会触发同步，因为两边的数据一致，没有必要。
 
 
 
@@ -326,28 +326,28 @@ def exchange_gi_process(drbdname):
 ## 如何模拟一个 `Split-Brain`状态
 
 1. 往主节点写入大文件，在未写入完前停止备节点的`DRBD`；
-```
+```plain
 # on secondary
 drbdadm down drbdxx
 ```
 2. 停止主节点的`DRBD`；
-```
+```plain
 # on primary
 drbdadm down drbdxx
 ```
 3. 启动备节点的`DRBD`，设置为主节点；
-```
+```plain
 # on secondary
 drbdadm up drbdxx
 drbdadm primary drbdxx
 ```
 4. 启动原主节点的`DRBD`，这时发现它的状态就是`StandAlone Secondary/Unknown UpToDate/DUnknown`，`Split-Brain` 情况出现。
-```
+```plain
 # on primary
 drbdadm up drbdxx
 ```
 
-## 解决DRBD裂脑状态
+## 解决 DRBD 裂脑状态
 
 ### 设置自动修复
 [5.17.2. Automatic split brain recovery policies](https://docs.linbit.com/docs/users-guide-8.4/#s-configure-split-brain-behavior )
@@ -355,7 +355,7 @@ drbdadm up drbdxx
 **警告**：配置`DRBD`自动修复裂脑（或其他状况）导致的数据分歧情况可能是正在配置的数据丢失，如果你不知道你在干什么，那最好别干。（NO ZUO NO DIE）
 
 _提示_ ：您更应该查看系统防护策略，集群管理集成和冗余集群管理器通信连接状态，以避免出现数据分歧。（防患于未然而不是亡羊补牢）
-在启用和配置`DRBD`的自动裂脑恢复策略之前，您必须了解`DRBD`为此提供了多种配置选项。 DRBD根据检测到裂脑时主节点（`Primary role`）的数量应用其裂脑恢复程序。为此，DRBD检查以下关键字，这些关键字均可在资源的网络配置部分中找到：
+在启用和配置`DRBD`的自动裂脑恢复策略之前，您必须了解`DRBD`为此提供了多种配置选项。 DRBD 根据检测到裂脑时主节点（`Primary role`）的数量应用其裂脑恢复程序。为此，DRBD 检查以下关键字，这些关键字均可在资源的网络配置部分中找到：
 
 #### after-sb-0pri
 
@@ -427,13 +427,13 @@ drbdadm connect <resource>
 ## 参考链接
 
 - [User’s Guide 8.4.x](https://docs.linbit.com/docs/users-guide-8.4/)
-- [关于DRBD v8.3的同步机制](http://blog.sina.com.cn/s/blog_a30f2be401016d04.html)
-- [一次DRBD裂脑行为的模拟](http://myhat.blog.51cto.com/391263/606318/)
-- [drbd裂脑处理 | IT瘾](http://itindex.net/detail/50197-drbd)
+- [关于 DRBD v8.3 的同步机制](http://blog.sina.com.cn/s/blog_a30f2be401016d04.html)
+- [一次 DRBD 裂脑行为的模拟](http://myhat.blog.51cto.com/391263/606318/)
+- [drbd 裂脑处理 | IT 瘾](http://itindex.net/detail/50197-drbd)
 
 http://www.3mu.me/%E4%BB%80%E4%B9%88%E6%98%AFdrbd%E8%84%91%E8%A3%82%E5%8F%8A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9Fdrbd%E8%84%91%E8%A3%82/
 
-drbd中metadata的理解(原创) – 蚊子世界
+drbd 中 metadata 的理解(原创) – 蚊子世界
 http://www.wenzizone.cn/2009/10/29/drbd%e4%b8%admetadata%e7%9a%84%e7%90%86%e8%a7%a3%e5%8e%9f%e5%88%9b.html
 
 

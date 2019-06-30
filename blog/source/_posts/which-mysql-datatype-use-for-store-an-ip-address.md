@@ -1,5 +1,5 @@
 ---
-title: MySQL中存储IP地址应该选用何种数据类型？
+title: MySQL 中存储 IP 地址应该选用何种数据类型？
 date: 2019-05-11 14:44:31
 tags:
 
@@ -14,7 +14,7 @@ categories:
 toc: true
 
 ---
-今天在项目开发时，遇到需要在数据库中存储ip地址，那么应该选用何种数据类型更加高效呢？
+今天在项目开发时，遇到需要在数据库中存储 ip 地址，那么应该选用何种数据类型更加高效呢？
 如果存储的是`IPV4`地址，可以选择使用`INT UNSIGNED`，然后借助 `MySQL` 自带的 `INET_ATON()` 和  `INET_NTOA()`来存取数据；
 如果存储的是`IPV6`地址，可以选择使用`VARBINARY()`，然后借助 `INET6_ATON()`和`INET6_NTOA()` (`MySQL5.6+`支持)方法存取数据。
 
@@ -77,7 +77,7 @@ if __name__ == '__main__':
 
 ## 针对`IPv6`地址
 
-MySQL提供内置函数`inet6_aton()`来存储和检索`IPv6`地址。敲黑板，不要把`IPv6`地址存储为整数，因为数字格式的`IPv6`地址需要比`UNSIGNED BIGINT`更多的字节。所以下面的函数返回`VARBINARY(16)`数据类型。让我们看一个例子。
+MySQL 提供内置函数`inet6_aton()`来存储和检索`IPv6`地址。敲黑板，不要把`IPv6`地址存储为整数，因为数字格式的`IPv6`地址需要比`UNSIGNED BIGINT`更多的字节。所以下面的函数返回`VARBINARY(16)`数据类型。让我们看一个例子。
 ```sql
 mysql> select hex(inet6_aton('127.0.0.1'));
 +---------------------------------+
@@ -128,5 +128,5 @@ SELECT name FROM user WHERE ipaddress = inet_aton('127.0.0.1');
 - [Which MySQL datatype use for store an IP address?](https://itsolutionstuff.com/post/which-mysql-datatype-use-for-store-an-ip-address)
 - [Most efficient way to store IP Address in MySQL](https://stackoverflow.com/questions/2542011/most-efficient-way-to-store-ip-address-in-mysql)
 - [MySQL doc-function_inet6-aton](https://dev.mysql.com/doc/refman/5.6/en/miscellaneous-functions.html#function_inet6-aton)
-- [IP地址在数据库里面的存储方式](https://www.cnblogs.com/gomysql/p/4595621.html)
-- [论IP地址在数据库中应该用何种形式存储?](https://www.cnblogs.com/skynet/archive/2011/01/09/1931044.html)
+- [IP 地址在数据库里面的存储方式](https://www.cnblogs.com/gomysql/p/4595621.html)
+- [论 IP 地址在数据库中应该用何种形式存储?](https://www.cnblogs.com/skynet/archive/2011/01/09/1931044.html)

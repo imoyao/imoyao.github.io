@@ -1,5 +1,5 @@
 ---
-title: Python环境管理介绍
+title: Python 环境管理介绍
 date: 2018-01-18 14:18:31
 thumbnail:
 
@@ -13,7 +13,7 @@ venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv 等工具的区别与
 
 ![Python](https://farm5.staticflickr.com/4290/35294660055_42c02b2316_k_d.jpg)
 
-## 第三方库：
+## 第三方库
 
 ### virtualenv
 
@@ -41,15 +41,15 @@ venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv 等工具的区别与
 
 `pipenv`是`Python`的**包**管理器。由`Kennetth Reitz`（`requests`的作者）编写维护，是我们上面提到的这些项目里面最新的。它的目标是在命令行中将`Pipfile`、`pip`和`virtualenv`合并为一个命令。
 
-## 标准库：
+## 标准库
 
 ### pyvenv
 
-`pyvenv`是一个`Python 3`附带的脚本，但在**Python 3.6中被弃用**，（参见[这里](https://docs.python.org/dev/whatsnew/3.6.html#id8)）因为它有问题（暂且不说名字还容易造成混淆）。在`Python 3.6+`中，实际上等价于命令`python3 -m venv`。
+`pyvenv`是一个`Python 3`附带的脚本，但在**Python 3.6 中被弃用**，（参见[这里](https://docs.python.org/dev/whatsnew/3.6.html#id8)）因为它有问题（暂且不说名字还容易造成混淆）。在`Python 3.6+`中，实际上等价于命令`python3 -m venv`。
 
 ### venv
 
-`venv`是`Python 3`附带的一个包，你可以使用`python3 -m venv`运行（虽然由于某些原因，一些发行版把它分离成一个单独的发行包，比如`Ubuntu / Debian`上的`python3-venv`）。它的作用与`virtualen`v相似，工作方式也非常相似，但不需要复制`Python`二进制文件（`Windows`下除外）。如果你的代码不需要支持`Python 2`，可以使用它。在撰写本文时，`Python`社区似乎对`virtualenv`感到满意，`venv`相对来说比较小众。
+`venv`是`Python 3`附带的一个包，你可以使用`python3 -m venv`运行（虽然由于某些原因，一些发行版把它分离成一个单独的发行包，比如`Ubuntu / Debian`上的`python3-venv`）。它的作用与`virtualen`v 相似，工作方式也非常相似，但不需要复制`Python`二进制文件（`Windows`下除外）。如果你的代码不需要支持`Python 2`，可以使用它。在撰写本文时，`Python`社区似乎对`virtualenv`感到满意，`venv`相对来说比较小众。
 
 ## 参考链接
 

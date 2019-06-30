@@ -1,5 +1,5 @@
 ---
-title: 浅析Python中的延迟绑定问题
+title: 浅析 Python 中的延迟绑定问题
 date: 2018-04-10 15:41:35
 tags:
 - Python
@@ -30,7 +30,7 @@ if __name__ == '__main__':
 ```
 创建了五个函数，它们全都是 `4` 乘以 `n` 。
 `Python` 的闭包是*迟绑定* 。这意味着闭包中用到的变量的值是在内部函数被调用时查询得到的。
-在这里, 每当调用*任何*函数返回时, `i` 的值是调用时在周围作用域（ `surrounding scope `）中查询到的。到那个时候，循环已经完成， `i` 的值最终变成 `4` 。
+在这里, 每当调用*任何*函数返回时, `i` 的值是调用时在周围作用域（ `surrounding scope`）中查询到的。到那个时候，循环已经完成， `i` 的值最终变成 `4` 。
 关于这个陷阱有一个普遍严重的误解，它很容易被甩锅给 `Python` 的 [lambda](http://docs.python.org/reference/expressions.html#lambda)表达式。实际上， `lambda` 表达式是被冤枉滴。我们尝试把它改写成普通函数：
 ```python
 
@@ -44,7 +44,7 @@ def multi_func():
 
     return foo
 ```
-## 为了实现目标，你应该这样：
+## 为了实现目标，你应该这样
 1. 最一般的解决方案可以说是有点取巧（ `hack` ）。由于 `Python` 拥有在前文提到的为函数默认参数赋值的行为（参见 [可变默认参数](http://docs.python-guide.org/en/latest/writing/gotchas/#default-args) ）,你可以像下面这样创建一个立即绑定参数的闭包：
 
 ```python

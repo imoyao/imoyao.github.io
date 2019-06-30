@@ -1,5 +1,5 @@
 ---
-title: 磁盘阵列控制卡（RAID卡）MegaCli常用管理命令汇总
+title: 磁盘阵列控制卡（RAID 卡）MegaCli 常用管理命令汇总
 date: 2017-11-20 15:02:45
 tags:
 - RAID
@@ -33,9 +33,9 @@ MegaCli -AdpSetProp -PrCorrectUncfgdAreas -val -a0
 MegaCli -AdpPR -SetStartTime yyyymmdd hh -a0
 ```
 
-## cc校验
+## cc 校验
 
-- 立即开始cc校验
+- 立即开始 cc 校验
 
 ```shell
 #L0表示Target ID 为0的raid组
@@ -50,11 +50,11 @@ MegaCli -ldcc -progdsply -L0 -a0
 MegaCli -ldcc -abort -L0 -a0
 ```
 
-- 计划cc校验
-如果模式为disable(MegaCli -adpccsched -info -a0来查看)，则下一次开始时间为07/28/2135, 02:00:00，状态为 Stopped，延期为168个小时;
-只有模式为Sequential和Concurrent模式时，才可以设定定期时间，所以要首先设定模式;
-如果模式为Sequential时，所有虚拟磁盘组顺序进行cc校验;
-如果模式为Concurrent时，所有虚拟磁盘组同时进行cc校验;
+- 计划 cc 校验
+如果模式为 disable(MegaCli -adpccsched -info -a0 来查看)，则下一次开始时间为 07/28/2135, 02:00:00，状态为 Stopped，延期为 168 个小时;
+只有模式为 Sequential 和 Concurrent 模式时，才可以设定定期时间，所以要首先设定模式;
+如果模式为 Sequential 时，所有虚拟磁盘组顺序进行 cc 校验;
+如果模式为 Concurrent 时，所有虚拟磁盘组同时进行 cc 校验;
 ```shell
 #设定CC模式
 MegaCli -adpccsched -modeconc -a0
@@ -74,7 +74,7 @@ MegaCli -AdpEventLog -GetCCIncon –f filename –L0 –a0
 ```
 
 ## 快速初始化和完全初始化
-快速初始化值是往raid组的前8M和后8M写0
+快速初始化值是往 raid 组的前 8M 和后 8M 写 0
 ```shell
 #快速初始化
 MegaCli -LDInit -start –L0 -a0
@@ -87,9 +87,9 @@ MegaCli -LDInit -abort -L0 -a0
 ```
 
 ## 后台初始化
-Raid5 需要5个数据盘才可以后台初始化(5个盘中不包含热备盘)
-后台初始化是创建raid后5分钟开始的(好像有时不是这样的)
-后台初始化和cc校验不同的地方是，后台初始化可以自动开始
+Raid5 需要 5 个数据盘才可以后台初始化(5 个盘中不包含热备盘)
+后台初始化是创建 raid 后 5 分钟开始的(好像有时不是这样的)
+后台初始化和 cc 校验不同的地方是，后台初始化可以自动开始
 改变后台初始化率时，需要停止后台初始化，否则没有效果
 ```shell
 #禁止后台初始化
@@ -110,9 +110,9 @@ MegaCli -AdpSetProp –CopyBackDsbl -0 -a0 (开启)
 #显示copyback设置情况
 MegaCli –AdpGetProp -CopyBackDsbl –a0
 ```
-当设置copyback为enable时，拔出坏盘，换上一个UNCONF的新盘，先用热备盘进行重建，然后进行copyback操作，如果copyback为disable时，不进行copyback操作，可以设定copyback为enable，然后用MegaCli -PDCpyBk -Start -PhysDrv[E0:S0,E1:S1] –a0开始copyback操作，其中[E0：S0]是raid组中的磁盘(源盘)，而[E1：S1]不是raid组中的磁盘(目的盘)
+当设置 copyback 为 enable 时，拔出坏盘，换上一个 UNCONF 的新盘，先用热备盘进行重建，然后进行 copyback 操作，如果 copyback 为 disable 时，不进行 copyback 操作，可以设定 copyback 为 enable，然后用 MegaCli -PDCpyBk -Start -PhysDrv[E0:S0,E1:S1] –a0 开始 copyback 操作，其中[E0：S0]是 raid 组中的磁盘(源盘)，而[E1：S1]不是 raid 组中的磁盘(目的盘)
 
-当某个盘出现第一个smart错误时，可以在这个盘和热备盘之间进行copyback操作，热备盘作为目的盘，完成了copyback操作时，smart错误盘才标记为failed状态。
+当某个盘出现第一个 smart 错误时，可以在这个盘和热备盘之间进行 copyback 操作，热备盘作为目的盘，完成了 copyback 操作时，smart 错误盘才标记为 failed 状态。
 ```shell
 #如果在copyback时，raid组删除，目的盘回到热备盘状态或Unconfigured Good
 MegaCli -AdpGetProp SMARTCpyBkEnbl -a0
@@ -130,7 +130,7 @@ MegaCli -adpeventlog -getevents -f filename -a0
 MegaCli -AdpEventLog -Clear –a0
 ```
 
-## raid5扩容
+## raid5 扩容
 ```shell
 #raid5的扩容
 MegaCli -LDRecon -Start -r5 -Add -Physdrv[E0:S0] -L0 -a0
@@ -148,7 +148,7 @@ MegaCli -cfgldadd -r0[117:1,117:3,117:11] -a0
 MegaCli -ldrecon -start -r5 -add -physdrv[117:14] -l0 -a0
 ```
 
-## 升级ROM
+## 升级 ROM
 ```shell
 #从低版本到高版本升级
 MegaCli -adpfwflash -f x.rom -a0
@@ -159,9 +159,9 @@ MegaCli -adpfwflash -f x.rom -noverchk -a0
 
 ## 连接方式
 
-Raid对内有两个接口，即connector0和connector1。得到连接器的状态;
+Raid 对内有两个接口，即 connector0 和 connector1。得到连接器的状态;
  MegaCli -adpgetconnectormode -connector0 -a0 
-如果连接器的模式为internal时，jbod的磁盘全部看不到，如果连接器的模式为external时，主柜上的磁盘全部看不到;
+如果连接器的模式为 internal 时，jbod 的磁盘全部看不到，如果连接器的模式为 external 时，主柜上的磁盘全部看不到;
 
 ## 外来配置
 ```shell
@@ -200,7 +200,7 @@ MegaCli -PDList –a0
 MegaCli -pdInfo -PhysDrv[E0:S0] –a0
 ```
 
-## Adpsetprop设置属性
+## Adpsetprop 设置属性
 ```shell
 RebuildRate ，PatrolReadRate，BgiRate，CCRate，ReconRate，表示进行重建，巡读，后台初始化，cc校验，扩容等所占有的系统资源率，提高速度
 CoercionMode(强制模式)，分成三种形式，None，128M，1G，当为1G时，每个磁盘比没有设置的时减少了1G的空间;
@@ -216,7 +216,7 @@ MegaCli -AdpSetProp ExposeEnclDevicesEnbl -1 -a0
 
 ## NCQ
 
-Native Command Queuing (NCQ)对硬盘的读写命令的顺序进行优化。带NCQ技术的硬盘在接到读写指令后，会根据指令对访问地址进行重新排序。比如根据指令，硬盘需要访问330扇区、980扇区、340扇区，由于数据在磁盘上分布位置不同，普通硬盘只会按部就班地依次访问。而NCQ硬盘对指令进行优化排列之后，就可以先读取330扇区，接着读取340扇区，然后再读取980扇区。这样做的好处就是减少了磁头臂来回移动的时间，使数据读取更有效，同时有效地延长了硬盘的使用寿命。
+Native Command Queuing (NCQ)对硬盘的读写命令的顺序进行优化。带 NCQ 技术的硬盘在接到读写指令后，会根据指令对访问地址进行重新排序。比如根据指令，硬盘需要访问 330 扇区、980 扇区、340 扇区，由于数据在磁盘上分布位置不同，普通硬盘只会按部就班地依次访问。而 NCQ 硬盘对指令进行优化排列之后，就可以先读取 330 扇区，接着读取 340 扇区，然后再读取 980 扇区。这样做的好处就是减少了磁头臂来回移动的时间，使数据读取更有效，同时有效地延长了硬盘的使用寿命。
 ```shell
 #显示NCQ的设置情况
 MegaCli -adpgetprop -NCQdsply -a0
@@ -280,7 +280,7 @@ MegaCli -AdpSetProp -AutoEnhancedImportEnbl -a0
 MegaCli -AdpSetVerify -f fileName -a0
 ```
 
-## RAID卡相关
+## RAID 卡相关
 ```shell
 #查看raid的配置信息
 MegaCli -adpallinfo -a0
@@ -304,7 +304,7 @@ MegaCli -ShowSummary -f filename -a0
 MegaCli -PhyErrorCounters -a0
 ```
 
-## Enclosure的信息
+## Enclosure 的信息
 ```shell
 #查看机柜的相关信息
 MegaCli -encinfo -a0
@@ -312,7 +312,7 @@ MegaCli -encinfo -a0
 MegaCli -encstatus -a0
 ```
 
-## BIOS相关
+## BIOS 相关
 ```shell
 #在启动时要按任意键才可以启动这种情况设置这个参数。但是首先要确保 bios 处于 enable 状态。通过 MegaCli -AdpBIOS -dsply -a0可以查看。如果不是，先用MegaCli -AdpBIOS -enbl -a0来设置
 MegaCli –AdpBIOS –BE –a0
@@ -343,7 +343,7 @@ MegaCli -AdpCacheFlush –a0
 MegaCli -AdpSetProp CacheFlushInterval –val –a0
 ```
 
-## 让硬盘LED灯闪烁
+## 让硬盘 LED 灯闪烁
 
 ```shell
 #开启blink
@@ -366,29 +366,29 @@ MegaCli -AdpSetProp BatWarnDsbl -val -a0
 #设置纠错码漏桶的字节数
 MegaCli -AdpSetProp EccBucketSize -val -a0
 ```
-## 后台初始化，完全初始化，cc校验，巡读等之间的关系
+## 后台初始化，完全初始化，cc 校验，巡读等之间的关系
 
-后台初始化和完全初始化，cc校验时不能进行巡读;
+后台初始化和完全初始化，cc 校验时不能进行巡读;
 巡读时可以后台初始化和完全初始化，此时巡读结束;;
-在后台初始化和cc校验时，不能开始完全初始化;
-扩容时不能建raid，不能添加热备盘;
-rebuild的优先级高于copyback;
+在后台初始化和 cc 校验时，不能开始完全初始化;
+扩容时不能建 raid，不能添加热备盘;
+rebuild 的优先级高于 copyback;
 
 ## RAID 的创建与删除
-- 创建raid 0，1，5，6
+- 创建 raid 0，1，5，6
 
 ```shell
 #MegaCli -CfgLdAdd -rX[E0:S0,E1:S1,...] [WT|WB] [NORA|RA|ADRA] [Direct|Cached] [CachedBadBBU|NoCachedBadBBU] [-szXXX [-szYYY ...]] [-strpszM] [-Hsp[E0:S0,...]] [-AfterLdX] [-Force]|[FDE|CtrlBased] -a0 可以设置写模式(wt，wb)，读模式(ra，nora，adra)，缓存模式(direct，cached)，大小(sz)，条块大小(strpszM)等。比如1000G，只用指定盘的一部分(sz1000G)，设置条块的大小strpsz(设置为16k，则为strpsz16)
 MegaCli -cfgldadd -r5[117:1,117:3,117:11] -wb -ra -cached -cachedbadbbu -force -a0
 ```
 
-- 创建raid 10，50，60
+- 创建 raid 10，50，60
 
 ```shell
 #MegaCli -CfgSpanAdd -rX-Array0[E0:S0,E1:S1] -Array1[E0:S0,E1:S1] [-ArrayX[E0:S0,E1:S1] ...] [WT|WB] [NORA|RA|ADRA] [Direct|Cached] [CachedBadBBU| NoCachedBadBBU] [-szXXX[-szYYY ...]][-strpszM][-AfterLdX][-Force] |[FDE|CtrlBased] -aN
 MegaCli -CfgSpanAdd -r10 -Array0[245:0,245:1] Array1[245:2,245:3] -WB -RA -Cached -Cachedbadbbu -a0
 ```
-- 批量创建raid0
+- 批量创建 raid0
 
 ```shell
 #把每个槽位的磁盘都创建为只有一个盘的raid0
@@ -397,7 +397,7 @@ MegaCli -CfgEachDskRaid0 -wb -ra -cached -cachedbadbbu -a0
 MegaCli -CfgAllFreeDrv -r5 -SATAOnly -wb -ra -cached -cachedbadbbu -a0
 ```
 
-- 删除raid组
+- 删除 raid 组
 
 ```shell
 #清除所有的raid组的配置
@@ -406,7 +406,7 @@ MegaCli -cfgclr -a0
 MegaCli -cfglddel -L0 -a0
 ```
 
-## 设置RAID组的属性
+## 设置 RAID 组的属性
 
 ```shell
 #设置raid组的名字
@@ -424,19 +424,19 @@ MegaCli -ldsetprop -endskcache -L0 -a0
 ```
 ## 查询篇
 
-- 显示BBU状态信息    
+- 显示 BBU 状态信息    
 ```shell
 MegaCli -AdpBbuCmd -GetBbuStatus –aALL 
 ``` 
-- 显示BBU容量信息    
+- 显示 BBU 容量信息    
 ```shell
 MegaCli -AdpBbuCmd -GetBbuCapacityInfo –aALL 
 ```
-- 显示BBU设计参数    
+- 显示 BBU 设计参数    
 ```shell
 MegaCli -AdpBbuCmd -GetBbuDesignInfo –aALL
 ```
-- 显示当前BBU属性   
+- 显示当前 BBU 属性   
 ```shell
 MegaCli -AdpBbuCmd -GetBbuProperties –aALL 
 ```
@@ -473,15 +473,15 @@ MegaCli -AdpGetTime –aALL
 MegaCli -AdpAllInfo –aAll 
 ```
 
-- 显示RAID卡型号，RAID设置，Disk相关信息      
+- 显示 RAID 卡型号，RAID 设置，Disk 相关信息      
 ```shell
 MegaCli -cfgdsply –aALL 
 ```
-- 查询RAID阵列个数    
+- 查询 RAID 阵列个数    
 ```shell
 MegaCli -cfgdsply -aALL |grep "Number of DISK GROUPS:"
 ``` 
-- 查看Cache 策略设置    
+- 查看 Cache 策略设置    
 ```shell
 MegaCli -cfgdsply -aALL |grep Polic
 ```
@@ -496,7 +496,7 @@ MegaCli -LDGetProp -DskCache -LALL -aALL
 ```shell 
 MegaCli -PDRbld -ShowProg -PhysDrv [1:5] -a0
 ```
-- 查看Megacli的log
+- 查看 Megacli 的 log
 ```shell
 MegaCli -FwTermLog dsply -a0 > adp2.log
 ```
@@ -582,7 +582,7 @@ MegaCli -PDOffline -PhysDrv [1:4] -a0
 MegaCli -PDOnline -PhysDrv [1:4] -a0 
 ```
 
-**注：**如果直接删除RAID而不操作热备，其局部热备会变为全局热备，而不是删除。
+**注：**如果直接删除 RAID 而不操作热备，其局部热备会变为全局热备，而不是删除。
 
 
 ## 管理篇
@@ -591,7 +591,7 @@ MegaCli -PDOnline -PhysDrv [1:4] -a0
 ```shell
 MegaCli -PdLocate -start -physdrv[252:2] -a0
 ```
-- 查看RAID阵列中掉线的盘
+- 查看 RAID 阵列中掉线的盘
 ```shell
 MegaCli -pdgetmissing -a0
 ```
@@ -599,19 +599,19 @@ MegaCli -pdgetmissing -a0
 ```shell
 MegaCli -pdreplacemissing -physdrv[12:10] -Array5 -row0 -a0
 ```
-- 手动开启rebuid
+- 手动开启 rebuid
 ```shell
 MegaCli -pdrbld -start -physdrv[12:10] -a0
 ```
-- 查看Megacli的log
+- 查看 Megacli 的 log
 ```shell
 MegaCli -FwTermLog dsply -a0 > adp2.log
 ```
-- 关闭Rebuild
+- 关闭 Rebuild
 ```shell
 MegaCli -AdpAutoRbld -Dsbl -a0
 ```
-- 设置rebuild的速率
+- 设置 rebuild 的速率
 ```shell
 MegaCli -AdpSetProp RebuildRate -30 -a0
 ```
@@ -655,15 +655,15 @@ FW error description:
 Exit Code: 0x03
 ```
 
-[参见这里1](http://en.community.dell.com/support-forums/servers/f/956/t/19531272)
+[参见这里 1](http://en.community.dell.com/support-forums/servers/f/956/t/19531272)
 
 ## 参考资料
 
 - [官方资源下载-broadcom](https://www.broadcom.com/site-search?q=megacli)
 - [Dell – PERC/LSI MegaCLI – How to install](https://techedemic.com/2014/08/07/dell-perclsi-megacli-how-to-install/)
 - [LSIMegaRAIDSAS](https://hwraid.le-vert.net/wiki/LSIMegaRAIDSAS#a3.1.megactl)
-- [DELL磁盘阵列控制卡（RAID卡）MegaCli常用管理命令汇总](http://zh.community.dell.com/techcenter/b/weblog/archive/2013/03/07/megacli-command-share)
-- [MegaCli命令总结 - CSDN博客](http://blog.csdn.net/heart_2011/article/details/7254404)
-- [Linux下查看Raid磁盘阵列信息的方法](http://www.ha97.com/4073.html)
+- [DELL 磁盘阵列控制卡（RAID 卡）MegaCli 常用管理命令汇总](http://zh.community.dell.com/techcenter/b/weblog/archive/2013/03/07/megacli-command-share)
+- [MegaCli 命令总结 - CSDN 博客](http://blog.csdn.net/heart_2011/article/details/7254404)
+- [Linux 下查看 Raid 磁盘阵列信息的方法](http://www.ha97.com/4073.html)
 - [Megacli 常用命令](http://www.mamicode.com/info-detail-860128.html)
   

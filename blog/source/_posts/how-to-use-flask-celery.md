@@ -1,5 +1,5 @@
 ---
-title: 如何使用flask-celery实现异步任务
+title: 如何使用 flask-celery 实现异步任务
 date: 2019-06-18 14:14:46
 tags:
 - Celery
@@ -41,7 +41,7 @@ Linux local 4.15.0-22-generic #24-Ubuntu SMP Wed May 16 12:15:17 UTC 2018 x86_64
 
 ```
 
-# `Celery`是什么？
+# `Celery`是什么
 ## 概念
 `Celery` 是一个“自带电池”的专注于实时处理和任务调度的分布式任务队列，同时提供操作和维护分布式系统所需的**工具**。
 ## 整体架构
@@ -55,7 +55,7 @@ Linux local 4.15.0-22-generic #24-Ubuntu SMP Wed May 16 12:15:17 UTC 2018 x86_64
 - Celery workers: 任务消费者，是运行后台作业的进程。`Celery` 支持本地和远程的 `workers`，因此你就可以在 `Flask` 服务器上启动一个单独的 `worker`，随后随着你的应用需求的增加而新增更多的 `workers`。
 - 消息代理（`Broker`）: 客户端通过消息队列和 `workers` 进行通信，`Celery` 支持多种方式来实现这些队列。常见的为 `RabbitMQ` 和 `Redis`。
 - 任务结果存储：用来存储`workers`执行的任务结果。
-详见[Celery 是…](http://docs.jinkan.org/docs/celery/getting-started/introduction.html#id19)
+详见[Celery 是……](http://docs.jinkan.org/docs/celery/getting-started/introduction.html#id19)
 # `Celery`的安装配置
 
 ## 安装 `Celery`
@@ -73,7 +73,7 @@ celery --version
 ```
 ### 与 `redis` 结合使用
 
-redis 安装可以参考之前写的这篇文章[Linux下如何安装Redis？](https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/)
+redis 安装可以参考之前写的这篇文章[Linux 下如何安装 Redis？](https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/)
 
 **注意**： 此处需要同时安装`redis`客户端和`redis`的`Python`支持。
 ### 验证结果
@@ -152,7 +152,7 @@ if __name__ == '__main__':
     sudo mkdir -p /var/log/celery/
     sudo touch /var/log/celery/celery.log 
     ```
-- 启动celery worker服务
+- 启动 celery worker 服务
 
     ```bash
     celery -A task worker -l debug -f /var/log/celery/celery.log
@@ -168,7 +168,7 @@ if __name__ == '__main__':
     Specify 'extend_existing=True' to redefine options and columns on an existing Table object.
     
     ```
-    解决：在对应model中添加`'extend_existing': True`
+    解决：在对应 model 中添加`'extend_existing': True`
     ```python
     __table_args__ = {'extend_existing': True}
     ```
@@ -226,4 +226,4 @@ if __name__ == '__main__':
 # TODO
 因为个人时间关系，这个暂时没有学完。关于`Celery`的使用需要进一步实践学习。
 ## 参考阅读
-[在Flask中使用Celery的最佳实践](https://www.jianshu.com/p/807efde55d81)
+[在 Flask 中使用 Celery 的最佳实践](https://www.jianshu.com/p/807efde55d81)

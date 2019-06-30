@@ -7,7 +7,7 @@ categories:
 - Python
 thumbnail:
 ---
-## Py乙己
+## Py 乙己
 
 孔乙己自己知道不能和架构师谈天，便只好向实习生说话。
 
@@ -173,7 +173,7 @@ _()
 
 3. [The Meaning of Underscores in Python – dbader.org](https://dbader.org/blog/meaning-of-underscores-in-python)
 
-4. [Python中的下划线_有多少个意思？- 知乎](https://www.zhihu.com/question/268940585/answer/344852737)
+4. [Python 中的下划线_有多少个意思？- 知乎](https://www.zhihu.com/question/268940585/answer/344852737)
 
 ## 派森多一点
 

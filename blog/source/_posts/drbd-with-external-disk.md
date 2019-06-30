@@ -14,15 +14,15 @@ tags:
 
 ### internal meta-data
 
-meta-data和数据存放在同一个底层设备之上，它通过在设备末端预留一个区域以存储元数据做到这一点。
+meta-data 和数据存放在同一个底层设备之上，它通过在设备末端预留一个区域以存储元数据做到这一点。
 
 - 优点：
 
-一旦meta-data创建之后，就和实际数据绑在了一起，在维护上会更简单方便，不用担心meta-data会因为某些操作而丢失。另外在硬盘损坏丢失数据的同时，meta-data也跟着一起丢失，当更换硬盘之后，只需要执行重建meta-data的命令即可，丢失的数据会很容易的从其他节点同步过来。
+一旦 meta-data 创建之后，就和实际数据绑在了一起，在维护上会更简单方便，不用担心 meta-data 会因为某些操作而丢失。另外在硬盘损坏丢失数据的同时，meta-data 也跟着一起丢失，当更换硬盘之后，只需要执行重建 meta-data 的命令即可，丢失的数据会很容易的从其他节点同步过来。
 
 - 缺点：
 
-如果底层设备是单一的磁盘，没有做raid，也不是lvm等，那么可能会对写入吞吐量产生负面影响。因为每一次写io都需要更新meta-data里面的信息，那么每次写io都会有两次，而且肯定会有磁头的较大寻道移动，因为meta-data都是记录在设备的最末端的，这样就会造成写io的性能降低。
+如果底层设备是单一的磁盘，没有做 raid，也不是 lvm 等，那么可能会对写入吞吐量产生负面影响。因为每一次写 io 都需要更新 meta-data 里面的信息，那么每次写 io 都会有两次，而且肯定会有磁头的较大寻道移动，因为 meta-data 都是记录在设备的最末端的，这样就会造成写 io 的性能降低。
 
 
 ### external meta data
@@ -31,13 +31,13 @@ meta-data和数据存放在同一个底层设备之上，它通过在设备末�
 
 - 优点：
 
-与internal meta-data的缺点完全相对。对于某些写操作, 使用外部元数据会稍微改进延迟行为。
+与 internal meta-data 的缺点完全相对。对于某些写操作, 使用外部元数据会稍微改进延迟行为。
 
 - 缺点：
 
-由于meta-data存放在与数据设备分开的地方，就意味着如果磁盘故障且仅破坏生产数据 (而不是 DRBD 元数据), 则可以通过手动干预, 以使发起从幸存的节点到后续更换的磁盘上的完整数据同步。也就是管理维护会稍微麻烦一点，很小的一点点。
+由于 meta-data 存放在与数据设备分开的地方，就意味着如果磁盘故障且仅破坏生产数据 (而不是 DRBD 元数据), 则可以通过手动干预, 以使发起从幸存的节点到后续更换的磁盘上的完整数据同步。也就是管理维护会稍微麻烦一点，很小的一点点。
 
-**注意：** 如果我们希望在已经存在数据的设备上面建立drbd的资源，并且不希望丢失该设备上面的数据，又没办法增大底层设备的容量，而且上层文件系统不支持收缩，我们就只能将meta data创建成external方式。
+**注意：** 如果我们希望在已经存在数据的设备上面建立 drbd 的资源，并且不希望丢失该设备上面的数据，又没办法增大底层设备的容量，而且上层文件系统不支持收缩，我们就只能将 meta data 创建成 external 方式。
 
 ## 估算元数据大小
 注意：如果公式渲染出错，可以去[这里](https://zohooo.github.io/jaxedit/)预览
@@ -48,7 +48,7 @@ meta-data和数据存放在同一个底层设备之上，它通过在设备末�
 
 $$M_{S}= \lceil\frac{C_{s}}{2^{18}} \rceil \ast 8 \ast N + 72$$
 
-Cs 是存储设备扇区大小。N是对端的数量，一般情况下drbd实现的是双节点，因此N=1，可以不用考虑。
+Cs 是存储设备扇区大小。N 是对端的数量，一般情况下 drbd 实现的是双节点，因此 N=1，可以不用考虑。
 
 您可以通过发出 blockdev --getsz <device>来检索设备大小。
 
@@ -57,7 +57,7 @@ Cs 是存储设备扇区大小。N是对端的数量，一般情况下drbd实现
 2097152
 ```
 
-结果中的Ms的大小也是用扇区表示的,要转换为 MB, 请除以 2048。(对于512字节的扇区大小, 这是除 s390 之外的所有 Linux 平台上的默认值)。
+结果中的 Ms 的大小也是用扇区表示的,要转换为 MB, 请除以 2048。(对于 512 字节的扇区大小, 这是除 s390 之外的所有 Linux 平台上的默认值)。
 ```python
 In [23]: (math.ceil(2097152/2**18)*8+72)/float(2048)
 Out[23]: 0.06640625
@@ -122,15 +122,15 @@ drbdadm -- --assume-clean resize <resource>
 
 （此为高级功能，请自审之后使用。）
 
-1. 资源被配置为external meta data时
+1. 资源被配置为 external meta data 时
 
-当DRBD在处于非活动情况下，在两个节点的支持设备被扩展时，且DRBD资源使用的是external meta data，那么新的大小会自动被识别，不需要管理员干预。DRBD设备将在下次两个节点活动并且成功建立网络连接之后，显示增加后的新容量。
+当 DRBD 在处于非活动情况下，在两个节点的支持设备被扩展时，且 DRBD 资源使用的是 external meta data，那么新的大小会自动被识别，不需要管理员干预。DRBD 设备将在下次两个节点活动并且成功建立网络连接之后，显示增加后的新容量。
 
-2. 资源被配置为internal meta data时
+2. 资源被配置为 internal meta data 时
 
-当DRBD资源被配置为使用 internal meta data时，在新大小变为可用之前, 则必须将此元数据移动到已扩容设备的末尾。为此, 请完成以下步骤:
+当 DRBD 资源被配置为使用 internal meta data 时，在新大小变为可用之前, 则必须将此元数据移动到已扩容设备的末尾。为此, 请完成以下步骤:
 
-- down掉DRBD资源:
+- down 掉 DRBD 资源:
 
 ```shell
 drbdadm down <resource>
@@ -145,7 +145,7 @@ drbdadm dump-md <resource> > /tmp/metadata
 
 - 在两个节点上给支持的块设备增加容量
 
-- 分别在两个节点上调整/tmp/metadata 文件中`la-size-sect`的大小信息。注：这里la-size-sect指定的是扇区数量
+- 分别在两个节点上调整/tmp/metadata 文件中`la-size-sect`的大小信息。注：这里 la-size-sect 指定的是扇区数量
 
 - 重新初始化元数据区域
 
@@ -164,25 +164,25 @@ yes
 Successfully restored meta data
 ```
 
-- 重新启用DRBD资源
+- 重新启用 DRBD 资源
 
 ```shell
 drbdadm up <resource>
 ```
-- 在一个节点上，设置DRBD为primary
+- 在一个节点上，设置 DRBD 为 primary
 
 ```shell
 drbdadm primary <resource>
 ```
-至此，已完成DRBD设备大小的扩容。
+至此，已完成 DRBD 设备大小的扩容。
 
 ### 在线缩小容量
 
 注：在线缩小容量，仅支持`external metadata`
 
-在缩小DRBD设备时必须首先缩小DRBD的上层块设备。例如文件系统。由于DRBD无法获知文件系统到底使用了多少空间，所以在缩小文件系统时需要格外小心防止数据丢失！文件系统是否可以被缩小取决于所使用的文件系统。大多数文件系统不支持在线缩减。XFS也不支持在线缩减。
+在缩小 DRBD 设备时必须首先缩小 DRBD 的上层块设备。例如文件系统。由于 DRBD 无法获知文件系统到底使用了多少空间，所以在缩小文件系统时需要格外小心防止数据丢失！文件系统是否可以被缩小取决于所使用的文件系统。大多数文件系统不支持在线缩减。XFS 也不支持在线缩减。
 
-因此，在缩小文件系统后，可以使用以下命令在线缩小DRBD设备容量。
+因此，在缩小文件系统后，可以使用以下命令在线缩小 DRBD 设备容量。
 
 ```shell
 drbdadm resize --size=<new-size>  <resource>
@@ -194,9 +194,9 @@ drbdadm resize --size=<new-size>  <resource>
 
 如果在 DRBD 处于非活动状态时收缩后备块设备, DRBD 将拒绝在下次尝试`attach`期间`attach`到此块设备, 因为它现在太小 (external meta-data), 或者它将无法找到其元数据 (internal meta-data)。要变通解决这些问题, 请使用此过程 (如果不能使用上面的在线收缩):
 
-- 在DRBD还处于配置运行状态时，在一个节点上缩小文件系统
+- 在 DRBD 还处于配置运行状态时，在一个节点上缩小文件系统
 
-- down掉DRBD资源
+- down 掉 DRBD 资源
 
 ```shell
 drbdadm down <resource>
@@ -212,7 +212,7 @@ drbdadm dump-md <resource> > /tmp/metadata
 
 - 在两个节点上给支持的块设备缩小容量
 
-- 分别在两个节点上调整/tmp/metadata 文件中`la-size-sect`的大小信息。注：这里la-size-sect指定的是扇区数量
+- 分别在两个节点上调整/tmp/metadata 文件中`la-size-sect`的大小信息。注：这里 la-size-sect 指定的是扇区数量
 
 - 重新初始化元数据区域
 
@@ -231,7 +231,7 @@ yes
 Successfully restored meta data
 ```
 
-- 重新启用DRBD资源
+- 重新启用 DRBD 资源
 
 ```shell
 drbdadm up <resource>
@@ -281,14 +281,14 @@ bm {
 # bits-set 0;
 ```
 
-从此命令中可以获知不同标记代数的uuid值，以及metadata的元数据信息，例如md_size_sect=1951744表示元数据所在分区占用了1951744个扇区。注意，该命令不要在drbd设备已启动的情况下执行。
+从此命令中可以获知不同标记代数的 uuid 值，以及 metadata 的元数据信息，例如 md_size_sect=1951744 表示元数据所在分区占用了 1951744 个扇区。注意，该命令不要在 drbd 设备已启动的情况下执行。
 
-知道这两个命令可以获取一些信息后，现在我们要做的是计算metadata部分的数据大小。这个大小在"修改drbd设备空间大小"时有用。
+知道这两个命令可以获取一些信息后，现在我们要做的是计算 metadata 部分的数据大小。这个大小在"修改 drbd 设备空间大小"时有用。
 
-首先获取元数据所在分区的扇区数。即上面结果中的"md_size_sect"。不过也可以使用块设备工具blockdev来获取。
+首先获取元数据所在分区的扇区数。即上面结果中的"md_size_sect"。不过也可以使用块设备工具 blockdev 来获取。
 
 ## 参考来源
 - [16.1. DRBD meta data](https://docs.linbit.com/docs/users-guide-8.4/#s-metadata)
-- [原创 | drbd中metadata的理解](https://www.wenzizone.cn/2009/10/29/drbd%E4%B8%ADmetadata%E7%9A%84%E7%90%86%E8%A7%A3%E5%8E%9F%E5%88%9B.html)
-- [drbd配置简述](https://blog.csdn.net/yuanhangq220/article/details/46634249)
+- [原创 | drbd 中 metadata 的理解](https://www.wenzizone.cn/2009/10/29/drbd%E4%B8%ADmetadata%E7%9A%84%E7%90%86%E8%A7%A3%E5%8E%9F%E5%88%9B.html)
+- [drbd 配置简述](https://blog.csdn.net/yuanhangq220/article/details/46634249)
 - [drbd(二)：配置和使用 - 骏马金龙 - 博客园](http://www.cnblogs.com/f-ck-need-u/p/8678883.html)

@@ -1,5 +1,5 @@
 ---
-title: DRBD备忘记录
+title: DRBD 备忘记录
 date: 2018-9-11 17:56:38
 tags:
 - 存储
@@ -14,14 +14,14 @@ categories:
 
 ![DRBD在Linux内核I/O栈的位置](https://docs.linbit.com/ug-src/users-guide-8.4/images/drbd-in-kernel.png)
 
-开始阅读之前，请先注意示例中使用的DRBD版本
+开始阅读之前，请先注意示例中使用的 DRBD 版本
 
 ```shell
 drbdadm -V
 # DRBDADM_VERSION=8.4.3
 ```
 
-注意：安装的kernel-devel的内核源码（内核源码路径/usr/src/kernel/）和当前系统的kernel版本(uname -r)不一致的话需要把当前内核更新一下。
+注意：安装的 kernel-devel 的内核源码（内核源码路径/usr/src/kernel/）和当前系统的 kernel 版本(uname -r)不一致的话需要把当前内核更新一下。
 在`2.6.33`及以上版本的内核默认中有`DRBD`,之前在用的`DRBD`主要`8.0`、`8.2`、`8.3` 三个版本,对应的`rpm`包是`drbd`,`drbd82`和`drbd83`，因此需要安装对应的内核模块，对应的名字为`kmod-drbd`,`kmod-drbd82`,`kmod-drbd83`。
 由于`drbd`是作为内核模块进行工作的，故建议使用与内核对应的版本，对应关系如下表。
 
@@ -37,12 +37,12 @@ drbdadm -V
 | 3.0 - 3.4 | 8.3.11 |
 | 3.5 - 3.7 | 8.3.13 |
 
-**注意:**目前官网上面8.0 – 8.3.x已标注为`Deprecated`即不建议使用状态。
+**注意:**目前官网上面 8.0 – 8.3.x 已标注为`Deprecated`即不建议使用状态。
 
-## drbd状态记录
-[本部分内容详见此处]()
+## drbd 状态记录
+[本部分内容详见此处](.)
 
-## 清除单个 `DRBD` 资源配置：(以drbd10为例)
+## 清除单个 `DRBD` 资源配置：(以 drbd10 为例)
 
 ```shell
 drbd-overview       # drbd概览
@@ -61,13 +61,13 @@ service drbd start
 
 ## `DRBD`扩容
 
-当遇到我们的`drbd resource`设备容量不够的时候，而且我们的底层设备支持在线增大容量的时候（比如lvm），我们可以先增大底层设备的大小，然后再通过`drbdadm resize resource_name`来实现对`resource`的扩容。
+当遇到我们的`drbd resource`设备容量不够的时候，而且我们的底层设备支持在线增大容量的时候（比如 lvm），我们可以先增大底层设备的大小，然后再通过`drbdadm resize resource_name`来实现对`resource`的扩容。
 这里有需要注意的是：
 只有在单主模式下可以这样做，而且需要先在两节点上都增大底层设备的容量，然后仅在主节点上执行`resize`命令。
 
-在执行了`resize`命令后，将自动触发一次当前主节点到其他所有从节点的re-synchronization；
+在执行了`resize`命令后，将自动触发一次当前主节点到其他所有从节点的 re-synchronization；
 
-如果我们在`drbd`非工作状态下对底层设备进行了扩容，然后再启动`drbd`，将不需要执行`resize`命令（当然前提是在配置文件中没有对disk参数项指定大小），`drbd`自己会知道已经增大了容量；
+如果我们在`drbd`非工作状态下对底层设备进行了扩容，然后再启动`drbd`，将不需要执行`resize`命令（当然前提是在配置文件中没有对 disk 参数项指定大小），`drbd`自己会知道已经增大了容量；
 
 在进行底层设备的增容操作的时候千万不要修改到原设备上面的数据，尤其是`drbd`的`meta`信息，否则有可能毁掉所有数据。
 
@@ -84,7 +84,7 @@ drbdadm secondary drbd[Num]
 drbdadm resize drbd[Num]
 ```
 
-## global_common.conf配置（示例）
+## global_common.conf 配置（示例）
 
 ```shell
 global {
@@ -143,11 +143,11 @@ common {            # 定义drbd设备共享的属性信息
 1. 主从所在的磁盘分区最好大小相等,`DRBD`磁盘镜像相当于网络`RAID1`；（本人使用时强制相等，但网上没有关于分区大小是否一定要相同的确切说法）
 2. 网络同步时需要一定的时间，在同步完成之前最好不要重启，否则会重新同步；
 3. `DRBD`的主节点不会监控从节点的状态，所以有可能会造成数据重传；
-4. 格式化只需要在`primary`节点上进行,且只能在主节点上挂载；若主节点下线,从节点上线,则从节点可以直接挂载,不需要再次格式化。集群中只有primary服务器可以挂载设备，secondary挂载会报错。只有在进行故障迁移升级为主时才需要挂载。
-5. 如果`DRBD`状态下关机双控恢复不过来，尝试删除`DRBD`配置信息，然后停掉`DRBD`端ODSP和`mysql`重启之后即可；(此条仅针对公司项目)
+4. 格式化只需要在`primary`节点上进行,且只能在主节点上挂载；若主节点下线,从节点上线,则从节点可以直接挂载,不需要再次格式化。集群中只有 primary 服务器可以挂载设备，secondary 挂载会报错。只有在进行故障迁移升级为主时才需要挂载。
+5. 如果`DRBD`状态下关机双控恢复不过来，尝试删除`DRBD`配置信息，然后停掉`DRBD`端 ODSP 和`mysql`重启之后即可；(此条仅针对公司项目)
 
 
-## 单个`drbd`配置文件（以drbd10.res 为例）
+## 单个`drbd`配置文件（以 drbd10.res 为例）
 
 ### 项目中的配置方案
 
@@ -190,13 +190,13 @@ resource r0 {   # ①
 ```
 翻译以看懂为目的：
 
-1.允许某些系统服务项关联的名称，如：nfs, http, mysql_0, postgres_wal等；
+1.允许某些系统服务项关联的名称，如：nfs, http, mysql_0, postgres_wal 等；
 Name that allows some association to the service that needs them. For example, nfs, http, mysql_0, postgres_wal, etc.
 
 2.`DRBD`设备名称及编号；
 The device name for DRBD and its minor number.
 
-在上面的例子中，`drbd`的编号是`0`。udev集成脚本提供符号链接`/dev/drbd/by-res/nfs/0`。或者，也可以省略配置中的设备节点名称，然后使用下面这种形式代替：
+在上面的例子中，`drbd`的编号是`0`。udev 集成脚本提供符号链接`/dev/drbd/by-res/nfs/0`。或者，也可以省略配置中的设备节点名称，然后使用下面这种形式代替：
 `drbd0 minor 0`（/dev/可选）或`/dev/drbd0`；
 
 In the example above, the minor number 0 is used for DRBD. The udev integration scripts will give you a symbolic link /dev/drbd/by-res/nfs/0. Alternatively, omit the device node name in the configuration and use the following line instead:
@@ -244,7 +244,7 @@ drbdadm  primary all
 mount /dev/drbd0 /data/
 ```
 
-### 停止drbd服务切换
+### 停止 drbd 服务切换
 
 基本思路：关闭主节点服务，此时挂载的`DRBD`分区就自动在主节点卸载了，然后在备用节点执行切换命令
 
@@ -276,7 +276,7 @@ drbdadm connect r0
 
 ## 其他
 
-### 双控配置互信（假定在控1执行）
+### 双控配置互信（假定在控 1 执行）
 
 ```shell
 echo y|ssh-keygen -t dsa -f ~/.ssh/id_dsa -N ""
@@ -288,22 +288,22 @@ scp -r ~/.ssh controller-2:         #双控对端hostname
 
 - [官方手册](https://docs.linbit.com/docs/users-guide-8.4/)
 
-- [SUSE高可用配置](https://www.suse.com/documentation/sle_ha/book_sleha/data/cha_ha_drbd.html)
+- [SUSE 高可用配置](https://www.suse.com/documentation/sle_ha/book_sleha/data/cha_ha_drbd.html)
 
-- [使用DRBD实现复制存储](http://clusterlabs.org/doc/en-US/Pacemaker/1.1/html/Clusters_from_Scratch/ch07.html)
+- [使用 DRBD 实现复制存储](http://clusterlabs.org/doc/en-US/Pacemaker/1.1/html/Clusters_from_Scratch/ch07.html)
 
 - [drbd 配置 - Rikewang - 博客园](http://www.cnblogs.com/wxl-dede/p/5114696.html)
 
-- [CentOS下实现Heartbeat+DRBD+MySQL双机热备硬件故障自动切换高可用(HA)方案 | 三木的人生——3mu.me](
+- [CentOS 下实现 Heartbeat+DRBD+MySQL 双机热备硬件故障自动切换高可用(HA)方案 | 三木的人生——3mu.me](
 http://www.3mu.me/centos%E4%B8%8B%E5%AE%9E%E7%8E%B0heartbeatdrbdmysql%E5%8F%8C%E6%9C%BA%E7%83%AD%E5%A4%87%E7%A1%AC%E4%BB%B6%E6%95%85%E9%9A%9C%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E9%AB%98%E5%8F%AF%E7%94%A8ha/#respond)
 
 - [High availability with the Distributed Replicated Block Device](https://www.ibm.com/developerworks/library/l-drbd/index.html)
 
-- [记一次DRBD Unknown故障处理过程](https://yq.aliyun.com/articles/52043)
+- [记一次 DRBD Unknown 故障处理过程](https://yq.aliyun.com/articles/52043)
 
 - [DRBD 管理、故障处理部分](https://www.linuxidc.com/wap.aspx?nid=93422&cid=9&sp=654)(https://www.linuxidc.com/Linux/2013-12/93422.htm)
 
-- [DRBD编译安装中出现的问题及解决小结 - CSDN博客](http://blog.csdn.net/t1anyuan/article/details/52143789)
+- [DRBD 编译安装中出现的问题及解决小结 - CSDN 博客](http://blog.csdn.net/t1anyuan/article/details/52143789)
 
-- [DRBD配置参数](https://www.linuxidc.com/Linux/2012-01/51661.htm)
+- [DRBD 配置参数](https://www.linuxidc.com/Linux/2012-01/51661.htm)
 
