@@ -41,3 +41,7 @@ git clone -b hexo https://github.com/yourname/hexo-test.github.io.git
 
 - [国内版](http://latex.91maths.com/)
 - [国际版](http://latex.codecogs.com/eqneditor/editor.php)
+
+## lint 工具
+
+使用[lint-md](https://github.com/hustcc/lint-md) 检查并修复博客中的`md`文件
