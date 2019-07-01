@@ -52,6 +52,32 @@ ssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --h
 
 ![can't_import_app](/images/snipaste_20190507_133810.jpg)
 
+## 更新
+
+今天突然出现不能访问的问题，使用`netstat nap|grep 5000(flask 运行端口)`查看端口状态：
+```bash
+tcp        0      0 0.0.0.0:5000            0.0.0.0:*               LISTEN      8195/python
+```
+说明端口正常开放，怀疑是防火墙的原因
+```bash
+systemctl stop firewalld
+```
+关闭之后可以正常访问，确认是其问题。
+```bash
+firewall-cmd --zone=public --add-port=5000/tcp --permanent
+Warning: ALREADY_ENABLED: 5000:tcp
+success
+```
+重启防火墙之后可以正常访问：
+```bash
+[root@172 ~]# systemctl stop firewalld
+
+[root@172 ~]# firewall-cmd --reload
+FirewallD is not running
+
+[root@172 ~]# firewall-cmd --state
+running
+```
 
 ## 参考链接
 
