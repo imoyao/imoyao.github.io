@@ -9,14 +9,14 @@
     <meta name="description" content="Redis是一款高性能的key-value数据库，本文主要记录如何在Linux系统上进行安装，以及为Python开发安装对应的redis模块。">
 <meta name="keywords" content="HOWTO,Redis,NoSQL,数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux下如何安装Redis？">
+<meta property="og:title" content="Linux 下如何安装 Redis？">
 <meta property="og:url" content="https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/index.html">
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="Redis是一款高性能的key-value数据库，本文主要记录如何在Linux系统上进行安装，以及为Python开发安装对应的redis模块。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-10T01:26:36.056Z">
+<meta property="og:updated_time" content="2019-07-02T09:54:39.775Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux下如何安装Redis？">
+<meta name="twitter:title" content="Linux 下如何安装 Redis？">
 <meta name="twitter:description" content="Redis是一款高性能的key-value数据库，本文主要记录如何在Linux系统上进行安装，以及为Python开发安装对应的redis模块。">
     
     
@@ -37,7 +37,7 @@
         
     
     <!-- title -->
-    <title>Linux下如何安装Redis？</title>
+    <title>Linux 下如何安装 Redis？</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -94,20 +94,20 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&text=Linux下如何安装Redis？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&is_video=false&description=Linux下如何安装Redis？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Linux下如何安装Redis？&body=Check out this article: https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&name=Linux下如何安装Redis？&description=&lt;p&gt;&lt;code&gt;Redis&lt;/code&gt;是一款高性能的&lt;code&gt;key-value&lt;/code&gt;数据库，本文主要记录如何在&lt;code&gt;Linux&lt;/code&gt;系统上进行安装，以及为&lt;code&gt;Python&lt;/code&gt;开发安装对应的&lt;code&gt;redis&lt;/code&gt;模块。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&text=Linux 下如何安装 Redis？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&is_video=false&description=Linux 下如何安装 Redis？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux 下如何安装 Redis？&body=Check out this article: https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&name=Linux 下如何安装 Redis？&description=&lt;p&gt;&lt;code&gt;Redis&lt;/code&gt;是一款高性能的&lt;code&gt;key-value&lt;/code&gt;数据库，本文主要记录如何在&lt;code&gt;Linux&lt;/code&gt;系统上进行安装，以及为&lt;code&gt;Python&lt;/code&gt;开发安装对应的&lt;code&gt;redis&lt;/code&gt;模块。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境"><span class="toc-number">1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">3.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOs"><span class="toc-number">3.2.</span> <span class="toc-text">CentOs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CentOS"><span class="toc-number">4.0.2.</span> <span class="toc-text">CentOS</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#附：常用redis管理命令"><span class="toc-number">5.</span> <span class="toc-text">附：常用redis管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装提供Python支持"><span class="toc-number">6.</span> <span class="toc-text">安装提供Python支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip安装"><span class="toc-number">6.1.</span> <span class="toc-text">pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码安装"><span class="toc-number">6.2.</span> <span class="toc-text">源码安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境"><span class="toc-number">1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">3.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOs"><span class="toc-number">3.2.</span> <span class="toc-text">CentOs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CentOS"><span class="toc-number">4.0.2.</span> <span class="toc-text">CentOS</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#附：常用redis管理命令"><span class="toc-number">5.</span> <span class="toc-text">附：常用redis管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装提供Python支持"><span class="toc-number">6.</span> <span class="toc-text">安装提供Python支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip-安装"><span class="toc-number">6.1.</span> <span class="toc-text">pip 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码安装"><span class="toc-number">6.2.</span> <span class="toc-text">源码安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li>
     </div>
   </span>
 </div>
@@ -119,7 +119,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Linux下如何安装Redis？
+        Linux 下如何安装 Redis？
     </h1>
 
 
@@ -191,16 +191,16 @@
 <p> 此时报错</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">CC adlist.o</span><br><span class="line">/bin/sh: cc: command not found</span><br><span class="line">make[1]: *** [adlist.o] Error 127</span><br><span class="line">make[1]: Leaving directory `/root/temp/redis-5.0.4/src'</span><br><span class="line">make: *** [all] Error 2</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>安装gcc</p>
+<li><p>安装 gcc</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install gcc -y</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <ol>
-<li><p>重新make</p>
+<li><p>重新 make</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
 <p> 此时报错</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">In file included from adlist.c:34:</span><br><span class="line">zmalloc.h:50:31: error: jemalloc/jemalloc.h: No such file or directory</span><br><span class="line">zmalloc.h:55:2: error: #error "Newer version of jemalloc required"</span><br><span class="line">make[1]: *** [adlist.o] Error 1</span><br><span class="line">make[1]: Leaving directory `/root/temp/redis-5.0.4/src'</span><br><span class="line">make: *** [all] Error 2</span><br></pre></td></tr></table></figure>
-<p> 在构建<code>Redis</code>时选择非默认内存分配器是通过设置<code>MALLOC</code>环境变量完成的， 默认情况下Redis是使用<code>malloc</code>为<code>libc</code>编译和链接的。<br> 而<code>libc</code>并不是<code>Linux</code>上默认的分配器，默认的是 <code>jemalloc</code>, 因为 <code>jemalloc</code> 被证明比<code>libc</code>有更少的碎片问题（<code>fragmentation problems</code>）。<br> 但是如果你没有<code>jemalloc</code> 而只有<code>libc</code> 当然 <code>make</code> 出错。 所以有两种解决办法：</p>
+<p> 在构建<code>Redis</code>时选择非默认内存分配器是通过设置<code>MALLOC</code>环境变量完成的， 默认情况下 Redis 是使用<code>malloc</code>为<code>libc</code>编译和链接的。<br> 而<code>libc</code>并不是<code>Linux</code>上默认的分配器，默认的是 <code>jemalloc</code>, 因为 <code>jemalloc</code> 被证明比<code>libc</code>有更少的碎片问题（<code>fragmentation problems</code>）。<br> 但是如果你没有<code>jemalloc</code> 而只有<code>libc</code> 当然 <code>make</code> 出错。 所以有两种解决办法：</p>
 </li>
 </ol>
 <ul>
@@ -214,7 +214,7 @@
   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd deps/</span><br><span class="line">make hiredis jemalloc linenoise lua geohash-int</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>原因参见： <a href="http://www.jb51.net/article/100575.htm" target="_blank" rel="noopener">浅谈redis采用不同内存分配器tcmalloc和jemalloc</a></p>
+<p>原因参见： <a href="http://www.jb51.net/article/100575.htm" target="_blank" rel="noopener">浅谈 redis 采用不同内存分配器 tcmalloc 和 jemalloc</a></p>
 <blockquote>
 <p>对于<code>tcmalloc</code>，<code>jemalloc</code>和<code>libc</code>对应的三个内存分配器。其性能和碎片率如何呢？<br>下面是一个简单测试结果，使用<code>Redis</code>自带的<code>redis-benchmark</code>写入等量数据进行测试，数据摘自采用不同分配器时<code>Redis info</code>信息。<br>我们可以看到，采用<code>tcmalloc</code>时碎片率是最低的，为<code>1.01</code>，<code>jemalloc</code>为<code>1.02</code>，而<code>libc</code>的分配器碎片率为<code>1.31</code>，</p>
 </blockquote>
@@ -223,7 +223,7 @@
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make $$ make install</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>验证</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">redis-server -v</span><br><span class="line">Redis server v=5.0.4 sha=00000000:0 malloc=jemalloc-5.1.0 bits=64 build=b139020f90f1d493</span><br><span class="line">whereis redis-server</span><br><span class="line">redis-server: /usr/local/bin/redis-server</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">redis-server -v</span><br><span class="line">Redis server v=5.0.4 sha=00000000:0 malloc=jemalloc-5.1.0 bits=64 build=b139020f90f1d493</span><br><span class="line">whereis redis-server</span><br><span class="line">redis-server: /usr/local/bin/redis-server</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>至此，<code>Redis</code>安装完成。</p>
@@ -298,7 +298,7 @@
 <li>在控制台中登录<code>redis</code>客户端：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@master init.d]# redis-cli</span><br><span class="line"># 测试redis连通性</span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br><span class="line">127.0.0.1:6379&gt; set hello world</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get hello</span><br><span class="line">&quot;world&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="安装提供Python支持"><a href="#安装提供Python支持" class="headerlink" title="安装提供Python支持"></a>安装提供<code>Python</code>支持</h2><h3 id="pip安装"><a href="#pip安装" class="headerlink" title="pip安装"></a>pip安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install redis</span><br></pre></td></tr></table></figure>
+<h2 id="安装提供Python支持"><a href="#安装提供Python支持" class="headerlink" title="安装提供Python支持"></a>安装提供<code>Python</code>支持</h2><h3 id="pip-安装"><a href="#pip-安装" class="headerlink" title="pip 安装"></a>pip 安装</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install redis</span><br></pre></td></tr></table></figure>
 <h3 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h3><p>去<code>https://pypi.org/project/redis/</code>下载源码，<code>Ubuntu</code>上使用最新版本<code>redis 3.2.1</code></p>
 <ol>
 <li><p>解压</p>
@@ -316,7 +316,7 @@
 </ol>
 <hr>
 <p><strong>小插曲</strong></p>
-<p>关于redis-py的Python低版本支持</p>
+<p>关于 redis-py 的 Python 低版本支持</p>
 <p>在<code>CentOS</code>上安装<code>redis-3.2.1</code>的时候由于<code>python</code>版本较低（<code>2.6.6</code>）出现以下问题<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master redis-3.2.1]# python setup.py install</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "setup.py", line 4, in &lt;module&gt;</span><br><span class="line">    from setuptools import setup</span><br><span class="line">ImportError: No module named setuptools</span><br></pre></td></tr></table></figure></p>
 <p>安装<code>setuptools-0.6c9</code>之后执行<code>python setup.py install</code>报错：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File "setup.py", line 7, in &lt;module&gt;</span><br><span class="line">    from redis import __version__</span><br><span class="line">  File "/root/temp/pyredis-3.2.1/redis/__init__.py", line 1, in &lt;module&gt;</span><br><span class="line">    from redis.client import Redis, StrictRedis</span><br><span class="line">  File "/root/temp/pyredis-3.2.1/redis/client.py", line 3046</span><br><span class="line">    return &#123;decode(encode(k)): v for k, v in iteritems(data)&#125;</span><br><span class="line">                                   ^</span><br><span class="line">SyntaxError: invalid syntax</span><br></pre></td></tr></table></figure>
@@ -329,8 +329,8 @@
 <p>读者可以从 <a href="https://pypi.org/project/redis/#history" target="_blank" rel="noopener">这里</a> 获取历史版本：<code>https://pypi.org/project/redis/#history</code></p>
 <h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
 <li><a href="https://redis.io/topics/quickstart" target="_blank" rel="noopener">Redis Quick Start</a></li>
-<li><a href="https://blog.csdn.net/softwave/article/details/53838194" target="_blank" rel="noopener">Ubuntu安装Redis并设置为开机自启动服务</a></li>
-<li><a href="https://www.cnblogs.com/cnkai/p/7642787.html" target="_blank" rel="noopener">Python操作Redis数据库</a></li>
+<li><a href="https://blog.csdn.net/softwave/article/details/53838194" target="_blank" rel="noopener">Ubuntu 安装 Redis 并设置为开机自启动服务</a></li>
+<li><a href="https://www.cnblogs.com/cnkai/p/7642787.html" target="_blank" rel="noopener">Python 操作 Redis 数据库</a></li>
 </ul>
 
   </div>
@@ -361,21 +361,21 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境"><span class="toc-number">1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">3.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOs"><span class="toc-number">3.2.</span> <span class="toc-text">CentOs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CentOS"><span class="toc-number">4.0.2.</span> <span class="toc-text">CentOS</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#附：常用redis管理命令"><span class="toc-number">5.</span> <span class="toc-text">附：常用redis管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装提供Python支持"><span class="toc-number">6.</span> <span class="toc-text">安装提供Python支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip安装"><span class="toc-number">6.1.</span> <span class="toc-text">pip安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码安装"><span class="toc-number">6.2.</span> <span class="toc-text">源码安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境"><span class="toc-number">1.</span> <span class="toc-text">测试环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载"><span class="toc-number">2.</span> <span class="toc-text">下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">3.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOs"><span class="toc-number">3.2.</span> <span class="toc-text">CentOs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">4.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ubuntu-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CentOS"><span class="toc-number">4.0.2.</span> <span class="toc-text">CentOS</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#附：常用redis管理命令"><span class="toc-number">5.</span> <span class="toc-text">附：常用redis管理命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装提供Python支持"><span class="toc-number">6.</span> <span class="toc-text">安装提供Python支持</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pip-安装"><span class="toc-number">6.1.</span> <span class="toc-text">pip 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码安装"><span class="toc-number">6.2.</span> <span class="toc-text">源码安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&text=Linux下如何安装Redis？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&is_video=false&description=Linux下如何安装Redis？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Linux下如何安装Redis？&body=Check out this article: https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux下如何安装Redis？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&name=Linux下如何安装Redis？&description=&lt;p&gt;&lt;code&gt;Redis&lt;/code&gt;是一款高性能的&lt;code&gt;key-value&lt;/code&gt;数据库，本文主要记录如何在&lt;code&gt;Linux&lt;/code&gt;系统上进行安装，以及为&lt;code&gt;Python&lt;/code&gt;开发安装对应的&lt;code&gt;redis&lt;/code&gt;模块。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&text=Linux 下如何安装 Redis？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&is_video=false&description=Linux 下如何安装 Redis？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux 下如何安装 Redis？&body=Check out this article: https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&title=Linux 下如何安装 Redis？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/&name=Linux 下如何安装 Redis？&description=&lt;p&gt;&lt;code&gt;Redis&lt;/code&gt;是一款高性能的&lt;code&gt;key-value&lt;/code&gt;数据库，本文主要记录如何在&lt;code&gt;Linux&lt;/code&gt;系统上进行安装，以及为&lt;code&gt;Python&lt;/code&gt;开发安装对应的&lt;code&gt;redis&lt;/code&gt;模块。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

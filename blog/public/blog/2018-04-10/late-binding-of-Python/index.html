@@ -9,14 +9,14 @@
     <meta name="description" content="延迟绑定(late binding)闭包Python 使用中一个常见的困惑是 Python 在闭包(或在周围全局作用域（surrounding global scope）)中绑定变量的方式。">
 <meta name="keywords" content="Python,延迟绑定,生成器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅析Python中的延迟绑定问题">
+<meta property="og:title" content="浅析 Python 中的延迟绑定问题">
 <meta property="og:url" content="https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/index.html">
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="延迟绑定(late binding)闭包Python 使用中一个常见的困惑是 Python 在闭包(或在周围全局作用域（surrounding global scope）)中绑定变量的方式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-08T02:31:13.385Z">
+<meta property="og:updated_time" content="2019-07-02T09:54:39.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅析Python中的延迟绑定问题">
+<meta name="twitter:title" content="浅析 Python 中的延迟绑定问题">
 <meta name="twitter:description" content="延迟绑定(late binding)闭包Python 使用中一个常见的困惑是 Python 在闭包(或在周围全局作用域（surrounding global scope）)中绑定变量的方式。">
     
     
@@ -37,7 +37,7 @@
         
     
     <!-- title -->
-    <title>浅析Python中的延迟绑定问题</title>
+    <title>浅析 Python 中的延迟绑定问题</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -94,20 +94,20 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&text=浅析Python中的延迟绑定问题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&is_video=false&description=浅析Python中的延迟绑定问题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=浅析Python中的延迟绑定问题&body=Check out this article: https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&name=浅析Python中的延迟绑定问题&description=&lt;h1 id=&#34;延迟绑定-late-binding-闭包&#34;&gt;&lt;a href=&#34;#延迟绑定-late-binding-闭包&#34; class=&#34;headerlink&#34; title=&#34;延迟绑定(late binding)闭包&#34;&gt;&lt;/a&gt;延迟绑定(&lt;code&gt;late binding&lt;/code&gt;)闭包&lt;/h1&gt;&lt;p&gt;&lt;code&gt;Python&lt;/code&gt; 使用中一个常见的困惑是 &lt;code&gt;Python&lt;/code&gt; 在闭包(或在周围全局作用域（&lt;code&gt;surrounding global scope&lt;/code&gt;）)中绑定变量的方式。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&text=浅析 Python 中的延迟绑定问题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&is_video=false&description=浅析 Python 中的延迟绑定问题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=浅析 Python 中的延迟绑定问题&body=Check out this article: https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&name=浅析 Python 中的延迟绑定问题&description=&lt;h1 id=&#34;延迟绑定-late-binding-闭包&#34;&gt;&lt;a href=&#34;#延迟绑定-late-binding-闭包&#34; class=&#34;headerlink&#34; title=&#34;延迟绑定(late binding)闭包&#34;&gt;&lt;/a&gt;延迟绑定(&lt;code&gt;late binding&lt;/code&gt;)闭包&lt;/h1&gt;&lt;p&gt;&lt;code&gt;Python&lt;/code&gt; 使用中一个常见的困惑是 &lt;code&gt;Python&lt;/code&gt; 在闭包(或在周围全局作用域（&lt;code&gt;surrounding global scope&lt;/code&gt;）)中绑定变量的方式。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#延迟绑定-late-binding-闭包"><span class="toc-number">1.</span> <span class="toc-text">延迟绑定(late binding)闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为了实现目标，你应该这样："><span class="toc-number">1.1.</span> <span class="toc-text">为了实现目标，你应该这样：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#当陷阱不是一个陷阱"><span class="toc-number">1.2.</span> <span class="toc-text">当陷阱不是一个陷阱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#派森多一点"><span class="toc-number">1.3.</span> <span class="toc-text">派森多一点</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#延迟绑定-late-binding-闭包"><span class="toc-number">1.</span> <span class="toc-text">延迟绑定(late binding)闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为了实现目标，你应该这样"><span class="toc-number">1.1.</span> <span class="toc-text">为了实现目标，你应该这样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#当陷阱不是一个陷阱"><span class="toc-number">1.2.</span> <span class="toc-text">当陷阱不是一个陷阱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#派森多一点"><span class="toc-number">1.3.</span> <span class="toc-text">派森多一点</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -119,7 +119,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        浅析Python中的延迟绑定问题
+        浅析 Python 中的延迟绑定问题
     </h1>
 
 
@@ -156,7 +156,7 @@
 <p>一个包含五个函数返回值的列表，每个函数有它们自己的封闭变量 <code>i</code> 乘以它们的参数，得到:<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="number">0</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>]</span><br></pre></td></tr></table></figure></p>
 <p>而实际结果是：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[<span class="number">40</span>, <span class="number">40</span>, <span class="number">40</span>, <span class="number">40</span>, <span class="number">40</span>]</span><br></pre></td></tr></table></figure></p>
 <p>创建了五个函数，它们全都是 <code>4</code> 乘以 <code>n</code> 。<br><code>Python</code> 的闭包是<em>迟绑定</em> 。这意味着闭包中用到的变量的值是在内部函数被调用时查询得到的。<br>在这里, 每当调用<em>任何</em>函数返回时, <code>i</code> 的值是调用时在周围作用域（ <code>surrounding scope</code>）中查询到的。到那个时候，循环已经完成， <code>i</code> 的值最终变成 <code>4</code> 。<br>关于这个陷阱有一个普遍严重的误解，它很容易被甩锅给 <code>Python</code> 的 <a href="http://docs.python.org/reference/expressions.html#lambda" target="_blank" rel="noopener">lambda</a>表达式。实际上， <code>lambda</code> 表达式是被冤枉滴。我们尝试把它改写成普通函数：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multi_func</span><span class="params">()</span>:</span></span><br><span class="line">    foo = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(n)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> n * i</span><br><span class="line">        foo.append(func)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> foo</span><br></pre></td></tr></table></figure></p>
-<h2 id="为了实现目标，你应该这样："><a href="#为了实现目标，你应该这样：" class="headerlink" title="为了实现目标，你应该这样："></a>为了实现目标，你应该这样：</h2><ol>
+<h2 id="为了实现目标，你应该这样"><a href="#为了实现目标，你应该这样" class="headerlink" title="为了实现目标，你应该这样"></a>为了实现目标，你应该这样</h2><ol>
 <li>最一般的解决方案可以说是有点取巧（ <code>hack</code> ）。由于 <code>Python</code> 拥有在前文提到的为函数默认参数赋值的行为（参见 <a href="http://docs.python-guide.org/en/latest/writing/gotchas/#default-args" target="_blank" rel="noopener">可变默认参数</a> ）,你可以像下面这样创建一个立即绑定参数的闭包：</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multi_expression_hack</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">lambda</span> n, i=i: n * i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>)]     <span class="comment"># 此处用法参见《Python Cookbook》7.7 匿名函数捕获变量值</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    print([func(<span class="number">10</span>) <span class="keyword">for</span> func <span class="keyword">in</span> multi_expression_hack()])</span><br></pre></td></tr></table></figure>
@@ -212,21 +212,21 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#延迟绑定-late-binding-闭包"><span class="toc-number">1.</span> <span class="toc-text">延迟绑定(late binding)闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为了实现目标，你应该这样："><span class="toc-number">1.1.</span> <span class="toc-text">为了实现目标，你应该这样：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#当陷阱不是一个陷阱"><span class="toc-number">1.2.</span> <span class="toc-text">当陷阱不是一个陷阱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#派森多一点"><span class="toc-number">1.3.</span> <span class="toc-text">派森多一点</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#延迟绑定-late-binding-闭包"><span class="toc-number">1.</span> <span class="toc-text">延迟绑定(late binding)闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#为了实现目标，你应该这样"><span class="toc-number">1.1.</span> <span class="toc-text">为了实现目标，你应该这样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#当陷阱不是一个陷阱"><span class="toc-number">1.2.</span> <span class="toc-text">当陷阱不是一个陷阱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#派森多一点"><span class="toc-number">1.3.</span> <span class="toc-text">派森多一点</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&text=浅析Python中的延迟绑定问题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&is_video=false&description=浅析Python中的延迟绑定问题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=浅析Python中的延迟绑定问题&body=Check out this article: https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析Python中的延迟绑定问题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&name=浅析Python中的延迟绑定问题&description=&lt;h1 id=&#34;延迟绑定-late-binding-闭包&#34;&gt;&lt;a href=&#34;#延迟绑定-late-binding-闭包&#34; class=&#34;headerlink&#34; title=&#34;延迟绑定(late binding)闭包&#34;&gt;&lt;/a&gt;延迟绑定(&lt;code&gt;late binding&lt;/code&gt;)闭包&lt;/h1&gt;&lt;p&gt;&lt;code&gt;Python&lt;/code&gt; 使用中一个常见的困惑是 &lt;code&gt;Python&lt;/code&gt; 在闭包(或在周围全局作用域（&lt;code&gt;surrounding global scope&lt;/code&gt;）)中绑定变量的方式。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&text=浅析 Python 中的延迟绑定问题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&is_video=false&description=浅析 Python 中的延迟绑定问题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=浅析 Python 中的延迟绑定问题&body=Check out this article: https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&title=浅析 Python 中的延迟绑定问题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-04-10/late-binding-of-Python/&name=浅析 Python 中的延迟绑定问题&description=&lt;h1 id=&#34;延迟绑定-late-binding-闭包&#34;&gt;&lt;a href=&#34;#延迟绑定-late-binding-闭包&#34; class=&#34;headerlink&#34; title=&#34;延迟绑定(late binding)闭包&#34;&gt;&lt;/a&gt;延迟绑定(&lt;code&gt;late binding&lt;/code&gt;)闭包&lt;/h1&gt;&lt;p&gt;&lt;code&gt;Python&lt;/code&gt; 使用中一个常见的困惑是 &lt;code&gt;Python&lt;/code&gt; 在闭包(或在周围全局作用域（&lt;code&gt;surrounding global scope&lt;/code&gt;）)中绑定变量的方式。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
