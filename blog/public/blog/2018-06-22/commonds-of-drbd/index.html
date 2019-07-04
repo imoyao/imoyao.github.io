@@ -9,14 +9,14 @@
     <meta name="description" content="本文基于DRBD-8.4版编写。">
 <meta name="keywords" content="DRBD">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DRBD用户手册之命令篇">
+<meta property="og:title" content="DRBD 用户手册之命令篇">
 <meta property="og:url" content="https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/index.html">
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="本文基于DRBD-8.4版编写。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-08T02:31:13.365Z">
+<meta property="og:updated_time" content="2019-07-02T09:54:39.713Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DRBD用户手册之命令篇">
+<meta name="twitter:title" content="DRBD 用户手册之命令篇">
 <meta name="twitter:description" content="本文基于DRBD-8.4版编写。">
     
     
@@ -37,7 +37,7 @@
         
     
     <!-- title -->
-    <title>DRBD用户手册之命令篇</title>
+    <title>DRBD 用户手册之命令篇</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -94,15 +94,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&text=DRBD用户手册之命令篇"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&is_video=false&description=DRBD用户手册之命令篇"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=DRBD用户手册之命令篇&body=Check out this article: https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&name=DRBD用户手册之命令篇&description=&lt;p&gt;本文基于&lt;code&gt;DRBD-8.4&lt;/code&gt;版编写。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&text=DRBD 用户手册之命令篇"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&is_video=false&description=DRBD 用户手册之命令篇"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DRBD 用户手册之命令篇&body=Check out this article: https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&name=DRBD 用户手册之命令篇&description=&lt;p&gt;本文基于&lt;code&gt;DRBD-8.4&lt;/code&gt;版编写。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -119,7 +119,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        DRBD用户手册之命令篇
+        DRBD 用户手册之命令篇
     </h1>
 
 
@@ -193,11 +193,11 @@
 <h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><ul>
 <li>attach</li>
 </ul>
-<p>将本地支持块设备连接到DRBD资源的设备。</p>
+<p>将本地支持块设备连接到 DRBD 资源的设备。</p>
 <ul>
 <li>detach</li>
 </ul>
-<p>从DRBD资源的设备中删除备份存储设备。</p>
+<p>从 DRBD 资源的设备中删除备份存储设备。</p>
 <ul>
 <li>connect</li>
 </ul>
@@ -216,10 +216,10 @@
 <p>是<code>attach</code>、<code>syncer</code>和 <code>connect</code>的快捷方式。</p>
 <p>实际上，可以将<code>drbdadm up</code>拆分为以下几个动作：</p>
 <ol>
-<li><p>将drbd的资源关联到底层设备(metadata和data区)上，使之能通过底层设备存、取数据。该过程调用的是drbdsetup程序。</p>
+<li><p>将 drbd 的资源关联到底层设备(metadata 和 data 区)上，使之能通过底层设备存、取数据。该过程调用的是 drbdsetup 程序。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">drbdadm attach drbd1</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>加载drbd资源的同步参数。</p>
+<li><p>加载 drbd 资源的同步参数。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">drbdadm syncer drbd1</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>连接对端。</p>
@@ -238,11 +238,11 @@
 <ul>
 <li>secondary</li>
 </ul>
-<p>将设备转回次要角色。 这是必需的，因为在连接状态的DRBD设备对中，两个节点中只能有一个节点是主端（除非在配置文件中明确设置了<strong>allow-two-primaries</strong> ）。</p>
+<p>将设备转回次要角色。 这是必需的，因为在连接状态的 DRBD 设备对中，两个节点中只能有一个节点是主端（除非在配置文件中明确设置了<strong>allow-two-primaries</strong> ）。</p>
 <ul>
 <li>invalidate</li>
 </ul>
-<p>强制DRBD将本地存储设备上的数据视为不同步（out-of-sync）。 因此，DRBD将复制其对等体中的每个块，以使本地存储设备重新同步。 为避免竞争，你需要建立了的复制链接，或断开连接的次端。</p>
+<p>强制 DRBD 将本地存储设备上的数据视为不同步（out-of-sync）。 因此，DRBD 将复制其对等体中的每个块，以使本地存储设备重新同步。 为避免竞争，你需要建立了的复制链接，或断开连接的次端。</p>
 <ul>
 <li>invalidate-remote</li>
 </ul>
@@ -250,7 +250,7 @@
 <ul>
 <li>resize</li>
 </ul>
-<p><code>DRBD</code>重新检查所有大小限制，并相应调整资源的设备大小。 例如，如果您增加了备份存储设备的大小（当然是在两个节点上均进行次操作），那么在您的某个节点上调用此命令后，DRBD将采用新的大小。 由于必须同步新的存储空间，因此只有存在至少一个主节点时，此命令才可用。<br><code>--size</code>选项可用于联机缩小<code>drbd</code>设备的可用大小。 用户必须负责确保设备上的文件系统不被该操作截断。<br><code>--assume-peer-have-space</code>允许你调整当前未连接到对等设备的设备。 使用时需要小心，因为如果您不重新调整对等磁盘的大小，则两者的进一步连接尝试将失败。<br><code>--assume-clean</code>允许您调整现有设备的大小并避免同步新的空间。 将附加空白存储添加到设备时，这样操作非常有用。 例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># drbdadm -- --assume-clean resize r0</span><br></pre></td></tr></table></figure></p>
+<p><code>DRBD</code>重新检查所有大小限制，并相应调整资源的设备大小。 例如，如果您增加了备份存储设备的大小（当然是在两个节点上均进行次操作），那么在您的某个节点上调用此命令后，DRBD 将采用新的大小。 由于必须同步新的存储空间，因此只有存在至少一个主节点时，此命令才可用。<br><code>--size</code>选项可用于联机缩小<code>drbd</code>设备的可用大小。 用户必须负责确保设备上的文件系统不被该操作截断。<br><code>--assume-peer-have-space</code>允许你调整当前未连接到对等设备的设备。 使用时需要小心，因为如果您不重新调整对等磁盘的大小，则两者的进一步连接尝试将失败。<br><code>--assume-clean</code>允许您调整现有设备的大小并避免同步新的空间。 将附加空白存储添加到设备时，这样操作非常有用。 例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># drbdadm -- --assume-clean resize r0</span><br></pre></td></tr></table></figure></p>
 <p>选项<code>-al-stripes</code>和<code>--al-stripe-size-kB</code>可用于在线更改 <code>activity log</code>的布局。 在使用内部元数据的情况下，这可能会同时缩小用户可见大小（使用<code>--size</code> ）或增加后备设备上的可用空间。</p>
 <ul>
 <li>check-resize</li>
@@ -295,7 +295,7 @@
 <ul>
 <li>cstate</li>
 </ul>
-<p>显示设备的当前连接状态。如：Connected、StandAlone等</p>
+<p>显示设备的当前连接状态。如：Connected、StandAlone 等</p>
 <ul>
 <li>dump</li>
 </ul>
@@ -303,7 +303,7 @@
 <ul>
 <li>outdate</li>
 </ul>
-<p>用于将节点的数据标记为过时。 通常由对等方的fence-peer处理程序使用。</p>
+<p>用于将节点的数据标记为过时。 通常由对等方的 fence-peer 处理程序使用。</p>
 <ul>
 <li>verify</li>
 </ul>
@@ -319,7 +319,7 @@
 <ul>
 <li>new-current-uuid</li>
 </ul>
-<p>生成新的<code>当前 UUID</code>并旋转所有其他UUID值。<br>这可以用来缩短集群的初始再同步。 有关更多详细信息，请参阅<code>drbdsetup</code>联机帮助页。</p>
+<p>生成新的<code>当前 UUID</code>并旋转所有其他 UUID 值。<br>这可以用来缩短集群的初始再同步。 有关更多详细信息，请参阅<code>drbdsetup</code>联机帮助页。</p>
 <ul>
 <li>dstate</li>
 </ul>
@@ -331,11 +331,11 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">[root@imoyao ~]# drbdadm hidden-commands</span><br><span class="line"></span><br><span class="line">These additional commands might be useful for writing   # 写脚本或许有用</span><br><span class="line">nifty shell scripts around drbdadm:</span><br><span class="line"></span><br><span class="line"> sh-nop                             sh-resources                       </span><br><span class="line"> sh-resource                        sh-mod-parms                       </span><br><span class="line"> sh-dev                             sh-udev                            </span><br><span class="line"> sh-minor                           sh-ll-dev                          </span><br><span class="line"> sh-md-dev                          sh-md-idx                          </span><br><span class="line"> sh-ip                              sh-lr-of                           </span><br><span class="line"> sh-b-pri                           sh-status                          </span><br><span class="line"> proxy-up                           proxy-down                         </span><br><span class="line"> new-resource                       </span><br><span class="line"></span><br><span class="line">These commands are used by the kernel part of DRBD to   # drbd内核</span><br><span class="line">invoke user mode helper programs:</span><br><span class="line"></span><br><span class="line"> before-resync-target               after-resync-target                </span><br><span class="line"> before-resync-source               pri-on-incon-degr                  </span><br><span class="line"> pri-lost-after-sb                  fence-peer                         </span><br><span class="line"> local-io-error                     pri-lost                           </span><br><span class="line"> initial-split-brain                split-brain                        </span><br><span class="line"> out-of-sync                        </span><br><span class="line"></span><br><span class="line">These commands ought to be used by experts and developers:  # 开发人员</span><br><span class="line"></span><br><span class="line"> sh-new-minor                       new-minor                          </span><br><span class="line"> suspend-io                         resume-io                          </span><br><span class="line"> set-gi                             new-current-uuid                   </span><br><span class="line"> check-resize</span><br></pre></td></tr></table></figure>
 <h1 id="drbddisk-8"><a href="#drbddisk-8" class="headerlink" title="drbddisk.8"></a>drbddisk.8</h1><p>TODO</p>
 <h1 id="drbdsetup-8-配置内核模块"><a href="#drbdsetup-8-配置内核模块" class="headerlink" title="drbdsetup.8-配置内核模块"></a>drbdsetup.8-配置内核模块</h1><p>TODO</p>
-<h1 id="版本信息"><a href="#版本信息" class="headerlink" title="版本信息"></a>版本信息</h1><p>本文档针对DRBD发行版本8.4.0进行了修订。</p>
-<h1 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h1><p>由Philipp Reisner <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x70;&#x68;&#x69;&#x6c;&#105;&#x70;&#112;&#46;&#114;&#x65;&#x69;&#x73;&#x6e;&#101;&#114;&#64;&#108;&#105;&#x6e;&#x62;&#x69;&#116;&#46;&#99;&#111;&#109;">&#x70;&#x68;&#x69;&#x6c;&#105;&#x70;&#112;&#46;&#114;&#x65;&#x69;&#x73;&#x6e;&#101;&#114;&#64;&#108;&#105;&#x6e;&#x62;&#x69;&#116;&#46;&#99;&#111;&#109;</a>和Lars Ellenberg撰写<a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#108;&#x61;&#x72;&#x73;&#46;&#x65;&#x6c;&#x6c;&#x65;&#110;&#x62;&#101;&#114;&#103;&#x40;&#108;&#x69;&#110;&#x62;&#x69;&#x74;&#46;&#x63;&#x6f;&#109;">&#108;&#x61;&#x72;&#x73;&#46;&#x65;&#x6c;&#x6c;&#x65;&#110;&#x62;&#101;&#114;&#103;&#x40;&#108;&#x69;&#110;&#x62;&#x69;&#x74;&#46;&#x63;&#x6f;&#109;</a>。中译版由<code>imoyao</code>首发于别院牧志（<code>idealyard</code>）</p>
-<h1 id="报告错误"><a href="#报告错误" class="headerlink" title="报告错误"></a>报告错误</h1><p>将错误报告给<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x64;&#114;&#98;&#100;&#x2d;&#117;&#x73;&#x65;&#114;&#x40;&#108;&#x69;&#115;&#x74;&#x73;&#46;&#108;&#x69;&#110;&#98;&#105;&#x74;&#46;&#x63;&#111;&#109;">&#x64;&#114;&#98;&#100;&#x2d;&#117;&#x73;&#x65;&#114;&#x40;&#108;&#x69;&#115;&#x74;&#x73;&#46;&#108;&#x69;&#110;&#98;&#105;&#x74;&#46;&#x63;&#111;&#109;</a>。</p>
-<h1 id="版权"><a href="#版权" class="headerlink" title="版权"></a>版权</h1><p>版权所有2001-2011 LINBIT信息技术公司，Philipp Reisner，Lars Ellenberg。 这是免费软件; 请参阅复制条件的来源。 没有保修; 甚至不适用于适销性或针对特定用途的适用性。</p>
-<h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><p>drbd.conf （5）， drbd （8）， drbddisk （8）， drbdsetup （8）， drbdmeta （8）和DRBD项目网站 [1]</p>
+<h1 id="版本信息"><a href="#版本信息" class="headerlink" title="版本信息"></a>版本信息</h1><p>本文档针对 DRBD 发行版本 8.4.0 进行了修订。</p>
+<h1 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h1><p>由 Philipp Reisner <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#112;&#104;&#105;&#108;&#105;&#112;&#112;&#46;&#x72;&#x65;&#105;&#115;&#x6e;&#x65;&#x72;&#x40;&#108;&#x69;&#x6e;&#98;&#105;&#x74;&#46;&#x63;&#x6f;&#109;">&#112;&#104;&#105;&#108;&#105;&#112;&#112;&#46;&#x72;&#x65;&#105;&#115;&#x6e;&#x65;&#x72;&#x40;&#108;&#x69;&#x6e;&#98;&#105;&#x74;&#46;&#x63;&#x6f;&#109;</a>和 Lars Ellenberg 撰写<a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#108;&#x61;&#x72;&#x73;&#46;&#101;&#108;&#x6c;&#101;&#x6e;&#x62;&#101;&#x72;&#x67;&#x40;&#108;&#x69;&#x6e;&#98;&#105;&#116;&#x2e;&#x63;&#x6f;&#x6d;">&#108;&#x61;&#x72;&#x73;&#46;&#101;&#108;&#x6c;&#101;&#x6e;&#x62;&#101;&#x72;&#x67;&#x40;&#108;&#x69;&#x6e;&#98;&#105;&#116;&#x2e;&#x63;&#x6f;&#x6d;</a>。中译版由<code>imoyao</code>首发于别院牧志（<code>idealyard</code>）</p>
+<h1 id="报告错误"><a href="#报告错误" class="headerlink" title="报告错误"></a>报告错误</h1><p>将错误报告给<a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x64;&#x72;&#98;&#x64;&#45;&#117;&#115;&#101;&#114;&#64;&#x6c;&#105;&#x73;&#116;&#115;&#46;&#x6c;&#x69;&#110;&#x62;&#x69;&#x74;&#46;&#99;&#x6f;&#x6d;">&#x64;&#x72;&#98;&#x64;&#45;&#117;&#115;&#101;&#114;&#64;&#x6c;&#105;&#x73;&#116;&#115;&#46;&#x6c;&#x69;&#110;&#x62;&#x69;&#x74;&#46;&#99;&#x6f;&#x6d;</a>。</p>
+<h1 id="版权"><a href="#版权" class="headerlink" title="版权"></a>版权</h1><p>版权所有 2001-2011 LINBIT 信息技术公司，Philipp Reisner，Lars Ellenberg。 这是免费软件; 请参阅复制条件的来源。 没有保修; 甚至不适用于适销性或针对特定用途的适用性。</p>
+<h1 id="推荐阅读"><a href="#推荐阅读" class="headerlink" title="推荐阅读"></a>推荐阅读</h1><p>drbd.conf （5）， drbd （8）， drbddisk （8）， drbdsetup （8）， drbdmeta （8）和 DRBD 项目网站 [1]</p>
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
 <li><a href="https://docs.linbit.com/man/v84/" target="_blank" rel="noopener">DRBD 8.4 Manual Pages</a></li>
 </ul>
@@ -374,15 +374,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&text=DRBD用户手册之命令篇"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&is_video=false&description=DRBD用户手册之命令篇"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=DRBD用户手册之命令篇&body=Check out this article: https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD用户手册之命令篇"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&name=DRBD用户手册之命令篇&description=&lt;p&gt;本文基于&lt;code&gt;DRBD-8.4&lt;/code&gt;版编写。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&text=DRBD 用户手册之命令篇"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&is_video=false&description=DRBD 用户手册之命令篇"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DRBD 用户手册之命令篇&body=Check out this article: https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&title=DRBD 用户手册之命令篇"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-06-22/commonds-of-drbd/&name=DRBD 用户手册之命令篇&description=&lt;p&gt;本文基于&lt;code&gt;DRBD-8.4&lt;/code&gt;版编写。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

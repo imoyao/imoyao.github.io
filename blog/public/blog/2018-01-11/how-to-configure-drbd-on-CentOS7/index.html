@@ -9,14 +9,14 @@
     <meta name="description" content="本文主要记录DRBD的配置过程和功能验证。">
 <meta name="keywords" content="DRBD,Linux,CentOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS7环境下配置DRBD">
+<meta property="og:title" content="CentOS7 环境下配置 DRBD">
 <meta property="og:url" content="https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/index.html">
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="本文主要记录DRBD的配置过程和功能验证。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-08T02:31:13.374Z">
+<meta property="og:updated_time" content="2019-07-02T09:54:39.753Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CentOS7环境下配置DRBD">
+<meta name="twitter:title" content="CentOS7 环境下配置 DRBD">
 <meta name="twitter:description" content="本文主要记录DRBD的配置过程和功能验证。">
     
     
@@ -37,7 +37,7 @@
         
     
     <!-- title -->
-    <title>CentOS7环境下配置DRBD</title>
+    <title>CentOS7 环境下配置 DRBD</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -94,20 +94,20 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&text=CentOS7环境下配置DRBD"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&is_video=false&description=CentOS7环境下配置DRBD"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=CentOS7环境下配置DRBD&body=Check out this article: https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&name=CentOS7环境下配置DRBD&description=&lt;p&gt;本文主要记录&lt;code&gt;DRBD&lt;/code&gt;的配置过程和功能验证。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&text=CentOS7 环境下配置 DRBD"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&is_video=false&description=CentOS7 环境下配置 DRBD"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7 环境下配置 DRBD&body=Check out this article: https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&name=CentOS7 环境下配置 DRBD&description=&lt;p&gt;本文主要记录&lt;code&gt;DRBD&lt;/code&gt;的配置过程和功能验证。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立磁盘分区"><span class="toc-number">1.</span> <span class="toc-text">建立磁盘分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改配置文件"><span class="toc-number">2.</span> <span class="toc-text">修改配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更改DRBD全局配置"><span class="toc-number">2.1.</span> <span class="toc-text">更改DRBD全局配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建DRBD配置文件"><span class="toc-number">2.2.</span> <span class="toc-text">创建DRBD配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试数据同步"><span class="toc-number">3.</span> <span class="toc-text">测试数据同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Primary端"><span class="toc-number">3.1.</span> <span class="toc-text">Primary端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secondary端"><span class="toc-number">3.2.</span> <span class="toc-text">Secondary端</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立磁盘分区"><span class="toc-number">1.</span> <span class="toc-text">建立磁盘分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改配置文件"><span class="toc-number">2.</span> <span class="toc-text">修改配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更改-DRBD-全局配置"><span class="toc-number">2.1.</span> <span class="toc-text">更改 DRBD 全局配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建DRBD配置文件"><span class="toc-number">2.2.</span> <span class="toc-text">创建DRBD配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试数据同步"><span class="toc-number">3.</span> <span class="toc-text">测试数据同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Primary端"><span class="toc-number">3.1.</span> <span class="toc-text">Primary端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secondary端"><span class="toc-number">3.2.</span> <span class="toc-text">Secondary端</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -119,7 +119,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        CentOS7环境下配置DRBD
+        CentOS7 环境下配置 DRBD
     </h1>
 
 
@@ -171,16 +171,16 @@
 <li>分区之后</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@DRBD_A ~]# lsblk</span><br><span class="line">NAME                  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">fd0                     2:0    1    4K  0 disk</span><br><span class="line">sda                     8:0    0   16G  0 disk</span><br><span class="line">├─sda1                  8:1    0  500M  0 part /boot</span><br><span class="line">└─sda2                  8:2    0 15.5G  0 part</span><br><span class="line">  ├─centos_bogon-root 253:0    0 13.9G  0 lvm  /</span><br><span class="line">  └─centos_bogon-swap 253:1    0  1.6G  0 lvm  [SWAP]</span><br><span class="line">sdb                     8:16   0    5G  0 disk</span><br><span class="line">├─sdb1                  8:17   0    1G  0 part      # 新分区</span><br><span class="line">└─StorPool-SANLun10   253:2    0    2G  0 lvm</span><br><span class="line">sr0                    11:0    1 1024M  0 rom</span><br><span class="line">drbd0                 147:0    0    2G  0 disk /media</span><br></pre></td></tr></table></figure>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="更改DRBD全局配置"><a href="#更改DRBD全局配置" class="headerlink" title="更改DRBD全局配置"></a>更改DRBD全局配置</h3><p>首先根据需求更改<code>DRBD</code>全局配置<code>/etc/drbd.d/global_common.conf</code>:</p>
-<p>此处可参阅另一篇文章：<a href="https://imoyao.github.io/blog/2017-09-11/Record_of_drbd/#global-common-conf配置（示例）">DRBD全局配置</a></p>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><h3 id="更改-DRBD-全局配置"><a href="#更改-DRBD-全局配置" class="headerlink" title="更改 DRBD 全局配置"></a>更改 DRBD 全局配置</h3><p>首先根据需求更改<code>DRBD</code>全局配置<code>/etc/drbd.d/global_common.conf</code>:</p>
+<p>此处可参阅另一篇文章：<a href="https://imoyao.github.io/blog/2017-09-11/Record_of_drbd/#global-common-conf配置（示例）">DRBD 全局配置</a></p>
 <h3 id="创建DRBD配置文件"><a href="#创建DRBD配置文件" class="headerlink" title="创建DRBD配置文件"></a>创建<code>DRBD</code>配置文件</h3><p>由于<code>DRBD</code>是基于块设备的存储复制解决方案，所以此处使用<code>Lun</code>作为演示。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi r0.res</span><br><span class="line">resource r0 &#123;</span><br><span class="line">    # DRBD device</span><br><span class="line">    device /dev/drbd0;</span><br><span class="line">    # block device</span><br><span class="line">    disk /dev/StorPool/SANLun10;    # 磁盘路径，若为disk则修改为/dev/sdb1</span><br><span class="line">    meta-disk internal;</span><br><span class="line">    on DRBD_A &#123;</span><br><span class="line">        # IP address:port</span><br><span class="line">        address 10.10.17.18:7788;</span><br><span class="line">    &#125;</span><br><span class="line">    on DRBD_B &#123;</span><br><span class="line">        address 10.10.17.19:7788;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>注意：</code>本机主机名(<code>hostname</code>)和地址(<code>ip</code>)必须严格按照真实情况配置，两边<code>.res</code>文件内容尽量保持一致。</p>
 <p>配置文件创建完成之后，在两个服务器上分别执行如下命令，创建<code>DRBD</code>资源，当然你也可以通过<code>scp</code>把配置文件拷过去，然后执行相关命令。</p>
-<p>其中上述配置文件的meta-disk有三种记录方式：internal/device/device[index_num]。其中不管是哪种方式，metadata存放的分区不能格式化，哪怕使用internal时metadata和一般data在同一个分区也不能格式化该分区。</p>
-<p>internal是将元数据也写入到数据分区的尾部，即数据和元数据同分区。如果指定的device没有给定index时，则表示元数据存储到该设备中。如果某节点指定device[index_num]，那么指定几次元数据分区索引就必须大于128M的几倍，例如上述文件中drbd1.longshuai.com节点指定了/dev/sdb1[0]，那么sdb1就必须大于128M，如果此时其他资源的节点也指定了同一台服务器的/dev/sdb1[1]，则指定了两次就必须大于256M。指定为internal和device时，元数据区的大小是drbd自行计算的。<br>上面index的说法来自<a href="http://www.cnblogs.com/f-ck-need-u/p/8678883.html#1-drbd-" target="_blank" rel="noopener">这里</a>，具体没有实际验证。</p>
+<p>其中上述配置文件的 meta-disk 有三种记录方式：internal/device/device[index_num]。其中不管是哪种方式，metadata 存放的分区不能格式化，哪怕使用 internal 时 metadata 和一般 data 在同一个分区也不能格式化该分区。</p>
+<p>internal 是将元数据也写入到数据分区的尾部，即数据和元数据同分区。如果指定的 device 没有给定 index 时，则表示元数据存储到该设备中。如果某节点指定 device[index_num]，那么指定几次元数据分区索引就必须大于 128M 的几倍，例如上述文件中 drbd1.longshuai.com 节点指定了/dev/sdb1[0]，那么 sdb1 就必须大于 128M，如果此时其他资源的节点也指定了同一台服务器的/dev/sdb1[1]，则指定了两次就必须大于 256M。指定为 internal 和 device 时，元数据区的大小是 drbd 自行计算的。<br>上面 index 的说法来自<a href="http://www.cnblogs.com/f-ck-need-u/p/8678883.html#1-drbd-" target="_blank" rel="noopener">这里</a>，具体没有实际验证。</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm create-md r0</span><br></pre></td></tr></table></figure>
-<p>然后启动DRBD：</p>
+<p>然后启动 DRBD：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm up r0</span><br></pre></td></tr></table></figure>
 <p>我在测试时没有操作下一步操作，但是数据也可以完成同步。查询了一下，网上说<code>drbdadm up</code>这个命令相当于<code>attach</code>、<code>syncer</code>、<code>connect</code>的总集合。但是后台使用<code>systemctl status drbd</code>获取到的状态还是<code>inactive (dead)</code>，欢迎大家提出自己的看法。</p>
 <hr>
@@ -258,21 +258,21 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立磁盘分区"><span class="toc-number">1.</span> <span class="toc-text">建立磁盘分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改配置文件"><span class="toc-number">2.</span> <span class="toc-text">修改配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更改DRBD全局配置"><span class="toc-number">2.1.</span> <span class="toc-text">更改DRBD全局配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建DRBD配置文件"><span class="toc-number">2.2.</span> <span class="toc-text">创建DRBD配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试数据同步"><span class="toc-number">3.</span> <span class="toc-text">测试数据同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Primary端"><span class="toc-number">3.1.</span> <span class="toc-text">Primary端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secondary端"><span class="toc-number">3.2.</span> <span class="toc-text">Secondary端</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立磁盘分区"><span class="toc-number">1.</span> <span class="toc-text">建立磁盘分区</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改配置文件"><span class="toc-number">2.</span> <span class="toc-text">修改配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#更改-DRBD-全局配置"><span class="toc-number">2.1.</span> <span class="toc-text">更改 DRBD 全局配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建DRBD配置文件"><span class="toc-number">2.2.</span> <span class="toc-text">创建DRBD配置文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试数据同步"><span class="toc-number">3.</span> <span class="toc-text">测试数据同步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Primary端"><span class="toc-number">3.1.</span> <span class="toc-text">Primary端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Secondary端"><span class="toc-number">3.2.</span> <span class="toc-text">Secondary端</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&text=CentOS7环境下配置DRBD"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&is_video=false&description=CentOS7环境下配置DRBD"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=CentOS7环境下配置DRBD&body=Check out this article: https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7环境下配置DRBD"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&name=CentOS7环境下配置DRBD&description=&lt;p&gt;本文主要记录&lt;code&gt;DRBD&lt;/code&gt;的配置过程和功能验证。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&text=CentOS7 环境下配置 DRBD"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&is_video=false&description=CentOS7 环境下配置 DRBD"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7 环境下配置 DRBD&body=Check out this article: https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&title=CentOS7 环境下配置 DRBD"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/&name=CentOS7 环境下配置 DRBD&description=&lt;p&gt;本文主要记录&lt;code&gt;DRBD&lt;/code&gt;的配置过程和功能验证。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
