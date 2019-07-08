@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。">
-<meta name="keywords" content="存储,DRBD,裂脑">
+<meta name="keywords" content="DRBD,裂脑,存储">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 DRBD 裂脑问题的总结">
 <meta property="og:url" content="https://imoyao.github.io/blog/2018-05-27/Split-Brain-Of-DRBD/index.html">
@@ -165,7 +165,7 @@
 <p><code>Drbd</code>自带一个裂脑处理程序脚本<code>/usr/lib/drbd/notify-split-brain.sh</code>。它可以通过电子邮件的方式发送到指定的地址。要配合程序发送信息到 root@localhost（这假设是设置的系统管理员的邮件地址），配置如下：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">resource &lt;resource&gt;</span><br><span class="line"></span><br><span class="line">  handlers &#123;</span><br><span class="line"></span><br><span class="line">    split-brain "/usr/lib/drbd/notify-split-brain.sh root";</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>当配置已经在资源上进行修改（同步到两个节点上），就不需要添加其他的处理就可以启动处理程序。<code>Drbd</code>会在下一次检测到裂脑时直接调用该处理程序。</p>
 <p>如果要配置真实可用的报警邮箱地址，则除了将上面的通知地址改为真实邮件地址:<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">split-brain "/usr/lib/drbd/notify-split-brain.sh foo@bar.com</span><br></pre></td></tr></table></figure></p>
-<p>还需要修改一下<code>ssmtp</code>配置文件：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/ssmtp/ssmtp.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 填写真实收件服务器信息</span></span><br><span class="line">mailhub=idealyard.imoyao.com:25</span><br></pre></td></tr></table></figure></p>
+<p>还需要修改一下<code>ssmtp</code>配置文件：<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim /etc/ssmtp/ssmtp.conf</span><br><span class="line"><span class="meta">#</span> 填写真实收件服务器信息</span><br><span class="line">mailhub=idealyard.imoyao.com:25</span><br></pre></td></tr></table></figure></p>
 <p>更多配置参见 <a href="http://iqjar.com/jar/sending-emails-from-the-raspberry-pi/" target="_blank" rel="noopener">这里</a></p>
 <h3 id="世代标识符元组（GI）"><a href="#世代标识符元组（GI）" class="headerlink" title="世代标识符元组（GI）"></a>世代标识符元组（GI）</h3><p>参见<a href="https://docs.linbit.com/docs/users-guide-8.4/#s-gi" target="_blank" rel="noopener">16.2. Generation Identifiers</a></p>
 <p>DRBD 将其备份的数据的更新变化过程比拟成人类世代繁衍的过程。每个时点同一个双机的 DRBD 的两个节点上的数据都来自于同一份原始数据，我们可认为这个时点上两分数据源于同一祖先。主备节点的 DRBD 都会用一个叫作 GI(Generation ID)的标识符来标识当前的数据是哪个世代的，同样也会记录最近两个数据祖先的 GI 用于追朔当前数据的历史来源。DRBD 可以据此来判断两个节点是否是属于同一个双机,因为同一个双机的两份数据应该是从同一个祖先而来。<br>GI 作为 DRBD 的内部机制主要被用来：</p>
