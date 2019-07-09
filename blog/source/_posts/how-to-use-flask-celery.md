@@ -94,7 +94,7 @@ imoyao@local:~$ redis-cli
 ```
 # 如何在项目中使用`Celery`
 
-以与`Flask`结合为例<使用`redis`作为`backend`>
+以与`Flask`结合为例(使用`redis`作为`backend`)
 
 - 创建`celery`实例
 
@@ -195,7 +195,9 @@ if __name__ == '__main__':
     Or maybe you're using relative imports?
     
     ```
-    解决：在装饰器`@app.task`中加入参数`name`，就可以被`celery`读取到（TODO：不够优雅，暂时测试性解决方案）  
+    解决：每个任务必须有不同的名称。如果没有显示提供名称，任务装饰器将会自动产生一个，产生的名称会基于这些信息： 1）任务定义所在的模块， 2）任务函数的名称
+
+    显示设置任务名称的例子：在装饰器`@app.task`中加入参数`name`，就可以被`celery`读取到。  
     
     ```python
     @celery.task(name='pmrearend.task.log_it')
@@ -226,4 +228,6 @@ if __name__ == '__main__':
 # TODO
 因为个人时间关系，这个暂时没有学完。关于`Celery`的使用需要进一步实践学习。
 ## 参考阅读
+[Celery 4.3.0 documentation »](http://docs.celeryproject.org/en/latest/)
 [在 Flask 中使用 Celery 的最佳实践](https://www.jianshu.com/p/807efde55d81)
+[Celery中文文档](https://blog.csdn.net/libing_thinking/article/details/78547816)
