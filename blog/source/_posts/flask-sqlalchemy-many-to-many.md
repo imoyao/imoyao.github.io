@@ -1,5 +1,5 @@
 ---
-title: flask-sqlalchemy-many-to-many
+title: flask-sqlalchemy中的多对多关系模型问题记录
 date: 2019-07-03 20:08:21
 tags:
 ---

@@ -1,5 +1,5 @@
 ---
-title: 如何使用 flask-celery 实现异步任务
+title: 如何使用 flask-celery 实现异步任务？
 date: 2019-06-18 14:14:46
 tags:
 - Celery
@@ -47,8 +47,10 @@ Linux local 4.15.0-22-generic #24-Ubuntu SMP Wed May 16 12:15:17 UTC 2018 x86_64
 ## 整体架构
 ![celery架构图](/images/structure-of-celery.png)
 <center><span>celery架构图</span></center>
+
 `Celery`支持定时任务（Celery Beat）和异步执行(Async Task)两种模式。同步模式为任务调用方等待任务执行完成，这种方式等同于RPC(Remote Procedure Call)， 异步方式为任务在后台执行，调用方调用后就去做其他工作，之后再根据需要来查看任务结果。`Celery`自己没有实现消息队列，而是直接已存在的消息队列作为`Broker`角色。
 ## 组件
+
 使用 `Celery` 运行后台任务并不像在线程中这样做那么简单，但是好处多多。`Celery` 具有分布式架构，使应用更加易于扩展。一个 `Celery` 安装有三个核心组件：
 
 - `Celery` 客户端: 用于发布后台作业。当与 `Flask` 一起工作的时候，客户端与 `Flask` 应用一起运行。

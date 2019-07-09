@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="Py 乙己孔乙己自己知道不能和架构师谈天，便只好向实习生说话。 有一回对我说道，“你写过Python么？”我略略点一点头。 他说，“写过代码，……我便考你一考。Python中的下划线，怎样用的？” 我想，搬砖一样的人，也配考我么？便回过脸去，不再理会。 孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些用法应该记着。将来做面试官的时候要用。” 我暗想我和面试官的等级还很远呢，而且我">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-30T09:06:41.388Z">
+<meta property="og:updated_time" content="2019-07-02T09:54:39.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 Python 中的下划线用法的记录">
 <meta name="twitter:description" content="Py 乙己孔乙己自己知道不能和架构师谈天，便只好向实习生说话。 有一回对我说道，“你写过Python么？”我略略点一点头。 他说，“写过代码，……我便考你一考。Python中的下划线，怎样用的？” 我想，搬砖一样的人，也配考我么？便回过脸去，不再理会。 孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些用法应该记着。将来做面试官的时候要用。” 我暗想我和面试官的等级还很远呢，而且我">
@@ -235,14 +235,8 @@
 <p>参见<a href="https://nedbatchelder.com/blog/200605/dunder.html" target="_blank" rel="noopener">这里</a></p>
 <blockquote>
 <p>关于<code>Python</code> 编程的一个尴尬的事情是：有很多种双下划线。 例如，语法糖下面的标准方法名称具有 <code>__getattr__</code> 这样的名称，构造函数是 <code>__init__</code> ，内置运算符可以用 <code>__add__</code> 重载，等等。 在 <code>Django</code> 框架中（至少在他们整合了 <code>magic-removal</code> 分支之前），对象关系映射器使用了名为 <code>user__id__exact</code> 的关键字参数。</p>
-</blockquote>
-<blockquote>
 <p>双下划线的问题是很难向别人描述。 你怎么读 <code>__init__</code> ？ “下划线下划线 <code>init</code> 下划线下划线”？ “双下划线 <code>init</code> 双下划线”？ 简单的 “<code>init</code>” 似乎漏掉了一些重要的东西。</p>
-</blockquote>
-<blockquote>
 <p>我有一个解决方案：双下划线应该发音为 “<code>dunder</code>” 。 所以 <code>__init__</code> 念成“<code>dunder init dunder</code>”，或者也可以简读为 “<code>dunder init</code>” 。</p>
-</blockquote>
-<blockquote>
 <p>现在我期待某个人定义一下 “<code>dunderhead</code>” 是什么意思，haha……</p>
 </blockquote>
 
