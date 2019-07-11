@@ -41,15 +41,20 @@ Linux local 4.15.0-22-generic #24-Ubuntu SMP Wed May 16 12:15:17 UTC 2018 x86_64
 
 ```
 
-# `Celery`是什么
-## 概念
+## `Celery`是什么
+
+### 概念
+
 `Celery` 是一个“自带电池”的专注于实时处理和任务调度的分布式任务队列，同时提供操作和维护分布式系统所需的**工具**。
-## 整体架构
+
+### 整体架构
+
 ![celery架构图](/images/structure-of-celery.png)
 <center><span>celery架构图</span></center>
 
 `Celery`支持定时任务（Celery Beat）和异步执行(Async Task)两种模式。同步模式为任务调用方等待任务执行完成，这种方式等同于RPC(Remote Procedure Call)， 异步方式为任务在后台执行，调用方调用后就去做其他工作，之后再根据需要来查看任务结果。`Celery`自己没有实现消息队列，而是直接已存在的消息队列作为`Broker`角色。
-## 组件
+
+### 组件
 
 使用 `Celery` 运行后台任务并不像在线程中这样做那么简单，但是好处多多。`Celery` 具有分布式架构，使应用更加易于扩展。一个 `Celery` 安装有三个核心组件：
 
@@ -58,9 +63,11 @@ Linux local 4.15.0-22-generic #24-Ubuntu SMP Wed May 16 12:15:17 UTC 2018 x86_64
 - 消息代理（`Broker`）: 客户端通过消息队列和 `workers` 进行通信，`Celery` 支持多种方式来实现这些队列。常见的为 `RabbitMQ` 和 `Redis`。
 - 任务结果存储：用来存储`workers`执行的任务结果。
 详见[Celery 是……](http://docs.jinkan.org/docs/celery/getting-started/introduction.html#id19)
-# `Celery`的安装配置
 
-## 安装 `Celery`
+## `Celery`的安装配置
+
+### 安装 `Celery`
+
 ```bash
 pip install celery
 ```
@@ -94,7 +101,7 @@ imoyao@local:~$ redis-cli
 127.0.0.1:6379> get celery-task-meta-a9db6911-e15a-4b9e-b321-958f5298652a
 "{\"status\": \"SUCCESS\", \"result\": 30, \"traceback\": null, \"children\": [], \"task_id\": \"a9db6911-e15a-4b9e-b321-958f5298652a\", \"date_done\": \"2019-06-13T18:43:43.491009\"}"
 ```
-# 如何在项目中使用`Celery`
+## 如何在项目中使用`Celery`
 
 以与`Flask`结合为例(使用`redis`作为`backend`)
 
@@ -161,7 +168,7 @@ if __name__ == '__main__':
     ```
 ---
 
-## 遇到的问题记录
+### 遇到的问题记录
 
 1. sqlalchemy.exc.InvalidRequestError
 
@@ -227,7 +234,7 @@ if __name__ == '__main__':
     [2019-06-14 02:43:54,645: DEBUG/MainProcess] Task accepted: pmrearend.task.log_it[aac524bd-cb47-4493-b0dd-9712a98a3f14] pid:4089
     [2019-06-14 02:43:54,650: INFO/ForkPoolWorker-1] Task pmrearend.task.log_it[aac524bd-cb47-4493-b0dd-9712a98a3f14] succeeded in 0.012691148993326351s: 30
     ```
-# TODO
+## TODO
 因为个人时间关系，这个暂时没有学完。关于`Celery`的使用需要进一步实践学习。
 ## 参考阅读
 [Celery 4.3.0 documentation »](http://docs.celeryproject.org/en/latest/)
