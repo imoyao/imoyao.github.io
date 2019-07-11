@@ -162,7 +162,7 @@ TypeError                                 Traceback (most recent call last)
 TypeError: a bytes-like object is required, not 'str'
 ```
 ---
-# 解决办法
+###  解决办法
 ```python
 In [20]: a = b'123|456'                                                                                        
 In [21]: a.decode('utf-8').split('|')                                                                         
