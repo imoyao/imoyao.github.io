@@ -150,6 +150,7 @@ class SensorMaker(HwMaker):
 ## 原因解释及解决方案
 
 关于`TypeError: a bytes-like object is required, not 'str'`错误，我们可以这样复现一下：
+```python
 In [16]: a = b'123|456'
 
 In [17]: a.split('|')                                                                                         
@@ -159,16 +160,18 @@ TypeError                                 Traceback (most recent call last)
 ----> 1 a.split('|')
 
 TypeError: a bytes-like object is required, not 'str'
-
+```
 ---
 # 解决办法
+```python
 In [20]: a = b'123|456'                                                                                        
 In [21]: a.decode('utf-8').split('|')                                                                         
 Out[21]: ['123', '456']
-'''
+```
+
 关于问题`UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb3 in position 38: invalid start byte`，主要是因为结果中有`³³³³³³³U³³³³³³³`,这个没有办法按照`utf-8`解码。
-出现异常报错是由于设置了decode()方法的第二个参数errors为严格（strict）形式造成的，因为默认就是这个参数，将其更改为ignore等即可。
-'''
+出现异常报错是由于设置了`decode()`方法的第二个参数`errors`为严格（`strict`）形式造成的，因为默认就是这个参数，将其更改为`ignore`即可。
+
 ## 参考链接
 - [Python3解决UnicodeDecodeError: 'utf-8' codec can't decode byte..问题 终极解决方案](https://blog.csdn.net/wang7807564/article/details/78164855/)
 - [TypeError: a bytes-like object is required, not 'str' when writing to a file in Python3](https://stackoverflow.com/questions/33054527/typeerror-a-bytes-like-object-is-required-not-str-when-writing-to-a-file-in)
