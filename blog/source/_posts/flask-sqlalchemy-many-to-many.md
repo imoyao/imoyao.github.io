@@ -27,3 +27,29 @@ articles = db.relationship('Article', secondary=posts_tags_table,
 
 参见这里  
 [when-do-i-need-to-use-sqlalchemy-back-populates](https://stackoverflow.com/questions/39869793/when-do-i-need-to-use-sqlalchemy-back-populates)
+
+```bash
+sqlalchemy.orm.exc.StaleDataError: DELETE statement on table 'iy_post_tags' expected to delete 4 row(s); Only 24 were matched.
+```
+### 处理过程
+书上说“将某个Book的Writer属性设置为None,就会解除与Writer对象的关系。”
+```python
+post_obj = Article.query.filter(Article.post_id == post_id).one()
+if post_obj:
+    body_id = post_obj.body_id
+    post_obj.tags = None
+    db.session.commit()
+```
+失败！！！
+
+再次参考[How to delete a Many-to-Many relationship in Flask-SQLAlchemy](https://seagullbird.xyz/posts/how-to-delete-many-to-many-in-sqlalchemy/)
+作者提到可能是因为对数据手动处理的问题，TODO：验证！
+
+还有[这里](https://stackoverflow.com/questions/36002638/how-to-fix-sqlalchemy-sawarning-delete-statement-on-table-expected-to-delete-1)是修改表结构
+
+[这里](https://stackoverflow.com/questions/41941273/deleting-from-a-sqlalchemy-many-to-many-matches-the-wrong-number-of-rows)
+```python
+db.PrimaryKeyConstraint('tag_id', 'post_id')
+```
+出现这个问题，可能是因为删除主键字段的时候，tags含有对post_id的引用。
+参见[这里](https://groups.google.com/forum/#!topic/sqlalchemy/vfoTsQkqfHI)
