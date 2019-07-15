@@ -234,8 +234,29 @@ if __name__ == '__main__':
     [2019-06-14 02:43:54,645: DEBUG/MainProcess] Task accepted: pmrearend.task.log_it[aac524bd-cb47-4493-b0dd-9712a98a3f14] pid:4089
     [2019-06-14 02:43:54,650: INFO/ForkPoolWorker-1] Task pmrearend.task.log_it[aac524bd-cb47-4493-b0dd-9712a98a3f14] succeeded in 0.012691148993326351s: 30
     ```
+## 问题记录：
+```bash
+celery.platforms.LockFailed: [Errno 13] Permission denied: '/home/xxx/celerybeat.pid'
+```    
+pid文件没有权限；这种情况有两种解决办法：
+- 修改pid文件存储路径，放到当前执行用户有权限的位置
+```bash
+celery beat -A celeryapp --loglevel=INFO --pidfile="/tmp/celerybeat.pid"        # 修改路径
+```
+- 对pid文件所在目录加权限，然后执行
+```bash
+chown -R YOUR_USER_NAME:YOUR_USER_NAME  CURRENT_PATH
+celery -A celery_worker:celery beat --loglevel=INFO
+```
+[参见这里](https://github.com/celery/celery/issues/3828)
+
+## 注意问题
+**不要**将task写进类中，因为可能导致执行出错等各种问题，如果真的要这么做，可以参考这里：  
+参见 [using class methods as celery tasks](https://stackoverflow.com/questions/9250317/using-class-methods-as-celery-tasks)
+
 ## TODO
 因为个人时间关系，这个暂时没有学完。关于`Celery`的使用需要进一步实践学习。
+
 ## 参考阅读
 [Celery 4.3.0 documentation »](http://docs.celeryproject.org/en/latest/)
 [在 Flask 中使用 Celery 的最佳实践](https://www.jianshu.com/p/807efde55d81)
