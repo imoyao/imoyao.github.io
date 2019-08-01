@@ -243,7 +243,7 @@ pid文件没有权限；这种情况有两种解决办法：
 ```bash
 celery beat -A celeryapp --loglevel=INFO --pidfile="/tmp/celerybeat.pid"        # 修改路径
 ```
-- 对pid文件所在目录加权限，然后执行
+- 对pid文件所在目录加权限，然后执行：
 ```bash
 chown -R YOUR_USER_NAME:YOUR_USER_NAME  CURRENT_PATH
 celery -A celery_worker:celery beat --loglevel=INFO

@@ -27,11 +27,12 @@ articles = db.relationship('Article', secondary=posts_tags_table,
 
 参见这里  
 [when-do-i-need-to-use-sqlalchemy-back-populates](https://stackoverflow.com/questions/39869793/when-do-i-need-to-use-sqlalchemy-back-populates)
-
+## 问题
 ```bash
 sqlalchemy.orm.exc.StaleDataError: DELETE statement on table 'iy_post_tags' expected to delete 4 row(s); Only 24 were matched.
 ```
 ### 处理过程
+出现这个问题原因是在多对多关系的关联表中，出现了重复数据。
 书上说“将某个Book的Writer属性设置为None,就会解除与Writer对象的关系。”
 ```python
 post_obj = Article.query.filter(Article.post_id == post_id).one()
@@ -43,13 +44,52 @@ if post_obj:
 失败！！！
 
 再次参考[How to delete a Many-to-Many relationship in Flask-SQLAlchemy](https://seagullbird.xyz/posts/how-to-delete-many-to-many-in-sqlalchemy/)
-作者提到可能是因为对数据手动处理的问题，TODO：验证！
+作者提到可能是因为对数据手动处理的问题。
+验证数据表中是否存在重复数据：
+```sql
+mysql> delete from iy_post_tags where post_id=26;
+Query OK, 2 rows affected (0.22 sec)
 
-还有[这里](https://stackoverflow.com/questions/36002638/how-to-fix-sqlalchemy-sawarning-delete-statement-on-table-expected-to-delete-1)是修改表结构
+mysql> select * from iy_post_tags;
++---------+--------+
+| post_id | tag_id |
++---------+--------+
+|      20 |      7 |
+|      21 |      7 |
+|      22 |      7 |
+|      23 |      7 |
+|      24 |      7 |
+|      24 |      7 |
+|      20 |      7 |
+|      25 |      7 |
+|      27 |      7 |    -- 注意这两行，表中出现同一篇文章，标签相同记录两次的情况，此时删除操作就会报错
+|      27 |      7 |
++---------+--------+
 
-[这里](https://stackoverflow.com/questions/41941273/deleting-from-a-sqlalchemy-many-to-many-matches-the-wrong-number-of-rows)
-```python
-db.PrimaryKeyConstraint('tag_id', 'post_id')
 ```
-出现这个问题，可能是因为删除主键字段的时候，tags含有对post_id的引用。
+的确存在，可以手动删除。
+
+### 利用代码限制永久解决
+
+利用主键唯一约束，在创建中间表的时候进行限制
+```python
+# 设置： primary_key=True
+article_tag_rel = sa.Table('article_tag_rel', Base.metadata,
+    sa.Column('tag_id', sa.Integer, ForeignKey('tag.id'), primary_key=True),
+    sa.Column('article_id', sa.Integer, ForeignKey('article.id'), primary_key=True)
+)
+```
+参见[这里](https://github.com/kvesteri/sqlalchemy-continuum/issues/65)  
+还有[这里](https://stackoverflow.com/questions/36002638/how-to-fix-sqlalchemy-sawarning-delete-statement-on-table-expected-to-delete-1)是修改表结构       
+[这里](https://stackoverflow.com/questions/41941273/deleting-from-a-sqlalchemy-many-to-many-matches-the-wrong-number-of-rows)     
+```python
+# 上面的一种简便写法
+import db
+posts_tags_table = db.Table('iy_post_tags', db.Model.metadata,
+                            db.Column('post_id', db.Integer, db.ForeignKey('iy_article.post_id')),
+                            db.Column('tag_id', db.Integer, db.ForeignKey('iy_tag.id')),
+                            db.PrimaryKeyConstraint('tag_id', 'post_id')
+                            )
+```
+
 参见[这里](https://groups.google.com/forum/#!topic/sqlalchemy/vfoTsQkqfHI)
