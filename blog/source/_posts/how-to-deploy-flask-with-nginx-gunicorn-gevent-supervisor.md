@@ -308,7 +308,7 @@ app                              RUNNING   pid 24639, uptime 0:20:55
 
 ## 参考来源
 1. [Huawei Cloud Centos7 Flask+Gunicorn+Gevent+Supervisor+Nginx Multi-site Production Environment Deployment](https://programmer.help/blogs/5c13afa73d10a.html)
-
 2. [Flask + Nginx + Gunicorn + Gevent部署](https://www.jianshu.com/p/192e62a5cdd2)
-2. [gunicorn+gevent+nginx部署flask应用](https://www.jianshu.com/p/65fae00615b9)
-2. [CentOS 上 Flask + uWSGI + Nginx 部署](https://blog.csdn.net/spark_csdn/article/details/80790929)
+3. [gunicorn+gevent+nginx部署flask应用](https://www.jianshu.com/p/65fae00615b9)
+4. [CentOS 上 Flask + uWSGI + Nginx 部署](https://blog.csdn.net/spark_csdn/article/details/80790929)
+4. [Nginx、Gunicorn在服务器中分别起什么作用](https://www.zhihu.com/question/38528616)
