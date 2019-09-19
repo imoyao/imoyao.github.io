@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Redis是一款高性能的key-value数据库，本文主要记录如何在Linux系统上进行安装，以及为Python开发安装对应的redis模块。">
-<meta name="keywords" content="HOWTO,Redis,NoSQL,数据库">
+<meta name="keywords" content="Redis,数据库,HOWTO,NoSQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux 下如何安装 Redis？">
 <meta property="og:url" content="https://imoyao.github.io/blog/2019-04-11/how-to-install-Redis-on-Linux/index.html">
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="Redis是一款高性能的key-value数据库，本文主要记录如何在Linux系统上进行安装，以及为Python开发安装对应的redis模块。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-02T09:54:39.775Z">
+<meta property="og:updated_time" content="2019-06-30T09:06:36.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux 下如何安装 Redis？">
 <meta name="twitter:description" content="Redis是一款高性能的key-value数据库，本文主要记录如何在Linux系统上进行安装，以及为Python开发安装对应的redis模块。">
@@ -195,7 +195,7 @@
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install gcc -y</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<ol>
+<ol start="3">
 <li><p>重新 make</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
 <p> 此时报错</p>
@@ -218,7 +218,7 @@
 <blockquote>
 <p>对于<code>tcmalloc</code>，<code>jemalloc</code>和<code>libc</code>对应的三个内存分配器。其性能和碎片率如何呢？<br>下面是一个简单测试结果，使用<code>Redis</code>自带的<code>redis-benchmark</code>写入等量数据进行测试，数据摘自采用不同分配器时<code>Redis info</code>信息。<br>我们可以看到，采用<code>tcmalloc</code>时碎片率是最低的，为<code>1.01</code>，<code>jemalloc</code>为<code>1.02</code>，而<code>libc</code>的分配器碎片率为<code>1.31</code>，</p>
 </blockquote>
-<ol>
+<ol start="4">
 <li><p>编译安装</p>
  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make $$ make install</span><br></pre></td></tr></table></figure>
 </li>
