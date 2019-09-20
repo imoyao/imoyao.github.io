@@ -13,9 +13,10 @@ tags:
 
 2. gunicorn: 高性能WSGI服务器;
 
-3. gevent: 将`Python`同步代码转换为异步协议库;
+3. gevent: 将`Python`同步代码转换为异步的协议库;
 
 4. supervisor: 监控服务流程的工具;
+
 ## 版本信息
 ```bash
 -bash-4.2# gunicorn --version
@@ -66,79 +67,7 @@ x_forwarded_for_header = 'X-FORWARDED-FOR'
   workers: 3
   worker_class: gevent
   threads: 1
-  worker_connections: 1000
-  max_requests: 0
-  max_requests_jitter: 0
-  timeout: 30
-  graceful_timeout: 30
-  keepalive: 2
-  limit_request_line: 4094
-  limit_request_fields: 100
-  limit_request_field_size: 8190
-  reload: False
-  reload_engine: auto
-  reload_extra_files: []
-  spew: False
-  check_config: False
-  preload_app: False
-  sendfile: None
-  reuse_port: False
-  chdir: /root/PMMT
-  daemon: False
-  raw_env: []
-  pidfile: log/gunicorn.pid
-  worker_tmp_dir: None
-  user: 0
-  group: 0
-  umask: 0
-  initgroups: False
-  tmp_upload_dir: None
-  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
-  forwarded_allow_ips: ['127.0.0.1']
-  accesslog: None
-  disable_redirect_access_to_syslog: False
-  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
-  errorlog: -
-  loglevel: debug
-  capture_output: False
-  logger_class: gunicorn.glogging.Logger
-  logconfig: None
-  logconfig_dict: {}
-  syslog_addr: udp://localhost:514
-  syslog: False
-  syslog_prefix: None
-  syslog_facility: user
-  enable_stdio_inheritance: False
-  statsd_host: None
-  statsd_prefix: 
-  proc_name: None
-  default_proc_name: runserver:app
-  pythonpath: None
-  paste: None
-  on_starting: <function OnStarting.on_starting at 0x7fbf4cf806a8>
-  on_reload: <function OnReload.on_reload at 0x7fbf4cf807b8>
-  when_ready: <function WhenReady.when_ready at 0x7fbf4cf808c8>
-  pre_fork: <function Prefork.pre_fork at 0x7fbf4cf809d8>
-  post_fork: <function Postfork.post_fork at 0x7fbf4cf80ae8>
-  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7fbf4cf80bf8>
-  worker_int: <function WorkerInt.worker_int at 0x7fbf4cf80d08>
-  worker_abort: <function WorkerAbort.worker_abort at 0x7fbf4cf80e18>
-  pre_exec: <function PreExec.pre_exec at 0x7fbf4cf80f28>
-  pre_request: <function PreRequest.pre_request at 0x7fbf4cf960d0>
-  post_request: <function PostRequest.post_request at 0x7fbf4cf96158>
-  child_exit: <function ChildExit.child_exit at 0x7fbf4cf96268>
-  worker_exit: <function WorkerExit.worker_exit at 0x7fbf4cf96378>
-  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7fbf4cf96488>
-  on_exit: <function OnExit.on_exit at 0x7fbf4cf96598>
-  proxy_protocol: False
-  proxy_allow_ips: ['127.0.0.1']
-  keyfile: None
-  certfile: None
-  ssl_version: 2
-  cert_reqs: 0
-  ca_certs: None
-  suppress_ragged_eofs: True
-  do_handshake_on_connect: False
+# ………… 省略中间部分
   ciphers: TLSv1
   raw_paste_global_conf: []
 [2019-08-07 16:00:20 +0800] [32111] [INFO] Starting gunicorn 19.9.0
@@ -164,7 +93,7 @@ x_forwarded_for_header = 'X-FORWARDED-FOR'
 -bash-4.2# iptables -nL|grep 5000
 ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0            tcp dpt:5000
 ```
-- CentOS7  
+- CentOS 7  
 使用`firewall-cmd`管理防火墙端口
 ```bash
 firewall-cmd --query-port=5000/tcp      # no
@@ -303,8 +232,6 @@ app                              RUNNING   pid 24639, uptime 0:20:55
 ```bash
 -bash-4.2# supervisord -c /etc/supervisord.conf
 ```
-
-
 
 ## 参考来源
 1. [Huawei Cloud Centos7 Flask+Gunicorn+Gevent+Supervisor+Nginx Multi-site Production Environment Deployment](https://programmer.help/blogs/5c13afa73d10a.html)
