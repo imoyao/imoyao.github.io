@@ -1,0 +1,12 @@
+[
+  {
+    "name": "IdealYard",
+    "url": "https://github.com/imoyao/idealyard",
+    "desc": "使用 Vue 和 Flask 搭建前后端分离的 RESTful 个人博客"
+  },
+  {
+    "name": "Learn Python Structures and Algorithms",
+    "url": "https://github.com/imoyao/learn_data_structures_and_algorithms_using_Python",
+    "desc": "一个Python数据结构和算法的学习记录"
+  }
+]

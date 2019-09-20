@@ -1,6 +1,29 @@
 <!-- jquery -->
 <%- js('lib/jquery/jquery.min') %>
 <%- js('lib/justified-gallery/js/jquery.justifiedGallery.min.js') %>
+<!-- clipboard -->
+<% if (is_post()){ %>
+  <%- js('lib/clipboard/clipboard.min') %>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"<%= __('tooltip.copy_tip') %>\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "<%= __('tooltip.copied') %>");
+      e.clearSelection();
+    })
+  })
+  </script>
+<% } %>
 <%- js('js/main') %>
 <!-- search -->
 <% if (config.search && (page.search || page.type === "search")){ %>

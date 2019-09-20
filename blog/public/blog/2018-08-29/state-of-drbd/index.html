@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="在管理DRBD的时候，需要关注drbd相关的各种状态指标，本文主要记录相关的指令及显示含义。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-30T09:06:41.231Z">
+<meta property="og:updated_time" content="2019-07-02T09:54:39.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DRBD 状态指标记录">
 <meta name="twitter:description" content="在管理DRBD的时候，需要关注drbd相关的各种状态指标，本文主要记录相关的指令及显示含义。">
@@ -370,6 +370,29 @@
     <!-- jquery -->
 <script src="/lib/jquery/jquery.min.js"></script>
 <script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
 <script src="/js/main.js"></script>
 <!-- search -->
 

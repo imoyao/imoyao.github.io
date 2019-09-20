@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="别院牧志">
 <meta property="og:description" content="使用Ztree时，treeNode.children只能获取到子节点，该如何拿到节点的叶子节点呢？">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-30T09:06:35.586Z">
+<meta property="og:updated_time" content="2019-07-02T09:54:39.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何获取 Ztree 的所有叶子节点？">
 <meta name="twitter:description" content="使用Ztree时，treeNode.children只能获取到子节点，该如何拿到节点的叶子节点呢？">
@@ -261,6 +261,29 @@
     <!-- jquery -->
 <script src="/lib/jquery/jquery.min.js"></script>
 <script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
 <script src="/js/main.js"></script>
 <!-- search -->
 
