@@ -29,8 +29,8 @@ toc: true
 - Reserved
     6 位，常被设为 0；
 - Control Bit Flags 
-    我们之前已经知道 TCP 是面向连接的协议。 面向连接协议的含义是，在可以传输任何数据之前，必须获得（obtained）并确认可靠的连接。 控制位控制着连接建立，数据传输和连接终止的整个过程。 控制位列出如下：它们依次为 URG，ACK，PSH，RST，SYN，FIN。
-    每个标志位的意思如下：
+    我们之前已经知道 TCP 是面向连接的协议。 面向连接协议的含义是，在可以传输任何数据之前，必须获得（obtained）并确认可靠的连接。 控制位控制着连接建立，数据传输和连接终止的整个过程。    
+    控制位列出如下：它们依次为 URG，ACK，PSH，RST，SYN，FIN。每个标志位的含义如下：   
     1. URG：Urgent Pointer，此标志表示 TCP 包的紧急指针域（后面马上就要说到）有效，用来保证 TCP 连接不被中断，并且督促中间层设备要尽快处理这些数据；
     2. ACK：Acknowledgement，此标志表示应答域有效。就是说前面所说的 TCP 应答号将会包含在 TCP 数据包中；有两个取值：0 和 1，为 1 的时候表示应答域有效，反之为 0；
     3. PSH：push，这个标志位表示传送操作。所谓 Push 操作就是指在数据包到达接收端以后，立即传送给应用程序，而不是在缓冲区中排队；
@@ -48,8 +48,9 @@ toc: true
     紧急指针字段，16bits，紧急指针指出在本报文段中的紧急数据的最后一个字节的序号。
 - Option
     长度可变，TCP 首部可以有多达 40 字节的可选信息，用于把附加信息传递给终点，或用来对齐其它选项。
-- [TCP Header Fields](http://www.omnisecu.com/tcpip/tcp-header.php)
-- [TCP Header](https://www.inetdaemon.com/tutorials/internet/tcp/tcp_header.shtml)
+
+1. [TCP Header Fields](http://www.omnisecu.com/tcpip/tcp-header.php)
+2. [TCP Header](https://www.inetdaemon.com/tutorials/internet/tcp/tcp_header.shtml)
 
 ## 三次握手与四次挥手
 
@@ -59,30 +60,29 @@ toc: true
 
 三次握手的目的是连接服务器指定端口，建立 TCP 连接，并同步连接双方的序列号和确认号，交换 TCP 窗口大小信息。在 socket 编程中，客户端执行 `connect()` 时。将触发三次握手。
     
-* 第一次握手(SYN=1, seq=x):
-    
+* 第一次握手(SYN=1, ACK=0, ISN=x):
    设备 A（客户端）发送一个 **SYN**chronize 标志设置为 1, **ACK**nowledge 标志设置为 0，以及初始序列号 ISN (Initial Sequence Number) 为 x 的 TCP 连接请求报文段；
    
-
    发送完毕后，客户端进入 `SYN_SEND` 状态，等待服务器的确认；
    
-* 第二次握手(SYN=1, ACK=1, seq=y, ACKnum=x+1):
+* 第二次握手(SYN=1, ACK=1, ISN=y, ACKnum=x+1):
     设备 B（服务器）接收设备 A 的 TCP 报文段，并返回 SYN = 1，ACK = 1，ISN = Y（设备 B 的初始序列号），确认编号(Acknowledgment Number )= x + 1（设备 B 接收到的设备 A 的 ISN 加 1）
    
    发送完毕后，服务器端进入 `SYN_RCVD` 状态。
 
-* 第三次握手(ACK=1，ACKnum=y+1,seq=x+1)
+* 第三次握手(ACK=1, SYN=0, ACKnum=y+1,seq=x+1)
     设备 A(客户端)向设备 B(服务器)发送一个 TCP 报文段，以确认接收到设备 B 的 ISN，标志设置为 SYN = 0，ACK = 1，序列号(Sequence number)= x+1，确认号(Acknowledgment number)= y+1
    
    发送完毕后，客户端进入 `ESTABLISHED` 状态，当服务器端接收到这个包时，也进入 `ESTABLISHED` 状态，TCP 握手结束。
    
-完成了三次握手，客户端和服务器端建立全双工通信（full-duplex communication），开始使用约定的序列和确认号传送数据。
+完成了三次握手，客户端和服务器端建立全双工通信（full-duplex communication），开始使用约定的序列号和确认号（ sequence 和 acknowledge numbers）传送数据。
 
 三次握手的过程的示意图如下：
 
 ![three-way-handshake](/images/tcp-connection-made-three-way-handshake.png)
 ![three-way-handshake](/images/3-way-handshake.png)
 
+- [3 way handshake, TCP Three-way handshake, TCP Synchronization](http://www.omnisecu.com/tcpip/tcp-three-way-handshake.php)
 - [TCP 3-Way Handshake (SYN,SYN-ACK,ACK)](https://www.inetdaemon.com/tutorials/internet/tcp/3-way_handshake.shtml)  
 - [TCP 3-Way Handshake Process](https://www.geeksforgeeks.org/tcp-3-way-handshake-process/) 
 
@@ -124,8 +124,11 @@ toc: true
 - [TCP Connection Termination](https://www.geeksforgeeks.org/tcp-connection-termination/)   
 
 #### 完整状态转换图
+
 ![客户端](/images/TCP-states-visited-by-ClientSide.png)
+
 ![服务端](/images/TCP-states-visited-by-ServerSide.png)
+
 ---
 ## 疑问解惑
 

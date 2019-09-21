@@ -188,9 +188,9 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/etc/init.d/drbd start</span><br></pre></td></tr></table></figure>
 <hr>
 <p>把<code>DRBD_A</code>做为主服务器：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span> 无数据时</span><br><span class="line">drbdadm primary r0</span><br><span class="line"><span class="meta">#</span> 有数据时，把本端作为primary端，本地数据分发到其他节点。</span><br><span class="line">drbdadm -- --overwrite-data-of-peer primary r0</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 无数据时</span></span><br><span class="line">drbdadm primary r0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 有数据时，把本端作为primary端，本地数据分发到其他节点。</span></span><br><span class="line">drbdadm -- --overwrite-data-of-peer primary r0</span><br></pre></td></tr></table></figure>
 <p>使用如下命令查看<code>DRBD</code>服务的状态信息：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/etc/init.d/drbd status</span><br><span class="line"><span class="meta">#</span>或者</span><br><span class="line">drbd-overview</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/etc/init.d/drbd status</span><br><span class="line"><span class="meta">#</span><span class="bash">或者</span></span><br><span class="line">drbd-overview</span><br></pre></td></tr></table></figure>
 <p>此时，写入<code>DRBD_A</code>端(<code>/dev/drbd1</code>)的数据都会同步到<code>DRBD_B</code>端。</p>
 <h2 id="测试数据同步"><a href="#测试数据同步" class="headerlink" title="测试数据同步"></a>测试数据同步</h2><h3 id="Primary端"><a href="#Primary端" class="headerlink" title="Primary端"></a><code>Primary</code>端</h3><ul>
 <li>格式化<code>drbd</code></li>
@@ -224,7 +224,7 @@
 <ul>
 <li>验证数据</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /media</span><br><span class="line">ls</span><br><span class="line">cat ./drbd_test/hello.txt</span><br><span class="line"><span class="meta">#</span> 返回</span><br><span class="line">hello World</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /media</span><br><span class="line">ls</span><br><span class="line">cat ./drbd_test/hello.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回</span></span><br><span class="line">hello World</span><br></pre></td></tr></table></figure>
 <p>参考来源</p>
 <ul>
 <li><a href="https://www.server-world.info/en/note?os=CentOS_7&amp;p=drbd&amp;f=2" target="_blank" rel="noopener">CentOS 7 : DRBD : Configure : Server World</a></li>
