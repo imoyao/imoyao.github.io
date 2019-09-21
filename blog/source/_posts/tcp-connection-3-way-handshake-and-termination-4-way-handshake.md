@@ -16,7 +16,7 @@ toc: true
 
 TCP（Transmission Control Protocol 传输控制协议）是一种面向连接的、可靠的、基于字节流的传输层通信协议。
 首先来看看OSI的七层模型：
-![OSI七层模型](/images/OSI-7-layers.png)
+![OSI七层模型](/images/OSI-7-layers.jpg)
  
 | OSI位置  | 功能       |
 | ------ | ------|
