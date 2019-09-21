@@ -1,7 +1,9 @@
 ---
-title: flask-sqlalchemy中的多对多关系模型问题记录
+title: flask-sqlalchemy 中的多对多关系模型问题记录
 date: 2019-07-03 20:08:21
 tags:
+- Flask
+- SqlAlchemy
 ---
 
 ## 问题记录
@@ -20,7 +22,7 @@ tags = db.relationship('Tag', secondary=posts_tags_table, backref=db.backref('ar
 articles = db.relationship('Article', secondary=posts_tags_table,
     #                            back_populates='tags')
 ```
-### 解释：
+### 解释
 
 当您使用`backref`时，`SQLAlchemy`会自动创建向后关联，因此它（backref）**只应该**在关系的一侧使用。所以应该删除上面其中的一句定义。
 
@@ -32,7 +34,7 @@ sqlalchemy.orm.exc.StaleDataError: DELETE statement on table 'iy_post_tags' expe
 ```
 ### 处理过程
 出现这个问题原因是在多对多关系的关联表中，出现了重复数据。
-书上说“将某个Book的Writer属性设置为None,就会解除与Writer对象的关系。”
+书上说“将某个 Book 的 Writer 属性设置为 None,就会解除与 Writer 对象的关系。”
 ```python
 post_obj = Article.query.filter(Article.post_id == post_id).one()
 if post_obj:
@@ -96,7 +98,7 @@ posts_tags_table = db.Table('iy_post_tags', db.Model.metadata,
 
 参见[这里](https://groups.google.com/forum/#!topic/sqlalchemy/vfoTsQkqfHI)
 
-出现这个问题，可能是因为删除主键字段的时候，tags含有对post_id的引用。
+出现这个问题，可能是因为删除主键字段的时候，tags 含有对 post_id 的引用。
 参见[这里](https://groups.google.com/forum/#!topic/sqlalchemy/vfoTsQkqfHI)
 
 >A human being should be able to change a diaper, plan an invasion, butcher a hog, conn a ship, design a building, write a sonnet, balance accounts, build a wall, set a bone, comfort the dying, take orders, give orders, cooperate, act alone, solve equations, analyze a new problem, pitch manure, program a computer, cook a tasty meal, fight efficiently, die gallantly. Specialization is for insects.

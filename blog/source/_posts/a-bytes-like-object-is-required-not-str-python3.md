@@ -173,5 +173,5 @@ Out[21]: ['123', '456']
 出现异常报错是由于设置了`decode()`方法的第二个参数`errors`为严格（`strict`）形式造成的，因为默认就是这个参数，将其更改为`ignore`即可。
 
 ## 参考链接
-- [Python3解决UnicodeDecodeError: 'utf-8' codec can't decode byte..问题 终极解决方案](https://blog.csdn.net/wang7807564/article/details/78164855/)
+- [Python3 解决 UnicodeDecodeError: 'utf-8' codec can't decode byte..问题 终极解决方案](https://blog.csdn.net/wang7807564/article/details/78164855/)
 - [TypeError: a bytes-like object is required, not 'str' when writing to a file in Python3](https://stackoverflow.com/questions/33054527/typeerror-a-bytes-like-object-is-required-not-str-when-writing-to-a-file-in)

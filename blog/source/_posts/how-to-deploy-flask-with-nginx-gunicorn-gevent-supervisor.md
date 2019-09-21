@@ -1,17 +1,17 @@
 ---
-title: 如何使用Gunicorn+Gevent+Supervisor+Nginx部署Flask应用
+title: 如何使用 Gunicorn+Gevent+Supervisor+Nginx 部署 Flask 应用
 date: 2019-08-07 15:21:59
 tags:
 - Nginx
 - Flask
 - 部署
-- Web开发
+- Web 开发
 ---
 ## 组件介绍
 
 1. Nginx: 高性能`Web`服务器+负责反向代理;
 
-2. gunicorn: 高性能WSGI服务器;
+2. gunicorn: 高性能 WSGI 服务器;
 
 3. gevent: 将`Python`同步代码转换为异步的协议库;
 
@@ -24,7 +24,7 @@ gunicorn (version 19.9.0)
 
 ```
 
-## 安装gunicorn和gevent
+## 安装 gunicorn 和 gevent
 
 ```bash
 pip install gunicorn
@@ -81,7 +81,7 @@ x_forwarded_for_header = 'X-FORWARDED-FOR'
 
 ```
 此时正常访问`http://10.10.15.111:5000/`应该可以看到首页信息提示表示连接服务正常。  
-**注意**：此处ip和端口均由自己设置，所以访问时应该做相应调整。  
+**注意**：此处 ip 和端口均由自己设置，所以访问时应该做相应调整。  
 如果无法正常访问，则需要验证防火墙是否正常：  
 - CentOS 7 以下版本  
 ```bash
@@ -104,15 +104,15 @@ systemctl status firewall
 systemctl status firewalld
 systemctl restart firewalld
 ```
-## 安装nginx和supervisor
+## 安装 nginx 和 supervisor
 
 ```bash
 yum -y install nginx supervisor
 ```
-### 配置nginx
+### 配置 nginx
 
 
-默认安装的Nginx配置文件`/etc/nginx/nginx.conf`内有如下配置
+默认安装的 Nginx 配置文件`/etc/nginx/nginx.conf`内有如下配置
 
 ```bash
 include /etc/nginx/conf.d/*.conf;
@@ -160,23 +160,23 @@ systemctl start nginx
 ### 报错
 
 - ERR_CONTENT_LENGTH_MISMATCH  
-    查看nginx错误日志
+    查看 nginx 错误日志
     
     ```bash
     $ tailf /var/log/nginx/error.log
     2019/08/09 03:04:21 [crit] 24616#0: *204 open() "/var/lib/nginx/tmp/proxy/2/03/0000000032" failed (13: Permission denied) while reading upstream, client: 10.10.15.199, server: localhost, request: "GET /static/js/app.1b53c809113e333c2727.js.map HTTP/1.1", upstream: "http://0.0.0.0:5000/static/js/app.1b53c809113e333c2727.js.map", host: "10.10.15.111:82"
     ```
 
-    参考这里：[ERR_CONTENT_LENGTH_MISMATCH解决方法](https://blog.csdn.net/mr_ooo/article/details/81068369)      
+    参考这里：[ERR_CONTENT_LENGTH_MISMATCH 解决方法](https://blog.csdn.net/mr_ooo/article/details/81068369)      
 - 进入首页出现`403 Forbidden`
-    1. nginx启动用户和配置中的工作用户不一致；
-    2. 配置文件中缺少index index.html index.htm index.php 行；
-    3. nginx用户没有响应工作目录的操作权限（`chown -R nginx:nginx WORK_DIR_PATH`）；
+    1. nginx 启动用户和配置中的工作用户不一致；
+    2. 配置文件中缺少 index index.html index.htm index.php 行；
+    3. nginx 用户没有响应工作目录的操作权限（`chown -R nginx:nginx WORK_DIR_PATH`）；
     4. 防火墙设置。         
-    参考这里：[解决Nginx出现403 forbidden (13: Permission denied)报错的四种方法](https://blog.csdn.net/onlysunnyboy/article/details/75270533)
+    参考这里：[解决 Nginx 出现 403 forbidden (13: Permission denied)报错的四种方法](https://blog.csdn.net/onlysunnyboy/article/details/75270533)
 
 
-## 配置Supervisor
+## 配置 Supervisor
 
 首先检查是否存在配置文件，一般配置文件的路径是`/etc/supervisord.conf`，如果配置文件不存在，我们可以通过命令来生成：
 ```bash
@@ -190,7 +190,7 @@ echo_supervisord_conf > /etc/supervisord.conf
 ;files = /etc/supervisord/*.conf    # 注意：本人安装版本为ini格式，所以我们自写的配置也应该调整为相应的.ini格式[include] \n files = supervisord.d/*.ini 
 ```
 默认一般是注释掉的，我们可以取消注释，这行配置的作用也很浅显，就是导入设置的路径下的所有`conf`文件，这使得我们如果有多个项目可以不用都写在同一个配置文件里，可以一个项目一个配置文件，更适合管理。这里的路径也是可以按照实际需求随意更改。
-手动启动Supervisord
+手动启动 Supervisord
 ```bash
 supervisord -c /etc/supervisord.conf
 ```
@@ -206,7 +206,7 @@ autorestart=true
 ```
 `project_name`按照你的实际需求修改，作为你这个服务的唯一标识，用于启动停止服务时使用。
 `command`修改为测试`gunicorn`时使用的命令，建议使用绝对路径。
-`directory`指定了工作路径，通常设置为项目根目录，我们填写的gun.py和app都是基于这个路径的。
+`directory`指定了工作路径，通常设置为项目根目录，我们填写的 gun.py 和 app 都是基于这个路径的。
 
 管理`Supervisor`的项目是使用`supervisorctl`命令，我们可以启动项目试试看
 
@@ -235,7 +235,7 @@ app                              RUNNING   pid 24639, uptime 0:20:55
 
 ## 参考来源
 1. [Huawei Cloud Centos7 Flask+Gunicorn+Gevent+Supervisor+Nginx Multi-site Production Environment Deployment](https://programmer.help/blogs/5c13afa73d10a.html)
-2. [Flask + Nginx + Gunicorn + Gevent部署](https://www.jianshu.com/p/192e62a5cdd2)
-3. [gunicorn+gevent+nginx部署flask应用](https://www.jianshu.com/p/65fae00615b9)
+2. [Flask + Nginx + Gunicorn + Gevent 部署](https://www.jianshu.com/p/192e62a5cdd2)
+3. [gunicorn+gevent+nginx 部署 flask 应用](https://www.jianshu.com/p/65fae00615b9)
 4. [CentOS 上 Flask + uWSGI + Nginx 部署](https://blog.csdn.net/spark_csdn/article/details/80790929)
-4. [Nginx、Gunicorn在服务器中分别起什么作用](https://www.zhihu.com/question/38528616)
+4. [Nginx、Gunicorn 在服务器中分别起什么作用](https://www.zhihu.com/question/38528616)

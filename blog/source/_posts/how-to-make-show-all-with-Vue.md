@@ -64,10 +64,10 @@ tags:
 </html>
 ```
 ## 功能演示
-此处显示与直接代码运行效果不一样，主要是因为样式以及添加i标签图标等导致；样式不会写的话可以参考`element-ui`官方文档的实现。
+此处显示与直接代码运行效果不一样，主要是因为样式以及添加 i 标签图标等导致；样式不会写的话可以参考`element-ui`官方文档的实现。
 
 ![显示全部与折叠](/images/show_all_example.gif)
 
 ## 参考链接
 
-[利用vue实现“显示更多”功能](https://blog.csdn.net/XuM222222/article/details/80189355)
+[利用 vue 实现“显示更多”功能](https://blog.csdn.net/XuM222222/article/details/80189355)

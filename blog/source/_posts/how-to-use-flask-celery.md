@@ -52,7 +52,7 @@ Linux local 4.15.0-22-generic #24-Ubuntu SMP Wed May 16 12:15:17 UTC 2018 x86_64
 ![celery架构图](/images/structure-of-celery.png)
 <center><span>celery架构图</span></center>
 
-`Celery`支持定时任务（Celery Beat）和异步执行(Async Task)两种模式。同步模式为任务调用方等待任务执行完成，这种方式等同于RPC(Remote Procedure Call)， 异步方式为任务在后台执行，调用方调用后就去做其他工作，之后再根据需要来查看任务结果。`Celery`自己没有实现消息队列，而是直接已存在的消息队列作为`Broker`角色。
+`Celery`支持定时任务（Celery Beat）和异步执行(Async Task)两种模式。同步模式为任务调用方等待任务执行完成，这种方式等同于 RPC(Remote Procedure Call)， 异步方式为任务在后台执行，调用方调用后就去做其他工作，之后再根据需要来查看任务结果。`Celery`自己没有实现消息队列，而是直接已存在的消息队列作为`Broker`角色。
 
 ### 组件
 
@@ -234,16 +234,16 @@ if __name__ == '__main__':
     [2019-06-14 02:43:54,645: DEBUG/MainProcess] Task accepted: pmrearend.task.log_it[aac524bd-cb47-4493-b0dd-9712a98a3f14] pid:4089
     [2019-06-14 02:43:54,650: INFO/ForkPoolWorker-1] Task pmrearend.task.log_it[aac524bd-cb47-4493-b0dd-9712a98a3f14] succeeded in 0.012691148993326351s: 30
     ```
-## 问题记录：
+## 问题记录
 ```bash
 celery.platforms.LockFailed: [Errno 13] Permission denied: '/home/xxx/celerybeat.pid'
 ```    
-pid文件没有权限；这种情况有两种解决办法：
-- 修改pid文件存储路径，放到当前执行用户有权限的位置
+pid 文件没有权限；这种情况有两种解决办法：
+- 修改 pid 文件存储路径，放到当前执行用户有权限的位置
 ```bash
 celery beat -A celeryapp --loglevel=INFO --pidfile="/tmp/celerybeat.pid"        # 修改路径
 ```
-- 对pid文件所在目录加权限，然后执行：
+- 对 pid 文件所在目录加权限，然后执行：
 ```bash
 chown -R YOUR_USER_NAME:YOUR_USER_NAME  CURRENT_PATH
 celery -A celery_worker:celery beat --loglevel=INFO
@@ -251,7 +251,7 @@ celery -A celery_worker:celery beat --loglevel=INFO
 [参见这里](https://github.com/celery/celery/issues/3828)
 
 ## 注意问题
-**不要**将task写进类中，因为可能导致执行出错等各种问题，如果真的要这么做，可以参考这里：  
+**不要**将 task 写进类中，因为可能导致执行出错等各种问题，如果真的要这么做，可以参考这里：  
 参见 [using class methods as celery tasks](https://stackoverflow.com/questions/9250317/using-class-methods-as-celery-tasks)
 
 ## TODO
@@ -260,4 +260,4 @@ celery -A celery_worker:celery beat --loglevel=INFO
 ## 参考阅读
 [Celery 4.3.0 documentation »](http://docs.celeryproject.org/en/latest/)
 [在 Flask 中使用 Celery 的最佳实践](https://www.jianshu.com/p/807efde55d81)
-[Celery中文文档](https://blog.csdn.net/libing_thinking/article/details/78547816)
+[Celery 中文文档](https://blog.csdn.net/libing_thinking/article/details/78547816)
