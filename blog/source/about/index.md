@@ -1,6 +1,7 @@
 ---
-title: 深深别院，潜潜牧志！
+title: 深深别院，潜潜牧志
 date: 2017-11-18 15:24:37
+author: 西风不瘦
 ---
 ![病木重生](images/A-withered-tree-comes-to-life-again.jpg)
 <center>
