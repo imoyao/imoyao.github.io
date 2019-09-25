@@ -6,6 +6,8 @@ nav:
   category: Category
   projects: Projects
   search: Search
+  blog: Blog
+  resume: Resume
 
 footer:
   copyright: Copyright
