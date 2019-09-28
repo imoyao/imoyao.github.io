@@ -40,7 +40,7 @@ drbdadm -V
 **注意:**目前官网上面 8.0 – 8.3.x 已标注为`Deprecated`即不建议使用状态。
 
 ## drbd 状态记录
-[本部分内容详见此处](.)
+[本部分内容详见此处](https://imoyao.github.io/blog/2018-08-29/state-of-drbd/)
 
 ## 清除单个 `DRBD` 资源配置：(以 drbd10 为例)
 
