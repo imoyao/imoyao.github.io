@@ -136,10 +136,24 @@ open_graph:
 # Plugins
 ##############################################################################
 
-# Fill in your Disqus Comments Shortname to enable Disqus comments.
-disqus:
-  enabled: false
-  shortname: cactus-1
+plugins:
+#  -----------------Disqus-----------------
+  # Fill in your Disqus Comments Shortname to enable Disqus comments.
+  disqus:
+    enabled: false
+    shortname: cactus-1
+#    -----------------Valine-----------------
+  # Valine comment system. https://valine.js.org
+  valine:
+    enabled: true # if you want use valine, please set this value to true
+    appId:  tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI # your leancloud appId
+    appKey:  CARePe7R247vdXACFg1fhk4E # your leancloud appKey
+    notify: false # Mail notify
+    verify: false # Verify code
+    avatar: monsterid # Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
+    placeholder: Just go go # Comment Box placeholder
+    guest_info: nick,mail,link # Comment header info
+    pageSize: 10 # comment list page size
 
 # Fill in your Google Analytics tracking ID to enable Google Analytics.
 google_analytics:
