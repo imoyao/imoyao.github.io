@@ -1,7 +1,12 @@
-<% if(page.comments && theme.disqus.enabled){ %>
+<% if(page.comments){ %>
     <div class="blog-post-comments">
+        <% if(theme.plugins.disqus.enabled){ %>
         <div id="disqus_thread">
             <noscript><%= __('comments.no_js') %></noscript>
         </div>
+        <% } %>
+        <% if(theme.plugins.valine.enabled){ %>
+        <div class="vcomment"></div>
+        <% } %>
     </div>
 <% } %>
