@@ -86,7 +86,7 @@ toc: true
 1. 编译安装
 
     ```shell
-    make $$ make install
+    make && make install
     ```
     此时报错
     ```shell

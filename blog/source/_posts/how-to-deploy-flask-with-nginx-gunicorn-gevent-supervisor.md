@@ -169,9 +169,9 @@ systemctl start nginx
 
     参考这里：[ERR_CONTENT_LENGTH_MISMATCH 解决方法](https://blog.csdn.net/mr_ooo/article/details/81068369)      
 - 进入首页出现`403 Forbidden`
-    1. nginx 启动用户和配置中的工作用户不一致；
+    1. nginx 启动用户和配置中的工作用户不一致（注意：如果你的`nginx`服务是`root`用户运行，则配置中`user`项配置为`root`）；
     2. 配置文件中缺少 index index.html index.htm index.php 行；
-    3. nginx 用户没有响应工作目录的操作权限（`chown -R nginx:nginx WORK_DIR_PATH`）；
+    3. nginx 用户没有相应工作目录的操作权限（`chown -R nginx:nginx WORK_DIR_PATH`）；
     4. 防火墙设置。         
     参考这里：[解决 Nginx 出现 403 forbidden (13: Permission denied)报错的四种方法](https://blog.csdn.net/onlysunnyboy/article/details/75270533)
 
