@@ -151,7 +151,7 @@ plugins:
     notify: false # Mail notify
     verify: false # Verify code
     avatar: monsterid # Gravatar style : mm/identicon/monsterid/wavatar/retro/hide
-    placeholder: Just go go # Comment Box placeholder
+    placeholder: 我们期待理性、友好而和谐的声音…… # Comment Box placeholder
     guest_info: nick,mail,link # Comment header info
     pageSize: 10 # comment list page size
 
