@@ -63,7 +63,7 @@ resource <resource>
 }
 ```
 
-当配置已经在资源上进行修改（同步到两个节点上），就不需要添加其他的处理就可以启动处理程序。`Drbd`会在下一次检测到裂脑时直接调用该处理程序。
+当配置已经在资源上进行修改（同步到两个节点上），就不需要添加其他的处理就可以启动处理程序。`DRBD`会在下一次检测到裂脑时直接调用该处理程序。
 
 如果要配置真实可用的报警邮箱地址，则除了将上面的通知地址改为真实邮件地址:
 ```shell
@@ -73,7 +73,7 @@ split-brain "/usr/lib/drbd/notify-split-brain.sh foo@bar.com
 ```shell
 vim /etc/ssmtp/ssmtp.conf
 # 填写真实收件服务器信息
-mailhub=idealyard.imoyao.com:25
+mailhub=mail.masantu.com:25
 ```
 
 更多配置参见 [这里](http://iqjar.com/jar/sending-emails-from-the-raspberry-pi/)
@@ -81,7 +81,7 @@ mailhub=idealyard.imoyao.com:25
 ### 世代标识符元组（GI）
 参见[16.2. Generation Identifiers](https://docs.linbit.com/docs/users-guide-8.4/#s-gi)
 
-DRBD 将其备份的数据的更新变化过程比拟成人类世代繁衍的过程。每个时点同一个双机的 DRBD 的两个节点上的数据都来自于同一份原始数据，我们可认为这个时点上两分数据源于同一祖先。主备节点的 DRBD 都会用一个叫作 GI(Generation ID)的标识符来标识当前的数据是哪个世代的，同样也会记录最近两个数据祖先的 GI 用于追朔当前数据的历史来源。DRBD 可以据此来判断两个节点是否是属于同一个双机,因为同一个双机的两份数据应该是从同一个祖先而来。
+DRBD 将其备份的数据的更新变化过程比拟成人类世代繁衍的过程。每个时点同一个双机的 DRBD 的两个节点上的数据都来自于同一份原始数据，我们可认为这个时点上两份数据源于同一祖先。主备节点的 DRBD 都会用一个叫作 GI(Generation ID)的标识符来标识当前的数据是哪个世代的，同样也会记录最近两个数据祖先的 GI 用于追朔当前数据的历史来源。DRBD 可以据此来判断两个节点是否是属于同一个双机,因为同一个双机的两份数据应该是从同一个祖先而来。
 GI 作为 DRBD 的内部机制主要被用来：
 
 1. 确定这两个节点是否是事实上的同一个集群的成员（而不是意外连接的两个节点）；
@@ -319,6 +319,7 @@ def exchange_gi_process(drbdname):
         return drbd_next
 
 ``` 
+
 **注意**：
 
 经分析官方文档中的'matches'并不是完全相等，而 'UUID is always empty (zero)' 是指 "'0'*16" 的字符串
@@ -352,10 +353,10 @@ drbdadm up drbdxx
 ### 设置自动修复
 [5.17.2. Automatic split brain recovery policies](https://docs.linbit.com/docs/users-guide-8.4/#s-configure-split-brain-behavior )
 
-**警告**：配置`DRBD`自动修复裂脑（或其他状况）导致的数据分歧情况可能是正在配置的数据丢失，如果你不知道你在干什么，那最好别干。（NO ZUO NO DIE）
+**警告**：配置`DRBD`自动修复裂脑（或其他状况）导致的数据分歧情况可能使正在配置的数据丢失，如果你不知道你在干什么，那最好别干。（NO ZUO NO DIE）
 
 _提示_ ：您更应该查看系统防护策略，集群管理集成和冗余集群管理器通信连接状态，以避免出现数据分歧。（防患于未然而不是亡羊补牢）
-在启用和配置`DRBD`的自动裂脑恢复策略之前，您必须了解`DRBD`为此提供了多种配置选项。 DRBD 根据检测到裂脑时主节点（`Primary role`）的数量应用其裂脑恢复程序。为此，DRBD 检查以下关键字，这些关键字均可在资源的网络配置部分中找到：
+在启用和配置`DRBD`的自动裂脑恢复策略之前，您必须了解`DRBD`为此提供了多种配置选项。 `DRBD` 根据检测到裂脑时主节点（`Primary role`）的数量应用其裂脑恢复程序。为此，`DRBD` 检查以下关键字，这些关键字均可在资源的网络配置部分中找到：
 
 #### after-sb-0pri
 
@@ -430,10 +431,5 @@ drbdadm connect <resource>
 - [关于 DRBD v8.3 的同步机制](http://blog.sina.com.cn/s/blog_a30f2be401016d04.html)
 - [一次 DRBD 裂脑行为的模拟](http://myhat.blog.51cto.com/391263/606318/)
 - [drbd 裂脑处理 | IT 瘾](http://itindex.net/detail/50197-drbd)
-
-http://www.3mu.me/%E4%BB%80%E4%B9%88%E6%98%AFdrbd%E8%84%91%E8%A3%82%E5%8F%8A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9Fdrbd%E8%84%91%E8%A3%82/
-
-drbd 中 metadata 的理解(原创) – 蚊子世界
-http://www.wenzizone.cn/2009/10/29/drbd%e4%b8%admetadata%e7%9a%84%e7%90%86%e8%a7%a3%e5%8e%9f%e5%88%9b.html
-
-
+- [什么是DRBD脑裂及如何模拟DRBD脑裂](http://www.3mu.me/%E4%BB%80%E4%B9%88%E6%98%AFdrbd%E8%84%91%E8%A3%82%E5%8F%8A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9Fdrbd%E8%84%91%E8%A3%82/)
+- [drbd 中 metadata 的理解(原创) – 蚊子世界](http://www.wenzizone.cn/2009/10/29/drbd%e4%b8%admetadata%e7%9a%84%e7%90%86%e8%a7%a3%e5%8e%9f%e5%88%9b.html)
