@@ -7,6 +7,48 @@ tags:
 ---
 ## FunPlus (小视频业务)
 ### 数据库的事务隔离机制
+#### 隔离级别
+
+- READ UNCOMMITTED（未提交读）
+这个级别，事务中的修改，即使没有提交，对其他事务也都是可见的。事务可以读取未提交的数据，被称为脏读（Dirty Read），这个级别性能不会比其他级别好太多，但缺乏其他级别的很多好处，一般很少使用。
+
+- READ COMMITTED（提交读）
+这个级别是大多数数据库系统的默认隔离级别（但 MySQL 不是）。一个事务从开始直到提交之前，所做的任何修改对其他事务都是不可见的。这个级别也叫作不可重复读（nonrepeatable read），因为两次执行同样的查询，可能会得到不一样的结果。
+
+- REPEATABLE READ（可重复读）
+该级别保证了在同一个事务中多次读取同样记录的结果是一致的，但依然无法解决另外一个幻读（Phantom Read）的问题。幻读，指的是当某个事物在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻行（Phantom Row）。InnoDB 和 XtraDB 存储引擎通过多版本并发控制（MVCC）解决了幻读的问题。可重复读是 MySQL 的默认事务隔离级别。
+
+- SERIALIZABLE（可串行化）
+最高的隔离级别，强制事务串行执行，避免了前面说的幻读的问题。但每次读都需要获得表级共享锁，读写相互都会阻塞。
+
+所有隔离级别
+1. read uncommitted : 读取尚未提交的数据 ：哪个问题都不能解决
+
+2. read committed：读取已经提交的数据 ：可以解决脏读 —- oracle 默认的
+
+3. repeatable read：可重复读：可以解决脏读 和 不可重复读 —- mysql 默认的
+
+4. serializable：串行化：可以解决 脏读 不可重复读 和 虚读—-相当于锁表
+
+| 事务隔离级别          | 脏读 | 可重复读 | 幻读 |
+| --------------------------- | ---- | -------- | ---- |
+| 未提交读（read uncommited） | ×   | ×       | ×   |
+| 提交读（read commited） | √  | ×       | ×   |
+| 可重复读（repeatable read） | √  | √      | ×   |
+| 串行化（serialziable)   | √  | √      | √  |
+
+注：×表示有该问题，√表示解决该问题。
+
+1. 脏读：事务 A 读取了事务 B 更新的数据，然后 B 进行回滚操作，那么 A 读取到的数据是脏数据；
+
+2. 不可重复读：事务 A 多次读取同一数据，事务 B 在事务 A 多次读取的过程中，对数据作了更新并提交，导致事务 A 多次读取同一数据时，结果不一致;
+
+3. 幻读：“当事务 A 要对数据表中某个字段的所有值进修改操作，此时有一个事务是插入一条记录 并提交给数据库，当提交事务 A 的用户再次查看时就会发现有一行数据未被修改，其实是事务 B 刚刚添加进去的”，这就是幻读；
+
+隔离级别越高，越能保证数据的完整性和统一性，但是对并发性能的影响也越大。对于多数应用程序，可以优先考虑把数据库系统的隔离级别设为 Read Committed。它能够避免脏读，而且具有较好的并发性能。尽管它会导致不可重复读、幻读和第二类丢失更新这些并发问题，在可能出现这类问题的个别场合，可以由应用程序采用悲观锁或乐观锁来控制。
+
+[mysql 事务隔离机制&锁](https://blog.csdn.net/xiancaione/article/details/82157019)
+[数据库事务和四种隔离级别](https://blog.csdn.net/weixin_39651041/article/details/79980202)
 
 ### flask 组件及源码剖析
 - [一个 Flask 应用运行过程剖析](https://segmentfault.com/a/1190000009152550)
@@ -14,7 +56,8 @@ tags:
 - [flask 源码解析](https://cizixs.com/2017/01/10/flask-insight-introduction/)
 - [Flask 源码解析:Flask 应用执行流程及原理](https://www.cnblogs.com/weihengblog/p/9490561.html)
 - [Flask 面试题](https://www.cnblogs.com/Utopia-Clint/p/10824238.html)
-### redis 中的数据类型，其中列表和有序集合有什么区别
+
+### redis 中的数据类型，其中列表和有序集合有什么区别？
 ####  list 列表
 List 数据结构是链表结构，是双向的，可以在链表左，右两边分别操作，所以插入数据的速度很快。
 
@@ -43,4 +86,4 @@ Sorted Set 有点像 Set 和 Hash 的结合体。
 
 zset 集合可以完成有序执行、按照优先级执行的情况；
 - [redis 五种数据结构详解（string，list，set，zset，hash）](https://www.cnblogs.com/xuzhengzong/p/7724841.html)
-- [Redis 实战 - list、set和Sorted Set](https://www.cnblogs.com/tangge/p/10698821.html)
+- [Redis 实战 - list、set 和 Sorted Set](https://www.cnblogs.com/tangge/p/10698821.html)
