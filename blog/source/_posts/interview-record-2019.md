@@ -1,0 +1,46 @@
+---
+title: 2019 面试记录
+date: 2019-10-18 10:03:12
+tags:
+- 记录
+
+---
+## FunPlus (小视频业务)
+### 数据库的事务隔离机制
+
+### flask 组件及源码剖析
+- [一个 Flask 应用运行过程剖析](https://segmentfault.com/a/1190000009152550)
+- [Flask 的请求处理流程和上下文](https://www.jianshu.com/p/2a2407f66438)
+- [flask 源码解析](https://cizixs.com/2017/01/10/flask-insight-introduction/)
+- [Flask 源码解析:Flask 应用执行流程及原理](https://www.cnblogs.com/weihengblog/p/9490561.html)
+- [Flask 面试题](https://www.cnblogs.com/Utopia-Clint/p/10824238.html)
+### redis 中的数据类型，其中列表和有序集合有什么区别
+####  list 列表
+List 数据结构是链表结构，是双向的，可以在链表左，右两边分别操作，所以插入数据的速度很快。
+
+也可以把 list 看成一种队列，所以在很多时候可以用 redis 用作消息队列，这个时候它的作用类似于 activeMq；
+
+但是缺点就是在数据量比较大的时候，访问某个数据的时间可能会很长，但针对这种情况，可以使用 zset。
+
+应用案例有时间轴数据，评论列表，消息传递等等，它可以提供简便的分页，读写操作。
+#### Set 集合
+Set 就是一个集合，集合的概念就是一堆**不重复值**的组合。利用 Redis 提供的 Set 数据结构，可以存储一些集合性的数据。
+
+比如在微博应用中，可以将一个用户所有的关注人存在一个集合中，将其所有粉丝存在一个集合。
+
+因为 Redis 非常人性化的为集合提供了求交集、并集、差集等操作，那么就可以非常方便的实现如共同关注、共同喜好、二度好友等功能，对上面的所有集合操作，你还可以使用不同的命令选择将结果返回给客户端还是存集到一个新的集合中。
+
+1.共同好友、二度好友
+2.利用唯一性，可以统计访问网站的所有独立 IP
+3.好友推荐的时候，根据 tag 求交集，大于某个 threshold 就可以推荐
+#### Zset 集合（Sorted Sets）
+Sorted Set 有点像 Set 和 Hash 的结合体。
+
+和 Set 一样，它里面的元素是唯一的，但是 Set 里面的元素是无序的，而 Sorted Set 里面的元素都带有一个浮点值，叫做分数（score），所以这一点和 Hash 有点像，因为每个元素都映射到了一个值。
+使它在 set 的基础上增加了一个**顺序属性**，这一属性在添加修改元素的时候可以指定，每次指定后，zset 会自动重新按新的值调整顺序。可以对指定键的值进行排序权重的设定，它应用排名模块比较多。
+
+比如一个存储全班同学成绩的 Sorted Sets，其集合 value 可以是同学的学号，而 score 就可以是其考试得分，这样在数据插入集合的时候，就已经进行了天然的排序。另外还可以用 Sorted Sets 来做带权重的队列，比如普通消息的 score 为 1，重要消息的 score 为 2，然后工作线程可以选择按 score 的倒序来获取工作任务，让重要的任务优先执行。
+
+zset 集合可以完成有序执行、按照优先级执行的情况；
+- [redis 五种数据结构详解（string，list，set，zset，hash）](https://www.cnblogs.com/xuzhengzong/p/7724841.html)
+- [Redis 实战 - list、set和Sorted Set](https://www.cnblogs.com/tangge/p/10698821.html)
