@@ -45,3 +45,6 @@ git clone -b hexo https://github.com/yourname/hexo-test.github.io.git
 ## lint 工具
 
 使用[lint-md](https://github.com/hustcc/lint-md) 检查并修复博客中的`md`文件
+```bash
+lint-md MD_FILE_PATH -f
+```
