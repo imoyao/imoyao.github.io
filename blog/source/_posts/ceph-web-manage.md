@@ -47,10 +47,10 @@ Calamari 包含的组件主要有 calamari-server、romana、salt-minion、salt-
 这些模块各自的作用：
 
 - calamari-server   
-这个是提供一个与集群进行交互，并且自己封装了一个自己的 API，做集中管理的地方，这个只需要在集群当中的某一台机器上安装，也可以独立安装
+这个是提供一个与集群进行交互，并且自己封装了一个自己的 API，做集中管理的地方，这个只需要在集群当中的某一台机器上安装
 
 - romana    
-就是原来的 calamari-client，这个叫 client,其实是一个 web 的界面，这个叫 calamari-web 更好，现在已经更名为 romana，这个也是只需要在集群当中的某一台机器上安装，也可以独立安装，这个需要跟 calamari-server 安装在一台机器上
+就是原来的 calamari-client，虽然叫 client,其实是一个 web 的界面，这个叫 calamari-web 更好，现在已经更名为 romana，这个只需要在集群当中的某一台机器上安装，需要跟 calamari-server 安装在一台机器上
 
 - salt-master   
 是一个远程管理的工具，可以批量的管理其他的机器，可以对安装了 salt-minion 的机器进行管理，在集群当中，这个也是跟 calamari-server 安装在一起的
@@ -61,7 +61,7 @@ Calamari 包含的组件主要有 calamari-server、romana、salt-minion、salt-
 - diamond   
 这个是系统的监控信息的收集控件，提供集群的硬件信息的监控和集群的信息的监控，数据是发送到 romana 的机器上的，是由 romana 上的 carbon 来收取数据并存储到机器当中的数据库当中的
 - Graphite      
-图形显示工具，其中 carbon 用来收集数据，whisper 是针对其专门开发的数据库，用来持久化数据，graphite-web 借助 django、apache 等提供 web 服务，从而用浏览器可以图形化展示数据。
+图形显示工具，其中 carbon 用来收集数据，whisper 是针对其专门开发的数据库，用来持久化数据，graphite-web 借助 Django、apache 等提供 web 服务，从而用浏览器可以图形化展示数据。
 
 Calamari 为 Ceph 的运维和管理提供了一个统一的平台，而且用户还可以基于这个平台扩展自己的存储管理产品，但同时也存在着不足和需要改进的地方。
 
