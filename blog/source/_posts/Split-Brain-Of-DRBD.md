@@ -431,5 +431,5 @@ drbdadm connect <resource>
 - [关于 DRBD v8.3 的同步机制](http://blog.sina.com.cn/s/blog_a30f2be401016d04.html)
 - [一次 DRBD 裂脑行为的模拟](http://myhat.blog.51cto.com/391263/606318/)
 - [drbd 裂脑处理 | IT 瘾](http://itindex.net/detail/50197-drbd)
-- [什么是DRBD脑裂及如何模拟DRBD脑裂](http://www.3mu.me/%E4%BB%80%E4%B9%88%E6%98%AFdrbd%E8%84%91%E8%A3%82%E5%8F%8A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9Fdrbd%E8%84%91%E8%A3%82/)
+- [什么是 DRBD 脑裂及如何模拟 DRBD 脑裂](http://www.3mu.me/%E4%BB%80%E4%B9%88%E6%98%AFdrbd%E8%84%91%E8%A3%82%E5%8F%8A%E5%A6%82%E4%BD%95%E6%A8%A1%E6%8B%9Fdrbd%E8%84%91%E8%A3%82/)
 - [drbd 中 metadata 的理解(原创) – 蚊子世界](http://www.wenzizone.cn/2009/10/29/drbd%e4%b8%admetadata%e7%9a%84%e7%90%86%e8%a7%a3%e5%8e%9f%e5%88%9b.html)
