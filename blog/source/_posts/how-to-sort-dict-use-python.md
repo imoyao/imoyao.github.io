@@ -1,8 +1,10 @@
 ---
-title: 🐍PyTricks | Python 技巧写法记录
+title: 🐍PyTricks | Python 字典排序
 date: 2018-01-02 17:00:59
 tags:
 - Python
+categories:
+- 🐍PyTricks
 ---
 写出`Pythonic`的代码应该是每个`Pythonista`的基本追求，本文主要记录在开发中遇到的一些有关`Python`技巧。
 
