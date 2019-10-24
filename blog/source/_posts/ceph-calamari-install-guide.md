@@ -13,4 +13,4 @@ git clone https://github.com/ceph/calamari.git
 git clone https://github.com/ceph/Diamond.git 
 git clone https://github.com/ceph/calamari-clients.git
 ```
-## 构建calamari server的rpm包
+## 构建 calamari server 的 rpm 包
