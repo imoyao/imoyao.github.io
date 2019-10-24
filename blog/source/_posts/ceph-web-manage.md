@@ -10,6 +10,7 @@ tags:
 ## 现状
 Ceph 的开源管理监控平台有如 VSM（三年前最后更新，read-only），InkScope，Calamari,[Suse-enterprise-storage](https://www.suse.com/zh-cn/products/suse-enterprise-storage/)等;
 ## VSM
+![VSM](/images/img_20191022164357.jpg)  
 [VSM | Virtual Storage Manager](https://github.com/intel/virtual-storage-manager)
 ### 官网
 [virtual-storage-manager](https://01.org/zh/virtual-storage-manager)
@@ -34,6 +35,7 @@ Ceph 的开源管理监控平台有如 VSM（三年前最后更新，read-only�
 ### 技术选型
 基于 Django 开发
 ## inkScope
+![inkScope](/images/img_20191022164353.jpg) 
 [inkScope](https://github.com/inkscope/inkscope)
 ### 介绍
 Inscope 搭建的主要组件:
@@ -56,6 +58,7 @@ Inscope 搭建的主要组件:
 PHP（？）、Flask、MongoDB、AngularJS 
 
 ## Calamari
+![Calamari](/images/img_20191022164326.jpg)  
 [calamari](https://github.com/ceph/calamari)
 
 ### 组件
@@ -127,6 +130,7 @@ Calamari 为 Ceph 的运维和管理提供了一个统一的平台，而且用�
 Django
 
 ## ceph-dash
+![ceph-dash](/images/img_20191022173026.jpg)   
 [ceph-dash](https://github.com/Crapworks/ceph-dash)
 ### 技术选型
 Flask
@@ -138,11 +142,7 @@ Flask
 ![management](/images/img_20191022164343.jpg)
 ### 监控
 ![monitor](/images/img_20191022164348.jpg)
-### 概览
-![VSM](/images/img_20191022164357.jpg)    
-![inkScope](/images/img_20191022164353.jpg)    
-![Calamari](/images/img_20191022164326.jpg)    
-![ceph-dash](/images/img_20191022173026.jpg)    
+   
 ## 一种声音
 > 从 ceph 社区 qq 群看过去，总会有一些运维或者开发询问哪种 ceph 管理平台方便好用，然后就开始对比 inkscope、vsm、calamari。其实这些都不是重点，重点是看看 github 上的这些项目已经 long long ago 不更新代码了，也就是说软件的生命周期走到了尽头，没有更新和扩展。想想群里的兄弟在生产环境上用这些软件，最后是什么结果……况且大部分公司都是一两个码农在搬砖，投入到开发这三个监控平台上也不现实。
 >
