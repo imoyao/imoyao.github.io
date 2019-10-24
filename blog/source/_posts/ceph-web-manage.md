@@ -150,6 +150,7 @@ Flask
 
 [关于 ceph 监控管理平台的一点个人观点](https://my.oschina.net/yangfanlinux/blog/783756)
 
+完整文档[点此](/doc/Ceph-manager-explore.pdf)     
 ## 参考链接 
 [zphj1987](http://www.zphj1987.com/)
 [Ceph 开源管理监控平台分析](http://www.hl10502.com/2017/03/30/ceph-web-manage/)
