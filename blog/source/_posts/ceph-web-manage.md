@@ -137,11 +137,11 @@ Flask
 ## ceph-DASHBOARD
 
 ![ceph-dashboard](/images/snipaste_20191026_172347.jpg)     
-从Luminous开始，Ceph 提供了原生的Dashboard功能，通过Dashboard可以获取Ceph集群的各种基本状态信息。  
+从 Luminous 开始，Ceph 提供了原生的 Dashboard 功能，通过 Dashboard 可以获取 Ceph 集群的各种基本状态信息。  
 具体参考官方文档说明：[DASHBOARD PLUGIN](https://docs.ceph.com/docs/mimic/mgr/dashboard/#enabling-the-object-gateway-management-frontend)
 ### 技术选型
 CherryPy、AngularJS  
-[Ceph Mimic - 启用Dashboard功能](https://blog.csdn.net/YoFog/article/details/85318736)
+[Ceph Mimic - 启用 Dashboard 功能](https://blog.csdn.net/YoFog/article/details/85318736)
 
 ## 横向对比
 [ceph-days-sf2015](http://de.slideshare.net/Inktank_Ceph/07-ceph-days-sf2015-paul-evans-static)
