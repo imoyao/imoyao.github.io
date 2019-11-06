@@ -152,9 +152,13 @@ toc: true
 
     ```shell
     redis-server -v
+    
     Redis server v=5.0.4 sha=00000000:0 malloc=jemalloc-5.1.0 bits=64 build=b139020f90f1d493
-    whereis redis-server
-    redis-server: /usr/local/bin/redis-server
+    ```
+    
+    ```shell
+    whereis redis-server    # in
+    redis-server: /usr/local/bin/redis-server   # out
     ```
 至此，`Redis`安装完成。
 

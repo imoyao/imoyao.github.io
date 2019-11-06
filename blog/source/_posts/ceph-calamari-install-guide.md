@@ -79,7 +79,7 @@ node2:
     KeyError: 'cluster_fsid'
 
 ```
-- 修改代码`AdminSocketError ` 为 ` (AdminSocketError,KeyError)`：
+- 修改代码`AdminSocketError` 为 `(AdminSocketError,KeyError)`：
 ```python
 try:
     fsid = json.loads(admin_socket(socket_path, ['status'], 'json'))['cluster_fsid']
@@ -161,7 +161,7 @@ node2:
 ![500_error](/images/snipaste_20191106_102957.jpg)   
 ### 500 错误，请联系管理员
 [此处](https://tracker.ceph.com/issues/13476)有关于该问题的描述。
-- 查看calamari 日志
+- 查看 calamari 日志
 ```shell
 tailf /var/log/calamari/calamari.log 
 ```
@@ -284,4 +284,4 @@ KeyError: 'getpwuid(): uid not found: 0'
 ```
 ## 参考链接
 - [安装部署 Ceph Calamari](https://www.cnblogs.com/gaohong/p/4669524.html)
-- [在CentOS 7 安装Calamari](https://www.cnblogs.com/flytor/p/11425135.html)
+- [在 CentOS 7 安装 Calamari](https://www.cnblogs.com/flytor/p/11425135.html)
