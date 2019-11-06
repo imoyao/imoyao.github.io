@@ -1,5 +1,5 @@
 #!/bin/sh
-
+# https://segmentfault.com/q/1010000006999861
 git filter-branch --env-filter '
 an="$GIT_AUTHOR_NAME"
 am="$GIT_AUTHOR_EMAIL"
