@@ -113,7 +113,7 @@ systemctl restart mariadb
 - [MySQL 调优之 innodb_buffer_pool_size 大小设置](https://blog.csdn.net/sunny05296/article/details/78916775)  
 - [低配服务器 VPS 运行 MYSQL 经常崩溃：[ERROR] mysqld: Out of memory (Needed 128663552 bytes)](http://www.bluestep.cc/%E4%BD%8E%E9%85%8D%E6%9C%8D%E5%8A%A1%E5%99%A8vps%E8%BF%90%E8%A1%8Cmysql%E7%BB%8F%E5%B8%B8%E5%B4%A9%E6%BA%83%EF%BC%9Aerror-mysqld-out-of-memory-needed-128663552-bytes/)  
 
-## 版本
+## 版本信息
 ```shell
 mysql --version
 mysql  Ver 15.1 Distrib 5.5.64-MariaDB, for Linux (x86_64) using readline 5.1
