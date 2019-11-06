@@ -1,5 +1,5 @@
 ---
-title: Python多线程模块threading初探
+title: Python 多线程模块 threading 初探
 tags:
 - Python
 ---
@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
 ```
 我们用 `Sublime` 运行一下：
-```
+```plain
 # 运行结果
 ('time for working...', 1512702893.041)
 For 0,I am doing job:Program at 1512702893.04.
@@ -59,7 +59,7 @@ For 2,I am playing music:历历万乡 at 1512702904.04.
 ('time for Go-live...', 1512702905.043)
 [Finished in 12.2s]
 ```
-耗时12秒。
+耗时 12 秒。
 随着我们慢慢学习进步，对项目代码越来越熟悉，技术更加精进，对自己的能力很有信心的时候：工作上面就那些东西，同时做也没啥问题。于是我们开启工作娱乐两不误的工作模式：
 
 ```python
@@ -99,7 +99,7 @@ if __name__ == '__main__':
 
 ```
 运行结果：
-```
+```plain
 ('time for entertaining...', 1512718414.723)
 For 0,I am playing music:山丘 at 1512718414.73.
 For 0,I am doing job:Program at 1512718414.73.
@@ -129,7 +129,7 @@ def intermediate_time(music_names, job_names):
     print('time for Go-live...', time.time())
 ```
 运行结果：
-```
+```plain
 ('time for entertaining...', 1512718992.165)
 For 0,I am playing music:山丘 at 1512718992.17.
 For 0,I am doing job:Program at 1512718992.17.
@@ -163,7 +163,7 @@ def intermediate_time(music_names, job_names):
 
 ```
 运行结果：
-```
+```plain
 ('time for entertaining...', 1512719421.376)
 For 0,I am playing music:山丘 at 1512719421.38.
 For 0,I am doing job:Program at 1512719421.38.
@@ -183,4 +183,4 @@ Do things together(intermediate_time) cost:9.007999897
 
 深入理解：
 
-[python 专题八.多线程编程之thread和threading](http://blog.csdn.net/eastmount/article/details/50155353)
+[python 专题八.多线程编程之 thread 和 threading](http://blog.csdn.net/eastmount/article/details/50155353)
