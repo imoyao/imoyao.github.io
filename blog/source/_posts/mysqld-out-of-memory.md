@@ -85,7 +85,7 @@ systemctl is-enabled mariadb
 /etc/systemd/system/multi-user.target.wants/mariadb.service
 ```
 ### 修改配置
-在`Service`配置项增加如下配置:
+在`Service`配置项中增加如下配置:
 ```bash
 # nu:30
 [Service]
