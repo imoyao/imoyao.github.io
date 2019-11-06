@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="最近开发中又要用到DRBD做远程复制的功能，网上搜到很多都是yum安装的办法，这里记录一下源码安装的办法。">
+<meta name="keywords" content="DRBD,Linux,CentOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS7 下源码安装 DRBD">
+<meta property="og:url" content="https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="最近开发中又要用到DRBD做远程复制的功能，网上搜到很多都是yum安装的办法，这里记录一下源码安装的办法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-30T09:06:35.635Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS7 下源码安装 DRBD">
+<meta name="twitter:description" content="最近开发中又要用到DRBD做远程复制的功能，网上搜到很多都是yum安装的办法，这里记录一下源码安装的办法。">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CentOS7 下源码安装 DRBD</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/blog/2018-01-02/how-to-sort-dict-use-python/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&text=CentOS7 下源码安装 DRBD"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&is_video=false&description=CentOS7 下源码安装 DRBD"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7 下源码安装 DRBD&body=Check out this article: https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&name=CentOS7 下源码安装 DRBD&description=&lt;p&gt;最近开发中又要用到&lt;code&gt;DRBD&lt;/code&gt;做远程复制的功能，网上搜到很多都是&lt;code&gt;yum&lt;/code&gt;安装的办法，这里记录一下源码安装的办法。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭防火墙"><span class="toc-number">1.1.</span> <span class="toc-text">关闭防火墙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭-SELinux"><span class="toc-number">1.2.</span> <span class="toc-text">关闭 SELinux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖"><span class="toc-number">1.3.</span> <span class="toc-text">安装依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载-解压源码"><span class="toc-number">2.</span> <span class="toc-text">下载/解压源码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解压下载的两个tar包"><span class="toc-number">2.1.</span> <span class="toc-text">解压下载的两个tar包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译rpm"><span class="toc-number">3.</span> <span class="toc-text">编译rpm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建构建DRBD需要的目录"><span class="toc-number">3.1.</span> <span class="toc-text">创建构建DRBD需要的目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译DRBD"><span class="toc-number">3.2.</span> <span class="toc-text">编译DRBD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#制作-rpm-包"><span class="toc-number">3.2.1.</span> <span class="toc-text">制作 rpm 包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#直接编译安装"><span class="toc-number">3.2.2.</span> <span class="toc-text">直接编译安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译-drbd-utils-组件"><span class="toc-number">3.3.</span> <span class="toc-text">编译 drbd-utils 组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">4.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装编译生成的文件"><span class="toc-number">4.1.</span> <span class="toc-text">安装编译生成的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加载模块（参见分割线部分）"><span class="toc-number">4.2.</span> <span class="toc-text">加载模块（参见分割线部分）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证安装结果"><span class="toc-number">5.</span> <span class="toc-text">验证安装结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考来源"><span class="toc-number">6.</span> <span class="toc-text">参考来源</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CentOS7 下源码安装 DRBD
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">imoyao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-01-11T02:43:17.000Z" itemprop="datePublished">2018-01-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/教程记录/">教程记录</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CentOS/">CentOS</a>, <a class="tag-link" href="/tags/DRBD/">DRBD</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <script src="/assets/js/APlayer.min.js"> </script><p>最近开发中又要用到<code>DRBD</code>做远程复制的功能，网上搜到很多都是<code>yum</code>安装的办法，这里记录一下源码安装的办法。<br><a id="more"></a></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl disable firewalld</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+<h3 id="关闭-SELinux"><a href="#关闭-SELinux" class="headerlink" title="关闭 SELinux"></a>关闭 SELinux</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sed -i -e "s/=enforcing/=disabled/g" /etc/selinux/config</span><br><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y update </span><br><span class="line">yum -y install gcc make automake autoconf libxslt libxslt-devel flex rpm-build wget</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 安装<code>kernel-devel</code>一定要和<code>uname -r</code>获取结果一致。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rpm -q kernel-devel</span><br><span class="line">uname -r</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.10.0-327.el7.x86_64</span></span><br></pre></td></tr></table></figure>
+<p>返回的内核版本应当一致，否则建议用本地源安装<code>kernel-devel</code>。</p>
+<h2 id="下载-解压源码"><a href="#下载-解压源码" class="headerlink" title="下载/解压源码"></a>下载/解压源码</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">官方地址：https://www.linbit.com/en/drbd-community/drbd-download/</span><br><span class="line">旧版本：http://www.linbit.com/en/drbd-community/old-releases/</span><br><span class="line">MORE：http://www.linbit.com/www.linbit.com/downloads/drbd/</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 在<code>DRBD 8.4.3</code>(?)以上版本，对<code>drbd</code>和<code>utils</code>做了拆分，需要分别进行下载。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://xxx.tar.gz</span><br></pre></td></tr></table></figure>
+<p>当然，如果需要你也可以通过我的分享下载编译好的<code>rpm</code>包（示例版本）：</p>
+<blockquote>
+<p>链接:  <a href="https://pan.baidu.com/s/1huncgDI" target="_blank" rel="noopener">https://pan.baidu.com/s/1huncgDI</a>       密码:  b41i</p>
+</blockquote>
+<h3 id="解压下载的两个tar包"><a href="#解压下载的两个tar包" class="headerlink" title="解压下载的两个tar包"></a>解压下载的两个<code>tar</code>包</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -zxvf drbd-8.*.tar.gz</span><br><span class="line">tar -zxvf drbd-utils-*.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="编译rpm"><a href="#编译rpm" class="headerlink" title="编译rpm"></a>编译<code>rpm</code></h2><h3 id="创建构建DRBD需要的目录"><a href="#创建构建DRBD需要的目录" class="headerlink" title="创建构建DRBD需要的目录"></a>创建构建<code>DRBD</code>需要的目录</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir -p rpmbuild/&#123;BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编译DRBD"><a href="#编译DRBD" class="headerlink" title="编译DRBD"></a>编译<code>DRBD</code></h3><h4 id="制作-rpm-包"><a href="#制作-rpm-包" class="headerlink" title="制作 rpm 包"></a>制作 <code>rpm</code> 包</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd drbd-8.4.5/</span><br><span class="line">make clean</span><br><span class="line">make km-rpm KDIR=/usr/src/kernels/`uname -r`/       # 启用内核模块 自动识别内核版本    </span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You have now:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /root/rpmbuild/RPMS/x86_64/drbd-km-3.10.0_693.11.6.el7.x86_64-8.4.5-1.x86_64.rpm</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /root/rpmbuild/RPMS/x86_64/drbd-km-debuginfo-8.4.5-1.x86_64.rpmmakeinsta</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="直接编译安装"><a href="#直接编译安装" class="headerlink" title="直接编译安装"></a>直接编译安装</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># drbd模块</span></span></span><br><span class="line"></span><br><span class="line">cd drbd</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line">lsmod|grep drbd</span><br><span class="line">cp drbd.ko /lib/modules/`uname -r`/kernel/lib/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 安装模块</span></span></span><br><span class="line">modprobe drbd</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 验证drbd模块是否加载（部分系统默认有该模块）</span></span></span><br><span class="line">lsmod|grep drbd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> drbd                  364858  0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> libcrc32c              12644  4 xfs,drbd,nf_nat,nf_conntrack</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="编译-drbd-utils-组件"><a href="#编译-drbd-utils-组件" class="headerlink" title="编译 drbd-utils 组件"></a>编译 drbd-utils 组件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ../../drbd-utils-8.9.0/   </span><br><span class="line">./configure</span><br><span class="line">make rpm</span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##</span></span></span><br><span class="line">+ exit 0</span><br><span class="line">You have now:</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-km-3.10.0_693.11.6.el7.x86_64-8.4.5-1.x86_64.rpm</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-km-debuginfo-8.4.5-1.x86_64.rpm</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-8.9.0-1.el7.centos.x86_64.rpm</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-utils-8.9.0-1.el7.centos.x86_64.rpm</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-xen-8.9.0-1.el7.centos.x86_64.rpm</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-udev-8.9.0-1.el7.centos.x86_64.rpm</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-pacemaker-8.9.0-1.el7.centos.x86_64.rpm</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-bash-completion-8.9.0-1.el7.centos.x86_64.rpm</span><br><span class="line">/root/rpmbuild/RPMS/x86_64/drbd-debuginfo-8.9.0-1.el7.centos.x86_64.rpm</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">##</span></span></span><br></pre></td></tr></table></figure>
+<p>此时有可能提示错误如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/bin/xsltproc \</span><br><span class="line">        --xinclude \</span><br><span class="line">        http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl drbdsetup.xml</span><br><span class="line">error : Operation in progress</span><br><span class="line">warning: failed to load external entity "http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl"</span><br><span class="line">cannot parse http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl</span><br><span class="line">make[1]: *** [drbdsetup.8] Error 4</span><br></pre></td></tr></table></figure>
+<p>提示有一个地址文件没能找到，解决方法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install docbook-style-xsl</span><br></pre></td></tr></table></figure>
+<p>TODO: 此处暂未找到别的解决方法，欢迎读者留言。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装编译生成的文件"><a href="#安装编译生成的文件" class="headerlink" title="安装编译生成的文件"></a>安装编译生成的文件</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /root/rpmbuild/RPMS/x86_64/</span><br><span class="line">rpm -ivh drbd-* --force</span><br></pre></td></tr></table></figure>
+<h3 id="加载模块（参见分割线部分）"><a href="#加载模块（参见分割线部分）" class="headerlink" title="加载模块（参见分割线部分）"></a>加载模块（参见分割线部分）</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">modprobe drbd</span><br></pre></td></tr></table></figure>
+<h2 id="验证安装结果"><a href="#验证安装结果" class="headerlink" title="验证安装结果"></a>验证安装结果</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">lsmod|grep drbd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回（`depends` 可能略有不同）：</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> drbd                  373375  4</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> libcrc32c              12644  2 xfs,drbd</span></span><br><span class="line"></span><br><span class="line">drbd-overview  </span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 以下两者返回稍有不同    </span></span><br><span class="line">cat /proc/drbd</span><br><span class="line">drbdadm -V</span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回</span></span><br><span class="line"></span><br><span class="line">DRBDADM_BUILDTAG=GIT-hash:\ 79677f4***7ca6b99929\ build\ by\ root@imoyao\,\ 2018-01-06\ 14:25:03</span><br><span class="line">DRBDADM_API_VERSION=1</span><br><span class="line">DRBD_KERNEL_VERSION_CODE=0x080405</span><br><span class="line">DRBDADM_VERSION_CODE=0x080900</span><br><span class="line">DRBDADM_VERSION=8.9.0</span><br></pre></td></tr></table></figure>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><ul>
+<li><p><a href="https://www.server-world.info/en/note?os=CentOS_7&amp;p=drbd&amp;f=1" target="_blank" rel="noopener">CentOS 7 : DRBD : Install : Server World</a></p>
+</li>
+<li><p><a href="http://blog.topspeedsnail.com/archives/8381" target="_blank" rel="noopener">CentOS 安装配置 DRBD – WTF Daily Blog</a></p>
+</li>
+<li><p><a href="http://www.3mu.me/centos%E4%B8%8B%E5%AE%9E%E7%8E%B0heartbeatdrbdmysql%E5%8F%8C%E6%9C%BA%E7%83%AD%E5%A4%87%E7%A1%AC%E4%BB%B6%E6%95%85%E9%9A%9C%E8%87%AA%E5%8A%A8%E5%88%87%E6%8D%A2%E9%AB%98%E5%8F%AF%E7%94%A8ha/#respond" target="_blank" rel="noopener">CentOS 下实现 Heartbeat+DRBD+MySQL 双机热备硬件故障自动切换高可用(HA)方案 | 三木的人生——3mu.me</a></p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        
+        
+        <div class="vcomment"></div>
+        
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#准备工作"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭防火墙"><span class="toc-number">1.1.</span> <span class="toc-text">关闭防火墙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭-SELinux"><span class="toc-number">1.2.</span> <span class="toc-text">关闭 SELinux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装依赖"><span class="toc-number">1.3.</span> <span class="toc-text">安装依赖</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载-解压源码"><span class="toc-number">2.</span> <span class="toc-text">下载/解压源码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解压下载的两个tar包"><span class="toc-number">2.1.</span> <span class="toc-text">解压下载的两个tar包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译rpm"><span class="toc-number">3.</span> <span class="toc-text">编译rpm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建构建DRBD需要的目录"><span class="toc-number">3.1.</span> <span class="toc-text">创建构建DRBD需要的目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译DRBD"><span class="toc-number">3.2.</span> <span class="toc-text">编译DRBD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#制作-rpm-包"><span class="toc-number">3.2.1.</span> <span class="toc-text">制作 rpm 包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#直接编译安装"><span class="toc-number">3.2.2.</span> <span class="toc-text">直接编译安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译-drbd-utils-组件"><span class="toc-number">3.3.</span> <span class="toc-text">编译 drbd-utils 组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装"><span class="toc-number">4.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装编译生成的文件"><span class="toc-number">4.1.</span> <span class="toc-text">安装编译生成的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加载模块（参见分割线部分）"><span class="toc-number">4.2.</span> <span class="toc-text">加载模块（参见分割线部分）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证安装结果"><span class="toc-number">5.</span> <span class="toc-text">验证安装结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考来源"><span class="toc-number">6.</span> <span class="toc-text">参考来源</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&text=CentOS7 下源码安装 DRBD"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&is_video=false&description=CentOS7 下源码安装 DRBD"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7 下源码安装 DRBD&body=Check out this article: https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&title=CentOS7 下源码安装 DRBD"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-01-11/how-to-install-drbd-on-CentOS7/&name=CentOS7 下源码安装 DRBD&description=&lt;p&gt;最近开发中又要用到&lt;code&gt;DRBD&lt;/code&gt;做远程复制的功能，网上搜到很多都是&lt;code&gt;yum&lt;/code&gt;安装的办法，这里记录一下源码安装的办法。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 - 2019 IMOYAO
+    Theme by <a href="https://github.com/probberechts/hexo-theme-cactus">Cactus</a>.
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Valine Comments -->
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+<script type="text/javascript">
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI",
+        appKey: "CARePe7R247vdXACFg1fhk4E",
+        avatar:"monsterid",
+        placeholder: "我们期待理性、友好而和谐的声音……",
+        guest_info:guest_info,
+        pageSize:"10"
+    })
+</script>
+
+    </div>
+</body>
+</html>

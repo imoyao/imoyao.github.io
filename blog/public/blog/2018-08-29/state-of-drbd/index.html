@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="在管理DRBD的时候，需要关注drbd相关的各种状态指标，本文主要记录相关的指令及显示含义。">
+<meta name="keywords" content="DRBD,Linux,高可用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DRBD 状态指标记录">
+<meta property="og:url" content="https://imoyao.github.io/blog/2018-08-29/state-of-drbd/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="在管理DRBD的时候，需要关注drbd相关的各种状态指标，本文主要记录相关的指令及显示含义。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-30T09:06:41.231Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DRBD 状态指标记录">
+<meta name="twitter:description" content="在管理DRBD的时候，需要关注drbd相关的各种状态指标，本文主要记录相关的指令及显示含义。">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>DRBD 状态指标记录</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/blog/2018-09-11/Record-of-drbd/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/blog/2018-08-28/drbd-with-external-disk/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&text=DRBD 状态指标记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&is_video=false&description=DRBD 状态指标记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DRBD 状态指标记录&body=Check out this article: https://imoyao.github.io/blog/2018-08-29/state-of-drbd/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&name=DRBD 状态指标记录&description=&lt;p&gt;在管理&lt;code&gt;DRBD&lt;/code&gt;的时候，需要关注&lt;code&gt;drbd&lt;/code&gt;相关的各种状态指标，本文主要记录相关的指令及显示含义。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DRBD状态概览"><span class="toc-number">1.</span> <span class="toc-text">DRBD状态概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接状态"><span class="toc-number">2.</span> <span class="toc-text">连接状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#角色状态"><span class="toc-number">3.</span> <span class="toc-text">角色状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#硬盘状态"><span class="toc-number">4.</span> <span class="toc-text">硬盘状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO-状态标记"><span class="toc-number">5.</span> <span class="toc-text">IO 状态标记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能指标"><span class="toc-number">6.</span> <span class="toc-text">性能指标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        DRBD 状态指标记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">imoyao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-08-29T03:26:43.000Z" itemprop="datePublished">2018-08-29</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/教程记录/">教程记录</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/DRBD/">DRBD</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/高可用/">高可用</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <script src="/assets/js/APlayer.min.js"> </script><p>在管理<code>DRBD</code>的时候，需要关注<code>drbd</code>相关的各种状态指标，本文主要记录相关的指令及显示含义。<br><a id="more"></a></p>
+<h2 id="DRBD状态概览"><a href="#DRBD状态概览" class="headerlink" title="DRBD状态概览"></a><code>DRBD</code>状态概览</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbd-overview</span><br><span class="line">drbd status</span><br><span class="line">cat /proc/drbd      # 9.0废止在drbd9中，更多的是使用drbdadm或drbdsetup来获取节点的状态信息。</span><br></pre></td></tr></table></figure>
+<p>以上命令略有不同，可自行对照</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@Storage drbd]# pwd</span><br><span class="line">/usr/lib/drbd</span><br><span class="line">[root@Storage drbd]# ./drbd status</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出示例</span></span><br><span class="line">drbd driver loaded OK; device status:</span><br><span class="line">version: 8.4.3 (api:1/proto:86-101)</span><br><span class="line">GIT-hash: 89a2942***221f964d3ee515 build by root@third, 2017-07-20 10:58:42</span><br><span class="line">m:res          cs            ro                 ds                 p       mounted       fstype</span><br><span class="line">0:drbd0        Connected     Primary/Secondary  UpToDate/UpToDate  C</span><br><span class="line">1:drbd1^^0     StandAlone    Primary/Unknown    UpToDate/DUnknown  r----s</span><br><span class="line">……</span><br><span class="line">6:drbd6        Connected     Primary/Secondary  UpToDate/UpToDate  C       /xxx  ext4</span><br></pre></td></tr></table></figure>
+<p>缩写解释</p>
+<ul>
+<li>res：资源名称</li>
+<li>cs：connect state,资源连接状态</li>
+<li>ro：role，表示节点角色信息<br>第一次启动 drbd 时，两个 drbd 节点默认都处于 Secondary 状态，<br>Primary/Secondary（代表这个是主节点）<br>Secondary/Primary（代表这个是副节点）</li>
+<li>ds：disk state,磁盘状态信息<br>Inconsistent/Inconsisten，即为“不一致/不一致”状态，表示两个节点的磁盘数据处于不一致状态。<br>UpToDate/Inconsistent（正在同步，数据还没有一致）<br>UpToDate/UpToDate （同步完成，数据一致）</li>
+<li>C drbd 的复制协议，即 A、B、C 协议。</li>
+<li>r—–是 IO 标记，反映的是该资源的 IO 状态信息。共有 6 种 IO 状态标记符号。</li>
+</ul>
+<h2 id="连接状态"><a href="#连接状态" class="headerlink" title="连接状态"></a>连接状态</h2><p>节点间通过 TCP 连接进行通信，在建立连接、断开连接、特殊情况下有很多种连接状态。</p>
+<p>DRBD 连接建立完成，表示元数据区、数据区等一切都已准备好，可以进行任何数据同步的操作。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master ~]# drbdadm cstate drbd20</span><br><span class="line">Connected</span><br></pre></td></tr></table></figure></p>
+<p>一个资源可能有以下连接状态中的一种</p>
+<ul>
+<li>Unconfigured：设备在等待配置</li>
+<li><strong>WFConnection</strong>：当前节点正在等待对端节点出现。例如对方节点<code>drbdadm down</code>后，本节点将处于本状态。</li>
+<li><strong>StandAlone</strong>：无连接。出现这种状态可能是因为：未连接过、使用<code>drbdadm disconnect</code>断开连接、节点由于身份验证的原因未成功加入 drbd 集群使得连接被删除、脑裂后断开连接。</li>
+<li>Disconnecting：断开连接的一个临时过渡状态。它很快就会切入下一状态就是<code>StandAlone</code>。</li>
+<li>Unconnected：尝试再次发起<code>TCP</code>连接时的一个临时连接状态(是连接超时后再次发送连接请求产生的状态)，它的下一个状态可能是<code>WFConnection</code>，也可能是<code>WFReportParams</code>。</li>
+<li>Timeout：和对端通信超时时的临时状态。下一个状态就是<code>Unconnection</code>。</li>
+<li>BrokenPipe：和对端连接丢失时的临时状态。下一个状态是<code>Unconnection</code>。</li>
+<li>NetworkFailure：和对端连接丢失时的临时状态。下一个状态是<code>Unconnection</code>。(没错，和上面的一样)</li>
+<li>ProtocolError：和对端连接丢失时的临时状态。下一个状态是<code>Unconnection</code>。(没错，还是和上面的一样)</li>
+<li>TearDown：对端关闭 TCP 连接时的临时状态。下一个状态是<code>Unconnection</code>。</li>
+<li><strong>Connected</strong>：DRBD 连接已经建立完成，数据镜像已经激活成功。这个状态是<code>drbd</code>正常运行时的状态。</li>
+<li>WFReportParams：TCP 连接已经建立完成，该节点正在等待对端的第一个数据包。</li>
+<li>StartingSyncS：全盘数据同步中。只有在初始化时才应该全盘同步。下一个状态是：<code>SyncSource</code>或<code>PauseSyncS</code>。</li>
+<li>StartingSyncT：全盘数据同步中。只有在初始化时才应该全盘同步。下一个状态是：<code>WFSyncUUID</code>。</li>
+<li>WFBitMapS：部分数据正在同步。下一个状态是：<code>SyncSource</code>或<code>PauseSyncS</code>。</li>
+<li>WFBitMapT：部分数据正在同步。下一个状态是：<code>WFSyncUUID</code>。</li>
+<li>WFSyncUUID：同步马上就要开始了。下一个状态：<code>SyncTarget</code>或<code>PauseSyncT</code>。</li>
+<li><strong>SyncSource</strong>：正在同步，且本节点是数据同步的源端。</li>
+<li><strong>SyncTartget</strong>：正在同步，且本节点是数据同步的目标端。</li>
+<li>PauseSyncS：本节点是同步的源端节点，但同步过程当前被暂停。出现这种状态的原因可能是当前同步进程依赖于另一个同步进程完成，或者使用<code>drbdadm pause-sync</code>手动中断了同步操作。</li>
+<li>PauseSyncT：本节点是同步的目标端，但同步过程当前被暂停。出现这种状态的原因可能是当前同步进程依赖于另一个同步进程完成，或者使用<code>drbdadm pause-sync</code>手动中断了同步操作。</li>
+<li>VerifyS：正在进行在线设备验证，且本节点将成为验证的源端。</li>
+<li>VerifyT：正在进行在线设备验证，且本节点将成为验证的目标端。</li>
+</ul>
+<p>在 drbd9 中，<code>WFConnection</code>状态改为<code>connecting</code>状态。删除了<code>WFReportParams</code>状态。添加了以下几个同步相关的状态：</p>
+<ul>
+<li>Off：该卷组还未同步，因为连接未建立。</li>
+<li><strong>Established</strong>：所有对该卷组的写操作已经在线完成同步。这是<code>drbd</code>正常运行时的状态。</li>
+<li>Ahead：数据同步操作被挂起，因为网络套接字中达到了一定的堵塞程度，无法应付更多的负载。该状态需要配置<code>on-congestion</code>选项来启用。</li>
+<li>Behind：对端将数据同步操作挂起，因为网络套接字中达到了一定的堵塞程度，无法应付更多的负载。该状态需要在对端节点上配置<code>on-congestion</code>选项来启用。</li>
+</ul>
+<h2 id="角色状态"><a href="#角色状态" class="headerlink" title="角色状态"></a>角色状态</h2><p>资源的角色状态既可以从/proc/drbd 文件中获取，也可以使用下面的命令来获取。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@drbd1 ~]# drbdadm role data1</span><br><span class="line">Primary/Unknown</span><br></pre></td></tr></table></figure></p>
+<p>在角色状态信息中，本地节点总是标记在第一位，远程节点标记在结尾。</p>
+<p>可能的节点角色状态有：</p>
+<ul>
+<li>Primary：资源的 primary 角色，该角色状态下的 drbd 设备可以进行挂载、读、写等。在没有启用多主复制模型(dual-primary mode)，只能有一个 primary 节点。</li>
+<li>Secondary：资源的 secondary 角色。该角色状态下的 drbd 设备会接收来自 primary 端的数据更新(除非和对端不是 primary)。且该角色的 drbd 设备不可挂载、不可读、不可写。</li>
+<li>Unknown：资源的角色未知。本地节点的角色状态绝对不可能会是这种状态。只有对端节点断开连接时对端节点才处于 Unknown 状态。</li>
+</ul>
+<h2 id="硬盘状态"><a href="#硬盘状态" class="headerlink" title="硬盘状态"></a>硬盘状态</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@master ~]# drbdadm dstate drbd20</span><br><span class="line">UpToDate/UpToDate</span><br></pre></td></tr></table></figure>
+<p>在磁盘状态信息中，本地节点的磁盘状态总是标记在第一位，远程节点标记在结尾。本地和对等节点的硬盘有可能为下列状态之一：</p>
+<ul>
+<li>Diskless 无盘：本地没有块设备分配给<code>DRBD</code>使用，这意味着资源可能从没有和它的底层块设备进行关联绑定(attach)，也可能是手动 detach 解除了关联，还可能是出现了底层 I/O 错误时自动分离（detach）。</li>
+<li>Attaching：读取无数据时候的瞬间状态</li>
+<li>Failed：失败，本地块设备报告<code>I/O</code>错误的下一个状态，其下一个状态为<code>Diskless</code>无盘</li>
+<li>Negotiating：在已经连接的 DRBD 设置进行<code>Attach</code>读取无数据前的瞬间状态</li>
+<li>Inconsistent：数据不一致，在两个节点上（初始的完全同步前）这种状态出现后立即创建一个新的资源。此外，在同步期间（同步目标端）正接收同步数据时，也会进入不一致状态。</li>
+<li>Outdated：数据资源是一致的，但是已经过时。(例如，已经同步后 secondary 下线了，之后又上线了，在还没开始重新同步的时候就是 Outdated 状态)</li>
+<li>DUnknown：当对等节点网络连接不可用时出现这种状态</li>
+<li>Consistent：连接断开时的数据处于一致性状态，当连接建立后，将决定数据是<code>UpToDate</code>还是<code>Outdated</code>状态</li>
+<li>UpToDate：一致的、最新的数据状态，这个状态为正常状态</li>
+</ul>
+<h2 id="IO-状态标记"><a href="#IO-状态标记" class="headerlink" title="IO 状态标记"></a>IO 状态标记</h2><p>IO 状态标记表示的是当前资源的 IO 操作状态。共有 6 种状态：</p>
+<ul>
+<li>IO 挂起：r 或 s 都可能表示 IO 挂起，一般是 r。r=running，s=suspended。</li>
+<li>串行重新同步：资源正在等待进行重新同步，但被 resync-after 选项延迟了同步进度。该状态标记为”a”，通常该状态栏应该处于”-“。</li>
+<li>对端初始化同步挂起：资源正在等待进行重新同步，但对端节点因为某些原因而 IO 挂起。该状态标记为”p”，通常该状态栏应该处于”-“。</li>
+<li>本地初始化同步挂起：资源正在等待进行重新同步，但本节点因为某些原因而 IO 挂起。该状态标记为”u”，通常该状态栏应该处于”-“。</li>
+<li>本地 IO 阻塞：通常该状态栏应该处于”-“。可能有以下几种标记：<ul>
+<li>d：因为 DRBD 内部原因导致的 IO 阻塞。</li>
+<li>b：后端设备正处于 IO 阻塞。</li>
+<li>n：网络套接字阻塞。</li>
+<li>a：网络套接字和后端块设备同时处于阻塞状态。</li>
+</ul>
+</li>
+<li>Activity Log 更新挂起：当 al 更新被挂起时，处于该状态，标记为”s”，通常该状态栏应该处于”-“。(如果不知道什么是 Active Log，请无视本标记)</li>
+</ul>
+<h2 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h2><p>习惯上，我们使用<code>cat /proc/drbd</code>获取<code>drbd</code>状态信息。主要是一些计数器和计量器的值。<br><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@Storage ~]# cat /proc/drbd </span><br><span class="line">version: 8.4.3 (api:1/proto:86-101)</span><br><span class="line">srcversion: 9D811F04CD6DC2C9A9A608F </span><br><span class="line"></span><br><span class="line"> 3: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----</span><br><span class="line">    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0</span><br><span class="line"></span><br><span class="line">301: cs:Connected ro:Secondary/Secondary ds:UpToDate/UpToDate C r-----</span><br><span class="line">    ns:0 nr:0 dw:0 dr:0 al:0 bm:0 lo:0 pe:0 ua:0 ap:0 ep:1 wo:f oos:0</span><br></pre></td></tr></table></figure></p>
+<p>drbd84 中使用缩写符号来标记性能指标，而 drbd9 中使用全称来表示。例如 drbd84 中的 ns 和 drbd9 中的 send 是同一个意思。</p>
+<ul>
+<li>ns/send (network send)：通过网络连接发送给对端的数据量，单位为 Kb。</li>
+<li>nr/receive (network receive)：通过网络连接接收到对端发送来的数据量，单位为 Kb。</li>
+<li>dw/written (disk write)：该卷(volume)写入本地磁盘的数据量，单位为 Kb。</li>
+<li>dr/read (disk read)：该卷(volume)从本地磁盘读取的数据量，单位为 Kb。</li>
+<li>al/al-writes (activity log)：元数据区中 al 更新的次数。</li>
+<li>bm/bm-writes (bit map)：元数据区中 bitmap 更新的次数。</li>
+<li>lo/lower-pending (local count)：DRBD 发起的打开本地 IO 子系统的请求次数。</li>
+<li>pe/pending (pending)：本地发送给对端但却没有回复的次数。</li>
+<li>ua/unacked (unacknowledged)：接收到对端发送的请求但却没有给予回复的请求数量。</li>
+<li>ap/upper-pending (application pending)：转发给 DRBD 的 IO 块的请求，但 DRBD 还没给予回复的请求数量。</li>
+<li>ep (epochs):epoch 对象的数量。通常为 1。drbd9 中没有该指标。</li>
+<li>wo/write-ordering (write order):当前正在使用的 write order 方法：b(barrier), f(flush), d(drain)或 n(none)。</li>
+<li>oos/out-of-sync (out of sync):当前不同步的数据量，单位为 Kb。</li>
+</ul>
+<p>上面所有”未给予回复”的指标数量都表示动作还未完成，需要回复后才表示操作完成。这些未回复数值不能太大。</p>
+<p>此外，drbd9 中添加了以下几个指标：</p>
+<ul>
+<li>resync-suspended：重新同步操作当前是否被挂起。可能的值为 no/user/peer/dependency。</li>
+<li>blocked：本地 IO 的拥挤情况。<ul>
+<li>no：本地 IO 不拥挤。</li>
+<li>upper：DRBD 层之上的 IO 被阻塞。例如到文件系统上的 IO 阻塞。可能有以下几种原因：<ul>
+<li>管理员使用 drbdadm suspend-io 命令挂起了 I/O 操作。</li>
+<li>短暂的 IO 阻塞，例如 attach/detach 导致的。</li>
+<li>删除了缓冲区。</li>
+<li>bitmap 的 IO 等待。</li>
+</ul>
+</li>
+<li>lower：底层设备处于拥挤状态。</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://www.cnblogs.com/f-ck-need-u/p/8684648.html" target="_blank" rel="noopener">drbd(三)：drbd 的状态说明 - 骏马金龙 - 博客园</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        
+        
+        <div class="vcomment"></div>
+        
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DRBD状态概览"><span class="toc-number">1.</span> <span class="toc-text">DRBD状态概览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#连接状态"><span class="toc-number">2.</span> <span class="toc-text">连接状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#角色状态"><span class="toc-number">3.</span> <span class="toc-text">角色状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#硬盘状态"><span class="toc-number">4.</span> <span class="toc-text">硬盘状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO-状态标记"><span class="toc-number">5.</span> <span class="toc-text">IO 状态标记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#性能指标"><span class="toc-number">6.</span> <span class="toc-text">性能指标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考链接"><span class="toc-number">7.</span> <span class="toc-text">参考链接</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&text=DRBD 状态指标记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&is_video=false&description=DRBD 状态指标记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=DRBD 状态指标记录&body=Check out this article: https://imoyao.github.io/blog/2018-08-29/state-of-drbd/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&title=DRBD 状态指标记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2018-08-29/state-of-drbd/&name=DRBD 状态指标记录&description=&lt;p&gt;在管理&lt;code&gt;DRBD&lt;/code&gt;的时候，需要关注&lt;code&gt;drbd&lt;/code&gt;相关的各种状态指标，本文主要记录相关的指令及显示含义。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 - 2019 IMOYAO
+    Theme by <a href="https://github.com/probberechts/hexo-theme-cactus">Cactus</a>.
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Valine Comments -->
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+<script type="text/javascript">
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI",
+        appKey: "CARePe7R247vdXACFg1fhk4E",
+        avatar:"monsterid",
+        placeholder: "我们期待理性、友好而和谐的声音……",
+        guest_info:guest_info,
+        pageSize:"10"
+    })
+</script>
+
+    </div>
+</body>
+</html>
