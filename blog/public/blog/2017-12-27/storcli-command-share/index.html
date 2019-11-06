@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="目前LSI RAID卡使用的配置工具主要有：Megaraid Storage Manager（MSM，图形环境）、MegaCLI（字符界面）、StorCLI（字符界面）。其中StorCLI作为MegaCLI后继者整合了LSI和原来3ware的产品支持，兼容MegaCLI命令的同时更加简洁。前面的文章记录了MegaCli常用管理命令，本篇主要记录StorCLI的使用。">
+<meta name="keywords" content="Linux,存储,RAID,Storcli">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Storcli 常用管理命令汇总">
+<meta property="og:url" content="https://imoyao.github.io/blog/2017-12-27/storcli-command-share/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="目前LSI RAID卡使用的配置工具主要有：Megaraid Storage Manager（MSM，图形环境）、MegaCLI（字符界面）、StorCLI（字符界面）。其中StorCLI作为MegaCLI后继者整合了LSI和原来3ware的产品支持，兼容MegaCLI命令的同时更加简洁。前面的文章记录了MegaCli常用管理命令，本篇主要记录StorCLI的使用。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-30T09:06:41.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Storcli 常用管理命令汇总">
+<meta name="twitter:description" content="目前LSI RAID卡使用的配置工具主要有：Megaraid Storage Manager（MSM，图形环境）、MegaCLI（字符界面）、StorCLI（字符界面）。其中StorCLI作为MegaCLI后继者整合了LSI和原来3ware的产品支持，兼容MegaCLI命令的同时更加简洁。前面的文章记录了MegaCli常用管理命令，本篇主要记录StorCLI的使用。">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Storcli 常用管理命令汇总</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </span>
+    <br>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/blog/2018-01-02/how-to-sort-dict-use-python/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/blog/2017-12-03/recommend-books-for-Python-learner/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&text=Storcli 常用管理命令汇总"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&is_video=false&description=Storcli 常用管理命令汇总"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Storcli 常用管理命令汇总&body=Check out this article: https://imoyao.github.io/blog/2017-12-27/storcli-command-share/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&name=Storcli 常用管理命令汇总&description=&lt;p&gt;目前&lt;code&gt;LSI RAID&lt;/code&gt;卡使用的配置工具主要有：&lt;code&gt;Megaraid Storage Manager&lt;/code&gt;（MSM，图形环境）、&lt;code&gt;MegaCLI&lt;/code&gt;（字符界面）、&lt;code&gt;StorCLI&lt;/code&gt;（字符界面）。其中&lt;code&gt;StorCLI&lt;/code&gt;作为&lt;code&gt;MegaCLI&lt;/code&gt;后继者整合了&lt;code&gt;LSI&lt;/code&gt;和原来&lt;code&gt;3ware&lt;/code&gt;的产品支持，兼容&lt;code&gt;MegaCLI&lt;/code&gt;命令的同时更加简洁。&lt;a href=&#34;https://imoyao.github.io/blog/2017-11-20/megacli_command_share/&#34;&gt;前面的文章&lt;/a&gt;记录了&lt;code&gt;MegaCli&lt;/code&gt;常用管理命令，本篇主要记录&lt;code&gt;StorCLI&lt;/code&gt;的使用。&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Storcli"><span class="toc-number">1.</span> <span class="toc-text">安装Storcli</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">1.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Centos"><span class="toc-number">1.2.</span> <span class="toc-text">Centos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESXi-5-5-amp-ESXi-6-0"><span class="toc-number">1.3.</span> <span class="toc-text">ESXi 5.5 &amp; ESXi 6.0</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storcli使用"><span class="toc-number">2.</span> <span class="toc-text">storcli使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-初始化-raid"><span class="toc-number">3.</span> <span class="toc-text">创建/初始化 raid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存加速"><span class="toc-number">4.</span> <span class="toc-text">缓存加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#误插拔设备合并"><span class="toc-number">5.</span> <span class="toc-text">误插拔设备合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">6.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考来源"><span class="toc-number">7.</span> <span class="toc-text">参考来源</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Storcli 常用管理命令汇总
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">imoyao</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-27T03:38:45.000Z" itemprop="datePublished">2017-12-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/教程记录/">教程记录</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/RAID/">RAID</a>, <a class="tag-link" href="/tags/Storcli/">Storcli</a>, <a class="tag-link" href="/tags/存储/">存储</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <script src="/assets/js/APlayer.min.js"> </script><p>目前<code>LSI RAID</code>卡使用的配置工具主要有：<code>Megaraid Storage Manager</code>（MSM，图形环境）、<code>MegaCLI</code>（字符界面）、<code>StorCLI</code>（字符界面）。其中<code>StorCLI</code>作为<code>MegaCLI</code>后继者整合了<code>LSI</code>和原来<code>3ware</code>的产品支持，兼容<code>MegaCLI</code>命令的同时更加简洁。<a href="https://imoyao.github.io/blog/2017-11-20/megacli_command_share/">前面的文章</a>记录了<code>MegaCli</code>常用管理命令，本篇主要记录<code>StorCLI</code>的使用。</p>
+<a id="more"></a>
+<h2 id="安装Storcli"><a href="#安装Storcli" class="headerlink" title="安装Storcli"></a>安装<code>Storcli</code></h2><h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unzip ul_avago_storcli_1.18.11_anyos.zip</span><br><span class="line">dpkg -i storcli_all_os/Ubuntu/storcli_1.18.11_all.deb</span><br><span class="line">dpkg -l | grep -i storcli</span><br></pre></td></tr></table></figure>
+<h3 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unzip ul_avago_storcli_1.18.11_anyos.zip</span><br><span class="line">rpm -ivh storcli_all_os/Linux/storcli-1.18.11-1.noarch.rpm</span><br><span class="line">rpm -qi storcli</span><br><span class="line">ln -s /opt/MegaRAID/storcli/storcli64 /usr/local/bin/storcli</span><br></pre></td></tr></table></figure>
+<h3 id="ESXi-5-5-amp-ESXi-6-0"><a href="#ESXi-5-5-amp-ESXi-6-0" class="headerlink" title="ESXi 5.5 &amp; ESXi 6.0"></a>ESXi 5.5 &amp; ESXi 6.0</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">unzip ul_avago_storcli_1.18.11_anyos.zip</span><br><span class="line">esxcli software vib install -v=vmware-esx-storcli-1.21.06.vib --no-sig-check</span><br><span class="line">ln -s /opt/lsi/storcli/storcli /sbin/storcli</span><br><span class="line">storcli -V</span><br></pre></td></tr></table></figure>
+<h2 id="storcli使用"><a href="#storcli使用" class="headerlink" title="storcli使用"></a><code>storcli</code>使用</h2><p>专有名词解释：</p>
+<p><code>/cx, /vx</code> 表示 <code>Controller/Virtual Drive Number</code>.</p>
+<p><code>/ex, /sx</code>表示 <code>Enclosure/Slot ID</code>.</p>
+<p><code>VD</code>表示 <code>Virtual Drive</code>.</p>
+<p>要输出<code>json</code>格式的返回,在命令行最后添加<code>J</code>.</p>
+<ul>
+<li>固件升级</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx download file=/path/to/firmware.rom</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看控制器和配置信息</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx show all</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用激活码激活特性(如 CacheCade, FastPath,…)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx set aso key=AAAAAAAABBBBBBBBCCCCCCCC</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看现有硬盘及其状态的信息 (IDs,…)</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx /eall /sall show (all)</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = Show Drive Information Succeeded.</span><br><span class="line"></span><br><span class="line">Drive Information :</span><br><span class="line">=================</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">EID:Slt DID State DG     Size Intf Med SED PI SeSz Model                  Sp</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line">252:0     1 Onln   1 3.637 TB SATA HDD N   N  512B WDC WD4000FYYZ-03UL1B3 U</span><br><span class="line">252:1     3 Onln   1 3.637 TB SATA HDD N   N  512B WDC WD4000FYYZ-03UL1B3 U</span><br><span class="line">......</span><br><span class="line">252:6    85 Onln   0 3.637 TB SATA HDD N   N  512B WDC WD4000FYYZ-03UL1B3 U</span><br><span class="line">252:7     2 UGood  - 3.637 TB SATA HDD N   N  512B WDC WD4000FYYZ-03UL1B3 D</span><br><span class="line">-----------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">EID-Enclosure Device ID|Slt-Slot No.|DID-Device ID|DG-DriveGroup</span><br><span class="line">DHS-Dedicated Hot Spare|UGood-Unconfigured Good|GHS-Global Hotspare</span><br><span class="line">UBad-Unconfigured Bad|Onln-Online|Offln-Offline|Intf-Interface</span><br><span class="line">Med-Media Type|SED-Self Encryptive Drive|PI-Protection Info</span><br><span class="line">SeSz-Sector Size|Sp-Spun|U-Up|D-Down|T-Transition|F-Foreign</span><br><span class="line">UGUnsp-Unsupported|UGShld-UnConfigured shielded|HSPShld-Hotspare shielded</span><br><span class="line">CFShld-Configured shielded|Cpybck-CopyBack|CBShld-Copyback Shielded</span><br></pre></td></tr></table></figure>
+<ul>
+<li>现有虚拟硬盘及其状态的信息</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx /vall show (all)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看当前所有重建的状态</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx /eall /sall show rebuild</span><br></pre></td></tr></table></figure>
+<h2 id="创建-初始化-raid"><a href="#创建-初始化-raid" class="headerlink" title="创建/初始化 raid"></a>创建/初始化 <code>raid</code></h2><ul>
+<li><code>shell</code>创建<code>VD</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx add vd type=[RAID0(r0)|RAID1(r1)|...] drives=[EnclosureID:SlotID|:SlotID-SlotID|:SlotID,SlotID]</span><br><span class="line"><span class="meta">#</span><span class="bash">more</span></span><br><span class="line">storcli /cx add vd type=raid[0|1|5|6|00|10|50|60(r0|r1|...)] [Size=&lt;VD1_Sz&gt;,&lt;VD2_Sz&gt;,..|all] [name=&lt;VDNAME1&gt;,..] drives=e:s|e:s-x,y;e:s-x,y,z [PDperArray=x] [SED] [pdcache=on|off|default] [pi] [DimmerSwitch(ds)=default|automatic(auto)|none|maximum(max)|MaximumWithoutCaching(maxnocache)] [wt|wb] [nora|ra] [direct|cached] [CachedBadBBU|NoCachedBadBBU][cachevd] [Strip=&lt;8|16|32|64|128|256|1024&gt;] [AfterVd=X] [Spares = [e:]s|[e:]s-x|[e:]s-x,y] [force][ExclusiveAccess]</span><br></pre></td></tr></table></figure>
+<p>示例:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用硬盘0-2创建raid1</span></span><br><span class="line">storcli /cx add vd type=r1 drives=252:0-2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建 raid5,write-bakc,<span class="built_in">read</span>-ahead</span></span><br><span class="line">storcli /cx add vd type=raid5  size=all names=VD1 drives=32:2-7 wb ra</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建 raid10/50/60,必须设定PDperArray参数,write-bakc,<span class="built_in">read</span>-ahead</span></span><br><span class="line">storcli /cx add vd type=raid10 size=all names=VD1 drives=32:2-7 PDperArray=2 wb ra</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>shell</code>之初始化<code>VD</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">storcli /cx/vx start init (force)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>监视初始化进度</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx/vx show init</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>shell</code>之移除<code>VD</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx/vx del (force)</span><br></pre></td></tr></table></figure>
+<h2 id="缓存加速"><a href="#缓存加速" class="headerlink" title="缓存加速"></a>缓存加速</h2><ul>
+<li><code>shell</code>之创建<code>CacheCade</code>设备（SSD 缓存加速）</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx add vd cc type=r[0,1,10] drives=[EnclosureID:SlotID|:SlotID-SlotID|:SlotID,SlotID]  WT|WB (assignvds=0,1,2)</span><br></pre></td></tr></table></figure>
+<p>示例:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /c0 add vd cc type=r1 drives=252:2-3 WB</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>shell</code>之<code>CacheCade</code>激活/停用</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx/[vx|vall] set ssdCaching=[on|off]</span><br></pre></td></tr></table></figure>
+<p>示例:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /c0/v1 set ssdCaching=on</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>shell</code>之移除<code>CacheCade</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx/vx del cc</span><br></pre></td></tr></table></figure>
+<h2 id="误插拔设备合并"><a href="#误插拔设备合并" class="headerlink" title="误插拔设备合并"></a>误插拔设备合并</h2><p>如果不正确地移除设备并重新连接到 RAID 控制器，它将被识别为 UBAD(Unconfigured Bad)。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /c0 /eall /sall show</span><br></pre></td></tr></table></figure>
+<p>此时的返回结果：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = Show Drive Information Succeeded.</span><br><span class="line"></span><br><span class="line">Drive Information :</span><br><span class="line">=================</span><br><span class="line"></span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">EID:Slt DID State DG       Size Intf Med SED PI SeSz Model                  Sp </span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">252:0     7 Onln   0  465.25 GB SATA HDD N   N  512B WDC WD5003ABYX-01WERA1 U  </span><br><span class="line">252:1     6 Onln   1  465.25 GB SATA HDD N   N  512B WDC WD5003ABYX-01WERA1 U  </span><br><span class="line">252:2     5 UGood  -  465.25 GB SATA HDD N   N  512B WDC WD5003ABYX-01WERA1 U  </span><br><span class="line">252:3     4 UBad   - 223.062 GB SATA SSD N   N  512B INTEL SSDSC2CW240A3    U  </span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>此时<code>252:3</code>必需置为<code>UGOOD</code></p>
+<ul>
+<li><code>UBad</code>置为<code>UGOOD</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx /ex /sx set good</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = Show Drive Information Succeeded.</span><br><span class="line"></span><br><span class="line">Drive Information :</span><br><span class="line">=================</span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">EID:Slt DID State DG       Size Intf Med SED PI SeSz Model                  Sp </span><br><span class="line">-------------------------------------------------------------------------------</span><br><span class="line">252:0     7 Onln   0  465.25 GB SATA HDD N   N  512B WDC WD5003ABYX-01WERA1 U  </span><br><span class="line">252:1     6 Onln   1  465.25 GB SATA HDD N   N  512B WDC WD5003ABYX-01WERA1 U  </span><br><span class="line">252:2     5 UGood  -  465.25 GB SATA HDD N   N  512B WDC WD5003ABYX-01WERA1 U  </span><br><span class="line">252:3     4 UGood  F 223.062 GB SATA SSD N   N  512B INTEL SSDSC2CW240A3    U  </span><br><span class="line">-------------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>foreign</code>管理</li>
+</ul>
+<p>此时硬盘为<code>foreign</code>状态</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx /fall show</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Controller = 0</span><br><span class="line">Status = Success</span><br><span class="line">Description = Operation on foreign configuration Succeeded</span><br><span class="line"></span><br><span class="line">FOREIGN CONFIGURATION :</span><br><span class="line">=====================</span><br><span class="line">----------------------------------------</span><br><span class="line">DG EID:Slot Type State       Size NoVDs </span><br><span class="line">----------------------------------------</span><br><span class="line"> 0 -        Cac0 Frgn  223.062 GB     1 </span><br><span class="line">----------------------------------------</span><br><span class="line"></span><br><span class="line">NoVDs - Number of VDs in disk group|DG - Diskgroup</span><br><span class="line">Total foreign drive groups = 1</span><br></pre></td></tr></table></figure>
+<p>现在它可以重新包含在配置中</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx /fall import</span><br></pre></td></tr></table></figure>
+<p>如果设备是 RAID 的一部分，则会自动执行重建（请参阅概述中的状态：Rbld）。 可用以下命令监视进度：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">storcli /cx /ex /sx show rebuild</span><br></pre></td></tr></table></figure>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看VD健康状态等,获取到坏盘的E:S编号,然后查看对应盘的SN</span></span><br><span class="line">storcli /c0 /vall show [all]</span><br><span class="line">storcli /c0 /eX /sY show all |grep SN</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看阵列卡</span></span><br><span class="line">storcli show ctrlcount</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看 virtual disk 0 @controlor 0</span></span><br><span class="line">storcli /cx /v0 show</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看 Controlor-0, Enclosure-7, Slot-7的磁盘信息</span></span><br><span class="line">storcli /cx/e252/s7 show all</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看报警信息</span></span><br><span class="line">storcli /cx show alarm</span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭beep蜂鸣器报警</span></span><br><span class="line">storcli /cx set alarm=&lt;on|off|silence&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 定位磁盘仓位</span></span><br><span class="line">storcli /c0/e8/s2 start/stop locate</span><br></pre></td></tr></table></figure>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><ul>
+<li><a href="https://www.broadcom.com/site-search?q=storcli" target="_blank" rel="noopener">官方相关资源下载-broadcom</a></li>
+<li><a href="https://docs.broadcom.com/docs-and-downloads/raid-controllers/raid-controllers-common-files/StorCLI_RefMan_revf.pdf" target="_blank" rel="noopener">StorCLI 官方手册下载</a></li>
+<li><a href="https://www.thomas-krenn.com/en/wiki/StorCLI" target="_blank" rel="noopener">StorCLI _Thomas-Krenn</a></li>
+<li><a href="https://www.xargs.cn/doku.php/lsi:storcli%E6%89%8B%E5%86%8C" target="_blank" rel="noopener">STORCLI-wiki（个人博主维护）</a></li>
+</ul>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        
+        
+        <div class="vcomment"></div>
+        
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Storcli"><span class="toc-number">1.</span> <span class="toc-text">安装Storcli</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ubuntu"><span class="toc-number">1.1.</span> <span class="toc-text">Ubuntu</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Centos"><span class="toc-number">1.2.</span> <span class="toc-text">Centos</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ESXi-5-5-amp-ESXi-6-0"><span class="toc-number">1.3.</span> <span class="toc-text">ESXi 5.5 &amp; ESXi 6.0</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storcli使用"><span class="toc-number">2.</span> <span class="toc-text">storcli使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建-初始化-raid"><span class="toc-number">3.</span> <span class="toc-text">创建/初始化 raid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存加速"><span class="toc-number">4.</span> <span class="toc-text">缓存加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#误插拔设备合并"><span class="toc-number">5.</span> <span class="toc-text">误插拔设备合并</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">6.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考来源"><span class="toc-number">7.</span> <span class="toc-text">参考来源</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&text=Storcli 常用管理命令汇总"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&is_video=false&description=Storcli 常用管理命令汇总"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Storcli 常用管理命令汇总&body=Check out this article: https://imoyao.github.io/blog/2017-12-27/storcli-command-share/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&title=Storcli 常用管理命令汇总"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://imoyao.github.io/blog/2017-12-27/storcli-command-share/&name=Storcli 常用管理命令汇总&description=&lt;p&gt;目前&lt;code&gt;LSI RAID&lt;/code&gt;卡使用的配置工具主要有：&lt;code&gt;Megaraid Storage Manager&lt;/code&gt;（MSM，图形环境）、&lt;code&gt;MegaCLI&lt;/code&gt;（字符界面）、&lt;code&gt;StorCLI&lt;/code&gt;（字符界面）。其中&lt;code&gt;StorCLI&lt;/code&gt;作为&lt;code&gt;MegaCLI&lt;/code&gt;后继者整合了&lt;code&gt;LSI&lt;/code&gt;和原来&lt;code&gt;3ware&lt;/code&gt;的产品支持，兼容&lt;code&gt;MegaCLI&lt;/code&gt;命令的同时更加简洁。&lt;a href=&#34;https://imoyao.github.io/blog/2017-11-20/megacli_command_share/&#34;&gt;前面的文章&lt;/a&gt;记录了&lt;code&gt;MegaCli&lt;/code&gt;常用管理命令，本篇主要记录&lt;code&gt;StorCLI&lt;/code&gt;的使用。&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 - 2019 IMOYAO
+    Theme by <a href="https://github.com/probberechts/hexo-theme-cactus">Cactus</a>.
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/links/">友链</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="https://blog.masantu.com">博客</a></li>
+         
+          <li><a href="https://resume.masantu.com">简历</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+        <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<!-- clipboard -->
+
+  <script src="/lib/clipboard/clipboard.min.js"></script>
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight .code pre").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      target: function(trigger) {
+        return trigger.nextElementSibling;
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+<!-- Disqus Comments -->
+
+
+<!-- Valine Comments -->
+
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+<script type="text/javascript">
+    var notify = 'false' == true ? true : false;
+    var verify = 'false' == true ? true : false;
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+      return GUEST_INFO.indexOf(item) > -1
+    });
+    guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI",
+        appKey: "CARePe7R247vdXACFg1fhk4E",
+        avatar:"monsterid",
+        placeholder: "我们期待理性、友好而和谐的声音……",
+        guest_info:guest_info,
+        pageSize:"10"
+    })
+</script>
+
+    </div>
+</body>
+</html>
