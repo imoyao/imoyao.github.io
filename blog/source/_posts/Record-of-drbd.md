@@ -202,7 +202,7 @@ The device name for DRBD and its minor number.
 In the example above, the minor number 0 is used for DRBD. The udev integration scripts will give you a symbolic link /dev/drbd/by-res/nfs/0. Alternatively, omit the device node name in the configuration and use the following line instead:
 drbd0 minor 0 (/dev/ is optional) or /dev/drbd0
 
-3.节点之间进行复制的原始设备。注意：在本例中，两个节点上面的设备是相同的。若使用不同设备，请将磁盘参数移动到主机上。（？）
+3.节点之间进行复制的原始设备。注意：在本例中，两个节点上面的设备是相同的。若使用不同设备，请将磁盘参数移动到状态为`on`节点上。（？）
 
 The raw device that is replicated between nodes. Note, in this example the devices are the same on both nodes. If you need different devices, move the disk parameter into the on host.
 
