@@ -1,4 +1,4 @@
-## 本分支主要存放站点的`sources`文件
+## 本分支用来存放站点的`sources`文件
 
 来源[@砖用冰西瓜](http://www.jianshu.com/p/beb8d611340a)
 
@@ -47,4 +47,9 @@ git clone -b hexo https://github.com/yourname/hexo-test.github.io.git
 使用[lint-md](https://github.com/hustcc/lint-md) 检查并修复博客中的`md`文件
 ```bash
 lint-md MD_FILE_PATH -f
+```
+## 修改作者信息
+参考[这里](https://stackoverflow.com/questions/750172/how-to-change-the-author-and-committer-name-and-e-mail-of-multiple-commits-in-gi)     
+```shell
+sh ./change_user_info.sh
 ```
