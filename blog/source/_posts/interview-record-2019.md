@@ -47,8 +47,10 @@ tags:
 
 隔离级别越高，越能保证数据的完整性和统一性，但是对并发性能的影响也越大。对于多数应用程序，可以优先考虑把数据库系统的隔离级别设为 Read Committed。它能够避免脏读，而且具有较好的并发性能。尽管它会导致不可重复读、幻读和第二类丢失更新这些并发问题，在可能出现这类问题的个别场合，可以由应用程序采用悲观锁或乐观锁来控制。
 
-[mysql 事务隔离机制&锁](https://blog.csdn.net/xiancaione/article/details/82157019)
+[MySQL 事务隔离机制&锁](https://blog.csdn.net/xiancaione/article/details/82157019)
+[MySQL 隔离级别](https://blog.csdn.net/taylor_tao/article/details/7063639)
 [数据库事务和四种隔离级别](https://blog.csdn.net/weixin_39651041/article/details/79980202)
+[RR(REPEATABLE-READ) 与 RC(READ-COMMITED) 隔离级别的异同](http://tech.dianwoda.com/2018/09/06/rr-yu-rcge-chi-ji-bie-de-yi-tong/)
 
 ### flask 组件及源码剖析
 - [一个 Flask 应用运行过程剖析](https://segmentfault.com/a/1190000009152550)
@@ -147,3 +149,43 @@ PyObject 是每个对象必有的内容，其中 ob_refcnt 就是做为引用计
 ### Python 传值还是传引用
 python 参数传递采用的是“传对象引用”的方式。这种方式相当于传值和传引用的一种综合。如果函数收到的是一个不可变对象（数字、字符或元组）的引用，就不能直接修改原始对象——相当于通过‘值传递’来传递对象。如果函数收到的是一个可变对象（字典、列表）的引用，就能修改对象的原始值——相当于‘传引用’来传递对象。
 [Python 传值还是传引用？| 通过对象引用传递](https://www.masantu.com/blog/2019-04-13/python-pass-by-object-reference/)
+## 中天联科
+### 类属性和实例属性的区别，如何判断类A是否有属性x？
+```python
+class A:
+    X = 'Hello'     # 类属性
+
+    def __init__(self,name='World'):
+        self.name = name    # 实例属性
+
+a = A('foo')
+print(A.X)  # Hello
+print(a.name)   #foo
+print(hasattr(a,'X'))   # True
+print(hasattr(A,'X'))   # True
+print(hasattr(A,'name'))    # False
+print(hasattr(a,'name'))    # True
+setattr(a,'name','bar')
+setattr(A,'X','Bye')
+print(a.name)   # bar
+print(A.X)  # Bye
+```
+### 什么是列表推导式？如何用一行代码判断一个文件夹下面文件数大于10个的子目录？
+```python
+import os
+print([_ for _ in range(10)])
+
+def find_file_more_than_10(root_dir_fp=None, limit=10):
+    if root_dir_fp is None:
+        root_dir_fp = os.path.split((os.path.abspath(__file__)))[0]
+
+    return [dirpath for dirpath, _, filenames in os.walk(root_dir_fp) if
+            len(filenames) > limit]
+
+
+if __name__ == '__main__':
+    print(find_file_more_than_10())
+```
+### 什么是协程？什么是生成器？
+- 生成器
+yield 和生成器表达式`(i for i in range(10))`。
