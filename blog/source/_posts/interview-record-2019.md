@@ -16,7 +16,7 @@ tags:
 这个级别是大多数数据库系统的默认隔离级别（但 MySQL 不是）。一个事务从开始直到提交之前，所做的任何修改对其他事务都是不可见的。这个级别也叫作不可重复读（nonrepeatable read），因为两次执行同样的查询，可能会得到不一样的结果。
 
 - REPEATABLE READ（可重复读）
-该级别保证了在同一个事务中多次读取同样记录的结果是一致的，但依然无法解决另外一个幻读（Phantom Read）的问题。幻读，指的是当某个事物在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻行（Phantom Row）。InnoDB 和 XtraDB 存储引擎通过多版本并发控制（MVCC）解决了幻读的问题。可重复读是 MySQL 的默认事务隔离级别。
+该级别保证了在同一个事务中多次读取同样记录的结果是一致的，但依然无法解决另外一个幻读（Phantom Read）的问题。幻读，指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻行（Phantom Row）。InnoDB 和 XtraDB 存储引擎通过多版本并发控制（MVCC）解决了幻读的问题。可重复读是 MySQL 的默认事务隔离级别。
 
 - SERIALIZABLE（可串行化）
 最高的隔离级别，强制事务串行执行，避免了前面说的幻读的问题。但每次读都需要获得表级共享锁，读写相互都会阻塞。
@@ -53,6 +53,14 @@ tags:
 [RR(REPEATABLE-READ) 与 RC(READ-COMMITED) 隔离级别的异同](http://tech.dianwoda.com/2018/09/06/rr-yu-rcge-chi-ji-bie-de-yi-tong/)
 
 ### flask 组件及源码剖析
+- [Flask自带的常用组件介绍](https://www.jianshu.com/p/8f01ad89406d)
+    1. session
+    2. flash，消息闪现
+    3. jsonify，返回 json 化数据
+    4. blueprint，构建大型应用条理化
+    5. g，Flask 中的全局变量 g ，可以为特定请求临时存储任何需要的数据并且是线程安全的，当请求结束时，这个对象会被销毁，下一个新的请求到来时又会产升一个新的 g。
+    6. abort，自定义错误
+    7. current_app，应用上下文
 - [一个 Flask 应用运行过程剖析](https://segmentfault.com/a/1190000009152550)
 - [Flask 的请求处理流程和上下文](https://www.jianshu.com/p/2a2407f66438)
 - [flask 源码解析](https://cizixs.com/2017/01/10/flask-insight-introduction/)
@@ -82,12 +90,12 @@ Set 就是一个集合，内部数据结构是整数集合(intset)、HASH 表，
 #### Zset 集合（Sorted Sets）
 Sorted Set 有点像 Set 和 Hash 的结合体。
 
-和 Set 一样，它里面的元素是唯一的，但是 Set 里面的元素是无序的，而 Sorted Set 里面的元素都带有一个浮点值，叫做分数（score），内部数据结构跳跃表，所以这一点和 Hash 有点像，因为每个元素都映射到了一个值。
+和 Set 一样，它里面的元素是唯一的，但是 Set 里面的元素是无序的，而 Sorted Set 里面的元素都带有一个浮点值，叫做分数（score），内部数据结构**跳跃表**，所以这一点和 Hash 有点像，因为每个元素都映射到了一个值。
 使它在 set 的基础上增加了一个**顺序属性**，这一属性在添加修改元素的时候可以指定，每次指定后，zset 会自动重新按新的值调整顺序。可以对指定键的值进行排序权重的设定，它应用排名模块比较多。
 
 比如一个存储全班同学成绩的 Sorted Sets，其集合 value 可以是同学的学号，而 score 就可以是其考试得分，这样在数据插入集合的时候，就已经进行了天然的排序。另外还可以用 Sorted Sets 来做带权重的队列，比如普通消息的 score 为 1，重要消息的 score 为 2，然后工作线程可以选择按 score 的倒序来获取工作任务，让重要的任务优先执行。
 
-zset 集合可以完成有序执行、按照优先级执行的情况；
+zset 集合可以完成有序执行、按照`优先级执行`的情况；
 - [redis 五种数据结构详解（string，list，set，zset，hash）](https://www.cnblogs.com/xuzhengzong/p/7724841.html)
 - [Redis 实战 - list、set 和 Sorted Set](https://www.cnblogs.com/tangge/p/10698821.html)
 
@@ -134,7 +142,8 @@ zset 集合可以完成有序执行、按照优先级执行的情况；
 3：非递归实现特点： 深度优先一般采用递归实现，如改用非递归，则可需要来模拟栈，当需要先遍历当前节点的儿子结点时（例如中序遍历）需要将其压入栈中，先遍历其儿子结点，然后再将其弹出栈，遍历当前节点。广度优先一般采用非递归来实现，用一个队列来保存依次需要遍历的节点。 
 [简述树的深度优先算法、广度优先算法，及非递归实现的特点](https://www.nowcoder.com/questionTerminal/b194924b44b144e8a238819a0a6dae42)   
 [广度优先搜索(BFS)和深度优先搜索(DFS)](https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/)
-```https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/```
+> https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/
+
 ### Python 垃圾回收机制
 [Python 垃圾回收机制](https://github.com/imoyao/interview_python#24-python%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6)
 - 引用计数  
@@ -147,10 +156,15 @@ PyObject 是每个对象必有的内容，其中 ob_refcnt 就是做为引用计
 分代回收的整体思想是：将系统中的所有内存块根据其存活时间划分为不同的集合，每个集合就成为一个“代”，垃圾收集频率随着“代”的存活时间的增大而减小，存活时间通常利用经过几次垃圾回收来度量。
 
 ### Python 传值还是传引用
-python 参数传递采用的是“传对象引用”的方式。这种方式相当于传值和传引用的一种综合。如果函数收到的是一个不可变对象（数字、字符或元组）的引用，就不能直接修改原始对象——相当于通过‘值传递’来传递对象。如果函数收到的是一个可变对象（字典、列表）的引用，就能修改对象的原始值——相当于‘传引用’来传递对象。
+
+python 参数传递采用的是“**传对象引用**”的方式。这种方式相当于传值和传引用的一种综合。如果函数收到的是一个不可变对象（数字、字符或元组）的引用，就不能直接修改原始对象——相当于通过‘值传递’来传递对象。如果函数收到的是一个可变对象（字典、列表）的引用，就能修改对象的原始值——相当于‘传引用’来传递对象。
+
 [Python 传值还是传引用？| 通过对象引用传递](https://www.masantu.com/blog/2019-04-13/python-pass-by-object-reference/)
+
 ## 中天联科
+
 ### 类属性和实例属性的区别，如何判断类A是否有属性x？
+
 ```python
 class A:
     X = 'Hello'     # 类属性
@@ -170,7 +184,9 @@ setattr(A,'X','Bye')
 print(a.name)   # bar
 print(A.X)  # Bye
 ```
+
 ### 什么是列表推导式？如何用一行代码判断一个文件夹下面文件数大于10个的子目录？
+
 ```python
 import os
 print([_ for _ in range(10)])
@@ -186,6 +202,8 @@ def find_file_more_than_10(root_dir_fp=None, limit=10):
 if __name__ == '__main__':
     print(find_file_more_than_10())
 ```
+
 ### 什么是协程？什么是生成器？
+
 - 生成器
 `yield`和生成器表达式`(i for i in range(10))`。
