@@ -49,7 +49,7 @@ venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv 等工具的区别与
 
 ### venv
 
-`venv`是`Python 3`附带的一个包，你可以使用`python3 -m venv`运行（虽然由于某些原因，一些发行版把它分离成一个单独的发行包，比如`Ubuntu / Debian`上的`python3-venv`）。它的作用与`virtualen`v 相似，工作方式也非常相似，但不需要复制`Python`二进制文件（`Windows`下除外）。如果你的代码不需要支持`Python 2`，可以使用它。在撰写本文时，`Python`社区似乎对`virtualenv`感到满意，`venv`相对来说比较小众。
+`venv`是`Python 3`附带的一个包，你可以使用`python3 -m venv`运行（虽然由于某些原因，一些发行版把它分离成一个单独的发行包，比如`Ubuntu / Debian`上的`python3-venv`）。它的作用与`virtualenv` 相似，工作方式也非常相似，但不需要复制`Python`二进制文件（`Windows`下除外）。如果你的代码不需要支持`Python 2`，可以使用它。在撰写本文时，`Python`社区似乎对`virtualenv`感到满意，`venv`相对来说比较小众。
 
 ## 参考链接
 
