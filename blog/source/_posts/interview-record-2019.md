@@ -164,7 +164,7 @@ python 参数传递采用的是“**传对象引用**”的方式。这种方式
 ## 中天联科
 
 ### 类属性和实例属性的区别，如何判断类A是否有属性x？
-
+[类变量和实例变量](https://github.com/imoyao/interview_python#4-%E7%B1%BB%E5%8F%98%E9%87%8F%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F)
 ```python
 class A:
     X = 'Hello'     # 类属性
