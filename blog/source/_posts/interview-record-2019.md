@@ -207,3 +207,33 @@ if __name__ == '__main__':
 
 - 生成器
 `yield`和生成器表达式`(i for i in range(10))`。
+
+## 金山云
+
+### 单例模式，如何实现？以及如何判断只有这一个实例？
+```python
+class Singleton:
+	_instance = {}
+	def __new__(cls,*args,**kwargs):
+		if not cls._instance:
+			cls._instance = super(Singleton,cls).__new__(cls,*args,**kwargs)
+		return cls._instance
+
+
+def deco_singleton(cls):
+	_instance = {}
+	def wrapper(*args,**kwargs):
+		if not cls in _instance:
+			_instance[cls] = cls(*args,**kwargs)
+
+		return _instance[cls]
+	return wrapper
+
+@deco_singleton
+class A:
+	pass
+```
+
+### 死锁产生的原因
+
+### ping 域名的过程
