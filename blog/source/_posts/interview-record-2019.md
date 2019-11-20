@@ -53,7 +53,7 @@ tags:
 [RR(REPEATABLE-READ) 与 RC(READ-COMMITED) 隔离级别的异同](http://tech.dianwoda.com/2018/09/06/rr-yu-rcge-chi-ji-bie-de-yi-tong/)
 
 ### flask 组件及源码剖析
-- [Flask自带的常用组件介绍](https://www.jianshu.com/p/8f01ad89406d)
+- [Flask 自带的常用组件介绍](https://www.jianshu.com/p/8f01ad89406d)
     1. session
     2. flash，消息闪现
     3. jsonify，返回 json 化数据
@@ -163,7 +163,7 @@ python 参数传递采用的是“**传对象引用**”的方式。这种方式
 
 ## 中天联科
 
-### 类属性和实例属性的区别，如何判断类A是否有属性x？
+### 类属性和实例属性的区别，如何判断类 A 是否有属性 x
 [类变量和实例变量](https://github.com/imoyao/interview_python#4-%E7%B1%BB%E5%8F%98%E9%87%8F%E5%92%8C%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F)
 ```python
 class A:
@@ -185,7 +185,7 @@ print(a.name)   # bar
 print(A.X)  # Bye
 ```
 
-### 什么是列表推导式？如何用一行代码判断一个文件夹下面文件数大于10个的子目录？
+### 什么是列表推导式？如何用一行代码判断一个文件夹下面文件数大于 10 个的子目录
 
 ```python
 import os
@@ -203,14 +203,14 @@ if __name__ == '__main__':
     print(find_file_more_than_10())
 ```
 
-### 什么是协程？什么是生成器？
+### 什么是协程？什么是生成器
 
 - 生成器
 `yield`和生成器表达式`(i for i in range(10))`。
 
 ## 金山云
 
-### 单例模式，如何实现？以及如何判断只有这一个实例？
+### 单例模式，如何实现？以及如何判断只有这一个实例
 ```python
 class Singleton:
 	_instance = {}
@@ -237,3 +237,9 @@ class A:
 ### 死锁产生的原因
 
 ### ping 域名的过程
+[ping 某域名的过程详解](https://www.masantu.com/blog/2019-11-19/the-detail-of-ping-a-domain/)
+
+### select 和 epoll 区别
+[Python 全栈之路系列之 IO 多路复用](https://blog.ansheng.me/article/python-full-stack-way-io-multiplexing.html)
+[Python 异步非阻塞 IO 多路复用 Select/Poll/Epoll 使用](https://www.haiyun.me/archives/1056.html)
+[Python 使用 select 和 epoll 实现 IO 多路复用实现并发服务器](https://www.jianshu.com/p/cdfddb026db0)
