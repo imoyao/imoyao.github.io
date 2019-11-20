@@ -261,3 +261,4 @@ celery -A celery_worker:celery beat --loglevel=INFO
 [Celery 4.3.0 documentation »](http://docs.celeryproject.org/en/latest/)
 [在 Flask 中使用 Celery 的最佳实践](https://www.jianshu.com/p/807efde55d81)
 [Celery 中文文档](https://blog.csdn.net/libing_thinking/article/details/78547816)
+[Celery-4.1 用户指南: Calling Tasks](https://blog.csdn.net/libing_thinking/article/details/78563222)
