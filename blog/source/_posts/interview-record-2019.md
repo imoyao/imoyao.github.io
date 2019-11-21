@@ -3,7 +3,8 @@ title: 2019 面试记录
 date: 2019-10-18 10:03:12
 tags:
 - 记录
-
+- Python
+- 后端
 ---
 ## FunPlus (小视频业务)
 ### 数据库的事务隔离机制
@@ -244,3 +245,114 @@ class A:
 [Python 全栈之路系列之 IO 多路复用](https://blog.ansheng.me/article/python-full-stack-way-io-multiplexing.html)
 [Python 异步非阻塞 IO 多路复用 Select/Poll/Epoll 使用](https://www.haiyun.me/archives/1056.html)
 [Python 使用 select 和 epoll 实现 IO 多路复用实现并发服务器](https://www.jianshu.com/p/cdfddb026db0)
+[How To Use Linux epoll with Python](https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/how_to_use_linux_epoll.html)
+
+## 艾普艾
+
+### **Redis**的数据类型都有哪些，如果要实现计数器功能，应该选用哪种数据类型？使用 Redis，如果内存满了会怎么样
+- 数据类型
+string,list,set,zset,hash
+- 计数器/限流器功能
+1. 可以选用`string`类型，调用`incr()`方法，参见[INCR](https://redis.io/commands/INCR)
+每次自增加 1
+```shell
+redis> SET mykey "10"
+"OK"
+redis> INCR mykey
+(integer) 11
+redis> GET mykey
+"11"
+```
+2. 可以选用`hash`类型，调用`hincrby()`方法，参见[HINCRBY](https://redis.io/commands/hincrby)
+对关联的统计项进行统一管理；
+```shell
+redis> HSET myhash field 5
+(integer) 1
+redis> HINCRBY myhash field 1
+(integer) 6
+redis> HINCRBY myhash field -1
+(integer) 5
+redis> HINCRBY myhash field -10
+(integer) -5
+```
+3. 可以选用`set`类型，调用`sadd()`方法，参见[SADD](https://redis.io/commands/SADD)
+多次调用只加一，防作弊刷数据等；
+```shell
+redis> SADD myset "Hello"
+(integer) 1
+redis> SADD myset "World"
+(integer) 1
+redis> SADD myset "World"
+(integer) 0
+redis> SMEMBERS myset
+1) "Hello"
+2) "World"
+```
+更多 Python 实例应用:[*Redis 多方式实现计数器功能（附代码）*](https://juejin.im/post/5da6923c5188252f192d2835)
+#### 内存满了
+此时不能继续写入数据，而且系统的其他操作任务也会受到影响。为防止这种现象发生，应该启用内存淘汰策略。
+[Redis 内存满了的几种解决方法](https://blog.csdn.net/u014590757/article/details/79788076)
+[Redis 过期--淘汰机制的解析和内存占用过高的解决方案](https://juejin.im/post/5dc81b4df265da4d4d0cfebc)
+#### 更多
+[10 个常见的 Redis 面试"刁难"问题](https://www.kancloud.cn/mangyusisha/php/701563)
+### 常见状态码错误？301、302 错误及区别？502 错误出现时应该怎么解决
+- 301/302
+跳转，301 redirect: 301 代表**永久性**转移(Permanently Moved)；302 redirect: 302 代表**暂时性**转移(Temporarily Moved )
+
+参见[http 状态码 301 和 302 详解及区别——辛酸的探索之路](http://blog.csdn.net/grandPang/article/details/47448395)
+
+- 502 Bad Gateway Error
+
+对用户访问请求的响应超时错误
+1. DNS 测试，ping 测试
+2. 检查防火墙端口，检查防火墙日志
+3. 数据库调用延迟
+4. 网络服务进程是否正常 
+参考
+1. [502 Bad Gateway 怎么解决？](https://www.zhihu.com/question/21647204)
+1. [How to Solve 502 Bad Gateway Issues?](https://www.keycdn.com/support/502-bad-gateway)
+
+## 华胜天成
+### 类属性的继承
+```python
+class Parent:
+    x = 10
+
+class Child1(Parent):
+    pass
+
+
+class Child2(Parent):
+    pass
+
+a = Parent()
+b = Child1()
+c = Child2()
+
+print(a.x,b.x,c.x)  # (10, 10, 10)
+a.x = 20
+print(a.x,b.x,c.x)  # (20, 10, 10)
+b.x = 30
+print(a.x,b.x,c.x)  # (20, 30, 10)
+```
+```python
+class A:
+    x = 'a'
+
+class B:
+    x = 'b'
+
+class C(A,B):
+    pass
+
+class D(B,A):
+    pass
+
+print(A.x,B.x,C.x,D.x)  # ('a', 'b', 'a', 'b')
+A.x = 'a1'
+print(A.x,B.x,C.x,D.x)  # ('a1', 'b', 'a1', 'b')
+B.x = 'b1'
+print(A.x,B.x,C.x,D.x)  # ('a1', 'b1', 'a1', 'b1')
+C.x = 'c'
+print(A.x,B.x,C.x,D.x)  # ('a1', 'b1', 'c', 'b1')
+```
