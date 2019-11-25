@@ -10,4 +10,4 @@ tags:
 [备份地址](https://www.howtoing.com/how-to-install-rabbitmq-server-on-centos-7/)
 
 ## 代码实践
-[](https://www.rabbitmq.com/tutorials/tutorial-one-python.html)
+[Hello World](https://www.rabbitmq.com/tutorials/tutorial-one-python.html)

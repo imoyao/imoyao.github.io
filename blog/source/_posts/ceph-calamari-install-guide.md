@@ -5,6 +5,9 @@ tags:
 - 安装
 - Calamari
 ---
+## 弃用
+**注意**：
+基于[*本文*](http://liyichao.github.io/posts/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-ceph-mgr.html)提到的原因，不再对该项目进行跟进和继续探索。
 ## 克隆源码
 ```bash
 mkdir /tmp/calamari-repo
