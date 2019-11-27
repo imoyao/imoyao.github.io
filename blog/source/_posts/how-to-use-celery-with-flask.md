@@ -239,15 +239,19 @@ if __name__ == '__main__':
 celery.platforms.LockFailed: [Errno 13] Permission denied: '/home/xxx/celerybeat.pid'
 ```    
 pid 文件没有权限；这种情况有两种解决办法：
+
 - 修改 pid 文件存储路径，放到当前执行用户有权限的位置
-```bash
-celery beat -A celeryapp --loglevel=INFO --pidfile="/tmp/celerybeat.pid"        # 修改路径
-```
+
+    ```bash
+    celery beat -A celeryapp --loglevel=INFO --pidfile="/tmp/celerybeat.pid"        # 修改路径
+    ```
+
 - 对 pid 文件所在目录加权限，然后执行：
-```bash
-chown -R YOUR_USER_NAME:YOUR_USER_NAME  CURRENT_PATH
-celery -A celery_worker:celery beat --loglevel=INFO
-```
+    
+    ```bash
+    chown -R YOUR_USER_NAME:YOUR_USER_NAME  CURRENT_PATH
+    celery -A celery_worker:celery beat --loglevel=INFO
+    ```
 [参见这里](https://github.com/celery/celery/issues/3828)
 
 ## 注意问题

@@ -107,4 +107,5 @@ ICMP（Internet Control Message Protocol | *网络控制消息协议*）是 TCP/
 ## 参考链接
 
 [ping 某个域名的详细过程](https://blog.csdn.net/guoweimelon/article/details/50865642)
+[ping 过程详解](https://blog.51cto.com/wanicy/335207)
 [THE IP ROUTING PROCESS - STEP-BY-STEP ANALYSIS](http://www.firewall.cx/networking-topics/routing/181-routing-process.html)
