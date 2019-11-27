@@ -235,6 +235,7 @@ if __name__ == '__main__':
     [2019-06-14 02:43:54,650: INFO/ForkPoolWorker-1] Task pmrearend.task.log_it[aac524bd-cb47-4493-b0dd-9712a98a3f14] succeeded in 0.012691148993326351s: 30
     ```
 ## 问题记录
+
 ```bash
 celery.platforms.LockFailed: [Errno 13] Permission denied: '/home/xxx/celerybeat.pid'
 ```    
