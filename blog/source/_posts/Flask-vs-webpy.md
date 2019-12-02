@@ -129,10 +129,10 @@ if __name__ == '__main__':
     '''
     app.run(host='0.0.0.0',debug=True)
 ```
-运行之后，浏览`http://0.0.0.1:5000/`即可访问。
+运行之后，浏览`http://IP_ADDR:5000/`即可访问。
 ```bash
 $ python app.py
- * Running on http://0.0.0.1:5000/
+ * Running on http://0.0.0.0:5000/
 ```
 代码解释
 1. 导入`Flask`类；
