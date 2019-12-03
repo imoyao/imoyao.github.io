@@ -14,3 +14,8 @@ tags:
 - [ ] 数据库索引
     1. [数据库索引到底是什么，是怎样工作的？](https://blog.csdn.net/weiliangliang111/article/details/51333169)
     2. [How do database indexes work? And, how do indexes help? Provide a tutorial on database indexes.](https://www.programmerinterview.com/database-sql/what-is-an-index/)
+
+- [ ] redis布隆过滤器
+    1. [redis专题06 布隆过滤器](https://researchlab.github.io/2018/10/03/redis-06-bloom-filter/)
+    2. [Redis 高级主题之布隆过滤器(BloomFilter)](https://juejin.im/post/5cfd060ee51d4556f76e8067)
+    3. [基于Redis的布隆过滤器的实现](https://blog.csdn.net/qq_30242609/article/details/71024458)
