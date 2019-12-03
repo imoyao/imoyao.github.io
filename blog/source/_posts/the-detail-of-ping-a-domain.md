@@ -7,7 +7,7 @@ tags:
 - 转载
 ---
 ## ICMP 协议
-ICMP（Internet Control Message Protocol | *网络控制消息协议*）是 TCP/IP 协议族的一个子协议，工作在网络互联层（*网络层*）。ICMP 协议是一种面向无连接的协议，用于传输出错报告控制信息。用于在 IP 主机. 路由器之间传递控制消息。控制消息是指网络通不通. 主机是否可达. 路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。
+ICMP（Internet Control Message Protocol | *网络控制消息协议*）是 TCP/IP 协议族的一个子协议，工作在网络互联层（*网络层*）。ICMP 协议是一种面向无连接的协议，用于传输出错报告控制信息。用于在 IP 主机、路由器之间传递控制消息。控制消息是指网络是否连通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。
 ### 常见报文类型
 | ICMP 消息类型 | 用途说明                                                                                                                                           |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -32,7 +32,7 @@ ICMP（Internet Control Message Protocol | *网络控制消息协议*）是 TCP/
 
 每个主机都设有一个 ARP 高速缓存（ARP cache），这里面放着的是主机已经知道的 IP 地址和 MAC 地址的映射表，并且这个映射表还是经常动态更新的。
 
-### ARP 的工作原理
+### Address Resolution Protocol —— ARP 的工作原理
 
 当主机 A 想要同本局域网上的某个主机 B 发送 IP 数据报时，就先在其 ARP 高速缓存中查看有无主机 B 的 IP 地址。如果有，就在 ARP 高速缓存中查找器对于的硬件地址，再把这个硬件地址写入 MAC 帧里，然后通过局域网把 MAC 帧发往此硬件地址。也有可能在 ARP 高速缓存中查不到主机 B 的 IP 地址（主机 A 缓存为空，或主机 B 刚加入局域网），这样也就无法知道主机 B 的 MAC 地址，这时候就需要使用到 ARP 了，按以下步骤来获得主机 B 的硬件地址。
 
@@ -46,7 +46,7 @@ ICMP（Internet Control Message Protocol | *网络控制消息协议*）是 TCP/
 
 ![ARP工作原理](/images/ARP.jpg)
 
-上面所描述的情况是在**同一局域网**下的情景，如果主机 A 要同不在同一局域网下的主机 B 进行通信，发送 IP 数据报。首先主机 A 将主机 B 的 IP 地址同自己的子网掩码进行比对，发现不在同一局域网内，则利用 ARP 请求分组，根本局域网上的路由器的 IP 地址来获取路由器的 MAC 地址，然后将剩下的工作交给路由器去做即可。
+上面所描述的情况是在**同一局域网**下的情景，如果主机 A 要和不在同一局域网下的主机 B 进行通信，发送 IP 数据报。首先主机 A 将主机 B 的 IP 地址同自己的子网掩码进行比对，发现不在同一局域网内，则利用 ARP 请求分组，根本局域网上的路由器的 IP 地址来获取路由器的 MAC 地址，然后将剩下的工作交给路由器去做即可。
 
 ### ARP 的四种典型情况
 
@@ -109,3 +109,5 @@ ICMP（Internet Control Message Protocol | *网络控制消息协议*）是 TCP/
 [ping 某个域名的详细过程](https://blog.csdn.net/guoweimelon/article/details/50865642)
 [ping 过程详解](https://blog.51cto.com/wanicy/335207)
 [THE IP ROUTING PROCESS - STEP-BY-STEP ANALYSIS](http://www.firewall.cx/networking-topics/routing/181-routing-process.html)
+[理解 ARP 协议](https://www.jianshu.com/p/65710069d934)
+[ARP 协议解析](https://cizixs.com/2017/07/31/arp-protocol/)
