@@ -1,13 +1,7 @@
-
-
-# 欢迎访问imoyao的个人博客！[牧志](https://imoyao.github.io/)
-
-## Hexo—material
-
-修改标签云 material-tagscloud ---> #8b030f  blod
+# 欢迎访问 imoyao 的个人博客！[别院牧志](https://imoyao.github.io/)
 
 ## TODO
-- 代码高亮
-- ~~单页缩略图~~
-- footer
-- 赞赏
+- [x] 代码高亮
+- [x] 单页缩略图
+- [x] footer
+- ~~赞赏~~
