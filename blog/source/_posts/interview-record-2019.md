@@ -243,6 +243,7 @@ class A:
 
 ### select 和 epoll 区别
 [Python 全栈之路系列之 IO 多路复用](https://blog.ansheng.me/article/python-full-stack-way-io-multiplexing.html)
+[select、poll、epoll之间的区别总结[整理]](https://www.cnblogs.com/anker/p/3265058.html)
 [Python 异步非阻塞 IO 多路复用 Select/Poll/Epoll 使用](https://www.haiyun.me/archives/1056.html)
 [Python 使用 select 和 epoll 实现 IO 多路复用实现并发服务器](https://www.jianshu.com/p/cdfddb026db0)
 [How To Use Linux epoll with Python](https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/how_to_use_linux_epoll.html)
@@ -308,7 +309,9 @@ redis> SMEMBERS myset
 2. 检查防火墙端口，检查防火墙日志
 3. 数据库调用延迟
 4. 网络服务进程是否正常 
-参考
+
+#### 参考
+
 1. [502 Bad Gateway 怎么解决？](https://www.zhihu.com/question/21647204)
 1. [How to Solve 502 Bad Gateway Issues?](https://www.keycdn.com/support/502-bad-gateway)
 
