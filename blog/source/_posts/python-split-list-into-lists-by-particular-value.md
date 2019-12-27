@@ -53,7 +53,7 @@ def list_of_groups(init_list, children_list_len):
 def slice_list(seq, size):
     return [seq[i:i + size] for i in range(0, len(seq), size)]
     
-def zip_iter(seq, size): # 没看懂
+def zip_iter(seq, size): # TODO:没看懂，这个方法当 seq 太小时，会返回空；e.g.zip_iter(list(range(2)),4)
     return list(zip(*[iter(seq)] * size))
 ```
 ## 执行结果
