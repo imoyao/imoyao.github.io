@@ -77,9 +77,8 @@ pagination_dir: page
 #主题更改
 #theme: next
 #theme: material
-#theme: cafe
-#theme: freemind
-theme: cactus
+#theme: cactus
+theme: idealyard
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
