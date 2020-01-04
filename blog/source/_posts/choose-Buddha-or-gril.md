@@ -2,7 +2,7 @@
 title: 佛与姑娘
 date: 2017-11-11 12:26:38
 top: 100
-thumbnail: "/img/daily_pic.png"
+cover: /images/p09310935393643.png
 tags:
 - 美文
 - 阅读

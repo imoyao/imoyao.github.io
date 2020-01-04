@@ -4,6 +4,8 @@ date: 2019-12-25 22:23:02
 tags: 
 - PyCharm
 - Python
+
+cover: /images/Python/PyCharm.jpg
 ---
 
 ## 说明
