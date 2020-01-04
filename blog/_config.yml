@@ -78,7 +78,9 @@ pagination_dir: page
 #theme: next
 #theme: material
 #theme: cactus
-theme: idealyard
+#theme: idealyard
+#theme: inside
+theme: Butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
