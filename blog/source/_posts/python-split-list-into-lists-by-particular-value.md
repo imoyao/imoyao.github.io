@@ -6,6 +6,7 @@ tags:
 - TODO
 categories:
 - 🐍PyTricks
+cover: /images/Python/Python-snake.jpg
 ---
 
 ## 自己写的

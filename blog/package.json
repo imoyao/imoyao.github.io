@@ -22,8 +22,10 @@
     "hexo-renderer-pug": "^1.0.0",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.2.0",
-    "hexo-tag-aplayer": "^2.0.1",
     "hexo-tag-bootstrap": "^0.1.2",
+    "hexo-generator-index-pin-top": "^0.2.2",
+    "hexo-tag-aplayer": "^2.0.7",
+    "hexo-wordcount": "^6.0.1",
     "hexo-util": "^1.8.1"
   }
 }

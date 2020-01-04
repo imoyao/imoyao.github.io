@@ -1,7 +1,7 @@
 ---
 title: 在搭建 Hexo 中遇到的问题记录
 date: 2017-11-18 13:12:12
-thumbnail:
+cover: /images/v2-4b229aa661f0d337bd16390761963842.jpg
 tags:
 - HOWTO
 - Hexo
@@ -9,9 +9,6 @@ tags:
 categories:
 - 教程记录
 ---
-![Github loves Hexo](/images/v2-4b229aa661f0d337bd16390761963842.jpg)
-
-<br>
 
 在网络上搜索一天多才磕磕绊绊搭建好这个博客，⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄ 现在把过程中遇到的坑记录一下，希望可以给之后的同学们带来帮助。
 <!--more-->
@@ -114,17 +111,7 @@ Error: Cannot find module '/Users/hechao/Documents/TechBlog/CniceToUpp/node_modu
 如果你想加入歌单，把上面的代码换成下面代码就行，参数的用法可以参照插件的使用说明。
 
 ```
-# aplayer:删除（\`）
 
-\`{% aplayerlist %}{"narrow": false,
-"autoplay": true,
-"showlrc": 3,
-"mode": "random",
-"music": [
-{"title": "平凡之路","author": "朴树","url": "http://xxx.com/%E5%B9%B3%E5%87%A1%E4%B9%8B%E8%B7%AF.mp3","pic": "https://xxx.com/1.jpg","lrc": "http://og9ocpmwk.bkt.clouddn.com/%E5%B9%B3%E5%87%A1%E4%B9%8B%E8%B7%AF.txt"},
-{"title": "野子","author": "苏运莹","url": "http://xxx.com/01%20%E9%87%8E%E5%AD%90.m4a","pic": "http://xxxx.com/%E9%87%8E%E5%AD%90.jpg","lrc":"https://xxx.com/%E9%87%8E%E5%AD%90.txt"}
-]}{% endaplayerlist %}\`
-```plain
 ## TODO
 `material` 主题填坑
 

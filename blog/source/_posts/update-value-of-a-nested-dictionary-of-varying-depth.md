@@ -3,9 +3,9 @@ title: 🐍PyTricks | 如何更新一个嵌套字典的值？
 date: 2019-09-25 10:35:58
 tags:
 - Python
-
 categories:
 - 🐍PyTricks
+cover: /images/Python/Python-snake.jpg
 ---
 
 ```python

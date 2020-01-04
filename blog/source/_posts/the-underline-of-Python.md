@@ -5,7 +5,7 @@ tags:
 - Python
 categories:
 - Python
-thumbnail:
+cover: /images/Python/3D-Python-Logo.jpg
 ---
 ## Py 乙己
 

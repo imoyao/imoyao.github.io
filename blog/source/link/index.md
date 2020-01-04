@@ -3,6 +3,7 @@ title: 莫遥和他的朋友们
 date: 2020-01-04 13:24:00
 author: 西风不瘦
 type: link
+top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/friends.jpg
 ---
 
 ## 其他

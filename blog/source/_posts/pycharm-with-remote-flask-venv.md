@@ -5,6 +5,7 @@ tags:
 - PyCharm
 - Flask
 - HOWTO
+cover: /images/Python/PyCharm.jpg
 
 categories:
 - 工作日常

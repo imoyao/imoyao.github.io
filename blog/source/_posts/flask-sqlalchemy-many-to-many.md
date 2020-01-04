@@ -6,7 +6,7 @@ tags:
 - SqlAlchemy
 
 categories:
-- 日常记录
+- 工作日常
 ---
 
 ## 问题记录
