@@ -51,12 +51,12 @@ html(lang=config.language data-theme=theme.display_mode)
         - var source = theme.background
         - var is_photo = source.substring(3,0) === 'url' ? 'photo':'color'
         #web_bg(data-type=is_photo)
-      if (is_post() && page.toc != false && theme.toc.enable)      
-        i.fa.fa-arrow-right#toggle-sidebar(aria-hidden="true")      
+      if (is_post() && page.toc != false && theme.toc.enable)
+        i.fa.fa-arrow-right#toggle-sidebar(aria-hidden="true")
         include ./sidebar.pug
       if (!is_post())
         include ./nav.pug
-        include ./desc.pug
+        //include ./desc.pug
       main#content-outer
         block top_img
         if (!is_post())
@@ -66,7 +66,7 @@ html(lang=config.language data-theme=theme.display_mode)
             else
               block content
         else
-          #content-inner.layout.layout_post    
+          #content-inner.layout.layout_post
             if body
               div!= body
             else
@@ -75,7 +75,7 @@ html(lang=config.language data-theme=theme.display_mode)
       - var footer_bg = theme.footer_bg.enable == false ? '' : `background-image: url(${footer_img})`
       - var is_bg = theme.footer_bg.enable == false ? 'color' : 'photo'
       footer#footer(style=footer_bg data-type=is_bg)
-        include ./footer.pug    
+        include ./footer.pug
     include ./rightside.pug
     each item in theme.CDN_USE.js
       script(src=url_for(item))
