@@ -5,6 +5,10 @@ tags:
 - Ceph
 - 存储
 ---
+{% note danger %} 
+## 过时提示（@Deprecated）
+此文写于刚开始对Ceph还不了解得时候，调研了一大堆最后也没用上。后来发现社区`Luminous`版本专项开发基于`Ceph-mgr-dashboard`的管理系统，见[此处](https://docs.ceph.com/docs/master/mgr/dashboard/)，故不再对该方向进行跟进、维护和继续探索。
+{% endnote %}
 本文主要在[Ceph 开源管理监控平台分析](http://www.hl10502.com/2017/03/30/ceph-web-manage/)基础上做一点补充。
 
 ## 现状
