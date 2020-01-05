@@ -292,7 +292,7 @@ Flink:
 
 # 打赏按钮
 reward:
-  enable: false
+  enable: true
   QR_code:
     - itemlist:
         img: /img/wechatpay.jpg
