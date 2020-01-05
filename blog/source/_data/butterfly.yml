@@ -115,13 +115,13 @@ default_top_img: https://source.unsplash.com/random
 default_cover: https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302
 
 # the banner image of archive page
-archive_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/archive.jpg
+archive_img: /img/archive.jpg
 
 # the banner image of tag page
-tag_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/tag.png
+tag_img: /img/tags.jpg
 
 # the banner image of category page
-category_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/category.jpg
+category_img: /img/category.jpg
 
 # 如果你有使用hexo-douban去生成movie界面，可配置这个
 movies_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/movie.jpg
@@ -565,7 +565,7 @@ instantpage:
   enable: true
 
 # Note (Bootstrap Callout)
-# https://muse.theme-next.org/docs/tag-plugins/note
+# https://theme-next.iissnan.com/tag-plugins.html#bootstrap-callout
 note:
   # Note tag style values:
   #  - simple    bs-callout old alert style. Default.
