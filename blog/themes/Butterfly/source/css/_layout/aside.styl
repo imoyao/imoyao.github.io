@@ -14,17 +14,24 @@
 
   .card-info
     img
-      display: inline-block
       padding: 5px
       width: 120px
       height: 120px
       border-radius: 70px
       vertical-align: top
-      transition: all .3s
-
+      display: block;
+      margin: 0 auto;
+      webkit-transition: 1.4s all;
+      moz-transition: 1.4s all;
+      ms-transition: 1.4s all;
+      transition: 1.4s all;
+      //https://vwin.github.io/2018/08/02/Hexo-Next%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC/
       &:hover
-        transform: rotate(540deg)
-
+        background-color: #4586f3;
+        webkit-transform: rotate(360deg) scale(1.1);
+        moz-transform: rotate(360deg) scale(1.1);
+        ms-transform: rotate(360deg) scale(1.1);
+        transform: rotate(360deg) scale(1.1);
     .author-info
       &__name
         font-weight: 500
@@ -67,10 +74,10 @@
         cursor: pointer
 
       i
-        transition: all .3s
+        transition: all .8s
 
         &:hover
-          transform: rotate(540deg)
+          transform: rotateY(540deg)
 
     #bookmark-it
       position: relative

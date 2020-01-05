@@ -24,7 +24,8 @@
 
   hr
   .comment_int
-    p.comment-word= theme.Flink.comment
+    //html support
+    p.comment-word!= `${theme.Flink.comment}`
 
 
 
