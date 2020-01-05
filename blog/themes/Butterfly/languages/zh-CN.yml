@@ -3,7 +3,7 @@ sidebar:
   have_read: 你已经读了
 
 footer:
-  driven: 驱动
+  driven: 强力驱动
   theme: 主题
 
 copy:
@@ -64,7 +64,7 @@ aside:
   card_recent_post: 最新文章
   card_bookmark: 加入书签
   card_webinfo:
-    headline: 网站资讯
+    headline: 网站概览
     article_name: 文章数目
     runtime_name: 已运行时间
     site_uv_name: 本站访客数
@@ -86,6 +86,7 @@ rightside:
   toc: 目录
   scroll_to_comment: 直达评论
   setting: 设置
+  feedback: 反馈
 
 runtime_unit: 天
 
@@ -103,3 +104,10 @@ Snackbar:
   cht_to_chs: 你已切换为简体
   day_to_night: 你已切换为深色模式
   night_to_day: 你已切换为浅色模式
+
+Home: 首页
+Archives: 归档
+Tags: 标签
+Categories: 分类
+Link: 友链
+About: 关于

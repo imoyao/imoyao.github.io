@@ -2,14 +2,19 @@
   - var now = new Date()
   - var nowYear = now.getFullYear()
   if theme.since && theme.since != nowYear
-    .copyright!= `&copy;${theme.since} - ${nowYear} By ${config.author}`
+    .copyright!= 'Copyright' + ` &copy; ${theme.since} - ${nowYear}` + ' ' +`${config.title}.`+' All Rights Reserved.'
   else
-    .copyright!= `&copy;${nowYear} By ${config.author}`
+    .copyright!= 'Copyright' + ` &copy;${nowYear}` + ' ' +`${config.title}.`+' All Rights Reserved.'
+  .footer-slogan
+    a(href='/about/')
+      span=config.author
+    i.fa.fa-heart(aria-hidden="true")
+    span#sp-slogan= config.slogan
   if theme.footer_copyright.enable
     .framework-info
-      span= _p('footer.driven') + ' '
       a(href='http://hexo.io')
         span Hexo
+      span= ' ' + _p('footer.driven')
       span.footer-separator |
       span= _p('footer.theme') + ' '
       a(href='https://github.com/jerryc127/hexo-theme-butterfly')
