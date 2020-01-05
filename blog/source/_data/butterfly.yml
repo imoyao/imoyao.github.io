@@ -292,7 +292,7 @@ Flink:
 
 # 打赏按钮
 reward:
-  enable: true
+  enable: false
   QR_code:
     - itemlist:
         img: /img/wechatpay.jpg
@@ -481,7 +481,7 @@ aside:
 
 # 网站公告
 announcement:
-  content: 💃Be my guest!👋~<br>💸⚠️：本站背景为随机图片，使用移动网络可能会产生较多流量费用！<br>🧐你的一切疑惑均可在 <a href="/about/">关于我</a> 页面得到解答；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
+  content: 💃Be my guest!👋~<br>💸⚠️：本站背景为随机图片，使用移动网络可能会产生较多流量费用！<br>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
 
 # busuanzi count for PV / UV in site
 # 访问人数

@@ -2,7 +2,7 @@
 title: Linux 下如何安装 Redis？
 
 date: 2019-04-11 10:03:08
-
+cover: /images/redis.jpg
 tags:
 - Redis
 - NoSQL
