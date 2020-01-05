@@ -129,3 +129,12 @@ feed:
   icon: icon.png
   autodiscovery: true
   template:
+
+# 链接添加 nofollow，https://github.com/hexojs/hexo-filter-nofollow
+nofollow:
+  enable: true
+  field: site
+  exclude:
+    - 'www.masantu.com'
+    - 'blog.masantu.com'
+    - 'masantu.com'
