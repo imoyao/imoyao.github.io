@@ -11,7 +11,7 @@ menu:
   Categories: /categories/ || fa fa-folder-open
   Link: /link/ || fas fa-user-friends
   About: /about/ || fas fa-user
-  Search: /search/ || fas fa-user
+
 #  List||fa fa-list:
 #    - Music || /music/ || fa fa-music
 #    - Movie || /movies/ || fa fa-film
@@ -103,14 +103,16 @@ katex:
 # ---------------
 avatar: https://cdn.jsdelivr.net/gh/masantu/statics/image/imoyao.jpg
 
+# see also: https://www.zhihu.com/question/21168322
+
 # the banner image of index
 index_img: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
 
 # if the banner of page not setting,it will show the top_img
-default_top_img: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
+default_top_img: https://source.unsplash.com/random
 
 # the default cover of the post
-default_cover: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
+default_cover: https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302
 
 # the banner image of archive page
 archive_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/archive.jpg
@@ -137,7 +139,7 @@ post_meta:
 
 # Please see doc for more details: https://jerryc.me/posts/21cfbf15/#字数统计
 wordcount:
-  enable: false
+  enable: true
 
 toc:
   enable: true
@@ -286,14 +288,14 @@ Flink:
   address: 地址： https://masantu.com/
   avatar: 头像： https://cdn.jsdelivr.net/gh/masantu/statics/image/imoyao.jpg
   info: Slogan： Valar Dohaeris.
-  comment: 我并不是一个喜欢凑热闹的人，所以暂时不接受基于 SEO 目的的交换链接，请多多包涵。 😅
+  comment: 关于友链的说明👉 <a href="/links/">见此处</a>。我并不是一个喜欢凑热闹的人，所以暂时不接受基于 SEO 目的的交换链接，请多多包涵。 😅
 
 # 打赏按钮
 reward:
-  enable: false
+  enable: true
   QR_code:
     - itemlist:
-        img: /img/wechat.jpg
+        img: /img/wechatpay.jpg
         text: 微信
     - itemlist:
         img: /img/alipay.jpg
@@ -349,7 +351,7 @@ background:
 # footer是否显示图片背景(此处为自定义，写法与top_img一致)
 footer_bg:
   enable: true
-  footer_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/footer.svg
+  footer_img: /images/footer.svg
 
 # 背景特效
 # 避免卡顿，建议只开启一个
@@ -479,14 +481,14 @@ aside:
 
 # 网站公告
 announcement:
-  content: 姐妹们，来客人啦，伺候着~ ^_^
+  content: 💃Be my guest!👋~<br>💸⚠️：本站背景为随机图片，使用移动网络可能会产生较多流量费用！<br>🧐你的一切疑惑均可在 <a href="/about/">关于我</a> 页面得到解答；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
 
 # busuanzi count for PV / UV in site
 # 访问人数
 busuanzi:
   site_uv: false
   site_pv: false
-  page_pv: false
+  page_pv: true
 
 # 网页开通时间
 # 格式: 月/日/年 时间
@@ -512,6 +514,7 @@ translate:
   msgToTraditionalChinese: "繁"
   #当文字是繁体时，按钮显示的文字
   msgToSimplifiedChinese: "简"
+tugecao: "https://support.qq.com/product/67072"
 
 #阅读模式
 readmode:
@@ -547,9 +550,9 @@ fancybox:
 # position 弹窗位置
 # 可选 top-left / top-center / top-right / bottom-left / bottom-center / bottom-right
 snackbar:
-  enable: false
+  enable: true
   position: bottom-left
-  bg_light: "#49b1f5" #light mode时弹窗背景
+  bg_light: "#4586F3" #light mode时弹窗背景
   bg_dark: "#2d3035" #dark mode时弹窗背景
 
 #百度推送

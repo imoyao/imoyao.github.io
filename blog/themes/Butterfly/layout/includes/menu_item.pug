@@ -3,7 +3,8 @@ each value, label in theme.menu
     .menus_item
       a.site-page(href=url_for(trim(value.split('||')[0])))
         i.fa-fw(class=trim(value.split('||')[1]))
-        span=' '+label
+        //span=' '+label
+        span=' '+_p(label)
   else
     .menus_item
       a.site-page

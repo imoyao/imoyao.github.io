@@ -87,6 +87,7 @@ rightside:
   toc: 目錄
   scroll_to_comment: 直達評論
   setting: 設置
+  feedback: 反饋
 
 runtime_unit: 天
 
@@ -105,4 +106,9 @@ Snackbar:
   day_to_night: 你已切換為深色模式
   night_to_day: 你已切換為淺色模式
 
-
+Home: 首頁
+Archives: 歸檔
+Tags: 標籤
+Categories: 分類
+Link: 友鏈
+About: 關於
