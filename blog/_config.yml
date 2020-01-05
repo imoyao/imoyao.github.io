@@ -80,9 +80,9 @@ pagination_dir: page
 #主题更改
 #theme: next
 #theme: material
-#theme: cactus
-#theme: idealyard
 #theme: inside
+#theme: idealyard
+#theme: cactus
 theme: Butterfly
 
 # Deployment
@@ -116,3 +116,16 @@ markdown:
   breaks: false
   smartLists: true
   smartypants: true
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:
