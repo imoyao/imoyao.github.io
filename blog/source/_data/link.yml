@@ -11,22 +11,11 @@ class:
       link: https://blog.masantu.com
       avatar: https://cdn.jsdelivr.net/gh/masantu/statics/image/santu.jpg
       descr: 就命运而言，休论公道。
-#    2:
-#      name: xxxxxx
-#      link: https://www.xxxxxxcn/
-#      avatar: https://xxxxx/avatar.png
-#      descr: xxxxxxx
-
-#class2:
-#  class_name: 鏈接無效
-#  link_list:
-#    1:
-#      name: 夢xxx
-#      link: https://blog.xxx.com
-#      avatar: https://xxxx/avatar.png
-#      descr: xxxx
-#    2:
-#      name: xx
-#      link: https://www.axxxx.cn/
-#      avatar: https://x
-#      descr: xx
+class2:
+  class_name: 上了这些网站，身体一天不如一天
+  link_list:
+    1:
+      name: Python 官网
+      link: https://www.python.org/
+      avatar: https://www.python.org/static/community_logos/python-powered-h.svg
+      descr: import this

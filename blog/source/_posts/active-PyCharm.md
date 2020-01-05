@@ -30,14 +30,16 @@ Windows 10 10.0
 
 ## 修改配置文件
 
-在\bin 目录下找到 `pycharm.exe.vmoptions` 和 `pycharm64.exe.vmoptions` 两个文件，使用文本编辑器（如：Notepad、Sublime Text 等）打开在两个文件最后追加：
-```bash
+在`\bin` 目录下找到 `pycharm.exe.vmoptions` 和 `pycharm64.exe.vmoptions` 两个文件，使用文本编辑器（如：Notepad、Sublime Text 等）打开在两个文件最后追加：
+```plain
 -javaagent:{{ Where pycharm.exe }} JetbrainsCrack-release-enc.jar
 ```
 其中`Where pycharm.exe`是一个变量，即你的 PyCharm 安装目录，如：
 ```bash
 -javaagent:D:\Program Files\JetBrains\PyCharm 2018.3.2\bin\JetbrainsCrack-release-enc.jar
 ```
+**update** 如果是`Linux`或者`Mac`系统，上方的`pycharm.exe.vmoptions`文件可能并不存在，这个时候请活学活用，查找`vmoptions`关键字即可；另外，如果是`32`位操作系统，可能并没有`64`位的应用程序，这种情形本人并没有进行过相应尝试。
+
 ## 输入激活码
 
 点击桌面图标，在弹出的激活对话框中输入以下内容：
@@ -72,4 +74,4 @@ ThisCrackLicenseId-{
 
 ## 太长不读
 
-如果觉得手动操作太累，可以试试直接用`Python`代码的方式。源码见此[Active_PyCharm](https://github.com/imoyao/my_practices/tree/master/codes/active_pycharm)
+如果觉得手动操作太累，可以尝试直接用`Python`代码的方式实现。源码见此[Active_PyCharm](https://github.com/imoyao/my_practices/tree/master/codes/active_pycharm)

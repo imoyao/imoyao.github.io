@@ -246,7 +246,7 @@ ICP:
 
 ####   Analysis    ####
 # ---------------
-baidu_analytics:
+baidu_analytics: 231bfe4abce99ac3586b516eef2ea05e
 
 # Google Analytics
 google_analytics:
@@ -292,7 +292,7 @@ Flink:
 
 # 打赏按钮
 reward:
-  enable: true
+  enable: false
   QR_code:
     - itemlist:
         img: /img/wechatpay.jpg
