@@ -2,12 +2,17 @@
 title: ceph-calamari 安装记录
 date: 2019-10-23 16:44:31
 tags:
-- 安装
+- Ceph
 - Calamari
 ---
-## 弃用
-**注意**：
-基于[*本文*](http://liyichao.github.io/posts/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-ceph-mgr.html)提到的原因，不再对该项目进行跟进和继续探索。
+{% note danger %} 
+## 过时提示（@Deprecated）
+基于[*本文*](http://liyichao.github.io/posts/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-ceph-mgr.html)提到的原因，不再对该项目进行跟进、维护和继续探索。
+
+{% endnote %}
+
+---
+
 ## 克隆源码
 ```bash
 mkdir /tmp/calamari-repo
