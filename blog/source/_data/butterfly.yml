@@ -226,7 +226,7 @@ valine:
   lang: zh-cn # i18n: zh-cn/en
   placeholder: 我们期待并欢迎理性、友好而和谐的声音…… # valine comment input placeholder(like: Please leave your footprints )
   guest_info: nick,mail,link #valine comment header info
-  bg: /img/comment_bg.png # valine background
+  bg: /images/comment-bg.svg # valine background
   count: false # top_img显示评论数
 
 #####     Footer Settings    ####

@@ -4,16 +4,15 @@ date: 2019-04-13 14:14:28
 tags:
 
 - Python
+description: 哈姆雷特不是莎士比亚写的；它只是由一个名叫莎士比亚的人写的。<br>Python 通过对象引用传递。
 ---
-哈姆雷特不是莎士比亚写的;它只是由一个名叫莎士比亚的人写的。
-Python 通过对象引用传递。
 
 <!--more-->
 
 本文译自 [Is Python pass-by-reference or pass-by-value?](https://robertheaton.com/2014/02/09/pythons-pass-by-object-reference-as-explained-by-philip-k-dick/)
 
 
->“假设我对 Fat 说，或 Kevin 对 Fat 说，“你没有经历过上帝。你只不过经历了一些与上帝的品质、方面、性质、力量、智慧和善良有关的事情。”这就像是关于德国人讲的一个双重抽象倾向的笑话；德国英国文学权威宣称，“哈姆雷特不是莎士比亚写的;它只是由一个名叫莎士比亚的人写的。”在英语语境中，这句话的区别只是口头的，没有实际意义，尽管德语中这种表达存在差异（这解释了德国思想的一些奇怪特征）。”
+>“假设我对 Fat 说，或 Kevin 对 Fat 说，“你没有经历过上帝。你只不过经历了一些与上帝的品质、方面、性质、力量、智慧和善良有关的事情。”这就像是关于德国人讲的一个双重抽象倾向的笑话；德国英国文学权威宣称，“哈姆雷特不是莎士比亚写的；它只是由一个名叫莎士比亚的人写的。”在英语语境中，这句话的区别只是口头的，没有实际意义，尽管德语中这种表达存在差异（这解释了德国思想的一些奇怪特征）。”
 >   <p align="right"> --Valis，p71（Book-of-the-Month-Club Edition）</p>
 
 Philip K. Dick 并不以其轻松或易懂的散文而闻名。绝大多数角色都很高。就像，真的，真的，真的很高。然而，在 Valis 的上述引文（1981 年出版）中，他对臭名昭着的`Python`参数传递范式给出了非常有远见的解释。Plus ça change, plus c’est omnomnomnom drugs.
@@ -104,10 +103,7 @@ print listA
 你可能还想了解这些概念与可变和不可变类型之间的有趣交互。但这些是另一回事了。现在，如果你能原谅我，我要去读《Dororoids Dream Of Electric Sheep？》了。 - 我对元编程有点生疏。
 
 ---
-
-[Does Python pass by reference or value?](https://eev.ee/blog/2012/05/23/python-faq-passing/)
-
 ## 参考链接
-
+* [Does Python pass by reference or value?](https://eev.ee/blog/2012/05/23/python-faq-passing/)
 * http://foobarnbaz.com/2012/07/08/understanding-python-variables/ 
 * http://javadude.com/articles/passbyvalue.htm
