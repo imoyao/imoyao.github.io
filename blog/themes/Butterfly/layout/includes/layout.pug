@@ -52,7 +52,8 @@ html(lang=config.language data-theme=theme.display_mode)
         - var is_photo = source.substring(3,0) === 'url' ? 'photo':'color'
         #web_bg(data-type=is_photo)
       if (is_post() && page.toc != false && theme.toc.enable)
-        i.fa.fa-arrow-right#toggle-sidebar(aria-hidden="true")
+        // fas.fa-angle-double-right | fa.fa-arrow-right
+        i.fas.fa-angle-double-right#toggle-sidebar(aria-hidden="true")
         include ./sidebar.pug
       if (!is_post())
         include ./nav.pug

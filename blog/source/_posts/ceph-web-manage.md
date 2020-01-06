@@ -5,37 +5,38 @@ tags:
 - Ceph
 - 存储
 ---
-{% note danger %} 
-## 过时提示（@Deprecated）
-此文写于刚开始对Ceph还不了解得时候，调研了一大堆最后也没用上。后来发现社区`Luminous`版本专项开发基于`Ceph-mgr-dashboard`的管理系统，见[此处](https://docs.ceph.com/docs/master/mgr/dashboard/)，故不再对该方向进行跟进、维护和继续探索。
+{% note danger no-icon %} 
+## 过时提示 @Deprecated
+此文写于刚开始对Ceph还不了解的时候，调研了一大堆最后也没用上。后来发现社区`Luminous`版本专项开发基于`Ceph-mgr-dashboard`的管理系统，见[此处](https://docs.ceph.com/docs/master/mgr/dashboard/)，故不再对该方向进行跟进、维护和继续探索。该文不再更新。
 {% endnote %}
+
 本文主要在[Ceph 开源管理监控平台分析](http://www.hl10502.com/2017/03/30/ceph-web-manage/)基础上做一点补充。
 
 ## 现状
-Ceph 的开源管理监控平台有如 VSM（三年前最后更新，read-only），InkScope，Calamari,[Suse-enterprise-storage](https://www.suse.com/zh-cn/products/suse-enterprise-storage/)等;
+Ceph 的开源管理监控平台有如 VSM（三年前最后更新，read-only），InkScope，Calamari，[Suse-enterprise-storage](https://www.suse.com/zh-cn/products/suse-enterprise-storage/)等。
 ## VSM
 ![VSM](/images/img_20191022164357.jpg)  
 [VSM | Virtual Storage Manager](https://github.com/intel/virtual-storage-manager)
 ### 官网
 [virtual-storage-manager](https://01.org/zh/virtual-storage-manager)
 ### 组件
-	Dashboard（vsm-dashboard）：VSM 的 webUI 界面，用户通过 Dashboard 来管理与监控 ceph 集群
-	vsmclient（python-vsmclient）：VSM restapi 调用的 client
-	API（vsm）：VSM 的 restapi
-	scheduler（vsm）：VSM 的调度组件
-	conductor（vsm）：VSM 的数据库操作组件，即所有的数据库操作都是通过 conductor 来调用 mysql
-	RabbitMQ：消息中间件，VSM 的各个组件相对独立，都是通过发送消息，通过 RPC 的方式来相互调用
-	agent（vsm）：VSM 代理服务
+▪ Dashboard（vsm-dashboard）：VSM 的 webUI 界面，用户通过 Dashboard 来管理与监控 ceph 集群
+▪ vsmclient（python-vsmclient）：VSM restapi 调用的 client
+▪ API（vsm）：VSM 的 restapi
+▪ scheduler（vsm）：VSM 的调度组件
+▪ conductor（vsm）：VSM 的数据库操作组件，即所有的数据库操作都是通过 conductor 来调用 mysql
+▪ RabbitMQ：消息中间件，VSM 的各个组件相对独立，都是通过发送消息，通过 RPC 的方式来相互调用
+▪ agent（vsm）：VSM 代理服务
 ### 优缺点
 #### 优点
-1.	管理功能完善、充足
-2.	界面友好
-3.	可以部署 Ceph 和监控 Ceph
-4.	与 OpenStack 一脉传承，设计风格类似（详见架构部分说明）
+    1.	管理功能完善、充足
+    2.	界面友好
+    3.	可以部署 Ceph 和监控 Ceph
+    4.	与 OpenStack 一脉传承，设计风格类似（详见架构部分说明）
 #### 缺点
-1.	非官方，社区维护，且目前已处于归档状态（read-only）
-2.	依赖 OpenStack 某些包和组件
-3.	封装一套自己的 rest-api，代码复杂度较高
+    1.	非官方，社区维护，且目前已处于归档状态（read-only）
+    2.	依赖 OpenStack 某些包和组件
+    3.	封装一套自己的 rest-api，代码复杂度较高
 ### 技术选型
 基于 Django 开发
 ## inkScope
@@ -111,13 +112,13 @@ calamari_clients 是一套用户界面，Calamari Server 在安装的过程中�
 calamari-web 包下面的文件提供所有 web 相关的配置，calamari_rest 和 calamari_clients 都要用到。
 ### 优缺点
 #### 优点
-1.	轻量级
-2.	官方化
-3.	界面友好
+    1.	轻量级
+    2.	官方化
+    3.	界面友好
 #### 缺点
-1.	不易安装
-2.	管理功能滞后
-3.	提供的管理功能太少
+    1.	不易安装
+    2.	管理功能滞后
+    3.	提供的管理功能太少
 
 Calamari 为 Ceph 的运维和管理提供了一个统一的平台，而且用户还可以基于这个平台扩展自己的存储管理产品，但同时也存在着不足和需要改进的地方。
 
@@ -150,7 +151,7 @@ CherryPy、AngularJS
 ## 横向对比
 [ceph-days-sf2015](http://de.slideshare.net/Inktank_Ceph/07-ceph-days-sf2015-paul-evans-static)
 ### 对比背景
-![](/images/img_20191022163356.jpg)
+![compare](/images/img_20191022163356.jpg)
 ### 管理
 ![management](/images/img_20191022164343.jpg)
 ### 监控

@@ -5,7 +5,7 @@ author: 西风不瘦
 comments: false
 top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 ---
-![病木重生](https://cdn.jsdelivr.net/gh/masantu/statics/image/A-withered-tree-comes-to-life-again.jpg)
+![病木重生](/img/A-withered-tree-comes-to-life-again-compressed.jpg)
 <figcaption > 病木重生 · 2018 年摄于北京·香山</figcaption >
 <div class="slogan"><i class="fa fa-user"></i>  自述</div>
 

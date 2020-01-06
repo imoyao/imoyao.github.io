@@ -481,7 +481,7 @@ aside:
 
 # 网站公告
 announcement:
-  content: 💃Be my guest!👋~<br>💸⚠️：本站背景为随机图片，使用移动网络可能会产生较多流量费用！<br>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
+  content: <h3>💃Be my guest!👋~</h3>💸⚠️：本站背景为随机图片，使用移动网络访问可能产生较多流量费用！<br>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
 
 # busuanzi count for PV / UV in site
 # 访问人数
@@ -604,11 +604,13 @@ Open_Graph_meta: true
 CDN_USE:
   css:
     - /css/index.css
-    - https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css
+#    - https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css
+    - https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css
     - https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css #fontawesomeV5_css
 
   js:
-    - https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js #/js/third-party/jquery.min.js
+    - https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js #/js/third-party/jquery.min.js
+#    - https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js #/js/third-party/jquery.min.js
     - /js/utils.js
     - /js/main.js
 
