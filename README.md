@@ -1,5 +1,7 @@
 # 别院牧志
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/88e1a8bd-d248-4658-8373-0ff1b81442c1/deploy-status)](https://app.netlify.com/sites/santu/deploys)
+
 > 本分支用来存放站点的`sources`文件
 
 ## `LaTex` 在线公式编辑器
@@ -22,6 +24,8 @@ sh ./change_user_info.sh
 
 ## TODO
  - [ ] homepage 着陆页，其他页面没有必要用那么大的首页，影响效率。
+    https://www.zhihu.com/question/24422335/answer/853599441
+    参考[hexo-theme-matery](http://ghang.top/)
  - [ ] 友链页面参考[agency](https://startbootstrap.com/themes/agency/)改进
  - [ ] 分享功能好像不好用？
  - [ ] 文章过期提示
