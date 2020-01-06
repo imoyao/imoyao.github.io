@@ -51,13 +51,15 @@ html(lang=config.language data-theme=theme.display_mode)
         - var source = theme.background
         - var is_photo = source.substring(3,0) === 'url' ? 'photo':'color'
         #web_bg(data-type=is_photo)
-      if (is_post() && page.toc != false && theme.toc.enable)
+      if (is_post() && page.toc !== false && theme.toc.enable)
         // fas.fa-angle-double-right | fa.fa-arrow-right
         i.fas.fa-angle-double-right#toggle-sidebar(aria-hidden="true")
         include ./sidebar.pug
       if (!is_post())
         include ./nav.pug
-        //include ./desc.pug
+      //只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery
+      if(page.current === 1)
+        include ./index-desc-card.pug
       main#content-outer
         block top_img
         if (!is_post())
