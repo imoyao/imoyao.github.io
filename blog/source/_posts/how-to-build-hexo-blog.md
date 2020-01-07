@@ -1,11 +1,11 @@
 ---
 title: 在搭建 Hexo 中遇到的问题记录
 date: 2017-11-18 13:12:12
-cover: /images/v2-4b229aa661f0d337bd16390761963842.jpg
+cover: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
 tags:
 - HOWTO
 - Hexo
-- Hexo-Next
+- 博客优化
 categories:
 - 教程记录
 ---
@@ -48,6 +48,7 @@ cnpm install expresstall express
 [Hexo 博客从一台电脑迁移到其他电脑 - 简书](http://www.jianshu.com/p/beb8d611340a)
 
 ## 如何设置腾讯公益为 404 页面
+
 以下是知乎网友给出的回答：
 
 > 直接在 source 根目录下创建自己的`404.html`即可。~~但是自定义 404 页面仅对绑定顶级域名的项目才起作用。~~
@@ -87,30 +88,27 @@ author: imoyao
 
 可以用音乐网站的外链，但是一般外链是`<iframe>`，据说这个方法影响网站的 SEO。
 
-下面我就隆重介绍一款 HTML5 音乐播放器：Aplayer。需要用到`hexo-tag-aplayer`插件。
+下面我就隆重介绍一款 `HTML5` 音乐播放器——`Aplayer`。需要用到`hexo-tag-aplayer`插件。
 
 切换到本地 Hexo 目录，运行：
-
-`npm install hexo-tag-aplayer@2.0.1`
-
-这里直接运行`npm install hexo-tag-aplayer`只会安装 2.0.0，该版本会出现以下错误：
-
-```plain
-FATAL Cannot find module '/Users/hechao/Documents/TechBlog/CniceToUpp/node_modules/hexo-tag-aplayer'
-Error: Cannot find module '/Users/hechao/Documents/TechBlog/CniceToUpp/node_modules/hexo-tag-aplayer'
+```shell
+npm install hexo-tag-aplayer@2.0.1
 ```
-作者给出来解决方案是用 2.0.1 版本。安装完成后，在需要添加音乐的地方加上：
+添加音频语法如下：
 
 ```plain
 #This is a example.
-{% aplayer "平凡之路" "朴树" "https://xxx.com/%E5%B9%B3%E5%87%A1%E4%B9%8B%E8%B7%AF.mp3" "https://xxx.com/1.jpg" "autoplay" %}```
+{% raw %}
+
+{% aplayer "平凡之路" "朴树" "https://xxx.com/%E5%B9%B3%E5%87%A1%E4%B9%8B%E8%B7%AF.mp3" "https://xxx.com/1.jpg" "autoplay" %}
 就会出现你想要的音乐啦。
 
 {% aplayer "蓝莲花" "许巍" "http://oh6j8wijn.bkt.clouddn.com/%E8%93%9D%E8%8E%B2%E8%8A%B1.mp3" "http://oh6j8wijn.bkt.clouddn.com/133107859321201106e3c3ede9a13305.jpeg" "autoplay" %}`
 
-如果你想加入歌单，把上面的代码换成下面代码就行，参数的用法可以参照插件的使用说明。
+{% endraw %}
 
 ```
+如果你想加入歌单，更多参数的配置可以参照[插件](https://github.com/MoePlayer/hexo-tag-aplayer)的使用说明。
 
 ## TODO
 `material` 主题填坑
