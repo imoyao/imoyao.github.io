@@ -8,7 +8,7 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 ![病木重生](/img/A-withered-tree-comes-to-life-again-compressed.jpg)
 <figcaption > 病木重生 · 2018 年摄于北京·香山</figcaption >
 
-<video src="/media/Dream-It-Possible.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"> your browser does not support the video tag </video>
+<video src="/media/Dream-It-Possible.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"> Your browser does not support the video tag. </video>
 
 <figcaption > 华为励志音乐短片·《Dream It Possible》</figcaption >
 
