@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: hexo
 
-media_folder: source/images
-public_folder: /images
+media_folder: blog/source/images
+public_folder: blog/public
 publish_mode: editorial_workflow
 # auto generator
 auto_generator:
