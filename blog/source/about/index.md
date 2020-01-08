@@ -5,6 +5,9 @@ author: 西风不瘦
 comments: false
 top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 ---
+
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+
 ![病木重生](/img/A-withered-tree-comes-to-life-again-compressed.jpg)
 <figcaption > 病木重生 · 2018 年摄于北京·香山</figcaption >
 
