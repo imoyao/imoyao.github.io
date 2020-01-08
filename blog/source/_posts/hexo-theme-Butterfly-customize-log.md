@@ -17,6 +17,19 @@ categories:
 ```plain
 <video src="/media/Dream-It-Possible.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"> Your browser does not support the video tag. </video>
 ```
+### 表格美化
+
+参考 [Hexo 下表格的美化和优化](https://hexo.imydl.tech/archives/6742.html)
+
+|姓名|年龄|性别|民族|
+|:---:|:---|---:|:---:|
+|张三丰|100|男|汉族|
+|张翠山|35|男|汉族|
+|殷素素|33|女|汉族|
+|张无忌|12|男|汉族|
+|赵敏|12|女|蒙古族|
+|小昭|12|女|波斯人|
+
 ## TODO
 
 ## 首页添加描述卡
@@ -33,15 +46,4 @@ categories:
 
 使用第三方插件 `hexo-wordcount` 被 `hexo-symbols-count-time` 所取代，因为 `hexo-symbols-count-time` 没有任何外部 `nodejs` 依赖、也没有会导致生成站点时的性能问题 language filter。
 
-### 表格美化
 
-参考 [Hexo 下表格的美化和优化](https://hexo.imydl.tech/archives/6742.html)
-
-|姓名|年龄|性别|民族|
-|:---:|:---|---:|:---:|
-|张三丰|100|男|汉族|
-|张翠山|35|男|汉族|
-|殷素素|33|女|汉族|
-|张无忌|12|男|汉族|
-|赵敏|12|女|蒙古族|
-|小昭|12|女|波斯人|
