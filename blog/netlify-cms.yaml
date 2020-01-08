@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   branch: hexo
 
-media_folder: blog/source/images
+media_folder: blog/themes/Butterfly/source/images
 public_folder: blog/public
 publish_mode: editorial_workflow
 # auto generator
@@ -15,6 +15,7 @@ auto_generator:
       create: true # Allow users to create new documents in this collection
       editor:
         preview: true
+      sort: "date:desc"
   page:
     enabled: true
     config:
