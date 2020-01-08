@@ -29,6 +29,13 @@ date: 2020-01-06 21:32:01
 |赵敏|12|女|蒙古族|
 |小昭|12|女|波斯人|
 
+### 实现 Netlify CMS 管理
+
+[Hexo Netlify CMS](https://github.com/jiangtj/hexo-netlify-cms)
+
+参考[将 Hexo 静态博客部署到 Netlify | reuixiy](https://io-oi.me/tech/deploy-static-site-to-netlify/)
+
+
 ## TODO
 
 ## 首页添加描述卡

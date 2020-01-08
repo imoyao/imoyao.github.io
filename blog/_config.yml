@@ -151,3 +151,6 @@ symbols_count_time:
   exclude_codeblock: false
   awl: 2
   wpm: 300
+
+netlify_cms:
+  config_file: netlify-cms.yaml
