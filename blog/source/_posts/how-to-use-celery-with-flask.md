@@ -250,7 +250,7 @@ pid 文件没有权限；这种情况有两种解决办法：
 
 - 对 pid 文件所在目录加权限，然后执行：
     
-    ```bash
+    ```bashplainplainplain
     chown -R YOUR_USER_NAME:YOUR_USER_NAME  CURRENT_PATH
     celery -A celery_worker:celery beat --loglevel=INFO
     ```

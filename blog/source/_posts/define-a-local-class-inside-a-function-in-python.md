@@ -6,7 +6,7 @@ tags:
 ---
 ## 缘起
 
-今天在看ceph（mgr-dashboard）源码的时候看到下面的代码，产生了一点疑惑，这里简单整理一下。代码详见`src/pybind/mgr/dashboard/module.py:502`
+今天在看 ceph（mgr-dashboard）源码的时候看到下面的代码，产生了一点疑惑，这里简单整理一下。代码详见`src/pybind/mgr/dashboard/module.py:502`
 ```python
 import cherrypy
 

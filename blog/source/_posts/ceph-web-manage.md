@@ -29,12 +29,12 @@ Ceph 的开源管理监控平台有如 VSM（三年前最后更新，read-only�
 ▪ agent（vsm）：VSM 代理服务
 ### 优缺点
 #### 优点
-    1.	管理功能完善、充足
+    1.	管理功能完善、充足plainplainplainplainplainplainplain
     2.	界面友好
     3.	可以部署 Ceph 和监控 Ceph
     4.	与 OpenStack 一脉传承，设计风格类似（详见架构部分说明）
 #### 缺点
-    1.	非官方，社区维护，且目前已处于归档状态（read-only）
+    1.	非官方，社区维护，且目前已处于归档状态（read-only）plainplainplainplainplainplainplainplainplainplainplainplainplain
     2.	依赖 OpenStack 某些包和组件
     3.	封装一套自己的 rest-api，代码复杂度较高
 ### 技术选型
@@ -112,11 +112,11 @@ calamari_clients 是一套用户界面，Calamari Server 在安装的过程中�
 calamari-web 包下面的文件提供所有 web 相关的配置，calamari_rest 和 calamari_clients 都要用到。
 ### 优缺点
 #### 优点
-    1.	轻量级
+    1.	轻量级plainplainplainplainplainplainplainplainplainplainplainplainplain
     2.	官方化
     3.	界面友好
 #### 缺点
-    1.	不易安装
+    1.	不易安装plainplainplainplainplainplain
     2.	管理功能滞后
     3.	提供的管理功能太少
 
