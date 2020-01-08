@@ -87,7 +87,7 @@ redis 安装可以参考之前写的这篇文章[Linux 下如何安装 Redis？]
 
 **注意**： 此处需要同时安装`redis`客户端和`redis`的`Python`支持。
 ### 验证结果
-```bash
+```plain
 imoyao@local:~$ redis-cli
 127.0.0.1:6379> keys *
 1) "_kombu.binding.celery"
@@ -219,7 +219,7 @@ if __name__ == '__main__':
     ```   
     正常运行结果
     
-    ```bash
+    ```plain
     [2019-06-14 02:43:43,139: DEBUG/MainProcess] TaskPool: Apply <function _fast_trace_task at 0x7f72a03fef28> (args:('pmrearend.task.log_it', 'a9db6911-e15a-4b9e-b321-958f5298652a', {'lang': 'py', 'task': 'pmrearend.task.log_it', 'id': 'a9db6911-e15a-4b9e-b321-958f5298652a', 'shadow': None, 'eta': '2019-06-13T18:43:43.139123+00:00', 'expires': None, 'group': None, 'retries': 0, 'timelimit': [None, None], 'root_id': 'a9db6911-e15a-4b9e-b321-958f5298652a', 'parent_id': None, 'argsrepr': '[10, 20]', 'kwargsrepr': '{}', 'origin': 'gen4669@local', 'reply_to': 'a2563c50-9249-3718-85a8-9ad44174831c', 'correlation_id': 'a9db6911-e15a-4b9e-b321-958f5298652a', 'delivery_info': {'exchange': '', 'routing_key': 'celery', 'priority': 0, 'redelivered': None}}, b'[[10, 20], {}, {"callbacks": null, "errbacks": null, "chain": null, "chord": null}]', 'application/json', 'utf-8') kwargs:{})
     [2019-06-14 02:43:43,281: DEBUG/MainProcess] basic.qos: prefetch_count->4
     [2019-06-14 02:43:43,284: WARNING/ForkPoolWorker-1] 30
@@ -248,12 +248,11 @@ pid 文件没有权限；这种情况有两种解决办法：
     celery beat -A celeryapp --loglevel=INFO --pidfile="/tmp/celerybeat.pid"        # 修改路径
     ```
 
-- 对 pid 文件所在目录加权限，然后执行：
-    
-    ```bashplainplainplain
-    chown -R YOUR_USER_NAME:YOUR_USER_NAME  CURRENT_PATH
-    celery -A celery_worker:celery beat --loglevel=INFO
-    ```
+- 对 pid 文件所在目录加权限，然后执行：  
+ ```bash
+chown -R YOUR_USER_NAME:YOUR_USER_NAME  CURRENT_PATH
+celery -A celery_worker:celery beat --loglevel=INFO
+```plain
 [参见这里](https://github.com/celery/celery/issues/3828)
 
 ## 注意问题
