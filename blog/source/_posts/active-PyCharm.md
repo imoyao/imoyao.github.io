@@ -11,7 +11,7 @@ cover: /images/Python/PyCharm.jpg
 ## 说明
 
 本记录来源网络，仅用于个人记录，若收到官方律师函后果自负。希望不差钱的同学支持正版，[去官网购买](https://www.jetbrains.com/pycharm/buy/)
-这个网站提供激活码，可用性及时效性没有验证[ PyCharm 激活码](http://www.ifdll.com/pycharm/)
+这个网站提供激活码，可用性及时效性没有验证[PyCharm 激活码](http://www.ifdll.com/pycharm/)
 
 PyCharm 和操作系统版本信息如下：
 ```plain

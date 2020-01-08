@@ -1,17 +1,24 @@
 ---
 title: Python 环境管理介绍
 date: 2018-01-18 14:18:31
-thumbnail:
+cover: /images/Python/pipenv.jpg
 
 tags:
 - Python
 ---
-venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv 等工具的区别与介绍。
-项目开发中可能需要用到不同版本的`Python`及相关的开发环境。比如`Python2`及`Python3`，或者有的项目需要 `Django1.5` ，有的需要`2.0`，这个时候借助一些工具，往往可以达到事半功倍的效果。
+Python 环境管理是个很大的坑，坑里面有无数新人 or 老司机的尸体。venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv 等工具的区别与介绍。
 
 <!--more-->
 
+项目开发中可能需要用到不同版本的`Python`及相关的开发环境。比如`Python2`及`Python3`，或者有的项目需要 `Django1.5` ，有的需要`2.0`，这个时候借助一些工具，往往可以达到事半功倍的效果。
+
 ![Python](https://farm5.staticflickr.com/4290/35294660055_42c02b2316_k_d.jpg)
+
+{%note info no-icon%}
+## @Update
+- 2020-1-8
+今天看到一篇文章 [Pipenv 有什么问题](https://frostming.com/2019/09-01/pipenv-problems)，作者是`Pipenv`的核心开发者，也对`Poetry`做了一点介绍，同时在 [这里](https://github.com/pypa/pipenv/issues/4058) 看到对`pipenv`项目进度的询问与开发者的回应，有兴趣的可以一读。
+{%endnote%}
 
 ## 第三方库
 
@@ -53,6 +60,8 @@ venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv 等工具的区别与
 
 ## 参考链接
 
-1.[Python - What is the difference between venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv, etc? - Stack Overflow](https://stackoverflow.com/questions/41573587/what-is-the-difference-between-venv-pyvenv-pyenv-virtualenv-virtualenvwrappe)
+1. [Python - What is the difference between venv, pyvenv, pyenv, virtualenv, virtualenvwrapper, pipenv, etc? - Stack Overflow](https://stackoverflow.com/questions/41573587/what-is-the-difference-between-venv-pyvenv-pyenv-virtualenv-virtualenvwrappe)
 
-2.[Pipenv & Virtual Environments — The Hitchhiker's Guide to Python](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+2. [Pipenv & Virtual Environments — The Hitchhiker's Guide to Python](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+
+3. [我的 Python 环境设置](https://frostming.com/2019/11-18/python-setup)

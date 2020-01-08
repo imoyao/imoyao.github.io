@@ -4,6 +4,7 @@ date: 2019-12-07 14:18:48
 tags:
 - Python
 - pip
+- 包管理
 
 categories:
 
@@ -64,12 +65,12 @@ if __name__ == '__main__':
 
 发现一个可以处理`卸载命令的增强，能删除卸载软件包的所有依赖关系问题`的包：
 
-```
+```plain
 pip install pef
 ```
 
 - [remove a package plus unused dependencies.](https://stackoverflow.com/questions/7915998/does-uninstalling-a-package-with-pip-also-remove-the-dependent-packages)
 
-## 举一反三，Linux环境中的呢？
+## 举一反三，Linux 环境中的呢
 - [How To List Installed Packages Sorted By Installation Date In Linux](https://www.ostechnix.com/list-installed-packages-sorted-installation-date-linux/)
 - [How can one remove all packages installed after a certain date/time?](https://askubuntu.com/questions/548683/how-can-one-remove-all-packages-installed-after-a-certain-date-time)

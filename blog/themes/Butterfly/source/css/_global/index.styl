@@ -134,6 +134,13 @@ table
   width: 100%
   border-spacing: 0
   border-collapse: collapse
+  //隔行变色
+  tbody
+    tr:nth-child(2n)
+      background: rgba(158,188,226,0.12)
+      // 悬浮变色
+      &:hover
+        background: #efefef
 
   thead
     background: alpha($a-link-color, 10%)
@@ -143,6 +150,9 @@ table
     padding: .3rem .6rem
     border: 1px solid darken($light-grey, 10%)
     vertical-align: top
+
+  &:nth-child(1)
+    white-space: nowrap
 
 *::selection
   background: $selection

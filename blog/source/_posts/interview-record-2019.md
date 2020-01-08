@@ -243,7 +243,7 @@ class A:
 
 ### select 和 epoll 区别
 [Python 全栈之路系列之 IO 多路复用](https://blog.ansheng.me/article/python-full-stack-way-io-multiplexing.html)
-[select、poll、epoll之间的区别总结[整理]](https://www.cnblogs.com/anker/p/3265058.html)
+[select、poll、epoll 之间的区别总结[整理]](https://www.cnblogs.com/anker/p/3265058.html)
 [Python 异步非阻塞 IO 多路复用 Select/Poll/Epoll 使用](https://www.haiyun.me/archives/1056.html)
 [Python 使用 select 和 epoll 实现 IO 多路复用实现并发服务器](https://www.jianshu.com/p/cdfddb026db0)
 [How To Use Linux epoll with Python](https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/how_to_use_linux_epoll.html)

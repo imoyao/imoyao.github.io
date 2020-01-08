@@ -7,10 +7,10 @@ tags:
 - Hexo
 - 博客优化
 categories:
-- 教程记录
+- 博客美化
 ---
 
-在网络上搜索一天多才磕磕绊绊搭建好这个博客，⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄ 现在把过程中遇到的坑记录一下，希望可以给之后的同学们带来帮助。
+在网络上搜索一天多才磕磕绊绊搭建好 [这个](www.masantu.com) 博客，⁄(⁄ ⁄•⁄ω⁄•⁄ ⁄)⁄ 现在把过程中遇到的坑记录一下，希望可以给之后的同学们带来帮助。
 <!--more-->
 
 ## npm 包管理安装太慢怎么办
@@ -44,7 +44,7 @@ cnpm install expresstall express
 
 **注：**master 分支不能当作他用，只能作为 hexo 发布之后使用。
 
-可以参考下面链接配置
+可以参考下面链接配置：
 [Hexo 博客从一台电脑迁移到其他电脑 - 简书](http://www.jianshu.com/p/beb8d611340a)
 
 ## 如何设置腾讯公益为 404 页面
@@ -70,9 +70,9 @@ cnpm install expresstall express
 
 目前存在问题：页面会有一个卡顿加载的过程，该页面没有适配移动端。
 
-## Next 主题文章页如何设置多标签
+## 文章页如何设置多标签
 
-在文章发布页（MARKDOWN 文件顶部）添加如下字段:
+在文章发布页（`MARKDOWN` 文件顶部）添加如下字段:
 
 ```plain
 title: 在搭建Hexo中遇到的问题记录
@@ -86,7 +86,7 @@ author: imoyao
 ```
 ## 如何给博客文章页添加音乐
 
-可以用音乐网站的外链，但是一般外链是`<iframe>`，据说这个方法影响网站的 SEO。
+可以用音乐网站的外链，但是一般外链是`<iframe>`，据说这个方法影响网站的 `SEO`。
 
 下面我就隆重介绍一款 `HTML5` 音乐播放器——`Aplayer`。需要用到`hexo-tag-aplayer`插件。
 
@@ -95,7 +95,6 @@ author: imoyao
 npm install hexo-tag-aplayer@2.0.1
 ```
 添加音频语法如下：
-
 ```plain
 #This is a example.
 {% raw %}
@@ -110,10 +109,16 @@ npm install hexo-tag-aplayer@2.0.1
 ```
 如果你想加入歌单，更多参数的配置可以参照[插件](https://github.com/MoePlayer/hexo-tag-aplayer)的使用说明。
 
-## TODO
-`material` 主题填坑
+## 盘古之白
+
+> 有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。毕竟爱情跟书写都需要适时地留白。
+
+使用 [lint-md](https://github.com/hustcc/lint-md/tree/master/packages/lint-md-cli) 解决博客中英文排版空格的问题；
+```shell
+lint-md source\_posts\ -f
+```
 
 ## 参考链接
-1. [开始使用 - NexT 使用文档 ](http://theme-next.iissnan.com/getting-started.html)
+1. [开始使用 - NexT 使用文档](http://theme-next.iissnan.com/getting-started.html)
 2. [GitHub+Hexo 搭建个人网站详细教程](https://zhuanlan.zhihu.com/p/26625249)
-2. [hexo添加音乐、high一下及一些坑 | tc9011's](http://tc9011.com/2016/12/24/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E3%80%81high%E4%B8%80%E4%B8%8B%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%9D%91/)
+2. [hexo 添加音乐、high 一下及一些坑 | tc9011's](http://tc9011.com/2016/12/24/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E3%80%81high%E4%B8%80%E4%B8%8B%E5%8F%8A%E4%B8%80%E4%BA%9B%E5%9D%91/)
