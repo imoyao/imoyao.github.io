@@ -1,6 +1,6 @@
 ---
 title: 如何使用 Python 操作 RabbitMQ
-date: 2019-11-21 15:20:56
+date: 2019-11-21 15:20:57
 tags:
 - RabbitMQ
 - TODO
