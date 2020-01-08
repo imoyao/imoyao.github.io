@@ -19,3 +19,8 @@ class2:
       link: https://www.python.org/
       avatar: https://www.python.org/static/community_logos/python-powered-h.svg
       descr: import this
+    2:
+      name: StackOverflow
+      link: https://stackoverflow.com/
+      avatar: https://www.python.org/static/community_logos/python-powered-h.svg
+      descr: Stack Overflow is the largest, most trusted online community for developers to learn, share their programming knowledge, and build their careers.
