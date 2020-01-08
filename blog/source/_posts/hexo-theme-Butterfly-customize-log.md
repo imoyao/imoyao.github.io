@@ -1,14 +1,13 @@
----
 title: Hexo 主题 Butterfly 自定义之路
-date: 2020-01-06 21:32:01
 tags:
-- Hexo
-- Butterfly
-cover: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+  - Hexo
+  - Butterfly
+cover: >-
+  https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
 categories:
-- 博客美化
+  - 博客美化
+date: 2020-01-06 21:32:01
 ---
-
 ## svg 背景
 
 使用 [SVG 编辑器](https://c.runoob.com/more/svgeditor/) 修改 footer、评论区背景图；
@@ -41,9 +40,3 @@ categories:
 ## page 页侧边栏
 
 不要展示只看一次就可以的信息
-
-### 插件
-
-使用第三方插件 `hexo-wordcount` 被 `hexo-symbols-count-time` 所取代，因为 `hexo-symbols-count-time` 没有任何外部 `nodejs` 依赖、也没有会导致生成站点时的性能问题 language filter。
-
-
