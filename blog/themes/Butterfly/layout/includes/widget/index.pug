@@ -1,7 +1,7 @@
 if theme.aside.card_author
   include ./card_author.pug
 
-if theme.aside.card_announcement
+if theme.aside.card_announcement && page.current === 1
   include ./card_announcement.pug
 
 if theme.aside.card_recent_post
@@ -16,6 +16,6 @@ if theme.aside.card_tags
 if theme.aside.card_archives
   include ./card_archives.pug
 
-if theme.aside.card_webinfo
+if theme.aside.card_webinfo && page.current === 1
   include ./card_webinfo.pug
   
