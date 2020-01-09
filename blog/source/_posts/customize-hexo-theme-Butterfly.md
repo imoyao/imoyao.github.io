@@ -43,12 +43,12 @@ date: 2020-01-06 21:32:01
 #### 状态
 - [x] 用户卡片页显示个人工作状态（支持 fa 和 emoji 😀）
 
-#### footer
+#### footer页面
 - [x] 添加 badge
 
 #### 背景图
  在原作者的基础上添加了修改books页面bg的strict，不得不说作者真的很细心了。
- ```pug
+ ```jade
  else if is_current('/books/', [strict])
   - var top_img = theme.books_img || theme.default_top_img
  ```
