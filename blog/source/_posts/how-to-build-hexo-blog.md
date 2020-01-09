@@ -70,7 +70,7 @@ cnpm install expresstall express
 
 目前存在问题：页面会有一个卡顿加载的过程，该页面没有适配移动端。
 
-## 文章页如何设置多标签？
+## 文章页如何设置多标签
 
 在文章发布页（`MARKDOWN` 文件顶部）添加如下字段:
 
@@ -109,13 +109,13 @@ npm install hexo-tag-aplayer@2.0.1
 ```
 如果你想加入歌单，更多参数的配置可以参照[插件](https://github.com/MoePlayer/hexo-tag-aplayer)的使用说明。
 
-## 如何在文章页插入视频？
+## 如何在文章页插入视频
 
 ```html
 <video src="/media/Dream-It-Possible.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"> Your browser does not support the video tag. </video>
 ```
 
-## 如何增加“盘古之白”？
+## 如何增加“盘古之白”
 
 > 有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其余三成的人最后只能把遗产留给自己的猫。毕竟爱情跟书写都需要适时地留白。
 

@@ -27,3 +27,13 @@
         if theme.ICP.icon
           img.icp-icon(src=url_for(theme.ICP.icon))
         span=theme.ICP.text
+
+  if theme.shields.enable
+    .badge
+      each link_string, _ in theme.shields.list
+        - var urls = link_string.split('||')
+        - var img_url = trim(urls[0])
+        - var link_url = trim(urls[1])
+        a(href=link_url)
+          if theme.ICP.icon
+            img.icp-icon(src=url_for(img_url))
