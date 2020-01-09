@@ -34,3 +34,13 @@
           each url, icon in theme.social
             a.social-icon(href=url target="_blank")
               i(class=icon aria-hidden="true")
+
+    if(theme.status && theme.status.enable)
+      if theme.status.fa.enable
+        .card-info-status.is-center
+          each content, icon in theme.status.fa_status
+            i(class=icon aria-hidden="true")
+            span!=`${content}`
+      else if theme.status.emoji.enable
+        .card-info-status.is-center
+          span!=`${theme.status.emoji.emoji_status}`

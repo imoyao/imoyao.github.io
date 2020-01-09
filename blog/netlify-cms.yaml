@@ -17,7 +17,7 @@ auto_generator:
         preview: true
       sort: "date:desc"
   page:
-    enabled: true
+    enabled: false
     config:
       label: "Page"
       delete: false
@@ -34,7 +34,9 @@ global_fields:
     - {label: "Tags", name: "tags", widget: "list", required: false}
     - {label: "Categories", name: "categories", widget: "list", required: false}
     - {label: "Body", name: "body", widget: "markdown", required: false}
+    - {label: "Featured Image", name: "cover", widget: "image", required: false}
     - {label: "Permalink", name: "permalink", widget: "string", required: false}
     - {label: "Comments", name: "comments", widget: "boolean", default: true, required: false}
+    - {label: "Hide", name: "hide", widget: "boolean", default: false, required: false}
   #post:
   #page:

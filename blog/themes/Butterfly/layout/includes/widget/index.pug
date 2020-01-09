@@ -1,3 +1,4 @@
+//只在首页显示公告和网站概览；跳到对应页时，侧边栏不显示对应card（避免信息重复）；
 if theme.aside.card_author
   include ./card_author.pug
 
@@ -7,13 +8,13 @@ if theme.aside.card_announcement && page.current === 1
 if theme.aside.card_recent_post
   include ./card_recent_post.pug
   
-if theme.aside.card_categories   
+if theme.aside.card_categories
   include ./card_categories.pug
 
-if theme.aside.card_tags
+if theme.aside.card_tags && page.type !== 'tags'
   include ./card_tags.pug
 
-if theme.aside.card_archives
+if theme.aside.card_archives && page.type !== 'categories'
   include ./card_archives.pug
 
 if theme.aside.card_webinfo && page.current === 1

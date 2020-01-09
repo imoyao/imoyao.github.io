@@ -6,8 +6,6 @@ comments: false
 top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 ---
 
-[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-
 ![病木重生](/img/A-withered-tree-comes-to-life-again-compressed.jpg)
 <figcaption > 病木重生 · 2018 年摄于北京·香山</figcaption >
 
@@ -36,7 +34,7 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 
 ### 关于我
 
-面食爱好者，电影爱好者，~~自认为的~~低自我监控者（概念参见《亲密关系·第 5 版》P130），~~曾经的~~阅读爱好者（现在因为时间和心境关系一年到头也读不了几本书啦！🐶）。
+🍜面食爱好者，🎥电影爱好者，~~自认为的~~低自我监控者（概念参见《亲密关系·第 5 版》P130），~~曾经的~~阅读爱好者（现在因为时间和心境关系一年到头也读不了几本书啦！🐶）。
 
 本人主要使用`Python`语言在后端开发方面做一些微小的工作，目前还没有遇到自己历史的进程。希望成为一个有趣的人，最好能有点小钱钱 _(:з”∠)_
 
@@ -74,8 +72,9 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 
 1. 本人没有经常性喝咖啡的习惯，偶尔的速溶咖啡费用亦可自费承担；
 2. 本[网站](https://www.masantu.com)暂时托管于 [GitHub Pages](https://pages.github.com/)，并不会产生额外的维护费用；
-3. 如本网站有内容帮助到你，你觉得需要花点钱表示感谢（~~宣泄一下~~），请使用微信（WeChat）扫描下方二维码与我一起做公益吧！
-***注意***：本支付款项会直接进入相应的基金账户，**并不**经过本人账户，所以无法申请退款，请思考后量力而行。
+3. 如本网站有内容帮助到你，你觉得需要花点钱表示感谢（~~宣泄一下~~），请使用微信（WeChat）扫描下方二维码与我一起做公益吧！ 
+
+ ***注意***：本支付款项会直接进入相应的基金账户，**并不**经过本人账户，所以无法申请退款，请考虑后量力而行。
 
 人人为我，我为人人。感谢您为中国公益事业的慷慨解囊！💕 
 

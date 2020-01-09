@@ -58,6 +58,17 @@ social:
   fas fa-feather-alt: https://blog.masantu.com
   fa fa-envelope: mailto:immoyao@gmail.com
   fa fa-rss: /atom.xml
+#------work status-------
+status:
+  enable: true
+  fa:
+    enable: true
+  fa_status:
+    fa fa-laptop: 寻找历史进程中……
+#  == 注意：fa与emoji最好只enable一个 =
+  emoji:
+    enable: true
+    emoji_status: 🤔 寻找历史进程中……
 
 ####    search    ####
 # Algolia search
@@ -243,6 +254,12 @@ ICP:
   url:
   text:
   icon: /img/icp.png
+#---- 尾部添加badge
+shields:
+  enable: true
+  list:
+    996.icu: https://img.shields.io/badge/link-996.icu-red.svg || https://996.icu
+    Open Source: https://img.shields.io/badge/Support-Open%20Source-brightgreen || https://opensource.org/about
 
 ####   Analysis    ####
 # ---------------

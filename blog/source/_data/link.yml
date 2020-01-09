@@ -11,6 +11,11 @@ class:
       link: https://blog.masantu.com
       avatar: https://cdn.jsdelivr.net/gh/masantu/statics/image/santu.jpg
       descr: 就命运而言，休论公道。
+    3:
+      name: 别院牧志
+      link: https://imoyao.gitee.io/
+      avatar: https://avatars0.githubusercontent.com/u/22978431?s=460&v=4
+      descr: 国内镜像，会稍微快点。
 class2:
   class_name: 上了这些网站，身体一天不如一天
   link_list:
