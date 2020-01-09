@@ -12,9 +12,9 @@ menu:
   Link: /link/ || fas fa-user-friends
   About: /about/ || fas fa-user
 
-#  List||fa fa-list:
-#    - Music || /music/ || fa fa-music
-#    - Movie || /movies/ || fa fa-film
+  More||fa fa-list:
+    - Book || /books/ || fa fa-book
+    - Movie || /movies/ || fa fa-film
 
 # Favicon
 # ---------------
@@ -62,7 +62,7 @@ social:
 status:
   enable: true
   fa:
-    enable: true
+    enable: false
   fa_status:
     fa fa-laptop: 寻找历史进程中……
 #  == 注意：fa与emoji最好只enable一个 =
@@ -134,8 +134,9 @@ tag_img: /img/tags.jpg
 # the banner image of category page
 category_img: /img/category.jpg
 
-# 如果你有使用hexo-douban去生成movie界面，可配置这个
+# 如果你有使用hexo-douban去生成movie界面，可配置这个 <牛逼！这个都考虑到了>
 movies_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/movie.jpg
+books_img: /images/p4655.jpg
 
 # if the photo link cannot connect,it will show that
 lodding_bg:

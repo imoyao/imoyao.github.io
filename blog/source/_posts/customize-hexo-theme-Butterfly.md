@@ -46,10 +46,15 @@ date: 2020-01-06 21:32:01
 #### footer
 - [x] 添加 badge
 
+#### 背景图
+ 在原作者的基础上添加了修改books页面bg的strict，不得不说作者真的很细心了。
+ ```pug
+ else if is_current('/books/', [strict])
+  - var top_img = theme.books_img || theme.default_top_img
+ ```
+ 
 ### 实现 Netlify CMS 管理
-
 使用[Hexo Netlify CMS](https://github.com/jiangtj/hexo-netlify-cms)实现
-
 参考[将 Hexo 静态博客部署到 Netlify | reuixiy](https://io-oi.me/tech/deploy-static-site-to-netlify/)
 
 #### page 页侧边栏
@@ -66,6 +71,9 @@ date: 2020-01-06 21:32:01
 - [x] self introduce
 - ~~music~~
 - ~~video~~
+
+#### page背景图
+- [ ] 修改books、movies页面的背景，更加沉浸式
 
 #### 编辑直达
 - [ ] 首页增加 [后台管理](https://imoyao.netlify.com/admin/#/) navbar
