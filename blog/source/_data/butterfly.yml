@@ -142,7 +142,7 @@ books_img: /images/p4655.jpg
 lodding_bg:
   flink: /img/friend_404.gif #404后图片
   post_page: /img/404.jpg #404后图片
-#  post: /img/loading.gif ##加载动画
+  post: /img/loading.svg #加载动画
 
 post_meta:
   date_type: both # or created or updated 文章日期是创建日或者更新日或都显示
@@ -601,6 +601,8 @@ note:
 # https://github.com/aFarkas/lazysizes
 lazyload:
   enable: true
+  onlypost: false
+  loadingImg: /img/loading.gif
 
 # 避免重复网址分散seo
 canonical: true

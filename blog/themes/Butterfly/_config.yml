@@ -128,7 +128,7 @@ movies_img: https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/mo
 lodding_bg:
   flink: /img/friend_404.gif #404后图片
   post_page: /img/404.jpg #404后图片
-#  post: /img/loading.gif ##加载动画
+  post: /img/loading.gif #加载动画
 
 post_meta:
   date_type: both # or created or updated 文章日期是创建日或者更新日或都显示
