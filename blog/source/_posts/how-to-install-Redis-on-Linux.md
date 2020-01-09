@@ -149,16 +149,16 @@ toc: true
     ```
 
 5. 验证
-    查看版本
-    ```shell
-    redis-server -v
-    Redis server v=5.0.4 sha=00000000:0 malloc=jemalloc-5.1.0 bits=64 build=b139020f90f1d493
-    ```
-    查看路径
-    ```shell
-    whereis redis-server    # in
-    redis-server: /usr/local/bin/redis-server   # out
-    ```
+ 查看版本
+```bash
+redis-server -v
+Redis server v=5.0.4 sha=00000000:0 malloc=jemalloc-5.1.0 bits=64 build=b139020f90f1d493
+```
+查看路径
+```shell
+whereis redis-server    # in
+redis-server: /usr/local/bin/redis-server   # out
+```
 至此，`Redis`安装完成。
 
 ## 配置
