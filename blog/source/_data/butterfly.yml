@@ -19,7 +19,7 @@ menu:
 # Favicon
 # ---------------
 favicon: /img/favicon.ico
-
+site_logo: /img/virctial-site-logo.png
 # PWA
 # See https://github.com/JLHwung/hexo-offline
 # ---------------
@@ -115,7 +115,6 @@ katex:
 avatar: https://cdn.jsdelivr.net/gh/masantu/statics/image/imoyao.jpg
 
 # see also: https://www.zhihu.com/question/21168322
-
 # the banner image of index
 index_img: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
 

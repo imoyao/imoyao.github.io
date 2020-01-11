@@ -5,10 +5,9 @@ tags:
 - Python
 - pip
 - 包管理
-
 categories:
-
 - 工作日常
+cover: /images/Python/pip-logo-large.svg
 ---
 今天在装包的时候，不小心将本该装到 Python 虚拟环境中的包安装到了机器真实环境中，所以需要对其筛选并清除，那么如何找到特定日期之后安装的 Python 包呢？在[这里](https://stackoverflow.com/questions/10256093/how-to-convert-ctime-to-datetime-in-python)找到了解决方案，最后做了一个简单的封装，如下：
 

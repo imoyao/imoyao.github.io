@@ -1,5 +1,5 @@
 ---
-title: 莫遥和他的朋友们
+title: 有朋自远方来，不亦乐乎？
 date: 2020-01-04 13:24:00
 author: 西风不瘦
 type: link
