@@ -1,3 +1,4 @@
+---
 title: Hexo 主题 Butterfly 自定义之路
 tags:
   - Hexo
@@ -6,13 +7,16 @@ cover: /images/krzysztof-niewolny-f8JYQPq45uI-unsplash.jpg
 categories:
   - 博客美化
 date: 2020-01-06 21:32:01
+reward: true
 ---
+{%note no-icon%}
 原作者文档👉 [hexo-theme-butterfly 安装文档](https://jerryc.me/posts/21cfbf15/)
-## 改进
+{%endnote%}
+## 已改进
 
 ### svg 背景
 
-使用 [SVG 编辑器](https://c.runoob.com/more/svgeditor/) 修改 footer、评论区背景图；
+使用 [SVG 编辑器](https://c.runoob.com/more/svgeditor/) 修改 footer、友链头像 404、评论区背景图；
 
 ### 表格美化
 
@@ -43,15 +47,21 @@ date: 2020-01-06 21:32:01
 #### 状态
 - [x] 用户卡片页显示个人工作状态（支持 fa 和 emoji 😀）
 
-#### footer页面
+#### footer 页面
 - [x] 添加 badge
 
 #### 背景图
- 在原作者的基础上添加了修改books页面bg的strict，不得不说作者真的很细心了。
+ 在原作者的基础上添加了修改 books 页面 bg 的 strict，不得不说作者真的很细心了。
  ```jade
  else if is_current('/books/', [strict])
   - var top_img = theme.books_img || theme.default_top_img
  ```
+#### 赞赏
+鉴于国人现实经济状况，只有在`font-matter`中添加`reward: true`才会打开赞赏功能；
+```jade
+// themes/Butterfly/layout/post.pug
+if theme.reward.enable && page.reward
+```
  
 ### 实现 Netlify CMS 管理
 使用[Hexo Netlify CMS](https://github.com/jiangtj/hexo-netlify-cms)实现
@@ -72,8 +82,9 @@ date: 2020-01-06 21:32:01
 - ~~music~~
 - ~~video~~
 
-#### page背景图
-- [ ] 修改books、movies页面的背景，更加沉浸式
+#### page 背景图
+- [x] 修改 books、movies 页面的背景，更加沉浸式;
+    TODO:暂时页面 id 重复未解决
 
 #### 编辑直达
 - [ ] 首页增加 [后台管理](https://imoyao.netlify.com/admin/#/) navbar

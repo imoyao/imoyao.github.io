@@ -51,6 +51,16 @@ html(lang=config.language data-theme=theme.display_mode)
         - var source = theme.background
         - var is_photo = source.substring(3,0) === 'url' ? 'photo':'color'
         #web_bg(data-type=is_photo)
+      //阅读和电影页加背景
+      if theme.douban_background.enable
+        // - var bg_type = theme.douban_background.bg_type
+        if is_current('/movies/', [strict])
+          - var source = theme.movie_background
+        if is_current('/books/', [strict])
+          - var source = theme.book_background
+        - var bg_img = `background-image: url(${source})`
+        #web_bg(data-type='photo' style=bg_img)
+
       if (is_post() && page.toc !== false && theme.toc.enable)
         // fas.fa-angle-double-right | fa.fa-arrow-right
         i.fas.fa-angle-double-right#toggle-sidebar(aria-hidden="true")
