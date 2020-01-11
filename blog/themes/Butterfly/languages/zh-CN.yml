@@ -63,6 +63,7 @@ aside:
   card_archives: 归档
   card_recent_post: 最新文章
   card_bookmark: 加入书签
+  card_follow_zhihu: 来知乎和我互动
   card_webinfo:
     headline: 网站概览
     article_name: 文章数目
@@ -70,7 +71,7 @@ aside:
     site_uv_name: 本站访客数
     site_pv_name: 本站总访问量
 
-donate: 打赏
+donate: 赞赏
 share: 分享
 bookmark:
   title: 添加书签

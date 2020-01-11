@@ -54,7 +54,7 @@ copy:
 # ---------------
 social:
   fab fa-github: https://github.com/imoyao
-  fab fa-zhihu: https://www.zhihu.com/people/imoyao/
+#  fab fa-zhihu: https://www.zhihu.com/people/imoyao/
   fas fa-feather-alt: https://blog.masantu.com
   fa fa-envelope: mailto:immoyao@gmail.com
   fa fa-rss: /atom.xml
@@ -68,7 +68,7 @@ status:
 #  == 注意：fa与emoji最好只enable一个 =
   emoji:
     enable: true
-    emoji_status: 🤔 寻找历史进程中……
+    emoji_status: 🧐 寻找历史进程中……
 
 ####    search    ####
 # Algolia search
@@ -140,7 +140,7 @@ books_img: /images/p4655.jpg
 
 # if the photo link cannot connect,it will show that
 lodding_bg:
-  flink: /img/friend_404.gif #404后图片
+  flink: /img/Ellipsis-5s-210px.svg #404后图片
   post_page: /img/404.jpg #404后图片
   post: /img/loading.svg #加载动画
 
@@ -310,7 +310,7 @@ Flink:
 
 # 打赏按钮
 reward:
-  enable: false
+  enable: true
   QR_code:
     - itemlist:
         img: /img/wechatpay.jpg
@@ -365,6 +365,13 @@ tag_ui: # 留空或index
 # 颜色 background: '#49B202'
 # 留空 显示白色
 background:
+
+#TODO: 导致页面id重复
+douban_background:
+  enable: true
+  bg_type: photo # photo
+book_background: https://cdn.jsdelivr.net/gh/masantu/statics/image/book-bg-tiny.jpg
+movie_background: https://cdn.jsdelivr.net/gh/masantu/statics/image/movie-bg-tiny.jpg
 
 # footer是否显示图片背景(此处为自定义，写法与top_img一致)
 footer_bg:

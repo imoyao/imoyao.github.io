@@ -35,4 +35,4 @@ if __name__ == '__main__':
 
 ## 参考
 
-- [如何用python实现行列互换？ - 知乎](https://www.zhihu.com/question/39660985)
+- [如何用 python 实现行列互换？ - 知乎](https://www.zhihu.com/question/39660985)

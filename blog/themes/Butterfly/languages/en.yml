@@ -62,6 +62,7 @@ aside:
   card_archives: Archives
   card_recent_post: Recent Post
   card_bookmark: Add to bookmark
+  card_follow_zhihu: Interacts with me on 知乎
   card_webinfo:
     headline: Info
     article_name: Article

@@ -5,7 +5,7 @@ tags:
 - PyCharm
 - Python
 
-cover: /images/Python/PyCharm.jpg
+cover: /images/PyCharm.png
 ---
 
 ## 说明
