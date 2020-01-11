@@ -1,7 +1,12 @@
 header  
   #page-header
     span#blog_name.pull_left
-      a#site-name.blog_title(href=url_for('/')) #[=config.title]
+      //更换文字为logo图片
+      //a#site-name.blog_title(href=url_for('/')) #[=config.title]
+      a#site-name.blog_title(href=url_for('/'))
+        - var site_logo = theme.site_logo
+        - var site_patch = `background: url(${site_logo})`
+        span.site-logo(style=site_patch)
     span.toggle-menu.pull_right.close
       a.site-page
         i.fa.fa-bars.fa-fw(aria-hidden="true")

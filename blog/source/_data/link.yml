@@ -1,5 +1,6 @@
 class:
   class_name: 现实好友
+  describe: 伐木丁丁，鸟鸣嘤嘤。
   link_list:
     1:
       name: 庄淑尤
@@ -17,7 +18,8 @@ class:
       avatar: /img/vertical-logo-bg.png
       descr: 国内镜像，访问快&更新慢。
 class2:
-  class_name: 我变秃了，还没变强
+  class_name: 我变秃了，却没变强
+  describe: 怎么才能变得“活挺好”？
   link_list:
     1:
       name: Python 官网
@@ -29,3 +31,12 @@ class2:
       link: https://stackoverflow.com/
       avatar: https://seeklogo.net/wp-content/uploads/2015/10/stack-overflow-logo-vector-download.jpg
       descr: Stack Overflow is the largest, most trusted online community for developers to learn, share their programming knowledge, and build their careers.
+class3:
+  class_name: 技术无关
+  describe: 除了技术，我还关注这些……
+  link_list:
+    1:
+      name: 中文独立播客
+      link: https://typlog.com/podlist/
+      avatar: https://i.typlog.com/blog/8445734763_713121.png
+      descr: 发现与推荐高质量的中文独立播客。
