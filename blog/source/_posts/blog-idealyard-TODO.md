@@ -103,8 +103,8 @@ cover: /images/photo-1475767770551-49f1b43f71cd.jpg
 - [ ] 用户邮箱验证，如果没有验证，则在首页提示用户去验证，完成验证之后才可以写文章；否则登录也无法进行有效操作。
    - [x] 消息提示已完成；
    - [ ] 需要完成激活邮箱；
-- [ ] 使用swagger 生成 Flask RESTful    
-    参考[使用swagger 生成 Flask RESTful API - 古寺比的寺 - SegmentFault 思否](https://segmentfault.com/a/1190000010144742)
+- [ ] 使用 swagger 生成 Flask RESTful    
+    参考[使用 swagger 生成 Flask RESTful API - 古寺比的寺 - SegmentFault 思否](https://segmentfault.com/a/1190000010144742)
 
    
 - [ ] `vendor`文件过大，导致首页刷新时间过长；  

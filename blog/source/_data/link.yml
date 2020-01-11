@@ -14,8 +14,8 @@ class:
     3:
       name: 别院牧志
       link: https://imoyao.gitee.io/
-      avatar: https://avatars0.githubusercontent.com/u/22978431?s=460&v=4
-      descr: 国内镜像，会稍微快点。
+      avatar: /img/vertical-logo-bg.png
+      descr: 国内镜像，访问快&更新慢。
 class2:
   class_name: 我变秃了，还没变强
   link_list:
