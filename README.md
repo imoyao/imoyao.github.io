@@ -27,7 +27,9 @@ sh ./change_user_info.sh
     https://www.zhihu.com/question/24422335/answer/853599441
     参考[hexo-theme-matery](http://ghang.top/)
  - [ ] 友链页面参考[agency](https://startbootstrap.com/themes/agency/)改进
- - [ ] 分享功能好像不好用？
+ - [x] 分享功能好像不好用？
  - [ ] 文章过期提示“font mater”
     优化显示参考[此处](https://docs.netlify.com/configure-builds/common-configurations/#javascript-spas)
+    
+  更多阅读[Hexo 主题 Butterfly 自定义之路](https://www.masantu.com/blog/2020-01-06/customize-hexo-theme-Butterfly/)
  
