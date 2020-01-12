@@ -1,6 +1,6 @@
 class:
-  class_name: 现实好友
-  describe: 伐木丁丁，鸟鸣嘤嘤。
+  class_name: 现实朋友
+  describe: 伐木丁丁，鸟鸣嘤嘤。人们早已忘记了这个道理。可是你不应将它遗忘。你必须永远对自己所驯服的东西负责。你要对你的玫瑰花负责。
   link_list:
     1:
       name: 庄淑尤
@@ -19,7 +19,7 @@ class:
       descr: 国内镜像，访问快&更新慢。
 class2:
   class_name: 我变秃了，却没变强
-  describe: 怎么才能变得“活挺好”？
+  describe: 怎么才能变成一个“活挺好”的 Pythonista ？
   link_list:
     1:
       name: Python 官网
