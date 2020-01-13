@@ -16,6 +16,8 @@ if theme.aside.card_tags && page.type !== 'tags'
 
 if theme.aside.card_archives && page.type !== 'categories'
   include ./card_archives.pug
+if theme.aside.card_links
+  include ./card_links.pug
 
 if theme.aside.card_webinfo && page.current === 1
   include ./card_webinfo.pug

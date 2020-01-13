@@ -19,19 +19,19 @@
       height: 120px
       border-radius: 70px
       vertical-align: top
-      display: block;
-      margin: 0 auto;
-      webkit-transition: 1.4s all;
-      moz-transition: 1.4s all;
-      ms-transition: 1.4s all;
-      transition: 1.4s all;
+      display: block
+      margin: 0 auto
+      webkit-transition: 1.4s all
+      moz-transition: 1.4s all
+      ms-transition: 1.4s all
+      transition: 1.4s all
       //https://vwin.github.io/2018/08/02/Hexo-Next%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC/
       &:hover
-        background-color: #4586f3;
-        webkit-transform: rotate(360deg) scale(1.1);
-        moz-transform: rotate(360deg) scale(1.1);
-        ms-transform: rotate(360deg) scale(1.1);
-        transform: rotate(360deg) scale(1.1);
+        background-color: #4586f3
+        webkit-transform: rotate(360deg) scale(1.1)
+        moz-transform: rotate(360deg) scale(1.1)
+        ms-transform: rotate(360deg) scale(1.1)
+        transform: rotate(360deg) scale(1.1)
     .author-info
       &__name
         font-weight: 500
@@ -209,6 +209,46 @@
           &:last-child
             display: inline-block
             float: right
+  // ger
+  .card-links
+    ul
+      padding-left: 0
+      a
+        word-break: keep-all
+        text-decoration none
+        height: 40px
+        line-height: 35px
+        border-radius: 8px
+        padding: 3px 11px
+        margin: 3px 10px 0 0
+        -moz-transition: all 0.5s 
+        -webkit-transition: all 0.5s 
+        -o-transition: all 0.5s 
+        transition: all 0.5s 
+        color: #FFF
+        &:nth-child(8n-7)
+          background: #8A9B0F
+        &:nth-child(8n-6)
+          background: #EB6841
+        &:nth-child(8n-5)
+          background: #3FB8AF
+        &:nth-child(8n-4)
+          background: #FE4365
+        &:nth-child(8n-3)
+          background: #FC9D9A
+        &:nth-child(8n-2)
+          background: #EDC951 
+        &:nth-child(8n-1)
+          background: #C8C8A9 
+        &:nth-child(8n)
+          background: #83AF9B
+        &:first-child
+          background: #036564
+        &:last-child
+          background: #3299BB
+        &:hover
+          border-radius: 0
+          text-shadow: #000 1px 1px 1px
 
 @media screen and (max-width: 900px)
   .layout_page

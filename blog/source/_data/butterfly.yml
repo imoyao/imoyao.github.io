@@ -501,6 +501,7 @@ aside:
   card_categories: true
   card_tags: true
   card_archives: true
+  card_links: true
   card_webinfo: true
 
 # 网站公告
