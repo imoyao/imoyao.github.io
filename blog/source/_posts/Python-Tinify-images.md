@@ -1,9 +1,10 @@
 ---
-title: 使用Python压缩图片
+title: 使用Python压缩图片(借助 TinyPng 的接口)
 date: 2020-01-12 11:03:14
 tags:
 - Python
 - 压缩图片
+- TODO
 ---
 ## 缘起
 
@@ -15,6 +16,10 @@ tags:
     2. 如果给出的额外参数是 -d xxx，则保存到用户指定的目录（目录可以是相对，也可以是绝对路径）；
     3. 如果给出的参数是 -f  xxx，如果为空，则压缩成同名+'_tinified'；如果不为空且有后缀，则验证后缀相同再压缩，否则raise；如果没有后缀，则判断是否同名，不同名则压缩之后命名新名称文件，否则覆盖提示；
 3. 如果给出参数[源目录 目的目录]，则将文件保存到指定目录；
+
+## TODO
+
+源码中的click使用Google开源库 [Python Fire ](https://github.com/google/python-fire)
 
 ## 更多
 
