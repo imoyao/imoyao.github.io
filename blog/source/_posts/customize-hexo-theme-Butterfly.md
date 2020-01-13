@@ -90,6 +90,8 @@ if theme.reward.enable && page.reward
 - [x] 修改 books、movies 页面的背景，更加沉浸式;
     TODO:暂时页面 id 重复未解决
 
+### 侧边栏友链
+
 #### 编辑直达
 - [ ] 首页增加 [后台管理](https://imoyao.netlify.com/admin/#/) navbar
 - [ ] 文章页添加编辑按钮(?)
