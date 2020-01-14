@@ -29,7 +29,7 @@ Was https://pypi.org/simple reachable?
 ```
 ## 解决方案
 
-给pip换清华源
+给 pip 换清华源
 ```shell
 cd ~
 mkdir .pip/pip.conf
@@ -38,15 +38,15 @@ vi .pip/pip.conf
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple
 ```
-外部执行测试安装，可以正常安装，进入pipenv之后还是报错，修改Pipfile
+外部执行测试安装，可以正常安装，进入 pipenv 之后还是报错，修改 Pipfile
 ```plain
 (PyTinyPng) [root@172 PyTinyPng]# find / -name Pipfile
 /root/iyblog/Pipfile
 /root/Flog/Pipfile
 /root/PyTinyPng/Pipfile
 ```
-修改对应项目的Pipfile，换成清华源或者阿里源，之后执行`pipenv install {SOMETHING}`即可。
+修改对应项目的 Pipfile，换成清华源或者阿里源，之后执行`pipenv install {SOMETHING}`即可。
 
 ## 总结
 
-网络原因导致pypi源不可达，修改pip.conf可以使pip正常使用，但是pipenv有自己的配置文件，不会跟着修改，即使把虚拟环境删了（`pipenv --rm`），Pipenv也不会删除（我测试的时候是这样）。所以需要重新生成该文件或者直接修改文件。
+网络原因导致 pypi 源不可达，修改 pip.conf 可以使 pip 正常使用，但是 pipenv 有自己的配置文件，不会跟着修改，即使把虚拟环境删了（`pipenv --rm`），Pipenv 也不会删除（我测试的时候是这样）。所以需要重新生成该文件或者直接修改文件。
