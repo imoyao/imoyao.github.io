@@ -17,6 +17,19 @@ tags:
     3. 如果给出的参数是 -f  xxx，如果为空，则压缩成同名+'_tinified'；如果不为空且有后缀，则验证后缀相同再压缩，否则 raise；如果没有后缀，则判断是否同名，不同名则压缩之后命名新名称文件，否则覆盖提示；
 3. 如果给出参数[源目录 目的目录]，则将文件保存到指定目录；
 
+## 参数
+ - `--key`
+ 从官网申请的 key，提供三种方式：
+     1. 代码中直接填充；
+     2. 执行前，命令行导入环境变量；
+         ```shell
+         export TINY_KEY='{{YOU GET FROM tinypng.com }}'
+         ```
+     3. 写进配置文件`tiny.key`；
+         ```bash
+         echo '{{YOU GET FROM tinypng.com }}' > tiny.key
+         ```
+
 ## TODO
 
 源码中的 click 使用 Google 开源库 [Python Fire](https://github.com/google/python-fire)
@@ -25,4 +38,6 @@ tags:
 
 - [图片无损压缩工具都有哪些？ - 知乎](https://www.zhihu.com/question/19779256)
 ---
-> 明白事理的人使自己适应世界；不明事理的人想使世界适应自己。所以，所有进步都要靠不明事理的人。 --萧伯纳
+{% blockquote 萧伯纳 %}
+明白事理的人使自己适应世界；不明事理的人想使世界适应自己。所以，所有进步都要靠不明事理的人。
+{% endblockquote %}
