@@ -8,7 +8,13 @@ tags:
 ---
 ## 缘起
     pass
-    
+
+## 使用说明
+首先去官网申请到 key 👉[tinypng](https://tinypng.com/developers)。然后运行脚本。……
+TODO
+### 依赖
+pass
+
 ## 思路
 
 ### key
@@ -87,8 +93,13 @@ def foo(baz):
 ```
 
 ## TODO
+- [ ] 组装信息并返回给用户展示出来；
+- [ ] 递归压缩目录下文件好像有问题；
+- [ ] 不要写文件，而是使用 ini/conf 配置；
+- [ ] resize 没有测试；
 
 源码中的 click 使用 Google 开源库 [Python Fire](https://github.com/google/python-fire)
+
 ## 参考文档
 - [欢迎查阅 Click 中文文档 — click](https://click-docs-zh-cn.readthedocs.io/zh/latest/)
 
