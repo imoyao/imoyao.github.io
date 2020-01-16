@@ -18,7 +18,7 @@ pass
 ## 思路
 
 ### key
-在执行前直接配置：程序自动获取（环境变量、文件、代码中）；如果获取失败则提示配置，设置key成功，保存到文件中，下一次执行时，直接在文件中直接读取；
+在执行前直接配置：程序自动获取（环境变量、文件、代码中）；如果获取失败则提示配置，设置 key 成功，保存到文件中，下一次执行时，直接在文件中直接读取；
 
 ### 压缩处理
 
@@ -31,7 +31,7 @@ pass
 
 ## 参数
 - 不带参数
-    递归压缩当前目录下的所有图片，并保存到tiny目录
+    递归压缩当前目录下的所有图片，并保存到 tiny 目录
     ```bash
     python shrink_img.py
     ```
@@ -39,7 +39,7 @@ pass
  从官网申请的 `key`，提供三种方式导入使用：
      1. 代码中直接填充；
      2. 执行前，命令行导入环境变量；
-         ```shell
+         ```bash
          export TINY_KEY='{{YOU GET FROM tinypng.com }}'
          ```
      3. 写进配置文件`tiny.key`；
@@ -66,13 +66,13 @@ pass
         可选参数，可以选择搭配`--recurse`使用。缺省时为**当前执行目录**下的`tiny`目录（即和默认不指定目录名称效果相同）；给定参数时，为指定保存的目录；
          
 - resize
-    只支持单文件resize,根据官网API，目前支持`--scale/--fit/--cover/--thumb`参数，指定该参数中的其一时，表示 resize 的文件名称，后面跟*file name和width和/或height*；
-    1. 其中指定为`--scale`时，**必须**--width或者--height；
+    只支持单文件 resize,根据官网 API，目前支持`--scale/--fit/--cover/--thumb`参数，指定该参数中的其一时，表示 resize 的文件名称，后面跟*file name 和 width 和/或 height*；
+    1. 其中指定为`--scale`时，**必须**--width 或者--height；
         ```bash
         --scale FILENAME --width INT
         --scale FILENAME --height INT
         ```
-    2. 其余参数时，第一个参数为文件名，剩余两个参数**依次**为*width和height*，不需要显式指定`--width`和`--height`；
+    2. 其余参数时，第一个参数为文件名，剩余两个参数**依次**为*width 和 height*，不需要显式指定`--width`和`--height`；
         ```bash
         --[fit,cover,thumb] FILENAME INT INT
         ```  
