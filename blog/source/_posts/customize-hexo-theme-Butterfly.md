@@ -10,7 +10,7 @@ date: 2020-01-06 21:32:01
 reward: true
 excerpt: 试一下是否好用？
 ---
-本文主要针对 hexo-theme-butterfly 主题进行了个性化自定义，并做了简单介绍。
+本文主要针对 hexo-theme-butterfly 主题进行了个性化自定义，并对修改内容做了简单介绍。
 <!--more-->
 {%note no-icon%}
 原作者文档👉 [hexo-theme-butterfly 安装文档](https://jerryc.me/posts/21cfbf15/)
@@ -90,15 +90,17 @@ if theme.reward.enable && page.reward
 - ~~music~~
 - ~~video~~
 
-#### page 背景图
+#### page 页
+- [x] 增加正文结束分割线，可以自定义分割线文字内容；
 - [x] 修改 books、movies 页面的背景，更加沉浸式；
     TODO:暂时页面 id 重复未解决
 
-### 侧边栏友链
+### 侧边栏
 - [x] 给友链页面中的朋友栏增加首页友链卡；
+- [x] 侧边栏只显示 20 条 tag，剩余的访问 tag 页面才能看到；
 
 ### 摘要
-- [ ] 目前的摘要功能应该是我没有配置好，感觉没有生效；设置`excerpt`试试？
+- [ ] 目前的摘要功能应该是我没有配置好，感觉没有生效；
 
 > 因为主题 UI 的关系，主頁文章節選只支持自動節選和文章頁 description。优先选择自動節選。
 > 在 butterfly.yml 里可以开启 auto_excerpt 的选项，你的文章将会在自动截取部分显示在主页。（默认显示 150 个字）。
