@@ -15,6 +15,7 @@ menu:
   More||fa fa-list:
     - Book || /books/ || fa fa-book
     - Movie || /movies/ || fa fa-film
+    - B&M History || /douban/ || fa fa-history
 
 # Favicon
 # ---------------
