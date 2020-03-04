@@ -2,7 +2,6 @@
 title: Python 传值还是传引用？| 通过对象引用传递
 date: 2019-04-13 14:14:28
 tags:
-
 - Python
 description: 哈姆雷特不是莎士比亚写的；它只是由一个名叫莎士比亚的人写的。<br>Python 通过对象引用传递。
 ---
