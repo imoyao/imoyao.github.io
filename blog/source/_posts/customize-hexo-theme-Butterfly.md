@@ -44,8 +44,7 @@ excerpt: 试一下是否好用？
 参考 [Hexo 下表格的美化和优化](https://hexo.imydl.tech/archives/6742.html)
 
 ### 新增
-
-~~- [ ]参考`Next`[主题外挂](https://hexo-theme-next.netlify.com/docs/tag-plugins/)~~
+- [ ] ~~参考`Next`[主题外挂](https://hexo-theme-next.netlify.com/docs/tag-plugins/)~~
 参见[此处](https://vuejs.org/v2/cookbook/serverless-blog.html) note 挂件；
 `gallery`已经实现需求，所以没有必要实现了。
 {% gallery %} 
