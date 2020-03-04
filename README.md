@@ -24,8 +24,8 @@ sh ./change_user_info.sh
 
 ## TODO
  - [ ] homepage 着陆页，其他页面没有必要用那么大的首页，影响效率。
-    https://www.zhihu.com/question/24422335/answer/853599441
-    参考[hexo-theme-matery](http://ghang.top/)
+   [主题发现](https://www.zhihu.com/question/24422335/answer/853599441) 
+   参考[hexo-theme-matery](http://ghang.top/) 
  - [ ] 友链页面参考[agency](https://startbootstrap.com/themes/agency/)改进
  - [x] 分享功能好像不好用？
  - [ ] 文章过期提示“font mater”
