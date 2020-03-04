@@ -105,10 +105,10 @@ zset 集合可以完成有序执行、按照`优先级执行`的情况；
 ### 进程线程以及协程
 
 1. 进程   
-进程是具有一定独立功能的程序关于某个数据集合上的一次运行活动,**进程是系统进行资源分配和调度的基本单位**。每个进程都有自己的独立内存空间，不同进程通过进程间通信*（IPC）来通信。由于进程比较重量，占据独立的内存，所以上下文进程间的切换开销（栈、寄存器、虚拟内存、文件句柄等）比较大，但相对比较稳定安全。
+进程是具有一定独立功能的程序关于某个数据集合上的一次运行活动，**进程是系统进行资源分配和调度的基本单位**。每个进程都有自己的独立内存空间，不同进程通过进程间通信*（IPC）来通信。由于进程比较重量，占据独立的内存，所以上下文进程间的切换开销（栈、寄存器、虚拟内存、文件句柄等）比较大，但相对比较稳定安全。
 
 2. 线程   
-**线程是进程的一个实体,是 CPU 调度和分派的基本单位**,它是比进程更小的能独立运行的基本单位。线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源。线程间通信主要通过共享内存，上下文切换很快，资源开销较少，但相比进程不够稳定容易丢失数据。
+**线程是进程的一个实体，是 CPU 调度和分派的基本单位**，它是比进程更小的能独立运行的基本单位。线程自己基本上不拥有系统资源，只拥有一点在运行中必不可少的资源(如程序计数器，一组寄存器和栈)，但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源。线程间通信主要通过共享内存，上下文切换很快，资源开销较少，但相比进程不够稳定容易丢失数据。
 
 3. 协程   
 协程是一种**用户态**的**轻量级线程**，**协程的调度完全由用户控制**。**协程拥有自己的寄存器上下文和栈**。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈，直接操作栈则基本没有内核切换的开销，可以不加锁的访问全局变量，所以上下文的切换非常快。可以利用到并发优势，又可以**避免反复系统调用和进程切换造成的开销**。
@@ -117,10 +117,10 @@ zset 集合可以完成有序执行、按照`优先级执行`的情况；
 
 - 进程与线程比较
 
-线程是指进程内的一个执行单元,也是进程内的可调度实体。线程与进程的区别:
+线程是指进程内的一个执行单元，也是进程内的可调度实体。线程与进程的区别:
 1. 地址空间:线程是进程内的一个执行单元，进程内至少有一个线程，它们共享进程的地址空间，而进程有自己独立的地址空间；
-2. 资源拥有:进程是资源分配和拥有的单位,同一个进程内的线程共享进程的资源；
-3. 线程是处理器调度的基本单位,但进程不是；
+2. 资源拥有:进程是资源分配和拥有的单位，同一个进程内的线程共享进程的资源；
+3. 线程是处理器调度的基本单位，但进程不是；
 4. 每个独立的线程有一个程序运行的入口、顺序执行序列和程序的出口，但是线程不能够独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制；
 
 - 协程与线程进行比较
@@ -171,18 +171,18 @@ python 参数传递采用的是“**传对象引用**”的方式。这种方式
 class A:
     X = 'Hello'     # 类属性
 
-    def __init__(self,name='World'):
+    def __init__(self，name='World'):
         self.name = name    # 实例属性
 
 a = A('foo')
 print(A.X)  # Hello
 print(a.name)   #foo
-print(hasattr(a,'X'))   # True
-print(hasattr(A,'X'))   # True
-print(hasattr(A,'name'))    # False
-print(hasattr(a,'name'))    # True
-setattr(a,'name','bar')
-setattr(A,'X','Bye')
+print(hasattr(a，'X'))   # True
+print(hasattr(A，'X'))   # True
+print(hasattr(A，'name'))    # False
+print(hasattr(a，'name'))    # True
+setattr(a，'name'，'bar')
+setattr(A，'X'，'Bye')
 print(a.name)   # bar
 print(A.X)  # Bye
 ```
@@ -193,11 +193,11 @@ print(A.X)  # Bye
 import os
 print([_ for _ in range(10)])
 
-def find_file_more_than_10(root_dir_fp=None, limit=10):
+def find_file_more_than_10(root_dir_fp=None， limit=10):
     if root_dir_fp is None:
         root_dir_fp = os.path.split((os.path.abspath(__file__)))[0]
 
-    return [dirpath for dirpath, _, filenames in os.walk(root_dir_fp) if
+    return [dirpath for dirpath， _， filenames in os.walk(root_dir_fp) if
             len(filenames) > limit]
 
 
@@ -216,17 +216,17 @@ if __name__ == '__main__':
 ```python
 class Singleton:
 	_instance = {}
-	def __new__(cls,*args,**kwargs):
+	def __new__(cls，*args，**kwargs):
 		if not cls._instance:
-			cls._instance = super(Singleton,cls).__new__(cls,*args,**kwargs)
+			cls._instance = super(Singleton，cls).__new__(cls，*args，**kwargs)
 		return cls._instance
 
 
 def deco_singleton(cls):
 	_instance = {}
-	def wrapper(*args,**kwargs):
+	def wrapper(*args，**kwargs):
 		if not cls in _instance:
-			_instance[cls] = cls(*args,**kwargs)
+			_instance[cls] = cls(*args，**kwargs)
 
 		return _instance[cls]
 	return wrapper
@@ -252,7 +252,7 @@ class A:
 
 ### **Redis**的数据类型都有哪些，如果要实现计数器功能，应该选用哪种数据类型？使用 Redis，如果内存满了会怎么样
 - 数据类型
-string,list,set,zset,hash
+string，list，set，zset，hash
 - 计数器/限流器功能
 1. 可以选用`string`类型，调用`incr()`方法，参见[INCR](https://redis.io/commands/INCR)
 每次自增加 1
@@ -332,11 +332,11 @@ a = Parent()
 b = Child1()
 c = Child2()
 
-print(a.x,b.x,c.x)  # (10, 10, 10)
+print(a.x，b.x，c.x)  # (10， 10， 10)
 a.x = 20
-print(a.x,b.x,c.x)  # (20, 10, 10)
+print(a.x，b.x，c.x)  # (20， 10， 10)
 b.x = 30
-print(a.x,b.x,c.x)  # (20, 30, 10)
+print(a.x，b.x，c.x)  # (20， 30， 10)
 ```
 ```python
 class A:
@@ -345,19 +345,19 @@ class A:
 class B:
     x = 'b'
 
-class C(A,B):
+class C(A，B):
     pass
 
-class D(B,A):
+class D(B，A):
     pass
 
-print(A.x,B.x,C.x,D.x)  # ('a', 'b', 'a', 'b')
+print(A.x，B.x，C.x，D.x)  # ('a'， 'b'， 'a'， 'b')
 A.x = 'a1'
-print(A.x,B.x,C.x,D.x)  # ('a1', 'b', 'a1', 'b')
+print(A.x，B.x，C.x，D.x)  # ('a1'， 'b'， 'a1'， 'b')
 B.x = 'b1'
-print(A.x,B.x,C.x,D.x)  # ('a1', 'b1', 'a1', 'b1')
+print(A.x，B.x，C.x，D.x)  # ('a1'， 'b1'， 'a1'， 'b1')
 C.x = 'c'
-print(A.x,B.x,C.x,D.x)  # ('a1', 'b1', 'c', 'b1')
+print(A.x，B.x，C.x，D.x)  # ('a1'， 'b1'， 'c'， 'b1')
 ```
 
 ## 更多
