@@ -249,7 +249,7 @@ ceph-deploy mgr create admin-node
 ```
 ---
 {%note danger %}
-在创建 mgr 节点的时候遇到显示`HostNotFound`错误，使用`vi /etc/sysconfig/network`修改 hostname 之后保证与上文中`\etc\hosts`配置相同，重新运行即可。
+在创建 mgr 节点的时候遇到显示`HostNotFound`错误，使用`vi /etc/sysconfig/network`修改 hostname 之后保证与上文中`/etc/hosts`配置相同，重新运行即可。
 
 ```shell
 [ceph_deploy.mgr][DEBUG ] Deploying mgr, cluster ceph hosts node1:node1
@@ -362,7 +362,7 @@ ceph-deploy disk list node1 node2
 [node2][INFO  ] Disk /dev/mapper/centos-root: 18.2 GB, 18249416704 bytes, 35643392 sectors
 [node2][INFO  ] Disk /dev/mapper/centos-swap: 2147 MB, 2147483648 bytes, 4194304 sectors
 ```
-{% note warning%}
+{% note warning%} 
 进行下面操作时请确保你的磁盘没有被使用且不包含任何个人重要数据。
 {% endnote %}
 3. 擦除磁盘的分区表和内容

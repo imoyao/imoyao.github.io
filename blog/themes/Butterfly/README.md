@@ -11,8 +11,6 @@ Doc:  https://jerryc.me/posts/21cfbf15/
 
 JerryC:  https://jerryc.me/
 
-
-
 Based on [hexo-theme-melody](https://github.com/Molunerfinn/hexo-theme-melody) theme.
 
 > If you update to hexo 4.2.0，it will be something's wrong

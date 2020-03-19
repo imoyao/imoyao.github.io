@@ -24,7 +24,7 @@ subtitle: 生命不息，折腾不止
 使用 [SVG 编辑器](https://c.runoob.com/more/svgeditor/) 修改 footer、友链头像 404、评论区背景图；
 
 ##### 背景图
- 在原作者的基础上添加了修改 books 页面 bg 的 strict，不得不说作者真的很细心了。
+ 在原作者的基础上添加了修改 books 页面 bg 的 strict，不得不说作者真的很细心。
  ```jade
  else if is_current('/books/', [strict])
   - var top_img = theme.books_img || theme.default_top_img

@@ -2,17 +2,12 @@
 title: MySQL 中存储 IP 地址应该选用何种数据类型？
 date: 2019-05-11 14:44:31
 tags:
-
 - MySQL
 - Python
 - 数据库
-
 categories:
-
 - 工作日常
-
 toc: true
-
 ---
 今天在项目开发时，遇到需要在数据库中存储 ip 地址，那么应该选用何种数据类型更加高效呢？
 如果存储的是`IPV4`地址，可以选择使用`INT UNSIGNED`，然后借助 `MySQL` 自带的 `INET_ATON()` 和  `INET_NTOA()`来存取数据；
