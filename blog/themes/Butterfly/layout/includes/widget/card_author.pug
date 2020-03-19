@@ -37,7 +37,7 @@
     if(theme.social)
         .card-info-social-icons.is-center
           each url, icon in theme.social
-            a.social-icon(href=url target="_blank")
+            a.social-icon-addr(href=url target="_blank")
               i(class=icon aria-hidden="true")
 
     if(theme.status && theme.status.enable)

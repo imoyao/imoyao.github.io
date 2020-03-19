@@ -692,7 +692,7 @@ $(function () {
    */
 
   if (GLOBAL_CONFIG.localSearch === undefined && GLOBAL_CONFIG.algolia !== undefined) {
-    $('a.social-icon.search').on('click', function () {
+    $('a.social-icon-addr.search').on('click', function () {
       openSearch()
       $('.ais-search-box--input').focus()
     })
@@ -796,7 +796,7 @@ $(function () {
     search.start()
   }
   if (GLOBAL_CONFIG.localSearch !== undefined && GLOBAL_CONFIG.algolia === undefined) {
-    $('a.social-icon.search').on('click', function () {
+    $('a.social-icon-addr.search').on('click', function () {
       var loadFlag = false
       openSearch()
       $('#local-search-input input').focus()

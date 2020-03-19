@@ -26,7 +26,7 @@ each article , index in page.posts.data
           span.sticky= _p('sticky')
           span.article-meta__separator(style="margin-right: 0.3rem") |
       if (theme.post_meta.date_type)
-        - var date_type = theme.post_meta.date_type == 'updated' ? 'updated' : 'date'
+        - var date_type = theme.post_meta.date_type === 'updated' ? 'updated' : 'date'
         time.post-meta__date #[i.fa.fa-calendar(aria-hidden="true")] #[=date(article[date_type], config.date_format)]
       if (theme.post_meta.categories && article.categories.data.length > 0)
         span.article-meta
@@ -36,12 +36,11 @@ each article , index in page.posts.data
             a(href=url_for(item.path)).article-meta__categories #[=item.name]
             if (index < article.categories.data.length - 1)
                 i.fa.fa-angle-right(aria-hidden="true")
-      if theme.auto_excerpt && theme.auto_excerpt.enable
+      - var specific_desc = article.description || article.subtitle || article.excerpt
+      if specific_desc
+        .content!= specific_desc
+      else if theme.auto_excerpt && theme.auto_excerpt.enable
         - const content = strip_html(article.content)
         - let expert = content.substring(0, theme.auto_excerpt.length) 
         - content.length > theme.auto_excerpt.length ? expert += ' ...' : ''
         .content!= expert
-      else
-        .content!= article.description
-
-    

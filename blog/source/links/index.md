@@ -1,7 +1,9 @@
 ---
-title: 莫遥和他的朋友们
+title: 有朋自远方来，不亦乐乎？
 date: 2017-11-18 15:24:37
 author: 西风不瘦
+type: link
+top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/friends.jpg
 ---
 
 ## 莫遥的朋友们  

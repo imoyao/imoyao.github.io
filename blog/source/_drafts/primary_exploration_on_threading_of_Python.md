@@ -1,7 +1,9 @@
----
 title: Python 多线程模块 threading 初探
 tags:
-- Python
+  - Python
+  - threading
+categories: []
+date: 2019-06-07 18:10:00
 ---
 写`Python`这么久了，一直对`socket`和`threading`等模块懵懵懂懂，项目中看到这里的相关代码基本也是绕着走。但是：
 > 我经常有那种感觉，如果这个事情来了，你却没有勇敢地去解决掉，它一定会再来。生活真是这样，它会一次次地让你去做这个功课直到你学会为止。

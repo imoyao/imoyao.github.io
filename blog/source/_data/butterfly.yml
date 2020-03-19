@@ -9,7 +9,7 @@ menu:
   Archives: /archives/ || fa fa-archive
   Tags: /tags/ || fa fa-tags
   Categories: /categories/ || fa fa-folder-open
-  Link: /link/ || fas fa-user-friends
+  Link: /links/ || fas fa-user-friends
   About: /about/ || fas fa-user
 
   More||fa fa-list:
@@ -306,7 +306,8 @@ Flink:
   address: 地址： https://masantu.com/
   avatar: 头像： https://cdn.jsdelivr.net/gh/masantu/statics/image/imoyao.jpg
   info: Slogan： Valar Dohaeris.
-  comment: 关于友链的说明👉 <a href="/links/">见此处</a>。我并不是一个喜欢凑热闹的人，所以暂时不接受基于 SEO 目的的交换链接，请多多包涵。 😅
+  comment: 等等，还有话说
+  content: 关于此页面，有一个花里胡哨的版本可戳此访问 👉[*莫遥和他的朋友们*](https://blog.masantu.com/Friends) 。我并不是一个喜欢凑热闹的人，所以暂时不接受基于 SEO 目的的交换链接，请多多包涵。 😅 另外，本人**并不承诺**在你添加本人友链后会及时添加贵站友链。当然，如果你真觉得有必要，可以通过邮件的方式与我取得联系。📧[邮我](mailto:immoyao@gmail.com)
 
 divider_text: 深深别院，潜潜牧志
 

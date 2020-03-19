@@ -8,7 +8,7 @@ categories:
   - 博客美化
 date: 2020-01-06 21:32:01
 reward: true
-excerpt: 试一下是否好用？
+subtitle: 生命不息，折腾不止
 ---
 本文主要针对 hexo-theme-butterfly 主题进行了个性化自定义，并对修改内容做了简单介绍。
 <!--more-->
@@ -70,12 +70,13 @@ excerpt: 试一下是否好用？
 #### iframe 实现 [豆瓣书影音](/douban/) 页面
 ```html
 <!--用户名替换为自己的豆瓣id-->
-<div id="iframe"><iframe height="100%" src="https://m.douban.com/people/imoyao/subject_profile" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe></div>
+<div id="iframe">
+    <iframe height="100%" src="https://m.douban.com/people/imoyao/subject_profile" sandbox="allow-forms allow-scripts allow-same-origin allow-popups"></iframe>
+</div>
 ```
 #### 实现 Netlify CMS 管理
 使用[Hexo Netlify CMS](https://github.com/jiangtj/hexo-netlify-cms)实现
 参考[将 Hexo 静态博客部署到 Netlify | reuixiy](https://io-oi.me/tech/deploy-static-site-to-netlify/)
-
 
 ### 改进
 
@@ -87,9 +88,7 @@ if theme.reward.enable && page.reward
 ```
 #### page 页侧边栏
 - [x] 不要展示只看一次就可以的信息（如网站概览，公告等）
-{% note success %}
-只在首页显示公告和网站概览；跳到对应页时，侧边栏不显示对应 card（避免信息重复）；
-{%endnote%}
+- [x] 只在首页显示公告和网站概览；跳到对应页时，侧边栏不显示对应 card（避免信息重复）；
 
 ## TODO
 
@@ -99,6 +98,11 @@ if theme.reward.enable && page.reward
 - [x] self introduce
 - ~~music~~
 - ~~video~~
+
+#### 添加 logos 页面存放网站 logo 等个人信息
+参考
+- [Ceph Logos - Ceph](https://ceph.io/logos/)
+- [The Python Logo | Python Software Foundation](https://www.python.org/community/logos/)
 
 #### page 页
 - [x] 增加正文结束分割线，可以自定义分割线文字内容；
@@ -117,17 +121,28 @@ if theme.reward.enable && page.reward
 ```
 
 ### 摘要
-- [ ] 目前的摘要功能应该是我没有配置好，感觉没有生效；
-
+- [x] 目前的摘要功能应该是我没有配置好，感觉没有生效；
+```jade
+ - var specific_desc = article.description || article.subtitle || article.excerpt
+      if specific_desc
+        .content!= specific_desc
+      else if theme.auto_excerpt && theme.auto_excerpt.enable
+        - const content = strip_html(article.content)
+        - let expert = content.substring(0, theme.auto_excerpt.length) 
+        - content.length > theme.auto_excerpt.length ? expert += ' ...' : ''
+        .content!= expert
+```
 > 因为主题 UI 的关系，主頁文章節選只支持自動節選和文章頁 description。优先选择自動節選。
 > 在 butterfly.yml 里可以开启 auto_excerpt 的选项，你的文章将会在自动截取部分显示在主页。（默认显示 150 个字）。
-
- ```ymal
+```ymal
  auto_excerpt: 
-   enable: true 
-   length: 150
- ```
- 
-#### 编辑直达
-- [ ] 首页增加 [后台管理](https://imoyao.netlify.com/admin/#/) navbar
-- [ ] 文章页添加编辑按钮(?)
+ enable: true 
+ length: 150
+```
+
+### 编辑直达
+- [ ] 首页增加 [后台管理](https://imoyao.netlify.com/admin/#/) navbar；
+- [ ] 文章页添加编辑按钮(?)；
+
+### 暗色模式
+- [x] 一些自定义样式修改；

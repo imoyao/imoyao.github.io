@@ -164,7 +164,7 @@ if hexo-config('darkmode.enable') || hexo-config('autoChangeMode') == '1' || hex
       .aside-post_title,
       .aside-category-list_link,
       .archive-list-link,
-      .social-icon
+      .social-icon-addr
         color: alpha(#FFFFFF, .6) !important
 
     .button--animated:before
@@ -227,7 +227,13 @@ if hexo-config('darkmode.enable') || hexo-config('autoChangeMode') == '1' || hex
 
       &:hover
         color: #49b1f5
-
+    table
+      tbody
+        tr:nth-child(2n)
+          &:hover
+            background: #454545
+    .divider-inner-text
+      color: rgba(255,255,255,0.6)
     // 手機 MENU,TOC
     #mobile-sidebar
       #mobile-sidebar-menus

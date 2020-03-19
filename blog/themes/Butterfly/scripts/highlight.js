@@ -26,7 +26,7 @@ hexo.extend.filter.register('after_post_render', data => {
   }
 
   if (theme.highlight_lang) {
-    var $highlight_lang = $('<div class="code_lang"></div>')
+    var $highlight_lang = $('<span class="code_lang"></span>')
     $('.highlight-tools').append($highlight_lang)
     var lang_name_index;
     var lang_name;
@@ -48,7 +48,7 @@ hexo.extend.filter.register('after_post_render', data => {
 
   if (theme.highlight_copy) {
     var $copyIcon = $('<i class="fa fa-clipboard" aria-hidden="true"></i>')
-    var $notice = $('<div class="copy-notice"></div>')
+    var $notice = $('<span class="copy-notice"></span>')
     $('.highlight-tools').append($notice)
     $('.highlight-tools').append($copyIcon)
   }

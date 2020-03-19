@@ -25,9 +25,11 @@
       li= theme.Flink.info
 
   hr
-  .comment_int
-    // add html support
-    p.comment-word!= `${theme.Flink.comment}`
+  div
+    h1= theme.Flink.comment
+    // add markdown support
+    p!= markdown(`${theme.Flink.content}`)
+
 
 
 
