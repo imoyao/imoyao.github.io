@@ -58,8 +58,9 @@ html(lang=config.language data-theme=theme.display_mode)
           - var source = theme.movie_background
         if is_current('/books/', [strict])
           - var source = theme.book_background
-        - var bg_img = `background-image: url(${source})`
-        #web_bg(data-type='photo' style=bg_img)
+        if source
+          - var bg_img = `background-image: url(${source})`
+          #web_bg(data-type='photo' style=bg_img)
 
       if (is_post() && page.toc !== false && theme.toc.enable)
         // fas.fa-angle-double-right | fa.fa-arrow-right

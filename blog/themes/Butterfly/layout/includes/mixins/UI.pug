@@ -32,11 +32,12 @@ mixin UI_NEW(posts)
               if (index < article.categories.data.length - 1)
                   i.fa.fa-angle-right(aria-hidden="true")
           //有描述优先描述，没有的时候再去自动截取
-        if article.description
-          .content!= article.description
+        - var specific_desc = article.description || article.subtitle || article.excerpt
+        if specific_desc
+          .content!= specific_desc
         else if theme.auto_excerpt && theme.auto_excerpt.enable
           - const content = strip_html(article.content)
-          - let expert = content.substring(0, theme.auto_excerpt.length) 
+          - let expert = content.substring(0, theme.auto_excerpt.length)
           - content.length > theme.auto_excerpt.length ? expert += ' ...' : ''
           .content!= expert
   - })

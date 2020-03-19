@@ -3,7 +3,7 @@ title: Git merge/rebase/squash 的区别
 date: 2020-01-08 22:13:53
 tags:
 - Git
-cover: https://seeklogo.com/images/G/git-logo-CD8D6F1C09-seeklogo.com.png
+cover: /images/logos/Git.svg
 ---
 
 ### git merge

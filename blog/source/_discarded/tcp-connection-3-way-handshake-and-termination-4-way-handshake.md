@@ -1,15 +1,11 @@
----
 title: TCP 三次握手与四次挥手
-date: 2019-09-20 18:03:19
 tags:
-- TCP
-- 网络
-
+  - 网络
+  - TCP
 categories:
-- 学习记录
-
+  - 学习记录
 toc: true
-
+date: 2019-09-20 18:03:00
 ---
 
 ## TCP 是什么

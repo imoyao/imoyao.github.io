@@ -25,7 +25,7 @@ class2:
     1:
       name: Python 官网
       link: https://www.python.org/
-      avatar: https://www.python.org/static/community_logos/python-powered-h.svg
+      avatar: /images/logos/Python.svg
       descr: import this
     2:
       name: StackOverflow
