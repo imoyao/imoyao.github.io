@@ -1,5 +1,5 @@
 ---
-title: ceph 错误收集记录
+title: Ceph 错误收集记录
 date: 2020-03-16 20:41:54
 tags:
 - ceph
