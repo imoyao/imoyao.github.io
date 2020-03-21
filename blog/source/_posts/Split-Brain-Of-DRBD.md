@@ -5,14 +5,16 @@ tags:
 - DRBD
 - 裂脑
 - 存储
+cover: /images/logos/DRBD.png
+subtitle: 裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。
+reward: true
 ---
-裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。
-<!--more-->
+{% note info%}
+本文在编写时基于[官网 8.4 英文版本](https://www.linbit.com/drbd-user-guide/users-guide-drbd-8-4/)。由于英语水平和当时认知所限，翻译中难免有聱牙诘屈甚至误导别人之处。今天翻阅官网发现已经出现了基于 9.0 版本的中文文档，所以大家可以直接去浏览[官方文档](https://www.linbit.com/drbd-user-guide/users-guide-drbd-9-0-chinese/#about)。
+{%endnote%}
 
 ## 什么是`DRBD`裂脑
-
-裂脑(`split brain`)实际上是指在某种情况下，由集群节点间的网络连接临时故障、集群软件管理干预或者是人为错误，导致两个节点都切换为主节点（`primary`）而断开连接。这种状态是一个潜在的有害状态，因为它意味着不能复制数据到对等节点，这样就可能导致两个节点的数据产生分歧，产生不可合并的分裂。
-
+裂脑(`split brain`)是指由于集群节点之间的所有网络链路的临时故障，以及可能由于集群管理软件的干预或人为错误，导致两个节点在断开连接时都切换到主节点（`primary`）角色的情况。这是一种潜在的有害状态，因为它意味着对数据的修改可能是在任一节点上进行的，而没有复制到对等节点。因此，在这种情况下，很可能已经创建了两个不同的数据集，这些数据集不能简单地合并。
 
 ## 怎么判定裂脑
 
@@ -125,7 +127,7 @@ GI 作为 DRBD 的内部机制主要被用来：
 
 当节点与其对等方失去连接时（网络故障或人工干预都有可能），DRBD 将按照以下方式修改其本地生成标识符：
 
-![图1 GI元祖在生成新的数据代时改变](https://docs.linbit.com/ug-src/users-guide-8.4/images/gi-changes-newgen.png)
+![图1 GI元祖在生成新的数据代时改变](/images/gi-changes-newgen.png)
 
 1. 为新的数据代生成新的`UUID`，变为主节点的`C-UUID`；
 2. 之前的 UUID 现在指向位图（`B-UUID`）以跟踪数据变化，因此它成为主节点的新位图`UUID`；
@@ -135,7 +137,7 @@ GI 作为 DRBD 的内部机制主要被用来：
 
 在开始重新同步时，`DRBD`在本地代标识符上执行如下修改：
 
-![图2 GI元祖在重新开始同步是改变](https://docs.linbit.com/ug-src/users-guide-8.4/images/gi-changes-syncstart.png)
+![图2 GI元祖在重新开始同步是改变](/images/gi-changes-syncstart.png)
 
 1. 在同步源端的`当前UUID`（C-UUID）保持不变；
 2. 同步源端的`位图UUID`轮转为`第一历史UUID`（H1-UUID）；
@@ -147,7 +149,7 @@ GI 作为 DRBD 的内部机制主要被用来：
 
 当重新同步结束后，将执行以下更改：
 
-![图3 当重新同步结束后，GI元祖发生改变](https://docs.linbit.com/ug-src/users-guide-8.4/images/gi-changes-synccomplete.png)
+![图3 当重新同步结束后，GI元祖发生改变](/images/gi-changes-synccomplete.png)
 
 1. 同步源端`当前UUID`(C-UUID)保持不变；
 2. 同步源端的`位图UUID`(B-UUID)轮转为`第一历史UUID`（H1-UUID），同时该 UUID(指`H1-UUID`)轮转为`第二历史UUID`(现有的第二历史 uuid 被丢弃)；
@@ -157,42 +159,20 @@ GI 作为 DRBD 的内部机制主要被用来：
 当节点之间建立连接之后，两个节点之间会交换当前可用的代标识符,然后根据比对的结果采取相应的操作。以下是可能的几种结果：
 
 - 两个节点上的当前`UUID(C-UUID)`都为空
-
 本地节点检测到它的当前`UUID`和对方的当前`UUID`都是空的。这通常是发生于尚未启动初始完全同步的新配置资源的正常情况。此时没有同步发生;须手动人为触发启动。
-
-
 - 单一节点上的当前`UUID(C-UUID)`为空
-
 本地节点检测到对方的当前`UUID`为空，而其本身非空。这是新配置资源的正常情况，此时初始全盘同步刚刚触发，本地节点被选为初始同步源（`sync source`）。 `DRBD`将磁盘上的同步位图(`sync bitmap`)中的所有位全部置位（意味着它认为整个设备不同步），并开始将其作为同步源同步。相反，（即本地当前`UUID`为空，对等节点非空），除了本地节点成为同步目标（`sync target`）之外，`DRBD`执行相同的步骤。
-
-
 - 当前`UUID(C-UUID)`相等
-
 本地节点检测到它的当前`UUID`和对等节点的当前`UUID`非空且相等时。这是资源在`secondary`状态进入断开连接（`disconnected`）模式时的正常情况，并且在断开连接时并未在任一节点上升为 `primary` 状态。此时不会触发同步，因为两边的数据一致，没有必要。
-
-
-
 - 位图`UUID（B-UUID）`匹配对等节点的当前``UUID（`C-UUID`）``
-
 本地节点检测到其位图`UUID`匹配对等节点的当前`UUID`，且对等节点的位图`UUID`为空。这是本地节点处于 `primary` 状态，次要节点故障后正常且预期的情况。这意味着对端在此期间永远不会变为`primary`状态，并始终以相同的数据生成为前提运行。 `DRBD`此时以本地节点作为同步源（`sync source`）启动正常的后台重新同步（`re-sync`）。相反，如果本地节点检测到其位图`UUID`为空，且对等节点的位图与本地节点的当前`UUID`匹配，那么这是本地节点失败后的正常和预期情况。同样地，`DRBD`此时启动正常的后台重新同步，只不过本地节点成为同步目标（`sync target`）。
-
-
 - 当前`UUID(C-UUID)`匹配对等节点的历史`UUID（h-UUID）`
-
 本地节点检测到其当前`UUID`与对等节点的历史`UUID`之一(`h1/h2`)匹配。这意味着尽管两个数据集共享一个共同的祖先且对等节点具有最新的数据，但保存在对等节点的位图中的信息已过时并且不可用。因此，简单的正常同步不够的。 `DRBD`此时将整个设备标记为未同步（`out-of-sync`）并启动以本地节点作为同步目标（`sync target`）的全盘后台重新同步。在相反的情况下（本地节点的某个历史`UUID`与对等节点的当前`UUID`相匹配），除了本地节点成为同步源（`sync source`）之外，`DRBD`执行相同的步骤。
-
 - 位图`UUID（B-UUID）`匹配，当前 `UUID(C-UUID)`不匹配
-
 本地节点检测到其当前`UUID`与对等节点的当前`UUID`不同且位图`UUID`匹配。这是裂脑（`split brain`）的一种情况，两份数据有相同的父代。这意味着`DRBD`可以调用裂脑自动恢复策略进行数据恢复（如果已配置）。否则，`DRBD`断开连接并等待手动恢复。
-
-
 - 当前`UUID（C-UUID）`和位图`UUID(B-UUID)`都不匹配
-
 本地节点检测到它的当前`UUID`与对等节点的当前`UUID`不同，并且位图`UUID`不匹配。这是两份数据与无关父代产生的一种裂脑，因此即使配置了自动恢复策略也没有意义。 `DRBD`处于断开连接并等待手动恢复状态。
-
-
 - 没有`UUID`匹配
-
 最后，如果`DRBD`未能检测到两个节点之间的`GI`元组中的单个元素匹配，则会记录关于无关数据（`unrelated data`）的警告并断开连接。这是`DRBD`的防范措施，可防止之前无关联的两个集群节点的意外连接导致数据破坏。
 
 以上逻辑使用代码表示如下：
@@ -318,11 +298,12 @@ def exchange_gi_process(drbdname):
             debug.write_debug(debug.LINE(), "peradrbd", (local_gis,remote_gis))
         return drbd_next
 
-``` 
+```
 
-**注意**：
-
-经分析官方文档中的'matches'并不是完全相等，而 'UUID is always empty (zero)' 是指 "'0'*16" 的字符串
+{%note info%}
+**注意**
+经分析官方文档中的`matches`并不是完全相等，而 `UUID is always empty (zero)` 是指 "'0'*16" 的字符串！
+{%endnote%}
 
 ## 如何模拟一个 `Split-Brain`状态
 
@@ -351,11 +332,17 @@ drbdadm up drbdxx
 ## 解决 DRBD 裂脑状态
 
 ### 设置自动修复
-[5.17.2. Automatic split brain recovery policies](https://docs.linbit.com/docs/users-guide-8.4/#s-configure-split-brain-behavior )
+参见[5.17.2. Automatic split brain recovery policies](https://docs.linbit.com/docs/users-guide-8.4/#s-configure-split-brain-behavior )
 
-**警告**：配置`DRBD`自动修复裂脑（或其他状况）导致的数据分歧情况可能使正在配置的数据丢失，如果你不知道你在干什么，那最好别干。（NO ZUO NO DIE）
+{%note warning%}
+**警告**
+配置`DRBD`自动修复裂脑（或其他状况）导致的数据分歧情况可能使正在配置的数据丢失，如果你不知道你在干什么，那最好别干。（NO ZUO NO DIE）
+{%endnote%}
+{%note info%}
+**提示**
+您更应该查看系统防护策略，集群管理集成和冗余集群管理器通信连接状态，以避免出现数据分歧。（防患于未然而不是亡羊补牢）
+{%endnote%}
 
-_提示_ ：您更应该查看系统防护策略，集群管理集成和冗余集群管理器通信连接状态，以避免出现数据分歧。（防患于未然而不是亡羊补牢）
 在启用和配置`DRBD`的自动裂脑恢复策略之前，您必须了解`DRBD`为此提供了多种配置选项。 `DRBD` 根据检测到裂脑时主节点（`Primary role`）的数量应用其裂脑恢复程序。为此，`DRBD` 检查以下关键字，这些关键字均可在资源的网络配置部分中找到：
 
 #### after-sb-0pri
@@ -377,8 +364,10 @@ _提示_ ：您更应该查看系统防护策略，集群管理集成和冗余�
 #### after-sb-2pri
 
 裂脑刚被检测到时该资源在两个节点都处于主端。该选项接受与除`discard-secondary` 和 `consensus` 之外与 `after-sb-1pri` 相同的关键字。
-
-_提示_：`DRBD`还可以理解这三个选项下额外的关键字，这些关键字在这里被省略，因为它们很少被使用。请参阅`drbd.conf`的手册页以获取有关裂脑恢复关键字的详细信息，此处不再讨论。
+{%note info%}
+**提示**
+`DRBD`还可以理解这三个选项下额外的关键字，这些关键字在这里被省略，因为它们很少被使用。请参阅`drbd.conf`的手册页以获取有关裂脑恢复关键字的详细信息，此处不再讨论。
+{%endnote%}
 例如，用作双主模式下`GFS`或`OCFS2`文件系统的块设备的资源可能会将其恢复策略定义如下：
 
 ```shell
@@ -423,7 +412,6 @@ drbdadm connect <resource>
 
 裂脑受害者不会引发全盘同步。相反，它的局部修改已经被回滚，对裂脑幸存者的任何修改都会传递给受害者。
 重新同步完成后，裂脑被视为已解决（`resolved`），两个节点再次形成完全一致的冗余复制存储系统（`DRBD`）。
-
 
 ## 参考链接
 

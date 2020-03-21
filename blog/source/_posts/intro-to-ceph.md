@@ -1,7 +1,7 @@
 ---
 title: 初识 Ceph 组件
 date: 2020-03-17 21:10:17
-subtitle: CEPH，你到底有几个好妹妹？
+subtitle: CEPH，你到底有几个好妹妹？🧐
 tags:
 - CEPH
 cover: /images/logos/ceph-logo.svg
