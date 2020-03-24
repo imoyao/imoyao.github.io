@@ -19,7 +19,6 @@ page:
 
 sticky: Sticky
 no_title: No title
-archives: Archives
 
 post:
   created: Created
@@ -27,12 +26,13 @@ post:
   wordcount: Word count
   min2read: "Reading time: %s min"
   page_pv: Post View
-  comments: comments
+  comments: Comments
   copyright:
     author: Author
     link: Link
     copyright_notice: Copyright Notice
     copyright_content: 'All articles in this blog are licensed under <a href="%s">%s</a> unless stating additionally.'
+  recommend: Recommend
 
 search: Search
 algolia_search:
@@ -62,7 +62,6 @@ aside:
   card_archives: Archives
   card_recent_post: Recent Post
   card_bookmark: Add to bookmark
-  card_follow_zhihu: Interacts with me on 知乎
   card_webinfo:
     headline: Info
     article_name: Article
@@ -72,7 +71,6 @@ aside:
 
 donate: Donate
 share: Share
-
 bookmark:
   title: Bookmark
 
@@ -86,7 +84,6 @@ rightside:
   toc: Table of Contents
   scroll_to_comment: Scroll to comment
   setting: Setting
-  feedback: Feedback
 
 runtime_unit: days
 
@@ -102,16 +99,7 @@ Snackbar:
     message_next: to bookmark this page
   chs_to_cht: Traditional Chinese Activated Manually
   cht_to_chs: Simplified Chinese Activated Manually
-  day_to_night: Light Mode Activated Manually
-  night_to_day: Dark Mode Activated Manually
+  day_to_night: Dark Mode Activated Manually
+  night_to_day: Light Mode Activated Manually
 
-Home: Home
-Archives: Archives
-Tags: Tags
-Categories: Categories
-Link: Link
-About: About
-More: More
-Book: Book
-Movie: Movie
-B&M History: B&M History
+error_title: Page not found

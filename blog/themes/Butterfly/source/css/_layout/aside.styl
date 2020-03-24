@@ -1,11 +1,13 @@
 #aside_content
   width: 25%
 
+  .card-widget:not(:first-child)
+    margin-top: 1rem
+
   .card-widget
     overflow: hidden
-    margin-top: 20px
     border-radius: 8px
-    background: $white
+    background: $card-bg
     box-shadow: 0 4px 8px 6px rgba(7, 17, 27, .06)
     transition: all .3s
 
@@ -14,24 +16,15 @@
 
   .card-info
     img
-      padding: 5px
-      width: 120px
-      height: 120px
+      display: inline-block
+      width: 110px
+      height: 110px
       border-radius: 70px
-      vertical-align: top
-      display: block
-      margin: 0 auto
-      webkit-transition: 1.4s all
-      moz-transition: 1.4s all
-      ms-transition: 1.4s all
-      transition: 1.4s all
-      //https://vwin.github.io/2018/08/02/Hexo-Next%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC/
+      transition: all .3s
+
       &:hover
-        background-color: #4586f3
-        webkit-transform: rotate(360deg) scale(1.1)
-        moz-transform: rotate(360deg) scale(1.1)
-        ms-transform: rotate(360deg) scale(1.1)
-        transform: rotate(360deg) scale(1.1)
+        transform: rotate(540deg)
+
     .author-info
       &__name
         font-weight: 500
@@ -41,21 +34,18 @@
         margin-top: -.3rem
 
     .card-info-data
-      display: flex
       padding: .7rem 0
 
       & > .card-info-data-item
-        flex: 1 1
-        min-width: 0
+        display: inline-block
+        width: 33.3%
 
         a
-          text-decoration: none
-
           .headline
             display: block
             overflow: hidden
             color: $font-black
-            text-transform: uppercase
+            // text-transform: uppercase
             text-overflow: ellipsis
             white-space: nowrap
             font-size: .7rem
@@ -67,25 +57,24 @@
     .card-info-social-icons
       margin: .3rem 0 -.3rem
 
-      .social-icon-addr
+      .social-icon
         margin: 0 .5rem
         color: $font-black
         font-size: 1rem
         cursor: pointer
 
       i
-        transition: all .8s
+        transition: all .3s
 
         &:hover
-          transform: rotateY(540deg)
+          transform: rotate(540deg)
 
     #bookmark-it
       position: relative
       z-index: 1
       display: block
       background-color: $light-blue
-      color: $white
-      text-decoration: none
+      color: $button-color
       text-transform: uppercase
       line-height: 1.6rem
 
@@ -103,7 +92,6 @@
 
   .card-tag-cloud
     a
-      text-decoration: none
       word-break: keep-all
 
       &:hover
@@ -118,7 +106,6 @@
 
         & > a
           color: $font-black
-          text-decoration: none
 
           .aside-post-cover
             float: left
@@ -141,7 +128,7 @@
           .aside-post-title
             .aside-post_meta
               padding-left: 10px
-              color: $theme-link-color
+              color: $theme-meta-color
               font-size: .6rem
 
             .aside-post_title
@@ -155,6 +142,10 @@
 
               &:hover
                 color: $light-blue !important
+
+            &.no-aside-cover
+              .aside-post_title
+                height: auto
 
   .card-archives ul.archive-list,
   .card-categories ul.aside-category-item
@@ -171,19 +162,23 @@
     &:hover
       padding: .2rem .85rem
       background-color: $light-blue
-      color: #363636
 
     a
-      display: flex
       color: $font-black
-      text-decoration: none
 
       span
+        display: inline-block
+        overflow: hidden
+        vertical-align: bottom
+        text-overflow: ellipsis
+        white-space: nowrap
+
         &:first-child
-          flex: auto
-          overflow: hidden
-          text-overflow: ellipsis
-          white-space: nowrap
+          width: 80%
+
+        &:last-child
+          width: 20%
+          text-align: right
 
   .card-categories
     .aside-category-item
@@ -209,46 +204,6 @@
           &:last-child
             display: inline-block
             float: right
-  // ger
-  .card-links
-    ul
-      padding-left: 0
-      a
-        word-break: keep-all
-        text-decoration none
-        height: 40px
-        line-height: 35px
-        border-radius: 8px
-        padding: 3px 11px
-        margin: 3px 10px 0 0
-        -moz-transition: all 0.5s 
-        -webkit-transition: all 0.5s 
-        -o-transition: all 0.5s 
-        transition: all 0.5s 
-        color: #FFF
-        &:nth-child(8n-7)
-          background: #8A9B0F
-        &:nth-child(8n-6)
-          background: #EB6841
-        &:nth-child(8n-5)
-          background: #3FB8AF
-        &:nth-child(8n-4)
-          background: #FE4365
-        &:nth-child(8n-3)
-          background: #FC9D9A
-        &:nth-child(8n-2)
-          background: #EDC951 
-        &:nth-child(8n-1)
-          background: #C8C8A9 
-        &:nth-child(8n)
-          background: #83AF9B
-        &:first-child
-          background: #036564
-        &:last-child
-          background: #3299BB
-        &:hover
-          border-radius: 0
-          text-shadow: #000 1px 1px 1px
 
 @media screen and (max-width: 900px)
   .layout_page
@@ -258,6 +213,10 @@
   #aside_content
     width: 100% !important
 
+  #aside_content
+    .card-widget:first-child
+      margin-top: 1rem
+
 @media screen and (min-width: 900px)
   #aside_content
     .card-widget
@@ -266,13 +225,7 @@
       else
         margin-right: 15px
 
-if hexo-config('aside_mobile') == false
+if hexo-config('aside.mobile') == false
   @media screen and (max-width: $sm)
     #aside_content
       display: none
-
-.card-info-status
-  margin .3rem 0 -.3rem
-  font-size .7rem
-  span
-    margin-left: .4rem

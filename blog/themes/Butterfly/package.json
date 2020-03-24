@@ -1,10 +1,5 @@
 {
   "name": "hexo-theme-butterfly",
-  "version": "2.1.0",
-  "description": "A Hexo Theme: Butterfly",
-  "dependencies": {
-    "hexo-generator-index-pin-top": "^0.2.2",
-    "hexo-tag-aplayer": "^2.0.7",
-    "hexo-util": "^1.8.1"
-  }
+  "version": "2.2.0",
+  "description": "A Hexo Theme: Butterfly"
 }
