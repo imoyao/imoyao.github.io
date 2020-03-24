@@ -15,11 +15,10 @@ page:
   articles: 文章總覽
   tag: 標籤
   category: 分類
-  archives: 時間軸
+  archives: 歸檔
 
 sticky: 置頂
 no_title: 無題
-archives: 時間軸
 
 post:
   created: 發表於
@@ -34,6 +33,7 @@ post:
     copyright_notice: 版權聲明
     copyright_content: '本博客所有文章除特別聲明外，均採用
       <a href="%s" target="_blank">%s</a> 許可協議。轉載請註明來自 <a href="%s" target="_blank">%s</a>！'
+  recommend: 相關推薦
 
 search: 搜索
 algolia_search:
@@ -64,7 +64,6 @@ aside:
   card_archives: 歸檔
   card_recent_post: 最新文章
   card_bookmark: 加入書籤
-  card_follow_zhihu: 來知乎和我互動
   card_webinfo:
     headline: 網站資訊
     article_name: 文章數目
@@ -77,7 +76,6 @@ share: 分享
 bookmark:
   title: 添加書籤
 
-
 rightside:
   readmode_title: 閲讀模式
   font_plus_title: 放大字體
@@ -88,7 +86,6 @@ rightside:
   toc: 目錄
   scroll_to_comment: 直達評論
   setting: 設置
-  feedback: 反饋
 
 runtime_unit: 天
 
@@ -107,13 +104,6 @@ Snackbar:
   day_to_night: 你已切換為深色模式
   night_to_day: 你已切換為淺色模式
 
-Home: 首頁
-Archives: 歸檔
-Tags: 標籤
-Categories: 分類
-Link: 友鏈
-About: 關於
-More: 更多
-Book: 讀書
-Movie: 電影
-B&M History: 書·影·音
+error_title: 頁面沒有找到
+
+
