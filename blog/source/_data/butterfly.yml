@@ -171,7 +171,7 @@ cover:
 # if the photo link cannot connect,it will show that
 lodding_bg:
   flink: /img/Ellipsis-5s-210px.svg #404后图片
-  post_page: /img/404.jpg #404后图片
+  post_page: /img/post_loadding.svg #404后图片
   post: /img/loading.svg #加载动画
 
 # A simple 404 page
@@ -546,7 +546,7 @@ subtitle:
 # fontawesome圖標
 # 默認使用的是 fontawesome v4版本的圖標
 fontawesome_v5:
-  enable: false
+  enable: true
 
 ####    側邊欄    ####
 #-------------------------------------
@@ -566,7 +566,7 @@ aside:
 
 # 網站公告
 announcement:
-  content: <h3>💃Be my guest!👋~</h3><br>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
+  content: <h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
 
 # busuanzi count for PV / UV in site
 # 訪問人數
@@ -594,7 +594,7 @@ translate:
   #延遲時間,若不在前, 要設定延遲翻譯時間, 如100表示100ms,默認為0
   translateDelay: 0
   #博客網址
-  cookieDomain: "https://xxx/"
+  cookieDomain: "https://www.masantu.com/"
   #當文字是簡體時，按鈕顯示的文字
   msgToTraditionalChinese: "繁"
   #當文字是繁體時，按鈕顯示的文字

@@ -9,15 +9,28 @@ html(lang=config.language data-theme=theme.display_mode)
     if theme.fireworks && theme.fireworks.enable
       canvas.fireworks
     !=partial('includes/mobile-sidebar/index', {}, {cache:theme.fragment_cache})
-    if (is_post() && page.toc != false && theme.toc.enable)      
-      i.fa.fa-arrow-right#toggle-sidebar(aria-hidden="true" class=autoOpenSidebar)      
+    if (is_post() && page.toc != false && theme.toc.enable)
+      //图标更换
+      i.fas.fa-angle-double-right#toggle-sidebar(aria-hidden="true" class=autoOpenSidebar)
       include ./sidebar.pug
     #body-wrap
       if theme.background
         - var is_photo = theme.background.substring(3,0) === 'url' ? 'photo':'color'
         #web_bg(data-type=is_photo)
-      include ./header/index.pug
 
+        // 自定义：阅读和电影页加背景
+      if theme.douban_background.enable
+        if is_current('/movies/', [strict])
+          - var source = theme.movie_background
+        if is_current('/books/', [strict])
+          - var source = theme.book_background
+        if source
+          - var bg_img = `background-image: url(${source})`
+          #web_bg(data-type='photo' style=bg_img)
+      include ./header/index.pug
+      //只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery
+      if(page.current === 1)
+        include ./index-desc-card.pug
       if (!is_post())
         main#content-inner.layout_page(class=hideAside)
           if body
@@ -31,9 +44,9 @@ html(lang=config.language data-theme=theme.display_mode)
             div!= body
           else
             block content
-      
-      - var footer_bg = theme.footer_bg == false ? '' : bg_img
-      - var is_bg = theme.footer_bg == false ? 'color' : 'photo'
+      - var footer_img =  theme.footer_bg.footer_img
+      - var footer_bg = theme.footer_bg.enable == false ? '' : `background-image: url(${footer_img})`
+      - var is_bg = theme.footer_bg.enable == false ? 'color' : 'photo'
       footer#footer(style=footer_bg data-type=is_bg)
         !=partial('includes/footer', {}, {cache:theme.fragment_cache})
     include ./rightside.pug

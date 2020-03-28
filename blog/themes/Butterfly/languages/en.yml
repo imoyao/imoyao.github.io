@@ -19,6 +19,7 @@ page:
 
 sticky: Sticky
 no_title: No title
+archives: Archives
 
 post:
   created: Created
@@ -62,6 +63,7 @@ aside:
   card_archives: Archives
   card_recent_post: Recent Post
   card_bookmark: Add to bookmark
+  card_follow_zhihu: Interacts with me on 知乎
   card_webinfo:
     headline: Info
     article_name: Article
@@ -71,6 +73,7 @@ aside:
 
 donate: Donate
 share: Share
+
 bookmark:
   title: Bookmark
 
@@ -84,6 +87,7 @@ rightside:
   toc: Table of Contents
   scroll_to_comment: Scroll to comment
   setting: Setting
+  feedback: Feedback
 
 runtime_unit: days
 
@@ -103,3 +107,14 @@ Snackbar:
   night_to_day: Light Mode Activated Manually
 
 error_title: Page not found
+
+Home: Home
+Archives: Archives
+Tags: Tags
+Categories: Categories
+Link: Link
+About: About
+More: More
+Book: Book
+Movie: Movie
+B&M History: B&M History

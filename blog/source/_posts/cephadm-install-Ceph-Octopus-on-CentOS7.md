@@ -8,7 +8,7 @@ tags:
 cover: /images/logos/ceph-logo.svg
 categories:
 - 工作日常
-subtitle: 正所谓“江上代有才人出，各领风骚数百年。”，Nautilus 版之后，ceph-deploy 不再被作为官方推荐的部署 ceph 集群的工具，从 Octopus 版开始取而代之的是新秀 cephadm。使用开源产品最重要的是跟上社区节奏，本文以 cephadm 为例实践了 ceph 集群的部署流程。
+subtitle: 正所谓“江上代有才人出，各领风骚数百年。”，从 Octopus 版开始 ceph-deploy 不再被作为官方推荐的部署 ceph 集群的工具（Nautilus 版仍然支持），取而代之的是新秀 cephadm。使用开源产品最重要的是跟上社区节奏，本文以官方文档为基础实践了 ceph 集群的部署流程。
 ---
 ## 版本信息
 - 系统信息
@@ -30,10 +30,10 @@ subtitle: 正所谓“江上代有才人出，各领风骚数百年。”，Naut
     Docker version 19.03.8, build afacb8b
     ```
 - CEPH 版本
-    ```shell
-    ceph --version
-    ceph version 15.1.1 (4536217610b4c55c08a293e67f5ae1f1129190be) octopus (rc)
-    ```
+ ```shell
+ ceph --version
+ ceph version 15.1.1 (4536217610b4c55c08a293e67f5ae1f1129190be) octopus (rc)
+ ```
 因为安装的是普通版本而不是最小安装，所以 ntp、lvm 管理工具等默认已经安装。
 
 ## 安装 cephadm
@@ -90,7 +90,7 @@ total 36
 其中前三行即是更新之后的源信息。
 {%note info no-icon%}
 ### 报错处理
-1. 没有装Python3
+1. 没有装 Python3
     执行第一条指令*可能*报错
     ```plain
     ./cephadm add-repo --release octopus
@@ -106,7 +106,7 @@ total 36
     ```plain
     Python 3.8.2
     ```
-2. 没有装podman/docker
+2. 没有装 podman/docker
     ```plain
     Unable to locate any of ['podman', 'docker']
     ```
@@ -142,8 +142,8 @@ mkdir -p /etc/ceph
 cephadm bootstrap --mon-ip *<mon-ip>*   # 此处指定moniter地址
 ```
 注意，此处指定为 ssh 登录的 ip 时一直提示端口占用，且 mon 进程一直启不来，后来改成另一个节点之后可以正常部署，此处需要查阅更多资料！ # TODO
-```plain
-[root@cepho ~]# cephadm bootstrap --mon-ip 172.18.1.128
+```shell
+cephadm bootstrap --mon-ip 172.18.1.128
 ```
 ```plain
 INFO:cephadm:Using recent ceph image ceph/daemon-base:latest
@@ -242,36 +242,37 @@ INFO:cephadm:Bootstrap complete.
 {%note info%}
 **注意**： 执行上述命令会去 docker 上面拉取最新的`ceph/daemon-base`，国内需要换源。具体操作如下：
 1. 编辑或新建配置文件：
-    ```shell
-    vi /etc/docker/daemon.json
-    ```
-    写入：
-    ```{
-    "registry-mirrors" : [
-        "http://ovfftd6p.mirror.aliyuncs.com",
-        "http://registry.docker-cn.com",
-        "http://docker.mirrors.ustc.edu.cn",
-        "http://hub-mirror.c.163.com"
-    ],
-    "insecure-registries" : [
-        "registry.docker-cn.com",
-        "docker.mirrors.ustc.edu.cn"
-    ],
-    "debug" : true,
-    "experimental" : true
-    }
-    ```
+ ```shell
+ vi /etc/docker/daemon.json
+ ```
+ 写入：
+ ```plain
+{
+"registry-mirrors" : [
+    "http://ovfftd6p.mirror.aliyuncs.com",
+    "http://registry.docker-cn.com",
+    "http://docker.mirrors.ustc.edu.cn",
+    "http://hub-mirror.c.163.com"
+],
+"insecure-registries" : [
+    "registry.docker-cn.com",
+    "docker.mirrors.ustc.edu.cn"
+],
+"debug" : true,
+"experimental" : true
+}
+```
 2. 重启 docker 服务
     ```plain
     systemctl restart docker
     ```
 3. 手动拉取镜像
-    ```shell
-    docker pull ceph/daemon-base
-    ```
+ ```shell
+ docker pull ceph/daemon-base
+ ```
 由于本人第一次使用 docker，所以一些表述可能存在问题。
 {% endnote %}
-### 访问dashboard
+### 访问 dashboard
 ![overview](/images/Ceph-dashboard-overview.png)
 ![Ceph-dashboard](/images/Ceph-dashboard-host.png)
 

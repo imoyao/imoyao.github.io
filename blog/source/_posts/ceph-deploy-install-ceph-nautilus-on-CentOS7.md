@@ -1,5 +1,5 @@
 ---
-title: CentOS7 安装 nautilus 版 CEPH（使用 ceph-deploy）
+title: CentOS7 部署 nautilus 版 CEPH（使用 ceph-deploy）
 date: 2020-03-15 12:37:35
 tags:
 - CEPH
@@ -134,6 +134,7 @@ ssh-copy-id cephadm@node2
 ssh node1 
 ssh node2
 ```
+注意。免密登录比较重要，如果是测试环境，直接使用 root 用户的话，上面改为`ssh-copy-id root@node1`去建立互信关系。
 
 ### 防火墙
 1. 在 monitor 节点
@@ -413,20 +414,16 @@ ceph-deploy --overwrite-conf osd create --data /dev/sdb node1
 ```
 所以覆写配置，正常操作的时候不需要添加该选项。
 {% endnote %}
+> 其中`create`是`prepare`和`active`的合并操作，下面是该命令的解释：
+> `ceph-deploy osd prepare HOST:DISK[:JOURNAL] [HOST:DISK[:JOURNAL]……]`
+> 为 osd 准备一个目录/磁盘。它会检查是否超过 MAX PIDs,读取 bootstrap-osd 的 key 或者写一个（如果没有找到的话），然后它会使用 ceph-disk 的 prepare 命令来准备磁盘、日志，并且把 OSD 部署到指定的主机上。
+> `ceph-deploy osd active HOST:DISK[:JOURNAL] [HOST:DISK[:JOURNAL]……]`
+> 激活上一步的 OSD。实际上它会调用 ceph-disk 的 active 命令，这个时候 OSD 会 up and in。
+> `ceph-deploy osd create HOST:DISK[:JOURNAL] [HOST:DISK[:JOURNAL]……]`
+> 上面两个命令的综合。
 
-    其中`create`是`prepare`和`active`的合并操作，下面是该命令的解释：plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
-    
-    > `ceph-deploy osd prepare HOST:DISK[:JOURNAL] [HOST:DISK[:JOURNAL]……]`
-    为 osd 准备一个目录/磁盘。它会检查是否超过 MAX PIDs,读取 bootstrap-osd 的 key 或者写一个（如果没有找到的话），然后它会使用 ceph-disk 的 prepare 命令来准备磁盘、日志，并且把 OSD 部署到指定的主机上。
-    >
-    > `ceph-deploy osd active HOST:DISK[:JOURNAL] [HOST:DISK[:JOURNAL]……]`
-    激活上一步的 OSD。实际上它会调用 ceph-disk 的 active 命令，这个时候 OSD 会 up and in。
-    >
-    > `ceph-deploy osd create HOST:DISK[:JOURNAL] [HOST:DISK[:JOURNAL]……]`
-    上两个命令的综合。
-    
-    返回结果如下：
-    ```plain
+返回结果如下：
+```plain
     [ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
     [ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf osd create --data /dev/sdb node1
     [ceph_deploy.cli][INFO  ] ceph-deploy options:
@@ -504,32 +501,33 @@ ceph-deploy --overwrite-conf osd create --data /dev/sdb node1
     [node1][DEBUG ] find the location of an executable
     [node1][INFO  ] Running command: sudo /bin/ceph --cluster=ceph osd stat --format=json
     [ceph_deploy.osd][DEBUG ] Host node1 is now ready for osd use.
-    ```
-    阅读最后一行信息，我们知道 node1 作为 osd 节点被添加进去了。
+```
+阅读最后一行信息，我们知道 node1 作为 osd 节点被添加进去了。
 5. 查看集群状态
 ```shell
 ceph -s
 ```
+
 返回结果如下：
 ```plain
-cluster:
-id:     e32088fc-a761-4aab-b221-fb56d42371dc
-health: HEALTH_WARN         # 提示 osd 节点少于预设
-        2 daemons have recently crashed
-        OSD count 1 < osd_pool_default_size 2
-
-services:
-mon: 1 daemons, quorum admin-node (age 3h)
-mgr: admin-node(active, since 26m)
-osd: 1 osds: 1 up (since 7m), 1 in (since 7m)
-
-data:
-pools:   0 pools, 0 pgs
-objects: 0 objects, 0 B
-usage:   1.0 GiB used, 3.0 GiB / 4 GiB avail
-pgs:
+    cluster:
+    id:     e32088fc-a761-4aab-b221-fb56d42371dc
+    health: HEALTH_WARN         # 提示 osd 节点少于预设
+            2 daemons have recently crashed
+            OSD count 1 < osd_pool_default_size 2
+    services:
+    mon: 1 daemons, quorum admin-node (age 3h)
+    mgr: admin-node(active, since 26m)
+    osd: 1 osds: 1 up (since 7m), 1 in (since 7m)
+    data:
+    pools:   0 pools, 0 pgs
+    objects: 0 objects, 0 B
+    usage:   1.0 GiB used, 3.0 GiB / 4 GiB avail
+    pgs:
 ```
+
 至此，单个的 OSD 节点添加成功。
+
 但是因为我们在[3.2 节](#%E5%88%9D%E5%A7%8B%E5%8C%96)的配置中添加了`osd pool default size = 2`配置，所以会显示 warning 信息。我们可以重复上面步骤添加 node2 为另一个 OSD 节点之后再次查看集群健康状态：
 ```shell
 ceph health

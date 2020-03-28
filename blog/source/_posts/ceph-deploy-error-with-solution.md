@@ -36,3 +36,20 @@ ceph crash archive <crash-id>
 更多参考：
 - [Crash Module — Ceph Documentation](https://docs.ceph.com/docs/master/mgr/crash/)
 - [ceph 报 daemons have recently crashed_网络_lyf0327 的博客-CSDN 博客](https://blog.csdn.net/lyf0327/article/details/103315698/)
+## xx is not defined in `mon initial members`
+执行`ceph-deploy mon add xx`添加 mon 节点时报错如下：
+```plain
+[node3][WARNIN] node3 is not defined in `mon initial members`
+[node3][WARNIN] monitor node3 does not exist in monmap
+```
+### 解释
+添加的 mon 节点不是初始化成员，集群无法识别
+### 解决方案
+将配置文件同步到新加节点
+```plain
+ceph-deploy --overwrite-conf config push xxx
+```
+
+### 参考
+- [ceph 在扩展 mon 节点时，要注意的问题 - aguncn - 博客园](https://www.cnblogs.com/aguncn/p/7352393.html)
+- [Ceph 添加监视器 Monitor 失败_运维_weixin_33924220 的博客-CSDN 博客](https://blog.csdn.net/weixin_33924220/article/details/92602783)

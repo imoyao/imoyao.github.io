@@ -13,7 +13,7 @@ subtitle: 生命不息，折腾不止
 本文主要针对 hexo-theme-butterfly 主题进行了个性化自定义，并对修改内容做了简单介绍。
 <!--more-->
 {%note no-icon%}
-原作者文档👉 [hexo-theme-butterfly 安装文档](https://jerryc.me/posts/21cfbf15/)
+原作者文档👉 [hexo-theme-butterfly 安装文档](https://docs.jerryc.me/)
 {%endnote%}
 ## 已完成
 
@@ -21,14 +21,46 @@ subtitle: 生命不息，折腾不止
 
 #### svg 背景
 
-使用 [SVG 编辑器](https://c.runoob.com/more/svgeditor/) 修改 footer、友链头像 404、评论区背景图；
+使用 [SVG 编辑器](https://c.runoob.com/more/svgeditor/) 修改
+- footer 背景
+```plain
+- var footer_img =  theme.footer_bg.footer_img
+      - var footer_bg = theme.footer_bg.enable == false ? '' : `background-image: url(${footer_img})`
+      - var is_bg = theme.footer_bg.enable == false ? 'color' : 'photo'
+```
+- 友链头像 404 默认图
+- 评论区背景图
 
-##### 背景图
+#### page 背景图
  在原作者的基础上添加了修改 books 页面 bg 的 strict，不得不说作者真的很细心。
  ```jade
- else if is_current('/books/', [strict])
-  - var top_img = theme.books_img || theme.default_top_img
+if theme.douban_background.enable
+    if is_current('/movies/', [strict])
+      - var source = theme.movie_background
+    if is_current('/books/', [strict])
+      - var source = theme.book_background
+    if source
+      - var bg_img = `background-image: url(${source})`
+      #web_bg(data-type='photo' style=bg_img)
  ```
+#### 网站 logo
+```jade
+    //更换文字为logo图片
+  //a#site-name.blog_title(href=url_for('/')) #[=config.title]
+  a#site-name.blog_title(href=url_for('/'))
+    - var site_logo = theme.site_logo
+    - var site_patch = `background: url(${site_logo})`
+    span.site-logo(style=site_patch)
+```
+```styl
+//网站换为图片之后加样式
+    .site-logo
+      display: inline-block;
+      vertical-align: middle;
+      width: 150px;
+      height: 40px
+      background-size: cover!important;
+```
 
 #### 表格美化
 
@@ -63,9 +95,34 @@ subtitle: 生命不息，折腾不止
 
 #### 用户状态
 - [x] 用户卡片页显示个人工作状态（支持 fa 和 emoji 😀）
+头像 hover 实践修改
+参考此处实现[头像不翻转，鼠标 hover 放大](https://vwin.github.io/2018/08/02/Hexo-Next%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC/)
+```styl
+.card-info
+    img
+      display: inline-block
+      width: 110px
+      height: 110px
+      border-radius: 70px
+      vertical-align: top
+      margin: 0 auto
+      webkit-transition: 1.4s all
+      moz-transition: 1.4s all
+      ms-transition: 1.4s all
+      transition: 1.4s all
 
+      &:hover
+        background-color: $avatar-bg
+        webkit-transform: rotate(360deg) scale(1.1)
+        moz-transform: rotate(360deg) scale(1.1)
+        ms-transform: rotate(360deg) scale(1.1)
+        transform: rotate(360deg) scale(1.1)
+```
 #### footer 页面
 - [x] 添加 badge
+```pug
+#/Butterfly/layout/includes/footer.pug
+```
 
 #### iframe 实现 [豆瓣书影音](/douban/) 页面
 ```html
@@ -89,13 +146,21 @@ if theme.reward.enable && page.reward
 #### page 页侧边栏
 - [x] 不要展示只看一次就可以的信息（如网站概览，公告等）
 - [x] 只在首页显示公告和网站概览；跳到对应页时，侧边栏不显示对应 card（避免信息重复）；
-
+```plain
+layout/includes/widget/index.pug
+```
+#### 文章页结束语
+```jade
+  //结束语分割线
+    .divider.divider-horizontal.divider-with-text-center(role='separator')
+      span.divider-inner-text=theme.divider_text
+```
 ## TODO
 
 ### 新增
 
 #### 首页添加描述卡
-- [x] self introduce
+- [x] 自述页面
 - ~~music~~
 - ~~video~~
 

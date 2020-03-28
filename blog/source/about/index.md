@@ -18,7 +18,9 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 
 <figcaption > 华为励志音乐短片·《Dream It Possible》</figcaption >
 
-<div class="slogan"><i class="fa fa-user"></i>  自述</div>
+<h2 class="slogan"><i class="fa fa-user"></i>  老暴露狂了</h2>
+
+*中国互联网大环境下，我们早就没有隐私可言了。而一个人的真正阴暗面是内心，想要走进一个人的内心其实是件挺困难的事情。既然这样，那就……来啊，快活啊，反正有大把愚妄~🙃*
 
 ### 关于站名
 
@@ -50,14 +52,22 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 唯有文字能担当此任，宣告生命曾经在场。
 {% endblockquote %}
 
-<div class="slogan"><i class="fa fa-heartbeat"></i>  致敬</div>
+### 技术问题解决之道
+
+1. 重启了没？多重启几次呢？
+2. 看官方文档吗？
+3. 实践（时间）是检验真理的唯一标准。
+4. To be continue……
+
+<h2 class="slogan"><i class="fa fa-heartbeat"></i>  致敬</h2>
 
 - 向祖师爷、BDFL、`Python`语言的缔造者—— [_Guido van Rossum_](https://gvanrossum.github.io/) 致以崇高的敬意；
 - 向互联网精神布道者、理想主义者、 `web.py` 的作者—— *The Internet's Own Boy:Aaron Swartz* 致以崇高的敬意；  
-    - 了解网友对他的评价请戳：[亚伦·斯沃茨 (Aaron Swartz) 是怎么样一个人？](https://www.zhihu.com/question/20711220)
-    - 通过雪泥鸿爪了解其性格：[The web.py Philosophy](http://webpy.org/philosophy)
+    1. 了解网友对他的评价请戳：[亚伦·斯沃茨 (Aaron Swartz) 是怎么样一个人？](https://www.zhihu.com/question/20711220)
+    2. 通过雪泥鸿爪了解其性格：[The web.py Philosophy](http://webpy.org/philosophy)
 
-<div class="slogan"><i class="fa fa-bell"></i>  其他</div>
+<h2 class="slogan"><i class="fa fa-bell"></i>  其他</h2>
+
 {% blockquote 曹禺, 《日出》·跋 %}
 这样我挨过许多煎熬的夜晚，于是我读《老子》，读《佛经》，读《圣经》，我读多少那被认为洪水猛兽的书籍。我流着眼泪，赞美着这些伟大的孤独的心灵。他们怀着悲哀驼负人间的酸辛，为这些不肖的子孙开辟大路。但我更恨人群中一些冥顽不灵的自命为“人”的这一类的动物。他们偏若充耳不闻，不肯听旷野里那伟大的凄厉的唤声。他们闭着眼，情愿做地穴里的鼹鼠，避开阳光，鸵鸟似的把头插在愚蠢里。我忍耐不下了，我渴望着一线阳光。我想太阳我多半不及见了，但我也愿望我这一生里能看到平地里轰起一声巨雷，把这群盘踞在地面上得魑魅魍魉击个糜烂，哪怕因而大陆便沉为海。我还是年轻，不尽的令人发指的回忆围攻着我，我想不出一条智慧的路，顾虑的万分周全。冲到我的口上，是我在书房里摇头晃脑背通本《书经》的时代，最使一个小孩动魄惊心的一句切齿的誓言：“时日曷丧，予及汝皆亡！”（见《商书·汤誓》）萦绕于心的也是一种暴风雨来临之感。我恶毒地诅咒四周的不公平，除了去掉这群糜烂的人们，我看不出眼前有多少光明。诚如《旧约》那热情的耶利米所呼号的，“我观看地，地是空虚混沌；我观看天，天也无光”。我感觉到大地震来临前那种“烦躁不安”，我眼看着要地崩山惊，“肥田变为荒地，城邑要被拆毁”，在这种心情下，“我已经听见角声和打仗的喊声”。我要写一点东西，宣泄这一腔愤懑，我要喊“你们末日到了”！对这帮荒淫无耻，丢弃了太阳的人们。
 {% endblockquote %}
@@ -67,29 +77,32 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 {% endblockquote %}
 <sup>①</sup> 给 comp.lang.python Usenet 小组的[留言](https://mail.python.org/pipermail/python-list/2002-December/134521.html )，2002 年 12 月 23 日，“Acrimony in c.l.p”。
 
-<div class="slogan"><i class="fa fa-handshake"></i>  联系方式</div>
+<h2 class="slogan"><i class="fa fa-handshake"></i>  联系方式</h2>
 
-- Email: immoyao#gmail.com
+- Email: immoyao#gmail.com 📧[邮我](mailto:immoyao@gmail.com)
 - QQ: NDQ1NTY3ODg5
 - Others: imoyao or None :-)
 - 个人公众号：  
 ![别院牧志](https://open.weixin.qq.com/qr/code?username=idealyard)
 <figcaption > idealyard </figcaption >
 
-<div class="slogan"><i class="fa fa-heart"></i>  赞赏</div>
+<h2 class="slogan"><i class="fa fa-heart"></i>  赞赏</h2>
 
-🔷 跋涉在建设共产主义道路上的大家都不容易，（~~其实主要是因为梁静茹没有给我要钱的勇气~~）所以大多数文章就没有必要开启“赞赏”功能啦；已在部分原创内容页面为来自资本主义的土豪们预留入口，欢迎喂我“恰饭”。恰饭嘛，生意。不寒碜。😳
-🔷 本人没有经常性喝咖啡的习惯，偶尔的速溶咖啡费用亦可自费承担；
-🔷 本[网站](https://www.masantu.com)暂时托管于 [GitHub Pages](https://pages.github.com/)，并不会产生额外的维护费用；
-🔷 如本网站有内容帮助到你，你觉得需要花点钱表示感谢（~~宣泄一下~~），请使用微信（WeChat）扫描下方二维码与我一起做公益吧！ 
-
- ***注意***：本支付款项会直接进入相应的基金账户，**并不**经过本人账户，所以无法申请退款，请考虑后量力而行。
-
+ - 跋涉在建设共产主义道路上的大家都不容易，（~~其实主要是因为梁静茹没有给我要钱的勇气~~）所以大多数文章就没有必要开启“赞赏”功能啦；已在部分原创内容页面为来自资本主义的土豪们预留入口，欢迎喂我“恰饭”。恰饭嘛，生意。不寒碜。😳
+ - 本人没有经常性喝咖啡的习惯，偶尔的速溶咖啡费用亦可自费承担；
+ - 本 [网站](https://www.masantu.com) 暂时托管于 [GitHub Pages](https://pages.github.com/)，并不会产生额外的维护费用；
+ - 如本网站有内容帮助到你，你觉得需要花点钱表示感谢（~~宣泄一下~~），请使用微信（WeChat）扫描下方二维码与我一起做公益吧！
+{% note warning %}
+ ***注意***：
+ 本支付款项会直接进入相应的基金账户，**并不**经过本人账户，所以无法申请退款，请考虑后量力而行。
+{% endnote %}
 人人为我，我为人人。感谢您为中国公益事业的慷慨解囊！💕 
 
 ![腾讯公益](/img/PublicWelfare-for-Children.jpg)
 
-<div class="slogan"><i class="fa fa-copyright"></i>  版权声明<sub>（特殊声明除外）</sub></div>
-    <center>
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本博客作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
-    </center>
+<h2 class="slogan"><i class="fa fa-copyright"></i>  版权声明<sub>（特殊声明除外）</sub></h2>
+{% raw %}
+<figcaption>
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="/img/by-nc-sa.png" /></a><br />本博客作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+</figcaption>
+{% endraw %}
