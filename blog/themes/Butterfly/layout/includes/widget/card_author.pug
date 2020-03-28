@@ -25,12 +25,27 @@
             .length_num= site.categories.length
 
     .card-info-bookmark.is-center
-      a#bookmark-it.bookmark.button--primary.button--animated(href="javascript:;" title= _p('aside.card_bookmark') target="_self")
-        i.fa.fa-bookmark(aria-hidden="true")
-        span= _p('aside.card_bookmark') || 'Follow Me'
-  
+      a#bookmark-it.bookmark.button--primary.button--animated(href="https://www.zhihu.com/people/imoyao/" title= _p('aside.card_follow_zhihu') target="_blank")
+        i.fab.fa-zhihu(aria-hidden="true")
+        span= _p('aside.card_follow_zhihu') || 'Follow Me'
+
+    //.card-info-bookmark.is-center
+    //  a#bookmark-it.bookmark.button--primary.button--animated(href="javascript:;" title= _p('aside.card_bookmark') target="_self")
+    //    i.fa.fa-bookmark(aria-hidden="true")
+    //    span= _p('aside.card_bookmark') || 'Follow Me'
+
     if(theme.social)
         .card-info-social-icons.is-center
           each url, icon in theme.social
-            a.social-icon(href=url target="_blank")
+            a.social-icon-addr(href=url target="_blank")
               i(class=icon aria-hidden="true")
+
+    if(theme.status && theme.status.enable)
+      if theme.status.fa.enable
+        .card-info-status.is-center
+          each content, icon in theme.status.fa_status
+            i(class=icon aria-hidden="true")
+            span!=`${content}`
+      else if theme.status.emoji.enable
+        .card-info-status.is-center
+          span!=`${theme.status.emoji.emoji_status}`

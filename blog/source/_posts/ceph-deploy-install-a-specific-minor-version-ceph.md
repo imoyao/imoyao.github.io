@@ -1,4 +1,4 @@
-title: 如何使用 ceph-deploy 安装一个指定版本号的 ceph 集群
+title: 如何使用 ceph-deploy 部署一个指定版本号的 ceph 集群
 tags:
   - CEPH
   - ceph-deploy

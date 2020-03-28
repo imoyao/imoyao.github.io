@@ -43,11 +43,13 @@ mixin UI_NEW(posts)
                 a(href=url_for(item.path)).article-meta__tags #[=item.name]
                 if (index < article.tags.data.length - 1)
                   span.article-meta__link -
-        if theme.auto_excerpt && theme.auto_excerpt.enable
-          - const content = strip_html(article.content)
-          - let expert = content.substring(0, theme.auto_excerpt.length) 
-          - content.length > theme.auto_excerpt.length ? expert += ' ...' : ''
-          .content!= expert
-        else
-          .content!= article.description
+            //有描述优先描述，没有的时候再去自动截取
+          - var specific_desc = article.description || article.subtitle || article.excerpt
+          if specific_desc
+            .content!= specific_desc
+          else if theme.auto_excerpt && theme.auto_excerpt.enable
+            - const content = strip_html(article.content)
+            - let expert = content.substring(0, theme.auto_excerpt.length)
+            - content.length > theme.auto_excerpt.length ? expert += ' ...' : ''
+            .content!= expert
   - })

@@ -17,7 +17,8 @@ Ceph OSD(对象存储守护进程，Ceph - OSD)用于存储数据，处理数据
 - Ceph 元数据服务器(MDS、Ceph-MDS)
 Ceph 元数据服务器存储代表 Ceph 文件系统（Ceph FS）的元数据。（亦即：Ceph 块设备存储和 Ceph 对象存储不使用 MDS）。Ceph 元数据服务器允许 POSIX 文件系统用户执行基本命令(如 ls、find 等)，而不会给 Ceph 存储集群带来巨大的负担。
 Ceph 将数据作为对象存储在逻辑存储池（VG）中。 使用`CRUSH算法`，Ceph 计算哪个放置组应包含该对象，并进一步计算哪个 Ceph OSD 守护程序应存储该放置组。 CRUSH 算法使 Ceph 存储集群能够动态扩展，重新平衡和恢复。
-
+## 网站记录
+[twt 企业 IT 交流平台 - talkwithtrend，企业 IT 技术社区，帮助您融入同行](http://www.talkwithtrend.com/)
 ---
 ## 建议最低硬件配置
 {% raw %}

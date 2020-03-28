@@ -39,7 +39,7 @@
     width: 15rem
     text-align: center
 
-    .social-icon
+    .social-icon-addr
       margin: 0 .5rem
       color: $light-grey
       text-shadow: .1rem .1rem .2rem rgba(0, 0, 0, .15)
@@ -185,6 +185,13 @@
     text-shadow: .1rem .1rem .2rem rgba($dark-black, .15)
     font-weight: bold
     cursor: pointer
+    //网站换为图片之后加样式
+    .site-logo
+      display: inline-block;
+      vertical-align: middle;
+      width: 150px;
+      height: 40px
+      background-size: cover!important;
 
   .menus_item
     position: relative
@@ -211,7 +218,7 @@
         z-index: -1
         width: 0
         height: 3px
-        background-color: lighten($theme-color, 30%)
+        background-color: $netease-red
         content: ''
         transition: all .3s ease-in-out
 
@@ -263,10 +270,12 @@
 @media screen and (min-width: $sm)
   #nav
     #site_title
-      font-size: 2rem
+      font-size: 3.5rem   // 大一点
+
 
     #site_subtitle
       font-size: 1.2rem
+      color: $google-red-light
 
 @media screen and (max-width: $sm)
   #page-header
@@ -303,3 +312,28 @@
 
             .post-meta__separator:first-child
               display: none
+//自定义
+.descript_area
+  display: block
+  width: 100%
+
+.descript_area .txt
+  text-align: center
+  font-size: 24px
+  color: #5f6464
+  line-height: 54px
+  padding: 105px 0 74px
+
+.descript_area .txt span.m
+  display: none
+
+.descript_area .txt span.pc
+  display: block
+
+@media screen and (max-width: 375px )
+  .descript_area .txt
+    padding: 48px 20px 24px
+    text-align: left
+
+  .descript_area .txt span.pc
+    display: none

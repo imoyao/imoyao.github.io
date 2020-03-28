@@ -3,8 +3,8 @@ sidebar:
   have_read: 你已经读了
 
 footer:
-  driven: 驱动
-  theme: 主题
+  driven: 强力驱动
+  theme: 主题基于
 
 copy:
   success: 复制成功
@@ -19,6 +19,7 @@ page:
 
 sticky: 置顶
 no_title: 无题
+archives: 时间轴
 
 post:
   created: 发表于
@@ -64,14 +65,15 @@ aside:
   card_archives: 归档
   card_recent_post: 最新文章
   card_bookmark: 加入书签
+  card_follow_zhihu: 来知乎和我互动
   card_webinfo:
-    headline: 网站资讯
+    headline: 网站概览
     article_name: 文章数目
     runtime_name: 已运行时间
     site_uv_name: 本站访客数
     site_pv_name: 本站总访问量
 
-donate: 打赏
+donate: 赞赏
 share: 分享
 bookmark:
   title: 添加书签
@@ -86,6 +88,7 @@ rightside:
   toc: 目录
   scroll_to_comment: 直达评论
   setting: 设置
+  feedback: 反馈
 
 runtime_unit: 天
 
@@ -105,3 +108,14 @@ Snackbar:
   night_to_day: 你已切换为浅色模式
 
 error_title: 页面没有找到
+
+Home: 首页
+Archives: 归档
+Tags: 标签
+Categories: 分类
+Link: 友链
+About: 关于
+More: 更多
+Book: 读过的书
+Movie: 看过的片
+B&M History: 书·影·音

@@ -65,6 +65,18 @@ h6
   opacity: 0
   cursor: pointer
   transition: all .2s
+  width: 30px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-align: center
+
+  &:hover
+    opacity .8
+    color #fff
+    background-color $theme-button-hover-color
+
+    &:before
+      color #fff
 
 hr
   position: relative
@@ -416,3 +428,35 @@ if hexo-config('avatar.effect') == true
 
   100%
     transform: translateX(0)
+
+//=======自定义样式=======
+.slogan
+  font-size: 1.2em
+  color: $emphatic-red
+  display: block
+  margin-bottom: 1em
+
+.footer-slogan
+  i
+    color $emphatic-red
+    padding 0 .4em
+
+figcaption
+  text-align center
+  margin-top .66667em
+  margin-bottom .66667em
+  padding 0 1em
+  font-size .9em
+  line-height 1.5
+  color #999999
+
+#iframe
+  overflow:hidden
+  //豆瓣iframe嵌入
+  iframe
+    width:103%;
+    height:2000px;
+    border: none
+.no-aside-page
+  width:100% !important
+  padding:20px !important

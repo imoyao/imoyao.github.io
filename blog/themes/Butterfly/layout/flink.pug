@@ -2,6 +2,8 @@
   .flink#article-container
     each i in site.data.link
       h2= i.class_name
+      blockquote
+        p.class-desc!= `${i.describe}`
       .post-cards
         .md-links
           each item in i.link_list

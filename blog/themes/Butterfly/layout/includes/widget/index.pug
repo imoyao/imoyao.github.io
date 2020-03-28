@@ -3,15 +3,18 @@ if theme.aside.enable
     #aside_content.aside_content
       if theme.aside.card_author
         !=partial('includes/widget/card_author', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_announcement
+      if theme.aside.card_announcement && page.current === 1
         !=partial('includes/widget/card_announcement', {}, {cache:theme.fragment_cache})
       if theme.aside.card_recent_post
         !=partial('includes/widget/card_recent_post', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_categories
+      if theme.aside.card_categories && page.type !== 'categories'
         !=partial('includes/widget/card_categories', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_tags
+      if theme.aside.card_tags && page.type !== 'tags'
         !=partial('includes/widget/card_tags', {}, {cache:theme.fragment_cache})
       if theme.aside.card_archives
         !=partial('includes/widget/card_archives', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_webinfo
+        //添加友链侧边栏
+      if theme.aside.card_links
+        !=partial('includes/widget/card_links', {}, {cache:theme.fragment_cache})
+      if theme.aside.card_webinfo && page.current === 1
         !=partial('includes/widget/card_webinfo', {}, {cache:theme.fragment_cache})  

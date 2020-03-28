@@ -38,12 +38,15 @@ blockquote
     padding: .5rem 0
 
   footer
+    text-align right
     padding: 0 0 .5rem
+    &:before
+      content: '——'
 
     cite
       &:before
         padding: 0 .3em
-        content: '—'
+        content: '·'
 
 #article-container
   pre,
@@ -136,7 +139,7 @@ blockquote
       padding-right: .5rem
       padding-left: .5rem
       width: 100%
-      background-color: $highlight-background
+      background-color: $highlight-background !important // readmode 看不清
 
     .line
       height: 1rem

@@ -1,6 +1,6 @@
 $(function () {
   var loadFlag = false
-  $('a.social-icon.search').on('click', function () {
+  $('a.social-icon-addr.search').on('click', function () {
     $('body').css({ width: '100%', overflow: 'hidden' })
     $('.search-dialog').css('display', 'block')
     $('#local-search-input input').focus()

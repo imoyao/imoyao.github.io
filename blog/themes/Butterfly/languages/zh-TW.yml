@@ -15,10 +15,11 @@ page:
   articles: 文章總覽
   tag: 標籤
   category: 分類
-  archives: 歸檔
+  archives: 時間軸
 
 sticky: 置頂
 no_title: 無題
+archives: 時間軸
 
 post:
   created: 發表於
@@ -64,6 +65,7 @@ aside:
   card_archives: 歸檔
   card_recent_post: 最新文章
   card_bookmark: 加入書籤
+  card_follow_zhihu: 來知乎和我互動
   card_webinfo:
     headline: 網站資訊
     article_name: 文章數目
@@ -86,6 +88,7 @@ rightside:
   toc: 目錄
   scroll_to_comment: 直達評論
   setting: 設置
+  feedback: 反饋
 
 runtime_unit: 天
 
@@ -106,4 +109,15 @@ Snackbar:
 
 error_title: 頁面沒有找到
 
+
+Home: 首頁
+Archives: 歸檔
+Tags: 標籤
+Categories: 分類
+Link: 友鏈
+About: 關於
+More: 更多
+Book: 讀書
+Movie: 電影
+B&M History: 書·影·音
 
