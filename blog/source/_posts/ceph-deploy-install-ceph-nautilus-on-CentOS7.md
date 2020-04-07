@@ -188,6 +188,7 @@ total 12
 ```shell
 vi ceph.conf
 ```
+如果有多个网络接口，需要在 Ceph 配置文件的`[global]`一节下添加`public network`设置，这也是官网建议我们的配置。具体参见[Network Configuration Reference — Ceph Documentation](https://docs.ceph.com/docs/nautilus/rados/configuration/network-config-ref/)
 ```plain
 [global]
 fsid = 52420c57-bf82-4ca9-9184-a38e2fab427e
@@ -197,6 +198,7 @@ auth_cluster_required = cephx
 auth_service_required = cephx
 auth_client_required = cephx
 osd pool default size = 2  #增加默认副本数为 2
+public network = 172.18.1.0/24 # 添加整个网段
 ```
 
 ### 安装 ceph
@@ -412,8 +414,9 @@ ceph-deploy --overwrite-conf osd create --data /dev/sdb node1
 [ceph_deploy.osd][ERROR ] RuntimeError: config file /etc/ceph/ceph.conf exists with different content; use --overwrite-conf to overwrite
 [ceph_deploy][ERROR ] GenericError: Failed to create 1 OSDs
 ```
-所以覆写配置，正常操作的时候不需要添加该选项。
+所以需要覆写配置，正常操作的时候不需要添加该选项。
 {% endnote %}
+
 > 其中`create`是`prepare`和`active`的合并操作，下面是该命令的解释：
 > `ceph-deploy osd prepare HOST:DISK[:JOURNAL] [HOST:DISK[:JOURNAL]……]`
 > 为 osd 准备一个目录/磁盘。它会检查是否超过 MAX PIDs,读取 bootstrap-osd 的 key 或者写一个（如果没有找到的话），然后它会使用 ceph-disk 的 prepare 命令来准备磁盘、日志，并且把 OSD 部署到指定的主机上。
@@ -503,6 +506,10 @@ ceph-deploy --overwrite-conf osd create --data /dev/sdb node1
     [ceph_deploy.osd][DEBUG ] Host node1 is now ready for osd use.
 ```
 阅读最后一行信息，我们知道 node1 作为 osd 节点被添加进去了。
+{% note info %}
+**注意：**
+如果 zap 磁盘失败，确认磁盘是否之前已经做过 LUN，如果是，需要删除 LV，VG，PV，之后再进行添加 osd 的操作。
+{% endnote %}
 5. 查看集群状态
 ```shell
 ceph -s

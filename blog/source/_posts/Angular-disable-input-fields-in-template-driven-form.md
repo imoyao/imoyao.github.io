@@ -8,6 +8,7 @@ tags:
 categories:
 - 工作日常
 cover: /images/logos/angular.svg
+subtitle: checkbox 的使用以及表单关联操作。
 ---
 ## 前言
 书接上回，我们在[上文](/blog/2020-03-06/Angular-orderBy-Object-or-Array/)中将表单展示出来了，但是怎么按照逻辑对表单进行限制呢？比如说基本的禁用表单中的某个字段？

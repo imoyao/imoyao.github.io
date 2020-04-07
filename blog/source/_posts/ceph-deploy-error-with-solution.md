@@ -45,11 +45,12 @@ ceph crash archive <crash-id>
 ### 解释
 添加的 mon 节点不是初始化成员，集群无法识别
 ### 解决方案
-将配置文件同步到新加节点
+修改配置文件添加`public network = 172.18.1.0/24`（网段需要根据实际情况修改）并将配置文件同步到新加节点
 ```plain
 ceph-deploy --overwrite-conf config push xxx
 ```
 
 ### 参考
+- [Ceph: mon is down and/or can’t rejoin the quorum – swami reddy](https://swamireddy.wordpress.com/2017/09/20/ceph-mon-is-down-andor-cant-rejoin-the-quorum/)
 - [ceph 在扩展 mon 节点时，要注意的问题 - aguncn - 博客园](https://www.cnblogs.com/aguncn/p/7352393.html)
 - [Ceph 添加监视器 Monitor 失败_运维_weixin_33924220 的博客-CSDN 博客](https://blog.csdn.net/weixin_33924220/article/details/92602783)
