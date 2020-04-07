@@ -16,7 +16,7 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 
 <video src="https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3YvcyFBbnVXTzVzdVUyYlZoMmJidUFlbHRLNTFERE1iP2U9aHdIN0tx.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"> Your browser does not support the video tag. </video>
 
-<figcaption > 华为励志音乐短片·《Dream It Possible》</figcaption >
+<figcaption> 华为励志音乐短片·《Dream It Possible》</figcaption>
 
 <h2 class="slogan"><i class="fa fa-user"></i>  老暴露狂了</h2>
 
@@ -35,15 +35,15 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 
 上网多年陆续用过很多网名，有的因为泛着年少时的中二气息已被弃用，把目前仍在使用着的简单罗列一下吧：
 
-1. `iMOYAO`,手持两把锟斤拷，口中疾呼烫烫烫。脚踏千朵屯屯屯，笑看万物锘锘锘。程序员为了减少因编码错误而导致的`Bug`怎么能没有一个英文代号呢？关于这个自造词的发音，`i`与`iPhone`中的`i`发音相同，`MOYAO`，可以借用“莫遥”的中文发音。（去听谷歌翻译）如果你是个好奇宝宝，用微软翻译会发现一些“不得了”的东西——“伊莫约”，不约，叔叔我们不约！弱弱说一声，大写的时候你不觉得（`OYAO`）还挺萌的嘛？😜
+1. `iMOYAO`,手持两把锟斤拷，口中疾呼烫烫烫。脚踏千朵屯屯屯，笑看万物锘锘锘。程序员为了减少因编码错误而导致的 Bug 怎么能没有一个英文代号呢？关于这个自造词的发音，`i`与`iPhone`中的`i`发音相同，`MOYAO`，可以借用“莫遥”的中文发音。（去听谷歌翻译）如果你是个好奇宝宝，用微软翻译会发现一些“不得了”的东西——“伊莫约”，不约，叔叔我们不约！弱弱说一声，大写的时候你不觉得（`OYAO`）还挺萌的嘛？😜
 2. 西风不瘦，很多人以为我引用的是小令《天净沙·秋思》中的“古道西风瘦马”，其实不是的。纳兰容若有词句这么写道：“休为西风瘦，痛饮频搔首。自古青蝇白璧，天已早，安排就。”
-3. 张牧志，化用姜文导演的电影作品——《让子弹飞》中的人物`牧之`而来。具体前文已经说过，不再赘述。
+3. 张牧志，化用姜文导演的电影作品——《让子弹飞》中的人物`牧之`而来。引申含义（~~牵强附会~~）前文已经说明，不再赘述。
 
 ### 关于我
 
 🍜面食爱好者，🎥电影爱好者，~~自认为的~~低自我监控者（概念参见《亲密关系·第 5 版》P130），~~曾经的~~阅读爱好者（现在因为时间和心境关系一年到头也读不了几本书啦！🐶）。
 
-如果要用一句话描述一下自己，那么化用长眠在纽约东北部的撒拉纳克湖畔的特鲁多医生的那句墓志铭——To Cure Sometimes, To Relieve Often, To Comfort Always. 偶尔文艺，时常庸俗，总是孤独。
+如果要用一句话描述一下自己，那就化用长眠在纽约东北部的撒拉纳克湖畔的特鲁多医生的那句墓志铭——To Cure Sometimes, To Relieve Often, To Comfort Always 吧。 偶尔文艺，时常庸俗，总是孤独。
 
 本人主要使用`Python`语言在云计算（存储方向）做一些微小的工作，目前还没有找到自己历史的进程。希望成为一个有趣的人，最好能有点小钱钱 _(:з”∠)_
 
@@ -54,8 +54,8 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 
 ### 技术问题解决之道
 
-1. 重启了没？多重启几次呢？
-2. 看官方文档吗？
+1. 重启过了没？
+2. 看过官方文档吗？
 3. 实践（时间）是检验真理的唯一标准。
 4. To be continue……
 
@@ -103,6 +103,6 @@ top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 <h2 class="slogan"><i class="fa fa-copyright"></i>  版权声明<sub>（特殊声明除外）</sub></h2>
 {% raw %}
 <figcaption>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="/img/by-nc-sa.png" /></a><br />本博客作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="/img/by-nc-sa.png" /></a><br />本博客作品采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a> 进行许可。
 </figcaption>
 {% endraw %}

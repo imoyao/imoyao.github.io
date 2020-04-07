@@ -1,29 +1,25 @@
 ---
-title: Python 之 Web 开发框架对比——Flask vs webpy
+title: Python 之 Web 开发框架对比——Flask vs Web.py
 date: 2019-06-05 18:03:49
 tags:
-
 - Flask
+- Web.py
 - Web 开发
 
 categories:
-
 - 工作日常
-
 toc: true
-
 ---
-`Python` 常用的`web`开发框架有很多如`Django`、`Flask`、`Tornado`、`Web.py`等，我们之前项目中使用的是 `Web.py`,但是新项目中选择哪个？或许是个值得思考的问题。本文主要对`Web.py`和`Flask`进行一个简单的对比。
+`Python` 常用的`web`开发框架有很多如`Django`、`Flask`、`Tornado`、`Web.py`等，我们之前项目中使用的是 `Web.py`，但是新项目中选择哪个？或许是个值得思考的问题。本文主要对`Web.py`和`Flask`进行一个简单的对比。
 
 <!--more-->
 
 ## 为什么要从`Web.py`迁移到`Flask`
 
-大势所趋。根据最新的[Python 开发者调研-2018](https://www.jetbrains.com/research/python-developers-survey-2018/)结果显示，`Flask`和`Django`已经成为最流行的`web`开发框架。对企业的良性发展和开发者个人成长而言，使用热门技术都是值得鼓励且必要的。而且，众所周知，官方计划在`2020`年停止`Python2`支持，而相比`Flask`而言,`Web.py`的版本更新计划有点跟不上节奏的感觉。
-
+大势所趋。根据最新的[Python 开发者调研-2018](https://www.jetbrains.com/research/python-developers-survey-2018/)结果显示，`Flask`和`Django`已经成为最流行的`web`开发框架。对企业的良性发展和开发者个人成长而言，使用热门技术都是值得鼓励且必要的。而且，众所周知，官方计划在`2020`年停止`Python2`支持，而相比`Flask`而言，`Web.py`的版本更新计划有点跟不上节奏的感觉。
 
 ![Web-frameworks-python-developers-survey-2018](/images/Web-frameworks-python-developers-survey-2018.jpg)
-<center><span>Web-frameworks-python-developers-survey-2018</span></center>
+<figcaption>Web-frameworks-python-developers-survey-2018</figcaption>
 
 ## TL;DR，`Flask` 对比 `Web.py` 的不同点
 
@@ -31,27 +27,25 @@ toc: true
 
 - **维护积极性**  - 最新版本分别为`Flask-1.0.2`和 `webpy-0.39`。
 
-    <figure class="half">
-        <img src="/images/flask-contributors.jpg" alt="flask-contributors">
-        <center><span>flask-contributors</span></center>
-        <img src="/images/webpy-contributors.jpg" alt="webpy-contributors">
-        <center><span>webpy-contributors</span></center>
-    </figure>
+{% gallery %}
+![flask-contributors](/images/flask-contributors.jpg)
+![webpy-contributors](/images/webpy-contributors.jpg)
+{% endgallery %}
 
 - **官方文档** - `Flask`具有良好的官方文档，并且有国内使用者翻译的中文文档；`Web.py`只有勉强够用、捉襟见肘的入门级官方文档，剩下的需要开发人员自行摸索。
 - **社区活跃度** - `Flask`拥有活跃的社区文化和数量庞大的拥趸者，`Web.py`国内只有不活跃的专门的豆瓣小组或者在一些热门`Python`社区偶有提及。
 - 第三方扩展  
     - 表单 - `Flask` 使用扩展`Flask-WTF`和`WTForms`可以实现很好的表单验证和 `csrf` 安全保护；（参阅[Flask-WTF 与 WTForms 的用法详解](https://www.jianshu.com/p/7e16877757f8)）；而`Web.py`自带[Form 库](http://webpy.org/form)，可以实现表单及简单校验。
-    - 数据库 -  `Flask` 使用扩展`Flask-SQLAlchemy`实现对数据库的`ORM`操作,可以很好地管理和实现数据库的迁移(借助`Flask-Migrate`)工作；`Web.py`我们使用自己封装的`database.py`。
+    - 数据库 -  `Flask` 使用扩展`Flask-SQLAlchemy`实现对数据库的`ORM`操作，可以很好地管理和实现数据库的迁移(借助`Flask-Migrate`)工作；`Web.py`我们使用自己封装的`database.py`。
     - 身份验证和权限 - `Flask`提供安全`cookie`作为您自己实现的工具，第三方扩展如`Flask-Login`(用户会话管理)，`Flask-HTTPAuth`<sup>①</sup>（简化了使用`Flask`路由的`HTTP`身份验证的使用），`Flask-Security`（提供一站式管理）， `Flask-Social`（用于添加“社交”或`OAuth`登录和连接管理）等，这些扩展良莠不齐，使用时需要对其有个初步了解并进行遴选；`Web.py`还是要自己造轮子。
     - `RESTful` - 使用`Flask-RESTful` 可以创建`REST`的`API`。
-    - 强大的页面渲染 -`Flask`使用`jinja2`作为模板引擎；`Web.py`使用`Templetor`,类 `python`,写起来信手拈来，无痛衔接，也可以使用`Mako`模板引擎，两者平分秋色。性能对比见这里 >> [几个模板系统的性能对比](http://www.pythontip.com/blog/post/2239/)
+    - 强大的页面渲染 -`Flask`使用`jinja2`作为模板引擎；`Web.py`使用`Templetor`类 `python` 写起来信手拈来，无痛衔接，也可以使用`Mako`模板引擎，两者平分秋色。性能对比见这里👉 [几个模板系统的性能对比](http://www.pythontip.com/blog/post/2239/)
 - 伸缩性 - `Flask`既可以像`Web.py`那样做微框架开发一个很小的`web`应用，也可以借助上方的各种扩展做到`Django`级别的应用。
     
 ## Flask 框架
 
 > Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions. 
-Flask 是一个基于 `Jinja2` 模板引擎和 `Werkzeug WSGI` 套件的一个微型的`Web`开发框架。体现了`logo`中的口号`web development, one drop at a time.`(`web`开发,一次一滴。)
+Flask 是一个基于 `Jinja2` 模板引擎和 `Werkzeug WSGI` 套件的一个微型的`Web`开发框架。体现了`logo`中的口号`web development, one drop at a time.`(`web`开发，一次一滴。)
 
 ### 什么是 “微”
 
@@ -66,13 +60,13 @@ Web.py 是一个简单且功能强大的用于 Python 语言的 web 框架。
 ### `Web.py`设计哲学
 
 `Web.py`的口号是`Think about the ideal way to write a web app. Write the code to make it happen.`（思考编写`web`应用程序的理想方式，然后去编写代码实现它。）  
-在用`Python`编写`web`应用程序的时候，我想象自己想要`API`的方式。它始于导入`web`，然后有一个定义`URL`的地方，处理`GET`和`POST`的简单函数和一些处理输入变量的东西。一旦代码对我来说看起来是正确的, 我就会想尽办法使它在不更改应用程序代码的情况下执行——结果就是 `Web.py`。
+在用`Python`编写`web`应用程序的时候，我想象自己想要`API`的方式。它始于导入`web`，然后有一个定义`URL`的地方，处理`GET`和`POST`的简单函数和一些处理输入变量的东西。一旦代码对我来说看起来是正确的， 我就会想尽办法使它在不更改应用程序代码的情况下执行——结果就是 `Web.py`。
 有人抱怨说我“搞了另一套模板语言”（yet another template language），我写了更多文字关于我的设计理念：[参阅](http://groups.google.com/group/webpy/msg/f266701d97e7ceb1)
 
-你不必使用它——`Web.py`的每个部分都与其他部分完全分离。但你是对的, 它是“另一种模板语言”，而我不会为此道歉。  
-`Web.py` 的目标是构建制作 `web` 应用程序的理想方法。如果为了实现这个目标需要有微小差异化的来重塑陈旧的东西, 我会捍卫自己对它们进行改造的权利。`理想的方式`和`几乎理想的方式`之间的区别, 正如马克·吐温所言：是闪电和萤火虫之间的区别。（The difference between the right word and the almost right word is the difference between lightning and the lightning Bug.）  
-但这些不仅仅是细微的差异。`Web.py` 允许您构建 `http` 响应, 而不暴露 `Python` 对象。`Web.py` 使数据库更易使用,而不试图使数据库看起来像一个对象。 `Web.py` 模板系统试图把 `Python` 纳入 `HTML`而不是想出另一种方法来编写 `HTML`。没多少人真正尝试过这么做的可能性。  
-你可以不同意这些方法更好并给出原因，但仅仅批评它们与众不同是浪费时间。是的, 它们天生骄傲。我的话讲完了。  
+你不必使用它——`Web.py`的每个部分都与其他部分完全分离。但你是对的， 它是“另一种模板语言”，而我不会为此道歉。  
+`Web.py` 的目标是构建制作 `web` 应用程序的理想方法。如果为了实现这个目标需要有微小差异化的来重塑陈旧的东西， 我会捍卫自己对它们进行改造的权利。`理想的方式`和`几乎理想的方式`之间的区别， 正如马克·吐温所言：是闪电和萤火虫之间的区别。（The difference between the right word and the almost right word is the difference between lightning and the lightning Bug.）  
+但这些不仅仅是细微的差异。`Web.py` 允许您构建 `http` 响应， 而不暴露 `Python` 对象。`Web.py` 使数据库更易使用，而不试图使数据库看起来像一个对象。 `Web.py` 模板系统试图把 `Python` 纳入 `HTML`而不是想出另一种方法来编写 `HTML`。没多少人真正尝试过这么做的可能性。  
+你可以不同意这些方法更好并给出原因，但仅仅批评它们与众不同是浪费时间。是的， 它们天生骄傲。我的话讲完了。  
 文字来源：[The Web.py Philosophy](http://webpy.org/philosophy)
 
 ## Show me the code
@@ -142,7 +136,7 @@ $ python app.py
 4. 定义函数，该函数名也是用来给特定函数生成 `URLs`，并且返回我们想要显示在用户浏览器上的信息。
 5. 最后我们用函数 `run()` 启动本地服务器来运行我们的应用。
     - `host='0.0.0.0'`你可以让你的服务器对外可见。
-    - `debug=True`开启调式模式,仅适用于开发阶段，在代码修改的时候服务器能够自动加载，发生错误之后可以更好追踪调试； **生产模式时，一定要关闭该选项。**
+    - `debug=True`开启调式模式，仅适用于开发阶段，在代码修改的时候服务器能够自动加载，发生错误之后可以更好追踪调试； **生产模式时，一定要关闭该选项。**
 
 **注意**   
 可能有人想要使用`Flask`实现`Web.py`类似的`RESTful`的代码设计风格，借助`Flask-RESTful`可以实现像`Web.py`一样的`RESTful`设计。示例如下：  
