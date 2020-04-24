@@ -2,7 +2,6 @@
 title: Python 环境管理介绍
 date: 2018-01-18 14:18:31
 cover: /images/Python/pipenv.jpg
-
 tags:
 - Python
 ---
