@@ -5,15 +5,22 @@ tags:
 - Python
 - 压缩图片
 - TODO
+subtitle: 一种用于解决“多图杀猫”问题的方案
 ---
+{%note info%}
+目前暂时没有这方面的需求。而且在[Third-Party Solutions](https://tinypng.com/third-party)中，已经有了相应的 Python 实现，后面有需求的话再继续改写吧。有人有需求的话可以访问下面的链接：
+- [mbarkhau/tinypng: Python module and command line tool for tinypng.com](https://github.com/mbarkhau/tinypng/)
+- [GcsSloop/TinyPng: 图片批量压缩脚本(Python)](https://github.com/GcsSloop/TinyPng)
+{%endnote%}
+
 ## 缘起
 看到别人实现了一套，但是只是基于 Python2 的支持，所以打算写一个支持 Python3 的版本。
 
 ## 使用说明
-首先去官网申请到 key 👉[tinypng](https://tinypng.com/developers)。然后运行脚本。……
-TODO
+首先去官网申请到 key 👉[tinypng](https://tinypng.com/developers)。然后运行脚本。`-h`查看帮助。
+
 ### 依赖
-pass
+看 pipenv 配置
 
 ## 思路
 
