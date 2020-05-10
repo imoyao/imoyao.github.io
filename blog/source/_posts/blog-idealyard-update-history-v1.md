@@ -6,7 +6,8 @@ tags:
   - Flask
   - 开源
 categories:
-  - IdealYard
+- Projects
+- IdealYard
 cover: /images/nathan-anderson-XxyzpjYNY8k-unsplash.jpg
 reward: true
 ---

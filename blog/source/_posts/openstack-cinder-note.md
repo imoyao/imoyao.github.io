@@ -10,7 +10,7 @@ categories:
 cover: 
 ---
 {%note warning%}
-**注意**：这是一条**仅**用于个人经验的基于devstack的开发记录，除“推荐阅读”以外，不针对大众有参考价值。
+**注意**：这是一条**仅**用于个人经验的基于 devstack 的开发记录，除“推荐阅读”以外，不针对大众有参考价值。
 {% endnote%}
 
 ## 服务管理
@@ -27,8 +27,8 @@ journalctl -f -u devstack@n-cpu.service
 journalctl -u devstack@c-vol.service
 
 ```
-##drivers路径
-```
+##drivers 路径
+```plain
 /opt/stack/cinder/cinder/volume/drivers/
 ```
 ## 认证
@@ -38,21 +38,21 @@ journalctl -u devstack@c-vol.service
 ```bash
 source /opt/stack/openrc.sh
 ```
-### 查看cinder 配置状态
+### 查看 cinder 配置状态
 看状态之前必须先执行上面一条命令给权限；
 
 ```bash
 cinder service-list
 ```
 
-### openstack 界面登录和ssh后台登录
-```
+### openstack 界面登录和 ssh 后台登录
+```plain
 IP：10.10.15.139    浏览器访问用户名admin,密码openstack;  ssh用户名qzz,密码qiu199212
 ```
 
-## fc和ipsan输出后，后台用lsblk可以看到
+## fc 和 ipsan 输出后，后台用 lsblk 可以看到
 
-## 修改cinder.conf配置
+## 修改 cinder.conf 配置
 
 ```bash
 default_volume_type = estorip-1
@@ -89,6 +89,6 @@ https://www.cnblogs.com/elvi/p/7735881.html
 https://docs.openstack.org/cinder/latest/contributor/drivers.html
 
 https://wiki.openstack.org/wiki/Cinder/how-to-contribute-a-driver
-[Cinder命令总结](https://blog.csdn.net/qq806692341/article/details/52397440)
+[Cinder 命令总结](https://blog.csdn.net/qq806692341/article/details/52397440)
 
 https://docs.openstack.org/liberty/zh_CN/install-guide-rdo/overview.html

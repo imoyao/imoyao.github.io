@@ -4,6 +4,7 @@ date: 2019-03-05 09:56:37
 tags:
 - git
 - 版本控制
+- Gerrit
 
 categories:
 - 工作日常
@@ -50,7 +51,9 @@ categories:
     git push origin 0d163929c240xxx745b520d07b854c207 ① :refs/changes/8xxx4 ②
     ```
     ①：此处为你自己需要`amend`的`commit`版本号；
-    ②：此处为远端你的`change`的编号，如果远端版本已经`closed`，则无法进行`amend`，只能 `git reset`；
+    ②：此处为远端你的`change`的编号，如果远端版本已经`closed`，~~则无法进行`amend`，只能 `git reset`；~~
+    如果上游提交已经合并并关闭，则参考此处[gerrit - Git push remote rejected {change ### closed} - Stack Overflow](https://stackoverflow.com/questions/11972384/git-push-remote-rejected-change-closed)
+    需要将之前 rebase 的 commit 信息中的 change-Id 删除，让 Gerrit 重新生成 change-Id ，之后可以继续提交。
 
 ### 总结
 

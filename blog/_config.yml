@@ -5,11 +5,11 @@
 # Site
 title: 别院牧志
 subtitle: IMOYAO
-description: Valar Dohaeris.
+description: 深深别院，潜潜牧志。一个独立博客，使用 Python 语言开发，专注于云计算方向。本人致力于写出 Pythonic 的代码。
 author: imoyao
 email: immoyao@gmail.com
 slogan: 就命运而言，休论公道。
-keywords: 别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, Linux
+keywords: 别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发
 #language: zh-Hans    # for next
 language: zh-CN       # for material
 timezone:
