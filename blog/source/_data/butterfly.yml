@@ -105,7 +105,7 @@ mathjax:
 # KaTeX
 # ---------------
 katex:
-  enable: false
+  enable: true
   # true 表示每一頁都加載katex.js
   # false 需要時加載，須在使用的Markdown Front-matter 加上 katex: true
   per_page: false
@@ -127,7 +127,8 @@ avatar:
 
 # see also: https://www.zhihu.com/question/21168322
 # the banner image of index
-index_img: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
+index_img: https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=zh-CN
+#index_img: https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture
 
 # if the banner of page not setting,it will show the top_img
 default_top_img: https://source.unsplash.com/random

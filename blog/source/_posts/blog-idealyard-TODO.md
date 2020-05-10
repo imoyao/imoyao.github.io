@@ -6,7 +6,8 @@ tags:
 - Flask
 - 开源
 - TODO
-categories: 
+categories:
+- Projects
 - IdealYard
 cover: /images/photo-1475767770551-49f1b43f71cd.jpg
 ---
@@ -26,9 +27,9 @@ cover: /images/photo-1475767770551-49f1b43f71cd.jpg
 - [x] token 超时时弹出很多 message,应该使用更友好的方式！或者精准提示，一次只提示一条即可；
     解决办法：[如何让 Element UI 的 Message 消息提示每次只弹出一个](https://segmentfault.com/a/1190000020173021)
 - [x] 标签云  
- ~~参考[这里](https://github.com/MikeCoder/hexo-tag-cloud)~~
- [这里](https://juejin.im/post/5c99a0f7e51d454e9b3c3343)
- ~~[这里](https://github.com/nobalmohan/vue-tag-cloud)~~  
+ 1.  ~~参考[这里](https://github.com/MikeCoder/hexo-tag-cloud)~~
+ 2. [这里](https://juejin.im/post/5c99a0f7e51d454e9b3c3343)
+ 3. ~~[这里](https://github.com/nobalmohan/vue-tag-cloud)~~  
 最终参考[VueWordCloud](https://github.com/SeregPie/VueWordCloud) 实现；
 - [x] 记住密码；
 - [x] 标签、分类页面，item 数量为 0 时，点击事件 disable；
@@ -130,6 +131,7 @@ cover: /images/photo-1475767770551-49f1b43f71cd.jpg
 - [ ] 标签管理员手动添加
 - [ ] 分类管理员手动添加
 - [ ] i18n（en&zh）
+- [ ] 前端文件太大[继续优化博客 Vue+Webpack 生成的 Javascript 文件体积 - 小明明 s à domicile](https://www.dongwm.com/post/optimize-javascript/)
 
 ---
 优先级低

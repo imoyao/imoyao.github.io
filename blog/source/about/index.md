@@ -3,7 +3,7 @@ title: 深深别院，潜潜牧志
 date: 2017-11-18 15:24:37
 author: 西风不瘦
 comments: false
-top_img:  https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
+top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 ---
 
 ![别院牧志](/img/horizontal-logo-about-banner.png)
