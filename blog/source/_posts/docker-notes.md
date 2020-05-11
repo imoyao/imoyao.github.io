@@ -7,6 +7,8 @@ tags:
 - 容器
 categories:
 - 工具
+top_img: /images/logos/Docker-Logo-White-RGB_Horizontal.png
+cover: /images/logos/Docker-logo.png
 ---
 ## 什么是 Docker
 Docker 是针对程序开发人员和系统管理员来**开发、部署、运行**应用的一个虚拟化平台。
@@ -76,7 +78,7 @@ Docker 客户端通过命令行或者其他工具使用 Docker SDK (<a href="htt
 {% endraw %}
 
 ## docker 环境安装
-[Install Docker Engine on CentOS | Docker Documentation](https://docs.docker.com/engine/install/centos/)
+ 参考[Install Docker Engine on CentOS | Docker Documentation](https://docs.docker.com/engine/install/centos/)
 ### 安装校验
 - 状态测试
 ```shell
@@ -204,36 +206,192 @@ Run 'docker COMMAND --help' for more information on a command.
 - [Docker 命令大全 | 菜鸟教程](https://www.runoob.com/docker/docker-command-manual.html)
 
 ## 构建并运行自己的 image
-我们可以拉取镜像来运行，但是要制作自己的image，就需要编写Dockerfile。它是一个文本文件。Docker根据改文件生成image文件。
-以官网的 [例子](https://docs.docker.com/get-started/part2/) 看一下如何构建image：
-首先克隆应用：
-```
-git clone https://github.com/dockersamples/node-bulletin-board
-cd node-bulletin-board/bulletin-board-app
-```
-之后打开dockerfile，看里面的内容：
-```
-# 使用官方镜像（node:current-slim）作为父级image，冒号表示标签
-FROM node:current-slim
-# 设置工作目录，此处目录是你的镜像文件系统，而不是节点文件系统
-WORKDIR /usr/src/app
-# 将文件从节点拷贝到本地，即拷贝到/usr/src/app/package.json
-COPY package.json .
-RUN npm install
+我们可以拉取镜像来运行，但是要制作自己的 image，就需要编写 Dockerfile。它是一个文本文件。Docker 根据改文件生成 image 文件。
+以官网的 [例子](https://docs.docker.com/get-started/part2/) 看一下如何构建 image：
+1. 首先克隆应用：
+    ```shell
+    git clone https://github.com/dockersamples/node-bulletin-board
+    cd node-bulletin-board/bulletin-board-app
+    ```
+2. 之后打开 dockerfile，查看里面的内容
+    ```plain
+    # 使用官方镜像（node:current-slim）作为父级image，冒号表示标签
+    FROM node:current-slim
+    # 设置工作目录，此处目录是你的镜像文件系统，而不是主机文件系统
+    WORKDIR /usr/src/app
+    # 将文件从主机拷贝到本地，即拷贝到/usr/src/app/package.json
+    COPY package.json .
+    # 运行npm install 安装依赖，所有依赖会打包进 image 文件
+    RUN npm install
+    # 暴露端口8080，允许外部连接
+    EXPOSE 8080
+    # CMD 指令：执行npm start 启动服务
+    CMD [ "npm", "start" ]
+    # 将源码从主机拷贝进你的文件系统中
+    COPY . .
+    ```
+这些步骤和在主机上进行部署安装的步骤大致相同，但是，将他们捕获为 dockerfile 可以是我们在可移植的、独立的 docker 镜像中执行相同的步骤。更多指令参考 [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 
-EXPOSE 8080
-CMD [ "npm", "start" ]
+#### `RUN`指令与`CMD`指令的区别在哪里
+简单说，RUN 命令在 image 文件的构建阶段执行，执行结果都会打包进入 image 文件；CMD 命令则是在容器启动后执行。另外，一个 Dockerfile 可以包含多个 RUN 命令，但是只能有一个 CMD 命令。
 
-COPY . .
+### 创建并测试 image
+确保工作目录：
+```shell
+[root@cephnode1 bulletin-board-app]# pwd
+```
+```plain
+/root/node-bulletin-board/bulletin-board-app
+```
+执行命令
+```shell
+docker build --tag bulletinboard:1.0 .
+```
+之后就会去拉取 image
+```plain
+Sending build context to Docker daemon 45.57 kB
+Step 1/7 : FROM node:current-slim
+Trying to pull repository docker.io/library/node ... 
+current-slim: Pulling from docker.io/library/node
+b248fa9f6d2a: Pull complete 
+dffc92453adc: Pull complete 
+fe328043d349: Pull complete 
+4f10197c89ca: Pull complete 
+ea536aa94bcb: Pull complete 
+Digest: sha256:082cbbeb6144e6bc7757f8f18a3486b52297179332254e6b6053c7c1b1e6ee5a
+Status: Downloaded newer image for docker.io/node:current-slim
+ ---> b91e80125d03
+Step 2/7 : WORKDIR /usr/src/app
+ ---> 953dba16ff6c
+Removing intermediate container b0ec527a8a85
+Step 3/7 : COPY package.json .
+ ---> 37223c9f96f0
+Removing intermediate container 5210827d4f6a
+Step 4/7 : RUN npm install
+ ---> Running in b0636bf7b2a0
+
+> ejs@2.7.4 postinstall /usr/src/app/node_modules/ejs
+> node ./postinstall.js
+
+Thank you for installing EJS: built with the Jake JavaScript build tool (https://jakejs.com/)
+
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN vue-event-bulletin@1.0.0 No repository field.
+npm WARN The package morgan is included as both a dev and production dependency.
+
+added 91 packages from 168 contributors and audited 221 packages in 16.522s
+found 0 vulnerabilities
+
+ ---> 34a58294222e
+Removing intermediate container b0636bf7b2a0
+Step 5/7 : EXPOSE 8080
+ ---> Running in 3d26cdf56f1e
+ ---> 58a0de628db8
+Removing intermediate container 3d26cdf56f1e
+Step 6/7 : CMD npm start
+ ---> Running in 23b066d14e0b
+ ---> 08fe8f2ddf74
+Removing intermediate container 23b066d14e0b
+Step 7/7 : COPY . .
+ ---> 6bee22fc7e1d
+Removing intermediate container 3368c01c7cbc
+Successfully built 6bee22fc7e1d
+```
+### 查看 images
+```shell
+[root@cephnode1 bulletin-board-app]# docker images
+```
+返回结果
+```plain
+REPOSITORY                                  TAG                 IMAGE ID            CREATED             SIZE
+bulletinboard                               1.0                 6bee22fc7e1d        5 minutes ago       181 MB  # 刚才我们创建的镜像
+docker.io/ceph/daemon                       latest              dc553e10e530        4 days ago          1.18 GB
+docker.io/node                              current-slim        b91e80125d03        4 days ago          165 MB
+docker.io/hello-world                       latest              bf756fb1ae65        4 months ago        13.3 kB
+docker.io/jolmomar/ansible_runner_service   latest              b27d3f6bf8a6        8 months ago        658 MB
+
+```
+### 将你的 image 作为容器运行
+1. 基于新生成的 image 启动容器
+    ```shell
+    docker run --publish 8000:8080 --detach --name bb bulletinboard:1.0
+    ```
+    上面指令的标识：
+    - `--publish` 要求 Docker 将主机端口 8000 上传入的流量转发到容器端口 8080。容器有自己的专用端口集，因此如果要从网络访问某个端口，必须以这种方式将通信量转发给它。否则，以默认的安全组配置，防火墙规则将阻止所有网络流量到达容器。
+    - `--detach`要求 Docker 在后台运行此容器。
+    - `--name`指定一个名称，在随后的命令中可以使用该名称引用容器，在本例中为`bb`。
+    另外，我们没有指定要运行容器的进程。因为在构建 Dockerfile 时使用了 CMD 指令； 因此，Docker 知道在启动时会自动在容器内运行 `npm start` 进程。
+    此外，可以使用
+    ```shell
+    docker container run -p 8000:8080 -it 6bee22fc7e1d # image id
+    # or
+    docker container run -p 8000:8080 -it bulletinboard:1.0 # image名称和标签
+    ```
+    会打开一个类似 dev 模式的容器，也可以正常访问。
+    ```plain
+    > vue-event-bulletin@1.0.0 start /usr/src/app
+    > node server.js
+    
+    Magic happens on port 8080...
+    ```
+    - `-p` 容器的 8080 映射到本机 8000 端口
+    - `it` 容器 shell 映射到本机 shell，之后你在本机窗口输入的指令会传入到容器中
+    
+2. 通过主机 8000 端口使用浏览器访问应用
+ ![](/images/Snipaste_2020-05-11_15-10-44.png)
+3. 之后可以使用指令停止容器
+    ```shell
+    docker stop bb
+    ```
+    然后再去访问，应用已经停止服务了。当然，你还可以使用`docker rm --force bb`强制删除容器。
+    删除容器还可以使用下面的指令：
+    1. 查询容器 ID
+        ```shellplainplainplain
+        docker container ls -all
+        # 或者使用 ps 查看全部容器
+        docker ps -a
+        ```
+        ```
+        CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+    d60c45afdc10        bulletinboard:1.0   "docker-entrypoint..."   7 minutes ago       Exited (0) 2 minutes ago                       hopeful_mcclintock
+        ```plain
+    2. 删除容器
+        ```shell
+        docker container rm [containerID]
+        ```
+    
+### 常用指令
+- docker container start
+`docker container run`命令是新建容器，每运行一次，就会新建一个容器。同样的命令运行两次，就会生成两个一模一样的容器文件。如果希望重复使用容器，就要使用`docker container start`命令，它用来启动已经生成、已经停止运行的容器文件。
+```shell
+docker container start [containerID]
+```
+- docker container stop
+`docker container kill`命令终止容器运行，相当于向容器里面的主进程发出 SIGKILL 信号。而`docker container stop`命令也是用来终止容器运行，相当于向容器里面的主进程发出 SIGTERM 信号，然后过一段时间再发出 SIGKILL 信号。
+```shell
+docker container stop [containerID]
+```
+这两个信号的差别是：应用程序收到 SIGTERM 信号以后，可以自行进行收尾清理工作，但也可以不理会这个信号。如果收到 SIGKILL 信号，就会强行立即终止，那些正在进行中的操作会全部丢失。
+- docker container logs
+`docker container logs`命令用来查看 docker 容器的输出，即容器里面 Shell 的标准输出。如果`docker run`命令运行容器的时候没有使用`-it`参数，就要用这个命令查看输出。
+```shell
+$ docker container logs [containerID]
+```
+- docker container exec
+`docker container exec`命令用于进入一个正在运行的 docker 容器。如果`docker run`命令运行容器的时候，没有使用`-it`参数，就要用这个命令进入容器。一旦进入了容器，就可以在容器的 Shell 执行命令了。
+```shell
+$ docker container exec -it [containerID] /bin/bash
+```
+- docker container cp
+`docker container cp`命令用于从正在运行的 Docker 容器里面，将文件拷贝到本机。下面是拷贝到当前目录的写法。
+```plain
+$ docker container cp [containID]:[/path/to/file] .
 ```
 
 ## 参考资料
-
-[Docker 入门教程 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)
-
-[什么是 Docker? - Docker 入门教程 - docker 中文社区](http://www.docker.org.cn/book/docker/what-is-docker-16.html)
-[Docker 教程 | 菜鸟教程](https://www.runoob.com/docker/docker-tutorial.html)
-
-[Docker 中文文档 Docker 概述-DockerInfo](http://www.dockerinfo.net/document)
-
-[Docker 学习新手笔记：从入门到放弃 - Joe’s Blog](https://hijiangtao.github.io/2018/04/17/Docker-in-Action/)
+- [Orientation and setup | Docker Documentation](https://docs.docker.com/get-started/)
+- [Docker 入门教程 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)
+- [什么是 Docker? - Docker 入门教程 - docker 中文社区](http://www.docker.org.cn/book/docker/what-is-docker-16.html)
+- [Docker 教程 | 菜鸟教程](https://www.runoob.com/docker/docker-tutorial.html)
+- [Docker 中文文档 Docker 概述-DockerInfo](http://www.dockerinfo.net/document)
+- [Docker 学习新手笔记：从入门到放弃 - Joe’s Blog](https://hijiangtao.github.io/2018/04/17/Docker-in-Action/)
