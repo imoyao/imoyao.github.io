@@ -22,3 +22,6 @@ top: 10
     - [Redis 高级主题之布隆过滤器(BloomFilter)](https://juejin.im/post/5cfd060ee51d4556f76e8067)
     - [基于 Redis 的布隆过滤器的实现](https://blog.csdn.net/qq_30242609/article/details/71024458)
     - [布隆过滤器(Bloom Filter)的原理和实现](https://www.cnblogs.com/cpselvis/p/6265825.html)
+## 计算机书籍及知识体系
+（不会真有人看完了吧？）
+[NGTE Books](https://ng-tech.icu/books/)
