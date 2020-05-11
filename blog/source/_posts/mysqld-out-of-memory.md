@@ -6,6 +6,7 @@ tags:
 categories:
 - 工作日常
 ---
+
 ## 缘起
 今天在访问博客的时候，登录首页发现无法正常加载博文。因为之前也出现过这种错误，怀疑还是因为数据库的问题，所以果断查看 MySQL 日志：
 ```shell
@@ -103,12 +104,14 @@ sudo systemctl daemon-reload
 # 重新启动MariaDB服务
 systemctl restart mariadb
 ```
-参见[如何配置 CentOS7 mariadb 服务在崩溃或重启后自动启动](https://www.codebye.com/how-to-config-centos7-mariadb-service-auto-start-after-reboot-or-crash.html)   
-[mariadb 在低配 ECS 上崩溃问题](http://chengms.com/?p=151)  
+参见
+
+- [如何配置 CentOS7 mariadb 服务在崩溃或重启后自动启动](https://www.codebye.com/how-to-config-centos7-mariadb-service-auto-start-after-reboot-or-crash.html)   
+- [mariadb 在低配 ECS 上崩溃问题](http://chengms.com/?p=151)  
 
 ## 修改 MySQL 配置(调小 innodb_buffer_pool_size 参数)
 参见
-- [MySQL5.7.12 占用内存过多的原因到底是什么?](https://www.v2ex.com/t/276069)  
+- [MySQL5.7.12 占用内存过多的原因到底是什么?](https://www.v2ex.com/t/276069) 
 - [MySQL 调优之 innodb_buffer_pool_size 大小设置](https://www.v2ex.com/t/276069)  
 - [mariadb 内存占用优化](https://segmentfault.com/a/1190000017992793)  
 - [MySQL 必须调整的 10 项配置优化](https://segmentfault.com/a/1190000003072283)  
