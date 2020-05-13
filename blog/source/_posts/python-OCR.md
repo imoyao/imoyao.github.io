@@ -8,7 +8,7 @@ categories:
 - Projects
 - GUSCSS
 cover: /images/gO1532084224753.jpg
-subtitle: 最初选用OCR第三方模块，后来发现识别率太低或者硬件要求较高，最后直接使用 API 实现。
+subtitle: 最初选用 OCR 第三方模块，后来发现识别率太低或者硬件要求较高，最后直接使用 API 实现。
 ---
 做项目的时候需要用到文字识别功能，以下是对一些方案的实践，最后选择了[百度文字识别 API](https://ai.baidu.com/ai-doc/OCR/Ek3h7yeiq)，其他的要么是云服务器内存太小，要么是 CPU 太低，没法用。还是直接找最简单快捷的办法。
 

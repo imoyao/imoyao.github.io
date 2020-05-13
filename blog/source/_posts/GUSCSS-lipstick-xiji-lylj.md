@@ -11,6 +11,9 @@ categories:
 - Projects
 - GUSCSS
 ---
+## 引言
+在项目 `给你点颜色瞧瞧|GUSCSS` 的 [不问色号](https://colors.masantu.com/#/lipsticks) 模块中，需要收集口红的颜色，本文以西集网烈焰蓝金系列唇膏为例，演示如何通过简单的爬虫获取图片，之后使用 OCR 技术对图片文字进行识别，同时获取图片特征颜色部分作为口红的 RGB 色值。
+
 ## 使用 urllib.request 获取网页
 ```plain
 import urllib.request
@@ -46,7 +49,7 @@ Process finished with exit code 1
 ![headers 作用·电影《赌侠》](/images/urllib-headers.gif)
 <figcaption> 穿上燕尾服再去参加 party·电影《赌侠》</figcaption>
 
-于是，我们戴上`headers`的装扮，门口保安一看：这位没问题，进来吧。程序就就顺利地进去了。
+于是，我们戴上`headers`的装扮，门口保安一看：这位没问题，进来吧。程序就顺利地进去了。
 
 ```python
 from urllib.request import urlopen,Request
