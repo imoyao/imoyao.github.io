@@ -209,12 +209,12 @@ Run 'docker COMMAND --help' for more information on a command.
 我们可以拉取镜像来运行，但是要制作自己的 image，就需要编写 Dockerfile。它是一个文本文件。Docker 根据改文件生成 image 文件。
 以官网的 [例子](https://docs.docker.com/get-started/part2/) 看一下如何构建 image：
 1. 首先克隆应用：
-    ```shell
+    ```shellplainplainplain
     git clone https://github.com/dockersamples/node-bulletin-board
     cd node-bulletin-board/bulletin-board-app
     ```
 2. 之后打开 dockerfile，查看里面的内容
-    ```plain
+    ```plainplainplain
     # 使用官方镜像（node:current-slim）作为父级image，冒号表示标签
     FROM node:current-slim
     # 设置工作目录，此处目录是你的镜像文件系统，而不是主机文件系统
@@ -354,7 +354,7 @@ docker.io/jolmomar/ansible_runner_service   latest              b27d3f6bf8a6    
         ```
         CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
     d60c45afdc10        bulletinboard:1.0   "docker-entrypoint..."   7 minutes ago       Exited (0) 2 minutes ago                       hopeful_mcclintock
-        ```plain
+        ```plainplainplainplain
     2. 删除容器
         ```shell
         docker container rm [containerID]
