@@ -32,6 +32,11 @@ class2:
       link: https://stackoverflow.com/
       avatar: https://seeklogo.net/wp-content/uploads/2015/10/stack-overflow-logo-vector-download.jpg
       descr: Stack Overflow is the largest, most trusted online community for developers to learn, share their programming knowledge, and build their careers.
+    3:
+      name: Real Python
+      link: https://realpython.com/
+      avatar: https://realpython.com/static/real-python-logo.893c30edea53.svg
+      descr: Learn Python online:Python tutorials for developers of all skill levels, Python books and courses, Python news, code examples, articles, and more.
 class3:
   class_name: 技术无关
   describe: 除了技术，我还关注这些……

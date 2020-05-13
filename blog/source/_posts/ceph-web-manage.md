@@ -14,11 +14,14 @@ tags:
 
 ## 现状
 Ceph 的开源管理监控平台有如 VSM（三年前最后更新，read-only），InkScope，Calamari，[Suse-enterprise-storage](https://www.suse.com/zh-cn/products/suse-enterprise-storage/)等。
+
 ## VSM
 ![VSM](/images/img_20191022164357.jpg)  
 [VSM | Virtual Storage Manager](https://github.com/intel/virtual-storage-manager)
+
 ### 官网
 [virtual-storage-manager](https://01.org/zh/virtual-storage-manager)
+
 ### 组件
 ▪ Dashboard（vsm-dashboard）：VSM 的 webUI 界面，用户通过 Dashboard 来管理与监控 ceph 集群
 ▪ vsmclient（python-vsmclient）：VSM restapi 调用的 client
@@ -27,21 +30,27 @@ Ceph 的开源管理监控平台有如 VSM（三年前最后更新，read-only�
 ▪ conductor（vsm）：VSM 的数据库操作组件，即所有的数据库操作都是通过 conductor 来调用 mysql
 ▪ RabbitMQ：消息中间件，VSM 的各个组件相对独立，都是通过发送消息，通过 RPC 的方式来相互调用
 ▪ agent（vsm）：VSM 代理服务
+
 ### 优缺点
+
 #### 优点
  1.	管理功能完善、充足
  2.	界面友好
  3.	可以部署 Ceph 和监控 Ceph
  4.	与 OpenStack 一脉传承，设计风格类似（详见架构部分说明）
+ 
 #### 缺点
  1.	非官方，社区维护，且目前已处于归档状态（read-only）
  2.	依赖 OpenStack 某些包和组件
  3.	封装一套自己的 rest-api，代码复杂度较高
+ 
 ### 技术选型
 基于 Django 开发
+
 ## inkScope
 ![inkScope](/images/img_20191022164353.jpg) 
 [inkScope](https://github.com/inkscope/inkscope)
+
 ### 介绍
 Inscope 搭建的主要组件:
 
@@ -55,10 +64,12 @@ Inscope 搭建的主要组件:
 用于安装启动 cephprobe 的脚本(整个集群只需一个)，安装在 mon 节点，脚本主要实现：获取 Ceph 集群的一些信息，并使用端口（5000）提供服务，将数据存入 mongodb 数据库中。
 - inkscope-sysprobe         
 安装用于所有 mon 和 osd 的 sysprobe 所需要脚本，即所有节点均安装，实现获取节点设备资源信息如：CPU、内存、磁盘等等。
+
 ### 搭建
 [Centos7.2：搭建 Ceph 管理系统 Inscope](https://blog.csdn.net/je930502/article/details/50812014)
 [Ceph web 管理/监控平台 Inkscope 部署](https://gtcsq.readthedocs.io/en/latest/others/inkscope_install.html)
 [开源 Ceph 管理平台 Inkscope 部署手册](http://cloud.51cto.com/art/201507/486005_all.htm)
+
 ### 技术选型
 PHP（？）、Flask、MongoDB、AngularJS 
 
@@ -100,9 +111,9 @@ Diamond 负责收集监控数据，它支持非常多的数据类型和 metrics�
 romana 包括 dashboard、login、admin、manage 四大模块，构建 rpm 软件包时，这些模块缺一不可。
 
 - dashboard 是一个 javascript 的客户端，直接与 ceph restful api 交互来管理 ceph。dashboard 包含 3 个逻辑部分，分别为 dashboard、workbench、graphs。
-　　- dashboard 是一个只读的视图，负责展现 ceph 集群的健康状态
-　　- workbench 是后台 OSD 和 host 的虚拟展现，最多限制展现 256 个 OSD
-　　- graphs 是有负责展示图形的 graphite 和负责在每个节点收集数据的 diamond 共同展示各种度量数据的视图
+　　1. dashboard 是一个只读的视图，负责展现 ceph 集群的健康状态
+　　2. workbench 是后台 OSD 和 host 的虚拟展现，最多限制展现 256 个 OSD
+　　3. graphs 是有负责展示图形的 graphite 和负责在每个节点收集数据的 diamond 共同展示各种度量数据的视图
 - login 模块用于登录 web 界面
 - admin 模块用来管理用户和 calamari 信息的管理工具
 - manage 模块用于管理 ceph 集群中的各种应用，如 OSD 管理、pool 管理、集群设置和集群日志展现等功能
@@ -110,11 +121,14 @@ romana 包括 dashboard、login、admin、manage 四大模块，构建 rpm 软�
 calamari_clients 是一套用户界面，Calamari Server 在安装的过程中会首先创建 opt/calamari/webapp 目录，并且把 webapp/calamari 下的 manager.py(django 配置)文件考进去， calamari_web 的所有内容到要放到 opt/calamari/webapp 下面来提供 UI 的访问页面。
 
 calamari-web 包下面的文件提供所有 web 相关的配置，calamari_rest 和 calamari_clients 都要用到。
+
 ### 优缺点
+
 #### 优点
  1. 轻量级
  2. 官方化
  3. 界面友好
+
 #### 缺点
  1. 不易安装
  2. 管理功能滞后
@@ -131,29 +145,36 @@ Calamari 为 Ceph 的运维和管理提供了一个统一的平台，而且用�
 [ceph 监控管理平台 calamari](https://blog.51cto.com/linuxww/1944963)
 [calamari 从入门到放弃](https://www.gitbook.com/book/zphj1987/calamaribook)
 [ceph | calamari](https://wiki.shileizcc.com/confluence/display/CEPH/Ceph%20Calamari)
+
 ### 技术选型
 Django
 
 ## ceph-dash
 ![ceph-dash](/images/img_20191022173026.jpg)   
 [ceph-dash](https://github.com/Crapworks/ceph-dash)
+
 ### 技术选型
 Flask
+
 ## ceph-DASHBOARD
 
 ![ceph-dashboard](/images/snipaste_20191026_172347.jpg)     
 从 Luminous 开始，Ceph 提供了原生的 Dashboard 功能，通过 Dashboard 可以获取 Ceph 集群的各种基本状态信息。  
 具体参考官方文档说明：[DASHBOARD PLUGIN](https://docs.ceph.com/docs/mimic/mgr/dashboard/#enabling-the-object-gateway-management-frontend)
+
 ### 技术选型
 CherryPy、AngularJS  
 [Ceph Mimic - 启用 Dashboard 功能](https://blog.csdn.net/YoFog/article/details/85318736)
 
 ## 横向对比
 [ceph-days-sf2015](http://de.slideshare.net/Inktank_Ceph/07-ceph-days-sf2015-paul-evans-static)
+
 ### 对比背景
 ![compare](/images/img_20191022163356.jpg)
+
 ### 管理
 ![management](/images/img_20191022164343.jpg)
+
 ### 监控
 ![monitor](/images/img_20191022164348.jpg)
    
@@ -164,7 +185,8 @@ CherryPy、AngularJS
 
 [关于 ceph 监控管理平台的一点个人观点](https://my.oschina.net/yangfanlinux/blog/783756)
 
-完整文档[点此](/doc/Ceph-manager-explore.pdf)     
+完整文档[点此](/doc/Ceph-manager-explore.pdf)    
+ 
 ## 参考链接 
 [zphj1987](http://www.zphj1987.com/)
 [Ceph 开源管理监控平台分析](http://www.hl10502.com/2017/03/30/ceph-web-manage/)
