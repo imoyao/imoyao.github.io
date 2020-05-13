@@ -72,7 +72,7 @@ failovermethod=priority
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 gpgcheck=0
-```plain
+```
 4. 更新源并安装 ceph-deploy
 ```plain
 sudo yum update
