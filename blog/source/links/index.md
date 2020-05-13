@@ -7,14 +7,27 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/friends.jpg
 ---
 
 ## 推荐阅读
-> 工作日常，不定期更新、替换
+> 工作日常发现的一些个人博客，不定期更新、替换
 
+### Linux
 - [鸟哥的 Linux 私房菜](http://cn.linux.vbird.org/)
-- [张先森的代码小屋](nullcc.github.io)
+
+### 其他
 - [Welcome to ansheng’s blog!](https://blog.ansheng.me/)
-- [Wikitten](http://wiki.361way.com/)
 - [laike9m's blog](https://laike9m.com/)
+- [捕蛇者说](https://pythonhunter.org/)
+- [张先森的代码小屋](nullcc.github.io)
+
+### 运维
+- [Wikitten](http://wiki.361way.com/)
+
+### OpenStack
+- [陈沙克日志 – 把我的过程记录下来，以免以后忘了](http://www.chenshake.com/)
 - [技术改变世界 - 孔令贤的个人博客](https://lingxiankong.github.io/index.html)
+
+### Flask
+- [Frost's Blog](https://frostming.com/)
+- [李辉的个人博客 | 李辉的个人网站](http://greyli.com/posts/)
 
 ## 个人信息
 
