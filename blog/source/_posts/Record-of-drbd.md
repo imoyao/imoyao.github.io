@@ -12,7 +12,7 @@ categories:
 这是一个关于 `DRBD` 的使用备忘录。
 <!--more-->
 
-![DRBD在Linux内核I/O栈的位置](https://docs.linbit.com/ug-src/users-guide-8.4/images/drbd-in-kernel.png)
+![DRBD在Linux内核I/O栈的位置](/images/DRBD-Diagram.png)
 
 开始阅读之前，请先注意示例中使用的 DRBD 版本
 

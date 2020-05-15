@@ -111,13 +111,16 @@ cover: /images/photo-1475767770551-49f1b43f71cd.jpg
  ```shell
   pymysql.err.InternalError: (1366, "Incorrect string value: '\\xF0\\x9F\\x98\\x98</...' for column 'content_html' at row 1")
  ```
+- [ ] 链接的 slug 中直接把 emoji 也给显示出来了，此处需要对 emoji 进行过滤或者转换为字符说明。
+ 1. [removing emojis from a string in Python - Stack Overflow](https://stackoverflow.com/questions/33404752/removing-emojis-from-a-string-in-python)
+ 2. [Python - replace unicode emojis with ASCII characters - Stack Overflow](https://stackoverflow.com/questions/43797500/python-replace-unicode-emojis-with-ascii-characters/43813727#43813727)
 - [ ] 需要增加用户详情页（about?），可编辑用户信息；
 - [ ] 使`aside`侧边栏固定，不会随鼠标滚动消失；
 - [ ] 参考博客后端管理系统；
  - [基于 vue 全家桶 + element-ui 构建的一个后台管理集成解决方案](https://github.com/uncleLian/vue-blog)
  - [vue-admin](https://github.com/taylorchen709/vue-admin)
  - [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-- [ ] footer 只有半个；
+- [ ] 自适应时 footer 只有半个；
 - [ ] 时间线无法正常显示；
 - [ ] 使用`celery`备份博客
  1. 每创建一篇文章；自动生成`xxxx.md`用于静态博客；

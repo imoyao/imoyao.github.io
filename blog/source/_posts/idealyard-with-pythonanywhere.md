@@ -101,7 +101,7 @@ from wsgi import app as application  # noqa
 # will prevent your wsgi file from working.
 ```
 ### 配置环境变量
-```
+```plain
 vi .env
 MYSQL_USER=xxx      # 数据库用户名
 MYSQL_PASSWORD=xxx  # 数据库密码
@@ -115,8 +115,8 @@ cd frontend
 npm install
 ```
 ## 更新
-如果Git代码更新了，我们可以使用下面的命令更新代码仓库
-```
+如果 Git 代码更新了，我们可以使用下面的命令更新代码仓库
+```plain
 pwd
 /home/imoyao/idealyard
 git pull
