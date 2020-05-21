@@ -177,11 +177,11 @@ MariaDB [iyblog_product]> SHOW VARIABLES WHERE Variable_name LIKE 'character_set
 </table>
 {%endraw%}
 
-实际验证一下😅：
+实际验证一下：
 ![emoji](/images/idealyard-emoji.png)
 
 最后我们发现了一个新问题（TODO）：
-链接的 slug 中直接把 emoji 也给显示出来了，此处需要对 emoji 进行过滤或者转换为字符说明。
+链接的 slug 中直接把 emoji 也给显示出来了，此处需要对 emoji 进行过滤或者转换为字符单词。
 
 ## 参考链接
 [mysql 存储 emoji 表情报错的处理方法【更改编码为 utf8mb4】_Mysql_脚本之家](https://www.jb51.net/article/144079.htm)
