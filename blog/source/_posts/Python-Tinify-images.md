@@ -8,6 +8,7 @@ tags:
 subtitle: 一种用于解决“多图杀猫”问题的方案
 ---
 {%note info%}
+@Depreciate
 目前暂时没有这方面的需求。而且在[Third-Party Solutions](https://tinypng.com/third-party)中，已经有了相应的 Python 实现，后面有需求的话再继续改写吧。有人有需求的话可以访问下面的链接：
 - [mbarkhau/tinypng: Python module and command line tool for tinypng.com](https://github.com/mbarkhau/tinypng/)
 - [GcsSloop/TinyPng: 图片批量压缩脚本(Python)](https://github.com/GcsSloop/TinyPng)

@@ -92,5 +92,6 @@ Ceph 对象网关节点上运行 Ceph RADOS 网关守护程序（ceph-radosgw）
 
 ## 参考链接
 - [Intro to Ceph — Ceph Documentation](https://docs.ceph.com/docs/master/start/intro/)
+- [Ceph Glossary — Ceph Documentation](https://ceph.readthedocs.io/en/latest/glossary/)
 - [Hardware Recommendations — Ceph Documentation](https://docs.ceph.com/docs/master/start/hardware-recommendations/#data-storage)
 - [Ceph 使用的最佳实践](https://www.ibm.com/developerworks/cn/opensource/os-ceph-active-active-data-center-and-best-practices/index.html)

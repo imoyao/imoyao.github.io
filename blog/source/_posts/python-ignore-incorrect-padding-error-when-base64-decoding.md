@@ -1,9 +1,15 @@
 ---
-title: python-ignore-incorrect-padding-error-when-base64-decoding
+title: 记一次 base64 编码错误问题
 date: 2020-03-24 20:53:23
 tags:
+- Python
 categories:
+- 工作日常
 ---
+## 前言
+出现这个问题，首先看一下是不是把 encode 后的字符错误地传给了 decode 方法，如果是的话，请调用正确的方法，如果不是，可以尝试使用下面的代码。
+
+## 代码
 
 ```python
 import json

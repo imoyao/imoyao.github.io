@@ -231,6 +231,14 @@ if hexo-config('darkmode.enable') || hexo-config('display_mode') == 'dark'
       &-item:before,
       &-title:before
         background: #121212
+    //====imoyao==表格暗色模式========
+    table
+      tbody
+        tr:nth-child(2n)
+          &:hover
+            background: #454545
+    .divider-inner-text
+      color: rgba(255,255,255,0.6)
 
     // 手機 MENU,TOC
     #mobile-sidebar

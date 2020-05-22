@@ -49,6 +49,11 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 唯有文字能担当此任，宣告生命曾经在场。
 {% endblockquote %}
 
+### 社交媒体
+
+<div class="zhihu-card" data-userhash="imoyao" data-theme="zhihu_new" data-width="400" data-height="225"></div>
+<script src="https://laike9m.github.io/zhihu-card/dist/widget.js"></script>
+
 ### 技术问题解决之道
 
 1. 重启过了没？
