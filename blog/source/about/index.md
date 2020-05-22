@@ -6,13 +6,10 @@ comments: false
 top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 ---
 
-![别院牧志](/img/horizontal-logo-about-banner.png)
-<figcaption > 五彩斑斓的黑，土丑土丑的就完事啦🙃</figcaption >
+![五彩斑斓的黑，土丑土丑的就完事啦🙃](/img/horizontal-logo-about-banner.png)
 
----
+![病木重生 · 2018 年摄于北京·香山](/img/A-withered-tree-comes-to-life-again-compressed.jpg)
 
-![病木重生](/img/A-withered-tree-comes-to-life-again-compressed.jpg)
-<figcaption > 病木重生 · 2018 年摄于北京·香山</figcaption >
 
 <video src="https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3YvcyFBbnVXTzVzdVUyYlZoMmJidUFlbHRLNTFERE1iP2U9aHdIN0tx.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"> Your browser does not support the video tag. </video>
 
@@ -83,8 +80,7 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/about-bg.jpg
 - QQ: NDQ1NTY3ODg5
 - Others: imoyao or None :-)
 - 个人公众号：  
-![别院牧志](https://open.weixin.qq.com/qr/code?username=idealyard)
-<figcaption > idealyard </figcaption >
+![idealyard](https://open.weixin.qq.com/qr/code?username=idealyard)
 
 <h2 class="slogan"><i class="fa fa-heart"></i>  赞赏</h2>
 

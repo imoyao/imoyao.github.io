@@ -12,9 +12,9 @@
     span#sp-slogan= config.slogan
   if theme.footer_copyright.enable
     .framework-info
-      span= _p('footer.driven') + ' '
       a(href='https://hexo.io')
         span Hexo
+      span= ' '+ _p('footer.driven')
       span.footer-separator |
       span= _p('footer.theme') + ' '
       a(href='https://github.com/jerryc127/hexo-theme-butterfly')
@@ -35,5 +35,4 @@
         - var img_url = trim(urls[0])
         - var link_url = trim(urls[1])
         a(href=link_url)
-          if theme.ICP.icon
-            img.icp-icon(src=url_for(img_url))
+          img.icp-icon(src=url_for(img_url))

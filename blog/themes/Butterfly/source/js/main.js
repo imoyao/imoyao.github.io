@@ -1,37 +1,40 @@
 $(function () {
   const isSnackbar = GLOBAL_CONFIG.Snackbar !== undefined
-  const isTocContent = $('#sidebar .sidebar-toc__content').children().length > 0
   const $pageHead = $('#page-header')
   const $rightside = $('#rightside')
   const $body = $('body')
 
   /**
    * 當menu過多時，自動適配，避免UI錯亂
-   */
-  const searchWidth = $('#search_button').outerWidth() !== undefined ? $('#search_button').outerWidth() : 0
-  const blogNameWidth = $('#blog_name').width()
-
-  var mw = 0
-  var $menusItem = $pageHead.find('.menus_item')
-  for (var i = 0; i < $menusItem.length; i++) {
-    mw = mw + $menusItem.eq(i).outerWidth()
-  }
-
-  /**
-   * 傳入 1 sidebar打開時
+    * 傳入 1 sidebar打開時
    * 傳入 2 正常狀態下
-   * 傳入 3 resize時使用
    */
+  var blogNameWidth = $('#blog_name').width()
+  var menusWidth = $('.menus').width()
+  var sidebarWidth = $('#sidebar').width()
+
   function isAdjust (n) {
     var t
     if (n === 1) {
-      t = blogNameWidth + searchWidth + mw > $pageHead.width() - 300
+      t = blogNameWidth + menusWidth > $pageHead.width() - sidebarWidth - 20
     } else if (n === 2) {
-      t = blogNameWidth + searchWidth + mw > $pageHead.width()
+      t = blogNameWidth + menusWidth > $pageHead.width() - 20
     }
 
     if (t) headerAdjust()
     else headerAdjustBack()
+  }
+
+  function headerAdjust () {
+    $pageHead.find('.toggle-menu').addClass('is-visible-inline')
+    $pageHead.find('.menus_items').addClass('is_invisible')
+    $pageHead.find('#search_button span').addClass('is_invisible')
+  }
+
+  function headerAdjustBack () {
+    $pageHead.find('.toggle-menu').removeClass('is-visible-inline')
+    $pageHead.find('.menus_items').removeClass('is_invisible')
+    $pageHead.find('#search_button span').removeClass('is_invisible')
   }
 
   // 初始化header
@@ -39,22 +42,14 @@ $(function () {
     if (window.innerWidth < 768) headerAdjust()
     else isAdjust(2)
   }
+
   initAjust()
-
-  function headerAdjust () {
-    $pageHead.find('.toggle-menu').addClass('is_visible')
-    $pageHead.find('.menus').addClass('is_invisible')
-    $pageHead.find('#search_button span').addClass('is_invisible')
-  }
-
-  function headerAdjustBack () {
-    $pageHead.find('.toggle-menu').removeClass('is_visible')
-    $pageHead.find('.menus').removeClass('is_invisible')
-    $pageHead.find('#search_button span').removeClass('is_invisible')
-  }
+  $('#page-header').css({ opacity: '1', animation: 'headerNoOpacity 1s' })
 
   $(window).on('resize', function () {
-    if (!$pageHead.hasClass('open-sidebar')) {
+    if ($('#sidebar').hasClass('tocOpenPc') && $pageHead.hasClass('fixed')) {
+      isAdjust(1)
+    } else {
       initAjust()
     }
   })
@@ -72,21 +67,12 @@ $(function () {
   /**
    * 進入post頁sidebar處理
    */
-
-  var isSidebarOpen = $('#toggle-sidebar').hasClass('on') && isTocContent
-  var isPcSidebarOpen = false
-  if (window.innerWidth > 1024 && isSidebarOpen) {
-    setTimeout(function () {
-      openSidebar()
-    }, 400)
-  }
-
-  // 當toc爲空時，隱藏toc按鈕
-  if (isTocContent) {
-    $('#toggle-sidebar').css('opacity', '1')
-  } else {
-    $('#toggle-sidebar').css('display', 'none')
-    $('#mobile-toc-button').css('display', 'none')
+  if (GLOBAL_CONFIG_SITE.isPost) {
+    if (window.innerWidth > 1024 && $('#toggle-sidebar').hasClass('on')) {
+      setTimeout(function () {
+        openSidebar()
+      }, 400)
+    }
   }
 
   /**
@@ -94,9 +80,10 @@ $(function () {
    */
 
   function closeSidebar () {
-    isPcSidebarOpen = false
-    $pageHead.removeClass('open-sidebar')
     $('#sidebar').removeClass('tocOpenPc')
+    $('.menus').animate({
+      paddingRight: 0
+    }, 400)
     $('#body-wrap').animate({
       paddingLeft: 0
     }, 400)
@@ -114,9 +101,10 @@ $(function () {
   }
 
   function openSidebar () {
-    isPcSidebarOpen = true
-    $pageHead.addClass('open-sidebar')
     $('#sidebar').addClass('tocOpenPc')
+    $('.menus').animate({
+      paddingRight: 300
+    }, 400)
     $('#body-wrap').animate({
       paddingLeft: 300
     }, 400)
@@ -129,7 +117,8 @@ $(function () {
       opacity: '1'
     })
     var isAdjustTimeCount = window.setInterval(function () {
-      isAdjust(1)
+      if ($pageHead.hasClass('fixed')) isAdjust(1)
+      else isAdjust(2)
     }, 100)
     setTimeout(function () {
       clearInterval(isAdjustTimeCount)
@@ -165,7 +154,7 @@ $(function () {
       $toggleMenu.removeClass('close').addClass('open')
       $mobileSidevarMenus.css('transform', 'translate3d(-100%,0,0)')
       var $mobileSidevarMenusChild = $mobileSidevarMenus.children()
-      for (i = 0; i <= $mobileSidevarMenusChild.length; i++) {
+      for (let i = 0; i <= $mobileSidevarMenusChild.length; i++) {
         const duration = i / 5 + 0.2
         $mobileSidevarMenusChild.eq(i).css('animation', 'sidebarItem ' + duration + 's')
       }
@@ -221,9 +210,9 @@ $(function () {
   const mql = window.matchMedia('(max-width: 1024px)')
   mql.addListener(function (ev) {
     if (ev.matches) {
-      if (isPcSidebarOpen === true) closeSidebar()
+      if ($('#sidebar').hasClass('tocOpenPc')) closeSidebar()
     } else {
-      if ($('#toggle-sidebar').hasClass('on') && isTocContent) openSidebar()
+      if ($('#toggle-sidebar').hasClass('on')) openSidebar()
       if ($mobileTocButton.hasClass('open')) closeMobileSidebar('toc')
     }
   })
@@ -258,121 +247,143 @@ $(function () {
 
   /**
    * 代碼
+   * 只適用於Hexo默認的代碼渲染
    */
-  const isHighlightCopy = GLOBAL_CONFIG.highlightCopy
-  const isHighlightLang = GLOBAL_CONFIG.highlightLang
-  const isHighlightShrink = GLOBAL_CONFIG.highlightShrink
   const $figureHighlight = $('figure.highlight')
-  if (isHighlightCopy || isHighlightLang || isHighlightShrink !== 'none') {
-    $figureHighlight.wrap('<div class="code-area-wrap"></div>').before('<div class="highlight-tools"></div>')
-  }
 
-  /**
+  if ($figureHighlight.length) {
+    const isHighlightCopy = GLOBAL_CONFIG.highlightCopy
+    const isHighlightLang = GLOBAL_CONFIG.highlightLang
+    const isHighlightShrink = GLOBAL_CONFIG.highlightShrink
+
+    if (isHighlightCopy || isHighlightLang || isHighlightShrink !== 'none') {
+      $figureHighlight.wrap('<div class="code-area-wrap"></div>').before('<div class="highlight-tools"></div>')
+    }
+
+    /**
    * 代碼收縮
    */
-  const $highlightTools = $('.highlight-tools')
-  if (isHighlightShrink === true) {
-    $highlightTools.append('<i class="fa fa-angle-down code-expand code-closed" aria-hidden="true"></i>')
-  } else if (isHighlightShrink === false) {
-    $highlightTools.append('<i class="fa fa-angle-down code-expand" aria-hidden="true"></i>')
-  }
-
-  $(document).on('click', '.highlight-tools >.code-expand', function () {
-    var $table = $(this).parent().next()
-    if ($(this).hasClass('code-closed')) {
-      $table.css('display', '')
-      $(this).removeClass('code-closed')
-    } else {
-      $table.css('display', 'none')
-      $(this).addClass('code-closed')
+    const $highlightTools = $('.highlight-tools')
+    if (isHighlightShrink === 'true') {
+      $highlightTools.append('<i class="fa fa-angle-down code-expand code-closed" aria-hidden="true"></i>')
+    } else if (isHighlightShrink === 'false') {
+      $highlightTools.append('<i class="fa fa-angle-down code-expand" aria-hidden="true"></i>')
     }
-  })
 
-  /**
+    $(document).on('click', '.highlight-tools >.code-expand', function () {
+      var $table = $(this).parent().next()
+      if ($(this).hasClass('code-closed')) {
+        $table.css('display', 'block')
+        $(this).removeClass('code-closed')
+      } else {
+        $table.css('display', 'none')
+        $(this).addClass('code-closed')
+      }
+    })
+
+    /**
     * 代碼語言
   */
-  if (isHighlightLang) {
-    var langNameIndex, langName
-    $figureHighlight.each(function () {
-      langNameIndex = langName = $(this).attr('class').split(' ')[1]
-      if (langNameIndex === 'plain') langName = 'Code'
-      $(this).prev().append('<div class="code-lang">' + langName + '</div>')
-    })
-  }
-  /**
+    if (isHighlightLang) {
+      var langNameIndex, langName
+      $figureHighlight.each(function () {
+        langNameIndex = langName = $(this).attr('class').split(' ')[1]
+        if (langNameIndex === 'plain') langName = 'Code'
+        $(this).prev().append('<div class="code-lang">' + langName + '</div>')
+      })
+    }
+    /**
    * 代碼copy
    * copy function
    */
-  if (isHighlightCopy) {
-    $highlightTools.append('<div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i>')
-    var copy = function (text, ctx) {
-      if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
-        try {
-          document.execCommand('copy') // Security exception may be thrown by some browsers.
-          if (isSnackbar) {
-            snackbarShow(GLOBAL_CONFIG.copy.success)
-          } else {
-            $(ctx).prev('.copy-notice')
-              .text(GLOBAL_CONFIG.copy.success)
-              .animate({
-                opacity: 1,
-                right: 30
-              }, 450, function () {
-                setTimeout(function () {
-                  $(ctx).prev('.copy-notice').animate({
-                    opacity: 0,
-                    right: 0
-                  }, 650)
-                }, 400)
-              })
+    if (isHighlightCopy) {
+      $highlightTools.append('<div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i>')
+      var copy = function (text, ctx) {
+        if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+          try {
+            document.execCommand('copy') // Security exception may be thrown by some browsers.
+            if (isSnackbar) {
+              snackbarShow(GLOBAL_CONFIG.copy.success)
+            } else {
+              $(ctx).prev('.copy-notice')
+                .text(GLOBAL_CONFIG.copy.success)
+                .animate({
+                  opacity: 1,
+                  right: 30
+                }, 450, function () {
+                  setTimeout(function () {
+                    $(ctx).prev('.copy-notice').animate({
+                      opacity: 0,
+                      right: 0
+                    }, 650)
+                  }, 400)
+                })
+            }
+          } catch (ex) {
+            if (isSnackbar) {
+              snackbarShow(GLOBAL_CONFIG.copy.success)
+            } else {
+              $(ctx).prev('.copy-notice')
+                .text(GLOBAL_CONFIG.copy.error)
+                .animate({
+                  opacity: 1,
+                  right: 30
+                }, 650, function () {
+                  setTimeout(function () {
+                    $(ctx).prev('.copy-notice').animate({
+                      opacity: 0,
+                      right: 0
+                    }, 650)
+                  }, 400)
+                })
+              return false
+            }
           }
-        } catch (ex) {
-          if (isSnackbar) {
-            snackbarShow(GLOBAL_CONFIG.copy.success)
-          } else {
-            $(ctx).prev('.copy-notice')
-              .text(GLOBAL_CONFIG.copy.error)
-              .animate({
-                opacity: 1,
-                right: 30
-              }, 650, function () {
-                setTimeout(function () {
-                  $(ctx).prev('.copy-notice').animate({
-                    opacity: 0,
-                    right: 0
-                  }, 650)
-                }, 400)
-              })
-            return false
-          }
-        }
-      } else {
-        if (isSnackbar) {
-          snackbarShow(GLOBAL_CONFIG.copy.noSupport)
         } else {
-          $(ctx).prev('.copy-notice').text(GLOBAL_CONFIG.copy.noSupport)
+          if (isSnackbar) {
+            snackbarShow(GLOBAL_CONFIG.copy.noSupport)
+          } else {
+            $(ctx).prev('.copy-notice').text(GLOBAL_CONFIG.copy.noSupport)
+          }
         }
       }
-    }
 
-    // click events
-    $(document).on('click', '.highlight-tools>.fa-clipboard', function () {
-      var selection = window.getSelection()
-      var range = document.createRange()
-      range.selectNodeContents($(this).parent().next().find('.code pre')[0])
-      selection.removeAllRanges()
-      selection.addRange(range)
-      var text = selection.toString()
-      copy(text, this)
-      selection.removeAllRanges()
+      // click events
+      $(document).on('click', '.highlight-tools>.fa-clipboard', function () {
+        var selection = window.getSelection()
+        var range = document.createRange()
+        range.selectNodeContents($(this).parent().next().find('.code pre')[0])
+        selection.removeAllRanges()
+        selection.addRange(range)
+        var text = selection.toString()
+        copy(text, this)
+        selection.removeAllRanges()
+      })
+    }
+  }
+
+  /**
+ * PhotoFigcaption
+ */
+  function addPhotoFigcaption () {
+    var images = $('#article-container img')
+    images.each(function (i, o) {
+      var $this = $(o)
+      if ($this.attr('alt')) {
+        var t = $('<figcaption class="is-center">' + $this.attr('alt') + '</figcaption>')
+        $this.after(t)
+      }
     })
   }
+  if (GLOBAL_CONFIG.isPhotoFigcaption) addPhotoFigcaption()
 
   /**
    * justified-gallery 圖庫排版
    */
   var $justifiedGallery = $('.justified-gallery')
+  var isJustifiedGallery = false
   if ($justifiedGallery.length) {
+    isJustifiedGallery = true
     var $imgList = $justifiedGallery.find('img')
     $imgList.unwrap()
     if ($imgList.length) {
@@ -383,11 +394,19 @@ $(function () {
     }
     $('head').append('<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css">')
     loadScript('https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js', function () {
-      $justifiedGallery.not($('.hide-content .justified-gallery')).justifiedGallery({
-        rowHeight: 220,
-        margins: 4
-      })
+      initJustifiedGallery($justifiedGallery)
     })
+
+    var initJustifiedGallery = function (selector) {
+      selector.each(function (i, o) {
+        if ($(this).is(':visible')) {
+          $(this).justifiedGallery({
+            rowHeight: 220,
+            margins: 4
+          })
+        }
+      })
+    }
   }
 
   /**
@@ -419,18 +438,23 @@ $(function () {
   } else if (isMediumZoom) {
     const zoom = mediumZoom(document.querySelectorAll('#article-container :not(a)>img'))
     zoom.on('open', function (event) {
-      const photoBg = $(document.documentElement).attr('data-theme') === 'dark' ? '#121212' : '#fff'
+      var photoBg = $(document.documentElement).attr('data-theme') === 'dark' ? '#121212' : '#fff'
       zoom.update({
         background: photoBg
       })
     })
   }
 
-  // 點擊toc，收起sidebar
-  // $('.toc-link').on('click', function () {
-  //   closeMobileSidebar('toc')
-  // })
+  /**
+   * lazyload
+   */
+  if (GLOBAL_CONFIG.islazyload) {
+    window.lozad('img').observe()
+  }
 
+  /**
+   * 滾動處理
+   */
   var initTop = 0
   $(window).scroll(function (event) {
     var currentTop = $(this).scrollTop()
@@ -442,7 +466,6 @@ $(function () {
         if (!$pageHead.hasClass('visible')) $pageHead.addClass('visible')
       }
       $pageHead.addClass('fixed')
-
       if ($rightside.css('opacity') === '0') {
         $rightside.css({ opacity: '1', transform: 'translateX(-38px)' })
       }
@@ -450,7 +473,6 @@ $(function () {
       if (currentTop === 0) {
         $pageHead.removeClass('fixed').removeClass('visible')
       }
-
       $rightside.css({ opacity: '', transform: '' })
     }
   })
@@ -473,7 +495,7 @@ $(function () {
    *  toc
    */
 
-  if (GLOBAL_CONFIG_SITE.isPost && isTocContent) {
+  if (GLOBAL_CONFIG_SITE.isPost && GLOBAL_CONFIG_SITE.isSidebar) {
     $('.toc-child').hide()
 
     // main of scroll
@@ -517,6 +539,8 @@ $(function () {
       }, 100)
     }
 
+    // anchor
+    var isanchor = GLOBAL_CONFIG.isanchor
     var updateAnchor = function (anchor) {
       if (window.history.replaceState && anchor !== window.location.hash) {
         window.history.replaceState(undefined, undefined, anchor)
@@ -550,7 +574,7 @@ $(function () {
 
       var currentActive = $('.toc-link.active')
       if (currentId && currentActive.attr('href') !== currentId) {
-        updateAnchor(currentId)
+        if (isanchor) updateAnchor(currentId)
 
         $('.toc-link').removeClass('active')
 
@@ -647,7 +671,7 @@ $(function () {
       if (copyFont.length > 45) {
         textFont = copyFont + '\n' + '\n' + '\n' +
           copyright.languages.author + '\n' +
-          copyright.languages.link + '\n' +
+          copyright.languages.link + window.location.href + '\n' +
           copyright.languages.source + '\n' +
           copyright.languages.info
       } else {
@@ -668,8 +692,7 @@ $(function () {
   var isFontAwesomeV5 = GLOBAL_CONFIG.isFontAwesomeV5
   var $darkModeButtom = $('#darkmode')
   if (typeof autoChangeMode !== 'undefined') {
-    if (Cookies.get('theme') === 'dark') changeLightIcon()
-    else changeDarkIcon()
+    document.documentElement.getAttribute('data-theme') === 'dark' ? changeLightIcon() : changeDarkIcon()
   }
 
   function changeLightIcon () {
@@ -697,11 +720,7 @@ $(function () {
 
   $darkModeButtom.click(function () {
     switchReadMode()
-    try {
-      utterancesTheme()
-    } catch (e) {
-      return false
-    }
+    if (typeof utterancesTheme === 'function') utterancesTheme()
   })
 
   /**
@@ -724,6 +743,9 @@ $(function () {
     interval = setInterval(showDateTime, 10000)
   }
 
+  /**
+   * 百度推送
+   */
   if (GLOBAL_CONFIG.baiduPush) {
     (function () {
       var bp = document.createElement('script')
@@ -742,14 +764,18 @@ $(function () {
    * tag-hide
    */
   var $hideInline = $('.hide-button')
-  $hideInline.on('click', function (e) {
-    e.preventDefault()
-    $(this).hide()
-    var $hideContent = $(this).next('.hide-content')
-    $hideContent.show()
-    $hideContent.find('.justified-gallery').justifiedGallery({
-      rowHeight: 220,
-      margins: 4
+  if ($hideInline.length) {
+    $hideInline.on('click', function (e) {
+      e.preventDefault()
+      var $this = $(this)
+      var $hideContent = $(this).next('.hide-content')
+      $this.toggleClass('open')
+      $hideContent.toggle()
+      if ($this.hasClass('open')) {
+        if (isJustifiedGallery && $hideContent.find('.justified-gallery').length > 0) {
+          initJustifiedGallery($hideContent.find('.justified-gallery'))
+        }
+      }
     })
-  })
+  }
 })

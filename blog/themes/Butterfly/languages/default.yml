@@ -62,14 +62,16 @@ aside:
   card_tags: Tags
   card_archives: Archives
   card_recent_post: Recent Post
-  card_bookmark: Add to bookmark
+  card_bookmark: Bookmark
   card_follow_zhihu: Interacts with me on 知乎
   card_webinfo:
     headline: Info
     article_name: Article
     runtime_name: Run time
+    site_wordcount: Total Count
     site_uv_name: UV
     site_pv_name: PV
+  more_button: More
 
 donate: Donate
 share: Share
@@ -107,6 +109,7 @@ Snackbar:
   night_to_day: Light Mode Activated Manually
 
 error_title: Page not found
+loading: Loading...
 
 Home: Home
 Archives: Archives

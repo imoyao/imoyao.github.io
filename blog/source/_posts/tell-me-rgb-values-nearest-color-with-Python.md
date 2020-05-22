@@ -27,7 +27,6 @@ RGB 是从颜色发光的原理来设计定的，通俗点说它的颜色混合�
 
 在电脑中，RGB 的所谓“多少”就是指亮度，并使用整数来表示。通常情况下，RGB 各有 256 级亮度，用数字表示为从 0、1、2...直到 255。注意虽然数字最高是 255，但 0 也是数值之一，因此共 256 级。
 ![RGB](/images/RGB.png)
-<figcaption> RGB </figcaption>
 
 ### HSV
 
@@ -248,7 +247,6 @@ def rgb_to_hsv(rgb_seq):
 数据来源：[HSV to RGB conversion | color conversion](https://www.rapidtables.com/convert/color/hsv-to-rgb.html)
 看~~色图~~，哦不，色环图。😳
 ![色环图](/images/color_circle.jpg)
-<figcaption> 色环图 </figcaption>
 
 先不管黑灰白三种色，找其他颜色与色环的对应关系，我们很容易发现 H 与色环的对应关系。
 1. 变换色相 H，保持 S，V 不变，颜色发生变化；
