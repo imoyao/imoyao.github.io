@@ -14,15 +14,12 @@
         width: calc(100% / 3 - 15px)
         height: 90px
         border-radius: 8px
-        list-style: none
         line-height: 17px
         transform: perspective(1px) translateZ(0)
 
         &:hover
           img
-            transform: rotateY(360deg)
-            transition-duration: 1s
-
+            transform: rotate(540deg)
 
         &:before
           position: absolute
@@ -34,7 +31,7 @@
           background: $light-blue
           content: ''
           transition-timing-function: ease-out
-          transition-duration: .6s
+          transition-duration: .3s
           transition-property: transform
           transform: scale(0)
 
@@ -54,6 +51,9 @@
             height: 65px
             border-radius: 35px
             transition: all .3s
+
+          .img-alt
+            display: none
 
           .md-links-title
             overflow: hidden

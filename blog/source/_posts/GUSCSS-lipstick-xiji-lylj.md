@@ -40,14 +40,12 @@ urllib.error.HTTPError: HTTP Error 403: Forbidden
 Process finished with exit code 1
 ```
 ![公共厕所咩·电影《疯狂的石头》](/images/Snipaste_2020-05-07_22-56-56.png)
-<figcaption> 公共厕所咩·电影《疯狂的石头》</figcaption>
 
 这么写，一般网站是不会让你看的。因为正常的用户访问会带浏览器的请求头，而我们用程序访问时没有请求头，网站知道我们是“垃圾请求”，只会白白消耗流量，所以拒绝为我们这样的请求服务。
 
 ## 遇到 403 怎么办
 为了获取到数据，我们要将程序伪装成“正经人”，告诉网站：我来给你们送钱了，让我进去康康吧？
-![headers 作用·电影《赌侠》](/images/urllib-headers.gif)
-<figcaption> 穿上燕尾服再去参加 party·电影《赌侠》</figcaption>
+![headers 作用（穿上燕尾服再去参加）·电影《赌侠》](/images/urllib-headers.gif)
 
 于是，我们戴上`headers`的装扮，门口保安一看：这位没问题，进来吧。程序就顺利地进去了。
 

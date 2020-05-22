@@ -19,7 +19,6 @@ toc: true
 大势所趋。根据最新的[Python 开发者调研-2018](https://www.jetbrains.com/research/python-developers-survey-2018/)结果显示，`Flask`和`Django`已经成为最流行的`web`开发框架。对企业的良性发展和开发者个人成长而言，使用热门技术都是值得鼓励且必要的。而且，众所周知，官方计划在`2020`年停止`Python2`支持，而相比`Flask`而言，`Web.py`的版本更新计划有点跟不上节奏的感觉。
 
 ![Web-frameworks-python-developers-survey-2018](/images/Web-frameworks-python-developers-survey-2018.jpg)
-<figcaption>Web-frameworks-python-developers-survey-2018</figcaption>
 
 ## TL;DR，`Flask` 对比 `Web.py` 的不同点
 

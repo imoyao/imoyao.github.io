@@ -67,14 +67,11 @@ categories:
 
 ## 效果展示
 
-![朱砂](/images/zhusha.png)
-<figcaption>朱砂 on 电脑</figcaption>
+![朱砂|电脑](/images/zhusha.png)
 
-![青葱](/images/iPad-with-case-on-wood-table.png)
-<figcaption>青葱 on 平板</figcaption>
+![青葱|平板](/images/iPad-with-case-on-wood-table.png)
 
-![月白](/images/yuebai.png)
-<figcaption>月白 on 手机</figcaption>
+![月白|手机](/images/yuebai.png)
 
 ## 部署
 Github 支持部署 docs 目录为项目文档，我们直接修改`vue.config.js`设置`outputDir: 'docs'`，把其导出到 docs 目录，

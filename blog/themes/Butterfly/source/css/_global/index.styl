@@ -62,7 +62,7 @@ h6
   left: $sidebar-icon-left
   z-index: 100
   font-size: $sidebar-icon-size
-  opacity: 0
+  // opacity: 0
   cursor: pointer
   transition: all .2s
   width: 30px;
@@ -155,6 +155,9 @@ table
 .is_visible
   display: block !important
 
+.is-visible-inline
+  display: inline-block !important
+
 .is_invisible
   display: none !important
 
@@ -199,6 +202,13 @@ img[src=''],
 img:not([src])
   opacity: 0
 
+.img-alt
+  margin: -.5rem 0 .5rem
+  color: $font-black
+
+  &:hover
+    text-decoration: none !important
+
 // hexo tag video
 .video-container
   position: relative
@@ -215,38 +225,17 @@ img:not([src])
     width: 100%
     height: 100%
 
-// tag-hide
-.hide-inline,
-.hide-block
-  & > .hide-button
-    position: relative
-    z-index: 1
-    display: inline-block
-    padding: 0 1rem
-    background: $tag-hide-bg
-    text-align: center
-    cursor: pointer
-
-    &:hover
-      text-decoration: none !important
-
-  & > .hide-content
-    display: none
-
-.hide-inline
-  & > .hide-button
-    margin: 0 .3rem
-
-  & > .hide-content
-    margin: 0 .3rem
-
-.hide-block
-  margin: 0 0 .8rem
-
 .comment_headling
   margin-bottom: 10px
   font-weight: 700
   font-size: 20px
+
+.post-ad
+  margin: 2rem 0
+
+.ad_height
+  display: block !important
+  height: auto !important
 
 #content-inner,
 #footer
@@ -255,16 +244,16 @@ img:not([src])
 #nav
   animation: nav-effect 1s
 
-#page-header
-  animation: header-effect 1s
-
 #site_title,
 #site_subtitle
   animation: titlescale 1s
 
-canvas,
+canvas:not(#ribbon-canvas),
 #web_bg
   animation: to_show 4s
+
+#ribbon-canvas
+  animation: ribbon_to_show 4s
 
 .card-announcement-animation
   color: #FF0000
@@ -292,10 +281,10 @@ if hexo-config('avatar.effect') == true
 
 .tocOpenMobile
   .sidebar-toc__title
-    animation: tocsidebarRtoL .5s
+    animation: tocsidebarRtoL .4s
 
   .sidebar-toc__progress
-    animation: tocsidebarRtoL .5s
+    animation: tocsidebarRtoL .6s
 
   .sidebar-toc__content
     animation: tocsidebarRtoL .7s
@@ -315,18 +304,6 @@ if hexo-config('avatar.effect') == true
 
 @keyframes nav-effect
   0%
-    opacity: 0
-    transform: translateY(-50px)
-
-  100%
-    opacity: 1
-    transform: translateY(0)
-
-@keyframes header-effect
-  0%
-    opacity: 0
-
-  50%
     opacity: 0
     transform: translateY(-50px)
 
@@ -374,6 +351,13 @@ if hexo-config('avatar.effect') == true
 
   100%
     opacity: 1
+
+@keyframes ribbon_to_show
+  0%
+    opacity: 0
+
+  100%
+    opacity: hexo-config('canvas_ribbon.alpha')
 
 @keyframes avatar_turn_around
   from

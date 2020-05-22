@@ -11,16 +11,11 @@ menu:
   Categories: /categories/ || fa fa-folder-open
   Link: /links/ || fas fa-user-friends
   About: /about/ || fas fa-user
-
-  More||fa fa-list:
-    - Book || /books/ || fa fa-book
-    - Movie || /movies/ || fa fa-film
+  List||fa fa-list:
+#    - Book || /books/ || fa fa-book
+#    - Movie || /movies/ || fa fa-film
     - B&M History || /douban/ || fa fa-history
 
-# Favicon
-# ---------------
-favicon: /img/favicon.ico
-site_logo: /img/virctial-site-logo.png
 # PWA
 # See https://github.com/JLHwung/hexo-offline
 # ---------------
@@ -36,9 +31,9 @@ site_logo: /img/virctial-site-logo.png
 # Highlight theme
 # ---------------
 highlight_theme: darker # default / darker / pale night / light / ocean
-highlight_copy: true  #代码复制按钮
-highlight_lang: true  #代码语言显示
-highlight_shrink: false # true 全部代码框不展开，需点击 '>' 打开 / false 代码框展开，有'>'点击按钮 | none 代码框展开，不显示 '>' 按钮
+highlight_copy: true #代碼複製按鈕
+highlight_lang: true #代碼語言顯示
+highlight_shrink: false # true 全部代碼框不展開，需點擊 '>' 打開 / false 代碼框展開，有'>'點擊按鈕 | none 代碼框展開，不顯示 '>' 按鈕
 
 code_word_wrap: false
 
@@ -51,14 +46,14 @@ copy:
 
 # social settings
 # formal:
-#   icon: link
+#   icon: link || the description
 # ---------------
 social:
-  fab fa-github: https://github.com/imoyao
-#  fab fa-zhihu: https://www.zhihu.com/people/imoyao/
-  fas fa-feather-alt: https://blog.masantu.com
-  fa fa-envelope: mailto:immoyao@gmail.com
-  fa fa-rss: /atom.xml
+  fab fa-github: https://github.com/imoyao || Github
+  fas fa-feather-alt: https://blog.masantu.com || 自留地
+  fa fa-envelope: immoyao@gmail.com || Email
+  fa fa-rss: /atom.xml || RSS
+
 #------work status-------
 status:
   enable: true
@@ -82,10 +77,10 @@ algolia_search:
   labels:
     input_placeholder: Search for Posts
     hits_empty: "We didn't find any results for the search: ${query}" # if there are no result
-    hits_stats: "${hits} results found in ${time} ms"
+    hits_stats: '${hits} results found in ${time} ms'
 
 # Local search
-# Please see doc for more details: https://jerryc.me/posts/21cfbf15/#本地搜索
+# Please see doc for more details: https://docs.jerryc.me/config.html#本地搜索
 # ---------------
 local_search:
   enable: true
@@ -94,7 +89,7 @@ local_search:
     hits_empty: "We didn't find any results for the search: ${query}" # if there are no result
 
 # MathJax
-# Please see doc for more details: https://jerryc.me/posts/21cfbf15/#MathJax
+# Please see doc for more details: https://docs.jerryc.me/config.html#mathjax
 # ---------------
 mathjax:
   enable: false
@@ -105,7 +100,7 @@ mathjax:
 # KaTeX
 # ---------------
 katex:
-  enable: true
+  enable: false
   # true 表示每一頁都加載katex.js
   # false 需要時加載，須在使用的Markdown Front-matter 加上 katex: true
   per_page: false
@@ -119,6 +114,10 @@ mermaid:
   # built-in themes: default/forest/dark/neutral
   theme: default
 
+# Favicon
+# ---------------
+favicon: /img/favicon.ico
+site_logo: /img/virctial-site-logo.png
 # Post info settings
 # ---------------
 avatar:
@@ -137,9 +136,11 @@ default_top_img: https://source.unsplash.com/random
 archive_img: /img/archive.jpg
 
 # the banner image of tag page
+# tag page, look like https://xxxxxxxxx.com/tags/butterfly
 tag_img: /img/tags.jpg
 
 # the banner image of category page
+# category page, look like https://xxxxxxxxx.com/categories/butterfly
 category_img: /img/category.jpg
 
 # 如果你有使用hexo-douban，可配置這個
@@ -155,7 +156,6 @@ douban_background:
   bg_type: photo # photo
 book_background: https://cdn.jsdelivr.net/gh/masantu/statics/image/book-bg-tiny.jpg
 movie_background: https://cdn.jsdelivr.net/gh/masantu/statics/image/movie-bg-tiny.jpg
-
 
 cover:
   # 是否顯示文章封面
@@ -178,7 +178,7 @@ lodding_bg:
 # A simple 404 page
 error_404:
   enable: false
-  subtitle: "Page Not Found"
+  subtitle: 'Page Not Found'
   background:
 
 post_meta:
@@ -191,9 +191,12 @@ post_meta:
     categories: true # true or false 文章頁是否顯示分類
     tags: true # true or false 文章頁是否顯示標籤
 
-# Please see doc for more details: https://jerryc.me/posts/21cfbf15/#字數統計
+# Please see doc for more details: https://docs.jerryc.me/config.html#字數統計
 wordcount:
-  enable: true
+  enable: false
+  post_wordcount: true
+  min2read: false
+  total_wordcount: false
 
 toc:
   enable: true
@@ -241,20 +244,20 @@ addtoany:
 disqus:
   enable: false
   shortname:
-  count: false # top_img顯示評論數
+  count: false # dispaly comment count in top_img
 
 # Disqus.js版評論系統，應對大陸長城的折中方案，兼容原版：https://github.com/SukkaW/DisqusJS
 # API 申請地址：https://disqus.com/api/applications/
 # 與 disqus 共用樣式
 disqusjs:
-  enable: false #开启改为 true
+  enable: false
   shortname:
   siteName:
   apikey:
   api: https://disqus.skk.moe/disqus/ #一般情況下無需修改 API 地址
   admin:
   adminLabel:
-  count: true # top_img顯示評論數
+  count: false # dispaly comment count in top_img
 
 laibili:
   enable: false
@@ -272,24 +275,27 @@ gitalk:
   distractionFreeMode: false # Facebook-like distraction free mode.
   pagerDirection: last # Comment sorting direction, available values are last and first.
   createIssueManually: false # Gitalk will create a corresponding github issue for your every single page automatically
-  count: true # top_img顯示評論數
+  count: false # dispaly comment count in top_img
 
 # valine comment system. https://valine.js.org
 valine:
   enable: true # if you want use valine,please set this value is true
   appId: tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI # leancloud application app id
   appKey: CARePe7R247vdXACFg1fhk4E # leancloud application app key
-  notify: false # valine mail notify (true/false) https://github.com/xCss/Valine/wiki
-  verify: false # valine verify code (true/false)
+  notify: false # valine mail notify (true/false) Deprecated in v1.4.0+
+  verify: false # valine verify code (true/false) Deprecated in v1.4.0+
   pageSize: 10 # comment list page size
   avatar: monsterid # gravatar style https://valine.js.org/#/avatar
-  lang: zh-cn # i18n: zh-cn/en
-  placeholder: 我们期待并欢迎理性、友好而和谐的声音…… # valine comment input placeholder(like: Please leave your footprints )
+  lang: zh-CN # i18n: zh-CN/zh-TW/en/ja
+  placeholder: 我们期待并欢迎理性、友好而和谐的声音……  # valine comment input placeholder(like: Please leave your footprints )
   guest_info: nick,mail,link #valine comment header info
   recordIP: false # Record reviewer IP
   serverURLs: # This configuration is suitable for domestic custom domain name users, overseas version will be automatically detected (no need to manually fill in)
+  emojiCDN: # emoji CDN
+  enableQQ: false # enable the Nickname box to automatically get QQ Nickname and QQ Avatar
+  requiredFields: nick,mail # required fields nick/mail/link
   bg: /images/comment-bg.svg # valine background
-  count: true # top_img顯示評論數
+  count: false # dispaly comment count in top_img
 
 # utterances
 # https://utteranc.es/
@@ -301,6 +307,17 @@ utterances:
   # 可選 github-light/github-dark/github-dark-orange/icy-dark/dark-blue/photon-dark
   light_theme: github-light
   dark_theme: photon-dark
+
+# Facebook Comments Plugin
+# https://developers.facebook.com/docs/plugins/comments/
+facebook_comments:
+  enable: false
+  app_id:
+  user_id: # optional
+  pageSize: 10 # The number of comments to show
+  order_by: social # social/time/reverse_time
+  lang: en_US # Language en_US/zh_CN/zh_TW and so on
+  count: false
 
 #####     Footer Settings    ####
 # ------------------------------------
@@ -321,6 +338,7 @@ ICP:
   url:
   text:
   icon: /img/icp.png
+
 #---- 尾部添加badge
 shields:
   enable: true
@@ -329,6 +347,7 @@ shields:
     Open Source: https://img.shields.io/badge/Support-Open%20Source-brightgreen || https://opensource.org/about
 
 ####   Analysis    ####
+# ---------------
 baidu_analytics: 231bfe4abce99ac3586b516eef2ea05e
 
 # Google Analytics
@@ -345,6 +364,13 @@ google_adsense:
   js: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
   client:
   enable_page_level_ads: true
+
+# 廣告插入位置
+# 適用於開啓手動廣告的配置
+# ad:
+#   index:
+#   aside:
+#   post:
 
 ####    站長驗證    ####
 # Google Webmaster tools verification setting
@@ -363,20 +389,9 @@ baidu_site_verification:
 # see http://zhanzhang.so.com/
 qihu_site_verification:
 
-# 友情链接界面设置
-Flink:
-  headline: 友情链接
-  info_headline: 别院牧志
-  name: 昵称： 张牧志 / imoyao
-  address: 地址： https://masantu.com/
-  avatar: 头像： https://cdn.jsdelivr.net/gh/masantu/statics/image/imoyao.jpg
-  info: Slogan： Valar Dohaeris.
-  comment: 等等，还有话说
-  content: 关于此页面，有一个花里胡哨的版本可戳此访问 👉[*莫遥和他的朋友们*](https://blog.masantu.com/Friends) 。我并不是一个喜欢凑热闹的人，所以暂时不接受基于 SEO 目的的交换链接，请多多包涵。 😅 另外，本人**并不承诺**在你添加本人友链后会及时添加贵站友链。当然，如果你真觉得有必要，可以通过邮件的方式与我取得联系。📧[邮我](mailto:immoyao@gmail.com)
-
 divider_text: 深深别院，潜潜牧志
 
-# 打赏按钮
+# 打賞按鈕
 reward:
   enable: true
   QR_code:
@@ -392,6 +407,14 @@ related_post:
   enable: true
   limit: 6 # 顯示推薦文章數目
   date_type: created # or created or updated 文章日期顯示創建日或者更新日
+
+# figcaption
+# 圖片描述文字
+photofigcaption: true
+
+# anchor
+# when you scroll in post, the url will update according to header id.
+anchor: true
 
 ####    美化/效果    ####
 #--------------------------------
@@ -454,7 +477,7 @@ canvas_ribbon_piao:
 # https://github.com/hustcc/canvas-nest.js
 canvas_nest:
   enable: false
-  color: "0,0,255" #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
+  color: '0,0,255' #color of lines, default: '0,0,0'; RGB values: (R,G,B).(note: use ',' to separate.)
   opacity: 0.7 # the opacity of line (0~1), default: 0.5.
   zIndex: -1 # z-index property of the background, default: -1.
   count: 99 # the number of lines, default: 99.
@@ -470,7 +493,7 @@ activate_power_mode:
 # 避免卡頓，建議只開啟一個
 # 點擊煙火特效
 fireworks:
-  enable: false
+  enable: true
 
 # 點擊出現愛心
 click_heart:
@@ -480,18 +503,9 @@ click_heart:
 ClickShowText:
   enable: false
   text:
-    - 富强
-    - 民主
-    - 文明
-    - 和谐
-    - 自由
-    - 平等
-    - 公正
-    - 法治
-    - 爱国
-    - 敬业
-    - 诚信
-    - 友善
+    - I
+    - LOVE
+    - YOU
   fontSize: 15px
 
 # 網站顯示模式
@@ -502,8 +516,9 @@ display_mode: light
 # 美化頁面顯示
 beautify:
   enable: true
+  field: site # site/post
   title-prefix-icon: '\f0c1'
-  title-prefix-icon-color: "#F47466"
+  title-prefix-icon-color: '#F47466'
 
 # 全局字體
 font:
@@ -514,7 +529,7 @@ font:
 # 網站名字字體
 # 左上角網站名字 主頁居中網站名字
 blog_title_font:
-  font_link: https://fonts.loli.net/css?family=Titillium+Web   #字体链接
+  font_link: https://fonts.googleapis.com/css?family=Titillium+Web #字體鏈接
   font-family: Titillium Web, PingFang SC, Hiragino Sans GB, "Microsoft YaHei", Helvetica Neue, Helvetica, Arial, sans-serif
 
 # 水平分隔綫
@@ -532,8 +547,8 @@ subtitle:
   loop: false
   # source調用第三方服務
   # source: false 關閉調用
-  # source: 1  調用金山詞霸的每日一句（簡體）
-  # source: 2  調用一言網的一句話（簡體） #https://hitokoto.cn/
+  # source: 1  調用搏天api的隨機語錄（簡體） https://api.btstu.cn/
+  # source: 2  調用一言網的一句話（簡體） https://hitokoto.cn/
   # source: 3  調用一句網（簡體） http://yijuzhan.com/
   # source: 4  調用今日詩詞（簡體） https://www.jinrishici.com/
   # subtitle 會先顯示 source , 再顯示 sub 的內容
@@ -549,6 +564,9 @@ subtitle:
 fontawesome_v5:
   enable: true
 
+# 加載動畫 Loading Animation
+preloader: false
+
 ####    側邊欄    ####
 #-------------------------------------
 # 側邊欄顯示設置
@@ -556,18 +574,31 @@ aside:
   enable: true
   mobile: true # 手機頁面（ 顯示寬度 < 768px ）是否顯示aside內容
   position: right # left or right
-  card_author: true
-  card_announcement: true
-  card_recent_post: true
-  card_categories: true
-  card_tags: true
-  card_archives: true
-  card_links: true
+  card_author:
+    enable: true
+    description:
+  card_announcement:
+    enable: true
+    content: <h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
+  card_recent_post:
+    enable: true
+    limit: 5 # if set 0 will show all
+  card_categories:
+    enable: true
+    limit: 8 # if set 0 will show all
+  card_tags:
+    enable: true
+    limit: 20 # if set 0 will show all
+    color: false
+  card_archives:
+    enable: true
+    type: monthly # yearly or monthly
+    format: MMMM YYYY # eg: YYYY年MM月
+    order: -1 # Sort of order. 1, asc for ascending; -1, desc for descending
+    limit: 8 # if set 0 will show all
+  card_links:
+    enable: true
   card_webinfo: true
-
-# 網站公告
-announcement:
-  content: <h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard">
 
 # busuanzi count for PV / UV in site
 # 訪問人數
@@ -595,11 +626,12 @@ translate:
   #延遲時間,若不在前, 要設定延遲翻譯時間, 如100表示100ms,默認為0
   translateDelay: 0
   #博客網址
-  cookieDomain: "https://www.masantu.com/"
+  cookieDomain: 'https://www.masantu.com/'
   #當文字是簡體時，按鈕顯示的文字
-  msgToTraditionalChinese: "繁"
+  msgToTraditionalChinese: '繁'
   #當文字是繁體時，按鈕顯示的文字
-  msgToSimplifiedChinese: "简"
+  msgToSimplifiedChinese: '简'
+
 tugecao: "https://support.qq.com/product/67072"
 
 #閲讀模式
@@ -639,8 +671,8 @@ fancybox:
 snackbar:
   enable: true
   position: bottom-left
-  bg_light: "#49b1f5" #light mode時彈窗背景
-  bg_dark: "#2d3035" #dark mode時彈窗背景
+  bg_light: '#49b1f5' #light mode時彈窗背景
+  bg_dark: '#2d3035' #dark mode時彈窗背景
 
 #百度推送
 baidu_push:
@@ -673,11 +705,8 @@ note:
   light_bg_offset: 0
 
 # 圖片懶加載
-# https://github.com/aFarkas/lazysizes
-lazyload:
-  enable: true
-  onlypost: false
-  loadingImg: /img/loading.gif
+# https://github.com/ApoorvSaxena/lozad.js
+lazyload: false
 
 # 避免重複網址分散seo
 canonical: true
@@ -696,21 +725,23 @@ Open_Graph_meta: true
 # 開啟hexo自帶的緩存，加快生成速度
 fragment_cache: true
 
-# CDN
-# 網站必須
-# 可根據需要自行添加js/css
-CDN_USE:
-  css:
-    - /css/index.css
-
-  js:
-    - https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js #/js/third-party/jquery.min.js
-    - /js/utils.js
-    - /js/main.js
+# inject
+# 插入代码到头部</head>之前 和 尾部</body>之前
+inject:
+  head:
+  # - <link rel="stylesheet" href="xxxxx">
+  bottom:
+    # - <script src="xxxx"></script>
 
 # CDN
 # 非必要不要修改
 CDN:
+  # main
+  main_css: /css/index.css
+  jquery: https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js
+  main: /js/main.js
+  utils: /js/utils.js
+
   # comments
   blueimp_md5: https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js
   gitalk: https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js
@@ -746,8 +777,8 @@ CDN:
   canvas_ribbon_piao: /js/third-party/piao.js
   canvas_nest: /js/third-party/canvas-nest.js
 
-  lazyload: https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js
-  instantpage: https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js
+  lazyload: https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js
+  instantpage: https://cdn.jsdelivr.net/npm/instant.page@3/instantpage.min.js
   typed: https://cdn.jsdelivr.net/npm/typed.js
   js_cookies: https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js
   pangu: https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js
@@ -772,4 +803,5 @@ CDN:
   fontawesome_v4: https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css
   fontawesome_v5: https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css
 
+  # 簡繁轉換
   translate: /js/tw_cn.js

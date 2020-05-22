@@ -95,7 +95,7 @@ if theme.douban_background.enable
 
 #### 用户状态
 - [x] 用户卡片页显示个人工作状态（支持 fa 和 emoji 😀）
-头像 hover 实践修改
+头像 hover 事件修改
 参考此处实现[头像不翻转，鼠标 hover 放大](https://vwin.github.io/2018/08/02/Hexo-Next%E4%B8%BB%E9%A2%98%E5%A4%B4%E5%83%8F%E6%97%8B%E8%BD%AC/)
 ```styl
 .card-info
@@ -118,6 +118,7 @@ if theme.douban_background.enable
         ms-transform: rotate(360deg) scale(1.1)
         transform: rotate(360deg) scale(1.1)
 ```
+
 #### footer 页面
 - [x] 添加 badge
 ```pug
@@ -135,7 +136,16 @@ if theme.douban_background.enable
 使用[Hexo Netlify CMS](https://github.com/jiangtj/hexo-netlify-cms)实现
 参考[将 Hexo 静态博客部署到 Netlify | reuixiy](https://io-oi.me/tech/deploy-static-site-to-netlify/)
 
+#### 吐个槽
+- [x] 侧边栏添加吐个槽，用户可以进行反馈
+
 ### 改进
+
+#### 文章页sidebar图标
+- [x] 更换另外一种图标，同时hover变成显眼按钮
+
+#### 个人信息
+- [x] 图标显示风格左右旋转而不是上下颠倒
 
 #### 赞赏
 鉴于国人现实经济状况，只有在`font-matter`中添加`reward: true`才会打开赞赏功能；
@@ -155,7 +165,11 @@ layout/includes/widget/index.pug
     .divider.divider-horizontal.divider-with-text-center(role='separator')
       span.divider-inner-text=theme.divider_text
 ```
+
 ## TODO
+
+### 原作者废弃
+- [ ] 文章font matter: hide 支持
 
 ### 新增
 
@@ -207,7 +221,8 @@ layout/includes/widget/index.pug
 
 ### 编辑直达
 - [ ] 首页增加 [后台管理](https://imoyao.netlify.com/admin/#/) navbar；
-- [ ] 文章页添加编辑按钮(?)；
+- [ ] 文章页添加编辑按钮（？）；
+    参考主题 [wzpan/hexo-theme-freemind: Most powerful bootstrap theme for hexo.](https://github.com/wzpan/hexo-theme-freemind) 实现
 
 ### 暗色模式
 - [x] 一些自定义样式修改；
