@@ -172,3 +172,13 @@ douban:
 #    title: 'This is my game title'
 #    quote: 'This is my game quote'
   timeout: 20000
+# https://github.com/printempw/hexo-hide-posts
+# hexo-hide-posts
+hide_posts:
+  # Change the filter name to fit your need
+  filter: hide
+  # Generators which you want to expose all posts (include hidden ones) to.
+  # Common generators: index, tag, category, archive, sitemap, feed, etc.
+  public_generators: []
+  # Add "noindex" meta tag to prevent hidden posts from being indexed by search engines
+  noindex: true

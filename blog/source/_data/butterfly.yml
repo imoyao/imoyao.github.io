@@ -11,7 +11,7 @@ menu:
   Categories: /categories/ || fa fa-folder-open
   Link: /links/ || fas fa-user-friends
   About: /about/ || fas fa-user
-  List||fa fa-list:
+  More||fa fa-list:
 #    - Book || /books/ || fa fa-book
 #    - Movie || /movies/ || fa fa-film
     - B&M History || /douban/ || fa fa-history
@@ -516,7 +516,7 @@ display_mode: light
 # 美化頁面顯示
 beautify:
   enable: true
-  field: site # site/post
+  field: post # site/post
   title-prefix-icon: '\f0c1'
   title-prefix-icon-color: '#F47466'
 

@@ -1,10 +1,11 @@
 ---
-title: 博客 idealyard 支持 emoji 显示问题
+title: 解决博客 idealyard 支持 emoji 显示问题
 date: 2020-05-15 13:50:02
 tags: 
 - idealyard
 - 博客
 - utf8mb4
+cover: /images/doge.png
 categories:
 - Projects
 - IdealYard
@@ -21,7 +22,7 @@ mysql  Ver 15.1 Distrib 5.5.64-MariaDB, for Linux (x86_64) using readline 5.1
 {%endnote%}
 
 ## 前言
-我们知道要想让数据库存储数据支持 emoji 显示必须将数据库编码格式设置为`utf8emb4`，可是我在代码中修改了数据库编码还是有问题，具体见此处 [Issues](https://github.com/imoyao/idealyard/issues/6) ，当时列出下面的怀疑：
+我们知道要想让数据库存储数据支持 emoji 显示必须将数据库编码格式设置为`utf8mb4`，可是我在代码中修改了数据库编码还是有问题，具体见此处 [Issues](https://github.com/imoyao/idealyard/issues/6) ，当时列出下面的怀疑：
 - [x] ~~数据库设置为`utf8mb4`编码；~~
 - [x] ~~单个表格编码未设置为`utf8mb4`；~~
 - [x] ~~由于前端使用`pangujs`导致传到后端已经出错；~~
@@ -177,11 +178,11 @@ MariaDB [iyblog_product]> SHOW VARIABLES WHERE Variable_name LIKE 'character_set
 </table>
 {%endraw%}
 
-实际验证一下😅：
+实际验证一下：
 ![emoji](/images/idealyard-emoji.png)
 
 最后我们发现了一个新问题（TODO）：
-链接的 slug 中直接把 emoji 也给显示出来了，此处需要对 emoji 进行过滤或者转换为字符说明。
+链接的 slug 中直接把 emoji 也给显示出来了，此处需要对 emoji 进行过滤或者转换为字符单词。
 
 ## 参考链接
 [mysql 存储 emoji 表情报错的处理方法【更改编码为 utf8mb4】_Mysql_脚本之家](https://www.jb51.net/article/144079.htm)
