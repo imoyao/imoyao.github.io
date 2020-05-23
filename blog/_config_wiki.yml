@@ -5,7 +5,7 @@
 # Site
 title: 别院牧志
 subtitle: IMOYAO
-description: 深深别院，潜潜牧志。一个独立博客，使用 Python 语言开发，专注于云计算方向。致力于写出 Pythonic 的代码。
+description: 深深别院，潜潜牧志，一个 Python 开发者的个人wiki。
 author: imoyao
 email: immoyao@gmail.com
 slogan: 就命运而言，休论公道。
@@ -16,7 +16,6 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-home: https://masantu.com/
 url: https://masantu.com/wiki/
 root: /wiki/
 #permalink: :year/:month/:day/:title/
