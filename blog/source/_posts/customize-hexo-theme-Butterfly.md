@@ -141,8 +141,8 @@ if theme.douban_background.enable
 
 ### 改进
 
-#### 文章页sidebar图标
-- [x] 更换另外一种图标，同时hover变成显眼按钮
+#### 文章页 sidebar 图标
+- [x] 更换另外一种图标，同时 hover 变成显眼按钮
 
 #### 个人信息
 - [x] 图标显示风格左右旋转而不是上下颠倒
@@ -169,7 +169,7 @@ layout/includes/widget/index.pug
 ## TODO
 
 ### 原作者废弃
-- [ ] 文章font matter: hide 支持
+- [ ] 文章 font matter: hide 支持
 
 ### 新增
 

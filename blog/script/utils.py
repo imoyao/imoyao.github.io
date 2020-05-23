@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import Queue
+try:
+    import Queue
+except ImportError:
+    import queue as Queue
 import base64
 import json
 import platform
@@ -73,8 +76,8 @@ def asyncread(command=None, readline=True, sudo=True, close_fds=True):
             stderr_reader.join()
             asyncprocess.stdout.close()
             asyncprocess.stderr.close()
-        except Exception, e:
-            print >> sys.stderr, traceback.print_exc()
+        except Exception as e:
+            print(traceback.print_exc())
     if readline:
         outresult = outlist
         errresult = errlist
@@ -109,8 +112,8 @@ def cust_popen(cmd, no_wait=False, close_fds=True, sudo=True):
         if not no_wait:
             retcode = proc.wait()
         return retcode, proc
-    except Exception, e:
-        print >> sys.stderr, traceback.print_exc()
+    except Exception as e:
+        print(traceback.print_exc())
 
 
 # ----------------------------------------
@@ -220,7 +223,7 @@ def make_file_java_byte_array_compatible(f, flag='file'):
     else:
         encoded_data = base64.b64encode(f)
     strg = ''
-    for i in xrange((len(encoded_data) / 40) + 1):
+    for i in range(int(len(encoded_data) / 40) + 1):
         strg += encoded_data[i * 40:(i + 1) * 40]
 
     return strg
