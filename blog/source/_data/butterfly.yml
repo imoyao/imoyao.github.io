@@ -9,6 +9,7 @@ menu:
   Archives: /archives/ || fa fa-archive
   Tags: /tags/ || fa fa-tags
   Categories: /categories/ || fa fa-folder-open
+  WIKI: /wiki/ || fa fa-book
   Link: /links/ || fas fa-user-friends
   About: /about/ || fas fa-user
   More||fa fa-list:

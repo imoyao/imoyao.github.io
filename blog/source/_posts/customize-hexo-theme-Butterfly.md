@@ -5,7 +5,7 @@ tags:
   - Butterfly
 cover: /images/krzysztof-niewolny-f8JYQPq45uI-unsplash.jpg
 categories:
-  - 博客美化
+  - 博客个性化
 date: 2020-01-06 21:32:01
 reward: true
 subtitle: 生命不息，折腾不止
