@@ -2,7 +2,7 @@
 title: RBD 监控埋点
 toc: true
 date: 2020-05-23 11:02:28
-tags
+tags: RBD
 ---
 # 1. perf dump
 - ceph daemon /var/run/ceph/ceph-client.admin.asok  perf dump 

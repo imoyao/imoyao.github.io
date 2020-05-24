@@ -1,5 +1,5 @@
 ---
-title: ceph crushmap choose 规则分析.md
+title: ceph crushmap choose 规则分析
 toc: true
 date: 2020-05-23 11:02:28
 tags:

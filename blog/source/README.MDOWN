@@ -1,17 +1,7 @@
 # 欢迎访问 imoyao 的个人博客！[别院牧志](https://imoyao.github.io/)
 
-## TODO
-<<<<<<< Updated upstream
-- [x] 代码高亮
-- [x] 单页缩略图
-- [ ] footer代码太乱
-- [ ] 文章页回到顶部
-- [ ] 首页天气没有必要，标签页不需要显示在那个地方，header太花里胡哨，hover太丑了
-- [ ] 用户信息需要修改
-
-- ~~赞赏~~
-
-
 ## 更新日志
+- 2020-05-23
+    添加主题[hexo-theme-butterfly](https://github.com/zthxxx/hexo-theme-Wikitten)构建个人 wiki;
 - 2020-1-4
     主题修改为[hexo-theme-butterfly](https://github.com/jerryc127/hexo-theme-butterfly/)

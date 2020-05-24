@@ -2,7 +2,8 @@
 title: ceph 集群警告和错误类型
 toc: true
 date: 2020-05-23 11:02:28
-tags
+tags: ceph
+
 ---
 
 | 指标 | 说明 | 级别 |
