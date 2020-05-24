@@ -116,7 +116,7 @@ Non-Bundled Plugins: Assets Compressor, BashSupport, com.kite.intellij, com.vlad
     示例:
       ```plain
       mac:      -javaagent:/Users/neo/jetbrains-agent.jar
-      linux:    -javaagent:/home/neo/jetbrains-agent.jar
+      Linux:    -javaagent:/home/neo/jetbrains-agent.jar
       windows:  -javaagent:C:\Users\neo\jetbrains-agent.jar
       ```
     如果还是填错了，参考 [这篇文章](https://intellij-support.jetbrains.com/hc/en-us/articles/206544519) 编辑 vmoptions 补救;

@@ -13,7 +13,7 @@ toc: true
 <!--more-->
 
 # 工作环境
-## linux
+## Linux
 ```bash
 [root@172 mysql]# uname -a
 Linux 172.18.1.117 3.10.0-957.el7.x86_64 #1 SMP Thu Nov 8 23:39:32 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
@@ -174,5 +174,5 @@ Bye
 **注意**：这种方法只对当前登录用户生效。
 
 # 参考阅读
-[linux 安装 mysql5.7.24 - 绿色落日的博客 - CSDN 博客](https://blog.csdn.net/qq_30000313/article/details/85333971)
-[linux 安装 mysql5.7.19](https://blog.csdn.net/zhou920786312/article/details/77750604)
+[Linux 安装 mysql5.7.24 - 绿色落日的博客 - CSDN 博客](https://blog.csdn.net/qq_30000313/article/details/85333971)
+[Linux 安装 mysql5.7.19](https://blog.csdn.net/zhou920786312/article/details/77750604)

@@ -104,7 +104,7 @@ trusted-host = pypi.python.org
 ### 参考来源
 
 [pip issue installing almost any library](https://stackoverflow.com/questions/16370583/pip-issue-installing-almost-any-library)
-[linux 设置 pip 镜像 Pip Warning：–trusted-host 问题解决方案](https://www.cnblogs.com/yudar/p/4657511.html)
+[Linux 设置 pip 镜像 Pip Warning：–trusted-host 问题解决方案](https://www.cnblogs.com/yudar/p/4657511.html)
 
 ## 安装`MySQL-python`时提示
 
