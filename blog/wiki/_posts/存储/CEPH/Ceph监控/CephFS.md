@@ -2,7 +2,8 @@
 title: CephFS 监控埋点
 toc: true
 date: 2020-05-23 11:02:28
-tags
+tags: CephFS
+
 ---
 # 1. perf dump
 ## 1.1. FS Client Metrics Table

@@ -53,10 +53,12 @@ highlight:
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
+
+# see also:: https://github.com/YuyingWu/hexo-generator-index-plus
+# see also:[是否有排序功能? · Issue #9 · zthxxx/hexo-theme-Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten/issues/9)
 index_generator:
   path: ''
   per_page: 10
-  order_by: -date
 
 # Category & Tag
 default_category: uncategorized

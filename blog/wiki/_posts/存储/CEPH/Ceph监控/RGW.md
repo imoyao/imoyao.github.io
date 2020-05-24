@@ -2,7 +2,8 @@
 title: RGW 监控埋点.md
 toc: true
 date: 2020-05-23 11:02:28
-tags
+tags: RGW
+
 ---
 # 1. RADOS
 ## 1.1 RGW Client Metrics Table
