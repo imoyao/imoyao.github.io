@@ -82,7 +82,7 @@ def foo(a, unused_b, unused_c, d=None, e=None):
 ### 结论
 使用 `import x` 来导入包和模块.
 
-    使用 `from x import y` ， 其中x是包前缀， y是不带前缀的模块名。plainplainplainplainplainplainplain
+    使用 `from x import y` ， 其中x是包前缀， y是不带前缀的模块名。plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
     使用 `from x import y as z`， 如果两个要导入的模块都叫做y或者y太长了。
 
@@ -216,7 +216,7 @@ class Error(Exception):
 ### 结论
 适用于简单情况。每个部分应该单独置于一行： 映射表达式， for 语句，过滤器表达式。禁止多重 for 语句或过滤器表达式。复杂情况下还是使用循环。
 
-    ```pythonplainplainplainplainplainplainplainplain
+    ```pythonplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     Yes:
       result = []
       for x in range(10):
@@ -507,7 +507,7 @@ No:  if len(users) == 0:
 ### 结论
 我们不使用不支持这些特性的 Python 版本， 所以没理由不用新的方式。
 
-    ```pythonplainplainplainplainplain
+    ```pythonplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     Yes: words = foo.split(':')
 
          [x[1] for x in my_list if x[2] == 5]

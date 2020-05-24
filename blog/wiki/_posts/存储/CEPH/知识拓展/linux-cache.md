@@ -1,5 +1,5 @@
 ---
-title: linux cache 介绍及控制
+title: Linux cache 介绍及控制
 toc: true
 date: 2020-05-23 11:02:28
 tags:

@@ -19,7 +19,7 @@ sudo apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcod
 sudo apt-get install python2.7-dev #2.7 可以改为 3.2 或者 3.5
 3. 下载 OpenCV 的源码
 
-OpenCV 官网上有 linux 版本的源码包可以下载，不过最好是从 git 上下载，这样可以保证下载得到的是最新的代码：
+OpenCV 官网上有 Linux 版本的源码包可以下载，不过最好是从 git 上下载，这样可以保证下载得到的是最新的代码：
 
 wget -O opencv.zip https://github.com/Itseez/opencv/archive/3.2.0.zip
 unzip opencv.zip

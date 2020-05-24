@@ -2,6 +2,7 @@
 title: Hexo 同时使用两种主题（博客与 wiki 页面实现统一管理）
 toc: true
 date: 2020-05-23 11:02:28
+cover: /images/i-wana-all.gif
 tags:
 - Hexo
 - wiki
@@ -29,7 +30,6 @@ root 目录下有两个 config 文件，默认使用`_config.yml`，用`hexo --c
 Wiki: /wiki/
 ```
 2.  为了避免在修改 wiki 配置时影响到主页面，将 root 目录下的`_config.yml`文件（即站点配置文件），复制并重命名为`_config_wiki.yml`，以下修改均指此文件。
-
 3.  安装 hexo 的[Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten)主题，将其作为 wiki 页面的 theme；
 ```plain
 cd your-hexo-directory
@@ -44,7 +44,6 @@ cp themes/Wikitten/_scaffolds/post.md scaffolds/wiki.md
 cp -f themes/Wikitten/_config.yml.example themes/Wikitten/_config.yml
 ```
 5.  修改 wikitten 主题的 config，更改资源文件目录，logo、favicon 等。
-
 6.  修改`_config_wiki.yml`设定使 wikitten 主题生效
 ```plain
 - theme: origin
@@ -78,9 +77,10 @@ cp -f themes/Wikitten/_config.yml.example themes/Wikitten/_config.yml
 ```
 
 ##  使用
+
 ### 创建别名（可选）
 主要目的是简化输入，如果不嫌麻烦，可以每次输入指令。
-- linux
+- Linux
 视自己情况而定，在`.zshrc`或者`.bashrc`等文件中新增 alias
 ```bash
 alias hwk="hexo --config _config_wiki.yml"
@@ -90,16 +90,17 @@ alias hwk="hexo --config _config_wiki.yml"
 doskey hwk=hexo --config _config_wiki.yml
 ```
 参见：
-1. [windows 系统如何给命令起别名？ - 知乎](https://www.zhihu.com/question/51962577)
-2. [Windows alias 给 cmd 命令起别名 - jetwill - 博客园](https://www.cnblogs.com/chenjo/p/12550207.html)
+    1. [windows 系统如何给命令起别名？ - 知乎](https://www.zhihu.com/question/51962577)
+    2. [Windows alias 给 cmd 命令起别名 - jetwill - 博客园](https://www.cnblogs.com/chenjo/p/12550207.html)
 
 ### 新建 wiki
 如果跳过上步，则将下面的指令中的`hwk`替换为`hexo --config _config_wiki.yml`
 ```plain
 hwk new "xxxx"
 ```
+
 ### 渲染页面
-共用 db.json（猜測）会导致主页面 blog 内容与 wiki 内容混杂，需要在渲染前后进行 clean 操作。
+共用 db.json（猜测）会导致主页面 blog 内容与 wiki 内容混杂，需要在渲染前后进行 clean 操作。
 1. 首先渲染主页面，生成到/public/
 ```plain
 hexo g

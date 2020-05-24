@@ -76,8 +76,11 @@ if theme.douban_background.enable
 参考 [Hexo 下表格的美化和优化](https://hexo.imydl.tech/archives/6742.html)
 
 ### 新增
-- [ ] ~~参考`Next`[主题外挂](https://hexo-theme-next.netlify.com/docs/tag-plugins/)~~
+
+#### 标签外挂
+- [x] ~~参考`Next`[主题外挂](https://hexo-theme-next.netlify.com/docs/tag-plugins/)~~
 参见[此处](https://vuejs.org/v2/cookbook/serverless-blog.html) note 挂件；
+建议阅读[标签外挂（Tag-Plugins） | JerryC](https://jerryc.me/posts/4aa8abbe/#%E6%A8%99%E7%B1%A4%E5%A4%96%E6%8E%9B%EF%BC%88Tag-Plugins%EF%BC%89)
 `gallery`已经实现需求，所以没有必要实现了。
 {% gallery %} 
 
@@ -169,7 +172,7 @@ layout/includes/widget/index.pug
 ## TODO
 
 ### 原作者废弃
-- [ ] 文章 font matter: hide 支持
+- [x] 文章 front matter: hide 支持
 
 ### 新增
 
