@@ -1,0 +1,148 @@
+// Config
+support-for-ie = false
+vendor-prefixes = webkit moz ms official
+
+// Colors
+color-default = #565a5f
+color-grey = #999
+color-border = #dfe1e2
+color-border-stretch = #c1cfdc
+color-link = #38b7ea
+color-background = #ebeef1
+color-meta-head = #7b848c
+color-sidebar-text = #777
+color-sidebar-text-dark = #333
+color-widget-background = #ddd
+color-widget-border = #ccc
+//====== note ======
+$light-grey = #EEEEEE
+$whitesmoke = #f5f5f5
+// Note colors
+// --------------------------------------------------
+hexo-config('note.light_bg_offset') is a 'unit' ? ($lbg = unit(hexo-config('note.light_bg_offset'), '%')) : ($lbg = 0)
+// Default
+$note-default-border = #777
+$note-default-bg = lighten(spin($note-default-border, 0), 94% + $lbg)
+$note-default-text = $note-default-border
+$note-default-icon = '\f0a9'
+$note-modern-default-border = #e1e1e1
+$note-modern-default-bg = lighten(spin($note-modern-default-border, 10), 60% + ($lbg * 4))
+$note-modern-default-text = #666
+$note-modern-default-hover = darken(spin($note-modern-default-text, -10), 32%)
+// Primary
+$note-primary-border = #6f42c1
+$note-primary-bg = lighten(spin($note-primary-border, 10), 92% + $lbg)
+$note-primary-text = $note-primary-border
+$note-primary-icon = '\f055'
+$note-modern-primary-border = #e1c2ff
+$note-modern-primary-bg = lighten(spin($note-modern-primary-border, 10), 40% + ($lbg * 4))
+$note-modern-primary-text = #6f42c1
+$note-modern-primary-hover = darken(spin($note-modern-primary-text, -10), 22%)
+// Info
+$note-info-border = #428bca
+$note-info-bg = lighten(spin($note-info-border, -10), 91% + $lbg)
+$note-info-text = $note-info-border
+$note-info-icon = '\f05a'
+$note-modern-info-border = #b3e5ef
+$note-modern-info-bg = lighten(spin($note-modern-info-border, 10), 50% + ($lbg * 4))
+$note-modern-info-text = #31708f
+$note-modern-info-hover = darken(spin($note-modern-info-text, -10), 32%)
+// Success
+$note-success-border = #5cb85c
+$note-success-bg = lighten(spin($note-success-border, 10), 90% + $lbg)
+$note-success-text = $note-success-border
+$note-success-icon = '\f058'
+$note-modern-success-border = #d0e6be
+$note-modern-success-bg = lighten(spin($note-modern-success-border, 10), 40% + ($lbg * 4))
+$note-modern-success-text = #3c763d
+$note-modern-success-hover = darken(spin($note-modern-success-text, -10), 27%)
+// Warning
+$note-warning-border = #f0ad4e
+$note-warning-bg = lighten(spin($note-warning-border, 10), 88% + $lbg)
+$note-warning-text = $note-warning-border
+$note-warning-icon = '\f06a'
+$note-modern-warning-border = #fae4cd
+$note-modern-warning-bg = lighten(spin($note-modern-warning-border, 10), 43% + ($lbg * 4))
+$note-modern-warning-text = #8a6d3b
+$note-modern-warning-hover = darken(spin($note-modern-warning-text, -10), 18%)
+// Danger
+$note-danger-border = #d9534f
+$note-danger-bg = lighten(spin($note-danger-border, -10), 92% + $lbg)
+$note-danger-text = $note-danger-border
+$note-danger-icon = '\f056'
+$note-modern-danger-border = #ebcdd2
+$note-modern-danger-bg = lighten(spin($note-modern-danger-border, 10), 35% + ($lbg * 4))
+$note-modern-danger-text = #a94442
+$note-modern-danger-hover = darken(spin($note-modern-danger-text, -10), 22%)
+
+
+// Fonts
+font-sans = "open sans", "Helvetica Neue", "Microsoft Yahei", Helvetica, Arial, sans-serif
+font-serif = Georgia, "Times New Roman", "Microsoft Yahei", serif
+font-mono = "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace
+font-size = 14px
+line-height = 1.6em
+line-height-title = 1.3em
+
+// Header
+header-height = 48px
+header-sub-height = 36px
+logo-url = hexo-config("customize.logo.url")
+logo-width = 0px + hexo-config("customize.logo.width")
+logo-height = 0px + hexo-config("customize.logo.height")
+
+// Sidebar
+sidebar = hexo-config("customize.sidebar")
+thumbnail-default-small = 'images/thumb-default-small.png'
+
+// Profile bar
+profile = hexo-config("customize.profile.enabled")
+profile-avatar-size = 128px
+
+// Layout
+block-margin = 40px
+article-padding = 20px
+mobile-nav-width = 280px
+main-column = 7.5
+sidebar-column = 2.5
+profile-column = 2.5
+sidebar-column-tablet = 3.5
+
+if sidebar
+    _sidebar-column = sidebar-column
+else
+    _sidebar-column = 0
+
+if profile
+    _profile-column = profile-column
+else
+    _profile-column = 0
+
+// Grids
+column-width = 80px
+gutter-width = 15px
+if _sidebar-column is 0 and _profile-column is 0
+    columns = 10
+    main-column = 10
+else
+    columns = main-column + _sidebar-column + _profile-column
+
+if sidebar
+    main-column-tablet = 6.5
+    if profile
+        main-column-tablet = 9
+
+// Media queries
+mq-mini = "screen and (max-width: 559px)"
+mq-mobile = "screen and (min-width: 560px) and (max-width: 799px)"
+mq-tablet = "screen and (min-width: 800px) and (max-width: 1199px)"
+mq-normal = "screen and (min-width: 1200px)"
+
+// Code Highlight
+highlight = hexo-config("customize.highlight") || "tomorrow"
+
+// Miscellaneous
+color-twitter = #00aced
+color-facebook = #3b5998
+color-pinterest = #cb2027
+color-google = #dd4b39
