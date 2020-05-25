@@ -4,9 +4,10 @@
 """
 ## 前置条件
 调用前请确保安装 hexo 和 lint-md；
-如果程序默认路径与配置中不同，请修改为正确路径后再执行！
+Win10 Python 3.7+ 测试通过
+~~如果程序默认路径与配置中不同，请修改为正确路径后再执行！~~
 运行生成前请保证没有 hexo 进程正在运行（会导致db.json删除失败）
-
+## 作用
 1. 对文章内容进行lint
 2. 生成site和wiki
 """
@@ -72,10 +73,16 @@ def gen():
     return return_code
 
 
-def main():
-    ret = lint()
-    if ret == 0:
-        print('lint-md execute success!')
+def main(lint_md=False):
+    """
+    添加lint为可配置，否则会出问题 >>> plain
+    :param lint_md:
+    :return:
+    """
+    if lint_md:
+        ret = lint()
+        if ret == 0:
+            print('lint-md execute success!')
     ret = gen()
     if ret == 0:
         print('site generate success,please run `hexo s` to Start the server.')

@@ -52,6 +52,7 @@ type=rpm-md
  ```bash
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 ```
+
 或者直接写入
 ```bash
 vim /etc/yum.repos.d/epel-7.repo
@@ -111,8 +112,8 @@ vi /etc/hosts
 {%note warning %}
 **注意**
 - 各节点都要创建该用户；
-- 不要使用ceph作为部署用户的用户名；
-- 用户必须赋权root用户；
+- 不要使用 ceph 作为部署用户的用户名；
+- 用户必须赋权 root 用户；
 {%endnote %}
 
 1. 创建用户
@@ -138,7 +139,7 @@ sudo chmod 0440 /etc/sudoers.d/cephadm
 [虚拟机克隆以及 IP，MAC 地址的修改_运维_进击的菜鸟-CSDN 博客](https://blog.csdn.net/lp102811/article/details/80204321)
 {% endnote %}
 注意：以下操作只在 admin-node 节点执行即可；
-1. 切换到cephadm用户
+1. 切换到 cephadm 用户
 ```bash
 su cephadm
 ```
@@ -157,8 +158,8 @@ ssh node2
 ```
 注意：免密登录比较重要，如果是测试环境，可以直接使用 root 用户的话，上面指令改为`ssh-copy-id root@node1`去建立互信关系。
 4. 此步为建议步骤
-编辑` ~/.ssh/config`，防止每次使用cephadm用户执行操作时手动输入，如果你有安全方面的顾虑，也可以执行时再输入。
-```
+编辑`~/.ssh/config`，防止每次使用 cephadm 用户执行操作时手动输入，如果你有安全方面的顾虑，也可以执行时再输入。
+```plain
 Host node1
    Hostname node1
    User cephadm
@@ -169,7 +170,7 @@ Host node3
    Hostname node3
    User cephadm
 ```
-其中Host 后面跟你的部署的节点的hostname，User后面跟刚才新建的用户名（本例中即cephadm）
+其中 Host 后面跟你的部署的节点的 hostname，User 后面跟刚才新建的用户名（本例中即 cephadm）
 
 ### 防火墙端口
 
@@ -205,6 +206,7 @@ cd my-cluster
 {% note warning%}
 请不要使用 sudo 调用 ceph-deploy；如果你以其他用户身份登录，不要以 root 身份运行它，因为它不会发出远程主机上所需的 sudo 命令。
 {% endnote %}
+
 ### 清除环境
 ```plain
 ceph-deploy purge node1 node2
