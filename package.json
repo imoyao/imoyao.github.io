@@ -37,6 +37,7 @@
     "hexo-tag-bootstrap": "^0.1.2",
     "hexo-util": "^1.9.1",
     "hexo-wordcount": "^6.0.1",
+    "lint-md": "^0.2.0",
     "node-snackbar": "^0.1.16"
   }
 }

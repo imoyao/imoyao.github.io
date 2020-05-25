@@ -14,10 +14,16 @@ import os
 
 from libcoms import delegator
 
-HEXO_PATH = r'C:\Users\Administrator\AppData\Roaming\npm\hexo.cmd'
-LINT_MD_PATH = r'C:\Users\Administrator\AppData\Roaming\npm\lint-md.cmd'
+# hexo_path = r'C:\Users\Administrator\AppData\Roaming\npm\hexo.cmd'
+# lint_md_path = r'C:\Users\Administrator\AppData\Roaming\npm\lint-md.cmd'
 DB_FP = r'db.json'
 WIKI_CONF = r'_config_wiki.yml'
+
+
+def tool_fp(tool_name):
+    win_cmd = 'where {tn}'.format(tn=tool_name)
+    ret = delegator.run(win_cmd)
+    return ret.out.split()[1]
 
 
 def lint():
@@ -25,12 +31,13 @@ def lint():
     用于lint-md文章
     :return:
     """
-    lint_site_posts = r'{lint} source\_posts\ -f'.format(lint=LINT_MD_PATH)
+    lint_md_path = tool_fp('lint-md')
+    lint_site_posts = r'{lint} source\_posts\ -f'.format(lint=lint_md_path)
     ret = delegator.run(lint_site_posts, block=False)
     ret.block()
     # return_code = ret.return_code
     # print('lint site ret_code:', return_code)
-    lint_site_posts = r'{lint} wiki\_posts\ -f'.format(lint=LINT_MD_PATH)
+    lint_site_posts = r'{lint} wiki\_posts\ -f'.format(lint=lint_md_path)
     ret = delegator.run(lint_site_posts, block=False)
     ret.block()
     return_code = ret.return_code
@@ -44,19 +51,20 @@ def gen():
     用于渲染生成内容
     :return:
     """
-    wiki_clean_cmd = '{hexo} --config {wk} clean'.format(hexo=HEXO_PATH, wk=WIKI_CONF)
+    hexo_path = tool_fp('hexo')
+    wiki_clean_cmd = '{hexo} --config {wk} clean'.format(hexo=hexo_path, wk=WIKI_CONF)
     ret = delegator.run(wiki_clean_cmd, block=False)
     ret.block()
     # return_code = ret.return_code
     # print('-----run--0----', return_code)
-    wiki_generate_cmd = '{hexo} --config {wk} generate'.format(hexo=HEXO_PATH, wk=WIKI_CONF)
+    wiki_generate_cmd = '{hexo} --config {wk} generate'.format(hexo=hexo_path, wk=WIKI_CONF)
     ret = delegator.run(wiki_generate_cmd, block=False)
     ret.block()
     # return_code = ret.return_code
     # print('-----run--1----', return_code)
     if os.path.exists(DB_FP):
         os.remove(DB_FP)
-    site_generate_cmd = '{hexo} generate'.format(hexo=HEXO_PATH, )
+    site_generate_cmd = '{hexo} generate'.format(hexo=hexo_path, )
     ret = delegator.run(site_generate_cmd, block=False)
     ret.block()
     return_code = ret.return_code

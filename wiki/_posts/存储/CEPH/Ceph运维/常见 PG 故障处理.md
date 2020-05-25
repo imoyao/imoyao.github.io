@@ -22,7 +22,7 @@
 
 另外，修改参数 `osd pool default size/min_size`后，只会对后面新建的 pool 起作用。如果想修改已存在的 pool 的 `size/min_size` ，可用下面的命令：
 
-	ceph osd pool set <poolname> size|min_size <val>plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph osd pool set <poolname> size|min_size <val>plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 **注意：** 你可以在运行时修改参数值。如果是在 Ceph 配置文件中进行的修改，你可能需要重启集群。
 
@@ -56,7 +56,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 在某些情况下， `ceph-osd` *互联*进程会遇到问题，阻值 PG 达到活跃、可用的状态。例如， `ceph health` 也许显示：
 
-	ceph health detailplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph health detailplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	HEALTH_ERR 7 pgs degraded; 12 pgs down; 12 pgs peering; 1 pgs recovering; 6 pgs stuck unclean; 114/3300 degraded (3.455%); 1/3 in osds are down
 	...
 	pg 0.5 is down+peering
@@ -99,7 +99,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 让 Ceph 无论如何都继续：
 
-	ceph osd lost 1plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph osd lost 1plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 恢复将继续进行。
 
@@ -123,7 +123,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 首先，你应该确认哪些对象找不到了：
 
-	ceph pg 2.4 list_missing [starting offset, in json]plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph pg 2.4 list_missing [starting offset, in json]plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	
 	{ "offset": { "oid": "",
 	 	"key": "",
@@ -145,7 +145,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 其次，你可以找出哪些 OSD 上探测到、或可能包含数据：
 
-	ceph pg 2.4 queryplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph pg 2.4 queryplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	
 	"recovery_state": [
 	 	{ "name": "Started\/Primary\/Active",
@@ -235,7 +235,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 2、去主 OSD（ osd.1 ）的日志中查找不一致的具体对象 。
 
-	root@osd0:~# grep -Hn 'ERR' /var/log/ceph/ceph-osd.1.logplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	root@osd0:~# grep -Hn 'ERR' /var/log/ceph/ceph-osd.1.logplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	/var/log/ceph/ceph-osd.1.log:30:2016-11-10 13:49:07.848804 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 shard 0: soid 9:29b4ad99:::rbd_data.1349f035c101d9.0000000000000001:head missing attr _
 	/var/log/ceph/ceph-osd.1.log:31:2016-11-10 13:49:07.849803 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 scrub 0 missing, 1 inconsistent objects
 	/var/log/ceph/ceph-osd.1.log:32:2016-11-10 13:49:07.849824 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 scrub 1 errors
@@ -244,7 +244,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 3、执行 `ceph pg repair` 命令修复问题 PG 。
 
-	root@mon:~# ceph pg repair 9.14plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	root@mon:~# ceph pg repair 9.14plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	instructing pg 9.14 on osd.1 to repair
 
 4、检查 Ceph 集群是否恢复到 `HEALTH_OK` 状态。
@@ -271,7 +271,7 @@ osd.1 的日志里也提示修复成功：
 
 1、停掉不一致的 object 所属的 osd 。
 
-	stop ceph-osd id=xxxplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	stop ceph-osd id=xxxplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 2、刷新该 osd 的日志。
 
@@ -279,7 +279,7 @@ osd.1 的日志里也提示修复成功：
 
 3、将不一致的 object 移除。
 
-	mv /var/lib/ceph/osd/ceph-{osd-id}/current/{pg.id}_head/ rbd\\udata.xxx /homeplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	mv /var/lib/ceph/osd/ceph-{osd-id}/current/{pg.id}_head/ rbd\\udata.xxx /homeplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 4、重新启动该 osd 。
 
