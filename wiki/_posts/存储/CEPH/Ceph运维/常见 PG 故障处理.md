@@ -56,7 +56,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 在某些情况下， `ceph-osd` *互联*进程会遇到问题，阻值 PG 达到活跃、可用的状态。例如， `ceph health` 也许显示：
 
-	ceph health detailplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph health detailplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	HEALTH_ERR 7 pgs degraded; 12 pgs down; 12 pgs peering; 1 pgs recovering; 6 pgs stuck unclean; 114/3300 degraded (3.455%); 1/3 in osds are down
 	...
 	pg 0.5 is down+peering
@@ -107,7 +107,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 某几种失败相组合，可能导致 Ceph 抱怨有找不到（ `unfound` ）的对象：
 
-	ceph health detailplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph health detailplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	HEALTH_WARN 1 pgs degraded; 78/3778 unfound (2.065%)
 	pg 2.4 is active+degraded, 78 unfound
 
@@ -167,7 +167,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 如果所有可能的位置都查询过了但仍有对象丢失，那就得放弃丢失的对象了。这仍可能是罕见的失败组合导致的，集群在写操作恢复后，未能得知写入是否已执行。以下命令把未找到的（ `unfound` ）对象标记为丢失（ `lost` ）。
 
-	ceph pg 2.5 mark_unfound_lost revert|deleteplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph pg 2.5 mark_unfound_lost revert|deleteplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 上述最后一个参数告诉集群应如何处理丢失的对象。
 
@@ -210,7 +210,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 当集群中出现 PG 不一致的问题时，执行 `ceph -s` 命令会出现下面的信息：
 
-	root@mon:~# ceph -splainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	root@mon:~# ceph -splainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	    cluster 614e77b4-c997-490a-a3f9-e89aa0274da3
 	     health HEALTH_ERR
 	            1 pgs inconsistent
@@ -235,7 +235,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 2、去主 OSD（ osd.1 ）的日志中查找不一致的具体对象 。
 
-	root@osd0:~# grep -Hn 'ERR' /var/log/ceph/ceph-osd.1.logplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	root@osd0:~# grep -Hn 'ERR' /var/log/ceph/ceph-osd.1.logplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	/var/log/ceph/ceph-osd.1.log:30:2016-11-10 13:49:07.848804 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 shard 0: soid 9:29b4ad99:::rbd_data.1349f035c101d9.0000000000000001:head missing attr _
 	/var/log/ceph/ceph-osd.1.log:31:2016-11-10 13:49:07.849803 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 scrub 0 missing, 1 inconsistent objects
 	/var/log/ceph/ceph-osd.1.log:32:2016-11-10 13:49:07.849824 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 scrub 1 errors
@@ -244,7 +244,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 3、执行 `ceph pg repair` 命令修复问题 PG 。
 
-	root@mon:~# ceph pg repair 9.14plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	root@mon:~# ceph pg repair 9.14plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	instructing pg 9.14 on osd.1 to repair
 
 4、检查 Ceph 集群是否恢复到 `HEALTH_OK` 状态。
@@ -262,7 +262,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 osd.1 的日志里也提示修复成功：
 
-	2016-11-10 14:04:31.732640 7f628c5e6700  0 log_channel(cluster) log [INF] : 9.14 repair startsplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	2016-11-10 14:04:31.732640 7f628c5e6700  0 log_channel(cluster) log [INF] : 9.14 repair startsplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	2016-11-10 14:04:31.827951 7f628edeb700 -1 log_channel(cluster) log [ERR] : 9.14 shard 0: soid 9:29b4ad99:::rbd_data.1349f035c101d9.0000000000000001:head missing attr _
 	2016-11-10 14:04:31.828117 7f628edeb700 -1 log_channel(cluster) log [ERR] : 9.14 repair 0 missing, 1 inconsistent objects
 	2016-11-10 14:04:31.828273 7f628edeb700 -1 log_channel(cluster) log [ERR] : 9.14 repair 1 errors, 1 fixed
