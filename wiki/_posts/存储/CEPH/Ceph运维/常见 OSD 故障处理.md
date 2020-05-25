@@ -50,7 +50,7 @@
 
 用 `iostat` 工具定位 I/O 相关问题。
 
-	iostat -xplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	iostat -xplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 #### 诊断信息
 
@@ -72,11 +72,11 @@
 
 维护结束后，重启 OSD 。
 
-	start ceph-osd id={num}plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	start ceph-osd id={num}plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 最后，解除 `noout` 标志。
 
-	ceph osd unset nooutplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph osd unset nooutplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 ### 2.3 OSD 没运行
 
@@ -96,7 +96,7 @@
 
 如果增大最大线程数解决了这个问题，你可以把此配置 `kernel.pid_max` 写入配置文件 `/etc/sysctl.conf`，使之永久生效，例如：
 
-	kernel.pid_max = 4194303plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	kernel.pid_max = 4194303plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 - **内核版本**： 确认你使用的内核版本和发布版本。 Ceph 默认依赖一些第三方工具，这些工具可能有缺陷或者与特定发布版和/或内核版本冲突（如 Google perftools ）。检查下[操作系统推荐表](http://docs.ceph.com/docs/master/start/os-recommendations/)，确保你已经解决了内核相关的问题。
 
@@ -106,7 +106,7 @@
 
 当 `ceph-osd` 挂掉时，monitor 可通过活着的 `ceph-osd` 了解到此情况，并通过 `ceph health` 命令报告：
 
-	ceph healthplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph healthplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	HEALTH_WARN 1/3 in osds are down
 
 特别地，有 `ceph-osd` 进程标记为 `in` 且 `down` 的时候，你也会得到警告。你可以用下面的命令得知哪个 `ceph-osd` 进程挂了：
@@ -137,7 +137,7 @@ Ceph 不允许你向满的 OSD 写入数据，以免丢失数据。在运行着�
 
 或者：
 
-	ceph healthplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph healthplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	HEALTH_ERR 1 nearfull osds, 1 full osds
 	osd.2 is near full at 85%
 	osd.3 is full at 97%
@@ -235,7 +235,7 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 
 较新版本的 Ceph 抱怨 “slow requests” ：
 
-	{date} {osd.num} [WRN] 1 slow requests, 1 included below; oldest blocked for > 30.005692 secsplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	{date} {osd.num} [WRN] 1 slow requests, 1 included below; oldest blocked for > 30.005692 secsplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	{date} {osd.num}  [WRN] slow request 30.005692 seconds old, received at {date-time}: osd_op(client.4240.0:8 benchmark_data_ceph-1_39426_object7 [write 0~4194304] 0.69848840) v4 currently waiting for subops from [610]
 
 可能的原因有：
@@ -262,7 +262,7 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 
 如果有原因导致 OSD 震荡（反复地被标记为 `down` ，然后又 `up` ），你可以强制 monitor 停止这种震荡状态：
 
-	ceph osd set noup      # prevent OSDs from getting marked upplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph osd set noup      # prevent OSDs from getting marked upplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	ceph osd set nodown    # prevent OSDs from getting marked down
 
 这些标记记录在 osdmap 数据结构里：
