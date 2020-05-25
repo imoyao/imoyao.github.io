@@ -20,7 +20,7 @@
 
 用管理套接字工具检索运行时信息。列出节点上所有 Ceph 套接字：
 
-	ls /var/run/cephplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ls /var/run/cephplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 然后，执行下例命令显示可用选项，把 `{daemon-name}` 换成实际的守护进程（如 osd.0 ）：
 
@@ -50,7 +50,7 @@
 
 用 `iostat` 工具定位 I/O 相关问题。
 
-	iostat -xplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	iostat -xplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 #### 诊断信息
 
@@ -72,7 +72,7 @@
 
 维护结束后，重启 OSD 。
 
-	start ceph-osd id={num}plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	start ceph-osd id={num}plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 最后，解除 `noout` 标志。
 
@@ -106,12 +106,12 @@
 
 当 `ceph-osd` 挂掉时，monitor 可通过活着的 `ceph-osd` 了解到此情况，并通过 `ceph health` 命令报告：
 
-	ceph healthplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph healthplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	HEALTH_WARN 1/3 in osds are down
 
 特别地，有 `ceph-osd` 进程标记为 `in` 且 `down` 的时候，你也会得到警告。你可以用下面的命令得知哪个 `ceph-osd` 进程挂了：
 
-    ceph health detailplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    ceph health detailplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     HEALTH_WARN 1/3 in osds are down
     osd.0 is down since epoch 23, last address 192.168.106.220:6800/11080
 
@@ -131,7 +131,7 @@ Ceph 不允许你向满的 OSD 写入数据，以免丢失数据。在运行着�
 
 `ceph health` 会报告将满的 `ceph-osds` ：
 
-	ceph healthplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph healthplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	HEALTH_WARN 1 nearfull osds
 	osd.2 is near full at 85%
 
@@ -148,7 +148,7 @@ Ceph 不允许你向满的 OSD 写入数据，以免丢失数据。在运行着�
 
 让集群能够读写是首先要做的事情。最容易想到的就是调高 `mon osd full ratio` 和 `mon osd nearfull ratio` 值，但是对于生产环境，一旦调整这个全局比例，可能会导致整个集群的数据都会动起来，引发更多的数据迁移。因此另一种折衷方法就是单独调整已满 OSD 的 near full 和 full 比例；也可以使用调低  OSD 的 crush weight 的方法，使已满 OSD 上的数据迁移一部分出去。
 
-    # 调整单个 osd 的比例plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    # 调整单个 osd 的比例plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	ceph tell osd.id injectargs '--mon-osd-full-ratio .98'
     ceph tell osd.id injectargs '--mon-osd-full-ratio 0.98'
     
@@ -231,7 +231,7 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 
 很老的版本抱怨 “old requests” ：
 
-	osd.0 192.168.106.220:6800/18813 312 : [WRN] old request osd_op(client.5099.0:790 fatty_26485_object789 [write 0~4096] 2.5e54f643) v4 received at 2012-03-06 15:42:56.054801 currently waiting for sub opsplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	osd.0 192.168.106.220:6800/18813 312 : [WRN] old request osd_op(client.5099.0:790 fatty_26485_object789 [write 0~4096] 2.5e54f643) v4 received at 2012-03-06 15:42:56.054801 currently waiting for sub opsplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 较新版本的 Ceph 抱怨 “slow requests” ：
 
@@ -272,7 +272,7 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 
 可用下列命令清除标记：
 
-	ceph osd unset noupplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	ceph osd unset noupplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 	ceph osd unset nodown
 
 Ceph 还支持另外两个标记 `noin` 和 `noout` ，它们可防止正在启动的 OSD 被标记为 `in` （可以分配数据），或被误标记为 `out` （不管 `mon osd down out interval` 的值是多少）。

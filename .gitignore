@@ -1,3 +1,18 @@
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+.coverage*
+htmlcov
+.tox
+coverage.xml
+junit*xml
+.cache
+ceph.conf
+wheelhouse*
+
 .DS_Store
 Thumbs.db
 db.json
