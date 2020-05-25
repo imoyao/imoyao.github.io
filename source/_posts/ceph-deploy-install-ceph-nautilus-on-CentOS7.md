@@ -17,9 +17,12 @@ subtitle: 人生苦短，不要把时间浪费在重复性工作上。本文主�
 ![ceph 节点组成说明](/images/ceph-1.png)
 ## 前期准备
 1. 配置网络为静态 ip
-简略
+此步请自行完成；
+    此步配置之后需要保证：
+    1. 开机网络自启；
+    2. 各节点之间的网络连通性（`ping {hostname}`）
 2. 添加 CEPH 的 yum 源
-```plain
+```bash
 vim /etc/yum.repos.d/ceph.repo
 ```
 ```plain
@@ -46,9 +49,14 @@ type=rpm-md
 ```
 3. 更新 epel.repo
 国内使用阿里源加快下载
- ```plain
+ ```bash
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
-# 或者直接写入
+```
+或者直接写入
+```bash
+vim /etc/yum.repos.d/epel-7.repo
+```
+```plain
 [epel]
 name=Extra Packages for Enterprise Linux 7 - $basearch
 baseurl=http://mirrors.aliyun.com/epel/7/$basearch
@@ -72,22 +80,22 @@ failovermethod=priority
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
 gpgcheck=0
-```plain
+```
 4. 更新源并安装 ceph-deploy
-```plain
+```bash
 sudo yum update
-sudo yum install ceph-deploy
+sudo yum install ceph-deploy -y
 ```
 5. 安装 NTP
-```plain
-sudo yum install ntp ntpdate ntp-doc
+```bash
+sudo yum install ntp ntpdate ntp-doc -y
 ```
 6. 安装 SSH 服务
-```plain
-sudo yum install openssh-server
+```bash
+sudo yum install openssh-server -y
 ```
 7. 修改 host
-```shell
+```bash
 vi /etc/hosts
 ```
 ```plain
@@ -99,6 +107,14 @@ vi /etc/hosts
 ```
 
 ### 创建 CEPH DEPLOY 用户（以 cephadm 为例）
+
+{%note warning %}
+**注意**
+- 各节点都要创建该用户；
+- 不要使用ceph作为部署用户的用户名；
+- 用户必须赋权root用户；
+{%endnote %}
+
 1. 创建用户
 ```plain
 # 本例中使用 cephadm
@@ -110,20 +126,25 @@ sudo passwd cephadm
 echo "cephadm ALL = (root) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/cephadm
 sudo chmod 0440 /etc/sudoers.d/cephadm
 ```
-3. tty
-使用 sudo visudo 定位`Defaults requiretty`配置修改为`Defaults:ceph !requiretty`或者直接注释掉；
+
+更多信息参阅官方文档 [Preflight Checklist — Ceph Documentation](https://ceph.readthedocs.io/en/latest/install/ceph-deploy/quick-start-preflight/#create-a-ceph-deploy-user)
+
 ---
 
 ### 配置节点
-1. 修改两个子节点的网络
+ 修改两个子节点的网络
 {%note warning %}
 如果使用克隆虚拟机，请注意一定要修改 MAC 地址绑定
 [虚拟机克隆以及 IP，MAC 地址的修改_运维_进击的菜鸟-CSDN 博客](https://blog.csdn.net/lp102811/article/details/80204321)
 {% endnote %}
-注意：以下操作只在 admin-node 节点执行
+注意：以下操作只在 admin-node 节点执行即可；
+1. 切换到cephadm用户
+```bash
+su cephadm
+```
 2. 建立 admin-node 节点到两个子节点的 ssh 互信
 ```shell
-# 生成密钥，
+# 生成密钥（一路回车）
 ssh-keygen
 # 拷贝
 ssh-copy-id cephadm@node1
@@ -134,11 +155,28 @@ ssh-copy-id cephadm@node2
 ssh node1 
 ssh node2
 ```
-注意。免密登录比较重要，如果是测试环境，直接使用 root 用户的话，上面改为`ssh-copy-id root@node1`去建立互信关系。
+注意：免密登录比较重要，如果是测试环境，可以直接使用 root 用户的话，上面指令改为`ssh-copy-id root@node1`去建立互信关系。
+4. 此步为建议步骤
+编辑` ~/.ssh/config`，防止每次使用cephadm用户执行操作时手动输入，如果你有安全方面的顾虑，也可以执行时再输入。
+```
+Host node1
+   Hostname node1
+   User cephadm
+Host node2
+   Hostname node2
+   User cephadm
+Host node3
+   Hostname node3
+   User cephadm
+```
+其中Host 后面跟你的部署的节点的hostname，User后面跟刚才新建的用户名（本例中即cephadm）
 
-### 防火墙
+### 防火墙端口
+
+你可以选择直接关闭防火墙，也可以选择开放防火墙端口。以下以开放防火墙端口为例：
+
 1. 在 monitor 节点
-```plain
+```bash
 sudo firewall-cmd --zone=public --add-service=ceph-mon --permanent
 ```
 2. 在 OSDs 和 MDSs 节点
@@ -149,7 +187,11 @@ sudo firewall-cmd --zone=public --add-service=ceph --permanent
 ```plain
 sudo firewall-cmd --reload
 ```
-4. 设置 SELINUX 为 Permissive
+
+### TTY
+使用`sudo visudo`打开`sudoers`文件（注意不要用编辑器打开而是使用专用命令），定位到`Defaults requiretty`设置，修改为 `Defaults:ceph !requiretty`
+
+### 设置 SELINUX 为 Permissive
 ```plain
 sudo setenforce 0
 ```
