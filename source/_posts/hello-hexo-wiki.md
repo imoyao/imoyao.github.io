@@ -119,6 +119,8 @@ rm db.json
 ```
 [db.json file is created and added to .gitignore using hexo.io - Stack Overflow](https://stackoverflow.com/questions/25389051/db-json-file-is-created-and-added-to-gitignore-using-hexo-io)
 [hexo 流程梳理之 database | john's tech blog](https://johnwonder.github.io/2016/10/17/hexo-flow-second/)
+以上流程写了一段 Python 代码来流程化处理，目前仅适用于 Windows 平台，Python3.7 测试通过。源码见此：✨[imoyao.github.io/hexo_wiki_site_gen_all_in_one.py at hexo · imoyao/imoyao.github.io](https://github.com/imoyao/imoyao.github.io/blob/hexo/tools/hexo_wiki_site_gen_all_in_one.py)
+
 5. 查看效果
 ```plain
 hexo s
@@ -127,6 +129,7 @@ hexo s
 ## 注意事项
 
 1. Wikitten 主题会根据目录自动生成分类，所以不建议在文章的 front matter 中再去定义 categories 字段，或者定义 categories 之后直接放到首页 index 目录即可，不然可能导致分类出现重合。
+2. 为了以后“分家”方便（降低耦合度），建议不要和主站的图片目录放到一个文件夹中，比如我的主站图片在`sources/images/`文件夹下，则 wiki 的图片可以放到`sources/pics/`或者`sources/imgs/`目录下，这样以后如果要做拆分，直接剪切相应目录即可。当然，如果你使用 OSS 存储或图床服务，则不需要这样麻烦。
 
 ## 参考链接
 [Hexo 同时使用两种主题](https://konfido.github.io/2019/03/16/hexo-wiki/)
