@@ -37,3 +37,9 @@ git clean -d -f
 git pull
 ```
 [Git 撤销工作区的所有修改并删除暂存区文件_git_Acettest's Blogs-CSDN 博客](https://blog.csdn.net/u010178308/article/details/86167195)
+
+## 查看某个指定文件的修改历史
+
+```bash
+git log --follow -p {file_path}
+```

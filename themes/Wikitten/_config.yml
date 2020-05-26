@@ -64,7 +64,7 @@ history_control: # make you wiki has history version control in page
     user: imoyao
     repertory: imoyao.github.io
     branch: hexo
-    subdir: blog
+#    subdir: blog
     wiki_source: wiki
 
 

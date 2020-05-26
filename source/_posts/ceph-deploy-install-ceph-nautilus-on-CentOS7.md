@@ -214,9 +214,25 @@ ceph-deploy purgedata node1 node2
 ceph-deploy forgetkeys
 rm ceph.* -rf
 ```
+{%note warning%}
+#### 报错
+```plain
+Bad owner or permissions on /home/cephadm/.ssh/config
+[ceph_deploy][ERROR ] RuntimeError: connecting to host: cnode1 resulted in errors: HostNotFound cnode1
+```
+#### 解决
+确认是以cephadm用户登录？之后执行：
+```bash
+chmod 600 /home/cephadm/.ssh/config
+```
+然后重复执行上一步。
+{%endnote%}
+此步骤会清除节点之间的ceph环境，相当于初始化一个全新的安装环境。
 
 ### 初始化
-1. 在`my-cluster`节点执行创建 mon 节点
+1. 在`my-cluster`管理节点执行创建 mon 节点
+指定的节点名称为 hostname, fqdn或者hostname:fqdn，如果不了解FQDN的含义可以参考：
+[关于hostname和fqdn的区别和获取及设置 - 邹天得 - 博客园](https://www.cnblogs.com/videring/articles/7025867.html)
 ```plain
 ceph-deploy new admin-node
 ```
@@ -244,7 +260,10 @@ auth_client_required = cephx
 osd pool default size = 2  #增加默认副本数为 2
 public network = 172.18.1.0/24 # 添加整个网段
 ```
-
+如果使用ipv6网络，则追加如下内容
+```bash
+echo ms bind ipv6 = true >> ceph.conf
+```
 ### 安装 ceph
 admin-node 节点执行，ceph-deploy 自动去各节点安装 ceph 环境
 ```plain
@@ -459,6 +478,7 @@ ceph-deploy --overwrite-conf osd create --data /dev/sdb node1
 [ceph_deploy][ERROR ] GenericError: Failed to create 1 OSDs
 ```
 所以需要覆写配置，正常操作的时候不需要添加该选项。
+注意`--overwrite-conf`指令必须紧跟在后面，而不能写在配置文件后面！
 {% endnote %}
 
 > 其中`create`是`prepare`和`active`的合并操作，下面是该命令的解释：
@@ -587,6 +607,177 @@ ceph health
 HEALTH_OK
 ```
 至此，ceph 环境搭建完毕！
+----
+## 启用dashboard
+
+1. 在所有的mgr节点安装dashbaord
+```bash
+yum install ceph-mgr-dashboard -y
+```
+2. 重启mgr功能
+```bash
+ceph mgr module disable dashboard
+ceph mgr module enable dashboard
+```
+3. 生成并安装自签名的证书
+```bash
+ceph dashboard create-self-signed-cert
+```
+
+4. 创建一个dashboard登录用户名密码
+```bash
+ceph dashboard ac-user-create admin admin administrator 
+```
+5. 查看服务访问方式
+```bash
+ceph mgr services
+```
+返回结果
+```plain
+{
+    "dashboard": "https://cnode0:8443/"
+}
+```
+6. 打开防火墙指定端口（8443）
+```
+firewall-cmd --zone=public --add-port=8443/tcp --permanent >/dev/null 2>&1
+firewall-cmd --reload >/dev/null 2>&1
+```
+7. 访问浏览器
+![dashboard](/images/ceph-dashboard.png)
+
+## 开启Object Gateway管理功能
+
+```
+1、创建rgw用户
+# radosgw-admin user info --uid=user01
+2、提供Dashboard证书
+# ceph dashboard set-rgw-api-access-key $access_key
+# ceph dashboard set-rgw-api-secret-key $secret_key
+3、配置rgw主机名和端口
+# ceph dashboard set-rgw-api-host 192.168.25.224
+4、刷新web页面
+```
+
+## 安装grafana
+1. 配置yum源文件
+建议使用清华源：[grafana | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirror.tuna.tsinghua.edu.cn/help/grafana/)
+```bash
+vim /etc/yum.repos.d/grafana.repo
+```
+```plain
+[grafana]
+name=grafana
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/grafana/yum/rpm
+repo_gpgcheck=0
+enabled=1
+gpgcheck=0
+```
+2. 通过yum命令安装grafana
+```bash
+yum -y install grafana
+```
+3.启动grafana并设为开机自启
+```bash
+systemctl start grafana-server.service 
+systemctl enable grafana-server.service
+```
+## 安装promethus
+
+
+1. 下载安装包，
+下载地址：https://prometheus.io/download/
+
+2、解压压缩包
+```bash
+tar fvxz prometheus-2.14.0.linux-amd64.tar.gz
+```
+3、将解压后的目录改名
+```bash
+mv prometheus-2.14.0.linux-amd64 /opt/prometheus
+```
+4、查看promethus版本
+```bash
+./prometheus --version
+```
+```plain
+prometheus, version 2.14.0 (branch: HEAD, revision: edeb7a44cbf745f1d8be4ea6f215e79e651bfe19)
+  build user:       root@df2327081015
+  build date:       20191111-14:27:12
+  go version:       go1.13.4
+
+```
+5、配置系统服务启动
+```bash
+# vim /etc/systemd/system/prometheus.service
+```
+```
+[Unit]
+Description=Prometheus Monitoring System
+Documentation=Prometheus Monitoring System
+
+[Service]
+ExecStart=/opt/prometheus/prometheus \
+  --config.file /opt/prometheus/prometheus.yml \
+  --web.listen-address=:9090
+
+[Install]
+WantedBy=multi-user.target
+```
+6、加载系统服务
+```bash
+systemctl daemon-reload
+```
+7、启动服务和添加开机自启动
+```bash
+systemctl start prometheus
+systemctl enable prometheus
+```
+
+## ceph mgr prometheus插件配置
+
+```bash
+ceph mgr module enable prometheus
+netstat -nltp | grep mgr 检查端口
+curl 127.0.0.1:9283/metrics  测试返回值
+```
+
+## 配置promethus
+
+1、在 scrape\_configs: 配置项下添加
+
+```
+vim prometheus.yml
+- job_name: 'ceph_cluster'
+    honor_labels: true
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['192.168.25.224:9283']
+        labels:
+          instance: ceph
+          
+
+```
+
+2、重启promethus服务
+
+```
+systemctl restart prometheus
+```
+
+3、检查prometheus服务器中是否添加成功
+
+```
+# 浏览器-》 http://x.x.x.x:9090 -》status -》Targets
+```
+
+## 配置grafana
+
+1、浏览器登录 grafana 管理界面  
+2、添加data sources，点击configuration--》data sources  
+3、添加dashboard，点击HOME--》find dashboard on grafana.com  
+4、搜索ceph的dashboard  
+5、点击HOME--》Import dashboard, 选择合适的dashboard，记录编号
 
 ## 参考资料
 - [Preflight Checklist — Ceph Documentation](https://docs.ceph.com/docs/nautilus/start/quick-start-preflight/)
