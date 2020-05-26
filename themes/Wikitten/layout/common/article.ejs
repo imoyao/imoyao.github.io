@@ -17,7 +17,7 @@
                         <% if (theme.history_control.enable) { 
                             let repertory_address = `${theme.history_control.server_link}/${theme.history_control.user}/${theme.history_control.repertory}`;
                             // 使用子目录，所以路径这么写
-                            let file_path = `${theme.history_control.branch}/${theme.history_control.subdir}/${theme.history_control.wiki_source}/${post.source}`;%>
+                            let file_path = `${theme.history_control.branch}/${theme.history_control.wiki_source}/${post.source}`;%>
                             <div class="article-meta-button">
                                 <a href='<%= `${repertory_address}/raw/${file_path}` %>'> Source </a>
                             </div>
