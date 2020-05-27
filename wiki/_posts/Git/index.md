@@ -43,3 +43,9 @@ git pull
 ```bash
 git log --follow -p {file_path}
 ```
+
+## 新建分支(以mydev为例)并推送
+```bash
+git checkout -b mydev
+git push origin mydev:mydev
+```
