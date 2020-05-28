@@ -10,11 +10,14 @@ categories:
 - 工作日常
 subtitle: 人生苦短，不要把时间浪费在重复性工作上。本文主要以 ceph-deploy 为例实践了 ceph 集群的部署流程。
 ---
+
 ## 引言
 项目开发中准备基于 ceph-mgr 中的 dashboard 做二次开发，本文主要记录搭建 ceph 环境的过程。
+
 ### 环境说明
 节点配置中参考官网搭建示例，基于实体机内存状况限制，使用三节点最小节点配置，具体如下：
 ![ceph 节点组成说明](/images/ceph-1.png)
+
 ## 前期准备
 1. 配置网络为静态 ip
 此步请自行完成；
@@ -22,6 +25,7 @@ subtitle: 人生苦短，不要把时间浪费在重复性工作上。本文主�
     1. 开机网络自启；
     2. 各节点之间的网络连通性（`ping {hostname}`）
 2. 添加 CEPH 的 yum 源
+国内使用阿里源加快下载
 ```bash
 vim /etc/yum.repos.d/ceph.repo
 ```
@@ -48,7 +52,7 @@ gpgcheck=0
 type=rpm-md
 ```
 3. 更新 epel.repo
-国内使用阿里源加快下载
+添加 EPEL 的阿里镜像源
  ```bash
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 ```
@@ -91,6 +95,7 @@ sudo yum install ceph-deploy -y
 ```bash
 sudo yum install ntp ntpdate ntp-doc -y
 ```
+配置ntp服务（此步省略）
 6. 安装 SSH 服务
 ```bash
 sudo yum install openssh-server -y
@@ -204,7 +209,9 @@ mkdir my-cluster
 cd my-cluster
 ```
 {% note warning%}
-请不要使用 sudo 调用 ceph-deploy；如果你以其他用户身份登录，不要以 root 身份运行它，因为它不会发出远程主机上所需的 sudo 命令。
+### 注意
+1. 以后执行 ceph-deploy 的指令都应该在该目录下进行；
+2. 请不要使用 sudo 调用 ceph-deploy；如果你以其他用户身份进行部署操作，不要以 root 身份运行它，因为它不会发出远程主机上所需的 sudo 命令。
 {% endnote %}
 
 ### 清除环境
@@ -230,9 +237,10 @@ chmod 600 /home/cephadm/.ssh/config
 此步骤会清除节点之间的ceph环境，相当于初始化一个全新的安装环境。
 
 ### 初始化
-1. 在`my-cluster`管理节点执行创建 mon 节点
+1. 在`my-cluster`管理节点执行创建部署节点
 指定的节点名称为 hostname, fqdn或者hostname:fqdn，如果不了解FQDN的含义可以参考：
 [关于hostname和fqdn的区别和获取及设置 - 邹天得 - 博客园](https://www.cnblogs.com/videring/articles/7025867.html)
+本例中管理节点`hostname`为admin-node，此处应该为你执行ceph-deploy操作的节点hostname。
 ```plain
 ceph-deploy new admin-node
 ```
@@ -258,7 +266,7 @@ auth_cluster_required = cephx
 auth_service_required = cephx
 auth_client_required = cephx
 osd pool default size = 2  #增加默认副本数为 2
-public network = 172.18.1.0/24 # 添加整个网段
+public network = 172.18.1.0/24 # 添加整个子网段
 ```
 如果使用ipv6网络，则追加如下内容
 ```bash
@@ -285,7 +293,8 @@ ceph-deploy install admin-node node1 node2
 - [用 yum 安装软件提示 cannot find a valid baseurl for repo:base/7/x86_64 的解决方法 - 简书](https://www.jianshu.com/p/50f0fb206cf7)
 - [小白解决 CENTOS7 错误:Cannot find a valid baseurl for repo: base/7/x86_6 - 林诺欧巴 - 博客园](https://www.cnblogs.com/linnuo/p/6257204.html)  
 上面的方法提供了两种方案：a):直接修改网卡配置；b):修改 `cat /etc/resolv.conf`
-我使用 a 方案时候重启网络`systemctl restart network`发现域名解析配置文件已经被修改了。本人不擅长网络相关，见笑。
+我使用 a 方案时候重启网络`systemctl restart network`发现域名解析配置文件已经被修改了。鄙人不擅长网络。
+此外，如果使用费root用户部署，一定要保证部署用户（本例中的cephadm）可以正常sudo！
 {% endnote %}
 ---
 {%note info %}
@@ -325,6 +334,7 @@ ssh: connect to host node1 port 22: Connection timed out
 
 ```
 {% endnote%}
+
 ### 查看 ceph 工作状态
 ```shell
 ceph -s
@@ -346,6 +356,7 @@ ceph -s
     pgs:     
 ```
 此时，集群已经部署成功，但是还没有存储节点，`革命尚未成功，同志仍需努力`。
+
 ### 添加 OSD 节点
 1. 获取集群节点可用磁盘列表
 ```shell
@@ -659,6 +670,10 @@ firewall-cmd --reload >/dev/null 2>&1
 4、刷新web页面
 ```
 
+以下内容是从别人博客复制的，没有验证。
+
+---
+
 ## 安装grafana
 1. 配置yum源文件
 建议使用清华源：[grafana | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirror.tuna.tsinghua.edu.cn/help/grafana/)
@@ -683,20 +698,18 @@ systemctl start grafana-server.service
 systemctl enable grafana-server.service
 ```
 ## 安装promethus
-
-
 1. 下载安装包，
 下载地址：https://prometheus.io/download/
 
-2、解压压缩包
+2. 解压压缩包
 ```bash
 tar fvxz prometheus-2.14.0.linux-amd64.tar.gz
 ```
-3、将解压后的目录改名
+3. 将解压后的目录改名
 ```bash
 mv prometheus-2.14.0.linux-amd64 /opt/prometheus
 ```
-4、查看promethus版本
+4. 查看promethus版本
 ```bash
 ./prometheus --version
 ```
@@ -707,9 +720,9 @@ prometheus, version 2.14.0 (branch: HEAD, revision: edeb7a44cbf745f1d8be4ea6f215
   go version:       go1.13.4
 
 ```
-5、配置系统服务启动
+5. 配置系统服务启动
 ```bash
-# vim /etc/systemd/system/prometheus.service
+vim /etc/systemd/system/prometheus.service
 ```
 ```
 [Unit]
