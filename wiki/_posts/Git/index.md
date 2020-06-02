@@ -49,3 +49,38 @@ git log --follow -p {file_path}
 git checkout -b mydev
 git push origin mydev:mydev
 ```
+
+## 删除已经跟踪的文件或者目录
+
+这种情况就是说：之前不小心把一些本不应该提交的文件或目录提交上去了，现在发现了，需要对上游仓库进行删除，同时本地不再跟踪文件变化。
+1. 首先修改`.gitignore`，排除要删除的文件。
+2. 按照如下执行，分别删除本地和git跟踪
+```bash
+rm -rf {file name}    # 删除本地文件
+git rm -r --cached {file name}  #从index中删除（不再跟踪）
+```
+3. 提交修改
+```bash
+git add -A/. # 添加到暂存区
+git push origin {branch name}   # 推送到远程仓库
+```
+看一下`git rm`的用法
+> $ git rm -r --cached
+> usage: git rm [<options>] [--] <file>...
+>
+>    -n, --dry-run         dry run
+    -q, --quiet           do not list removed files
+    --cached              only remove from the index
+    -f, --force           override the up-to-date check
+    -r                    allow recursive removal
+    --ignore-unmatch      exit with a zero status even if nothing matched
+
+{%note primary%}
+如果同名的文件过多，如：`.class` 文件被提交了，那么如果这样一个个显然效率太低，可以按照下面方法操作:
+```bash
+find . -iname {filename} -exec rm -rf {}\
+```
+重复上面的步骤，将文件名替换为下一个要删除的文件名
+{%endnote%}
+
+参见：[删除git已经跟踪的文件或者目录 - 简书](https://www.jianshu.com/p/706560653753)
