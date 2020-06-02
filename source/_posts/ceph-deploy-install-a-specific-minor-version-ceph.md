@@ -188,6 +188,42 @@ ceph-deploy install --repo-url http://172.18.1.101/ ceph1 ceph2 ceph3
 [root@admin-node x86_64]# ceph -v
 ceph version 14.2.5 (ad5bd132e1492173c85fda2cc863152730b16a92) nautilus (stable)
 ```
+## 本地镜像安装
+1. 下载源文件到本地
+```
+mkdir ceph-mirror
+cd ceph-mirror
+
+yum install --downloadonly --downloaddir=. ceph
+yum install --downloadonly --downloaddir=. yum-plugin-priorities
+
+```
+2. 对文件进行删选
+仅保留我们需要的版本的rpm文件，其余的删除（否则同步会很耗时）
+
+3. 使用`--local-mirror`指定使用本地镜像安装
+```
+ceph-deploy install --local-mirror {/opt/ceph-mirror/rpm-nautilus/el7/} node1 nodex
+```
+后面一次跟的指令为本地mirror所在路径、节点hostname（多个或一个）
+
+### 问题定位
+同步时同步文件报内存不足
+```plain
+[cdnode1][INFO  ] syncing file: aarch64/ceph-debuginfo-14.2.2-0.el7.aarch64.rpm
+[ceph_deploy][ERROR ] Traceback (most recent call last):
+[ceph_deploy][ERROR ]   File "/usr/lib/python2.7/site-packages/ceph_deploy/util/decorators.py", line 69, in newfunc
+
+# 太长省略
+[ceph_deploy][ERROR ]     return _Serializer().save(obj)
+[ceph_deploy][ERROR ]   File "/usr/lib/python2.7/site-packages/ceph_deploy/lib/vendor/remoto/lib/vendor/execnet/gateway_base.py", line 1312, in save
+[ceph_deploy][ERROR ]     return type(streamlist[0])().join(streamlist)
+[ceph_deploy][ERROR ] MemoryError
+[ceph_deploy][ERROR ] 
+Error in sys.exitfunc:
+
+```
+分析了一下，这个文件大概2G大小，如果直接rsync的话会导致内存爆炸，所以我的处理办法是删除`ceph-debuginfo`这个文件，后续有问题再装。
 
 ## 总结	
  `ceph-deploy` 可以通过三种指定方式部署 ceph,分别为`ceph-deploy install --release`（用于指定大版本号如`nautilus`）、`ceph-deploy install --testing`(用于最新开发版本)和`ceph-deploy install --dev`（用于指定分支或者 tag）,起初我以为`--dev`可以满足我指定版本号的需求，后来一顿操作发现报错:
