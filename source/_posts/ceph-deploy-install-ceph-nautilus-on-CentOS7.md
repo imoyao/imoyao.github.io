@@ -56,11 +56,11 @@ type=rpm-md
  ```bash
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 ```
-
-或者直接写入
+或者手动编辑
 ```bash
 vim /etc/yum.repos.d/epel-7.repo
 ```
+直接写入
 ```plain
 [epel]
 name=Extra Packages for Enterprise Linux 7 - $basearch
@@ -228,7 +228,7 @@ Bad owner or permissions on /home/cephadm/.ssh/config
 [ceph_deploy][ERROR ] RuntimeError: connecting to host: cnode1 resulted in errors: HostNotFound cnode1
 ```
 #### 解决
-确认是以cephadm用户登录？之后执行：
+确认节点开机？确认是以cephadm用户登录？之后执行：
 ```bash
 chmod 600 /home/cephadm/.ssh/config
 ```
@@ -252,6 +252,22 @@ total 12
 -rw-r--r--. 1 root root 3014 Mar 15 16:33 ceph-deploy-ceph.log
 -rw-------. 1 root root   73 Mar 15 16:33 ceph.mon.keyring
 ```
+{%note warning%}
+遇到报错
+```plain
+Traceback (most recent call last):
+  File "/usr/bin/ceph-deploy", line 18, in <module>
+    from ceph_deploy.cli import main
+  File "/usr/lib/python2.7/site-packages/ceph_deploy/cli.py", line 1, in <module>
+    import pkg_resources
+ImportError: No module named pkg_resources
+```
+安装`distribute`
+```bash
+pip install distribute
+```
+或者参考此处：[python - No module named pkg_resources - Stack Overflow](https://stackoverflow.com/questions/7446187/no-module-named-pkg-resources)
+{%endnote%}
 2. 修改集群配置
 ```shell
 vi ceph.conf
@@ -272,6 +288,7 @@ public network = 172.18.1.0/24 # 添加整个子网段
 ```bash
 echo ms bind ipv6 = true >> ceph.conf
 ```
+
 ### 安装 ceph
 admin-node 节点执行，ceph-deploy 自动去各节点安装 ceph 环境
 ```plain
@@ -303,7 +320,7 @@ ceph-deploy install admin-node node1 node2
 执行到上面的时候可能会遇到报错，一定要耐心排查保证没有`ERROR`之后再进行下一步！
 ### 初始化 monitor 节点并收集所有密钥
 ```shell
-$ ceph-deploy mon create-initial
+ceph-deploy mon create-initial
 ```
 此时目录下文件为
 ```plain
@@ -356,7 +373,17 @@ ceph -s
     pgs:     
 ```
 此时，集群已经部署成功，但是还没有存储节点，`革命尚未成功，同志仍需努力`。
-
+{%note warning%}
+今天重新部署遇到报错：
+```
+ceph -s
+[errno 2] error connecting to the cluster
+```
+现象描述：不加sudo执行下面的指令显示受限，加sudo之后可以获取到ceph的状态，很奇怪，暂时没有找到解决办法。
+```bash
+sudo ceph --connect-timeout=25 --cluster=ceph --admin-daemon=/var/run/ceph/ceph-mon.cnode0.asok mon_status
+```
+{%endnote %}
 ### 添加 OSD 节点
 1. 获取集群节点可用磁盘列表
 ```shell
