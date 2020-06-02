@@ -1,8 +1,8 @@
 ---
-title: 一个示例 markdown
+title: 给 SFTP 创建新用户、默认打开和限制在某个目录
 toc: true
 date: 2020-05-26 12:27:56
-tags: others
+tags: SFTP
 ---
 # [给sftp创建新用户、默认打开和限制在某个目录](https://www.cnblogs.com/xjnotxj/p/6912471.html)
 
