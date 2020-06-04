@@ -7,6 +7,15 @@ tags:
 - Yum
 
 ---
+
+## 配置
+默认yum下载的包保存在`/var/cache/yum`，也可以在 /etc/yum.conf 指定：
+```plain
+cachedir=/var/cache/yum # 存放目录
+keepcache=1 # 1为保存 0为不保存
+metadata_expire=90m # 过期时间
+```
+
 ## 只下载不安装包
 
 1. 安装`yum-downloadonly`或 `yum-plugin-downloadonly` 软件包
