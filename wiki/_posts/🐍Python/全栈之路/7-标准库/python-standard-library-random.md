@@ -8,7 +8,6 @@ tags:
 top: 13
 
 ---
-# Python 标准库系列之 random 模块
 
 This module implements pseudo-random number generators for various distributions.
 

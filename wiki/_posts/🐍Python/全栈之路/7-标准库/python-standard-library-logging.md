@@ -8,7 +8,6 @@ tags:
 top: 15
 
 ---
-# Python 标准库系列之 logging 模块
 
 This module defines functions and classes which implement a flexible event logging system for applications and libraries.
 

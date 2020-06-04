@@ -8,7 +8,6 @@ tags:
 top: 7
 
 ---
-# Python 标准库系列之 datetime 模块
 
 > Fast implementation of the datetime type.
 
