@@ -262,8 +262,10 @@ Traceback (most recent call last):
     import pkg_resources
 ImportError: No module named pkg_resources
 ```
-安装`distribute`
+安装`distribute`。如果国内源太慢，可以参考此文[Python 换源操作 | 别院牧志](https://www.masantu.com/wiki/%E6%8D%A2%E6%BA%90/pip/)
 ```bash
+# 如果没有安装pip，先安装pip
+yum install python-pip 
 pip install distribute
 ```
 或者参考此处：[python - No module named pkg_resources - Stack Overflow](https://stackoverflow.com/questions/7446187/no-module-named-pkg-resources)
@@ -318,6 +320,7 @@ ceph-deploy install admin-node node1 node2
 本人在实践时发现默认安装最新稳定版本 ceph，而假如需要安装指定小版本的 ceph，可以参考[此文](/blog/2020-03-16/ceph-deploy-install-a-specific-minor-version-ceph/)。
 {% endnote %}
 执行到上面的时候可能会遇到报错，一定要耐心排查保证没有`ERROR`之后再进行下一步！
+
 ### 初始化 monitor 节点并收集所有密钥
 ```shell
 ceph-deploy mon create-initial

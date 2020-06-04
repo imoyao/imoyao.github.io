@@ -8,7 +8,6 @@ tags:
 top: 11
 
 ---
-# Python 标准库系列之 zipfile 模块
 
 The ZIP file format is a common archive and compression standard. This module provides tools to create, read, write, append, and list a ZIP file. 
 
