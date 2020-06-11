@@ -15,12 +15,12 @@ tags: 博客
 1. https 图片外链收费
 2. 需要域名备案
 
-## 阿里云OSS
+## 阿里云 OSS
 
-阿里云OSS计费由四个部分组成: 存储费用 + 流量费用 + 请求费用 + 数据处理费用
+阿里云 OSS 计费由四个部分组成: 存储费用 + 流量费用 + 请求费用 + 数据处理费用
 
 3. jsDelivr
-```
+```plain
 //图片上床到Github仓库的地址
 https://github.com/Longxr/PicStored/tree/master/blog/xxx.png
 
@@ -43,7 +43,7 @@ https://cdn.jsdelivr.net/gh/Longxr/PicStored/blog/xxx.png
 
 ## 软件
 ### GoodSync vs freefilesync
-关于备份，有两个极优秀的软件我不得不提——Macrium Reflect 和 GoodSync。如果说Macrium为我提供了整套的系统以及磁盘备份的解决方案，那么GoodSync可以说是只要有正在运行的系统（他也可以运行在U盘里）存在，它可以解决任何的备份、同步、传输需求。
+关于备份，有两个极优秀的软件我不得不提——Macrium Reflect 和 GoodSync。如果说 Macrium 为我提供了整套的系统以及磁盘备份的解决方案，那么 GoodSync 可以说是只要有正在运行的系统（他也可以运行在 U 盘里）存在，它可以解决任何的备份、同步、传输需求。
 
 它支持任意（可以非本机，可以在内网，可以是云存储）文件夹到任意文件夹备份与同步。
 
@@ -57,6 +57,6 @@ https://cdn.jsdelivr.net/gh/Longxr/PicStored/blog/xxx.png
 [更换博客图床 - 简书](https://www.jianshu.com/p/2b14396a6eb2)
 [可能是最佳的免费图床 | 斯是陋室，惟吾德馨](https://yi-yun.github.io/%E5%9B%BE%E5%BA%8A%E7%9A%84%E9%80%89%E6%8B%A9/)
 [博客图床迁移记](https://glumes.com/post/life/blog-image-migrate/)
-[markdown博客图床上传的艰辛之路 | 洞香春](https://wdd.js.org/the-hard-way-of-markdown-insert-images.html)
+[markdown 博客图床上传的艰辛之路 | 洞香春](https://wdd.js.org/the-hard-way-of-markdown-insert-images.html)
 [博客图床最佳解决方案 | 嘟嘟独立博客](http://tengj.top/2019/08/18/tuchuang/)
 [各位 v 友，你们博客的图床都采用什么方案啊 - V2EX](https://v2ex.com/t/551634)
