@@ -82,12 +82,12 @@ def foo():
 
 `Python`解释器没有做优化，所以，即使把上面的`factorial(n)`函数改成尾递归方式的`tail_recursion_fact()`，也会导致栈溢出。
 
-通过特殊的装饰器，我们也可以实现[Python开启尾递归优化](https://segmentfault.com/a/1190000007641519),详见代码中的`tail_call_optimized()`函数。
+通过特殊的装饰器，我们也可以实现[Python 开启尾递归优化](https://segmentfault.com/a/1190000007641519),详见代码中的`tail_call_optimized()`函数。
 
 ## 注意
 
 尽管使用递归思想编写程序通常可以使条理更加清晰，但是有可能导致消耗的空间和时间使我们得不偿失。
-比如`fib_normal()`、`fib_recursion()`和`fib_tail_recursion()`在计算`Fibonacci`数列前30项时，消耗的时间分别是:
+比如`fib_normal()`、`fib_recursion()`和`fib_tail_recursion()`在计算`Fibonacci`数列前 30 项时，消耗的时间分别是:
 ```bash
 The function **fib_normal** takes 0.00020684471130371094 time.      
 The function **fib_recursion** takes 4.22707200050354 time.

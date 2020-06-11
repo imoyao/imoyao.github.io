@@ -743,7 +743,7 @@ reddit              https://www.reddit.com/r/vim/
 - 某些终端中使用 Vim 8 内嵌终端如看到奇怪字符，使用 :set t_RS= t_SH= 解决
 - 某些终端中使用 NeoVim 如看到奇怪字符，使用 :set guicursor= 解决
 - 多使用 ciw, ci[, ci", ci( 以及 diw, di[, di", di( 命令来快速改写/删除文本
-- 在行内左右移动光标时，多使用w b e或W B E，而不是h l或方向键，这样会快很多
+- 在行内左右移动光标时，多使用 w b e 或 W B E，而不是 h l 或方向键，这样会快很多
 - SHIFT 相当于移动加速键， w b e 移动光标很慢，但是 W B E 走的很快
 - 自己要善于总结新技巧，比如移动到行首非空字符时用 0w 命令比 ^ 命令更容易输入
 - 在空白行使用 dip 命令可以删除所有临近的空白行，viw 可以选择连续空白
@@ -757,7 +757,7 @@ reddit              https://www.reddit.com/r/vim/
 - 搜索时可以用 CTRL-R CTRL-W 插入光标下的单词，命令模式也能这么用
 - 映射按键时，应该默认使用 noremap ，只有特别需要的时候使用 map
 - 当你觉得做某事很低效时，你应该停下来，u u u u 然后思考正确的高效方式来完成
-- 用 y复制文本后，命令模式中 CTRL-R 然后按双引号 0 可以插入之前复制内容
+- 用 y 复制文本后，命令模式中 CTRL-R 然后按双引号 0 可以插入之前复制内容
 - Windows 下的 GVim 可以设置 set rop=type:directx,renmode:5 增强显示
 
 ## 版权信息

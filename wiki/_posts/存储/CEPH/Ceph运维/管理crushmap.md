@@ -52,7 +52,7 @@ Ceph 将把已编译的 CRUSH Map 保存到你指定的文件。
 要把 CRUSH Map 应用到集群，执行命令：
 
 
-	```bash
+	```bashplainplainplainplainplainplainplainplainplain
 	ceph osd setcrushmap -i  {compiled-crushmap-filename}
 	```
 

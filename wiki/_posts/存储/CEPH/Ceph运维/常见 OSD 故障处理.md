@@ -12,7 +12,7 @@
 
 如果你没改默认路径，可以在 `/var/log/ceph` 下找到 Ceph 的日志：
 
-	```bash
+	```bashplainplain
 	ls /var/log/ceph
 	```
 
@@ -22,13 +22,13 @@
 
 用管理套接字工具检索运行时信息。列出节点上所有 Ceph 套接字：
 
-	```bash
+	```bashplain
 	ls /var/run
 	```
 
 然后，执行下例命令显示可用选项，把 `{daemon-name}` 换成实际的守护进程（如 osd.0 ）：
 
-	ceph daemon osd.0 
+	ceph daemon osd.0plainplain
 
 或者，你也可以指定一个 `{socket-file}` （如 `/var/run/ceph` 下的文件）：
 
@@ -46,7 +46,7 @@
 
 可能会引起文件系统问题。用 `df` 命令显示文件系统的可用空间。
 
-	df -h
+	df -hplainplainplain
 
 其它用法见 `df --help` 。
 
@@ -100,7 +100,7 @@
 
 如果增大最大线程数解决了这个问题，你可以把此配置 `kernel.pid_max` 写入配置文件 `/etc/sysctl.conf`，使之永久生效，例如：
 
-	kernel.pid_max = 4194303
+	kernel.pid_max = 4194303plain
 
 - **内核版本**： 确认你使用的内核版本和发布版本。 Ceph 默认依赖一些第三方工具，这些工具可能有缺陷或者与特定发布版和/或内核版本冲突（如 Google perftools ）。检查下[操作系统推荐表](http://docs.ceph.com/docs/master/start/os-recommendations/)，确保你已经解决了内核相关的问题。
 
@@ -110,7 +110,7 @@
 
 当 `ceph-osd` 挂掉时，monitor 可通过活着的 `ceph-osd` 了解到此情况，并通过 `ceph health` 命令报告：
 
-	ceph healthplain
+	ceph healthplainplainplain
 	HEALTH_WARN 1/3 in osds are down
 
 特别地，有 `ceph-osd` 进程标记为 `in` 且 `down` 的时候，你也会得到警告。你可以用下面的命令得知哪个 `ceph-osd` 进程挂了：
@@ -177,7 +177,7 @@ Ceph 是一个分布式存储系统，所以它依赖于网络来互联 OSD 们�
 
 确保 Ceph 进程和 Ceph 依赖的进程已建立连接和/或在监听。
 
-	netstat -a | grep ceph
+	netstat -a | grep cephplainplain
 	netstat -l | grep ceph
 	sudo netstat -p | grep ceph
 
@@ -241,7 +241,7 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 
 很老的版本抱怨 “old requests” ：
 
-	osd.0 192.168.106.220:6800/18813 312 : [WRN] old request osd_op(client.5099.0:790 fatty_26485_object789 [write 0~4096] 2.5e54f643) v4 received at 2012-03-06 15:42:56.054801 currently waiting for sub ops
+	osd.0 192.168.106.220:6800/18813 312 : [WRN] old request osd_op(client.5099.0:790 fatty_26485_object789 [write 0~4096] 2.5e54f643) v4 received at 2012-03-06 15:42:56.054801 currently waiting for sub opsplain
 
 较新版本的 Ceph 抱怨 “slow requests” ：
 
@@ -273,12 +273,12 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 
 如果有原因导致 OSD 震荡（反复地被标记为 `down` ，然后又 `up` ），你可以强制 monitor 停止这种震荡状态：
 
-	ceph osd set noup      # prevent OSDs from getting marked up
+	ceph osd set noup      # prevent OSDs from getting marked upplainplainplain
 	ceph osd set nodown    # prevent OSDs from getting marked down
 
 这些标记记录在 osdmap 数据结构里：
 
-	ceph osd dump | grep flags
+	ceph osd dump | grep flagsplainplainplain
 	flags no-up,no-down
 
 可用下列命令清除标记：

@@ -213,7 +213,7 @@ Run 'docker COMMAND --help' for more information on a command.
     ```
 2. 之后打开 dockerfile，查看里面的内容
 
-    ```plain
+    ```plainplain
     # 使用官方镜像（node:current-slim）作为父级image，冒号表示标签
     FROM node:current-slim
     # 设置工作目录，此处目录是你的镜像文件系统，而不是主机文件系统
@@ -345,7 +345,7 @@ docker.io/jolmomar/ansible_runner_service   latest              b27d3f6bf8a6    
     然后再去访问，应用已经停止服务了。当然，你还可以使用`docker rm --force bb`强制删除容器。
     删除容器还可以使用下面的指令：
     1. 查询容器 ID
-        ```shell
+        ```shellplainplain
         docker container ls -all
         # 或者使用 ps 查看全部容器
         docker ps -a
