@@ -129,7 +129,7 @@ sudo passwd cephadm
 ```
 2. sudo 赋权
 ```plain
-echo "cephadm ALL = (root) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/cephadm
+echo "cephadm ALL = (root) NOPASSWD:ALL"  > /etc/sudoers.d/cephadm
 sudo chmod 0440 /etc/sudoers.d/cephadm
 ```
 
@@ -297,8 +297,11 @@ admin-node 节点执行，ceph-deploy 自动去各节点安装 ceph 环境
 ceph-deploy install admin-node node1 node2
 ```
 ---
-{%note info %}
-执行上述报错
+
+#### 报错处理
+
+{%note danger %}
+1. 网络不通
 ```plain
 # 太长省略
 [admin-node][WARNIN]             yum-config-manager --save --setopt=<repoid>.skip_if_unavailable=true
@@ -313,7 +316,9 @@ ceph-deploy install admin-node node1 node2
 - [小白解决 CENTOS7 错误:Cannot find a valid baseurl for repo: base/7/x86_6 - 林诺欧巴 - 博客园](https://www.cnblogs.com/linnuo/p/6257204.html)  
 上面的方法提供了两种方案：a):直接修改网卡配置；b):修改 `cat /etc/resolv.conf`
 我使用 a 方案时候重启网络`systemctl restart network`发现域名解析配置文件已经被修改了。鄙人不擅长网络。
-此外，如果使用费root用户部署，一定要保证部署用户（本例中的cephadm）可以正常sudo！
+此外，如果使用非root用户部署，一定要保证部署用户（本例中的cephadm）可以正常sudo！
+2. 重新配置epel.repo
+进入`/etc/yum.repos.d`中删除`epel.repo`和`epel-testing.repo`重新安装
 {% endnote %}
 ---
 {%note info %}
@@ -647,8 +652,11 @@ ceph health
 ```plain
 HEALTH_OK
 ```
-至此，ceph 环境搭建完毕！
+
+至此，ceph 环境搭建完毕！ 
+
 ----
+
 ## 启用dashboard
 
 1. 在所有的mgr节点安装dashbaord
