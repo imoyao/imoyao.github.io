@@ -241,6 +241,6 @@ with Popen(["cmd", "arg1"], stdout=PIPE, bufsize=1,
     for line in p.stdout:
         print(line, end='')
 ```
-与 Python 2 不同，Python 2 照原样输出子进程的字节串。 Python 3使用文本模式（使用locale.getpreferredencoding(False) 编码对cmd的输出进行解码）。
+与 Python 2 不同，Python 2 照原样输出子进程的字节串。 Python 3 使用文本模式（使用 locale.getpreferredencoding(False) 编码对 cmd 的输出进行解码）。
 
 来源参见[python - Read streaming input from subprocess.communicate() - Stack Overflow](https://stackoverflow.com/questions/2715847/read-streaming-input-from-subprocess-communicate)
