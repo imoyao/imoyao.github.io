@@ -93,7 +93,7 @@ PS：在有大量用户的环境中使用-r 参数时要特别小心。你永远
 ```bash
 useradd -G {group-name} username
 ```
-例如，我们要创建一个新用户 cnzhx 并将其添加到用户组 developers 中。首先需要以 root 用户身份登录到系统中。先确认一下是否存在 developers 这个用户组，在命令行输入：
+例如，我们要创建一个新用户 cnzhx 并将其添加到用户组 developers 中。首先需要以 root 用户身份登录到系统中。先确认一下是否存在 developers 这个用户l组，在命令行输入：
 ```bash
 grep developers /etc/group
 ```
