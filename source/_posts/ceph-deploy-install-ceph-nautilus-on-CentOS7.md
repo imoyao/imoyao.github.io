@@ -129,7 +129,7 @@ sudo passwd cephadm
 ```
 2. sudo 赋权
 ```plain
-echo "cephadm ALL = (root) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/cephadm
+echo "cephadm ALL = (root) NOPASSWD:ALL"  > /etc/sudoers.d/cephadm
 sudo chmod 0440 /etc/sudoers.d/cephadm
 ```
 
@@ -262,8 +262,10 @@ Traceback (most recent call last):
     import pkg_resources
 ImportError: No module named pkg_resources
 ```
-安装`distribute`
+安装`distribute`。如果国内源太慢，可以参考此文[Python 换源操作 | 别院牧志](https://www.masantu.com/wiki/%E6%8D%A2%E6%BA%90/pip/)
 ```bash
+# 如果没有安装pip，先安装pip
+yum install python-pip 
 pip install distribute
 ```
 或者参考此处：[python - No module named pkg_resources - Stack Overflow](https://stackoverflow.com/questions/7446187/no-module-named-pkg-resources)
@@ -295,8 +297,11 @@ admin-node 节点执行，ceph-deploy 自动去各节点安装 ceph 环境
 ceph-deploy install admin-node node1 node2
 ```
 ---
-{%note info %}
-执行上述报错
+
+#### 报错处理
+
+{%note danger %}
+1. 网络不通
 ```plain
 # 太长省略
 [admin-node][WARNIN]             yum-config-manager --save --setopt=<repoid>.skip_if_unavailable=true
@@ -311,13 +316,16 @@ ceph-deploy install admin-node node1 node2
 - [小白解决 CENTOS7 错误:Cannot find a valid baseurl for repo: base/7/x86_6 - 林诺欧巴 - 博客园](https://www.cnblogs.com/linnuo/p/6257204.html)  
 上面的方法提供了两种方案：a):直接修改网卡配置；b):修改 `cat /etc/resolv.conf`
 我使用 a 方案时候重启网络`systemctl restart network`发现域名解析配置文件已经被修改了。鄙人不擅长网络。
-此外，如果使用费root用户部署，一定要保证部署用户（本例中的cephadm）可以正常sudo！
+此外，如果使用非root用户部署，一定要保证部署用户（本例中的cephadm）可以正常sudo！
+2. 重新配置epel.repo
+进入`/etc/yum.repos.d`中删除`epel.repo`和`epel-testing.repo`重新安装
 {% endnote %}
 ---
 {%note info %}
 本人在实践时发现默认安装最新稳定版本 ceph，而假如需要安装指定小版本的 ceph，可以参考[此文](/blog/2020-03-16/ceph-deploy-install-a-specific-minor-version-ceph/)。
 {% endnote %}
 执行到上面的时候可能会遇到报错，一定要耐心排查保证没有`ERROR`之后再进行下一步！
+
 ### 初始化 monitor 节点并收集所有密钥
 ```shell
 ceph-deploy mon create-initial
@@ -644,8 +652,11 @@ ceph health
 ```plain
 HEALTH_OK
 ```
-至此，ceph 环境搭建完毕！
+
+至此，ceph 环境搭建完毕！ 
+
 ----
+
 ## 启用dashboard
 
 1. 在所有的mgr节点安装dashbaord

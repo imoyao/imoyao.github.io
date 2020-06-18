@@ -11,15 +11,15 @@ tags:
 
 | 操作                 | 操作说明                                 | 时间复杂度 |
 | -------------------- | -------------------------------------------- | ---------- |
-| index(value)         | 查找list某个元素的索引              | O(1)       |
+| index(value)         | 查找 list 某个元素的索引              | O(1)       |
 | a = index(value)     | 索引赋值                                 | O(1)       |
 | append(value)        | 队尾添加                                 | O(1)       |
 | pop()                | 队尾删除                                 | O(1)       |
 | pop(index)           | 根据索引删除某个元素               | O(n)       |
 | insert(index, value) | 根据索引插入某个元素               | O(n)       |
 | iterration           | 列表迭代                                 | O(n)       |
-| item `in` List         | 列表搜索（in关键字）                | O(n)       |
-| slice [x:y]          | 切片, 获取x, y为O(1), 获取x,y 中间的值为O(k) | O(k)       |
+| item `in` List         | 列表搜索（in 关键字）                | O(n)       |
+| slice [x:y]          | 切片, 获取 x, y 为 O(1), 获取 x,y 中间的值为 O(k) | O(k)       |
 | del slice [x:y]      | 删除切片，删除切片后数据需要重新移动/合并 | O(n)       |
 | reverse              | 列表反转                                 | O(n)       |
 | sort                 | 排序                                       | O(nlogn)   |
@@ -39,4 +39,4 @@ tags:
 
 ## 更多阅读
 
-[Python 内存分析:list和array](https://www.cnblogs.com/hellcat/p/8795841.html)
+[Python 内存分析:list 和 array](https://www.cnblogs.com/hellcat/p/8795841.html)

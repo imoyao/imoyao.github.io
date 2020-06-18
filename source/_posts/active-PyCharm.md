@@ -10,10 +10,10 @@ cover: /images/PyCharm.png
 
 ## 说明
 
-本记录来源网络，仅用于个人记录，若收到官方律师函后果自负。希望不差钱的同学支持正版，[去官网购买](https://www.jetbrains.com/pycharm/buy/)
-这个网站提供激活码，可用性及时效性没有验证[PyCharm 激活码](http://www.ifdll.com/pycharm/)
+本记录来源网络，仅用于个人记录，若收到官方律师函后果自负。希望不差钱的同学支持正版，[去官网购买](https://www.jetbrains.com/pycharm/buy/)   
+~~这个网站提供激活码，可用性及时效性没有验证。[PyCharm 激活码](http://www.ifdll.com/pycharm/)~~（已经打不开了）
 
-PyCharm 和操作系统版本信息如下：
+### PyCharm 和操作系统版本信息
 ```plain
 PyCharm 2018.3.2 (Professional Edition)
 Build #PY-183.4886.43, built on December 18, 2018
