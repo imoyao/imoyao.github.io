@@ -8,7 +8,6 @@ tags:
 top: 9
 
 ---
-# Python 标准库系列之 subprocess 模块
 
 > This module allows you to spawn processes, connect to their input/output/error pipes, and obtain their return codes.
 
@@ -77,7 +76,7 @@ Traceback (most recent call last):
 subprocess.CalledProcessError: Command 'pasas' returned non-zero exit status 1
 ```
 
-以上的三种执行方式在执行命令的时候，`shell`默认等于`True`，等于`True`的时候，括号内的命令是一行的，如果`shell`等于`False`，那么`[]`内的字符串就是命令的一个元素，执行的时候会把`[]`内的字符串拼接起来执行。
+**注意**：在执行命令的时候，`shell`默认等于`True`，等于`True`的时候，括号内的命令是一行的字符串；如果`shell`等于`False`，那么`[]`内的字符串就是命令的一个元素，执行的时候会把`[]`内的字符串拼接起来执行。
 
 **subprocess.Popen()**
 
@@ -207,5 +206,46 @@ C:\Python35\python.exe F:/Python_code/sublime/Week5/Day02/sub.py
 
 Process finished with exit code 0
 ```
+<<<<<<< HEAD
 ## 其他资料
 [Python之系统交互（subprocess） - 云游道士 - 博客园](https://www.cnblogs.com/yyds/p/7288916.html)
+=======
+
+## 高级用法
+
+今天在使用的时候想要实现一个“流输出”，即类似于一个输出为长耗时的操作，需要把结果实时打印在屏幕上：
+### Python2
+```python
+from subprocess import Popen, PIPE
+
+def cust_popen(_cmd):
+    """
+    流输出结果
+    :param _cmd:
+    :return:
+    """
+    if isinstance(_cmd, list):
+        shell = False
+    else:
+        shell = True
+    p = Popen(_cmd, stdout=PIPE, shell=shell, bufsize=1)
+    with p.stdout:
+        for line in iter(p.stdout.readline, b''):
+            print(line),  # for py2
+    p.wait()  # wait for the subprocess to exit
+```
+`iter()` 用于一旦行被写入工作区，则立即读取其内容；
+### Python3
+```python
+#!/usr/bin/env python3
+from subprocess import Popen, PIPE
+
+with Popen(["cmd", "arg1"], stdout=PIPE, bufsize=1,
+           universal_newlines=True) as p:
+    for line in p.stdout:
+        print(line, end='')
+```
+与 Python 2 不同，Python 2 照原样输出子进程的字节串。 Python 3 使用文本模式（使用 locale.getpreferredencoding(False) 编码对 cmd 的输出进行解码）。
+
+来源参见[python - Read streaming input from subprocess.communicate() - Stack Overflow](https://stackoverflow.com/questions/2715847/read-streaming-input-from-subprocess-communicate)
+>>>>>>> 7e9dccfdf9b7bc243e39db34b0c5d11d3adb5c62
