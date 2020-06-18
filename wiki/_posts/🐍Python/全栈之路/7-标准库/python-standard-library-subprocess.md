@@ -207,3 +207,5 @@ C:\Python35\python.exe F:/Python_code/sublime/Week5/Day02/sub.py
 
 Process finished with exit code 0
 ```
+## 其他资料
+[Python之系统交互（subprocess） - 云游道士 - 博客园](https://www.cnblogs.com/yyds/p/7288916.html)
