@@ -8,7 +8,6 @@ tags:
 top: 12
 
 ---
-# Python 标准库系列之 tarfile 模块
 
 The tarfile module makes it possible to read and write tar archives, including those using gzip, bz2 and lzma compression. Use the zipfile module to read or write .zip files, or the higher-level functions in shutil.
 
