@@ -36,7 +36,7 @@ Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务
 
 访问管理套接字很简单，就是让 `ceph` 工具使用 `asok` 文件。对于 Dumpling 之前的版本，命令是这样的：
 
-	ceph --admin-daemon /var/run/ceph/ceph-mon.<id>.asok <command>
+	ceph --admin-daemon /var/run/ceph/ceph-mon.<id>.asok <command>plainplain
 
 对于 Dumpling 及后续版本，你可以用另一个（推荐的）命令：
 
@@ -50,7 +50,7 @@ Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务
 
 下面是 `mon_status` 的输出样例：
 
-	{plain
+	{plainplain
 		"name": "c",
   		"rank": 2,
   		"state": "peon",
@@ -144,7 +144,7 @@ Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务
 
 monmap 通常看起来是下面的样子，这取决于 monitor 的个数：
 
-    epoch 3
+    epoch 3plainplainplain
     fsid 5c4e9d53-e2e1-478a-8061-f543f8be4cf8
     last_changed 2013-10-30 04:12:01.945629
     created 2013-10-29 14:14:41.914786
@@ -166,7 +166,7 @@ monmap 通常看起来是下面的样子，这取决于 monitor 的个数：
 
 1、是否已形成法定人数？如果是，从法定人数中抓取 monmap ：
 
-	```
+	```plain
 	ceph mon getmap -o /tmp/monmap
 	```
 
@@ -179,7 +179,7 @@ monmap 通常看起来是下面的样子，这取决于 monitor 的个数：
 
 4、注入 monmap 。
 
-	ceph-mon -i ID --inject-monmap /tmp/monmap
+	ceph-mon -i ID --inject-monmap /tmp/monmapplain
 
 5、启动 monitor 。
 
@@ -213,11 +213,11 @@ Monitor 会用 `HEALTH_WARN` 的方式警告你。 `ceph health detail` 应该�
 
 检查 IP 过滤表。某些操作系统安装工具会给 `iptables` 增加一条 `REJECT` 规则。这条规则会拒绝所有尝试连接该主机的客户端（除了 `ssh` ）。如果你的 monitor 主机设置了这条防火墙 `REJECT` 规则，客户端从其他节点连接过来时就会超时失败。你需要定位出拒绝客户端连接 Ceph 守护进程的那条 `iptables` 规则。比如，你需要对类似于下面的这条规则进行适当处理：
 
-	REJECT all -- anywhere anywhere reject-with icmp-host-prohibited
+	REJECT all -- anywhere anywhere reject-with icmp-host-prohibitedplain
 
 你还需要给 Ceph 主机的 IP 过滤表增加规则，以确保客户端可以访问 Ceph monitor （默认端口 6789 ）和 Ceph OSD （默认 6800 ~ 7300 ）的相关端口。
 
-	iptables -A INPUT -m multiport -p tcp -s {ip-address}/{netmask} --dports 6789,6800:7300 -j ACCEPT
+	iptables -A INPUT -m multiport -p tcp -s {ip-address}/{netmask} --dports 6789,6800:7300 -j ACCEPTplain
 
 或者，如果你的环境**允许**，也可以直接关闭主机的防火墙。
 
@@ -256,7 +256,7 @@ Ceph monitor 把集群的各种 map 信息存放在 key/value 数据库中，如
   		EOF
   		rsync -avz user@host:$ms $ms
 	done
-	# rebuild the monitor store from the collected map, if the cluster does not
+	# rebuild the monitor store from the collected map, if the cluster does notplain
 	# use cephx authentication, we can skip the following steps to update the
 	# keyring with the caps, and there is no need to pass the "--keyring" option.
 	# i.e. just use "ceph-monstore-tool /tmp/mon-store rebuild" instead
@@ -287,7 +287,7 @@ Ceph monitor 把集群的各种 map 信息存放在 key/value 数据库中，如
 
 当 monitor 进程检测到本地可用磁盘空间不足时，会停止 monitor 服务。Monitor 的日志中应该会有类似如下信息的输出：
 
-	2016-09-01 16:45:54.994488 7fb1cac09700  0 mon.jyceph01@0(leader).data_health(62) update_stats avail 5% total 297 GB, used 264 GB, avail 18107 MB
+	2016-09-01 16:45:54.994488 7fb1cac09700  0 mon.jyceph01@0(leader).data_health(62) update_stats avail 5% total 297 GB, used 264 GB, avail 18107 MBplainplain
 	2016-09-01 16:45:54.994747 7fb1cac09700 -1 mon.jyceph01@0(leader).data_health(62) reached critical levels of available space on local monitor storage -- shutdown!
 
 清理本地磁盘，增大可用空间，重启 monitor 进程，即可恢复正常。

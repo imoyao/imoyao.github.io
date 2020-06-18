@@ -27,7 +27,7 @@ tags:
 pip install -i https://pypi.doubanio.com/simple/ flask
 ```
 
-全局设置有不同的层级和文件位置，以用户全局（per-user）为例，在 Linux & macOS 中，配置需要写到 `~/.pip/pip.conf` 文件中；Windows 中，配置文件位置为 `%HOMEPATH%\pip\pip.ini`，`%HOMEPATH%` 即你的用户文件夹，一般为“\Users\<你的用户名>”，具体值可以使用 `echo %HOMEPATH% `命令查看。
+全局设置有不同的层级和文件位置，以用户全局（per-user）为例，在 Linux & macOS 中，配置需要写到 `~/.pip/pip.conf` 文件中；Windows 中，配置文件位置为 `%HOMEPATH%\pip\pip.ini`，`%HOMEPATH%` 即你的用户文件夹，一般为“\Users\<你的用户名>”，具体值可以使用 `echo %HOMEPATH%`命令查看。
 
 通常你需要手动创建对应的目录和文件，然后写入下面的内容：
 

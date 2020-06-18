@@ -1,7 +1,7 @@
 ## 目录
 
 ### 基本数据结构
-- [数组]()
+- [数组](.)
 - [链表](./Linked_list)
 - [堆](./Heap)
 - [栈](./Stack)
@@ -19,7 +19,7 @@
 - [希尔排序](sorts/shell_sort)
 
 ### 其他数据结构
-#### TODO:
+#### TODO
 - [树](./Tree)
 - [图](./Graph)
 
@@ -87,12 +87,12 @@
 [Python 数据结构和算法](https://www.bilibili.com/video/av43431667)
 
 ## 其他
-[数据结构与算法教程-C语言版教程](http://data.biancheng.net/)
+[数据结构与算法教程-C 语言版教程](http://data.biancheng.net/)
 
 ## 约定
 
 本仓库中代码全部使用`Python3.6`实现，使用`Linux`操作系统运行。内页`readme`中的代码默认指同目录下`.py`文件中的代码片段。
-```
+```plain
 imoyao@local:~$ lsb_release -a
 
 No LSB modules are available.
