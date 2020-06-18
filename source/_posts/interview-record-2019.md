@@ -97,8 +97,8 @@ Sorted Set 有点像 Set 和 Hash 的结合体。
 比如一个存储全班同学成绩的 Sorted Sets，其集合 value 可以是同学的学号，而 score 就可以是其考试得分，这样在数据插入集合的时候，就已经进行了天然的排序。另外还可以用 Sorted Sets 来做带权重的队列，比如普通消息的 score 为 1，重要消息的 score 为 2，然后工作线程可以选择按 score 的倒序来获取工作任务，让重要的任务优先执行。
 
 zset 集合可以完成有序执行、按照`优先级执行`的情况；
-- [redis 五种数据结构详解（string，list，set，zset，hash）](https://www.cnblogs.com/xuzhengzong/p/7724841.html)
-- [Redis 实战 - list、set 和 Sorted Set](https://www.cnblogs.com/tangge/p/10698821.html)
+- [redis 五种数据结构详解（string，list，set，zset，hash）](https://www.cnblogs.com/xuzhengzong/p/7724841.html)   
+- [Redis 实战 - list、set 和 Sorted Set](https://www.cnblogs.com/tangge/p/10698821.html)    
 
 ## 独到科技
 
@@ -141,9 +141,9 @@ zset 集合可以完成有序执行、按照`优先级执行`的情况；
      深度优先一般采用递归的方式实现，递归的深度为树的高度。
 2：树的广度优先算法：广度优先是按照层次来遍历树的节点，先是根节点，然后依次遍历第二层子节点，当第二层子节点遍历完后，在依次遍历第三层子节点。广度优先采用队列来记录当前可遍历的节点，当遍历某个节点时，将其左孩子和右孩子结点依次入队，待该层遍历完了以后，再依次遍历下一层儿子结点。
 3：非递归实现特点： 深度优先一般采用递归实现，如改用非递归，则可需要来模拟栈，当需要先遍历当前节点的儿子结点时（例如中序遍历）需要将其压入栈中，先遍历其儿子结点，然后再将其弹出栈，遍历当前节点。广度优先一般采用非递归来实现，用一个队列来保存依次需要遍历的节点。 
-[二叉树深度优先遍历（DFS）和广度优先遍历（BFS）](https://www.masantu.com/blog/2019-10-28/binary-tree-BFS-and-DFS/)
-[简述树的深度优先算法、广度优先算法，及非递归实现的特点](https://www.nowcoder.com/questionTerminal/b194924b44b144e8a238819a0a6dae42)   
-[广度优先搜索(BFS)和深度优先搜索(DFS)](https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/)
+1. [二叉树深度优先遍历（DFS）和广度优先遍历（BFS）](https://www.masantu.com/blog/2019-10-28/binary-tree-BFS-and-DFS/)
+2. [简述树的深度优先算法、广度优先算法，及非递归实现的特点](https://www.nowcoder.com/questionTerminal/b194924b44b144e8a238819a0a6dae42)   
+3. [广度优先搜索(BFS)和深度优先搜索(DFS)](https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/)
 > https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/
 
 ### Python 垃圾回收机制
@@ -214,19 +214,19 @@ if __name__ == '__main__':
 
 ### 单例模式，如何实现？以及如何判断只有这一个实例
 ```python
-class Singleton:
+class Singleton:    # py3
 	_instance = {}
-	def __new__(cls，*args，**kwargs):
+	def __new__(cls,*args,**kwargs):
 		if not cls._instance:
-			cls._instance = super(Singleton，cls).__new__(cls，*args，**kwargs)
+			cls._instance = super(Singleton,cls).__new__(cls,*args,**kwargs)
 		return cls._instance
 
 
 def deco_singleton(cls):
 	_instance = {}
-	def wrapper(*args，**kwargs):
+	def wrapper(*args,**kwargs):
 		if not cls in _instance:
-			_instance[cls] = cls(*args，**kwargs)
+			_instance[cls] = cls(*args,**kwargs)
 
 		return _instance[cls]
 	return wrapper
@@ -242,11 +242,11 @@ class A:
 [ping 某域名的过程详解](https://www.masantu.com/blog/2019-11-19/the-detail-of-ping-a-domain/)
 
 ### select 和 epoll 区别
-[Python 全栈之路系列之 IO 多路复用](https://blog.ansheng.me/article/python-full-stack-way-io-multiplexing.html)
-[select、poll、epoll 之间的区别总结[整理]](https://www.cnblogs.com/anker/p/3265058.html)
-[Python 异步非阻塞 IO 多路复用 Select/Poll/Epoll 使用](https://www.haiyun.me/archives/1056.html)
-[Python 使用 select 和 epoll 实现 IO 多路复用实现并发服务器](https://www.jianshu.com/p/cdfddb026db0)
-[How To Use Linux epoll with Python](https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/how_to_use_linux_epoll.html)
+1. [Python 全栈之路系列之 IO 多路复用](https://blog.ansheng.me/article/python-full-stack-way-io-multiplexing.html)
+2. [select、poll、epoll 之间的区别总结[整理]](https://www.cnblogs.com/anker/p/3265058.html)
+3. [Python 异步非阻塞 IO 多路复用 Select/Poll/Epoll 使用](https://www.haiyun.me/archives/1056.html)
+4. [Python 使用 select 和 epoll 实现 IO 多路复用实现并发服务器](https://www.jianshu.com/p/cdfddb026db0)
+5. [How To Use Linux epoll with Python](https://harveyqing.gitbooks.io/python-read-and-write/content/python_advance/how_to_use_linux_epoll.html)
 
 ## 艾普艾
 
@@ -290,12 +290,15 @@ redis> SMEMBERS myset
 2) "World"
 ```
 更多 Python 实例应用:[*Redis 多方式实现计数器功能（附代码）*](https://juejin.im/post/5da6923c5188252f192d2835)
+
 #### 内存满了
 此时不能继续写入数据，而且系统的其他操作任务也会受到影响。为防止这种现象发生，应该启用内存淘汰策略。
 [Redis 内存满了的几种解决方法](https://blog.csdn.net/u014590757/article/details/79788076)
 [Redis 过期--淘汰机制的解析和内存占用过高的解决方案](https://juejin.im/post/5dc81b4df265da4d4d0cfebc)
+
 #### 更多
 [10 个常见的 Redis 面试"刁难"问题](https://www.kancloud.cn/mangyusisha/php/701563)
+
 ### 常见状态码错误？301、302 错误及区别？502 错误出现时应该怎么解决
 - 301/302
 跳转，301 redirect: 301 代表**永久性**转移(Permanently Moved)；302 redirect: 302 代表**暂时性**转移(Temporarily Moved )
@@ -316,6 +319,7 @@ redis> SMEMBERS myset
 1. [How to Solve 502 Bad Gateway Issues?](https://www.keycdn.com/support/502-bad-gateway)
 
 ## 华胜天成
+
 ### 类属性的继承
 ```python
 class Parent:

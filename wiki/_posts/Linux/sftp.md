@@ -9,7 +9,7 @@ tags: SFTP
 
 给外包的工作人员提供我司服务器的**某一目录**的访问（包括读写）权限，方便他们部署代码文件。
 
-之所以是某一目录的访问，是因为 SFTP 的用户登录后，默认是能看到整个系统的文件目录，这样很不安全。限制用户只能在自己的home目录下活动，这里需要使用到chroot，openssh 4.8p1以后都支持chroot。可以输入`ssh -V`来查看openssh的版本，如果低于4.8p1，需要自行升级安装。
+之所以是某一目录的访问，是因为 SFTP 的用户登录后，默认是能看到整个系统的文件目录，这样很不安全。限制用户只能在自己的 home 目录下活动，这里需要使用到 chroot，openssh 4.8p1 以后都支持 chroot。可以输入`ssh -V`来查看 openssh 的版本，如果低于 4.8p1，需要自行升级安装。
 
 题外话：如果是针对 ftp 的用户权限管理，推荐使用 vsftpd，可通过 yum 直接安装。
 
@@ -20,7 +20,7 @@ tags: SFTP
 groupadd sftp   # 本例中使用sftp作为组名
 ```
 ### 创建新用户
-创建一个sftp用户，名为mysftp
+创建一个 sftp 用户，名为 mysftp
 ```bash
 useradd -g sftp -s /bin/false mysftp
 ```
@@ -39,7 +39,7 @@ passwd mysftp
 
 因为我们只想该用户使用 SFTP，并不需要该用户能登录 SSH，威胁安全。
 
-```
+```plain
 usermod -s /bin/false mysftp
 ```
 
@@ -47,17 +47,17 @@ usermod -s /bin/false mysftp
 
 #### 4、修改该用户的家目录
 
-```
+```plain
 usermod -d /data/wwwroot/user1/ mysftp
 ```
 
 这样每次用户访问服务器都会默认打开`/data/www/user1/`，但还是可以跳出这个访问其它目录，需要进行下面一步的操作。
 
-#### 5、设置 sshd\_config：
+#### 5、设置 sshd\_config
 
 打开`sshd_config`文件
 
-```
+```plain
 vi /etc/ssh/sshd_config
 ```
 
@@ -70,7 +70,7 @@ Match user mysftp   # 当然，也可以匹配用户，多个用户名之间也�
 ForceCommand internal-sftp
 ChrootDirectory /data/www/user1/
 ```
-`ChrootDirectory /data/sftp/%u`用chroot将用户的根目录指定到/data/sftp/%u，%u代表用户名，这样用户就只能在/data/sftp/%u下活动，chroot的含义，可以参考这里：[理解 chroot](https://www.ibm.com/developerworks/cn/linux/l-cn-chroot/)
+`ChrootDirectory /data/sftp/%u`用 chroot 将用户的根目录指定到/data/sftp/%u，%u 代表用户名，这样用户就只能在/data/sftp/%u 下活动，chroot 的含义，可以参考这里：[理解 chroot](https://www.ibm.com/developerworks/cn/linux/l-cn-chroot/)
 将上面的 `mysftp` 和 `/data/www/user1/` 替换成你需要的。
 ```plain
 AllowTcpForwarding no
@@ -94,7 +94,7 @@ ChrootDirectory /data/www/user2/
 
 现在用 SFTP 软件使用`mysftp`用户登录，就可以发现目录已经被限定、锁死在`/data/wwwroot/user1/`了。
 
-## 设定Chroot目录权限
+## 设定 Chroot 目录权限
 ```bash
 # chown root:sftp /data/wwwroot/user1
 # chmod 755 /data/wwwroot/user1/
@@ -108,7 +108,7 @@ ChrootDirectory /data/www/user2/
 
 修改前：
 
-```
+```plain
 Subsystem sftp internal-sftp
 UsePAM yes
 Match user mysftp
@@ -124,7 +124,7 @@ PasswordAuthentication yes
 
 修改后：
 
-```
+```plain
 UseDNS no
 AddressFamily inet
 PermitRootLogin yes
@@ -148,9 +148,9 @@ ChrootDirectory /data/wwwroot/user1/
 
 如果违反了上面的两条要求，那么就会出现新用户访问不了 sftp  的情况。
 
-**所以`/data/www/user1/`及上级的所有目录属主一定要是 root，并且组权限和公共权限不能有写入权限，如果一定需要有写入权限，那们可以在`/data/www/user1/`下建立 777 权限的upload文件夹**。
+**所以`/data/www/user1/`及上级的所有目录属主一定要是 root，并且组权限和公共权限不能有写入权限，如果一定需要有写入权限，那们可以在`/data/www/user1/`下建立 777 权限的 upload 文件夹**。
 
-```
+```plain
 mkdir /data/wwwroot/user1/upload
 chown -R mysftp:root /data/wwwroot/user1/upload
 ```
@@ -158,16 +158,16 @@ chown -R mysftp:root /data/wwwroot/user1/upload
 这样`mysftp`用户就可以在`/data/wwwroot/user1/upload`里随意读写文件了。
 
 ## 参考链接
-[如何将SFTP用户限制在某个目录下？](http://www.jbxue.com/LINUXjishu/22628.html)
-[centos下配置sftp且限制用户访问目录](https://segmentfault.com/a/1190000000441260)
-[CentOS的ssh sftp配置及权限设置[转载-验证可用] - wooya - 博客园](https://www.cnblogs.com/wooya/p/9392142.html)
+[如何将 SFTP 用户限制在某个目录下？](http://www.jbxue.com/LINUXjishu/22628.html)
+[centos 下配置 sftp 且限制用户访问目录](https://segmentfault.com/a/1190000000441260)
+[CentOS 的 ssh sftp 配置及权限设置[转载-验证可用] - wooya - 博客园](https://www.cnblogs.com/wooya/p/9392142.html)
 
 ## umask 计算
 [umask Calculator - WintelGuy.com](https://wintelguy.com/umask-calc.pl)
 
 ## 计算规则
 
-[Linux umask与文件默认权限 - 诺晨 - OSCHINA](https://my.oschina.net/nk2011/blog/811273?utm_source=debugrun&utm_medium=referral)
+[Linux umask 与文件默认权限 - 诺晨 - OSCHINA](https://my.oschina.net/nk2011/blog/811273?utm_source=debugrun&utm_medium=referral)
 
-[Linux umask详解：令新建文件和目录拥有默认权限_操作系统_zyy1659949090的博客-CSDN博客](https://blog.csdn.net/zyy1659949090/article/details/88122535)
+[Linux umask 详解：令新建文件和目录拥有默认权限_操作系统_zyy1659949090 的博客-CSDN 博客](https://blog.csdn.net/zyy1659949090/article/details/88122535)
 [linux - How to use os.umask() in Python - Stack Overflow](https://stackoverflow.com/questions/10291131/how-to-use-os-umask-in-python)

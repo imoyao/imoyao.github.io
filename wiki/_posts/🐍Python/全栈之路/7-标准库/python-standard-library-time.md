@@ -8,7 +8,6 @@ tags:
 top: 6
 
 ---
-# Python 标准库系列之 time 模块
 
 > This module provides various functions to manipulate time values.
 

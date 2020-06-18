@@ -22,7 +22,7 @@
 
 另外，修改参数 `osd pool default size/min_size`后，只会对后面新建的 pool 起作用。如果想修改已存在的 pool 的 `size/min_size` ，可用下面的命令：
 
-	ceph osd pool set <poolname> size|min_size <val>
+	ceph osd pool set <poolname> size|min_size <val>plain
 
 **注意：** 你可以在运行时修改参数值。如果是在 Ceph 配置文件中进行的修改，你可能需要重启集群。
 
@@ -30,7 +30,7 @@
 
 如果你设置了 `osd pool default size` 的值为 `1` ，那你就仅有对象的单份拷贝。OSD 依赖于其他 OSD 告诉自己应该保存哪些对象。如果第一个 OSD 持有对象的拷贝，并且没有第二份拷贝，那么也就没有第二个 OSD 去告诉第一个 OSD 它应该保管那份拷贝。对于每一个映射到第一个 OSD 上的 PG （参考 `ceph pg dump` 的输出），你可以强制第一个 OSD 关注它应该保存的 PGs ：
 
-	ceph pg force_create_pg <pgid>
+	ceph pg force_create_pg <pgid>plain
 
 #### CRUSH MAP 错误
 
@@ -66,7 +66,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 可以查询到 PG 为何被标记为 `down` ：
 
-	ceph pg 0.5 query
+	ceph pg 0.5 queryplain
 	
 	{ "state": "down+peering",
   	  ...
@@ -183,7 +183,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 可以找出哪些 PG 是 `stale` 状态，和存储这些归置组的最新 OSD ，命令如下：
 
-    ceph health detail
+    ceph health detailplain
     HEALTH_WARN 24 pgs stale; 3/300 in osds are down
     ...
     pg 2.5 is stuck stale+active+remapped, last acting [2,0]
@@ -210,7 +210,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 当集群中出现 PG 不一致的问题时，执行 `ceph -s` 命令会出现下面的信息：
 
-	root@mon:~# ceph -s
+	root@mon:~# ceph -splainplain
 	    cluster 614e77b4-c997-490a-a3f9-e89aa0274da3
 	     health HEALTH_ERR
 	            1 pgs inconsistent
@@ -235,7 +235,7 @@ PG 达不到 clean 状态的另一个可能的原因就是集群的 CRUSH Map �
 
 2、去主 OSD（ osd.1 ）的日志中查找不一致的具体对象 。
 
-	root@osd0:~# grep -Hn 'ERR' /var/log/ceph/ceph-osd.1.log
+	root@osd0:~# grep -Hn 'ERR' /var/log/ceph/ceph-osd.1.logplainplain
 	/var/log/ceph/ceph-osd.1.log:30:2016-11-10 13:49:07.848804 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 shard 0: soid 9:29b4ad99:::rbd_data.1349f035c101d9.0000000000000001:head missing attr _
 	/var/log/ceph/ceph-osd.1.log:31:2016-11-10 13:49:07.849803 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 scrub 0 missing, 1 inconsistent objects
 	/var/log/ceph/ceph-osd.1.log:32:2016-11-10 13:49:07.849824 7f628c5e6700 -1 log_channel(cluster) log [ERR] : 9.14 scrub 1 errors
@@ -271,7 +271,7 @@ osd.1 的日志里也提示修复成功：
 
 1、停掉不一致的 object 所属的 osd 。
 
-	stop ceph-osd id=xxx
+	stop ceph-osd id=xxxplainplain
 
 2、刷新该 osd 的日志。
 
@@ -311,7 +311,7 @@ osd.1 的日志里也提示修复成功：
 
 在 monitor 节点的 ceph.conf 配置文件中添加:
 
-    [global]
+    [global]plainplainplain
     .......
     mon_pg_warn_max_per_osd = 1000
 
@@ -319,6 +319,6 @@ osd.1 的日志里也提示修复成功：
 
 或者直接用 `tell` 命令在运行时更改参数的值而不用重启服务：
 
-	ceph tell mon.* injectargs '--mon_pg_warn_max_per_osd 1000'
+	ceph tell mon.* injectargs '--mon_pg_warn_max_per_osd 1000'plainplain
 
 而另一种情况， `too few PGs per OSD （16 < min 20）` 这样的告警信息则往往出现在集群刚刚建立起来，除了默认的 rbd 存储池，还没建立自己的存储池，再加上 OSD 个数较多，就会出现这个提示信息。这通常不是什么问题，也无需修改配置项，在建立了自己的存储池后，这个告警信息就会消失。
