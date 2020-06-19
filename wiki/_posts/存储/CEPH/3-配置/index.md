@@ -97,7 +97,7 @@ BOOTSTRAP 选项
 
 * mon\_host，集群的监视器列表
 * mon\_dns\_serv\_name（默认值：ceph-mon），用于通过 DNS 检查以识别集群监视器的 DNS SRV 记录的名称
-* mon\_data，osd\_data，mds\_data，mgr\_data以及类似的选项用来定义守护程序存储其数据的本地目录
+* mon\_data，osd\_data，mds\_data，mgr\_data 以及类似的选项用来定义守护程序存储其数据的本地目录
 * keying，ketfile，and/or key，可用于指定用于向监视器进行身份验证的身份验证凭据。请注意，在大多数情况下，默认密钥环位置位于上面指定的数据目录中。
 
 在绝大多数情况下，这些的默认值是合适的，但 mon\_host 选项除外，它标识了集群监视器的地址。当 DNS 用于识别监视器时，可以完全避免本地 ceph 配置文件。任何进程可以通过选项--no-mon-config 以跳过从集群监视器检索配置的步骤。 这在配置完全通过配置文件管理或监视器集群当前已关闭但需要执行某些维护活动的情况下非常有用。
@@ -532,7 +532,7 @@ OSD 守护进程默认绑定从 6800 起的第一个可用端口，需要注意�
 
 当某个守护进程失败并重启时没释放端口，重启后的进程就会监听新端口。你应该打开整个 6800-7300 端口区间，以应对这种可能性。
 
-如果你分开了公共网和集群网，必须分别为之设置防火墙，因为客户端会通过公共网连接，而其他 OSD 会通过集群网连接。按下例增加规则时，要把\{iface\}替换为网 口（如 eth0，eth1 等等），\{ip-address\}替换为公共网或集群网IP，\{netmask\}替换为公共网或集群网掩码。例如：
+如果你分开了公共网和集群网，必须分别为之设置防火墙，因为客户端会通过公共网连接，而其他 OSD 会通过集群网连接。按下例增加规则时，要把\{iface\}替换为网 口（如 eth0，eth1 等等），\{ip-address\}替换为公共网或集群网 IP，\{netmask\}替换为公共网或集群网掩码。例如：
 
 sudo iptables -A INPUT -i \{iface\}  -m multiport -p tcp -s \{ip-address\}/\{netmask\} --dports 6800:7300 -j ACCEPT
 
@@ -550,14 +550,14 @@ Ceph 的网络配置要放到 \[global\] 段下。前述的 5 分钟快速入门
 要配置公共网络，请将以下选项添加到 Ceph 配置文件的\[global\]部分。
 
 \[global\]
-        # ... elided configurationplainplainplain
+        # ... elided configurationplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         public network \= \{public-network/netmask\}
 
 集群网络  
 如果声明群集网络，OSD 将通过群集网络路由心跳，对象复制和恢复流量。 与使用单个网络相比，这可以提高性能。 要配置群集网络，请将以下选项添加到 Ceph 配置文件的\[global\]部分。
 
 \[global\]
-        # ... elided configurationplainplain
+        # ... elided configurationplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         cluster network \= \{cluster-network/netmask\}
 
 我们希望无法从公共网络或 Internet 访问群集网络以增强安全性。
@@ -568,7 +568,7 @@ Ceph 的网络配置要放到 \[global\] 段下。前述的 5 分钟快速入门
 
 \[mon.a\]
 
-        host \= \{hostname\}plain
+        host \= \{hostname\}plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         mon addr \= \{ip-address\}:6789 \[osd.0\]
         host \= \{hostname\}
 
@@ -1046,7 +1046,7 @@ Tip:监控集群时，要警惕和 nearfull 相关的警告。这意味着一些
 
 在这样的集群里，坏一或两个 OSD 很平常；一种罕见但可能发生的情形是一个机架的路由器或电源挂了，这会导致多个 OSD 同时离线（如 OSD 7-12 ），在这种情况下，你仍要力争保持集群可运行并达到 active + clean 状态，即使这意味着你得在短期内额外增加一些 OSD 及主机。如果集群利用率太高，在解决故障域期间也许不会丢数据，但很可能牺牲数据可用性，因为利用率超过了 full ratio 。故此，我们建议至少要粗略地规划下容量。
 
-确定群集的两个数字：OSD的数量和集群的总容量
+确定群集的两个数字：OSD 的数量和集群的总容量
 
 如果将群集的总容量除以群集中的 OSD 数，则可以找到群集中 OSD 的平均平均容量。 考虑将该数字乘以您期望在正常操作期间同时失败的 OSD 数量（相对较小的数量）。 最后将群集的容量乘以全部比率，以达到最大运行容量; 然后，减去那些预期会故障的 OSD 从而计算出合理的 full ratio。 用更多数量的 OSD 故障（例如，一组 OSD）重复上述过程，以得到合理的 near full ratio。
 
@@ -1054,7 +1054,7 @@ Tip:监控集群时，要警惕和 nearfull 相关的警告。这意味着一些
 
 \[global\]
 
-        mon osd full ratio \= .80 mon osd backfillfull ratio \= .75 mon osd nearfull ratio \= .70plainplainplain
+        mon osd full ratio \= .80 mon osd backfillfull ratio \= .75 mon osd nearfull ratio \= .70plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 mon osd full ratio
 描述：OSD 被视为已满之前使用的磁盘空间百分比。
@@ -1452,7 +1452,7 @@ The OSDs send failure reports to monitor if they find its peer is not responsive
 类型:    String
 默认：    host
 
-OSD选项
+OSD 选项
 
 osd heartbeat address
 描述:    OSD 用于心跳的网络地址 类型:    Address
@@ -2383,7 +2383,7 @@ journal block align
 
 \[global\]
 
-    # By default, Ceph makes 3 replicas of objects. If you want to make fourplainplain
+    # By default, Ceph makes 3 replicas of objects. If you want to make fourplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     # copies of an object the default value--a primary copy and three replica
     # copies\--reset the default values as shown in 'osd pool default size'.
     # If you want to allow Ceph to write a lesser number of copies in a degraded

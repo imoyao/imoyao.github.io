@@ -82,9 +82,9 @@ def foo(a, unused_b, unused_c, d=None, e=None):
 ### 结论
 使用 `import x` 来导入包和模块.
 
-    使用 `from x import y` ， 其中x是包前缀， y是不带前缀的模块名。plainplainplainplainplainplainplainplainplain
+使用 `from x import y` ， 其中 x 是包前缀， y 是不带前缀的模块名。
 
-    使用 `from x import y as z`， 如果两个要导入的模块都叫做y或者y太长了。
+使用 `from x import y as z`， 如果两个要导入的模块都叫做 y 或者 y 太长了。
 
 例如， 模块 `sound.effects.echo` 可以用如下方式导入：
 
@@ -216,43 +216,43 @@ class Error(Exception):
 ### 结论
 适用于简单情况。每个部分应该单独置于一行： 映射表达式， for 语句，过滤器表达式。禁止多重 for 语句或过滤器表达式。复杂情况下还是使用循环。
 
-    ```pythonplainplainplain
+```python
 
-    Yes:
-      result = []
-      for x in range(10):
-          for y in range(5):
-              if x * y > 10:
-                  result.append((x, y))
+# Yes:
+result = []
+for x in range(10):
+  for y in range(5):
+      if x * y > 10:
+          result.append((x, y))
 
-      for x in xrange(5):
-          for y in xrange(5):
-              if x != y:
-                  for z in xrange(5):
-                      if y != z:
-                          yield (x, y, z)
+for x in xrange(5):
+  for y in xrange(5):
+      if x != y:
+          for z in xrange(5):
+              if y != z:
+                  yield (x, y, z)
 
-      return ((x, complicated_transform(x))
-              for x in long_generator_function(parameter)
-              if x is not None)
+return ((x, complicated_transform(x)) 
+        for x in long_generator_function(parameter) 
+        if x is not None)
 
-      squares = [x * x for x in range(10)]
+squares = [x * x for x in range(10)]
 
-      eat(jelly_bean for jelly_bean in jelly_beans
-          if jelly_bean.color == 'black')   
-    ```
+eat(jelly_bean for jelly_bean in jelly_beans
+  if jelly_bean.color == 'black')   
+```
 
-    ```python
-    No:
-      result = [(x, y) for x in range(10) for y in range(5) if x * y > 10]
+```python
+# No:
+result = [(x, y) for x in range(10) for y in range(5) if x * y > 10]
 
-      return ((x, y, z)
-              for x in xrange(5)
-              for y in xrange(5)
-              if x != y
-              for z in xrange(5)
-              if y != z)
-    ```
+return ((x, y, z)
+      for x in xrange(5)
+      for y in xrange(5)
+      if x != y
+      for z in xrange(5)
+      if y != z)
+```
 
 ## 默认迭代器和操作符
 
@@ -508,23 +508,25 @@ No:  if len(users) == 0:
 ### 结论
 我们不使用不支持这些特性的 Python 版本， 所以没理由不用新的方式。
 
-    ```pythonplainplainplainplain
-    Yes: words = foo.split(':')
+```python
+# Yes:
+words = foo.split(':')
 
-         [x[1] for x in my_list if x[2] == 5]
+[x[1] for x in my_list if x[2] == 5]
 
-         map(math.sqrt, data)    # Ok. No inlined lambda expression.
+map(math.sqrt, data)    # Ok. No inlined lambda expression.
 
-         fn(*args, **kwargs)   
-    ```
+fn(*args, **kwargs)   
+```
 
-    ```python
-    No:  words = string.split(foo, ':')
+```python
+# No:  
+words = string.split(foo, ':')
 
-         map(lambda x: x[1], filter(lambda x: x[2] == 5, my_list))
+map(lambda x: x[1], filter(lambda x: x[2] == 5, my_list))
 
-         apply(fn, args, kwargs)             
-    ```
+apply(fn, args, kwargs)             
+```
 
 ## 词法作用域(Lexical Scoping)
 

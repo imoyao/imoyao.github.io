@@ -53,10 +53,12 @@ type=rpm-md
 ```
 3. 更新 epel.repo
 添加 EPEL 的阿里镜像源
- ```bash
+```bash
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 ```
+
 或者手动编辑
+
 ```bash
 vim /etc/yum.repos.d/epel-7.repo
 ```
@@ -95,7 +97,7 @@ sudo yum install ceph-deploy -y
 ```bash
 sudo yum install ntp ntpdate ntp-doc -y
 ```
-配置ntp服务（此步省略）
+配置 ntp 服务（此步省略）
 6. 安装 SSH 服务
 ```bash
 sudo yum install openssh-server -y
@@ -228,19 +230,19 @@ Bad owner or permissions on /home/cephadm/.ssh/config
 [ceph_deploy][ERROR ] RuntimeError: connecting to host: cnode1 resulted in errors: HostNotFound cnode1
 ```
 #### 解决
-确认节点开机？确认是以cephadm用户登录？之后执行：
+确认节点开机？确认是以 cephadm 用户登录？之后执行：
 ```bash
 chmod 600 /home/cephadm/.ssh/config
 ```
 然后重复执行上一步。
 {%endnote%}
-此步骤会清除节点之间的ceph环境，相当于初始化一个全新的安装环境。
+此步骤会清除节点之间的 ceph 环境，相当于初始化一个全新的安装环境。
 
 ### 初始化
 1. 在`my-cluster`管理节点执行创建部署节点
-指定的节点名称为 hostname, fqdn或者hostname:fqdn，如果不了解FQDN的含义可以参考：
-[关于hostname和fqdn的区别和获取及设置 - 邹天得 - 博客园](https://www.cnblogs.com/videring/articles/7025867.html)
-本例中管理节点`hostname`为admin-node，此处应该为你执行ceph-deploy操作的节点hostname。
+指定的节点名称为 hostname, fqdn 或者 hostname:fqdn，如果不了解 FQDN 的含义可以参考：
+[关于 hostname 和 fqdn 的区别和获取及设置 - 邹天得 - 博客园](https://www.cnblogs.com/videring/articles/7025867.html)
+本例中管理节点`hostname`为 admin-node，此处应该为你执行 ceph-deploy 操作的节点 hostname。
 ```plain
 ceph-deploy new admin-node
 ```
@@ -286,7 +288,7 @@ auth_client_required = cephx
 osd pool default size = 2  #增加默认副本数为 2
 public network = 172.18.1.0/24 # 添加整个子网段
 ```
-如果使用ipv6网络，则追加如下内容
+如果使用 ipv6 网络，则追加如下内容
 ```bash
 echo ms bind ipv6 = true >> ceph.conf
 ```
@@ -316,8 +318,8 @@ ceph-deploy install admin-node node1 node2
 - [小白解决 CENTOS7 错误:Cannot find a valid baseurl for repo: base/7/x86_6 - 林诺欧巴 - 博客园](https://www.cnblogs.com/linnuo/p/6257204.html)  
 上面的方法提供了两种方案：a):直接修改网卡配置；b):修改 `cat /etc/resolv.conf`
 我使用 a 方案时候重启网络`systemctl restart network`发现域名解析配置文件已经被修改了。鄙人不擅长网络。
-此外，如果使用非root用户部署，一定要保证部署用户（本例中的cephadm）可以正常sudo！
-2. 重新配置epel.repo
+此外，如果使用非 root 用户部署，一定要保证部署用户（本例中的 cephadm）可以正常 sudo！
+2. 重新配置 epel.repo
 进入`/etc/yum.repos.d`中删除`epel.repo`和`epel-testing.repo`重新安装
 {% endnote %}
 ---
@@ -383,11 +385,11 @@ ceph -s
 此时，集群已经部署成功，但是还没有存储节点，`革命尚未成功，同志仍需努力`。
 {%note warning%}
 今天重新部署遇到报错：
-```
+```plain
 ceph -s
 [errno 2] error connecting to the cluster
 ```
-现象描述：不加sudo执行下面的指令显示受限，加sudo之后可以获取到ceph的状态，很奇怪，暂时没有找到解决办法。
+现象描述：不加 sudo 执行下面的指令显示受限，加 sudo 之后可以获取到 ceph 的状态，很奇怪，暂时没有找到解决办法。
 ```bash
 sudo ceph --connect-timeout=25 --cluster=ceph --admin-daemon=/var/run/ceph/ceph-mon.cnode0.asok mon_status
 ```
@@ -657,13 +659,13 @@ HEALTH_OK
 
 ----
 
-## 启用dashboard
+## 启用 dashboard
 
-1. 在所有的mgr节点安装dashbaord
+1. 在所有的 mgr 节点安装 dashbaord
 ```bash
 yum install ceph-mgr-dashboard -y
 ```
-2. 重启mgr功能
+2. 重启 mgr 功能
 ```bash
 ceph mgr module disable dashboard
 ceph mgr module enable dashboard
@@ -673,7 +675,7 @@ ceph mgr module enable dashboard
 ceph dashboard create-self-signed-cert
 ```
 
-4. 创建一个dashboard登录用户名密码
+4. 创建一个 dashboard 登录用户名密码
 ```bash
 ceph dashboard ac-user-create admin admin administrator 
 ```
@@ -688,16 +690,16 @@ ceph mgr services
 }
 ```
 6. 打开防火墙指定端口（8443）
-```
+```plain
 firewall-cmd --zone=public --add-port=8443/tcp --permanent >/dev/null 2>&1
 firewall-cmd --reload >/dev/null 2>&1
 ```
 7. 访问浏览器
 ![dashboard](/images/ceph-dashboard.png)
 
-## 开启Object Gateway管理功能
+## 开启 Object Gateway 管理功能
 
-```
+```plain
 1、创建rgw用户
 # radosgw-admin user info --uid=user01
 2、提供Dashboard证书
@@ -712,8 +714,8 @@ firewall-cmd --reload >/dev/null 2>&1
 
 ---
 
-## 安装grafana
-1. 配置yum源文件
+## 安装 grafana
+1. 配置 yum 源文件
 建议使用清华源：[grafana | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirror.tuna.tsinghua.edu.cn/help/grafana/)
 ```bash
 vim /etc/yum.repos.d/grafana.repo
@@ -726,16 +728,16 @@ repo_gpgcheck=0
 enabled=1
 gpgcheck=0
 ```
-2. 通过yum命令安装grafana
+2. 通过 yum 命令安装 grafana
 ```bash
 yum -y install grafana
 ```
-3.启动grafana并设为开机自启
+3.启动 grafana 并设为开机自启
 ```bash
 systemctl start grafana-server.service 
 systemctl enable grafana-server.service
 ```
-## 安装promethus
+## 安装 promethus
 1. 下载安装包，
 下载地址：https://prometheus.io/download/
 
@@ -747,7 +749,7 @@ tar fvxz prometheus-2.14.0.linux-amd64.tar.gz
 ```bash
 mv prometheus-2.14.0.linux-amd64 /opt/prometheus
 ```
-4. 查看promethus版本
+4. 查看 promethus 版本
 ```bash
 ./prometheus --version
 ```
@@ -762,7 +764,7 @@ prometheus, version 2.14.0 (branch: HEAD, revision: edeb7a44cbf745f1d8be4ea6f215
 ```bash
 vim /etc/systemd/system/prometheus.service
 ```
-```
+```plain
 [Unit]
 Description=Prometheus Monitoring System
 Documentation=Prometheus Monitoring System
@@ -785,7 +787,7 @@ systemctl start prometheus
 systemctl enable prometheus
 ```
 
-## ceph mgr prometheus插件配置
+## ceph mgr prometheus 插件配置
 
 ```bash
 ceph mgr module enable prometheus
@@ -793,11 +795,11 @@ netstat -nltp | grep mgr 检查端口
 curl 127.0.0.1:9283/metrics  测试返回值
 ```
 
-## 配置promethus
+## 配置 promethus
 
 1、在 scrape\_configs: 配置项下添加
 
-```
+```plain
 vim prometheus.yml
 - job_name: 'ceph_cluster'
     honor_labels: true
@@ -807,28 +809,27 @@ vim prometheus.yml
         labels:
           instance: ceph
           
-
 ```
 
-2、重启promethus服务
+2、重启 promethus 服务
 
-```
+```plain
 systemctl restart prometheus
 ```
 
-3、检查prometheus服务器中是否添加成功
+3、检查 prometheus 服务器中是否添加成功
 
-```
+```plain
 # 浏览器-》 http://x.x.x.x:9090 -》status -》Targets
 ```
 
-## 配置grafana
+## 配置 grafana
 
-1、浏览器登录 grafana 管理界面  
-2、添加data sources，点击configuration--》data sources  
-3、添加dashboard，点击HOME--》find dashboard on grafana.com  
-4、搜索ceph的dashboard  
-5、点击HOME--》Import dashboard, 选择合适的dashboard，记录编号
+1. 浏览器登录 grafana 管理界面  
+2. 添加 data sources，点击 configuration--》data sources  
+3. 添加 dashboard，点击 HOME--》find dashboard on grafana.com  
+4. 搜索 ceph 的 dashboard  
+5. 点击 HOME--》Import dashboard, 选择合适的 dashboard，记录编号
 
 ## 参考资料
 - [Preflight Checklist — Ceph Documentation](https://docs.ceph.com/docs/nautilus/start/quick-start-preflight/)

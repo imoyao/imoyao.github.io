@@ -29,19 +29,19 @@ Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务
 ### 1.2 使用 Mon 的管理套接字
 
 通过管理套接字，你可以用 Unix 套接字文件直接与指定守护进程交互。这个文件位于你 Mon 节点的 `run` 目录下，默认配置它位于 `/var/run/ceph/ceph-mon.ID.asok`，但要是改过配置就不一定在那里了。如果你在那里没找到它，请检查 `ceph.conf` 里是否配置了其它路径，或者用下面的命令获取：
-
+```plain
     ceph-conf --name mon.ID --show-config-value admin_socket
-
+```
 请牢记，只有在 Mon 运行时管理套接字才可用。Mon 正常关闭时，管理套接字会被删除；如果 Mon 不运行了、但管理套接字还存在，就说明 Mon 不是正常关闭的。不管怎样，Mon 没在运行，你就不能使用管理套接字， `ceph` 命令会返回类似 `Error 111: Connection Refused` 的错误消息。
 
 访问管理套接字很简单，就是让 `ceph` 工具使用 `asok` 文件。对于 Dumpling 之前的版本，命令是这样的：
-
-	ceph --admin-daemon /var/run/ceph/ceph-mon.<id>.asok <command>plainplain
-
+```bash
+	ceph --admin-daemon /var/run/ceph/ceph-mon.<id>.asok <command>
+```
 对于 Dumpling 及后续版本，你可以用另一个（推荐的）命令：
-
+```bash
 	ceph daemon mon.<id> <command>
-
+```
 `ceph` 工具的 `help` 命令会显示管理套接字支持的其它命令。请仔细了解一下 `config get` 、 `config show` 、 `mon_status` 和 `quorum_status` 命令，在排除 Mon 故障时它们会很有用。
 
 ### 1.3 理解 MON_STATUS
@@ -49,8 +49,8 @@ Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务
 当集群形成法定人数后，或在没有形成法定人数时通过管理套接字， 用 `ceph` 工具可以获得 `mon_status` 信息。命令会输出关于 monitor 的大多数信息，包括部分 `quorum_status` 命令的输出内容。
 
 下面是 `mon_status` 的输出样例：
-
-	{plainplain
+```plain
+	{
 		"name": "c",
   		"rank": 2,
   		"state": "peon",
@@ -86,7 +86,7 @@ Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务
 			]
 		}
 	}
-
+```
 从上面的信息可以看出， monmap 中包含 3 个 monitor （ *a*，*b* 和 *c*），只有 2 个 monitor 形成了法定人数， *c* 是法定人数中的 *peon* 角色（非 *leader* 角色）。
 
 还可以看出， **a** 并不在法定人数之中。请看 `quorum` 集合。在集合中只有 *1* 和 *2* 。这不是 monitor 的名字，而是它们加入当前 monmap 后确定的等级。丢失了等级 0 的 monitor，根据 monmap ，这个 monitor 就是 `mon.a` 。
@@ -101,14 +101,14 @@ Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务
 
 当此种情况发生时，根据你运行的 Ceph 版本，可能看到类似下面的输出：
 
-	```bash
-	root@OPS-ceph1:~# ceph health detail
-	```
+```bash
+root@OPS-ceph1:~# ceph health detail
+```
 
-	```plain
-	HEALTH_WARN 1 mons down, quorum 1,2 b,c
-	mon.a (rank 0) addr 127.0.0.1:6789/0 is down (out of quorum)
-	```
+```plain
+HEALTH_WARN 1 mons down, quorum 1,2 b,c
+mon.a (rank 0) addr 127.0.0.1:6789/0 is down (out of quorum)
+```
 
 ##### 如何解决
 
@@ -143,15 +143,15 @@ Monitor 维护着 Ceph 集群的信息，如果 Monitor 无法正常提供服务
 #### 恢复 Monitor 损坏的 monmap
 
 monmap 通常看起来是下面的样子，这取决于 monitor 的个数：
-
-    epoch 3plainplainplain
+```plain
+    epoch 3
     fsid 5c4e9d53-e2e1-478a-8061-f543f8be4cf8
     last_changed 2013-10-30 04:12:01.945629
     created 2013-10-29 14:14:41.914786
     0: 127.0.0.1:6789/0 mon.a
     1: 127.0.0.1:6790/0 mon.b
     2: 127.0.0.1:6795/0 mon.c
-
+```
 不过也不一定就是这样的内容。比如，在早期版本的 Ceph 中，有一个严重 bug 会导致 `monmap` 的内容全为 0 。这意味着即使用 `monmaptool` 也不能读取它，因为全 0 的内容没有任何意义。另外一些情况，某个 monitor 所持有的 monmap 已严重过期，以至于无法搜寻到集群中的其他 monitors 。在这些状况下，你有两种可行的解决方法：
 
 **销毁 monitor 然后新建**
@@ -166,21 +166,21 @@ monmap 通常看起来是下面的样子，这取决于 monitor 的个数：
 
 1、是否已形成法定人数？如果是，从法定人数中抓取 monmap ：
 
-	```plain
-	ceph mon getmap -o /tmp/monmap
-	```
+```plain
+ceph mon getmap -o /tmp/monmap
+```
 
 
 2、没有形成法定人数？直接从其他 monitor 节点上抓取 monmap （这里假定你抓取 monmap 的 monitor 的 id 是 ID-FOO 并且守护进程已经停止运行）：
-
+```plain
 	ceph-mon -i ID-FOO --extract-monmap /tmp/monmap
-
+```
 3、停止你想要往其中注入 monmap 的 monitor。
 
 4、注入 monmap 。
-
-	ceph-mon -i ID --inject-monmap /tmp/monmapplain
-
+```plain
+	ceph-mon -i ID --inject-monmap /tmp/monmap
+```
 5、启动 monitor 。
 
 请记住，能够注入 monmap 是一个很强大的特性，如果滥用可能会对 monitor 造成大破坏，因为这样做会覆盖 monitor 持有的最新 monmap 。
@@ -200,9 +200,9 @@ Monitor 节点间明显的时钟偏移会对 monitor 造成严重的影响。这
 **如何知道是否存在时钟偏移？**
 
 Monitor 会用 `HEALTH_WARN` 的方式警告你。 `ceph health detail` 应该输出如下格式的信息：
-
+```plain
 	mon.c addr 10.10.0.1:6789/0 clock skew 0.08235s > max 0.05s (latency 0.0045s)
-
+```
 这表示 `mon.c` 已被标记出正在遭受时钟偏移。
 
 **如果存在时钟偏移该怎么处理？**
@@ -212,13 +212,13 @@ Monitor 会用 `HEALTH_WARN` 的方式警告你。 `ceph health detail` 应该�
 #### 客户端无法连接或挂载
 
 检查 IP 过滤表。某些操作系统安装工具会给 `iptables` 增加一条 `REJECT` 规则。这条规则会拒绝所有尝试连接该主机的客户端（除了 `ssh` ）。如果你的 monitor 主机设置了这条防火墙 `REJECT` 规则，客户端从其他节点连接过来时就会超时失败。你需要定位出拒绝客户端连接 Ceph 守护进程的那条 `iptables` 规则。比如，你需要对类似于下面的这条规则进行适当处理：
-
-	REJECT all -- anywhere anywhere reject-with icmp-host-prohibitedplain
-
+```plain
+	REJECT all -- anywhere anywhere reject-with icmp-host-prohibited
+```
 你还需要给 Ceph 主机的 IP 过滤表增加规则，以确保客户端可以访问 Ceph monitor （默认端口 6789 ）和 Ceph OSD （默认 6800 ~ 7300 ）的相关端口。
-
-	iptables -A INPUT -m multiport -p tcp -s {ip-address}/{netmask} --dports 6789,6800:7300 -j ACCEPTplain
-
+```plain
+	iptables -A INPUT -m multiport -p tcp -s {ip-address}/{netmask} --dports 6789,6800:7300 -j ACCEPT
+```
 或者，如果你的环境**允许**，也可以直接关闭主机的防火墙。
 
 ### 1.5 Monitor 数据库失败
@@ -227,11 +227,15 @@ Monitor 会用 `HEALTH_WARN` 的方式警告你。 `ceph health detail` 应该�
 
 Ceph monitor 把集群的各种 map 信息存放在 key/value 数据库中，如 LevelDB 。如果 monitor 是因为数据库崩溃而失败，在 monitor 的 log 日志中应该会有如下错误信息：
 
-	```Corruption: error in middle of record```
+```plain
+Corruption: error in middle of record
+```
 
 或：
 
-	```Corruption: 1 missing files; e.g.: /var/lib/ceph/mon/mon.0/store.db/1234567.ldb```
+```plain
+Corruption: 1 missing files; e.g.: /var/lib/ceph/mon/mon.0/store.db/1234567.ldb
+```
 
 
 #### 通过健康的 Monitor(s) 恢复
@@ -242,33 +246,33 @@ Ceph monitor 把集群的各种 map 信息存放在 key/value 数据库中，如
 
 但是万一所有的 monitors 都同时失败了该怎么办？由于建议用户在部署集群时至少安装 3 个 monitors，同时失效的可能性较小。但是数据中心意外的断电，再加上磁盘/文件系统配置不当，可能会引起底层文件系统失败，从而杀掉所有的 monitors 。这种情况下，我们可以通过存放在 OSDs 上的信息来恢复 monitor 的数据库：
 
-	```shell
-	ms=/tmp/mon-store
-	mkdir $ms
-	# collect the cluster map from OSDs
-	for host in $hosts; do
-  		rsync -avz $ms user@host:$ms
-  		rm -rf $ms
-  		ssh user@host <<EOF
-    		for osd in /var/lib/osd/osd-*; do
-      			ceph-objectstore-tool --data-path $osd --op update-mon-db --mon-store-path $ms
-    		done
-  		EOF
-  		rsync -avz user@host:$ms $ms
-	done
-	# rebuild the monitor store from the collected map, if the cluster does notplain
-	# use cephx authentication, we can skip the following steps to update the
-	# keyring with the caps, and there is no need to pass the "--keyring" option.
-	# i.e. just use "ceph-monstore-tool /tmp/mon-store rebuild" instead
-	ceph-authtool /path/to/admin.keyring -n mon. \
-	  --cap mon allow 'allow *'
-	ceph-authtool /path/to/admin.keyring -n client.admin \
-	  --cap mon allow 'allow *' --cap osd 'allow *' --cap mds 'allow *'
-	ceph-monstore-tool /tmp/mon-store rebuild -- --keyring /path/to/admin.keyring
-	# backup corrupted store.db just in case
-	mv /var/lib/ceph/mon/mon.0/store.db /var/lib/ceph/mon/mon.0/store.db.corrupted
-	mv /tmp/mon-store/store.db /var/lib/ceph/mon/mon.0/store.db
-    ```
+```shell
+ms=/tmp/mon-store
+mkdir $ms
+# collect the cluster map from OSDs
+for host in $hosts; do
+    rsync -avz $ms user@host:$ms
+    rm -rf $ms
+    ssh user@host <<EOF
+        for osd in /var/lib/osd/osd-*; do
+            ceph-objectstore-tool --data-path $osd --op update-mon-db --mon-store-path $ms
+        done
+    EOF
+    rsync -avz user@host:$ms $ms
+done
+# rebuild the monitor store from the collected map, if the cluster does not
+# use cephx authentication, we can skip the following steps to update the
+# keyring with the caps, and there is no need to pass the "--keyring" option.
+# i.e. just use "ceph-monstore-tool /tmp/mon-store rebuild" instead
+ceph-authtool /path/to/admin.keyring -n mon. \
+  --cap mon allow 'allow *'
+ceph-authtool /path/to/admin.keyring -n client.admin \
+  --cap mon allow 'allow *' --cap osd 'allow *' --cap mds 'allow *'
+ceph-monstore-tool /tmp/mon-store rebuild -- --keyring /path/to/admin.keyring
+# backup corrupted store.db just in case
+mv /var/lib/ceph/mon/mon.0/store.db /var/lib/ceph/mon/mon.0/store.db.corrupted
+mv /tmp/mon-store/store.db /var/lib/ceph/mon/mon.0/store.db
+```
 上面的这些步骤：
 
 1. 从所有的 OSD 主机上收集 map 信息。
@@ -286,10 +290,10 @@ Ceph monitor 把集群的各种 map 信息存放在 key/value 数据库中，如
 #### 磁盘空间不足导致 MON DOWN
 
 当 monitor 进程检测到本地可用磁盘空间不足时，会停止 monitor 服务。Monitor 的日志中应该会有类似如下信息的输出：
-
-	2016-09-01 16:45:54.994488 7fb1cac09700  0 mon.jyceph01@0(leader).data_health(62) update_stats avail 5% total 297 GB, used 264 GB, avail 18107 MBplainplain
+```plain
+	2016-09-01 16:45:54.994488 7fb1cac09700  0 mon.jyceph01@0(leader).data_health(62) update_stats avail 5% total 297 GB, used 264 GB, avail 18107 MB
 	2016-09-01 16:45:54.994747 7fb1cac09700 -1 mon.jyceph01@0(leader).data_health(62) reached critical levels of available space on local monitor storage -- shutdown!
-
+```
 清理本地磁盘，增大可用空间，重启 monitor 进程，即可恢复正常。
 
 #### 通过 Mon 数据库的备份恢复
