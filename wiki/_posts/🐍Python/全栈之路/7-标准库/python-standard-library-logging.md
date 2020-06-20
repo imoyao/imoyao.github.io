@@ -149,7 +149,7 @@ logger2.addHandler(file_2_1)
 2. 当使用`logger2`写日志时，会将相应的内容写入 l2_1.log 文件中
 
 ## 更多参考
-[Python之日志处理（logging模块） - 云游道士 - 博客园](https://www.cnblogs.com/yyds/p/6901864.html)
-[python logging模块使用教程 - 简书](https://www.jianshu.com/p/feb86c06c4f4)
-[第32天：Python logging 模块详解 - 纯洁的微笑博客](http://www.ityouknow.com/python/2019/10/13/python-logging-032.html)
-[Python日志库logging总结-可能是目前为止将logging库总结的最好的一篇文章 - 掘金](https://juejin.im/post/5bc2bd3a5188255c94465d31#heading-6)
+[Python 之日志处理（logging 模块） - 云游道士 - 博客园](https://www.cnblogs.com/yyds/p/6901864.html)
+[python logging 模块使用教程 - 简书](https://www.jianshu.com/p/feb86c06c4f4)
+[第 32 天：Python logging 模块详解 - 纯洁的微笑博客](http://www.ityouknow.com/python/2019/10/13/python-logging-032.html)
+[Python 日志库 logging 总结-可能是目前为止将 logging 库总结的最好的一篇文章 - 掘金](https://juejin.im/post/5bc2bd3a5188255c94465d31#heading-6)

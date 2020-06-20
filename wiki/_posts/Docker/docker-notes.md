@@ -204,31 +204,32 @@ Run 'docker COMMAND --help' for more information on a command.
 - [Docker 命令大全 | 菜鸟教程](https://www.runoob.com/docker/docker-command-manual.html)
 
 ## 构建并运行自己的 image
+
 我们可以拉取镜像来运行，但是要制作自己的 image，就需要编写 Dockerfile。它是一个文本文件。Docker 根据改文件生成 image 文件。
 以官网的 [例子](https://docs.docker.com/get-started/part2/) 看一下如何构建 image：
-1. 首先克隆应用：
-    ```shellplain
-    git clone https://github.com/dockersamples/node-bulletin-board
-    cd node-bulletin-board/bulletin-board-app
-    ```
-2. 之后打开 dockerfile，查看里面的内容
 
-    ```plainplain
-    # 使用官方镜像（node:current-slim）作为父级image，冒号表示标签
-    FROM node:current-slim
-    # 设置工作目录，此处目录是你的镜像文件系统，而不是主机文件系统
-    WORKDIR /usr/src/app
-    # 将文件从主机拷贝到本地，即拷贝到/usr/src/app/package.json
-    COPY package.json .
-    # 运行npm install 安装依赖，所有依赖会打包进 image 文件
-    RUN npm install
-    # 暴露端口8080，允许外部连接
-    EXPOSE 8080
-    # CMD 指令：执行npm start 启动服务
-    CMD [ "npm", "start" ]
-    # 将源码从主机拷贝进你的文件系统中
-    COPY . .
-    ```
+1. 首先克隆应用：
+```shell
+git clone https://github.com/dockersamples/node-bulletin-board
+cd node-bulletin-board/bulletin-board-app
+```
+2. 之后打开 dockerfile，查看里面的内容
+```plain
+# 使用官方镜像（node:current-slim）作为父级image，冒号表示标签
+FROM node:current-slim
+# 设置工作目录，此处目录是你的镜像文件系统，而不是主机文件系统
+WORKDIR /usr/src/app
+# 将文件从主机拷贝到本地，即拷贝到/usr/src/app/package.json
+COPY package.json .
+# 运行npm install 安装依赖，所有依赖会打包进 image 文件
+RUN npm install
+# 暴露端口8080，允许外部连接
+EXPOSE 8080
+# CMD 指令：执行npm start 启动服务
+CMD [ "npm", "start" ]
+# 将源码从主机拷贝进你的文件系统中
+COPY . .
+```
 这些步骤和在主机上进行部署安装的步骤大致相同，但是，将他们捕获为 dockerfile 可以是我们在可移植的、独立的 docker 镜像中执行相同的步骤。更多指令参考 [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 
 #### `RUN`指令与`CMD`指令的区别在哪里
@@ -345,19 +346,20 @@ docker.io/jolmomar/ansible_runner_service   latest              b27d3f6bf8a6    
     然后再去访问，应用已经停止服务了。当然，你还可以使用`docker rm --force bb`强制删除容器。
     删除容器还可以使用下面的指令：
     1. 查询容器 ID
-        ```shellplainplain
-        docker container ls -all
-        # 或者使用 ps 查看全部容器
-        docker ps -a
-        ```
-        返回结果
-        ```plain
-        CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
+    ```shell
+    docker container ls -all
+    # 或者使用 ps 查看全部容器
+    docker ps -a
+    ```  
+    返回结果
+    ```plain
+    CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS               NAMES
     d60c45afdc10        bulletinboard:1.0   "docker-entrypoint..."   7 minutes ago       Exited (0) 2 minutes ago                       hopeful_mcclintock
+    ```
     2. 删除容器
-        ```shell
-        docker container rm [containerID]
-        ```
+    ```shell
+    docker container rm [containerID]
+    ```
     
 ### 常用指令
 - docker container start
