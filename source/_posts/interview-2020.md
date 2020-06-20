@@ -16,7 +16,7 @@ categories:
             <th>技术实现</th>
             <th>优势</th>
             <th>劣势</th>
-            <th>代表作</th>
+            <th>典型代表</th>
         </tr>
     </thead>
     <tbody>
