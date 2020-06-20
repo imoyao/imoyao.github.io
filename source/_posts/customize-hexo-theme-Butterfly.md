@@ -214,7 +214,7 @@ layout/includes/widget/index.pug
         - content.length > theme.auto_excerpt.length ? expert += ' ...' : ''
         .content!= expert
 ```
-> 因为主题 UI 的关系，主頁文章節選只支持自動節選和文章頁 description。优先选择自動節選。
+> 因为主题 UI 的关系，主页文章节选只支持自动节选和文章页 description。优先选择自动节选。
 > 在 butterfly.yml 里可以开启 auto_excerpt 的选项，你的文章将会在自动截取部分显示在主页。（默认显示 150 个字）。
 ```ymal
  auto_excerpt: 
@@ -229,3 +229,17 @@ layout/includes/widget/index.pug
 
 ### 暗色模式
 - [x] 一些自定义样式修改；
+
+### 简化部署
+在站点配置文件中修改远程部署仓库信息如下：
+```yml
+deploy:
+  type: git
+  repo:
+    github: https://github.com/imoyao/imoyao.github.io.git
+    gitee: https://gitee.com/imoyao/imoyao.git
+```
+其中地址修改为你的仓库的地址。具体说明见[此处](https://blog.csdn.net/tsvico/article/details/80629452)；同时还可以将代码推送到两个仓库中，参考[此处](https://www.jianshu.com/p/747e2bb71775)：
+```bash
+git remote set-url --add origin 你的gitee项目地址
+```

@@ -8,7 +8,7 @@ categories:
 ---
 ## 作用
 > Adds behaviour to object without affecting its class.
-Decorator模式用于动态地向对象添加新特性，而不更改其原来的代码实现。它与继承不同，新特性只绑定到特定对象，而不会添加到整个子类。
+Decorator 模式用于动态地向对象添加新特性，而不更改其原来的代码实现。它与继承不同，新特性只绑定到特定对象，而不会添加到整个子类。
 
 ## 优缺点
 ### 优点
@@ -46,7 +46,7 @@ def foo():
 ### 进阶
 
 - 装饰器带参数
-```
+```plain
 def deco_with_args(name):
     def decorator(func):
         def wrapper(*args,**kwargs):

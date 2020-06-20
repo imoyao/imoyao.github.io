@@ -89,7 +89,9 @@ theme: Butterfly
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/imoyao/imoyao.github.io.git
+  repo:
+    github: https://github.com/imoyao/imoyao.github.io.git
+    gitee: https://gitee.com/imoyao/imoyao.git
   #  repo: git@github.com:imoyao/imoyao.github.io.git
 
   branch: master

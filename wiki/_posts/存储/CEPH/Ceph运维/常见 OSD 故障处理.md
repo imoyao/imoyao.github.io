@@ -12,9 +12,9 @@
 
 如果你没改默认路径，可以在 `/var/log/ceph` 下找到 Ceph 的日志：
 
-	```bashplainplain
-	ls /var/log/ceph
-	```
+```bash
+ls /var/log/ceph
+```
 
 如果看到的日志还不够详细，可以增大日志级别。请参考[1.12 日志和调试]，查阅如何保证看到大量日志又不影响集群运行。
 
@@ -22,18 +22,19 @@
 
 用管理套接字工具检索运行时信息。列出节点上所有 Ceph 套接字：
 
-	```bashplain
-	ls /var/run
-	```
+```bash
+ls /var/run
+```
 
 然后，执行下例命令显示可用选项，把 `{daemon-name}` 换成实际的守护进程（如 osd.0 ）：
 
-	ceph daemon osd.0plainplain
-
+```plain
+	ceph daemon osd.0
+```
 或者，你也可以指定一个 `{socket-file}` （如 `/var/run/ceph` 下的文件）：
-
-	ceph daemon {socket-file} help
-
+```plain
+ceph daemon {socket-file} help
+```
 和其它手段相比，管理套接字允许你：
 
 - 在运行时列出配置
@@ -45,42 +46,51 @@
 #### 显示可用空间
 
 可能会引起文件系统问题。用 `df` 命令显示文件系统的可用空间。
-
-	df -hplainplainplain
-
+```plain
+	df -h
+```
 其它用法见 `df --help` 。
 
 #### I/O 统计信息
 
 用 `iostat` 工具定位 I/O 相关问题。
-
+```bash
 	iostat -x
-
+```
 #### 诊断信息
 
 要查看诊断信息，配合 `less` 、 `more` 、 `grep` 或 `tail` 使用 `dmesg` ，例如：
 
-	dmesg | grep scsi
+```bash
+dmesg | grep scsi
+```	
 
 ### 2.2 停止数据向外重平衡
 
 你得周期性地对集群的子集进行维护，或解决某个故障域的问题（如某个机架）。如果你不想在停机维护 OSD 时让 CRUSH 自动重均衡，首先设置集群的 `noout` 标志：
-
-	ceph osd set noout
+```bash
+ceph osd set noout
+```
 
 设置了 noout 后，你就可以停机维护失败域内的 OSD 了。
 
-	```stop ceph-osd id={num}```
+```bash
+stop ceph-osd id={num}
+```
 
 **注意：**在定位某故障域内的问题时，停机的 OSD 内的 PG 状态会变为 `degraded` 。
 
 维护结束后，重启 OSD 。
 
-	```start ceph-osd id={num}```
+```bash
+start ceph-osd id={num}
+```
 
 最后，解除 `noout` 标志。
 
-	```ceph osd unset noout```
+```bash
+ceph osd unset noout
+```
 
 ### 2.3 OSD 没运行
 
@@ -95,13 +105,13 @@
 - **检查路径**： 检查配置文件的路径，以及 OSD 的数据和日志分区路径。如果你分离了 OSD 的数据和日志分区、而配置文件和实际挂载点存在出入，启动 OSD 时就可能失败。如果你想把日志存储于一个块设备，应该为日志硬盘分区并为各 OSD 分别指定一个分区。
 
 - **检查最大线程数**： 如果你的节点有很多 OSD ，也许就会触碰到默认的最大线程数限制（如通常是 32k 个），尤其是在恢复期间。你可以用 `sysctl` 增大线程数，把最大线程数更改为支持的最大值（即 4194303 ），看看是否有用。例如：
-
-	sysctl -w kernel.pid_max=4194303
-
+```plain
+sysctl -w kernel.pid_max=4194303
+```
 如果增大最大线程数解决了这个问题，你可以把此配置 `kernel.pid_max` 写入配置文件 `/etc/sysctl.conf`，使之永久生效，例如：
-
-	kernel.pid_max = 4194303plain
-
+```plain
+kernel.pid_max = 4194303
+```
 - **内核版本**： 确认你使用的内核版本和发布版本。 Ceph 默认依赖一些第三方工具，这些工具可能有缺陷或者与特定发布版和/或内核版本冲突（如 Google perftools ）。检查下[操作系统推荐表](http://docs.ceph.com/docs/master/start/os-recommendations/)，确保你已经解决了内核相关的问题。
 
 - **段错误**： 如果有了段错误，提高日志级别（如果还没提高），再试试。如果重现了，联系 ceph-devel 邮件列表并提供你的配置文件、monitor 输出和日志文件内容。
@@ -109,15 +119,17 @@
 #### OSD 失败
 
 当 `ceph-osd` 挂掉时，monitor 可通过活着的 `ceph-osd` 了解到此情况，并通过 `ceph health` 命令报告：
-
-	ceph healthplainplainplain
-	HEALTH_WARN 1/3 in osds are down
-
+```bash
+ceph health
+HEALTH_WARN 1/3 in osds are down
+```
 特别地，有 `ceph-osd` 进程标记为 `in` 且 `down` 的时候，你也会得到警告。你可以用下面的命令得知哪个 `ceph-osd` 进程挂了：
 
+```plain
     ceph health detail
     HEALTH_WARN 1/3 in osds are down
     osd.0 is down since epoch 23, last address 192.168.106.220:6800/11080
+```
 
 如果有硬盘失败或其它错误使 `ceph-osd` 不能正常运行或重启，将会在日志文件 `/var/log/ceph/` 里输出一条错误信息。
 
@@ -135,22 +147,23 @@ Ceph 不允许你向满的 OSD 写入数据，以免丢失数据。在运行着�
 
 `ceph health` 会报告将满的 `ceph-osds` ：
 
+```plain
 	ceph health
 	HEALTH_WARN 1 nearfull osds
 	osd.2 is near full at 85%
+```
 
 或者：
 
+```bash
+ceph health
+```
 
-	```bash
-	ceph health
-	```
-
-	```plain
-	HEALTH_ERR 1 nearfull osds, 1 full osds
-	osd.2 is near full at 85%
-	osd.3 is full at 97%
-	```
+```plain
+HEALTH_ERR 1 nearfull osds, 1 full osds
+osd.2 is near full at 85%
+osd.3 is full at 97%
+```
 
 处理这种情况的最好方法就是在出现 `near full` 告警时尽快增加新的 `ceph-osd` ，这允许集群把数据重分布到新 OSD 里。
 
@@ -158,13 +171,15 @@ Ceph 不允许你向满的 OSD 写入数据，以免丢失数据。在运行着�
 
 让集群能够读写是首先要做的事情。最容易想到的就是调高 `mon osd full ratio` 和 `mon osd nearfull ratio` 值，但是对于生产环境，一旦调整这个全局比例，可能会导致整个集群的数据都会动起来，引发更多的数据迁移。因此另一种折衷方法就是单独调整已满 OSD 的 near full 和 full 比例；也可以使用调低  OSD 的 crush weight 的方法，使已满 OSD 上的数据迁移一部分出去。
 
-    # 调整单个 osd 的比例plain
-	ceph tell osd.id injectargs '--mon-osd-full-ratio .98'
-    ceph tell osd.id injectargs '--mon-osd-full-ratio 0.98'
-    
-    # 调整 osd 的 crush weight 值
-    ceph osd crush reweight osd.id {a-little-lower-weight-value}
-
+- 调整单个 osd 的比例
+```bash
+ceph tell osd.id injectargs '--mon-osd-full-ratio .98'
+ceph tell osd.id injectargs '--mon-osd-full-ratio 0.98'
+```   
+- 调整 osd 的 crush weight 值
+```bash
+ceph osd crush reweight osd.id {a-little-lower-weight-value}
+```
 ### 2.4 OSD 龟速或无响应
 
 一个反复出现的问题是 OSD 龟速或无响应。在深入性能问题前，你应该先确保不是其他故障。例如，确保你的网络运行正常、且 OSD 在运行，还要检查 OSD 是否被恢复流量拖住了。
@@ -176,15 +191,15 @@ Ceph 不允许你向满的 OSD 写入数据，以免丢失数据。在运行着�
 Ceph 是一个分布式存储系统，所以它依赖于网络来互联 OSD 们、复制对象、从错误中恢复和检查心跳。网络问题会导致 OSD 延时和震荡（反复经历 up and down，详情可参考下文中的相关小节） 。
 
 确保 Ceph 进程和 Ceph 依赖的进程已建立连接和/或在监听。
-
-	netstat -a | grep cephplainplain
+```bash
+	netstat -a | grep ceph
 	netstat -l | grep ceph
 	sudo netstat -p | grep ceph
-
+```
 检查网络统计信息。
-
+```bash
 	netstat -s
-
+```
 #### 驱动器配置
 
 一个存储驱动器应该只用于一个 OSD 。如果有其它进程共享驱动器，顺序读写吞吐量会成为瓶颈，包括日志、操作系统、monitor 、其它 OSD 和非 Ceph 进程。
@@ -240,9 +255,9 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 如果某 `ceph-osd` 守护进程对一请求响应很慢，它会生成日志消息来抱怨请求耗费的时间过长。默认警告阀值是 30 秒，可以通过 `osd op complaint time` 选项来配置。这种情况发生时，集群日志会收到这些消息。
 
 很老的版本抱怨 “old requests” ：
-
-	osd.0 192.168.106.220:6800/18813 312 : [WRN] old request osd_op(client.5099.0:790 fatty_26485_object789 [write 0~4096] 2.5e54f643) v4 received at 2012-03-06 15:42:56.054801 currently waiting for sub opsplain
-
+```plain
+	osd.0 192.168.106.220:6800/18813 312 : [WRN] old request osd_op(client.5099.0:790 fatty_26485_object789 [write 0~4096] 2.5e54f643) v4 received at 2012-03-06 15:42:56.054801 currently waiting for sub ops
+```
 较新版本的 Ceph 抱怨 “slow requests” ：
 
 ```plain
@@ -272,20 +287,20 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 然而，如果 cluster（后端）网络失败、或出现了明显的延时，同时 public（前端）网络却运行良好， OSD 目前不能很好地处理这种情况。这时 OSD 们会向 monitor 报告邻居 `down` 了、同时报告自己是 `up` 的，我们把这种情形称为震荡（ flapping ）。
 
 如果有原因导致 OSD 震荡（反复地被标记为 `down` ，然后又 `up` ），你可以强制 monitor 停止这种震荡状态：
-
-	ceph osd set noup      # prevent OSDs from getting marked upplainplainplain
-	ceph osd set nodown    # prevent OSDs from getting marked down
-
+```bash
+ceph osd set noup      # prevent OSDs from getting marked up
+ceph osd set nodown    # prevent OSDs from getting marked down
+```
 这些标记记录在 osdmap 数据结构里：
-
-	ceph osd dump | grep flagsplainplainplain
-	flags no-up,no-down
-
+```bash
+ceph osd dump | grep flags
+flags no-up,no-down
+```
 可用下列命令清除标记：
-
-	ceph osd unset noupplain
-	ceph osd unset nodown
-
+```bash
+ceph osd unset noup
+ceph osd unset nodown
+```
 Ceph 还支持另外两个标记 `noin` 和 `noout` ，它们可防止正在启动的 OSD 被标记为 `in` （可以分配数据），或被误标记为 `out` （不管 `mon osd down out interval` 的值是多少）。
 
 **注意：** `noup` 、 `noout` 和 `nodown` 从某种意义上说是临时的，一旦标记被清除了，被它们阻塞的动作短时间内就会发生。另一方面， `noin` 标记阻止 OSD 启动后加入集群，但其它守护进程都维持原样。
