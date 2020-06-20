@@ -116,7 +116,7 @@ def gen():
     return return_code
 
 
-def main(lint_md=True):
+def main(lint_md=False):
     """
     添加lint为可配置，否则会出问题 >>> plain
     :param lint_md:
