@@ -13,7 +13,7 @@ subtitle: 生命不息，折腾不止
 本文主要针对 hexo-theme-butterfly 主题进行了个性化自定义，并对修改内容做了简单介绍。
 <!--more-->
 {%note no-icon%}
-原作者文档👉 [hexo-theme-butterfly 安装文档](https://docs.jerryc.me/)
+原作者文档👉 [hexo-theme-butterfly 安装文档](https://demo.jerryc.me/)
 {%endnote%}
 ## 已完成
 
@@ -80,7 +80,7 @@ if theme.douban_background.enable
 #### 标签外挂
 - [x] ~~参考`Next`[主题外挂](https://hexo-theme-next.netlify.com/docs/tag-plugins/)~~
 参见[此处](https://vuejs.org/v2/cookbook/serverless-blog.html) note 挂件；
-建议阅读[标签外挂（Tag-Plugins） | JerryC](https://jerryc.me/posts/4aa8abbe/#%E6%A8%99%E7%B1%A4%E5%A4%96%E6%8E%9B%EF%BC%88Tag-Plugins%EF%BC%89)
+建议阅读[標籤外掛(Tag Plugins) | Butterfly](https://demo.jerryc.me/posts/2df239ce/)
 `gallery`已经实现需求，所以没有必要实现了。
 {% gallery %} 
 
@@ -241,5 +241,6 @@ deploy:
 ```
 其中地址修改为你的仓库的地址。具体说明见[此处](https://blog.csdn.net/tsvico/article/details/80629452)；同时还可以将代码推送到两个仓库中，参考[此处](https://www.jianshu.com/p/747e2bb71775)：
 ```bash
-git remote set-url --add origin 你的gitee项目地址
+git remote set-url --add origin {你的 gitee 项目地址}
 ```
+（当然我们也可以手动点击 gitee 网页上的同步按钮强制从 github 上更新）
