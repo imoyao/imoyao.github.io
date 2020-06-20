@@ -208,7 +208,7 @@ Process finished with exit code 0
 ```
 <<<<<<< HEAD
 ## 其他资料
-[Python之系统交互（subprocess） - 云游道士 - 博客园](https://www.cnblogs.com/yyds/p/7288916.html)
+[Python 之系统交互（subprocess） - 云游道士 - 博客园](https://www.cnblogs.com/yyds/p/7288916.html)
 =======
 
 ## 高级用法
