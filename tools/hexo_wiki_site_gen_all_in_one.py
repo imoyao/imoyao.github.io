@@ -10,8 +10,11 @@ Win10 Python 3.7+ 测试通过
 ## 作用
 1. 对文章内容进行lint
 2. 生成site和wiki
+## 运行
+python3 tools\hexo_wiki_site_gen_all_in_one.py
 """
 import os
+import subprocess
 
 from libcoms import delegator
 
@@ -21,10 +24,38 @@ DB_FP = r'db.json'
 WIKI_CONF = r'_config_wiki.yml'
 
 
+class ExcuteError(Exception):
+    pass
+
+
+def custom_run(_cmd):
+    """
+
+    https://stackoverflow.com/questions/2715847/read-streaming-input-from-subprocess-communicate/17698359#17698359
+
+    https://stackoverflow.com/questions/2715847/read-streaming-input-from-subprocess-communicate
+
+    :param _cmd:
+    :return:
+    """
+    if isinstance(_cmd, list):
+        shell = False
+    else:
+        shell = True
+
+    with subprocess.Popen(_cmd, shell=shell, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True,
+                          encoding='utf-8') as p:
+        for line in p.stdout:
+            # UnicodeDecodeError: 'gbk' codec can't decode byte 0xa7 in position 59: illegal multibyte sequence
+            print(line, end='')
+        _ret_code = p.wait()
+    return _ret_code
+
+
 def tool_fp(tool_name):
     win_cmd = 'where {tn}'.format(tn=tool_name)
-    ret = delegator.run(win_cmd)
-    return ret.out.split()[1]
+    _ret = delegator.run(win_cmd)
+    return _ret.out.split()[1]
 
 
 def lint():
@@ -34,15 +65,19 @@ def lint():
     """
     lint_md_path = tool_fp('lint-md')
     lint_site_posts = r'{lint} source\_posts\ -f'.format(lint=lint_md_path)
-    ret = delegator.run(lint_site_posts, block=False)
-    ret.block()
-    # return_code = ret.return_code
-    # print('lint site ret_code:', return_code)
+    _ret = custom_run(lint_site_posts)
+    if _ret == 0:
+        print('Lint posts success!')
+    else:
+        raise ExcuteError('The command {} run error.'.format(lint_site_posts))
+
     lint_site_posts = r'{lint} wiki\_posts\ -f'.format(lint=lint_md_path)
-    ret = delegator.run(lint_site_posts, block=False)
-    ret.block()
-    return_code = ret.return_code
-    # print('lint site ret_code:', return_code)
+    return_code = custom_run(lint_site_posts)
+    if return_code == 0:
+        print('Lint wiki success!')
+    else:
+        raise ExcuteError('The command {} run error.'.format(lint_site_posts))
+
     assert return_code == 0
     return return_code
 
@@ -54,38 +89,46 @@ def gen():
     """
     hexo_path = tool_fp('hexo')
     wiki_clean_cmd = '{hexo} --config {wk} clean'.format(hexo=hexo_path, wk=WIKI_CONF)
-    ret = delegator.run(wiki_clean_cmd, block=False)
-    ret.block()
+    ret = custom_run(wiki_clean_cmd)
+    if ret == 0:
+        print('Clean wiki success!')
+    else:
+        raise ExcuteError('The command {} run error.'.format(wiki_clean_cmd))
     # return_code = ret.return_code
     # print('-----run--0----', return_code)
     wiki_generate_cmd = '{hexo} --config {wk} generate'.format(hexo=hexo_path, wk=WIKI_CONF)
-    ret = delegator.run(wiki_generate_cmd, block=False)
-    ret.block()
+    ret = custom_run(wiki_generate_cmd)
+    if ret == 0:
+        print('Generate wiki success!')
+    else:
+        raise ExcuteError('The command {} run error.'.format(wiki_generate_cmd))
     # return_code = ret.return_code
     # print('-----run--1----', return_code)
     if os.path.exists(DB_FP):
         os.remove(DB_FP)
     site_generate_cmd = '{hexo} generate'.format(hexo=hexo_path, )
-    ret = delegator.run(site_generate_cmd, block=False)
-    ret.block()
-    return_code = ret.return_code
+    return_code = custom_run(site_generate_cmd)
+    if ret == 0:
+        print('Generate posts success!')
+    else:
+        raise ExcuteError('The command {} run error.'.format(site_generate_cmd))
     assert return_code == 0
     return return_code
 
 
-def main(lint_md=False):
+def main(lint_md=True):
     """
     添加lint为可配置，否则会出问题 >>> plain
     :param lint_md:
     :return:
     """
     if lint_md:
-        ret = lint()
-        if ret == 0:
+        _ret = lint()
+        if _ret == 0:
             print('lint-md execute success!')
-    ret = gen()
-    if ret == 0:
-        print('site generate success,please run `hexo s` to Start the server.')
+    _ret = gen()
+    if _ret == 0:
+        print('Site generate success,please run `hexo s` to Start the server.')
 
 
 if __name__ == '__main__':
