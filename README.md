@@ -1,6 +1,7 @@
 # 别院牧志
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/88e1a8bd-d248-4658-8373-0ff1b81442c1/deploy-status)](https://app.netlify.com/sites/santu/deploys)
+![自动部署更新博客](https://github.com/imoyao/imoyao.github.io/workflows/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E6%9B%B4%E6%96%B0%E5%8D%9A%E5%AE%A2/badge.svg)
 
 > 本分支用来存放站点的`sources`文件
 
