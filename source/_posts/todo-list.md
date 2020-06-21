@@ -4,7 +4,7 @@ date: 2019-11-27 23:34:31
 tags:
 - TODO
 - 待学清单
-cover: /images/jessica-lewis-fJXv46LT7Xk-unsplash.jpg
+cover: https://cdn.jsdelivr.net/gh/masantu/statics/image/jessica-lewis-fJXv46LT7Xk-unsplash.jpg
 subtitle: 人人都有松鼠癖，人人都是马来人。😑
 top: 10
 ---

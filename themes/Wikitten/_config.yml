@@ -17,7 +17,7 @@ customize:
     profile:
         enabled: false # Whether to show profile bar
         avatar: # css/images/avatar.png
-        gravatar: zth_9451@qq.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
+        gravatar: emailme8@163.com # Gravatar email address, if you enable Gravatar, your avatar config will be overriden
         author: imoyao
         author_title: Devoloper
         location: Beijing, China
@@ -26,7 +26,7 @@ customize:
     sidebar: left # sidebar position, options: left, right
     category_perExpand: false # enable article categories list per expanding
     thumbnail: true # enable posts thumbnail, options: true, false
-    favicon: /img/favicon.ico # path to favicon
+    favicon: https://www.masantu.com/favicon.ico # path to favicon
     default_index_file: index.md # if this, it will display at site index instead of default index page
     social_links:
         github: https://github.com/imoyao
