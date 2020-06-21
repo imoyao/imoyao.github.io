@@ -2,7 +2,7 @@
 title: 佛与姑娘
 date: 2017-11-11 12:26:38
 top: 100
-cover: /images/p09310935393643.png
+cover: https://cdn.jsdelivr.net/gh/masantu/statics/image/p2449411368.jpg
 tags:
 - 美文
 - 阅读
