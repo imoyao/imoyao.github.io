@@ -24,4 +24,4 @@ tags: DRBD
 [drbd+heartbeat 实现应用高可用_老老_新浪博客](http://blog.sina.com.cn/s/blog_53c33d890100bf50.html)
 [Distributed Replicated Block Device 的高可用性](https://www.ibm.com/developerworks/cn/linux/l-drbd/index.html)
 [沃趣科技-文档-MySQL 高可用之 DRBD](http://www.woqutech.com/docs_info.php?id=513)
-[为什么双数据中心无法做到完美的灾备自动切换？ - 知乎](https://zhuanlan.zhihu.com/p/136877267)
+[Linux 高可用(HA)之 Corosync+Pacemaker+DRBD+MySQL/MariaDB 实现高可用 MySQ/MariaDB 集群 | Linux–不是那么难](https://www.dwhd.org/20150530_014731.html)
