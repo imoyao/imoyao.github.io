@@ -45,7 +45,9 @@ def custom_run(_cmd):
 
     with subprocess.Popen(_cmd, shell=shell, stdout=subprocess.PIPE, bufsize=1, universal_newlines=True,
                           encoding='utf-8') as p:
-        for line in p.stdout:
+        # for line in p.stdout:
+        # https://docs.python.org/zh-cn/3/library/subprocess.html#subprocess.Popen.communicate
+        for line in p.communicate()[0]:
             # UnicodeDecodeError: 'gbk' codec can't decode byte 0xa7 in position 59: illegal multibyte sequence
             print(line, end='')
         _ret_code = p.wait()
@@ -116,7 +118,7 @@ def gen():
     return return_code
 
 
-def main(lint_md=False):
+def main(lint_md=True):
     """
     添加lint为可配置，否则会出问题 >>> plain
     :param lint_md:
