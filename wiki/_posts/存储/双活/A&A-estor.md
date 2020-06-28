@@ -93,7 +93,6 @@ gRPC 是一个现代的开源高性能 RPC 框架，可以在任何环境中运�
 #### why
 
 1. 足够简单
-
 2. 序列化后体积很小:消息大小只需要 XML 的 1/10 ~ 1/3
 3. 解析速度快:解析速度比 XML 快 20 ~ 100 倍
 4. 多语言支持
@@ -501,7 +500,7 @@ def del_node():
 
 #### 恢复时的操作
 
-	TODO: ***需要确认两种方案是已同时实现还是设计方案***？plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	***需要确认两种方案是已同时实现还是设计方案***plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 ```python
 def recover_op1():
