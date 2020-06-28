@@ -7,9 +7,8 @@ tags:
 - threading
 top: 1
 ---
-# Python 全栈之路系列之线程与进程
 
-## What is a Thread
+## 什么是线程
 
 线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位，一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。
 
@@ -17,13 +16,13 @@ top: 1
 
 线程的切换使用过上下文来实现的，比如有一本书，有 a 和 b 这两个人(两个线程)看，a 看完之后记录当前看到那一页哪一行，然后交给 b 看，b 看完之后记录当前看到了那一页哪一行，此时 a 又要看了，那么 a 就通过上次记录的值(上下文)直接找到上次看到了哪里，然后继续往下看。
 
-## What is a Process
+## 什么是进程
 
 一个进程至少要包含一个线程，每个进程在启动的时候就会自动的启动一个线程，进程里面的第一个线程就是主线程，每次在进程内创建的子线程都是由主线程进程创建和销毁，子线程也可以由主线程创建出来的线程创建和销毁线程。
 
-进程是对各种资源管理的集合，比如要调用内存、CPU、网卡、声卡等，进程要操作上述的硬件之前都必须要创建一个线程，进程里面可以包含多个线程，QQ 就是一个进程。
+进程是对各种资源管理和调度的集合，比如要调用内存、CPU、网卡、声卡等，进程要操作上述的硬件之前都必须要创建一个线程，进程里面可以包含多个线程，QQ 就是一个进程。
 
-继续拿 QQ 来说，比如我现在打卡了 QQ 的聊天窗口、个人信息窗口、设置窗口等，那么每一个打开的窗口都是一个线程，他们都在执行不同的任务，比如聊天窗口这个线程可以和好友进行互动，聊天，视频等，个人信息窗口我可以查看、修改自己的资料。
+继续拿 QQ 来说，比如我现在打开 QQ 的聊天窗口、个人信息窗口、设置窗口等，那么每一个打开的窗口都是一个线程，他们都在执行不同的任务，比如聊天窗口这个线程可以和好友进行互动，聊天，视频等，个人信息窗口我可以查看、修改自己的资料。
 
 为了进程安全起见，所以两个进程之间的数据是不能够互相访问的(默认情况下)，比如自己写了一个应用程序，然后让别人运行起来，那么我的这个程序就可以访问用户启动的其他应用，我可以通过我自己的程序去访问 QQ，然后拿到一些聊天记录等比较隐秘的信息，那么这个时候就不安全了，所以说进程与进程之间的数据是不可以互相访问的，而且每一个进程的内存是独立的。
 
@@ -40,29 +39,27 @@ top: 1
 9. 一个线程可以控制和操作同一个进程里的其他线程，线程与线程之间没有隶属关系，但是进程只能操作子进程
 10. 改变主线程，有可能会影响到其他线程的行为，但是对于父进程的修改是不会影响子进程;
 
-一个多并发的小脚本
+### 一个多并发的小脚本
 
 ```python
 import threading
 import time
-def Princ(String):
-    print('task', String)
+def princ(tring):
+    print('task', tring)
     time.sleep(5)
 # target=目标函数， args=传入的参数
-t1 = threading.Thread(target=Princ, args=('t1',))
+t1 = threading.Thread(target=princ, args=('t1',))
 t1.start()
-t2 = threading.Thread(target=Princ, args=('t1',))
+t2 = threading.Thread(target=princ, args=('t1',))
 t2.start()
-t3 = threading.Thread(target=Princ, args=('t1',))
+t3 = threading.Thread(target=princ, args=('t1',))
 t3.start()
 ```
 
-参考文档
+### 参考文档
 
-进程与线程的一个简单解释
-http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html
-Linux 进程与线程的区别
-https://my.oschina.net/cnyinlinux/blog/422207
+[进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)
+[Linux 进程与线程的区别](https://my.oschina.net/cnyinlinux/blog/422207)
 
 ## 线程
 
@@ -70,24 +67,25 @@ https://my.oschina.net/cnyinlinux/blog/422207
 
 调用 threading 模块调用线程的两种方式
 
-直接调用
+### 直接调用
 
 ```python
 import threading
 import time
-def Princ(String):
-    print('task', String)
+
+def princ(tring):
+    print('task', tring)
     time.sleep(5)
 # target=目标函数， args=传入的参数
-t1 = threading.Thread(target=Princ, args=('t1',))
+t1 = threading.Thread(target=princ, args=('t1',))
 t1.start()
-t2 = threading.Thread(target=Princ, args=('t1',))
+t2 = threading.Thread(target=princ, args=('t1',))
 t2.start()
-t3 = threading.Thread(target=Princ, args=('t1',))
+t3 = threading.Thread(target=princ, args=('t1',))
 t3.start()
 ```
 
-通过类调用
+### 通过类调用
 
 ```python
 import threading
@@ -107,7 +105,7 @@ t2.start()
 
 ### 多线程
 
-多线程在 Python 内实则就是一个假象，为什么这么说呢，因为 CPU 的处理速度是很快的，所以我们看起来以一个线程在执行多个任务，每个任务的执行速度是非常之快的，利用上下文切换来快速的切换任务，以至于我们根本感觉不到。
+多线程在 Python 内实际是一个假象。为什么这么说呢，因为 CPU 的处理速度是很快的，所以我们看起来以一个线程在执行多个任务，每个任务的执行速度是非常之快的，利用上下文切换来快速的切换任务，以至于我们根本感觉不到。
 
 但是频繁的使用上下文切换也是要耗费一定的资源，因为单线程在每次切换任务的时候需要保存当前任务的上下文。
 
@@ -121,41 +119,50 @@ t2.start()
 
 ```python
 for i in range(50):
-    t = threading.Thread(target=Princ, args=('t-%s' % (i),))
+    t = threading.Thread(target=princ, args=('t-%s' % (i),))
     t.start()
 ```
 
-join()
+### **join()**
 
-`join()`方法可以让程序等待每一个线程之后完成之后再往下执行，又成为串行执行。
+join()会阻塞调用这个方法的线程，直到被调用 join() 的线程终结——不管是正常终结还是抛出未处理异常，或者直到发生超时，超时选项是可选参数。
+
+当 timeout 参数存在而且不是 None 时，它应该是一个用于指定操作超时的以秒为单位的浮点数或者分数。因为 join() 总是返回 None ，所以你一定要在 join() 后调用 is_alive() 才能判断是否发生超时。如果线程仍然存活，则 join() 超时。
+
+当 timeout 参数不存在或者是 None ，这个操作会阻塞直到线程终结。
+
+一个线程可以被 join() 很多次。如果尝试加入当前线程会导致死锁， join() 会引起 RuntimeError 异常。如果尝试 join() 一个尚未开始的线程，也会抛出相同的异常。
+
+`join()`方法可以让程序等待每一个线程完成之后再往下执行，又称为串行执行。
 
 ```python
 import threading
 import time
-def Princ(String):
-    print('task', String)
+def princ(tring):
+    print('task', tring)
     time.sleep(1)
 for i in range(50):
-    t = threading.Thread(target=Princ, args=('t-%s' % (i),))
+    t = threading.Thread(target=princ, args=('t-%s' % (i),))
     t.start()
 	# 当前线程执行完毕之后在执行后面的线程
     t.join()
 ```
 
-让主线程阻塞，子现在并行执行
+让主线程阻塞，子线程现在并行执行
 
 ```python
 import threading
 import time
-def Princ(String):
-    print('task', String)
+
+def princ(tring):
+    print('task', tring)
     time.sleep(2)
 # 执行子线程的时间
 start_time = time.time()
 # 存放线程的实例
 t_objs = []
 for i in range(50):
-    t = threading.Thread(target=Princ, args=('t-%s' % (i),))
+    t = threading.Thread(target=princ, args=('t-%s' % (i),))
     t.start()
 	# 为了不让后面的子线程阻塞，把当前的子线程放入到一个列表中
     t_objs.append(t)
@@ -212,8 +219,7 @@ Process finished with exit code 0
 ```
 Event
 
-Event 是线程间通信最间的机制之一：一个线程发送一个 event 信号，其他的线程则等待这个信号。用于主线程控制其他线程的执行。 Events 管理一个 flag，这个 flag 可以使用 set
-()设置成 True 或者使用 clear()重置为 False，wait()则用于阻塞，在 flag 为 True 之前。flag 默认为 False。
+Event 是线程间通信最简单的机制之一：一个线程发送一个 event 信号，其他的线程则等待这个信号，用于主线程控制其他线程的执行。 Event 管理一个 flag，这个 flag 可以使用 set()设置成 True 或者使用 clear()重置为 False，wait()则用于在 flag 为 True 之前保持阻塞。flag 默认为 False。
 
 |选项|描述|
 |:--|:--|
@@ -242,26 +248,32 @@ inp = input("True/False?>> ")
 if inp == "True":
     event_obj.set()
 ````
+代码参见[此处](./codes/t_event.py)
 
-守护进程(守护线程)
+### 守护进程/线程(daemon)
+当我们通过`t.daemon = True`或者调用 `t.setDaemon(True)` 设置为 Daemon 时，主线程结束会中断子线程。
 
-一个主进程可以启动多个守护进程，但是主进程必须要一直运行，如果主进程挂掉了，那么守护进程也会随之挂掉
+有的线程会做背景人物，比如 keepalive，或者周期性地执行垃圾回收任务等。这些任务只有当主程序运行的时候才有用，并且可以在其他非守护程序线程退出后将其杀死。
 
-程序会等待主线程(进程)执行完毕，但是不会等待守护进程(线程)
+如果没有守护线程，我们就必须跟踪这些线程，并在程序完全退出之前告知它们退出。通过将线程设置为守护线程，运行线程之后就不用管了，所有守护线程都会自动终止。
+
+一个主进程可以启动多个守护进程，但是主进程必须要一直运行，如果主进程挂掉了，那么守护进程也会随之挂掉。
+
+程序会等待主线程(进程)执行完毕，但是不会等待守护进程(线程)执行结束（因为设置为守护线程的任务可能是一直不会终结的）。
 
 ```python
 import threading
 import time
 
-def Princ(String):
-    print('task', String)
+def princ(tring):
+    print('task', tring)
     time.sleep(2)
 for i in range(50):
-    t = threading.Thread(target=Princ, args=('t-%s' % (i),))
+    t = threading.Thread(target=princ, args=('t-%s' % (i),))
     t.setDaemon(True)  # 把当前线程设置为守护线程，要在start之前设置
     t.start()
 ```
-**场景预设：** 比如现在有一个 FTP 服务，每一个用户连接上去的时候都会创建一个守护线程，现在已经有 300 个用户连接上去了，就是说已经创建了 300 个守护线程，但是突然之间 FTP 服务宕掉了，这个时候就不会等待守护线程执行完毕再退出，而是直接退出，如果是普通的线程，那么就会登台线程执行完毕再退出。
+**场景预设：** 比如现在有一个 FTP 服务，每一个用户连接上去的时候都会创建一个守护线程，现在已经有 300 个用户连接上去了，就是说已经创建了 300 个守护线程，但是突然之间 FTP 服务宕掉了，这个时候就不会等待守护线程执行完毕再退出，而是直接退出，如果是普通的线程，那么就会等待线程执行完毕再退出。
 
 ```python
 #!/use/bin/env python
@@ -269,6 +281,7 @@ for i in range(50):
 
 from multiprocessing import Process
 import time
+
 def runprocess(arg):
     print(arg)
     time.sleep(2)
@@ -280,15 +293,18 @@ p.start()
 
 print("end")
 ```
+参考：
+[python - Daemon Threads Explanation - Stack Overflow](https://stackoverflow.com/questions/190010/daemon-threads-explanation)
+[python - setDaemon() method of threading.Thread - Stack Overflow](https://stackoverflow.com/questions/5127401/setdaemon-method-of-threading-thread)
 
 线程之间的数据交互与锁(互斥锁)
 
-`python2.x`需要加锁，但是在`python3.x`上面就不需要了
+`python2.x`需要加锁，但是在`python3.x`上面就不需要了。
 
 ```python
 # _*_ coding:utf-8 _*_
 import threading
-def Princ():
+def princ():
     # 获取锁
     lock.acquire()
     # 在函数内可以直接修改全局变量
@@ -304,7 +320,7 @@ lock = threading.Lock()
 number = 0
 t_objs = []
 for i in range(100):
-    t = threading.Thread(target=Princ)
+    t = threading.Thread(target=princ)
     t.start()
     t_objs.append(t)
 for t in t_objs:
@@ -312,7 +328,7 @@ for t in t_objs:
 print('Number:', number)
 ```
 
-递归锁(Lock/RLock)
+### 递归锁(Lock/RLock)
 
 ```python
 import threading
@@ -350,7 +366,7 @@ for t in t_objs:
     t.join()
 print(num, num2)
 ```
-信号量(Semaphore)
+### 信号量(Semaphore)
 
 `互斥锁`同时只允许一个线程更改数据，而`Semaphore`是同时允许一定数量的线程更改数据
 
@@ -402,11 +418,11 @@ if __name__ == '__main__':
 ```python
 from multiprocessing import Process
 import threading
-def Thread(String):
-    print(String)
-def Proces(String):
-    print('hello', String)
-    t = threading.Thread(target=Thread, args=('Thread %s' % (String),))  # 创建一个线程
+def Thread(tring):
+    print(tring)
+def Proces(tring):
+    print('hello', tring)
+    t = threading.Thread(target=Thread, args=('Thread %s' % (tring),))  # 创建一个线程
     t.start()  # 启动它
 if __name__ == '__main__':
     p = Process(target=Proces, args=('World',))  # 创建一个进程
@@ -436,8 +452,8 @@ if __name__ == '__main__':
 # _*_ coding:utf-8 _*_
 from multiprocessing import Process
 import os
-def info(String):
-    print(String)
+def info(tring):
+    print(tring)
     print('module name:', __name__)
     print('父进程的PID:', os.getppid())
     print('子进程的PID:', os.getpid())
@@ -775,3 +791,7 @@ IO 密集型(I/O bound)
 计算密集型(CPU bound)
 
 程序大部分在做计算、逻辑判断、循环导致 cpu 占用率很高的情况，称之为计算密集型，比如说 python 程序中执行了一段代码`1+1`，这就是在计算 1+1 的值
+
+## 更多参考
+
+[threading — Manage Concurrent Operations Within a Process — PyMOTW 3](https://pymotw.com/3/threading/index.html)
