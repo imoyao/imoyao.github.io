@@ -1,5 +1,5 @@
 ---
-title: 基于 DRBD 实现的双活方案
+title: 基于 DRBD 实现的双活方案文档阅读记录
 toc: true
 date: 2020-06-18 12:27:56
 tags: DRBD
@@ -428,7 +428,6 @@ def del_node():
    组删除
 
 3. 同步之后升主操作，激活输出
-
    1. 获取 drbdname/sanlun name
    2. drbd 升主，激活 target，数据记录
    3. 接管时同步后升主：离线接管检查时，**去除对双主 drbd 状态的验证**（为什么？）
@@ -500,7 +499,7 @@ def del_node():
 
 #### 恢复时的操作
 
-	***需要确认两种方案是已同时实现还是设计方案***plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+	TODO: ***需要确认两种方案是已同时实现还是设计方案***？
 
 ```python
 def recover_op1():
