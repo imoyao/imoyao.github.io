@@ -795,3 +795,4 @@ IO 密集型(I/O bound)
 ## 更多参考
 
 [threading — Manage Concurrent Operations Within a Process — PyMOTW 3](https://pymotw.com/3/threading/index.html)
+[Python Tutorial: multithreading - creating threads - 2020](https://www.bogotobogo.com/python/Multithread/python_multithreading_creating_threads.php)
