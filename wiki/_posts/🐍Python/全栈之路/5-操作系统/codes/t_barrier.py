@@ -14,34 +14,30 @@ Barrier从字面理解是屏障的意思，主要是用作集合线程，然后�
 
 而在计算机的世界里，Barrier可以解决的问题很多，比如，一个程序有若干个线程并发的从网站上下载一个大型xml文件，这个过程可以相互独立，因为一个文件的各个部分并不相关。而在处理这个文件的时候，可能需要一个完整的文件，所以，需要有一条虚拟的线让这些并发的部分集合一下从而可以拼接成为一个完整的文件，可能是为了后续处理也可能是为了计算hash值来验证文件的完整性。而后，再交由下一步处理。
 
-本示例中模拟发车，按照上座率进行发车，只有等够3个人，才会发一次车，否则会一直等
+本示例中模拟发车，按照上座率进行发车，只有等够3个人，才会发一次车，否则会一直等；在最后一次，剩余人数不够发车条件，直接发车。
 """
 
 
 def worker(barrier):
-    # global NUM_THREADS
+    global NUM_THREADS
     print(threading.current_thread().name,
           'waiting for barrier with {} others'.format(
               barrier.n_waiting))
     pause_time = random.randint(1, 5) / 10
     time.sleep(pause_time)
-
-    worker_id = barrier.wait()
-    print(threading.current_thread().name, 'after barrier',
-          worker_id)
-
-    # except threading.BrokenBarrierError:
-    #     print('------!!!--------', NUM_THREADS)
-    #     barrier.abort()
-    #     print(threading.current_thread().name, 'aborting')
-    # else:
-    #     print('Sleep {},There just {} leaves!'.format(pause_time, NUM_THREADS))
-    #     print(threading.current_thread().name, 'after barrier',
-    #           worker_id)
+    NUM_THREADS -= 1
+    try:
+        worker_id = barrier.wait()
+    except threading.BrokenBarrierError:
+        print(threading.current_thread().name, 'Aborting,there are {} left!'.format(NUM_THREADS))
+    else:
+        print('Sleep {} seconds,There just {} left!'.format(pause_time, NUM_THREADS))
+        print(threading.current_thread().name, 'after barrier',
+              worker_id)
 
 
 NUM_THREADS_PARTIES = 3
-NUM_THREADS = 10
+NUM_THREADS = 11
 
 
 def main():
@@ -50,6 +46,12 @@ def main():
         t = threading.Thread(target=worker, args=(b,))
         t.start()
         time.sleep(.6)
+    if NUM_THREADS <= 0:    # 没人了，不等了
+        print('no left!=====just abort======')
+        '''
+        Barrier 的 abort() 方法会导致所有等待中的线程接收到一个 BrokenBarrierError。 我们可以使用此方法来告知那些被阻塞住的线程该结束了。
+        '''
+        b.abort()
 
 
 main()
