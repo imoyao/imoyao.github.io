@@ -6,7 +6,8 @@ tags:
 - SqlAlchemy
 
 categories:
-- 工作日常
+- Projects
+- IdealYard
 ---
 
 ## 问题
