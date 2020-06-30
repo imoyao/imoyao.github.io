@@ -46,7 +46,7 @@ def main():
         t = threading.Thread(target=worker, args=(b,))
         t.start()
         time.sleep(.6)
-    if NUM_THREADS <= 0:    # 没人了，不等了
+    if NUM_THREADS <= 0:  # 没人了，不等了
         print('no left!=====just abort======')
         '''
         Barrier 的 abort() 方法会导致所有等待中的线程接收到一个 BrokenBarrierError。 我们可以使用此方法来告知那些被阻塞住的线程该结束了。
@@ -54,4 +54,42 @@ def main():
         b.abort()
 
 
-main()
+if __name__ == '__main__':
+    main()
+
+'''
+Thread-1 waiting for barrier with 0 others
+Thread-2 waiting for barrier with 1 others
+Thread-3 waiting for barrier with 2 others
+Sleep 0.3 seconds,There just 8 left!
+Thread-2 after barrierSleep 0.4 seconds,There just 8 left!
+Thread-3 Sleep 0.1 seconds,There just 8 left!
+Thread-1 1
+after barrier  after barrier 0
+2
+Thread-4 waiting for barrier with 0 others
+Thread-5 waiting for barrier with 1 others
+Thread-6 waiting for barrier with 2 others
+Sleep 0.5 seconds,There just 5 left!
+Sleep 0.2 seconds,There just 5 left!
+Thread-5 Sleep 0.5 seconds,There just 5 left!
+Thread-4 Thread-6 after barrierafter barrierafter barrier 0  
+2
+1
+Thread-7 waiting for barrier with 0 others
+Thread-8 waiting for barrier with 1 others
+Thread-9 waiting for barrier with 2 others
+Sleep 0.1 seconds,There just 2 left!Sleep 0.3 seconds,There just 2 left!
+Thread-9 after barrier
+ 2
+Sleep 0.5 seconds,There just 2 left!Thread-7
+Thread-8 after barrier after barrier 1 0
+# 剩余两个，一车拉走
+Thread-10 waiting for barrier with 0 others
+Thread-11 waiting for barrier with 1 others
+no left!=====just abort======
+Thread-11 Aborting,there are 0 left!
+Thread-10 Aborting,there are 0 left!
+
+Process finished with exit code 0
+'''
