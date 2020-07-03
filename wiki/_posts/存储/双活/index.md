@@ -15,6 +15,7 @@ tags: DRBD
 [五种业界主流存储双活方案解析（仲裁与两地三中心） - 邓毓 - twt 企业 IT 交流平台](https://www.talkwithtrend.com/Article/245299)
 [五种业界主流存储双活架构设计方案特点对比分析 - 邓毓 - twt 企业 IT 交流平台](https://www.talkwithtrend.com/Article/244809)
 ---
+[DRBD使用gfs2,cman实现双主集群文件存储方案-Apprentice-51CTO博客](https://blog.51cto.com/apprentice/1400869)
 [为什么双数据中心无法做到完美的灾备自动切换？ - 知乎](https://zhuanlan.zhihu.com/p/136877267)
 [从 IT 应用架构角度，畅谈双活数据中心容灾解决方案 - 架构 - dbaplus 社群：围绕 Data、Blockchain、AiOps 的企业级专业社群。技术大咖、原创干货，每天精品原创文章推送，每周线上技术分享，每月线下技术沙龙。](https://dbaplus.cn/news-21-1223-1.html)
 [突破存储跨中心双活方案设计阶段难点之一：脑裂风险 - 51CTO.COM](https://stor.51cto.com/art/201710/554440.htm)
