@@ -550,14 +550,14 @@ Ceph 的网络配置要放到 \[global\] 段下。前述的 5 分钟快速入门
 要配置公共网络，请将以下选项添加到 Ceph 配置文件的\[global\]部分。
 
 \[global\]
-        # ... elided configurationplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        # ... elided configurationplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         public network \= \{public-network/netmask\}
 
 集群网络  
 如果声明群集网络，OSD 将通过群集网络路由心跳，对象复制和恢复流量。 与使用单个网络相比，这可以提高性能。 要配置群集网络，请将以下选项添加到 Ceph 配置文件的\[global\]部分。
 
 \[global\]
-        # ... elided configurationplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        # ... elided configurationplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         cluster network \= \{cluster-network/netmask\}
 
 我们希望无法从公共网络或 Internet 访问群集网络以增强安全性。
@@ -568,7 +568,7 @@ Ceph 的网络配置要放到 \[global\] 段下。前述的 5 分钟快速入门
 
 \[mon.a\]
 
-        host \= \{hostname\}plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        host \= \{hostname\}plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         mon addr \= \{ip-address\}:6789 \[osd.0\]
         host \= \{hostname\}
 
@@ -1054,7 +1054,7 @@ Tip:监控集群时，要警惕和 nearfull 相关的警告。这意味着一些
 
 \[global\]
 
-        mon osd full ratio \= .80 mon osd backfillfull ratio \= .75 mon osd nearfull ratio \= .70plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        mon osd full ratio \= .80 mon osd backfillfull ratio \= .75 mon osd nearfull ratio \= .70plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
 
 mon osd full ratio
 描述：OSD 被视为已满之前使用的磁盘空间百分比。
@@ -2383,7 +2383,7 @@ journal block align
 
 \[global\]
 
-    # By default, Ceph makes 3 replicas of objects. If you want to make fourplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    # By default, Ceph makes 3 replicas of objects. If you want to make fourplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     # copies of an object the default value--a primary copy and three replica
     # copies\--reset the default values as shown in 'osd pool default size'.
     # If you want to allow Ceph to write a lesser number of copies in a degraded
