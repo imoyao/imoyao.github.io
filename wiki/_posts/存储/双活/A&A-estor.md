@@ -499,8 +499,6 @@ def del_node():
 
 #### 恢复时的操作
 
-	TODO: ***需要确认两种方案是已同时实现还是设计方案***？
-
 ```python
 def recover_op1():
     get_recover_info()
