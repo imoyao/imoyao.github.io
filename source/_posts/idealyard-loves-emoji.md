@@ -5,7 +5,7 @@ tags:
 - idealyard
 - 博客
 - utf8mb4
-cover: https://cdn.jsdelivr.net/gh/masantu/statics/image/doge.png
+cover: https://cdn.jsdelivr.net/gh/masantu/statics/images/doge.png
 categories:
 - Projects
 - IdealYard

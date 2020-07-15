@@ -122,7 +122,7 @@ site_logo: /img/virctial-site-logo.png
 # Post info settings
 # ---------------
 avatar:
-  img: https://cdn.jsdelivr.net/gh/masantu/statics/image/imoyao.jpg
+  img: https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg
   effect: false # 頭像會一直轉圈
 
 # see also: https://www.zhihu.com/question/21168322
@@ -155,8 +155,8 @@ douban:
 douban_background:
   enable: true
   bg_type: photo # photo
-book_background: https://cdn.jsdelivr.net/gh/masantu/statics/image/book-bg-tiny.jpg
-movie_background: https://cdn.jsdelivr.net/gh/masantu/statics/image/movie-bg-tiny.jpg
+book_background: https://cdn.jsdelivr.net/gh/masantu/statics/images/book-bg-tiny.jpg
+movie_background: https://cdn.jsdelivr.net/gh/masantu/statics/images/movie-bg-tiny.jpg
 
 cover:
   # 是否顯示文章封面
