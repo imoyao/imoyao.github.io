@@ -90,7 +90,7 @@ if theme.douban_background.enable
 
 ![](https://i0.hippopx.com/photos/121/457/241/girls-the-scenery-wallpaper-7f97112750013868bc5bcc249f13e27d.jpg) 
 
-![](https://cdn.jsdelivr.net/gh/masantu/statics/image/p458733229.jpg) 
+![](https://cdn.jsdelivr.net/gh/masantu/statics/images/p458733229.jpg) 
 
 ![](https://picjumbo.com/wp-content/uploads/iphone-free-stock-photos-2210x3315.jpg) 
 ![](https://images.unsplash.com/photo-1529245814698-dd66c442bfef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80) 
