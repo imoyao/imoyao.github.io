@@ -68,6 +68,16 @@ if __name__ == '__main__':
     print('local ip address long to ip is %s'%long2ip(4294967295)) 
 
 ```
+#### 更新
+我们还可以使用 ipaddress 库对 ip 地址进行 int 和 str 之间的互转。代码如下：
+```python
+>>> import ipaddress
+
+>>> int(ipaddress.ip_address('127.0.0.1'))
+2130706433
+>>> str(ipaddress.ip_address(2130706433))
+'127.0.0.1'
+```
 
 
 ## 针对`IPv6`地址
@@ -124,4 +134,4 @@ SELECT name FROM user WHERE ipaddress = inet_aton('127.0.0.1');
 - [Most efficient way to store IP Address in MySQL](https://stackoverflow.com/questions/2542011/most-efficient-way-to-store-ip-address-in-mysql)
 - [MySQL doc-function_inet6-aton](https://dev.mysql.com/doc/refman/5.6/en/miscellaneous-functions.html#function_inet6-aton)
 - [IP 地址在数据库里面的存储方式](https://www.cnblogs.com/gomysql/p/4595621.html)
-- [论 IP 地址在数据库中应该用何种形式存储?](https://www.cnblogs.com/skynet/archive/2011/01/09/1931044.html)
+- [论 IP 地址在数据库中应该用何种形式存储？](https://www.cnblogs.com/skynet/archive/2011/01/09/1931044.html)
