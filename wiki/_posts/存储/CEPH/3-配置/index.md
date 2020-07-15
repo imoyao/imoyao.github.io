@@ -2385,7 +2385,11 @@ journal block align
 ```plain
 \[global\]
 
+<<<<<<< HEAD
     # By default, Ceph makes 3 replicas of objects. If you want to make four
+=======
+    # By default, Ceph makes 3 replicas of objects. If you want to make fourplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+>>>>>>> 0eb6d915945e4d84c1a59a646f299c232fef70af
     # copies of an object the default value--a primary copy and three replica
     # copies\--reset the default values as shown in 'osd pool default size'.
     # If you want to allow Ceph to write a lesser number of copies in a degraded
