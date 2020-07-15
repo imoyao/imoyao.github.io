@@ -548,36 +548,36 @@ Ceph 的网络配置要放到 \[global\] 段下。前述的 5 分钟快速入门
 
 公共网络  
 要配置公共网络，请将以下选项添加到 Ceph 配置文件的\[global\]部分。
-
+```plain
 \[global\]
-        # ... elided configurationplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        # ... elided configuration
         public network \= \{public-network/netmask\}
-
+```
 集群网络  
 如果声明群集网络，OSD 将通过群集网络路由心跳，对象复制和恢复流量。 与使用单个网络相比，这可以提高性能。 要配置群集网络，请将以下选项添加到 Ceph 配置文件的\[global\]部分。
-
+```plain
 \[global\]
-        # ... elided configurationplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+        # ... elided configuration
         cluster network \= \{cluster-network/netmask\}
-
+```
 我们希望无法从公共网络或 Internet 访问群集网络以增强安全性。
 
 ### Ceph Daemon
 
 有一个网络配置是所有守护进程都要配的：各个守护进程都必须指定主机，Ceph 也要求指定监视器 IP 地址及端口。一些部署工具（如 ceph-deploy，Chef）会给你创建配置文件，如果它能胜任那就别设置这些值。主机选项是主机的短名，不是全资域名 FQDN，也不是 IP 地址。在命令行下输入主机名-s 获取主机名。
-
+```plain
 \[mon.a\]
-
-        host \= \{hostname\}plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
-        mon addr \= \{ip-address\}:6789 \[osd.0\]
         host \= \{hostname\}
 
+        mon addr \= \{ip-address\}:6789 \[osd.0\]
+        host \= \{hostname\}
+```
 您不必为守护程序设置主机 IP 地址。 如果您具有静态 IP 配置并且公共和集群网络都在运行，则 Ceph 配置文件可以为每个守护程序指定主机的 IP 地址。 要为守护程序设置静态 IP 地址，以下选项应出现在 ceph.conf 文件的守护程序实例部分中。
-
+```plain
 \[osd.0\]
         public addr \= \{host-public-ip-address\}
         cluster addr \= \{host-cluster-ip-address\}
-
+```
 单网卡 OSD，双网络集群
 
 一般来说，我们不建议用单网卡 OSD 主机部署两个网络。然而这事可以实现，把公共地址选择配在\[osd.n\]段下即可强制 OSD 主机运行在公共网，其中 n 是其 OSD 号。另外，公共网和集群网必须互通，考虑到安全因素我们不建议这样做。
@@ -1051,12 +1051,14 @@ Tip:监控集群时，要警惕和 nearfull 相关的警告。这意味着一些
 如果将群集的总容量除以群集中的 OSD 数，则可以找到群集中 OSD 的平均平均容量。 考虑将该数字乘以您期望在正常操作期间同时失败的 OSD 数量（相对较小的数量）。 最后将群集的容量乘以全部比率，以达到最大运行容量; 然后，减去那些预期会故障的 OSD 从而计算出合理的 full ratio。 用更多数量的 OSD 故障（例如，一组 OSD）重复上述过程，以得到合理的 near full ratio。
 
 以下设置仅适用于群集创建，然后存储在 OSDMap 中。
-
+```
 \[global\]
 
-        mon osd full ratio \= .80 mon osd backfillfull ratio \= .75 mon osd nearfull ratio \= .70plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+
+        mon osd full ratio \= .80 mon osd backfillfull ratio \= .75 mon osd nearfull ratio \= .70
 
 mon osd full ratio
+```
 描述：OSD 被视为已满之前使用的磁盘空间百分比。
 类型：float 默认值：0.95 mon osd backfillfull ratio
 说明：在 OSD 被认为太满而无法 backfill 之前使用的磁盘空间百分比。
@@ -2380,10 +2382,10 @@ journal block align
 当你创建存储池并给它设置归置组数量时如果你没指定，Ceph 就用默认值。我们建议更改某些默认值，特别是存储池的副本数和默认归置组数量，可以在运行 pool 命令的时候设置这些值。你也可以把配置写入 Ceph 配置文件的 \[global\] 段来覆盖默认值。
 
  
-
+```plain
 \[global\]
 
-    # By default, Ceph makes 3 replicas of objects. If you want to make fourplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    # By default, Ceph makes 3 replicas of objects. If you want to make four
     # copies of an object the default value--a primary copy and three replica
     # copies\--reset the default values as shown in 'osd pool default size'.
     # If you want to allow Ceph to write a lesser number of copies in a degraded
@@ -2398,7 +2400,7 @@ journal block align
     # \(100 \* 10\) / 4 = 250.
 
     osd pool default pg num \= 250 osd pool default pgp num \= 250
-
+```
  
 
 mon max pool pg num
@@ -2494,15 +2496,10 @@ osd min pg log entries
 类型：    Float
 默认： 2
 
- 
-
- 
 
 ## 消息设置
 
 ### 通用设置
-
- 
 
 ms tcp nodelay
 描述：    在 messenger tcp 会话上禁用 nagle 算法。
@@ -2545,10 +2542,6 @@ ms tcp nodelay
 类型： 64\-bit Unsigned Integer
 是否必须： No
 默认： 0
-
- 
-
- 
 
 ### ASYNC MESSENGER OPTIONS
 
