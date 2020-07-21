@@ -40,7 +40,7 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/friends.jpg
 ```
 网站：[别院牧志](www.masantu.com)
 slogan：Valar Dohaeris.
-头像：![avatar](https://cdn.jsdelivr.net/gh/masantu/statics/image/imoyao.jpg)
+头像：![avatar](https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg)
 Keywords/Describe: Python/Web
 描述：你如今的气质里，藏着你走过的路、读过的书和爱过的人。
 ```
