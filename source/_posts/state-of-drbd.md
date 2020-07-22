@@ -188,5 +188,5 @@ drbd84 中使用缩写符号来标记性能指标，而 drbd9 中使用全称来
     - lower：底层设备处于拥挤状态。
     
 ## 参考链接
-
+- [DRBD 8.4 en » LINBIT](https://www.linbit.com/drbd-user-guide/users-guide-drbd-8-4/#s-check-status)
 - [drbd(三)：drbd 的状态说明 - 骏马金龙 - 博客园](http://www.cnblogs.com/f-ck-need-u/p/8684648.html)
