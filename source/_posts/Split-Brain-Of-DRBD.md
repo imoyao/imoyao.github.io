@@ -412,6 +412,9 @@ drbdadm connect <resource>
 脑裂受害者不会引发全盘同步。相反，它的局部修改已经被回滚，对脑裂幸存者的任何修改都会传递给受害者。
 重新同步完成后，脑裂被视为已解决（`resolved`），两个节点再次形成完全一致的冗余复制存储系统（`DRBD`）。
 
+### 仲裁服务
+参见我的另一篇博文：[一种基于 DRBD 的双活解决方案 | 别院牧志](/blog/2020-07-22/A-A-via-DRBD/)
+
 ## 参考链接
 
 - [User’s Guide 8.4.x](https://docs.linbit.com/docs/users-guide-8.4/)
