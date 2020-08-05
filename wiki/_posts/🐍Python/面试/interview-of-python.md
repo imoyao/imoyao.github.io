@@ -422,7 +422,7 @@ d.foo1()
 
 Python 中的`__new__`确实很少见到,先做了解：
 
-1. `__new__`是Python中真正的构造方法（创建并返回实例），而`__init__`是一个实例化方法；
+1. `__new__`是 Python 中真正的构造方法（创建并返回实例），而`__init__`是一个实例化方法；
 2. `__new__`方法会返回一个创建的实例，而`__init__`什么都不返回；
 3. 只有在`__new__`返回一个 cls 的实例时后面的`__init__`才能被调用；
 4. 当创建一个新实例时调用`__new__`，初始化一个实例时用`__init__`；
@@ -430,11 +430,11 @@ Python 中的`__new__`确实很少见到,先做了解：
 2、`__new__`特性
 
 - `__new__` 方法是在类实例化对象时第一个调用的方法，将返回实例对象
-- `__new__` 方法始终都是类方法（即第一个参数为cls）
-- 第一个参数cls是当前正在实例化的类，如果要得到当前类的实例，应当在当前类中的 `__new__`方法语句中调用当前类的父类的” `__new__` 方法
+- `__new__` 方法始终都是类方法（即第一个参数为 cls）
+- 第一个参数 cls 是当前正在实例化的类，如果要得到当前类的实例，应当在当前类中的 `__new__`方法语句中调用当前类的父类的” `__new__` 方法
 
 [Python use of new and init](http://stackoverflow.com/questions/674304/pythons-use-of-new-and-init)
-[详解类class类的构造函数`__new__`和初始化函数`__init__`及定制一个类（终章）_brucewong0516的博客](https://blog.csdn.net/brucewong0516/article/details/79124550)
+[详解类 class 类的构造函数`__new__`和初始化函数`__init__`及定制一个类（终章）_brucewong0516 的博客](https://blog.csdn.net/brucewong0516/article/details/79124550)
 
 ### `__call__`方法
 Python 中所有的东西都被称为对象，对象分为可以被调用和不可以被调用。
