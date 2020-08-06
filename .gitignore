@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -13,6 +14,8 @@ junit*xml
 ceph.conf
 wheelhouse*
 
+=======
+>>>>>>> Stashed changes
 .DS_Store
 Thumbs.db
 db.json
@@ -20,6 +23,7 @@ db.json
 .idea/
 node_modules/
 .deploy*/
+<<<<<<< Updated upstream
 public/
 
 # python
@@ -33,3 +37,6 @@ public/
 
 # dirs
 temps/
+=======
+public/
+>>>>>>> Stashed changes

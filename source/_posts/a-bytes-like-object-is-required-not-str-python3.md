@@ -150,7 +150,7 @@ class SensorMaker(HwMaker):
 ## 原因解释及解决方案
 
 关于`TypeError: a bytes-like object is required, not 'str'`错误，我们可以这样复现一下：
-```python
+```plain
 In [16]: a = b'123|456'
 
 In [17]: a.split('|')                                                                                         
@@ -163,7 +163,7 @@ TypeError: a bytes-like object is required, not 'str'
 ```
 ---
 ###  解决办法
-```python
+```plain
 In [20]: a = b'123|456'                                                                                        
 In [21]: a.decode('utf-8').split('|')                                                                         
 Out[21]: ['123', '456']
