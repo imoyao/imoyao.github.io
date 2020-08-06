@@ -5,7 +5,7 @@ tags:
 hide: true
 ---
 ## 第二版
-1. 使用[depcheck](https://www.npmjs.com/package/depcheck) 移除无用依赖
+- [ ] 使用[depcheck](https://www.npmjs.com/package/depcheck) 移除无用依赖
 
 
 ## 第一版

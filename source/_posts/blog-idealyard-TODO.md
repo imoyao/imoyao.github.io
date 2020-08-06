@@ -108,7 +108,7 @@ cover: /images/photo-1475767770551-49f1b43f71cd.jpg
  参考[这里](https://segmentfault.com/q/1010000008832754)  
  参考[这里](https://www.jianshu.com/p/e78c2210c410)
 - [ ] 使用`盘古之白`之后不能输入`emoji`表情；
- ```shell
+ ```plain
   pymysql.err.InternalError: (1366, "Incorrect string value: '\\xF0\\x9F\\x98\\x98</...' for column 'content_html' at row 1")
  ```
 - [ ] 链接的 slug 中直接把 emoji 也给显示出来了，此处需要对 emoji 进行过滤或者转换为字符说明。

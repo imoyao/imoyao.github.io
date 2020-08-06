@@ -464,6 +464,5 @@ green
 
 ### 其他
 - [颜色列表 - 维基中文镜像，自由的百科全书](http://www.bosimedia.com/wiki/%E9%A2%9C%E8%89%B2%E5%88%97%E8%A1%A8)
-- [Mathpix Snip | 图片转公式](https://mathpix.com/)
 - [latex 在线公式编辑器汉化版](http://www.jq22.com/yanshi16883)
 - [HSV to RGB conversion | color conversion](https://www.rapidtables.com/convert/color/hsv-to-rgb.html)
