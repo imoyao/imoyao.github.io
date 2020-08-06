@@ -5,7 +5,7 @@ tags:
 - Flask
 - Web.py
 - Web 开发
-
+- Python
 categories:
 - 工作日常
 toc: true
@@ -38,7 +38,7 @@ toc: true
     - 数据库 -  `Flask` 使用扩展`Flask-SQLAlchemy`实现对数据库的`ORM`操作，可以很好地管理和实现数据库的迁移(借助`Flask-Migrate`)工作；`Web.py`我们使用自己封装的`database.py`。
     - 身份验证和权限 - `Flask`提供安全`cookie`作为您自己实现的工具，第三方扩展如`Flask-Login`(用户会话管理)，`Flask-HTTPAuth`<sup>①</sup>（简化了使用`Flask`路由的`HTTP`身份验证的使用），`Flask-Security`（提供一站式管理）， `Flask-Social`（用于添加“社交”或`OAuth`登录和连接管理）等，这些扩展良莠不齐，使用时需要对其有个初步了解并进行遴选；`Web.py`还是要自己造轮子。
     - `RESTful` - 使用`Flask-RESTful` 可以创建`REST`的`API`。
-    - 强大的页面渲染 -`Flask`使用`jinja2`作为模板引擎；`Web.py`使用`Templetor`类 `python` 写起来信手拈来，无痛衔接，也可以使用`Mako`模板引擎，两者平分秋色。性能对比见这里👉 [几个模板系统的性能对比](http://www.pythontip.com/blog/post/2239/)
+    - 强大的页面渲染 -`Flask`使用`jinja2`作为模板引擎；`Web.py`使用 [`Templetor`类](https://webpy.org/templetor) ，类似`python` 语法的写法使其写起来信手拈来，无痛衔接。当然你也可以使用`Mako`模板引擎，两者平分秋色，甚至从语法上来说 web.py 略胜一筹。性能对比见这里👉 [几个模板系统的性能对比](http://www.pythontip.com/blog/post/2239/)
 - 伸缩性 - `Flask`既可以像`Web.py`那样做微框架开发一个很小的`web`应用，也可以借助上方的各种扩展做到`Django`级别的应用。
     
 ## Flask 框架
