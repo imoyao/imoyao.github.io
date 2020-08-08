@@ -6,7 +6,6 @@
     "version": "4.2.1"
   },
   "dependencies": {
-    "gulp": "^4.0.2",
     "hexo": "^4.2.1",
     "hexo-admin": "^2.3.0",
     "hexo-autonofollow": "^1.0.1",
