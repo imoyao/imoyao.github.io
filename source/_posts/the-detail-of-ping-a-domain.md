@@ -34,19 +34,250 @@ ICMP（Internet Control Message Protocol | *网络控制消息协议*）是 TCP/
 
 ### Address Resolution Protocol —— ARP 的工作原理
 
-当主机 A 想要同本局域网上的某个主机 B 发送 IP 数据报时，就先在其 ARP 高速缓存中查看有无主机 B 的 IP 地址。如果有，就在 ARP 高速缓存中查找器对于的硬件地址，再把这个硬件地址写入 MAC 帧里，然后通过局域网把 MAC 帧发往此硬件地址。也有可能在 ARP 高速缓存中查不到主机 B 的 IP 地址（主机 A 缓存为空，或主机 B 刚加入局域网），这样也就无法知道主机 B 的 MAC 地址，这时候就需要使用到 ARP 了，按以下步骤来获得主机 B 的硬件地址。
+当主机 A 想要同本局域网上的某个主机 B 发送 IP 数据报时，就先在其 ARP 高速缓存中查看有无主机 B 的 IP 地址。如果有，就在 ARP 高速缓存中查找其对应的硬件地址，再把这个硬件地址写入 MAC 帧里，然后通过局域网把 MAC 帧发往此硬件地址。也有可能在 ARP 高速缓存中查不到主机 B 的 IP 地址（主机 A 缓存为空，或主机 B 刚加入局域网），这样也就无法知道主机 B 的 MAC 地址，这时候就需要使用到 ARP 了。
+
+按以下步骤来获得主机 B 的硬件地址。
 
 1. 主机 A 的 ARP 进程在本局域网上广播发送一个 ARP 请求分组，以广播的形式，格式如图 a 所示。
 
+   {%raw%}
+
+   <table>
+       <tbody>
+           <tr>
+               <td width="87">
+               <div><b>以太网目的</b><b>MAC</b></div>
+               </td>
+               <td width="82">
+               <div><b>以太网源</b><b>MAC</b></div>
+               </td>
+               <td width="41">
+               <div><b>帧类型</b></div>
+               </td>
+               <td width="57">
+               <div><b>硬件类型</b></div>
+               </td>
+               <td rowspan="2" width="24">
+               <div><b>4</b></div>
+               </td>
+               <td rowspan="2" width="24">
+               <div><b>6</b></div>
+               </td>
+               <td width="35">
+               <div><b>OP</b></div>
+               </td>
+               <td width="89">
+               <div><b>发送端以太网</b><b>MAC</b></div>
+               </td>
+               <td width="72">
+               <div><b>发送端</b><b>IP</b><b>地址</b></div>
+               </td>
+               <td width="84">
+               <div><b>目的</b><b>MAC</b></div>
+               </td>
+               <td width="48">
+               <div><b>目的</b><b>IP</b></div>
+               </td>
+           </tr>
+           <tr>
+               <td width="87">
+               <div>FF-FF-FF-FF-FF-FF</div>
+               </td>
+               <td width="82">
+               <div>00-50-56-C0-00-01</div>
+               </td>
+               <td width="41">
+               <div>0806</div>
+               </td>
+               <td width="57">
+               <div>0800</div>
+               </td>
+               <td width="35">
+               <div>1</div>
+               </td>
+               <td width="89">
+               <div>00-50-56-C0-00-01</div>
+               </td>
+               <td width="72">
+               <div>1.1.1.1</div>
+               </td>
+               <td width="84">
+               <div>00-00-00-00-00-00</div>
+               </td>
+               <td width="48">
+               <div>1.1.1.3</div>
+               </td>
+           </tr>
+       </tbody>
+   </table>
+
+   {%endraw%}
+
+   其中 OP  1:表示 ARP 请求 2:表示 ARP 应答 3:表示 RARP 请求 4:表示 RARP 应答。
+   更多关于 ARP 报文参考该文[ARP 协议报文格式及 ARP 表_changsoon-CSDN 博客_arp 报文格式](https://blog.csdn.net/u011784495/article/details/71716586)
+
 2. 在本局域网上的所有主机上运行的 ARP 进程都收到了这个 ARP 请求分组。
 
-3. 主机 B 在 ARP 请求分组中发现了自己的 IP 地址，就向 A 主机发送 ARP 响应分组，以单播的形式直接发给 A，以如图 b 所示。同时主机 B 知道了 A 的 IP 地址和 MAC 地址，就将主机 A 的 IP 地址和 MAC 地址写入 ARP 高速缓存中。其他主机在对比 IP 地址之后，发现与自己的 IP 地址不同，就丢掉分组。
+3. 主机 B 在 ARP 请求分组中发现了自己的 IP 地址，就向 A 主机发送 ARP 响应分组，以单播的形式直接发给 A，以如图 b 所示。同时主机 B 知道了 A 的 IP 地址和 MAC 地址，就将主机 A 的 IP 地址和 MAC 地址写入 ARP 高速缓存中，并按同样的 ARP 报文格式返回给主机 A。其他主机在对比 IP 地址之后，发现与自己的 IP 地址不同，就丢掉分组。
 
-4. 主机 A 收到主机 B 的 ARP 响应分组之后，这样就知道了主机 B 的 MAC 地址，同时把主机 B 的 IP 地址和 MAC 地址写入 ARP 高速缓存。
+   {%raw%}
+
+   <table border="1" cellspacing="0" cellpadding="0">
+       <tbody>
+           <tr>
+               <td width="124">
+               <div align="center"><b>目的地址</b></div>
+               </td>
+               <td width="124">
+               <div align="center"><b>源地址</b></div>
+               </td>
+               <td rowspan="2" width="63">
+               <div align="center"><b>…</b></div>
+               </td>
+               <td width="63">
+               <div align="center"><b>源</b><b>IP</b></div>
+               </td>
+               <td width="64">
+               <div align="center"><b>目的</b><b>IP</b></div>
+               </td>
+               <td rowspan="2" width="63">
+               <div align="center"><b>…</b></div>
+               </td>
+               <td width="67">
+               <div align="center"><b>ICMP</b><b>报文</b></div>
+               </td>
+           </tr>
+           <tr>
+               <td width="124">
+               <div align="center">00-50-56-C0-00-03</div>
+               </td>
+               <td width="124">
+               <div align="center">00-50-56-C0-00-01</div>
+               </td>
+               <td width="63">
+               <div align="center">1.1.1.1</div>
+               </td>
+               <td width="64">
+               <div align="center">1.1.1.3</div>
+               </td>
+               <td width="67">
+               <div align="center">Echo request</div>
+               </td>
+           </tr>
+       </tbody>
+   </table>
+
+   {%endraw%}
+
+4. 主机 A 收到主机 B 的 ARP 响应分组之后，这样就知道了主机 B 的 MAC 地址，同时把主机 B 的 IP 地址和 MAC 地址写入 ARP 高速缓存，然后就把这个 MAC 封装到 ICMP 协议的二层报文中向主机 B 发送。
+
+   {%raw%}
+
+   <table border="1" cellspacing="0" cellpadding="0">
+       <tbody>
+           <tr>
+               <td width="124">
+               <div align="center"><b>目的地址</b></div>
+               </td>
+               <td width="124">
+               <div align="center"><b>源地址</b></div>
+               </td>
+               <td rowspan="2" width="63">
+               <div align="center"><b>…</b></div>
+               </td>
+               <td width="63">
+               <div align="center"><b>源</b><b>IP</b></div>
+               </td>
+               <td width="64">
+               <div align="center"><b>目的</b><b>IP</b></div>
+               </td>
+               <td rowspan="2" width="63">
+               <div align="center"><b>…</b></div>
+               </td>
+               <td width="67">
+               <div align="center"><b>ICMP</b><b>报文</b></div>
+               </td>
+           </tr>
+           <tr>
+               <td width="124">
+               <div align="center">00-50-56-C0-00-03</div>
+               </td>
+               <td width="124">
+               <div align="center">00-50-56-C0-00-01</div>
+               </td>
+               <td width="63">
+               <div align="center">1.1.1.1</div>
+               </td>
+               <td width="64">
+               <div align="center">1.1.1.3</div>
+               </td>
+               <td width="67">
+               <div align="center">Echo request</div>
+               </td>
+           </tr>
+       </tbody>
+   </table>
+
+   {%endraw%}
+
+5. 当主机 B 收到了这个报文后，发现是主机 A 的 ICPM 回显请求，就按同样的格式，返回一个值给主机 A，这样就完成了同一网段内的 ping 过程。
+
+   {%raw%}
+
+   <table border="1" cellspacing="0" cellpadding="0" align="left">
+       <tbody>
+           <tr>
+               <td width="124">
+               <div align="center"><b>目的地址</b></div>
+               </td>
+               <td width="124">
+               <div align="center"><b>源地址</b></div>
+               </td>
+               <td rowspan="2" width="63">
+               <div align="center"><b>…</b></div>
+               </td>
+               <td width="63">
+               <div align="center"><b>源</b><b>IP</b></div>
+               </td>
+               <td width="64">
+               <div align="center"><b>目的</b><b>IP</b></div>
+               </td>
+               <td rowspan="2" width="63">
+               <div align="center"><b>…</b></div>
+               </td>
+               <td width="67">
+               <div align="center"><b>ICMP</b><b>报文</b></div>
+               </td>
+           </tr>
+           <tr>
+               <td width="124">
+               <div align="center">00-50-56-C0-00-01</div>
+               </td>
+               <td width="124">
+               <div align="center">00-50-56-C0-00-03</div>
+               </td>
+               <td width="63">
+               <div align="center">1.1.1.3</div>
+               </td>
+               <td width="64">
+               <div align="center">1.1.1.1</div>
+               </td>
+               <td width="67">
+               <div align="center">Echo answer</div>
+               </td>
+           </tr>
+       </tbody>
+   </table>
+
+   
+
+
+
+​				{%endraw%}
 
 ![ARP工作原理](/images/ARP.jpg)
 
-上面所描述的情况是在**同一局域网**下的情景，如果主机 A 要和不在同一局域网下的主机 B 进行通信，发送 IP 数据报。首先主机 A 将主机 B 的 IP 地址同自己的子网掩码进行比对，发现不在同一局域网内，则利用 ARP 请求分组，根本局域网上的路由器的 IP 地址来获取路由器的 MAC 地址，然后将剩下的工作交给路由器去做即可。
+上面所描述的情况是在**同一局域网**下的情景，如果主机 A 要和不在同一局域网下的主机 B 进行通信，发送 IP 数据报。首先主机 A 将主机 B 的 IP 地址同自己的子网掩码进行比对，发现不在同一局域网内，则利用 ARP 请求分组，跟本局域网上的路由器的 IP 地址来获取路由器的 MAC 地址，然后将剩下的工作交给路由器去做即可。
 
 ### ARP 的四种典型情况
 
@@ -62,7 +293,7 @@ ICMP（Internet Control Message Protocol | *网络控制消息协议*）是 TCP/
 
 **PING 是应用层直接使用网络层 ICMP 的一个例子，没有经过传输层的 TCP 或 UDP。**
 
-1. 主机查找本地系统 Hosts 文件的 DNS 缓存，如果存在该域名对应的 IP，则获取 IP，跳转到第 8 步；如果不存在，则继续。
+1. 主机查找本地系统 hosts 文件的 DNS 缓存，如果存在该域名对应的 IP，则获取 IP，跳转到第 8 步；如果不存在，则继续。
 
 2. 主机向本网络路由器发起请求，查找路由 DNS 缓存，如果存在该域名对于的 IP，则获取 IP，跳转到第 8 步；如果不存在，则继续。
 
