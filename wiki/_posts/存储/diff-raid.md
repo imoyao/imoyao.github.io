@@ -26,7 +26,7 @@ RAID （ Redundant Array of Independent Disks ）即独立磁盘冗余阵列，�
 
 1. RAID0
 
-RAID0 称为条带化存储，将数据分段存储在各个磁盘中，读写均可以并行处理，因此读写速率为单个磁盘的 N 倍，没有冗余功能，任何一个磁盘的损坏就会导致的数据不可用。
+RAID0 称为条带化存储，将数据分段存储在各个磁盘中，读写均可以并行处理，因此读写速率为单个磁盘的 N 倍；但是没有冗余功能，任何一个磁盘的损坏就会导致的数据不可用。
 
 RAID 0 的特点：
 
@@ -79,6 +79,7 @@ RAID 10(又叫 RAID 1+0)特点：
 - 兼顾冗余(提供镜像存储)和性能(数据条带形分布)
 - 在实际应用中较为常用
 ## 参考链接
+[Linux 上配置 RAID - 骏马金龙 - 博客园](https://www.cnblogs.com/f-ck-need-u/p/7049501.html)
 [RAID0、RAID1 及 RAID5 的区别详解_Mr_JWYang-CSDN 博客_raid0](https://blog.csdn.net/Mr_Yang__/article/details/85228465)
 [RAID 0, RAID 1, RAID 5, RAID 10 图解_Devin-CSDN 博客_raid 0 1 5](https://blog.csdn.net/ym01213/article/details/84278542)
 [RAID 有哪几种？有什么区别？ - 知乎](https://www.zhihu.com/question/20131784/answer/199454382)
