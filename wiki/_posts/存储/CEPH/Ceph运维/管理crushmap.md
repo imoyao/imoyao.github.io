@@ -1,3 +1,10 @@
+---
+title: 管理 crash map
+toc: true
+date: 2020-05-23 11:02:28
+tags: ceph
+---
+
 # 1. 介绍
 ----------
 

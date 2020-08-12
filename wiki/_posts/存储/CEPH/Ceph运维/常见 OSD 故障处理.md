@@ -1,6 +1,9 @@
-# 2. 常见 OSD 故障处理
-
-----------
+---
+title: 常见 OSD 故障处理
+toc: true
+date: 2020-05-23 11:02:28
+tags: ceph
+---
 
 进行 OSD 排障前，先检查一下 monitors 和网络。如果 `ceph health` 或 `ceph -s` 返回的是健康状态，这意味着 monitors 形成了法定人数。如果 monitor 还没达到法定人数、或者 monitor 状态错误，要先解决 monitor 的问题。核实下你的网络，确保它在正常运行，因为网络对 OSD 的运行和性能有显著影响。
 
