@@ -2,6 +2,6 @@
 
 ## 更新日志
 - 2020-05-23
-    添加主题[hexo-theme-butterfly](https://github.com/zthxxx/hexo-theme-Wikitten)构建个人 wiki;
+    添加主题[hexo-theme-Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten)构建个人 wiki;
 - 2020-1-4
     主题修改为[hexo-theme-butterfly](https://github.com/jerryc127/hexo-theme-butterfly/)
