@@ -17,6 +17,7 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/image/friends.jpg
 - [laike9m's blog](https://laike9m.com/)
 - [捕蛇者说](https://pythonhunter.org/)
 - [张先森的代码小屋](nullcc.github.io)
+- [Python 工匠](https://github.com/piglei/one-python-craftsman)
 
 ### 运维
 - [Wikitten](http://wiki.361way.com/)
