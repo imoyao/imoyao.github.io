@@ -2,6 +2,7 @@
 title: Python 工匠：善用变量来改善代码质量
 toc: true
 date: 2020-08-13 18:21:46
+sticky: 100
 tags:
 - 编程
 - Python
@@ -316,3 +317,5 @@ def get_best_trip_by_user_id(user_id):
 > 
 > - 2018.04.09：根据 @onlyice 的建议，添加了 namedtuple 部分
 
+## 相关链接
+[unbug.github.io](https://unbug.github.io/codelf/)

@@ -9,6 +9,7 @@ categories:
 ---
 ## 代码
 如果项目中有用到 netifaces 或者 psutil 库，可以直接使用下面的方法：
+
 ### 直接调用第三方库
 - netifaces
 ```python
@@ -48,6 +49,7 @@ def get_net_ipaddr():
     return ip_list
 ```
 如果觉得只是为了一个小功能引入第三方库有点大材小用，那么我们也可以自己造轮子。
+
 ### 标准库
 ```python
 def std_get_ip_list():
@@ -111,7 +113,7 @@ fcntl.ioctl(fd, request, arg=0, mutate_flag=True)
     {% note info %}
     代码中使用的 `0x8915` 在 `/usr/include/linux/sockios.h` 文件中定义，它对应的符号是 `SIOCGIFADDR`，我们正是通过这一操作来取得 IPv4 地址。
 
-    ```plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    ```plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
     [root@VM_0_16_centos ~]# cat /usr/include/linux/sockios.h |grep 
 
     0x8915#define SIOCGIFADDR	0x8915		/* get PA address	     */
@@ -121,7 +123,7 @@ fcntl.ioctl(fd, request, arg=0, mutate_flag=True)
 
 第三个参数 `arg` 是操作所需的参数，这通常是一个 32 位整数或一段二进制内容。
 {% note info %}
-根据文档（`man netdevice`），使用 `SIOCGIFADDR` 时需要传入的参数是结构体 `struct ifreq`。`struct ifreq` 的定义位于 `/usr/include/net/if.h`
+根据[文档](https://man7.org/linux/man-pages/man7/netdevice.7.html)，使用 `SIOCGIFADDR` 时需要传入的参数是结构体 `struct ifreq`。`struct ifreq` 的定义位于 `/usr/include/net/if.h`
 
 ```plain
 [root@VM_0_16_centos ~]# cat /usr/include/net/if.h | grep IFNAMSIZ
