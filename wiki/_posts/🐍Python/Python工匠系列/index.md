@@ -33,10 +33,6 @@ tags:
 - [14. 写好面向对象代码的原则（下）](zh_CN/14-write-solid-python-codes-part-3.md)
 - [15. 在边界处思考](zh_CN/15-thinking-in-edge-cases.md)
 
-关注我的微信公众号，在第一时间阅读最新文章：
-
-<img src="https://user-images.githubusercontent.com/731266/54093209-2edced80-43d0-11e9-8e69-764f5da8b275.png" />
-
 所有文章禁止转载，如需转载请通过微信公众号联系我。
 
 ## 详细内容
