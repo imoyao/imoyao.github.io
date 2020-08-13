@@ -2,6 +2,7 @@
 title: Python 工匠：编写条件分支代码的技巧
 toc: true
 date: 2020-08-13 18:21:46
+sticky: 99
 tags:
 - 编程
 - Python
