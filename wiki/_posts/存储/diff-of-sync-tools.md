@@ -21,5 +21,6 @@ tags:
 [Mirror](https://github.com/stephenh/mirror) is an asynchronous synchronisation tool that takes use of the inotify notifications much like Lsyncd. The main differences are: it is developed specifically for master-master use, thus running on a daemon on both systems, uses its own transportation layer instead of rsync and is Java instead of Lsyncd’s C core with Lua scripting.
 
 ## 参考链接
+[rsync 的核心算法 | | 酷 壳 - CoolShell](https://coolshell.cn/articles/7425.html)
 [Lsyncd - Live Syncing (Mirror) Daemon](https://axkibe.github.io/lsyncd/)
 [How does `scp` differ from `rsync`? - Stack Overflow](https://stackoverflow.com/questions/20244585/how-does-scp-differ-from-rsync)
