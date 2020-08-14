@@ -1,17 +1,19 @@
-## 来源
-
-Fork from：
-
-## [PythonShare](https://github.com/Yixiaohan/codeparkshare)
-
-
+---
+title: Python 初学者（零基础学习 Python、Python 入门）书籍、视频、资料、社区推荐*
+date: 2019-10-23 11:16:53
+tags:
+- 编程
+- Python
+- 资源推荐
 ---
 
    *Python 初学者（零基础学习 Python、Python 入门）书籍、视频、资料、社区推荐*  
 ------------------------
 本文 **主要** 针对 **零基础** 想学习 Python 者。本文本文由@史江歌（shijiangge@gmail.com  QQ:499065469）根据互联网资料收集整理而成，感谢互联网，感谢各位的分享。鸣谢！本文会不断更新。
 
-一、学会使用搜索引擎，尤其是 Google。推荐阅读文章
+## 学会使用搜索引擎，尤其是 Google
+
+推荐阅读文章
 --------------------------
   [《如何用好 Google 搜索引擎？》](http://www.zhihu.com/question/20161362) 知乎问答@崔凯  
   
@@ -20,13 +22,13 @@ Fork from：
   [《如何用好 Google》](http://wordpress.lixiaolai.com/archives/992.html) by-李笑来    
   
 
-二、学会提问
+## 学会提问
 ----------------------------
 推荐阅读 [《提问的智慧》](http://wiki.woodpecker.org.cn/moin/AskForHelp) by-啄木鸟社区
 
 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md) 务必请读完！
 
-三、书籍推荐
+## 书籍推荐
 --------------------------
 
 ### 零基础
@@ -63,7 +65,7 @@ Fork from：
 
 2. [Python 快速教程](http://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html) 
 
-四、视频推荐
+## 视频推荐
 ------------------------------------------
 麻省理工公开课《计算机科学及编程导论》，该课程针对零基础者 [网易公开课](http://v.163.com/special/opencourse/bianchengdaolun.html) 。  
 
@@ -71,7 +73,7 @@ Fork from：
 这门课程适用于那些拥有 **很少或没有编程经验**  的学生,它致力于使学生理解计算机在解决问题中的作用,并且帮助学生，  **不论其专业**，使他们对于能够完成有用的小程序的目标充满信心。
 
 
-五、学习方法
+## 学习方法
 ---------------------------------------
 ### *知乎问答*：[零基础，应当如何开始学习 Python ？](http://www.zhihu.com/question/20039623?nr=1)--by@黎敏
 
@@ -172,7 +174,7 @@ Just do it 。动手敲代码吧。
 
 [Python 3 Module of the Week](https://pymotw.com/3/) Python 标准库的使用
 
-八、爬虫以及模拟登陆新浪微博
+## 爬虫
 --------------------------------------
 [知乎：Python 爬虫如何入门学习](http://www.zhihu.com/question/20899988)
 
@@ -190,6 +192,12 @@ Just do it 。动手敲代码吧。
 
 [网络爬虫系列](http://blog.csdn.net/pleasecallmewhy/article/details/8922826)
 
-九、工具
+## 工具
 -------------------------------------
 Windows 系统下，Python 相关包[Windows Binaries for Python Extension Packages](http://www.lfd.uci.edu/~gohlke/pythonlibs/)
+
+## 来源
+
+Fork from：
+
+## [PythonShare](https://github.com/Yixiaohan/codeparkshare)
