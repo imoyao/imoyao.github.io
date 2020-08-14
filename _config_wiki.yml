@@ -109,14 +109,32 @@ search:
 
 # Markdown
 ## https://github.com/chjj/marked
-markdown:
+# markdown:
+#   gfm: true
+#   pedantic: false
+#   sanitize: false
+#   tables: true
+#   breaks: false
+#   smartLists: true
+#   smartypants: true
+
+# [hexojs/hexo-renderer-marked: Markdown renderer for Hexo](https://github.com/hexojs/hexo-renderer-marked)
+marked:
   gfm: true
   pedantic: false
-  sanitize: false
-  tables: true
-  breaks: false
+  breaks: true
   smartLists: true
   smartypants: true
+  modifyAnchors: 0
+  autolink: true
+  sanitizeUrl: false
+  headerIds: true
+  lazyload: false
+  prependRoot: false
+  external_link:
+    enable: false
+    exclude: ['www.masantu.com','blog.masantu.com','masantu.com']
+    nofollow: false
 
 feed:
   type: atom
