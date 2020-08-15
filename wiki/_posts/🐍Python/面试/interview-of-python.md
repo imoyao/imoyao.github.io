@@ -1713,7 +1713,7 @@ print merge_sortedlist(a,b)
 
 > 其实思想可以按照从尾开始比较两个链表，如果相交，则从尾开始必然一致，只要从尾开始比较，直至不一致的地方即为交叉点，如图所示
 
-![](http://hi.csdn.net/attachment/201106/28/0_1309244136MWLP.gif)
+![如图](http://hi.csdn.net/attachment/201106/28/0_1309244136MWLP.gif)
 
 ```python
 # 使用a,b两个list来模拟链表，可以看出交叉点是 7这个节点

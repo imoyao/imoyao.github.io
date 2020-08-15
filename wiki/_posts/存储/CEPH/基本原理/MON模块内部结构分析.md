@@ -1,3 +1,11 @@
+---
+title: first-wiki
+toc: true
+date: 2020-05-23 11:02:28
+tags:
+
+---
+
 # 1. 模块简介
 Monitor 作为 Ceph 的 Metada Server 维护了集群的信息，它包括了 6 个 Map，
 分别是 MONMap，OSDMap，PGMap，LogMap，AuthMap，MDSMap。
