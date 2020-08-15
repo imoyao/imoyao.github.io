@@ -23,7 +23,7 @@ tags:
 
 事务指的是满足 ACID 特性的一组操作，可以通过 Commit 提交一个事务，也可以使用 Rollback 进行回滚。
 
-<div align="center"> <img src="pics/f74144be-857a-40cd-8ec7-87626ef4e20b.png" width="400px"> </div><br>
+<div align="center"><img src="/pics/f74144be-857a-40cd-8ec7-87626ef4e20b.png" width="400px"></div><br>
 
 #### ACID
 
@@ -56,7 +56,7 @@ tags:
 - 在并发的情况下，多个事务并行执行，事务不仅要满足原子性，还需要满足隔离性，才能满足一致性。
 - 事务满足持久化是为了能应对数据库崩溃的情况。
 
-<div align="center"> <img src="pics/417bc315-4409-48c6-83e0-59e8d405429e.jpg" width="400px"> </div><br>
+<div align="center"> <img src="/pics/417bc315-4409-48c6-83e0-59e8d405429e.jpg" width="400px"> </div><br>
 
 #### AUTOCOMMIT
 
@@ -70,25 +70,25 @@ MySQL 默认采用自动提交模式。也就是说，如果不显式使用`STAR
 
 T<sub>1</sub> 和 T<sub>2</sub> 两个事务都对一个数据进行修改，T<sub>1</sub> 先修改，T<sub>2</sub> 随后修改，T<sub>2</sub> 的修改覆盖了 T<sub>1</sub> 的修改。
 
-<div align="center"> <img src="pics/75184b58-c627-4edc-8dcf-605762ebb733.png" width="320px"> </div><br>
+<div align="center"> <img src="/pics/75184b58-c627-4edc-8dcf-605762ebb733.png" width="320px"> </div><br>
 
 #### 读脏数据
 
 T<sub>1</sub> 修改一个数据，T<sub>2</sub> 随后读取这个数据。如果 T<sub>1</sub> 撤销了这次修改，那么 T<sub>2</sub> 读取的数据是脏数据。
 
-<div align="center"> <img src="pics/af0e94d9-502d-4531-938f-d46dd29de52d.png" width="360px"> </div><br>
+<div align="center"> <img src="/pics/af0e94d9-502d-4531-938f-d46dd29de52d.png" width="360px"> </div><br>
 
 #### 不可重复读
 
 T<sub>2</sub> 读取一个数据，T<sub>1</sub> 对该数据做了修改。如果 T<sub>2</sub> 再次读取这个数据，此时读取的结果和第一次读取的结果不同。
 
-<div align="center"> <img src="pics/66ae164c-ad47-4905-895e-51fe38ce797a.png" width="360px"> </div><br>
+<div align="center"> <img src="/pics/66ae164c-ad47-4905-895e-51fe38ce797a.png" width="360px"> </div><br>
 
 #### 幻影读
 
 T<sub>1</sub> 读取某个范围的数据，T<sub>2</sub> 在这个范围内插入新的数据，T<sub>1</sub> 再次读取这个范围的数据，此时读取的结果和和第一次读取的结果不同。
 
-<div align="center"> <img src="pics/8fdc577d-552d-4b43-b5e4-a8f98bc2cb51.png" width="340px"> </div><br>
+<div align="center"> <img src="/pics/8fdc577d-552d-4b43-b5e4-a8f98bc2cb51.png" width="340px"> </div><br>
 
 ----
 
@@ -297,7 +297,7 @@ MVCC 在每行记录后面都保存着两个隐藏的列，用来存储两个版
 
 MVCC 使用到的快照存储在 Undo 日志中，该日志通过回滚指针把一个数据行（Record）的所有快照连接起来。
 
-<div align="center"> <img src="pics/e41405a8-7c05-4f70-8092-e961e28d3112.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/e41405a8-7c05-4f70-8092-e961e28d3112.jpg" width=""/> </div><br>
 
 #### 实现过程
 
@@ -511,7 +511,7 @@ Entity-Relationship，有三个组成部分：实体、属性、联系。
 
 下图的 Course 和 Student 是一对多的关系。
 
-<div align="center"> <img src="pics/1d28ad05-39e5-49a2-a6a1-a6f496adba6a.png" width="380px"/> </div><br>
+<div align="center"> <img src="/pics/1d28ad05-39e5-49a2-a6a1-a6f496adba6a.png" width="380px"/> </div><br>
 
 #### 表示出现多次的关系
 
@@ -519,19 +519,19 @@ Entity-Relationship，有三个组成部分：实体、属性、联系。
 
 下图表示一个课程的先修关系，先修关系出现两个 Course 实体，第一个是先修课程，后一个是后修课程，因此需要用两条线来表示这种关系。
 
-<div align="center"> <img src="pics/ac929ea3-daca-40ec-9e95-4b2fa6678243.png" width="250px"/> </div><br>
+<div align="center"> <img src="/pics/ac929ea3-daca-40ec-9e95-4b2fa6678243.png" width="250px"/> </div><br>
 
 #### 联系的多向性
 
 虽然老师可以开设多门课，并且可以教授多名学生，但是对于特定的学生和课程，只有一个老师教授，这就构成了一个三元联系。
 
-<div align="center"> <img src="pics/5bb1b38a-527e-4802-a385-267dadbd30ba.png" width="350px"/> </div><br>
+<div align="center"> <img src="/pics/5bb1b38a-527e-4802-a385-267dadbd30ba.png" width="350px"/> </div><br>
 
 #### 表示子类
 
 用一个三角形和两条线来连接类和子类，与子类有关的属性和联系都连到子类上，而与父类和子类都有关的连到父类上。
 
-<div align="center"> <img src="pics/14389ea4-8d96-4e96-9f76-564ca3324c1e.png" width="450px"/> </div><br>
+<div align="center"> <img src="/pics/14389ea4-8d96-4e96-9f76-564ca3324c1e.png" width="450px"/> </div><br>
 
 ### 参考资料
 
@@ -552,7 +552,7 @@ Entity-Relationship，有三个组成部分：实体、属性、联系。
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 1.2 节 SQL
 
@@ -1303,7 +1303,7 @@ SET PASSWROD FOR myuser = Password('new_password');
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 1.3 节 Leetcode-Database 题解
 
@@ -2295,7 +2295,7 @@ ORDER BY
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 1.4 节 MySQL
 
@@ -2311,7 +2311,7 @@ B+ Tree 是基于 B Tree 和叶子节点顺序访问指针进行实现，它具�
 
 在 B+ Tree 中，一个节点中的 key 从左到右非递减排列，如果某个指针的左右相邻 key 分别是 key<sub>i</sub> 和 key<sub>i+1</sub>，且不为 null，则该指针指向节点的所有 key 大于等于 key<sub>i</sub> 且小于等于 key<sub>i+1</sub>。
 
-<div align="center"> <img src="pics/33576849-9275-47bb-ada7-8ded5f5e7c73.png" width="350px"> </div><br>
+<div align="center"> <img src="/pics/33576849-9275-47bb-ada7-8ded5f5e7c73.png" width="350px"> </div><br>
 
 ##### 2. 操作
 
@@ -2353,11 +2353,11 @@ B+ Tree 是基于 B Tree 和叶子节点顺序访问指针进行实现，它具�
 
 InnoDB 的 B+Tree 索引分为主索引和辅助索引。主索引的叶子节点 data 域记录着完整的数据记录，这种索引方式被称为聚簇索引。因为无法把数据行存放在两个不同的地方，所以一个表只能有一个聚簇索引。
 
-<div align="center"> <img src="pics/45016e98-6879-4709-8569-262b2d6d60b9.png" width="350px"> </div><br>
+<div align="center"> <img src="/pics/45016e98-6879-4709-8569-262b2d6d60b9.png" width="350px"> </div><br>
 
 辅助索引的叶子节点的 data 域记录着主键的值，因此在使用辅助索引进行查找时，需要先查找到主键值，然后再到主索引中进行查找。
 
-<div align="center"> <img src="pics/7c349b91-050b-4d72-a7f8-ec86320307ea.png" width="350px"> </div><br>
+<div align="center"> <img src="/pics/7c349b91-050b-4d72-a7f8-ec86320307ea.png" width="350px"> </div><br>
 
 ##### 2. 哈希索引
 
@@ -2619,7 +2619,7 @@ MySQL 提供了 FROM_UNIXTIME() 函数把 UNIX 时间戳转换为日期，并提
 
 当一个表的数据不断增多时，Sharding 是必然的选择，它可以将数据分布到集群的不同节点上，从而缓存单个数据库的压力。
 
-<div align="center"> <img src="pics/63c2909f-0c5f-496f-9fe5-ee9176b31aba.jpg" width=""> </div><br>
+<div align="center"> <img src="/pics/63c2909f-0c5f-496f-9fe5-ee9176b31aba.jpg" width=""> </div><br>
 
 #### 垂直切分
 
@@ -2627,7 +2627,7 @@ MySQL 提供了 FROM_UNIXTIME() 函数把 UNIX 时间戳转换为日期，并提
 
 在数据库的层面使用垂直切分将按数据库中表的密集程度部署到不同的库中，例如将原来的电商数据库垂直切分成商品数据库、用户数据库等。
 
-<div align="center"> <img src="pics/e130e5b8-b19a-4f1e-b860-223040525cf6.jpg" width=""> </div><br>
+<div align="center"> <img src="/pics/e130e5b8-b19a-4f1e-b860-223040525cf6.jpg" width=""> </div><br>
 
 #### Sharding 策略
 
@@ -2661,7 +2661,7 @@ MySQL 提供了 FROM_UNIXTIME() 函数把 UNIX 时间戳转换为日期，并提
 -  **I/O 线程** ：负责从主服务器上读取二进制日志，并写入从服务器的中继日志（Relay log）。
 -  **SQL 线程** ：负责读取中继日志，解析出主服务器已经执行的数据更改并在从服务器中重放（Replay）。
 
-<div align="center"> <img src="pics/master-slave.png" width=""> </div><br>
+<div align="center"> <img src="/pics/master-slave.png" width=""> </div><br>
 
 #### 读写分离
 
@@ -2675,7 +2675,7 @@ MySQL 提供了 FROM_UNIXTIME() 函数把 UNIX 时间戳转换为日期，并提
 
 读写分离常用代理方式来实现，代理服务器接收应用层传来的读写请求，然后决定转发到哪个服务器。
 
-<div align="center"> <img src="pics/master-slave-proxy.png" width=""> </div><br>
+<div align="center"> <img src="/pics/master-slave-proxy.png" width=""> </div><br>
 
 ### 参考资料
 
@@ -2695,7 +2695,7 @@ MySQL 提供了 FROM_UNIXTIME() 函数把 UNIX 时间戳转换为日期，并提
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 1.5 节 Redis
 
@@ -2721,7 +2721,7 @@ Redis 支持很多特性，例如将内存中的数据持久化到硬盘中，�
 
 #### STRING
 
-<div align="center"> <img src="pics/6019b2db-bc3e-4408-b6d8-96025f4481d6.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/6019b2db-bc3e-4408-b6d8-96025f4481d6.png" width="400"/> </div><br>
 
 ```html
 > set hello world
@@ -2736,7 +2736,7 @@ OK
 
 #### LIST
 
-<div align="center"> <img src="pics/fb327611-7e2b-4f2f-9f5b-38592d408f07.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/fb327611-7e2b-4f2f-9f5b-38592d408f07.png" width="400"/> </div><br>
 
 ```html
 > rpush list-key item
@@ -2764,7 +2764,7 @@ OK
 
 #### SET
 
-<div align="center"> <img src="pics/cd5fbcff-3f35-43a6-8ffa-082a93ce0f0e.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/cd5fbcff-3f35-43a6-8ffa-082a93ce0f0e.png" width="400"/> </div><br>
 
 ```html
 > sadd set-key item
@@ -2798,7 +2798,7 @@ OK
 
 #### HASH
 
-<div align="center"> <img src="pics/7bd202a7-93d4-4f3a-a878-af68ae25539a.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/7bd202a7-93d4-4f3a-a878-af68ae25539a.png" width="400"/> </div><br>
 
 ```html
 > hset hash-key sub-key1 value1
@@ -2829,7 +2829,7 @@ OK
 
 #### ZSET
 
-<div align="center"> <img src="pics/1202b2d6-9469-4251-bd47-ca6034fb6116.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/1202b2d6-9469-4251-bd47-ca6034fb6116.png" width="400"/> </div><br>
 
 ```html
 > zadd zset-key 728 member1
@@ -2971,11 +2971,11 @@ int dictRehash(dict *d, int n) {
 
 跳跃表是基于多指针有序链表实现的，可以看成多个有序链表。
 
-<div align="center"> <img src="pics/beba612e-dc5b-4fc2-869d-0b23408ac90a.png" width="600px"/> </div><br>
+<div align="center"> <img src="/pics/beba612e-dc5b-4fc2-869d-0b23408ac90a.png" width="600px"/> </div><br>
 
 在查找时，从上层指针开始查找，找到对应的区间之后再到下一层去查找。下图演示了查找 22 的过程。
 
-<div align="center"> <img src="pics/0ea37ee2-c224-4c79-b895-e131c6805c40.png" width="600px"/> </div><br>
+<div align="center"> <img src="/pics/0ea37ee2-c224-4c79-b895-e131c6805c40.png" width="600px"/> </div><br>
 
 与红黑树等平衡树相比，跳跃表具有以下优点：
 
@@ -3126,7 +3126,7 @@ Redis 服务器是一个事件驱动程序。
 
 Redis 基于 Reactor 模式开发了自己的网络事件处理器，使用 I/O 多路复用程序来同时监听多个套接字，并将到达的事件传送给文件事件分派器，分派器会根据套接字产生的事件类型调用相应的事件处理器。
 
-<div align="center"> <img src="pics/9ea86eb5-000a-4281-b948-7b567bd6f1d8.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/9ea86eb5-000a-4281-b948-7b567bd6f1d8.png" width=""/> </div><br>
 
 #### 时间事件
 
@@ -3179,7 +3179,7 @@ def main():
 
 从事件处理的角度来看，服务器运行流程如下：
 
-<div align="center"> <img src="pics/c0a9fa91-da2e-4892-8c9f-80206a6f7047.png" width="350"/> </div><br>
+<div align="center"> <img src="/pics/c0a9fa91-da2e-4892-8c9f-80206a6f7047.png" width="350"/> </div><br>
 
 ### 十一、复制
 
@@ -3199,7 +3199,7 @@ def main():
 
 随着负载不断上升，主服务器可能无法很快地更新所有从服务器，或者重新连接和重新同步从服务器将导致系统超载。为了解决这个问题，可以创建一个中间层来分担主服务器的复制工作。中间层的服务器是最上层服务器的从服务器，又是最下层服务器的主服务器。
 
-<div align="center"> <img src="pics/395a9e83-b1a1-4a1d-b170-d081e7bb5bab.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/395a9e83-b1a1-4a1d-b170-d081e7bb5bab.png" width="600"/> </div><br>
 
 ### 十二、Sentinel
 
@@ -3234,7 +3234,7 @@ Sentinel（哨兵）可以监听集群中的服务器，并在主服务器进入
 
 Redis 没有关系型数据库中的表这一概念来将同种类型的数据存放在一起，而是使用命名空间的方式来实现这一功能。键名的前面部分存储命名空间，后面部分的内容存储 ID，通常使用 : 来进行分隔。例如下面的 HASH 的键名为 article:92617，其中 article 为命名空间，ID 为 92617。
 
-<div align="center"> <img src="pics/7c54de21-e2ff-402e-bc42-4037de1c1592.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/7c54de21-e2ff-402e-bc42-4037de1c1592.png" width="400"/> </div><br>
 
 #### 点赞功能
 
@@ -3242,13 +3242,13 @@ Redis 没有关系型数据库中的表这一概念来将同种类型的数据�
 
 为了节约内存，规定一篇文章发布满一周之后，就不能再对它进行投票，而文章的已投票集合也会被删除，可以为文章的已投票集合设置一个一周的过期时间就能实现这个规定。
 
-<div align="center"> <img src="pics/485fdf34-ccf8-4185-97c6-17374ee719a0.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/485fdf34-ccf8-4185-97c6-17374ee719a0.png" width="400"/> </div><br>
 
 #### 对文章进行排序
 
 为了按发布时间和点赞数进行排序，可以建立一个文章发布时间的有序集合和一个文章点赞数的有序集合。（下图中的 score 就是这里所说的点赞数；下面所示的有序集合分值并不直接是时间和点赞数，而是根据时间和点赞数间接计算出来的）
 
-<div align="center"> <img src="pics/f7d170a3-e446-4a64-ac2d-cb95028f81a8.png" width="800"/> </div><br>
+<div align="center"> <img src="/pics/f7d170a3-e446-4a64-ac2d-cb95028f81a8.png" width="800"/> </div><br>
 
 ### 参考资料
 
@@ -3265,7 +3265,7 @@ Redis 没有关系型数据库中的表这一概念来将同种类型的数据�
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 # 第 2 章 Java
 
@@ -3423,7 +3423,7 @@ value 数组被声明为 final，这意味着 value 数组初始化之后就不�
 
 如果一个 String 对象已经被创建过了，那么就会从 String Pool 中取得引用。只有 String 是不可变的，才可能使用 String Pool。
 
-<div align="center"> <img src="pics/9112288f-23f5-4e53-b222-a46fdbca1603.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/9112288f-23f5-4e53-b222-a46fdbca1603.png" width="300px"> </div><br>
 
 **3. 安全性** 
 
@@ -4581,7 +4581,7 @@ Throwable 可以用来表示任何可以作为异常抛出的类，分为两种�
 -  **受检异常** ：需要用 try...catch... 语句捕获并进行处理，并且可以从异常中恢复；
 -  **非受检异常** ：是程序运行时错误，例如除 0 会引发 Arithmetic Exception，此时程序崩溃并且无法恢复。
 
-<div align="center"> <img src="pics/PPjwP.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/PPjwP.png" width="600"/> </div><br>
 
 - [Java 入门之异常处理](https://www.tianmaying.com/tutorial/Java-Exception)
 - [Java 异常的面试问题及答案 -Part 1](http://www.importnew.com/7383.html)
@@ -4663,7 +4663,7 @@ Java 注解是附加在代码中的一些元信息，用于一些工具在编译
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 2.2 节 Java 容器
 
@@ -4673,7 +4673,7 @@ Java 注解是附加在代码中的一些元信息，用于一些工具在编译
 
 #### Collection
 
-<div align="center"> <img src="pics/73403d84-d921-49f1-93a9-d8fe050f3497.png" width="800px"> </div><br>
+<div align="center"> <img src="/pics/73403d84-d921-49f1-93a9-d8fe050f3497.png" width="800px"> </div><br>
 
 ##### 1. Set
 
@@ -4699,7 +4699,7 @@ Java 注解是附加在代码中的一些元信息，用于一些工具在编译
 
 #### Map
 
-<div align="center"> <img src="pics/774d756b-902a-41a3-a3fd-81ca3ef688dc.png" width="500px"> </div><br>
+<div align="center"> <img src="/pics/774d756b-902a-41a3-a3fd-81ca3ef688dc.png" width="500px"> </div><br>
 
 - TreeMap：基于红黑树实现。
 
@@ -4713,7 +4713,7 @@ Java 注解是附加在代码中的一些元信息，用于一些工具在编译
 
 #### 迭代器模式
 
-<div align="center"> <img src="pics/93fb1d38-83f9-464a-a733-67b2e6bfddda.png" width="600px"> </div><br>
+<div align="center"> <img src="/pics/93fb1d38-83f9-464a-a733-67b2e6bfddda.png" width="600px"> </div><br>
 
 Collection 继承了 Iterable 接口，其中的 iterator() 方法能够产生一个 Iterator 对象，通过这个对象就可以迭代遍历 Collection 中的元素。
 
@@ -4773,7 +4773,7 @@ public class ArrayList<E> extends AbstractList<E>
 private static final int DEFAULT_CAPACITY = 10;
 ```
 
-<div align="center"> <img src="pics/52a7744f-5bce-4ff3-a6f0-8449334d9f3d.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/52a7744f-5bce-4ff3-a6f0-8449334d9f3d.png" width="400px"> </div><br>
 
 ##### 2. 扩容
 
@@ -5036,7 +5036,7 @@ transient Node<E> first;
 transient Node<E> last;
 ```
 
-<div align="center"> <img src="pics/c8563120-cb00-4dd6-9213-9d9b337a7f7c.png" width="500px"> </div><br>
+<div align="center"> <img src="/pics/c8563120-cb00-4dd6-9213-9d9b337a7f7c.png" width="500px"> </div><br>
 
 ##### 2. 与 ArrayList 的比较
 
@@ -5058,7 +5058,7 @@ transient Entry[] table;
 
 Entry 存储着键值对。它包含了四个字段，从 next 字段我们可以看出 Entry 是一个链表。即数组中的每个位置被当成一个桶，一个桶存放一个链表。HashMap 使用拉链法来解决冲突，同一个链表中存放哈希值和散列桶取模运算结果相同的 Entry。
 
-<div align="center"> <img src="pics/9420a703-1f9d-42ce-808e-bcb82b56483d.png" width="550px"> </div><br>
+<div align="center"> <img src="/pics/9420a703-1f9d-42ce-808e-bcb82b56483d.png" width="550px"> </div><br>
 
 ```java
 static class Entry<K,V> implements Map.Entry<K,V> {
@@ -5134,7 +5134,7 @@ map.put("K3", "V3");
 - 计算键值对所在的桶；
 - 在链表上顺序查找，时间复杂度显然和链表的长度成正比。
 
-<div align="center"> <img src="pics/e0870f80-b79e-4542-ae39-7420d4b0d8fe.png" width="550px"> </div><br>
+<div align="center"> <img src="/pics/e0870f80-b79e-4542-ae39-7420d4b0d8fe.png" width="550px"> </div><br>
 
 ##### 3. put 操作
 
@@ -5470,7 +5470,7 @@ final Segment<K,V>[] segments;
 static final int DEFAULT_CONCURRENCY_LEVEL = 16;
 ```
 
-<div align="center"> <img src="pics/db808eff-31d7-4229-a4ad-b8ae71870a3a.png" width="550px"> </div><br>
+<div align="center"> <img src="/pics/db808eff-31d7-4229-a4ad-b8ae71870a3a.png" width="550px"> </div><br>
 
 ##### 2. size 操作
 
@@ -5759,13 +5759,13 @@ public final class ConcurrentCache<K, V> {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 2.3 节 Java 并发
 
 ### 一、线程状态转换
 
-<div align="center"> <img src="pics/adfb427d-3b21-40d7-a142-757f4ed73079.png" width="600px"> </div><br>
+<div align="center"> <img src="/pics/adfb427d-3b21-40d7-a142-757f4ed73079.png" width="600px"> </div><br>
 
 #### 新建（New）
 
@@ -6438,7 +6438,7 @@ java.util.concurrent（J.U.C）大大提高了并发性能，AQS 被认为是 J.
 
 维护了一个计数器 cnt，每次调用 countDown() 方法会让计数器的值减 1，减到 0 的时候，那些因为调用 await() 方法而在等待的线程就会被唤醒。
 
-<div align="center"> <img src="pics/ba078291-791e-4378-b6d1-ece76c2f0b14.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/ba078291-791e-4378-b6d1-ece76c2f0b14.png" width="300px"> </div><br>
 
 ```java
 public class CountdownLatchExample {
@@ -6487,7 +6487,7 @@ public CyclicBarrier(int parties) {
 }
 ```
 
-<div align="center"> <img src="pics/f71af66b-0d54-4399-a44b-f47b58321984.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/f71af66b-0d54-4399-a44b-f47b58321984.png" width="300px"> </div><br>
 
 ```java
 public class CyclicBarrierExample {
@@ -6724,7 +6724,7 @@ public class ForkJoinPool extends AbstractExecutorService
 
 ForkJoinPool 实现了工作窃取算法来提高 CPU 的利用率。每个线程都维护了一个双端队列，用来存储需要执行的任务。工作窃取算法允许空闲的线程从其它线程的双端队列中窃取一个任务来执行。窃取的任务必须是最晚的任务，避免和队列所属线程发生竞争。例如下图中，Thread2 从 Thread1 的队列中拿出最晚的 Task1 任务，Thread1 会拿出 Task2 来执行，这样就避免发生竞争。但是如果队列中只有一个任务时还是会发生竞争。
 
-<div align="center"> <img src="pics/e42f188f-f4a9-4e6f-88fc-45f4682072fb.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/e42f188f-f4a9-4e6f-88fc-45f4682072fb.png" width="300px"> </div><br>
 
 ### 九、线程不安全示例
 
@@ -6779,19 +6779,19 @@ Java 内存模型试图屏蔽各种硬件和操作系统的内存访问差异，
 
 加入高速缓存带来了一个新的问题：缓存一致性。如果多个缓存共享同一块主内存区域，那么多个缓存的数据可能会不一致，需要一些协议来解决这个问题。
 
-<div align="center"> <img src="pics/942ca0d2-9d5c-45a4-89cb-5fd89b61913f.png" width="600px"> </div><br>
+<div align="center"> <img src="/pics/942ca0d2-9d5c-45a4-89cb-5fd89b61913f.png" width="600px"> </div><br>
 
 所有的变量都存储在主内存中，每个线程还有自己的工作内存，工作内存存储在高速缓存或者寄存器中，保存了该线程使用的变量的主内存副本拷贝。
 
 线程只能直接操作工作内存中的变量，不同线程之间的变量值传递需要通过主内存来完成。
 
-<div align="center"> <img src="pics/15851555-5abc-497d-ad34-efed10f43a6b.png" width="600px"> </div><br>
+<div align="center"> <img src="/pics/15851555-5abc-497d-ad34-efed10f43a6b.png" width="600px"> </div><br>
 
 #### 内存间交互操作
 
 Java 内存模型定义了 8 个操作来完成主内存和工作内存的交互操作。
 
-<div align="center"> <img src="pics/8b7ebbad-9604-4375-84e3-f412099d170c.png" width="450px"> </div><br>
+<div align="center"> <img src="/pics/8b7ebbad-9604-4375-84e3-f412099d170c.png" width="450px"> </div><br>
 
 - read：把一个变量的值从主内存传输到工作内存中
 - load：在 read 之后执行，把 read 得到的值放入工作内存的变量副本中
@@ -6814,11 +6814,11 @@ Java 内存模型保证了 read、load、use、assign、store、write、lock 和
 
 下图演示了两个线程同时对 cnt 进行操作，load、assign、store 这一系列操作整体上看不具备原子性，那么在 T1 修改 cnt 并且还没有将修改后的值写入主内存，T2 依然可以读入旧值。可以看出，这两个线程虽然执行了两次自增运算，但是主内存中 cnt 的值最后为 1 而不是 2。因此对 int 类型读写操作满足原子性只是说明 load、assign、store 这些单个操作具备原子性。
 
-<div align="center"> <img src="pics/2797a609-68db-4d7b-8701-41ac9a34b14f.jpg" width="300px"> </div><br>
+<div align="center"> <img src="/pics/2797a609-68db-4d7b-8701-41ac9a34b14f.jpg" width="300px"> </div><br>
 
 AtomicInteger 能保证多个线程修改的原子性。
 
-<div align="center"> <img src="pics/dd563037-fcaa-4bd8-83b6-b39d93a12c77.jpg" width="300px"> </div><br>
+<div align="center"> <img src="/pics/dd563037-fcaa-4bd8-83b6-b39d93a12c77.jpg" width="300px"> </div><br>
 
 使用 AtomicInteger 重写之前线程不安全的代码之后得到以下线程安全实现：
 
@@ -6926,7 +6926,7 @@ volatile 关键字通过添加内存屏障的方式来禁止指令重排，即�
 
 在一个线程内，在程序前面的操作先行发生于后面的操作。
 
-<div align="center"> <img src="pics/874b3ff7-7c5c-4e7a-b8ab-a82a3e038d20.png" width="180px"> </div><br>
+<div align="center"> <img src="/pics/874b3ff7-7c5c-4e7a-b8ab-a82a3e038d20.png" width="180px"> </div><br>
 
 ##### 2. 管程锁定规则
 
@@ -6934,7 +6934,7 @@ volatile 关键字通过添加内存屏障的方式来禁止指令重排，即�
 
 一个 unlock 操作先行发生于后面对同一个锁的 lock 操作。
 
-<div align="center"> <img src="pics/8996a537-7c4a-4ec8-a3b7-7ef1798eae26.png" width="350px"> </div><br>
+<div align="center"> <img src="/pics/8996a537-7c4a-4ec8-a3b7-7ef1798eae26.png" width="350px"> </div><br>
 
 ##### 3. volatile 变量规则
 
@@ -6942,7 +6942,7 @@ volatile 关键字通过添加内存屏障的方式来禁止指令重排，即�
 
 对一个 volatile 变量的写操作先行发生于后面对这个变量的读操作。
 
-<div align="center"> <img src="pics/942f33c9-8ad9-4987-836f-007de4c21de0.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/942f33c9-8ad9-4987-836f-007de4c21de0.png" width="400px"> </div><br>
 
 ##### 4. 线程启动规则
 
@@ -6950,7 +6950,7 @@ volatile 关键字通过添加内存屏障的方式来禁止指令重排，即�
 
 Thread 对象的 start() 方法调用先行发生于此线程的每一个动作。
 
-<div align="center"> <img src="pics/6270c216-7ec0-4db7-94de-0003bce37cd2.png" width="380px"> </div><br>
+<div align="center"> <img src="/pics/6270c216-7ec0-4db7-94de-0003bce37cd2.png" width="380px"> </div><br>
 
 ##### 5. 线程加入规则
 
@@ -6958,7 +6958,7 @@ Thread 对象的 start() 方法调用先行发生于此线程的每一个动作�
 
 Thread 对象的结束先行发生于 join() 方法返回。
 
-<div align="center"> <img src="pics/233f8d89-31d7-413f-9c02-042f19c46ba1.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/233f8d89-31d7-413f-9c02-042f19c46ba1.png" width="400px"> </div><br>
 
 ##### 6. 线程中断规则
 
@@ -7176,7 +7176,7 @@ public class ThreadLocalExample1 {
 
 它所对应的底层结构图为：
 
-<div align="center"> <img src="pics/6782674c-1bfe-4879-af39-e9d722a95d39.png" width="500px"> </div><br>
+<div align="center"> <img src="/pics/6782674c-1bfe-4879-af39-e9d722a95d39.png" width="500px"> </div><br>
 
 每个 Thread 都有一个 ThreadLocal.ThreadLocalMap 对象。
 
@@ -7279,17 +7279,17 @@ JDK 1.6 引入了偏向锁和轻量级锁，从而让锁拥有了四个状态：
 
 以下是 HotSpot 虚拟机对象头的内存布局，这些数据被称为 Mark Word。其中 tag bits 对应了五个状态，这些状态在右侧的 state 表格中给出。除了 marked for gc 状态，其它四个状态已经在前面介绍过了。
 
-<div align="center"> <img src="pics/bb6a49be-00f2-4f27-a0ce-4ed764bc605c.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/bb6a49be-00f2-4f27-a0ce-4ed764bc605c.png" width="500"/> </div><br>
 
 下图左侧是一个线程的虚拟机栈，其中有一部分称为 Lock Record 的区域，这是在轻量级锁运行过程创建的，用于存放锁对象的 Mark Word。而右侧就是一个锁对象，包含了 Mark Word 和其它信息。
 
-<div align="center"> <img src="pics/051e436c-0e46-4c59-8f67-52d89d656182.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/051e436c-0e46-4c59-8f67-52d89d656182.png" width="500"/> </div><br>
 
 轻量级锁是相对于传统的重量级锁而言，它使用 CAS 操作来避免重量级锁使用互斥量的开销。对于绝大部分的锁，在整个同步周期内都是不存在竞争的，因此也就不需要都使用互斥量进行同步，可以先采用 CAS 操作进行同步，如果 CAS 失败了再改用互斥量进行同步。
 
 当尝试获取一个锁对象时，如果锁对象标记为 0 01，说明锁对象的锁未锁定（unlocked）状态。此时虚拟机在当前线程的虚拟机栈中创建 Lock Record，然后使用 CAS 操作将对象的 Mark Word 更新为 Lock Record 指针。如果 CAS 操作成功了，那么线程就获取了该对象上的锁，并且对象的 Mark Word 的锁标记变为 00，表示该对象处于轻量级锁状态。
 
-<div align="center"> <img src="pics/baaa681f-7c52-4198-a5ae-303b9386cf47.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/baaa681f-7c52-4198-a5ae-303b9386cf47.png" width="400"/> </div><br>
 
 如果 CAS 操作失败了，虚拟机首先会检查对象的 Mark Word 是否指向当前线程的虚拟机栈，如果是的话说明当前线程已经拥有了这个锁对象，那就可以直接进入同步块继续执行，否则说明这个锁对象已经被其他线程线程抢占了。如果有两条以上的线程争用同一个锁，那轻量级锁就不再有效，要膨胀为重量级锁。
 
@@ -7301,7 +7301,7 @@ JDK 1.6 引入了偏向锁和轻量级锁，从而让锁拥有了四个状态：
 
 当有另外一个线程去尝试获取这个锁对象时，偏向状态就宣告结束，此时撤销偏向（Revoke Bias）后恢复到未锁定状态或者轻量级锁状态。
 
-<div align="center"> <img src="pics/390c913b-5f31-444f-bbdb-2b88b688e7ce.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/390c913b-5f31-444f-bbdb-2b88b688e7ce.jpg" width="600"/> </div><br>
 
 ### 十三、多线程开发良好的实践
 
@@ -7341,7 +7341,7 @@ JDK 1.6 引入了偏向锁和轻量级锁，从而让锁拥有了四个状态：
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 2.4 节 Java 虚拟机
 
@@ -7349,7 +7349,7 @@ JDK 1.6 引入了偏向锁和轻量级锁，从而让锁拥有了四个状态：
 
 ### 一、运行时数据区域
 
-<div align="center"> <img src="pics/5778d113-8e13-4c53-b5bf-801e58080b97.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/5778d113-8e13-4c53-b5bf-801e58080b97.png" width="400px"> </div><br>
 
 #### 程序计数器
 
@@ -7359,7 +7359,7 @@ JDK 1.6 引入了偏向锁和轻量级锁，从而让锁拥有了四个状态：
 
 每个 Java 方法在执行的同时会创建一个栈帧用于存储局部变量表、操作数栈、常量池引用等信息。从方法调用直至执行完成的过程，对应着一个栈帧在 Java 虚拟机栈中入栈和出栈的过程。
 
-<div align="center"> <img src="pics/8442519f-0b4d-48f4-8229-56f984363c69.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/8442519f-0b4d-48f4-8229-56f984363c69.png" width="400px"> </div><br>
 
 可以通过 -Xss 这个虚拟机参数来指定每个线程的 Java 虚拟机栈内存大小，在 JDK 1.4 中默认为 256K，而在 JDK 1.5+ 默认为 1M：
 
@@ -7378,7 +7378,7 @@ java -Xss2M HackTheJava
 
 本地方法一般是用其它语言（C、C++ 或汇编语言等）编写的，并且被编译为基于本机硬件和操作系统的程序，对待这些方法需要特别处理。
 
-<div align="center"> <img src="pics/66a6899d-c6b0-4a47-8569-9d08f0baf86c.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/66a6899d-c6b0-4a47-8569-9d08f0baf86c.png" width="300px"> </div><br>
 
 #### 堆
 
@@ -7463,7 +7463,7 @@ Java 虚拟机使用该算法来判断对象是否可被回收，GC Roots 一般
 - 方法区中类静态属性引用的对象
 - 方法区中的常量引用的对象
 
-<div align="center"> <img src="pics/83d909d2-3858-4fe1-8ff4-16471db0b180.png" width="350px"> </div><br>
+<div align="center"> <img src="/pics/83d909d2-3858-4fe1-8ff4-16471db0b180.png" width="350px"> </div><br>
 
 ##### 3. 方法区的回收
 
@@ -7543,7 +7543,7 @@ obj = null;
 
 ##### 1. 标记 - 清除
 
-<div align="center"> <img src="pics/005b481b-502b-4e3f-985d-d043c2b330aa.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/005b481b-502b-4e3f-985d-d043c2b330aa.png" width="400px"> </div><br>
 
 在标记阶段，程序会检查每个对象是否为活动对象，如果是活动对象，则程序会在对象头部打上标记。
 
@@ -7558,7 +7558,7 @@ obj = null;
 
 ##### 2. 标记 - 整理
 
-<div align="center"> <img src="pics/ccd773a5-ad38-4022-895c-7ac318f31437.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/ccd773a5-ad38-4022-895c-7ac318f31437.png" width="400px"> </div><br>
 
 让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存。
 
@@ -7572,7 +7572,7 @@ obj = null;
 
 ##### 3. 复制
 
-<div align="center"> <img src="pics/b2b77b9e-958c-4016-8ae5-9c6edd83871e.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/b2b77b9e-958c-4016-8ae5-9c6edd83871e.png" width="400px"> </div><br>
 
 将内存划分为大小相等的两块，每次只使用其中一块，当这一块内存用完了就将还存活的对象复制到另一块上面，然后再把使用过的内存空间进行一次清理。
 
@@ -7593,7 +7593,7 @@ HotSpot 虚拟机的 Eden 和 Survivor 大小比例默认为 8:1，保证了内�
 
 #### 垃圾收集器
 
-<div align="center"> <img src="pics/c625baa0-dde6-449e-93df-c3a67f2f430f.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/c625baa0-dde6-449e-93df-c3a67f2f430f.jpg" width=""/> </div><br>
 
 以上是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。
 
@@ -7602,7 +7602,7 @@ HotSpot 虚拟机的 Eden 和 Survivor 大小比例默认为 8:1，保证了内�
 
 ##### 1. Serial 收集器
 
-<div align="center"> <img src="pics/22fda4ae-4dd5-489d-ab10-9ebfdad22ae0.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/22fda4ae-4dd5-489d-ab10-9ebfdad22ae0.jpg" width=""/> </div><br>
 
 Serial 翻译为串行，也就是说它以串行的方式执行。
 
@@ -7614,7 +7614,7 @@ Serial 翻译为串行，也就是说它以串行的方式执行。
 
 ##### 2. ParNew 收集器
 
-<div align="center"> <img src="pics/81538cd5-1bcf-4e31-86e5-e198df1e013b.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/81538cd5-1bcf-4e31-86e5-e198df1e013b.jpg" width=""/> </div><br>
 
 它是 Serial 收集器的多线程版本。
 
@@ -7634,7 +7634,7 @@ Serial 翻译为串行，也就是说它以串行的方式执行。
 
 ##### 4. Serial Old 收集器
 
-<div align="center"> <img src="pics/08f32fd3-f736-4a67-81ca-295b2a7972f2.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/08f32fd3-f736-4a67-81ca-295b2a7972f2.jpg" width=""/> </div><br>
 
 是 Serial 收集器的老年代版本，也是给 Client 场景下的虚拟机使用。如果用在 Server 场景下，它有两大用途：
 
@@ -7643,7 +7643,7 @@ Serial 翻译为串行，也就是说它以串行的方式执行。
 
 ##### 5. Parallel Old 收集器
 
-<div align="center"> <img src="pics/278fe431-af88-4a95-a895-9c3b80117de3.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/278fe431-af88-4a95-a895-9c3b80117de3.jpg" width=""/> </div><br>
 
 是 Parallel Scavenge 收集器的老年代版本。
 
@@ -7651,7 +7651,7 @@ Serial 翻译为串行，也就是说它以串行的方式执行。
 
 ##### 6. CMS 收集器
 
-<div align="center"> <img src="pics/62e77997-6957-4b68-8d12-bfd609bb2c68.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/62e77997-6957-4b68-8d12-bfd609bb2c68.jpg" width=""/> </div><br>
 
 CMS（Concurrent Mark Sweep），Mark Sweep 指的是标记 - 清除算法。
 
@@ -7676,17 +7676,17 @@ G1（Garbage-First），它是一款面向服务端应用的垃圾收集器，�
 
 堆被分为新生代和老年代，其它收集器进行收集的范围都是整个新生代或者老年代，而 G1 可以直接对新生代和老年代一起回收。
 
-<div align="center"> <img src="pics/4cf711a8-7ab2-4152-b85c-d5c226733807.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/4cf711a8-7ab2-4152-b85c-d5c226733807.png" width="600"/> </div><br>
 
 G1 把堆划分成多个大小相等的独立区域（Region），新生代和老年代不再物理隔离。
 
-<div align="center"> <img src="pics/9bbddeeb-e939-41f0-8e8e-2b1a0aa7e0a7.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/9bbddeeb-e939-41f0-8e8e-2b1a0aa7e0a7.png" width="600"/> </div><br>
 
 通过引入 Region 的概念，从而将原来的一整块内存空间划分成多个的小空间，使得每个小空间可以单独进行垃圾回收。这种划分方法带来了很大的灵活性，使得可预测的停顿时间模型成为可能。通过记录每个 Region 垃圾回收时间以及回收所获得的空间（这两个值是通过过去回收的经验获得），并维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的 Region。
 
 每个 Region 都有一个 Remembered Set，用来记录该 Region 对象的引用对象所在的 Region。通过使用 Remembered Set，在做可达性分析的时候就可以避免全堆扫描。
 
-<div align="center"> <img src="pics/f99ee771-c56f-47fb-9148-c0036695b5fe.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/f99ee771-c56f-47fb-9148-c0036695b5fe.jpg" width=""/> </div><br>
 
 如果不计算维护 Remembered Set 的操作，G1 收集器的运作大致可划分为以下几个步骤：
 
@@ -7774,7 +7774,7 @@ G1 把堆划分成多个大小相等的独立区域（Region），新生代和�
 
 #### 类的生命周期
 
-<div align="center"> <img src="pics/335fe19c-4a76-45ab-9320-88c90d6a0d7e.png" width="600px"> </div><br>
+<div align="center"> <img src="/pics/335fe19c-4a76-45ab-9320-88c90d6a0d7e.png" width="600px"> </div><br>
 
 包括以下 7 个阶段：
 
@@ -7946,7 +7946,7 @@ System.out.println(ConstClass.HELLOWORLD);
 
 下图展示了类加载器之间的层次关系，称为双亲委派模型（Parents Delegation Model）。该模型要求除了顶层的启动类加载器外，其它的类加载器都要有自己的父类加载器。这里的父子关系一般通过组合关系（Composition）来实现，而不是继承关系（Inheritance）。
 
-<div align="center"> <img src="pics/0dd2d40a-5b2b-4d45-b176-e75a4cd4bdbf.png" width="500px"> </div><br>
+<div align="center"> <img src="/pics/0dd2d40a-5b2b-4d45-b176-e75a4cd4bdbf.png" width="500px"> </div><br>
 
 ##### 1. 工作过程
 
@@ -8076,7 +8076,7 @@ public class FileSystemClassLoader extends ClassLoader {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 2.5 节 Java IO
 
@@ -8146,7 +8146,7 @@ Java I/O 使用了装饰者模式来实现。以 InputStream 为例，
 - FileInputStream 是 InputStream 的子类，属于具体组件，提供了字节流的输入操作；
 - FilterInputStream 属于抽象装饰者，装饰者用于装饰组件，为组件提供额外的功能。例如 BufferedInputStream 为 FileInputStream 提供缓存的功能。
 
-<div align="center"> <img src="pics/9709694b-db05-4cce-8d2f-1c8b09f4d921.png" width="650px"> </div><br>
+<div align="center"> <img src="/pics/9709694b-db05-4cce-8d2f-1c8b09f4d921.png" width="650px"> </div><br>
 
 实例化一个具有缓存功能的字节流对象时，只需要在 FileInputStream 对象上再套一层 BufferedInputStream 对象即可。
 
@@ -8326,7 +8326,7 @@ public static void main(String[] args) throws IOException {
 - Socket：客户端类
 - 服务器和客户端通过 InputStream 和 OutputStream 进行输入输出。
 
-<div align="center"> <img src="pics/1e6affc4-18e5-4596-96ef-fb84c63bf88a.png" width="550px"> </div><br>
+<div align="center"> <img src="/pics/1e6affc4-18e5-4596-96ef-fb84c63bf88a.png" width="550px"> </div><br>
 
 #### Datagram
 
@@ -8388,23 +8388,23 @@ I/O 包和 NIO 已经很好地集成了，java.io.\* 已经以 NIO 为基础重�
 
 ① 新建一个大小为 8 个字节的缓冲区，此时 position 为 0，而 limit = capacity = 8。capacity 变量不会改变，下面的讨论会忽略它。
 
-<div align="center"> <img src="pics/1bea398f-17a7-4f67-a90b-9e2d243eaa9a.png"/> </div><br>
+<div align="center"> <img src="/pics/1bea398f-17a7-4f67-a90b-9e2d243eaa9a.png"/> </div><br>
 
 ② 从输入通道中读取 5 个字节数据写入缓冲区中，此时 position 为 5，limit 保持不变。
 
-<div align="center"> <img src="pics/80804f52-8815-4096-b506-48eef3eed5c6.png"/> </div><br>
+<div align="center"> <img src="/pics/80804f52-8815-4096-b506-48eef3eed5c6.png"/> </div><br>
 
 ③ 在将缓冲区的数据写到输出通道之前，需要先调用 flip() 方法，这个方法将 limit 设置为当前 position，并将 position 设置为 0。
 
-<div align="center"> <img src="pics/952e06bd-5a65-4cab-82e4-dd1536462f38.png"/> </div><br>
+<div align="center"> <img src="/pics/952e06bd-5a65-4cab-82e4-dd1536462f38.png"/> </div><br>
 
 ④ 从缓冲区中取 4 个字节到输出缓冲中，此时 position 设为 4。
 
-<div align="center"> <img src="pics/b5bdcbe2-b958-4aef-9151-6ad963cb28b4.png"/> </div><br>
+<div align="center"> <img src="/pics/b5bdcbe2-b958-4aef-9151-6ad963cb28b4.png"/> </div><br>
 
 ⑤ 最后需要调用 clear() 方法来清空缓冲区，此时 position 和 limit 都被设置为最初位置。
 
-<div align="center"> <img src="pics/67bf5487-c45d-49b6-b9c0-a058d8c68902.png"/> </div><br>
+<div align="center"> <img src="/pics/67bf5487-c45d-49b6-b9c0-a058d8c68902.png"/> </div><br>
 
 #### 文件 NIO 实例
 
@@ -8462,7 +8462,7 @@ NIO 实现了 IO 多路复用中的 Reactor 模型，一个线程 Thread 使用�
 
 应该注意的是，只有套接字 Channel 才能配置为非阻塞，而 FileChannel 不能，为 FileChannel 配置非阻塞也没有意义。
 
-<div align="center"> <img src="pics/093f9e57-429c-413a-83ee-c689ba596cef.png" width="350px"> </div><br>
+<div align="center"> <img src="/pics/093f9e57-429c-413a-83ee-c689ba596cef.png" width="350px"> </div><br>
 
 ##### 1. 创建选择器
 
@@ -8672,7 +8672,7 @@ NIO 与普通 I/O 的区别主要有以下两点：
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 # 第 3 章 系统设计
 
@@ -8783,7 +8783,7 @@ NIO 与普通 I/O 的区别主要有以下两点：
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 3.2 节 分布式
 
@@ -8830,7 +8830,7 @@ EXPIRE 指令可以为一个键值对设置一个过期时间，从而避免了�
 
 Zookeeper 提供了一种树形结构的命名空间，/app1/p_1 节点的父节点为 /app1。
 
-<div align="center"> <img src="pics/aefa8042-15fa-4e8b-9f50-20b282a2c624.png" width="320px"> </div><br>
+<div align="center"> <img src="/pics/aefa8042-15fa-4e8b-9f50-20b282a2c624.png" width="320px"> </div><br>
 
 ##### 2. 节点类型
 
@@ -8873,7 +8873,7 @@ Zookeeper 提供了一种树形结构的命名空间，/app1/p_1 节点的父节
 
 协调者询问参与者事务是否执行成功，参与者发回事务执行结果。
 
-<div align="center"> <img src="pics/44d33643-1004-43a3-b99a-4d688a08d0a1.png" width="550px"> </div><br>
+<div align="center"> <img src="/pics/44d33643-1004-43a3-b99a-4d688a08d0a1.png" width="550px"> </div><br>
 
 ###### 1.2 提交阶段
 
@@ -8881,7 +8881,7 @@ Zookeeper 提供了一种树形结构的命名空间，/app1/p_1 节点的父节
 
 需要注意的是，在准备阶段，参与者执行了事务，但是还未提交。只有在提交阶段接收到协调者发来的通知后，才进行提交或者回滚。
 
-<div align="center"> <img src="pics/d2ae9932-e2b1-4191-8ee9-e573f36d3895.png" width="550px"> </div><br>
+<div align="center"> <img src="/pics/d2ae9932-e2b1-4191-8ee9-e573f36d3895.png" width="550px"> </div><br>
 
 ##### 2. 存在的问题
 
@@ -8909,13 +8909,13 @@ Zookeeper 提供了一种树形结构的命名空间，/app1/p_1 节点的父节
 2. 之后将本地消息表中的消息转发到消息队列中，如果转发成功则将消息从本地消息表中删除，否则继续重新转发。
 3. 在分布式事务操作的另一方从消息队列中读取一个消息，并执行消息中的操作。
 
-<div align="center"> <img src="pics/476329d4-e2ef-4f7b-8ac9-a52a6f784600.png" width="740px"> </div><br>
+<div align="center"> <img src="/pics/476329d4-e2ef-4f7b-8ac9-a52a6f784600.png" width="740px"> </div><br>
 
 ### 三、CAP
 
 分布式系统不可能同时满足一致性（C：Consistency）、可用性（A：Availability）和分区容忍性（P：Partition Tolerance），最多只能同时满足其中两项。
 
-<div align="center"> <img src="pics/a14268b3-b937-4ffa-a34a-4cc53071686b.jpg" width="450px"> </div><br>
+<div align="center"> <img src="/pics/a14268b3-b937-4ffa-a34a-4cc53071686b.jpg" width="450px"> </div><br>
 
 #### 一致性
 
@@ -8978,7 +8978,7 @@ ACID 要求强一致性，通常运用在传统的数据库系统上。而 BASE 
 - 接受者（Acceptor）：对每个提议进行投票；
 - 告知者（Learner）：被告知投票的结果，不参与投票过程。
 
-<div align="center"> <img src="pics/b988877c-0f0a-4593-916d-de2081320628.jpg"/> </div><br>
+<div align="center"> <img src="/pics/b988877c-0f0a-4593-916d-de2081320628.jpg"/> </div><br>
 
 #### 执行过程
 
@@ -8988,19 +8988,19 @@ ACID 要求强一致性，通常运用在传统的数据库系统上。而 BASE 
 
 下图演示了两个 Proposer 和三个 Acceptor 的系统中运行该算法的初始过程，每个 Proposer 都会向所有 Acceptor 发送 Prepare 请求。
 
-<div align="center"> <img src="pics/1a9977e4-2f5c-49a6-aec9-f3027c9f46a7.png"/> </div><br>
+<div align="center"> <img src="/pics/1a9977e4-2f5c-49a6-aec9-f3027c9f46a7.png"/> </div><br>
 
 当 Acceptor 接收到一个 Prepare 请求，包含的提议为 [n1, v1]，并且之前还未接收过 Prepare 请求，那么发送一个 Prepare 响应，设置当前接收到的提议为 [n1, v1]，并且保证以后不会再接受序号小于 n1 的提议。
 
 如下图，Acceptor X 在收到 [n=2, v=8] 的 Prepare 请求时，由于之前没有接收过提议，因此就发送一个 [no previous] 的 Prepare 响应，设置当前接收到的提议为 [n=2, v=8]，并且保证以后不会再接受序号小于 2 的提议。其它的 Acceptor 类似。
 
-<div align="center"> <img src="pics/fb44307f-8e98-4ff7-a918-31dacfa564b4.jpg"/> </div><br>
+<div align="center"> <img src="/pics/fb44307f-8e98-4ff7-a918-31dacfa564b4.jpg"/> </div><br>
 
 如果 Acceptor 接收到一个 Prepare 请求，包含的提议为 [n2, v2]，并且之前已经接收过提议 [n1, v1]。如果 n1 > n2，那么就丢弃该提议请求；否则，发送 Prepare 响应，该 Prepare 响应包含之前已经接收过的提议 [n1, v1]，设置当前接收到的提议为 [n2, v2]，并且保证以后不会再接受序号小于 n2 的提议。
 
 如下图，Acceptor Z 收到 Proposer A 发来的 [n=2, v=8] 的 Prepare 请求，由于之前已经接收过 [n=4, v=5] 的提议，并且 n > 2，因此就抛弃该提议请求；Acceptor X 收到 Proposer B 发来的 [n=4, v=5] 的 Prepare 请求，因为之前接收到的提议为 [n=2, v=8]，并且 2 <= 4，因此就发送 [n=2, v=8] 的 Prepare 响应，设置当前接收到的提议为 [n=4, v=5]，并且保证以后不会再接受序号小于 4 的提议。Acceptor Y 类似。
 
-<div align="center"> <img src="pics/2bcc58ad-bf7f-485c-89b5-e7cafc211ce2.jpg"/> </div><br>
+<div align="center"> <img src="/pics/2bcc58ad-bf7f-485c-89b5-e7cafc211ce2.jpg"/> </div><br>
 
 ##### 2. Accept 阶段
 
@@ -9010,13 +9010,13 @@ Proposer A 接收到两个 Prepare 响应之后，就发送 [n=2, v=8] Accept �
 
 Proposer B 过后也收到了两个 Prepare 响应，因此也开始发送 Accept 请求。需要注意的是，Accept 请求的 v 需要取它收到的最大提议编号对应的 v 值，也就是 8。因此它发送 [n=4, v=8] 的 Accept 请求。
 
-<div align="center"> <img src="pics/9b838aee-0996-44a5-9b0f-3d1e3e2f5100.png"/> </div><br>
+<div align="center"> <img src="/pics/9b838aee-0996-44a5-9b0f-3d1e3e2f5100.png"/> </div><br>
 
 ##### 3. Learn 阶段
 
 Acceptor 接收到 Accept 请求时，如果序号大于等于该 Acceptor 承诺的最小序号，那么就发送 Learn 提议给所有的 Learner。当 Learner 发现有大多数的 Acceptor 接收了某个提议，那么该提议的提议值就被 Paxos 选择出来。
 
-<div align="center"> <img src="pics/bf667594-bb4b-4634-bf9b-0596a45415ba.jpg"/> </div><br>
+<div align="center"> <img src="/pics/bf667594-bb4b-4634-bf9b-0596a45415ba.jpg"/> </div><br>
 
 #### 约束条件
 
@@ -9042,47 +9042,47 @@ Raft 也是分布式一致性协议，主要是用来竞选主节点。
 
 - 下图展示一个分布式系统的最初阶段，此时只有 Follower 没有 Leader。Node A 等待一个随机的竞选超时时间之后，没收到 Leader 发来的心跳包，因此进入竞选阶段。
 
-<div align="center"> <img src="pics/111521118015898.gif"/> </div><br>
+<div align="center"> <img src="/pics/111521118015898.gif"/> </div><br>
 
 - 此时 Node A 发送投票请求给其它所有节点。
 
-<div align="center"> <img src="pics/111521118445538.gif"/> </div><br>
+<div align="center"> <img src="/pics/111521118445538.gif"/> </div><br>
 
 - 其它节点会对请求进行回复，如果超过一半的节点回复了，那么该 Candidate 就会变成 Leader。
 
-<div align="center"> <img src="pics/111521118483039.gif"/> </div><br>
+<div align="center"> <img src="/pics/111521118483039.gif"/> </div><br>
 
 - 之后 Leader 会周期性地发送心跳包给 Follower，Follower 接收到心跳包，会重新开始计时。
 
-<div align="center"> <img src="pics/111521118640738.gif"/> </div><br>
+<div align="center"> <img src="/pics/111521118640738.gif"/> </div><br>
 
 #### 多个 Candidate 竞选
 
 - 如果有多个 Follower 成为 Candidate，并且所获得票数相同，那么就需要重新开始投票。例如下图中 Node B 和 Node D 都获得两票，需要重新开始投票。
 
-<div align="center"> <img src="pics/111521119203347.gif"/> </div><br>
+<div align="center"> <img src="/pics/111521119203347.gif"/> </div><br>
 
 - 由于每个节点设置的随机竞选超时时间不同，因此下一次再次出现多个 Candidate 并获得同样票数的概率很低。
 
-<div align="center"> <img src="pics/111521119368714.gif"/> </div><br>
+<div align="center"> <img src="/pics/111521119368714.gif"/> </div><br>
 
 #### 数据同步
 
 - 来自客户端的修改都会被传入 Leader。注意该修改还未被提交，只是写入日志中。
 
-<div align="center"> <img src="pics/71550414107576.gif"/> </div><br>
+<div align="center"> <img src="/pics/71550414107576.gif"/> </div><br>
 
 - Leader 会把修改复制到所有 Follower。
 
-<div align="center"> <img src="pics/91550414131331.gif"/> </div><br>
+<div align="center"> <img src="/pics/91550414131331.gif"/> </div><br>
 
 - Leader 会等待大多数的 Follower 也进行了修改，然后才将修改提交。
 
-<div align="center"> <img src="pics/101550414151983.gif"/> </div><br>
+<div align="center"> <img src="/pics/101550414151983.gif"/> </div><br>
 
 - 此时 Leader 会通知的所有 Follower 让它们也提交修改，此时所有节点的值达成一致。
 
-<div align="center"> <img src="pics/111550414182638.gif"/> </div><br>
+<div align="center"> <img src="/pics/111550414182638.gif"/> </div><br>
 
 ### 参考
 
@@ -9102,7 +9102,7 @@ Raft 也是分布式一致性协议，主要是用来竞选主节点。
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 3.3 节 集群
 
@@ -9130,11 +9130,11 @@ Raft 也是分布式一致性协议，主要是用来竞选主节点。
 
 下图中，一共有 6 个客户端产生了 6 个请求，这 6 个请求按 (1, 2, 3, 4, 5, 6) 的顺序发送。(1, 3, 5) 的请求会被发送到服务器 1，(2, 4, 6) 的请求会被发送到服务器 2。
 
-<div align="center"> <img src="pics/9daa3616-00a4-48c4-9146-792dc8499be3.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/9daa3616-00a4-48c4-9146-792dc8499be3.jpg" width="500px"/> </div><br>
 
 该算法比较适合每个服务器的性能差不多的场景，如果有性能存在差异的情况下，那么性能较差的服务器可能无法承担过大的负载（下图的 Server 2）。
 
-<div align="center"> <img src="pics/bfea8772-d01b-4a51-8adc-edfd7d3dce84.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/bfea8772-d01b-4a51-8adc-edfd7d3dce84.jpg" width="500px"/> </div><br>
 
 ##### 2. 加权轮询（Weighted Round Robbin）
 
@@ -9142,7 +9142,7 @@ Raft 也是分布式一致性协议，主要是用来竞选主节点。
 
 例如下图中，服务器 1 被赋予的权值为 5，服务器 2 被赋予的权值为 1，那么 (1, 2, 3, 4, 5) 请求会被发送到服务器 1，(6) 请求会被发送到服务器 2。
 
-<div align="center"> <img src="pics/4ab87717-e264-4232-825d-8aaf08f14e8b.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/4ab87717-e264-4232-825d-8aaf08f14e8b.jpg" width="500px"/> </div><br>
 
 ##### 3. 最少连接（least Connections）
 
@@ -9150,13 +9150,13 @@ Raft 也是分布式一致性协议，主要是用来竞选主节点。
 
 例如下图中，(1, 3, 5) 请求会被发送到服务器 1，但是 (1, 3) 很快就断开连接，此时只有 (5) 请求连接服务器 1；(2, 4, 6) 请求被发送到服务器 2，只有 (2) 的连接断开，此时 (6, 4) 请求连接服务器 2。该系统继续运行时，服务器 2 会承担过大的负载。
 
-<div align="center"> <img src="pics/e98deb5a-d5d4-4294-aa9b-9220d4483403.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/e98deb5a-d5d4-4294-aa9b-9220d4483403.jpg" width="500px"/> </div><br>
 
 最少连接算法就是将请求发送给当前最少连接数的服务器上。
 
 例如下图中，服务器 1 当前连接数最小，那么新到来的请求 6 就会被发送到服务器 1 上。
 
-<div align="center"> <img src="pics/43d323ac-9f07-4e4a-a315-4eaf8c38766c.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/43d323ac-9f07-4e4a-a315-4eaf8c38766c.jpg" width="500px"/> </div><br>
 
 ##### 4. 加权最少连接（Weighted Least Connection）
 
@@ -9168,7 +9168,7 @@ Raft 也是分布式一致性协议，主要是用来竞选主节点。
 
 和轮询算法类似，该算法比较适合服务器性能差不多的场景。
 
-<div align="center"> <img src="pics/a42ad3a7-3574-4c48-a783-ed3d08a0688a.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/a42ad3a7-3574-4c48-a783-ed3d08a0688a.jpg" width="500px"/> </div><br>
 
 ##### 6. 源地址哈希法 (IP Hash)
 
@@ -9176,7 +9176,7 @@ Raft 也是分布式一致性协议，主要是用来竞选主节点。
 
 可以保证同一 IP 的客户端的请求会转发到同一台服务器上，用来实现会话粘滞（Sticky Session）
 
-<div align="center"> <img src="pics/0f399a9f-1351-4b2d-b8a4-2ebe82b1a703.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/0f399a9f-1351-4b2d-b8a4-2ebe82b1a703.jpg" width="500px"/> </div><br>
 
 #### 转发实现
 
@@ -9191,7 +9191,7 @@ HTTP 重定向负载均衡服务器使用某种负载均衡算法计算得到服
 
 该负载均衡转发的缺点比较明显，实际场景中很少使用它。
 
-<div align="center"> <img src="pics/02a1fbfd-7a9d-4114-95df-ca2445587a1f.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/02a1fbfd-7a9d-4114-95df-ca2445587a1f.jpg" width="500px"/> </div><br>
 
 ##### 2. DNS 域名解析
 
@@ -9207,7 +9207,7 @@ HTTP 重定向负载均衡服务器使用某种负载均衡算法计算得到服
 
 大型网站基本使用了 DNS 做为第一级负载均衡手段，然后在内部使用其它方式做第二级负载均衡。也就是说，域名解析的结果为内部的负载均衡服务器 IP 地址。
 
-<div align="center"> <img src="pics/d2c072cc-8b17-480c-813e-18cdb3b4b51f.jpg" width="500px"/> </div><br>
+<div align="center"> <img src="/pics/d2c072cc-8b17-480c-813e-18cdb3b4b51f.jpg" width="500px"/> </div><br>
 
 ##### 3. 反向代理服务器
 
@@ -9264,7 +9264,7 @@ HTTP 重定向负载均衡服务器使用某种负载均衡算法计算得到服
 
 - 当服务器宕机时，将丢失该服务器上的所有 Session。
 
-<div align="center"> <img src="pics/1623f524-b011-40c8-b83f-eab38d538f76.png" width="400px"/> </div><br>
+<div align="center"> <img src="/pics/1623f524-b011-40c8-b83f-eab38d538f76.png" width="400px"/> </div><br>
 
 #### Session Replication
 
@@ -9275,7 +9275,7 @@ HTTP 重定向负载均衡服务器使用某种负载均衡算法计算得到服
 - 占用过多内存；
 - 同步过程占用网络带宽以及服务器处理器时间。
 
-<div align="center"> <img src="pics/40c6570d-c1d7-4c38-843e-ba991b2328c2.png" width="400px"/> </div><br>
+<div align="center"> <img src="/pics/40c6570d-c1d7-4c38-843e-ba991b2328c2.png" width="400px"/> </div><br>
 
 #### Session Server
 
@@ -9289,7 +9289,7 @@ HTTP 重定向负载均衡服务器使用某种负载均衡算法计算得到服
 
 - 需要去实现存取 Session 的代码。
 
-<div align="center"> <img src="pics/fdc45a09-f838-4348-8959-d2c793727788.png" width="600px"/> </div><br>
+<div align="center"> <img src="/pics/fdc45a09-f838-4348-8959-d2c793727788.png" width="600px"/> </div><br>
 
 参考：
 
@@ -9299,7 +9299,7 @@ HTTP 重定向负载均衡服务器使用某种负载均衡算法计算得到服
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 3.4 节 攻击技术
 
@@ -9492,7 +9492,7 @@ ResultSet rs = stmt.executeQuery();
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 3.5 节 缓存
 
@@ -9690,7 +9690,7 @@ CDN 主要有以下优点：
 - 通过部署多台服务器，从而提高系统整体的带宽性能；
 - 多台服务器可以看成是一种冗余机制，从而具有高可用性。
 
-<div align="center"> <img src="pics/15313ed8-a520-4799-a300-2b6b36be314f.jpg"/> </div><br>
+<div align="center"> <img src="/pics/15313ed8-a520-4799-a300-2b6b36be314f.jpg"/> </div><br>
 
 ### 五、缓存问题
 
@@ -9763,11 +9763,11 @@ Distributed Hash Table（DHT） 是一种哈希分布方式，其目的是为了
 
 将哈希空间 [0, 2<sup>n</sup>-1] 看成一个哈希环，每个服务器节点都配置到哈希环上。每个数据对象通过哈希取模得到哈希值之后，存放到哈希环中顺时针方向第一个大于等于该哈希值的节点上。
 
-<div align="center"> <img src="pics/68b110b9-76c6-4ee2-b541-4145e65adb3e.jpg"/> </div><br>
+<div align="center"> <img src="/pics/68b110b9-76c6-4ee2-b541-4145e65adb3e.jpg"/> </div><br>
 
 一致性哈希在增加或者删除节点时只会影响到哈希环中相邻的节点，例如下图中新增节点 X，只需要将它前一个节点 C 上的数据重新进行分布即可，对于节点 A、B、D 都没有影响。
 
-<div align="center"> <img src="pics/66402828-fb2b-418f-83f6-82153491bcfe.jpg"/> </div><br>
+<div align="center"> <img src="/pics/66402828-fb2b-418f-83f6-82153491bcfe.jpg"/> </div><br>
 
 #### 虚拟节点
 
@@ -9789,7 +9789,7 @@ Distributed Hash Table（DHT） 是一种哈希分布方式，其目的是为了
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 3.6 节 消息队列
 
@@ -9799,20 +9799,20 @@ Distributed Hash Table（DHT） 是一种哈希分布方式，其目的是为了
 
 消息生产者向消息队列中发送了一个消息之后，只能被一个消费者消费一次。
 
-<div align="center"> <img src="pics/206f965e-53b2-4732-90cf-75910b80d7ac.png" width="450px"/> </div><br>
+<div align="center"> <img src="/pics/206f965e-53b2-4732-90cf-75910b80d7ac.png" width="450px"/> </div><br>
 
 #### 发布/订阅
 
 消息生产者向频道发送一个消息之后，多个消费者可以从该频道订阅到这条消息并消费。
 
-<div align="center"> <img src="pics/4e93f7d4-2623-4129-a939-59051256561e.png" width="450px"/> </div><br>
+<div align="center"> <img src="/pics/4e93f7d4-2623-4129-a939-59051256561e.png" width="450px"/> </div><br>
 
 发布与订阅模式和观察者模式有以下不同：
 
 - 观察者模式中，观察者和主题都知道对方的存在；而在发布与订阅模式中，生产者与消费者不知道对方的存在，它们之间通过频道进行通信。
 - 观察者模式是同步的，当事件触发时，主题会调用观察者的方法，然后等待方法返回；而发布与订阅模式是异步的，生产者向频道发送一个消息之后，就不需要关心消费者何时去订阅这个消息，可以立即返回。
 
-<div align="center"> <img src="pics/530764d5-f67f-47a2-8df4-57e8646e1400.png" width="450px"/> </div><br>
+<div align="center"> <img src="/pics/530764d5-f67f-47a2-8df4-57e8646e1400.png" width="450px"/> </div><br>
 
 ### 二、使用场景
 
@@ -9862,7 +9862,7 @@ Distributed Hash Table（DHT） 是一种哈希分布方式，其目的是为了
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 # 第 4 章 面向对象
 
@@ -9889,7 +9889,7 @@ Distributed Hash Table（DHT） 是一种哈希分布方式，其目的是为了
 
 私有构造函数保证了不能通过构造函数来创建对象实例，只能通过公有静态函数返回唯一的私有静态变量。
 
-<div align="center"> <img src="pics/eca1f422-8381-409b-ad04-98ef39ae38ba.png"/> </div><br>
+<div align="center"> <img src="/pics/eca1f422-8381-409b-ad04-98ef39ae38ba.png"/> </div><br>
 
 ##### Implementation
 
@@ -10087,7 +10087,7 @@ secondName
 
 这样做能把客户类和具体子类的实现解耦，客户类不再需要知道有哪些子类以及应当实例化哪个子类。客户类往往有多个，如果不使用简单工厂，那么所有的客户类都要知道所有子类的细节。而且一旦子类发生改变，例如增加子类，那么所有的客户类都要进行修改。
 
-<div align="center"> <img src="pics/40c0c17e-bba6-4493-9857-147c0044a018.png"/> </div><br>
+<div align="center"> <img src="/pics/40c0c17e-bba6-4493-9857-147c0044a018.png"/> </div><br>
 
 ##### Implementation
 
@@ -10170,7 +10170,7 @@ public class Client {
 
 下图中，Factory 有一个 doSomething() 方法，这个方法需要用到一个产品对象，这个产品对象由 factoryMethod() 方法创建。该方法是抽象的，需要由子类去实现。
 
-<div align="center"> <img src="pics/f4d0afd0-8e78-4914-9e60-4366eaf065b5.png"/> </div><br>
+<div align="center"> <img src="/pics/f4d0afd0-8e78-4914-9e60-4366eaf065b5.png"/> </div><br>
 
 ##### Implementation
 
@@ -10234,7 +10234,7 @@ public class ConcreteFactory2 extends Factory {
 
 从高层次来看，抽象工厂使用了组合，即 Cilent 组合了 AbstractFactory，而工厂方法模式使用了继承。
 
-<div align="center"> <img src="pics/e2190c36-8b27-4690-bde5-9911020a1294.png"/> </div><br>
+<div align="center"> <img src="/pics/e2190c36-8b27-4690-bde5-9911020a1294.png"/> </div><br>
 
 ##### Implementation
 
@@ -10324,7 +10324,7 @@ public class Client {
 
 ##### Class Diagram
 
-<div align="center"> <img src="pics/db5e376d-0b3e-490e-a43a-3231914b6668.png"/> </div><br>
+<div align="center"> <img src="/pics/db5e376d-0b3e-490e-a43a-3231914b6668.png"/> </div><br>
 
 ##### Implementation
 
@@ -10414,7 +10414,7 @@ abcdefghijklmnopqrstuvwxyz
 
 ##### Class Diagram
 
-<div align="center"> <img src="pics/b8922f8c-95e6-4187-be85-572a509afb71.png"/> </div><br>
+<div align="center"> <img src="/pics/b8922f8c-95e6-4187-be85-572a509afb71.png"/> </div><br>
 
 ##### Implementation
 
@@ -10475,7 +10475,7 @@ abc
 
 - Handler：定义处理请求的接口，并且实现后继链（successor）
 
-<div align="center"> <img src="pics/ca9f23bf-55a4-47b2-9534-a28e35397988.png"/> </div><br>
+<div align="center"> <img src="/pics/ca9f23bf-55a4-47b2-9534-a28e35397988.png"/> </div><br>
 
 ##### Implementation
 
@@ -10606,13 +10606,13 @@ request2 is handle by ConcreteHandler2
 - Invoker：通过它来调用命令
 - Client：可以设置命令与命令的接收者
 
-<div align="center"> <img src="pics/c44a0342-f405-4f17-b750-e27cf4aadde2.png"/> </div><br>
+<div align="center"> <img src="/pics/c44a0342-f405-4f17-b750-e27cf4aadde2.png"/> </div><br>
 
 ##### Implementation
 
 设计一个遥控器，可以控制电灯开关。
 
-<div align="center"> <img src="pics/e6bded8e-41a0-489a-88a6-638e88ab7666.jpg"/> </div><br>
+<div align="center"> <img src="/pics/e6bded8e-41a0-489a-88a6-638e88ab7666.jpg"/> </div><br>
 
 ```java
 public interface Command {
@@ -10727,7 +10727,7 @@ public class Client {
 - TerminalExpression：终结符表达式，每个终结符都需要一个 TerminalExpression。
 - Context：上下文，包含解释器之外的一些全局信息。
 
-<div align="center"> <img src="pics/2b125bcd-1b36-43be-9b78-d90b076be549.png"/> </div><br>
+<div align="center"> <img src="/pics/2b125bcd-1b36-43be-9b78-d90b076be549.png"/> </div><br>
 
 ##### Implementation
 
@@ -10852,7 +10852,7 @@ false
 - Iterator 主要定义了 hasNext() 和 next() 方法。
 - Client 组合了 Aggregate，为了迭代遍历 Aggregate，也需要组合 Iterator。
 
-<div align="center"> <img src="pics/89292ae1-5f13-44dc-b508-3f035e80bf89.png"/> </div><br>
+<div align="center"> <img src="/pics/89292ae1-5f13-44dc-b508-3f035e80bf89.png"/> </div><br>
 
 ##### Implementation
 
@@ -10941,17 +10941,17 @@ public class Client {
 - Mediator：中介者，定义一个接口用于与各同事（Colleague）对象通信。
 - Colleague：同事，相关对象
 
-<div align="center"> <img src="pics/30d6e95c-2e3c-4d32-bf4f-68128a70bc05.png"/> </div><br>
+<div align="center"> <img src="/pics/30d6e95c-2e3c-4d32-bf4f-68128a70bc05.png"/> </div><br>
 
 ##### Implementation
 
 Alarm（闹钟）、CoffeePot（咖啡壶）、Calendar（日历）、Sprinkler（喷头）是一组相关的对象，在某个对象的事件产生时需要去操作其它对象，形成了下面这种依赖结构：
 
-<div align="center"> <img src="pics/82cfda3b-b53b-4c89-9fdb-26dd2db0cd02.jpg"/> </div><br>
+<div align="center"> <img src="/pics/82cfda3b-b53b-4c89-9fdb-26dd2db0cd02.jpg"/> </div><br>
 
 使用中介者模式可以将复杂的依赖结构变成星形结构：
 
-<div align="center"> <img src="pics/5359cbf5-5a79-4874-9b17-f23c53c2cb80.jpg"/> </div><br>
+<div align="center"> <img src="/pics/5359cbf5-5a79-4874-9b17-f23c53c2cb80.jpg"/> </div><br>
 
 ```java
 public abstract class Colleague {
@@ -11111,7 +11111,7 @@ doSprinkler()
 - Caretaker：负责保存好备忘录
 - Menento：备忘录，存储原始对象的的状态。备忘录实际上有两个接口，一个是提供给 Caretaker 的窄接口：它只能将备忘录传递给其它对象；一个是提供给 Originator 的宽接口，允许它访问到先前状态所需的所有数据。理想情况是只允许 Originator 访问本备忘录的内部状态。
 
-<div align="center"> <img src="pics/50678f34-694f-45a4-91c6-34d985c83fee.png"/> </div><br>
+<div align="center"> <img src="/pics/50678f34-694f-45a4-91c6-34d985c83fee.png"/> </div><br>
 
 ##### Implementation
 
@@ -11284,7 +11284,7 @@ public class Client {
 
 主题（Subject）是被观察的对象，而其所有依赖者（Observer）称为观察者。
 
-<div align="center"> <img src="pics/7a3c6a30-c735-4edb-8115-337288a4f0f2.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/7a3c6a30-c735-4edb-8115-337288a4f0f2.jpg" width="600"/> </div><br>
 
 ##### Class Diagram
 
@@ -11292,13 +11292,13 @@ public class Client {
 
 观察者（Observer）的注册功能需要调用主题的 registerObserver() 方法。
 
-<div align="center"> <img src="pics/a8c8f894-a712-447c-9906-5caef6a016e3.png"/> </div><br>
+<div align="center"> <img src="/pics/a8c8f894-a712-447c-9906-5caef6a016e3.png"/> </div><br>
 
 ##### Implementation
 
 天气数据布告板会在天气信息发生改变时更新其内容，布告板有多个，并且在将来会继续增加。
 
-<div align="center"> <img src="pics/b1df9732-86ce-4d69-9f06-fba1db7b3b5a.jpg"/> </div><br>
+<div align="center"> <img src="/pics/b1df9732-86ce-4d69-9f06-fba1db7b3b5a.jpg"/> </div><br>
 
 ```java
 public interface Subject {
@@ -11419,13 +11419,13 @@ StatisticsDisplay.update: 1.0 1.0 1.0
 
 ##### Class Diagram
 
-<div align="center"> <img src="pics/79df886f-fdc3-4020-a07f-c991bb58e0d8.png"/> </div><br>
+<div align="center"> <img src="/pics/79df886f-fdc3-4020-a07f-c991bb58e0d8.png"/> </div><br>
 
 ##### Implementation
 
 糖果销售机有多种状态，每种状态下销售机有不同的行为，状态可以发生转移，使得销售机的行为也发生改变。
 
-<div align="center"> <img src="pics/396be981-3f2c-4fd9-8101-dbf9c841504b.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/396be981-3f2c-4fd9-8101-dbf9c841504b.jpg" width="600"/> </div><br>
 
 ```java
 public interface State {
@@ -11726,7 +11726,7 @@ No gumball dispensed
 - Strategy 接口定义了一个算法族，它们都实现了  behavior() 方法。
 - Context 是使用到该算法族的类，其中的 doSomething() 方法会调用 behavior()，setStrategy(Strategy) 方法可以动态地改变 strategy 对象，也就是说能动态地改变 Context 所使用的算法。
 
-<div align="center"> <img src="pics/cd1be8c2-755a-4a66-ad92-2e30f8f47922.png"/> </div><br>
+<div align="center"> <img src="/pics/cd1be8c2-755a-4a66-ad92-2e30f8f47922.png"/> </div><br>
 
 ##### 与状态模式的比较
 
@@ -11813,13 +11813,13 @@ quack!
 
 ##### Class Diagram
 
-<div align="center"> <img src="pics/ac6a794b-68c0-486c-902f-8d988eee5766.png"/> </div><br>
+<div align="center"> <img src="/pics/ac6a794b-68c0-486c-902f-8d988eee5766.png"/> </div><br>
 
 ##### Implementation
 
 冲咖啡和冲茶都有类似的流程，但是某些步骤会有点不一样，要求复用那些相同步骤的代码。
 
-<div align="center"> <img src="pics/11236498-1417-46ce-a1b0-e10054256955.png"/> </div><br>
+<div align="center"> <img src="/pics/11236498-1417-46ce-a1b0-e10054256955.png"/> </div><br>
 
 ```java
 public abstract class CaffeineBeverage {
@@ -11916,7 +11916,7 @@ Tea.addCondiments
 - ConcreteVisitor：具体访问者，存储遍历过程中的累计结果
 - ObjectStructure：对象结构，可以是组合结构，或者是一个集合。
 
-<div align="center"> <img src="pics/79c6f036-bde6-4393-85a3-ef36a0327bd2.png"/> </div><br>
+<div align="center"> <img src="/pics/79c6f036-bde6-4393-85a3-ef36a0327bd2.png"/> </div><br>
 
 ##### Implementation
 
@@ -12121,7 +12121,7 @@ Number of items:     6
 
 ##### Class Diagram
 
-<div align="center"> <img src="pics/22870bbe-898f-4c17-a31a-d7c5ee5d1c10.png"/> </div><br>
+<div align="center"> <img src="/pics/22870bbe-898f-4c17-a31a-d7c5ee5d1c10.png"/> </div><br>
 
 ##### Implementation
 
@@ -12173,11 +12173,11 @@ public class Client {
 
 把一个类接口转换成另一个用户需要的接口。
 
-<div align="center"> <img src="pics/3d5b828e-5c4d-48d8-a440-281e4a8e1c92.png"/> </div><br>
+<div align="center"> <img src="/pics/3d5b828e-5c4d-48d8-a440-281e4a8e1c92.png"/> </div><br>
 
 ##### Class Diagram
 
-<div align="center"> <img src="pics/ff5152fc-4ff3-44c4-95d6-1061002c364a.png"/> </div><br>
+<div align="center"> <img src="/pics/ff5152fc-4ff3-44c4-95d6-1061002c364a.png"/> </div><br>
 
 ##### Implementation
 
@@ -12249,7 +12249,7 @@ public class Client {
 - Abstraction：定义抽象类的接口
 - Implementor：定义实现类接口
 
-<div align="center"> <img src="pics/2a1f8b0f-1dd7-4409-b177-a381c58066ad.png"/> </div><br>
+<div align="center"> <img src="/pics/2a1f8b0f-1dd7-4409-b177-a381c58066ad.png"/> </div><br>
 
 ##### Implementation
 
@@ -12407,7 +12407,7 @@ public class Client {
 
 组合对象拥有一个或者多个组件对象，因此组合对象的操作可以委托给组件对象去处理，而组件对象可以是另一个组合对象或者叶子对象。
 
-<div align="center"> <img src="pics/2b8bfd57-b4d1-4a75-bfb0-bcf1fba4014a.png"/> </div><br>
+<div align="center"> <img src="/pics/2b8bfd57-b4d1-4a75-bfb0-bcf1fba4014a.png"/> </div><br>
 
 ##### Implementation
 
@@ -12539,7 +12539,7 @@ Composite:root
 
 装饰者（Decorator）和具体组件（ConcreteComponent）都继承自组件（Component），具体组件的方法实现不需要依赖于其它对象，而装饰者组合了一个组件，这样它可以装饰其它装饰者或者具体组件。所谓装饰，就是把这个装饰者套在被装饰者之上，从而动态扩展被装饰者的功能。装饰者的方法有一部分是自己的，这属于它的功能，然后调用被装饰者的方法实现，从而也保留了被装饰者的功能。可以看到，具体组件应当是装饰层次的最低层，因为只有具体组件的方法实现不需要依赖于其它对象。
 
-<div align="center"> <img src="pics/6b833bc2-517a-4270-8a5e-0a5f6df8cd96.png"/> </div><br>
+<div align="center"> <img src="/pics/6b833bc2-517a-4270-8a5e-0a5f6df8cd96.png"/> </div><br>
 
 ##### Implementation
 
@@ -12547,7 +12547,7 @@ Composite:root
 
 下图表示在 DarkRoast 饮料上新增新添加 Mocha 配料，之后又添加了 Whip 配料。DarkRoast 被 Mocha 包裹，Mocha 又被 Whip 包裹。它们都继承自相同父类，都有 cost() 方法，外层类的 cost() 方法调用了内层类的 cost() 方法。
 
-<div align="center"> <img src="pics/c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/c9cfd600-bc91-4f3a-9f99-b42f88a5bb24.jpg" width="600"/> </div><br>
 
 ```java
 public interface Beverage {
@@ -12645,7 +12645,7 @@ public class Client {
 
 ##### Class Diagram
 
-<div align="center"> <img src="pics/f9978fa6-9f49-4a0f-8540-02d269ac448f.png"/> </div><br>
+<div align="center"> <img src="/pics/f9978fa6-9f49-4a0f-8540-02d269ac448f.png"/> </div><br>
 
 ##### Implementation
 
@@ -12704,7 +12704,7 @@ public class Client {
 - IntrinsicState：内部状态，享元对象共享内部状态
 - ExtrinsicState：外部状态，每个享元对象的外部状态不同
 
-<div align="center"> <img src="pics/5f5c22d5-9c0e-49e1-b5b0-6cc7032724d4.png"/> </div><br>
+<div align="center"> <img src="/pics/5f5c22d5-9c0e-49e1-b5b0-6cc7032724d4.png"/> </div><br>
 
 ##### Implementation
 
@@ -12793,7 +12793,7 @@ Java 利用缓存来加速大量小对象的访问时间。
 - 保护代理（Protection Proxy）：按权限控制对象的访问，它负责检查调用者是否具有实现一个请求所必须的访问权限。
 - 智能代理（Smart Reference）：取代了简单的指针，它在访问对象时执行一些附加操作：记录对象的引用次数；当第一次引用一个对象时，将它装入内存；在访问一个实际对象前，检查是否已经锁定了它，以确保其它对象不能改变它。
 
-<div align="center"> <img src="pics/9b679ff5-94c6-48a7-b9b7-2ea868e828ed.png"/> </div><br>
+<div align="center"> <img src="/pics/9b679ff5-94c6-48a7-b9b7-2ea868e828ed.png"/> </div><br>
 
 ##### Implementation
 
@@ -12896,7 +12896,7 @@ public class ImageViewer {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 4.2 节 面向对象思想
 
@@ -13024,7 +13024,7 @@ Percussion is playing...
 
 用来描述继承关系，在 Java 中使用 extends 关键字。
 
-<div align="center"> <img src="pics/c0874e0a-dba3-467e-9c86-dd9313e0843e.jpg" width="180px"> </div><br>
+<div align="center"> <img src="/pics/c0874e0a-dba3-467e-9c86-dd9313e0843e.jpg" width="180px"> </div><br>
 
 ```text
 @startuml
@@ -13045,7 +13045,7 @@ Vihical <|-- Trunck
 
 用来实现一个接口，在 Java 中使用 implements 关键字。
 
-<div align="center"> <img src="pics/83d466bd-946b-4430-854a-cf7b0696d4c8.jpg" width="170px"> </div><br>
+<div align="center"> <img src="/pics/83d466bd-946b-4430-854a-cf7b0696d4c8.jpg" width="170px"> </div><br>
 
 ```text
 @startuml
@@ -13066,7 +13066,7 @@ MoveBehavior <|.. Run
 
 表示整体由部分组成，但是整体和部分不是强依赖的，整体不存在了部分还是会存在。
 
-<div align="center"> <img src="pics/a0ce43b7-afa8-4397-a96e-5c12a070f2ae.jpg" width="300px"> </div><br>
+<div align="center"> <img src="/pics/a0ce43b7-afa8-4397-a96e-5c12a070f2ae.jpg" width="300px"> </div><br>
 
 ```text
 @startuml
@@ -13089,7 +13089,7 @@ Computer o-- Screen
 
 和聚合不同，组合中整体和部分是强依赖的，整体不存在了部分也不存在了。比如公司和部门，公司没了部门就不存在了。但是公司和员工就属于聚合关系了，因为公司没了员工还在。
 
-<div align="center"> <img src="pics/6a88a398-c494-41f5-bb62-9f7fb811df7c.jpg" width="280px"> </div><br>
+<div align="center"> <img src="/pics/6a88a398-c494-41f5-bb62-9f7fb811df7c.jpg" width="280px"> </div><br>
 
 ```text
 @startuml
@@ -13110,7 +13110,7 @@ Company *-- DepartmentB
 
 表示不同类对象之间有关联，这是一种静态关系，与运行过程的状态无关，在最开始就可以确定。因此也可以用 1 对 1、多对 1、多对多这种关联关系来表示。比如学生和学校就是一种关联关系，一个学校可以有很多学生，但是一个学生只属于一个学校，因此这是一种多对一的关系，在运行开始之前就可以确定。
 
-<div align="center"> <img src="pics/a3e4dc62-0da5-4d22-94f2-140078281812.jpg" width="200px"> </div><br>
+<div align="center"> <img src="/pics/a3e4dc62-0da5-4d22-94f2-140078281812.jpg" width="200px"> </div><br>
 
 ```text
 @startuml
@@ -13133,7 +13133,7 @@ School "1" - "n" Student
 - A 类是 B 类方法当中的一个参数；
 - A 类向 B 类发送消息，从而影响 B 类发生变化。
 
-<div align="center"> <img src="pics/379444c9-f1d1-45cd-b7aa-b0c18427d388.jpg" width="330px"> </div><br>
+<div align="center"> <img src="/pics/379444c9-f1d1-45cd-b7aa-b0c18427d388.jpg" width="330px"> </div><br>
 
 ```text
 @startuml
@@ -13256,7 +13256,7 @@ Vihicle .. N
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 # 第 5 章 网络
 
@@ -13270,27 +13270,27 @@ Vihicle .. N
 
 网络把主机连接起来，而互联网是把多种不同的网络连接起来，因此互联网是网络的网络。
 
-<div align="center"> <img src="pics/network-of-networks.gif" width="450"/> </div><br>
+<div align="center"> <img src="/pics/network-of-networks.gif" width="450"/> </div><br>
 
 #### ISP
 
 互联网服务提供商 ISP 可以从互联网管理机构获得许多 IP 地址，同时拥有通信线路以及路由器等联网设备，个人或机构向 ISP 缴纳一定的费用就可以接入互联网。
 
-<div align="center"> <img src="pics/72be01cd-41ae-45f7-99b9-a8d284e44dd4.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/72be01cd-41ae-45f7-99b9-a8d284e44dd4.png" width="500"/> </div><br>
 
 目前的互联网是一种多层次 ISP 结构，ISP 根据覆盖面积的大小分为第一层 ISP、区域 ISP 和接入 ISP。互联网交换点 IXP 允许两个 ISP 直接相连而不用经过第三个 ISP。
 
-<div align="center"> <img src="pics/3be42601-9d33-4d29-8358-a9d16453af93.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/3be42601-9d33-4d29-8358-a9d16453af93.png" width="500"/> </div><br>
 
 #### 主机之间的通信方式
 
 - 客户-服务器（C/S）：客户是服务的请求方，服务器是服务的提供方。
 
-<div align="center"> <img src="pics/914894c2-0bc4-46b5-bef9-0316a69ef521.jpg" width="240px"> </div><br>
+<div align="center"> <img src="/pics/914894c2-0bc4-46b5-bef9-0316a69ef521.jpg" width="240px"> </div><br>
 
 - 对等（P2P）：不区分客户和服务器。
 
-<div align="center"> <img src="pics/42430e94-3137-48c0-bdb6-3cebaf9102e3.jpg" width="200px"> </div><br>
+<div align="center"> <img src="/pics/42430e94-3137-48c0-bdb6-3cebaf9102e3.jpg" width="200px"> </div><br>
 
 #### 电路交换与分组交换
 
@@ -13308,7 +13308,7 @@ Vihicle .. N
 
 总时延 = 排队时延 + 处理时延 + 传输时延 + 传播时延
 
-<div align="center"> <img src="pics/4b2ae78c-e254-44df-9e37-578e2f2bef52.jpg" width="380"/> </div><br>
+<div align="center"> <img src="/pics/4b2ae78c-e254-44df-9e37-578e2f2bef52.jpg" width="380"/> </div><br>
 
 ##### 1. 排队时延
 
@@ -13324,7 +13324,7 @@ Vihicle .. N
 
 <!-- <div align="center"><img src="https://latex.codecogs.com/gif.latex?delay=\frac{l(bit)}{v(bit/s)}" class="mathjax-pic"/></div> <br> -->
 
-<div align="center"> <img src="pics/dcdbb96c-9077-4121-aeb8-743e54ac02a4.png" width="150px"> </div><br>
+<div align="center"> <img src="/pics/dcdbb96c-9077-4121-aeb8-743e54ac02a4.png" width="150px"> </div><br>
 
 其中 l 表示数据帧的长度，v 表示传输速率。
 
@@ -13334,13 +13334,13 @@ Vihicle .. N
 
 <!-- <div align="center"><img src="https://latex.codecogs.com/gif.latex?delay=\frac{l(m)}{v(m/s)}" class="mathjax-pic"/></div> <br> -->
 
-<div align="center"> <img src="pics/a1616dac-0e12-40b2-827d-9e3f7f0b940d.png" width="150"> </div><br>
+<div align="center"> <img src="/pics/a1616dac-0e12-40b2-827d-9e3f7f0b940d.png" width="150"> </div><br>
 
 其中 l 表示信道长度，v 表示电磁波在信道上的传播速度。
 
 #### 计算机网络体系结构
 
-<div align="center"> <img src="pics/0fa6c237-a909-4e2a-a771-2c5485cd8ce0.png" width="450"/> </div><br>
+<div align="center"> <img src="/pics/0fa6c237-a909-4e2a-a771-2c5485cd8ce0.png" width="450"/> </div><br>
 
 ##### 1. 五层协议
 
@@ -13370,7 +13370,7 @@ Vihicle .. N
 
 TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接使用 IP 层或者网络接口层。
 
-<div align="center"> <img src="pics/48d79be8-085b-4862-8a9d-18402eb93b31.png" width="250"/> </div><br>
+<div align="center"> <img src="/pics/48d79be8-085b-4862-8a9d-18402eb93b31.png" width="250"/> </div><br>
 
 ##### 4. 数据在各层之间的传递过程
 
@@ -13382,7 +13382,7 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 物理层
 
@@ -13398,13 +13398,13 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 模拟信号是连续的信号，数字信号是离散的信号。带通调制把数字信号转换为模拟信号。
 
-<div align="center"> <img src="pics/c34f4503-f62c-4043-9dc6-3e03288657df.jpg" width="500"/> </div><br>
+<div align="center"> <img src="/pics/c34f4503-f62c-4043-9dc6-3e03288657df.jpg" width="500"/> </div><br>
 
 #### 微信公众号
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 链路层
 
@@ -13414,7 +13414,7 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 将网络层传下来的分组添加首部和尾部，用于标记帧的开始和结束。
 
-<div align="center"> <img src="pics/29a14735-e154-4f60-9a04-c9628e5d09f4.png" width="300"/> </div><br>
+<div align="center"> <img src="/pics/29a14735-e154-4f60-9a04-c9628e5d09f4.png" width="300"/> </div><br>
 
 ##### 2. 透明传输
 
@@ -13422,7 +13422,7 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 帧使用首部和尾部进行定界，如果帧的数据部分含有和首部尾部相同的内容，那么帧的开始和结束位置就会被错误的判定。需要在数据部分出现首部尾部相同的内容前面插入转义字符。如果数据部分出现转义字符，那么就在转义字符前面再加个转义字符。在接收端进行处理之后可以还原出原始数据。这个过程透明传输的内容是转义字符，用户察觉不到转义字符的存在。
 
-<div align="center"> <img src="pics/e738a3d2-f42e-4755-ae13-ca23497e7a97.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/e738a3d2-f42e-4755-ae13-ca23497e7a97.png" width="500"/> </div><br>
 
 ##### 3. 差错检测
 
@@ -13450,13 +13450,13 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 频分复用的所有主机在相同的时间占用不同的频率带宽资源。
 
-<div align="center"> <img src="pics/4aa5e057-bc57-4719-ab57-c6fbc861c505.png" width="350"/> </div><br>
+<div align="center"> <img src="/pics/4aa5e057-bc57-4719-ab57-c6fbc861c505.png" width="350"/> </div><br>
 
 ##### 2. 时分复用
 
 时分复用的所有主机在不同的时间占用相同的频率带宽资源。
 
-<div align="center"> <img src="pics/67582ade-d44a-46a6-8757-3c1296cc1ef9.png" width="350"/> </div><br>
+<div align="center"> <img src="/pics/67582ade-d44a-46a6-8757-3c1296cc1ef9.png" width="350"/> </div><br>
 
 使用频分复用和时分复用进行通信，在通信的过程中主机会一直占用一部分信道资源。但是由于计算机数据的突发性质，通信过程没必要一直占用信道资源而不让出给其它用户使用，因此这两种方式对信道的利用率都不高。
 
@@ -13464,7 +13464,7 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 是对时分复用的一种改进，不固定每个用户在时分复用帧中的位置，只要有数据就集中起来组成统计时分复用帧然后发送。
 
-<div align="center"> <img src="pics/6283be2a-814a-4a10-84bf-9592533fe6bc.png" width="350"/> </div><br>
+<div align="center"> <img src="/pics/6283be2a-814a-4a10-84bf-9592533fe6bc.png" width="350"/> </div><br>
 
 ##### 4. 波分复用
 
@@ -13476,7 +13476,7 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 <!-- <div align="center"><img src="https://latex.codecogs.com/gif.latex?\frac{1}{m}\vec{S}\cdot\vec{T}=0" class="mathjax-pic"/></div> <br> -->
 
-<div align="center"> <img src="pics/308a02e9-3346-4251-8c41-bd5536dab491.png" width="100px"> </div><br>
+<div align="center"> <img src="/pics/308a02e9-3346-4251-8c41-bd5536dab491.png" width="100px"> </div><br>
 
 为了讨论方便，取 m=8，设码片 <img src="https://latex.codecogs.com/gif.latex?\vec{S}" class="mathjax-pic"/> 为 00011011。在拥有该码片的用户发送比特 1 时就发送该码片，发送比特 0 时就发送该码片的反码 11100100。
 
@@ -13486,9 +13486,9 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 <!-- <div align="center"><img src="https://latex.codecogs.com/gif.latex?\frac{1}{m}\vec{S}\cdot\vec{S'}=-1" class="mathjax-pic"/></div> <br> -->
 
-<div align="center"> <img src="pics/6fda1dc7-5c74-49c1-bb79-237a77e43a43.png" width="100px"> </div><br>
+<div align="center"> <img src="/pics/6fda1dc7-5c74-49c1-bb79-237a77e43a43.png" width="100px"> </div><br>
 
-<div align="center"> <img src="pics/e325a903-f0b1-4fbd-82bf-88913dc2f290.png" width="125px"> </div><br>
+<div align="center"> <img src="/pics/e325a903-f0b1-4fbd-82bf-88913dc2f290.png" width="125px"> </div><br>
 
 其中 <img src="https://latex.codecogs.com/gif.latex?\vec{S'}" class="mathjax-pic"/> 为 <img src="https://latex.codecogs.com/gif.latex?\vec{S}" class="mathjax-pic"/> 的反码。
 
@@ -13496,7 +13496,7 @@ TCP/IP 体系结构不严格遵循 OSI 分层概念，应用层可能会直接�
 
 码分复用需要发送的数据量为原先的 m 倍。
 
-<div align="center"> <img src="pics/99b6060e-099d-4201-8e86-f8ab3768a7cf.png" width="500px"> </div><br>
+<div align="center"> <img src="/pics/99b6060e-099d-4201-8e86-f8ab3768a7cf.png" width="500px"> </div><br>
 
 #### CSMA/CD 协议
 
@@ -13510,13 +13510,13 @@ CSMA/CD 表示载波监听多点接入 / 碰撞检测。
 
 当发生碰撞时，站点要停止发送，等待一段时间再发送。这个时间采用  **截断二进制指数退避算法**  来确定。从离散的整数集合 {0, 1, .., (2<sup>k</sup>-1)} 中随机取出一个数，记作 r，然后取 r 倍的争用期作为重传等待时间。
 
-<div align="center"> <img src="pics/19d423e9-74f7-4c2b-9b97-55890e0d5193.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/19d423e9-74f7-4c2b-9b97-55890e0d5193.png" width="400"/> </div><br>
 
 #### PPP 协议
 
 互联网用户通常需要连接到某个 ISP 之后才能接入到互联网，PPP 协议是用户计算机和 ISP 进行通信时所使用的数据链路层协议。
 
-<div align="center"> <img src="pics/e1ab9f28-cb15-4178-84b2-98aad87f9bc8.jpg" width="300"/> </div><br>
+<div align="center"> <img src="/pics/e1ab9f28-cb15-4178-84b2-98aad87f9bc8.jpg" width="300"/> </div><br>
 
 PPP 的帧格式：
 
@@ -13525,7 +13525,7 @@ PPP 的帧格式：
 - FCS 字段是使用 CRC 的检验序列
 - 信息部分的长度不超过 1500
 
-<div align="center"> <img src="pics/759013d7-61d8-4509-897a-d75af598a236.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/759013d7-61d8-4509-897a-d75af598a236.png" width="400"/> </div><br>
 
 #### MAC 地址
 
@@ -13541,7 +13541,7 @@ MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标�
 
 可以按照网络拓扑结构对局域网进行分类：
 
-<div align="center"> <img src="pics/807f4258-dba8-4c54-9c3c-a707c7ccffa2.jpg" width="800"/> </div><br>
+<div align="center"> <img src="/pics/807f4258-dba8-4c54-9c3c-a707c7ccffa2.jpg" width="800"/> </div><br>
 
 #### 以太网
 
@@ -13557,7 +13557,7 @@ MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标�
 -  **数据** ：长度在 46-1500 之间，如果太小则需要填充；
 -  **FCS** ：帧检验序列，使用的是 CRC 检验方法；
 
-<div align="center"> <img src="pics/164944d3-bbd2-4bb2-924b-e62199c51b90.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/164944d3-bbd2-4bb2-924b-e62199c51b90.png" width="500"/> </div><br>
 
 #### 交换机
 
@@ -13567,7 +13567,7 @@ MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标�
 
 下图中，交换机有 4 个接口，主机 A 向主机 B 发送数据帧时，交换机把主机 A 到接口 1 的映射写入交换表中。为了发送数据帧到 B，先查交换表，此时没有主机 B 的表项，那么主机 A 就发送广播帧，主机 C 和主机 D 会丢弃该帧，主机 B 回应该帧向主机 A 发送数据包时，交换机查找交换表得到主机 A 映射的接口为 1，就发送数据帧到接口 1，同时交换机添加主机 B 到接口 2 的映射。
 
-<div align="center"> <img src="pics/a4444545-0d68-4015-9a3d-19209dc436b3.png" width="800"/> </div><br>
+<div align="center"> <img src="/pics/a4444545-0d68-4015-9a3d-19209dc436b3.png" width="800"/> </div><br>
 
 #### 虚拟局域网
 
@@ -13577,13 +13577,13 @@ MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标�
 
 使用 VLAN 干线连接来建立虚拟局域网，每台交换机上的一个特殊接口被设置为干线接口，以互连 VLAN 交换机。IEEE 定义了一种扩展的以太网帧格式 802.1Q，它在标准以太网帧上加进了 4 字节首部 VLAN 标签，用于表示该帧属于哪一个虚拟局域网。
 
-<div align="center"> <img src="pics/e98e9d20-206b-4533-bacf-3448d0096f38.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/e98e9d20-206b-4533-bacf-3448d0096f38.png" width="500"/> </div><br>
 
 #### 微信公众号
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 网络层
 
@@ -13593,7 +13593,7 @@ MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标�
 
 使用 IP 协议，可以把异构的物理网络连接起来，使得在网络层看起来好像是一个统一的网络。
 
-<div align="center"> <img src="pics/8d779ab7-ffcc-47c6-90ec-ede8260b2368.png" width="800"/> </div><br>
+<div align="center"> <img src="/pics/8d779ab7-ffcc-47c6-90ec-ede8260b2368.png" width="800"/> </div><br>
 
 与 IP 协议配套使用的还有三个协议：
 
@@ -13603,7 +13603,7 @@ MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标�
 
 #### IP 数据报格式
 
-<div align="center"> <img src="pics/85c05fb1-5546-4c50-9221-21f231cdc8c5.jpg" width="700"/> </div><br>
+<div align="center"> <img src="/pics/85c05fb1-5546-4c50-9221-21f231cdc8c5.jpg" width="700"/> </div><br>
 
 -  **版本**  : 有 4（IPv4）和 6（IPv6）两个值；
 
@@ -13623,7 +13623,7 @@ MAC 地址是链路层地址，长度为 6 字节（48 位），用于唯一标�
 
 -  **片偏移**  : 和标识符一起，用于发生分片的情况。片偏移的单位为 8 字节。
 
-<div align="center"> <img src="pics/23ba890e-e11c-45e2-a20c-64d217f83430.png" width="700"/> </div><br>
+<div align="center"> <img src="/pics/23ba890e-e11c-45e2-a20c-64d217f83430.png" width="700"/> </div><br>
 
 #### IP 地址编址方式
 
@@ -13639,7 +13639,7 @@ IP 地址的编址方式经历了三个历史阶段：
 
 IP 地址 ::= {< 网络号 >, < 主机号 >}
 
-<div align="center"> <img src="pics/cbf50eb8-22b4-4528-a2e7-d187143d57f7.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/cbf50eb8-22b4-4528-a2e7-d187143d57f7.png" width="500"/> </div><br>
 
 ##### 2. 子网划分
 
@@ -13669,27 +13669,27 @@ CIDR 的地址掩码可以继续称为子网掩码，子网掩码首 1 长度为
 
 网络层实现主机之间的通信，而链路层实现具体每段链路之间的通信。因此在通信过程中，IP 数据报的源地址和目的地址始终不变，而 MAC 地址随着链路的改变而改变。
 
-<div align="center"> <img src="pics/66192382-558b-4b05-a35d-ac4a2b1a9811.jpg" width="700"/> </div><br>
+<div align="center"> <img src="/pics/66192382-558b-4b05-a35d-ac4a2b1a9811.jpg" width="700"/> </div><br>
 
 ARP 实现由 IP 地址得到 MAC 地址。
 
-<div align="center"> <img src="pics/b9d79a5a-e7af-499b-b989-f10483e71b8b.jpg" width="500"/> </div><br>
+<div align="center"> <img src="/pics/b9d79a5a-e7af-499b-b989-f10483e71b8b.jpg" width="500"/> </div><br>
 
 每个主机都有一个 ARP 高速缓存，里面有本局域网上的各主机和路由器的 IP 地址到 MAC 地址的映射表。
 
 如果主机 A 知道主机 B 的 IP 地址，但是 ARP 高速缓存中没有该 IP 地址到 MAC 地址的映射，此时主机 A 通过广播的方式发送 ARP 请求分组，主机 B 收到该请求后会发送 ARP 响应分组给主机 A 告知其 MAC 地址，随后主机 A 向其高速缓存中写入主机 B 的 IP 地址到 MAC 地址的映射。
 
-<div align="center"> <img src="pics/8006a450-6c2f-498c-a928-c927f758b1d0.png" width="700"/> </div><br>
+<div align="center"> <img src="/pics/8006a450-6c2f-498c-a928-c927f758b1d0.png" width="700"/> </div><br>
 
 #### 网际控制报文协议 ICMP
 
 ICMP 是为了更有效地转发 IP 数据报和提高交付成功的机会。它封装在 IP 数据报中，但是不属于高层协议。
 
-<div align="center"> <img src="pics/e3124763-f75e-46c3-ba82-341e6c98d862.jpg" width="500"/> </div><br>
+<div align="center"> <img src="/pics/e3124763-f75e-46c3-ba82-341e6c98d862.jpg" width="500"/> </div><br>
 
 ICMP 报文分为差错报告报文和询问报文。
 
-<div align="center"> <img src="pics/aa29cc88-7256-4399-8c7f-3cf4a6489559.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/aa29cc88-7256-4399-8c7f-3cf4a6489559.png" width="600"/> </div><br>
 
 ##### 1. Ping
 
@@ -13722,7 +13722,7 @@ VPN 使用公用的互联网作为本机构各专用网之间的通信载体。�
 
 下图中，场所 A 和 B 的通信经过互联网，如果场所 A 的主机 X 要和另一个场所 B 的主机 Y 通信，IP 数据报的源地址是 10.1.0.1，目的地址是 10.2.0.3。数据报先发送到与互联网相连的路由器 R1，R1 对内部数据进行加密，然后重新加上数据报的首部，源地址是路由器 R1 的全球地址 125.1.2.3，目的地址是路由器 R2 的全球地址 194.4.5.6。路由器 R2 收到数据报后将数据部分进行解密，恢复原来的数据报，此时目的地址为 10.2.0.3，就交付给 Y。
 
-<div align="center"> <img src="pics/1556770b-8c01-4681-af10-46f1df69202c.jpg" width="800"/> </div><br>
+<div align="center"> <img src="/pics/1556770b-8c01-4681-af10-46f1df69202c.jpg" width="800"/> </div><br>
 
 #### 网络地址转换 NAT
 
@@ -13730,7 +13730,7 @@ VPN 使用公用的互联网作为本机构各专用网之间的通信载体。�
 
 在以前，NAT 将本地 IP 和全球 IP 一一对应，这种方式下拥有 n 个全球 IP 地址的专用网内最多只可以同时有 n 台主机接入互联网。为了更有效地利用全球 IP 地址，现在常用的 NAT 转换表把传输层的端口号也用上了，使得多个专用网内部的主机共用一个全球 IP 地址。使用端口号的 NAT 也叫做网络地址与端口转换 NAPT。
 
-<div align="center"> <img src="pics/2719067e-b299-4639-9065-bed6729dbf0b.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/2719067e-b299-4639-9065-bed6729dbf0b.png" width=""/> </div><br>
 
 #### 路由器的结构
 
@@ -13738,7 +13738,7 @@ VPN 使用公用的互联网作为本机构各专用网之间的通信载体。�
 
 分组转发结构由三个部分组成：交换结构、一组输入端口和一组输出端口。
 
-<div align="center"> <img src="pics/c3369072-c740-43b0-b276-202bd1d3960d.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/c3369072-c740-43b0-b276-202bd1d3960d.jpg" width="600"/> </div><br>
 
 #### 路由器分组转发流程
 
@@ -13749,7 +13749,7 @@ VPN 使用公用的互联网作为本机构各专用网之间的通信载体。�
 - 若路由表中有一个默认路由，则把数据报传送给路由表中所指明的默认路由器；
 - 报告转发分组出错。
 
-<div align="center"> <img src="pics/1ab49e39-012b-4383-8284-26570987e3c4.jpg" width="800"/> </div><br>
+<div align="center"> <img src="/pics/1ab49e39-012b-4383-8284-26570987e3c4.jpg" width="800"/> </div><br>
 
 #### 路由选择协议
 
@@ -13806,13 +13806,13 @@ BGP 只能寻找一条比较好的路由，而不是最佳路由。
 
 每个 AS 都必须配置 BGP 发言人，通过在两个相邻 BGP 发言人之间建立 TCP 连接来交换路由信息。
 
-<div align="center"> <img src="pics/9cd0ae20-4fb5-4017-a000-f7d3a0eb3529.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/9cd0ae20-4fb5-4017-a000-f7d3a0eb3529.png" width="600"/> </div><br>
 
 #### 微信公众号
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 传输层
 
@@ -13826,13 +13826,13 @@ BGP 只能寻找一条比较好的路由，而不是最佳路由。
 
 #### UDP 首部格式
 
-<div align="center"> <img src="pics/d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg" width="600"/> </div><br>
 
 首部字段只有 8 个字节，包括源端口、目的端口、长度、检验和。12 字节的伪首部是为了计算检验和临时添加的。
 
 #### TCP 首部格式
 
-<div align="center"> <img src="pics/55dc4e84-573d-4c13-a765-52ed1dd251f9.png" width="700"/> </div><br>
+<div align="center"> <img src="/pics/55dc4e84-573d-4c13-a765-52ed1dd251f9.png" width="700"/> </div><br>
 
 -  **序号**  ：用于对字节流进行编号，例如序号为 301，表示第一个字节的编号为 301，如果携带的数据长度为 100 字节，那么下一个报文段的序号应为 401。
 
@@ -13850,7 +13850,7 @@ BGP 只能寻找一条比较好的路由，而不是最佳路由。
 
 #### TCP 的三次握手
 
-<div align="center"> <img src="pics/e92d0ebc-7d46-413b-aec1-34a39602f787.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/e92d0ebc-7d46-413b-aec1-34a39602f787.png" width="600"/> </div><br>
 
 假设 A 为客户端，B 为服务器端。
 
@@ -13872,7 +13872,7 @@ BGP 只能寻找一条比较好的路由，而不是最佳路由。
 
 #### TCP 的四次挥手
 
-<div align="center"> <img src="pics/f87afe72-c2df-4c12-ac03-9b8d581a8af8.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/f87afe72-c2df-4c12-ac03-9b8d581a8af8.jpg" width="600"/> </div><br>
 
 以下描述不讨论序号和确认号，因为序号和确认号的规则比较简单。并且不讨论 ACK，因为 ACK 在连接建立之后都为 1。
 
@@ -13922,7 +13922,7 @@ TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文�
 
 接收窗口只会对窗口内最后一个按序到达的字节进行确认，例如接收窗口已经收到的字节为 {31, 34, 35}，其中 {31} 按序到达，而 {34, 35} 就不是，因此只对字节 31 进行确认。发送方得到一个字节的确认之后，就知道这个字节之前的所有字节都已经被接收。
 
-<div align="center"> <img src="pics/a3253deb-8d21-40a1-aae4-7d178e4aa319.jpg" width="800"/> </div><br>
+<div align="center"> <img src="/pics/a3253deb-8d21-40a1-aae4-7d178e4aa319.jpg" width="800"/> </div><br>
 
 #### TCP 流量控制
 
@@ -13934,7 +13934,7 @@ TCP 使用超时重传来实现可靠传输：如果一个已经发送的报文�
 
 如果网络出现拥塞，分组将会丢失，此时发送方会继续重传，从而导致网络拥塞程度更高。因此当出现拥塞时，应当控制发送方的速率。这一点和流量控制很像，但是出发点不同。流量控制是为了让接收方能来得及接收，而拥塞控制是为了降低整个网络的拥塞程度。
 
-<div align="center"> <img src="pics/51e2ed95-65b8-4ae9-8af3-65602d452a25.jpg" width="500"/> </div><br>
+<div align="center"> <img src="/pics/51e2ed95-65b8-4ae9-8af3-65602d452a25.jpg" width="500"/> </div><br>
 
 TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、快重传、快恢复。
 
@@ -13945,7 +13945,7 @@ TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、�
 - 接收方有足够大的接收缓存，因此不会发生流量控制；
 - 虽然 TCP 的窗口基于字节，但是这里设窗口的大小单位为报文段。
 
-<div align="center"> <img src="pics/910f613f-514f-4534-87dd-9b4699d59d31.png" width="800"/> </div><br>
+<div align="center"> <img src="/pics/910f613f-514f-4534-87dd-9b4699d59d31.png" width="800"/> </div><br>
 
 ##### 1. 慢开始与拥塞避免
 
@@ -13965,13 +13965,13 @@ TCP 主要通过四个算法来进行拥塞控制：慢开始、拥塞避免、�
 
 慢开始和快恢复的快慢指的是 cwnd 的设定值，而不是 cwnd 的增长速率。慢开始 cwnd 设定为 1，而快恢复 cwnd 设定为 ssthresh。
 
-<div align="center"> <img src="pics/f61b5419-c94a-4df1-8d4d-aed9ae8cc6d5.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/f61b5419-c94a-4df1-8d4d-aed9ae8cc6d5.png" width="600"/> </div><br>
 
 #### 微信公众号
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 应用层
 
@@ -13981,7 +13981,7 @@ DNS 是一个分布式数据库，提供了主机名和 IP 地址之间相互转
 
 域名具有层次结构，从上到下依次为：根域名、顶级域名、二级域名。
 
-<div align="center"> <img src="pics/b54eeb16-0b0e-484c-be62-306f57c40d77.jpg"/> </div><br>
+<div align="center"> <img src="/pics/b54eeb16-0b0e-484c-be62-306f57c40d77.jpg"/> </div><br>
 
 DNS 可以使用 UDP 或者 TCP 进行传输，使用的端口号都为 53。大多数情况下 DNS 使用 UDP 进行传输，这就要求域名解析器和域名服务器都必须自己处理超时和重传从而保证可靠性。在两种情况下会使用 TCP 进行传输：
 
@@ -13999,11 +13999,11 @@ FTP 使用 TCP 进行连接，它需要两个连接来传送一个文件：
 
 - 主动模式：服务器端主动建立数据连接，其中服务器端的端口号为 20，客户端的端口号随机，但是必须大于 1024，因为 0\~1023 是熟知端口号。
 
-<div align="center"> <img src="pics/03f47940-3843-4b51-9e42-5dcaff44858b.jpg"/> </div><br>
+<div align="center"> <img src="/pics/03f47940-3843-4b51-9e42-5dcaff44858b.jpg"/> </div><br>
 
 - 被动模式：客户端主动建立数据连接，其中客户端的端口号由客户端自己指定，服务器端的端口号随机。
 
-<div align="center"> <img src="pics/be5c2c61-86d2-4dba-a289-b48ea23219de.jpg"/> </div><br>
+<div align="center"> <img src="/pics/be5c2c61-86d2-4dba-a289-b48ea23219de.jpg"/> </div><br>
 
 主动模式要求客户端开放端口号给服务器端，需要去配置客户端的防火墙。被动模式只需要服务器端开放端口号即可，无需客户端配置防火墙。但是被动模式会导致服务器端的安全性减弱，因为开放了过多的端口号。
 
@@ -14020,7 +14020,7 @@ DHCP 工作过程如下：
 3. 如果客户端选择了某个 DHCP 服务器提供的信息，那么就发送 Request 报文给该 DHCP 服务器。
 4. DHCP 服务器发送 Ack 报文，表示客户端此时可以使用提供给它的信息。
 
-<div align="center"> <img src="pics/23219e4c-9fc0-4051-b33a-2bd95bf054ab.jpg"/> </div><br>
+<div align="center"> <img src="/pics/23219e4c-9fc0-4051-b33a-2bd95bf054ab.jpg"/> </div><br>
 
 #### 远程登录协议
 
@@ -14034,13 +14034,13 @@ TELNET 可以适应许多计算机和操作系统的差异，例如不同操作�
 
 邮件协议包含发送协议和读取协议，发送协议常用 SMTP，读取协议常用 POP3 和 IMAP。
 
-<div align="center"> <img src="pics/7b3efa99-d306-4982-8cfb-e7153c33aab4.png" width="700"/> </div><br>
+<div align="center"> <img src="/pics/7b3efa99-d306-4982-8cfb-e7153c33aab4.png" width="700"/> </div><br>
 
 ##### 1. SMTP
 
 SMTP 只能发送 ASCII 码，而互联网邮件扩充 MIME 可以发送二进制文件。MIME 并没有改动或者取代 SMTP，而是增加邮件主体的结构，定义了非 ASCII 码的编码规则。
 
-<div align="center"> <img src="pics/ed5522bb-3a60-481c-8654-43e7195a48fe.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/ed5522bb-3a60-481c-8654-43e7195a48fe.png" width=""/> </div><br>
 
 ##### 2. POP3
 
@@ -14128,7 +14128,7 @@ IMAP 协议中客户端和服务器上的邮件保持同步，如果不手动删
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 ### 参考链接
 
 - 计算机网络, 谢希仁
@@ -14154,17 +14154,17 @@ IMAP 协议中客户端和服务器上的邮件保持同步，如果不手动删
 
 URI 包含 URL 和 URN。
 
-<div align="center"> <img src="pics/8441b2c4-dca7-4d6b-8efb-f22efccaf331.png" width="500px"> </div><br>
+<div align="center"> <img src="/pics/8441b2c4-dca7-4d6b-8efb-f22efccaf331.png" width="500px"> </div><br>
 
 ##### 请求和响应报文
 
 ###### 1. 请求报文
 
-<div align="center"> <img src="pics/HTTP_RequestMessageExample.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/HTTP_RequestMessageExample.png" width=""/> </div><br>
 
 ###### 2. 响应报文
 
-<div align="center"> <img src="pics/HTTP_ResponseMessageExample.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/HTTP_ResponseMessageExample.png" width=""/> </div><br>
 
 #### 二、HTTP 方法
 
@@ -14251,7 +14251,7 @@ DELETE /file.html HTTP/1.1
 CONNECT www.example.com:443 HTTP/1.1
 ```
 
-<div align="center"> <img src="pics/dc00f70e-c5c8-4d20-baf1-2d70014a97e3.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/dc00f70e-c5c8-4d20-baf1-2d70014a97e3.jpg" width=""/> </div><br>
 
 ##### TRACE
 
@@ -14394,7 +14394,7 @@ CONNECT www.example.com:443 HTTP/1.1
 
 ##### 连接管理
 
-<div align="center"> <img src="pics/HTTP1_x_Connections.png" width="800"/> </div><br>
+<div align="center"> <img src="/pics/HTTP1_x_Connections.png" width="800"/> </div><br>
 
 ###### 1. 短连接与长连接
 
@@ -14723,11 +14723,11 @@ HTTP/1.1 使用虚拟主机技术，使得一台服务器拥有多个域名，�
 
 - 用户察觉得到正向代理的存在。
 
-<div align="center"> <img src="pics/a314bb79-5b18-4e63-a976-3448bffa6f1b.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/a314bb79-5b18-4e63-a976-3448bffa6f1b.png" width=""/> </div><br>
 
 - 而反向代理一般位于内部网络中，用户察觉不到。
 
-<div align="center"> <img src="pics/2d09a847-b854-439c-9198-b29c65810944.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/2d09a847-b854-439c-9198-b29c65810944.png" width=""/> </div><br>
 
 ###### 2. 网关
 
@@ -14749,7 +14749,7 @@ HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）�
 
 通过使用 SSL，HTTPS 具有了加密（防窃听）、认证（防伪装）和完整性保护（防篡改）。
 
-<div align="center"> <img src="pics/ssl-offloading.jpg" width="700"/> </div><br>
+<div align="center"> <img src="/pics/ssl-offloading.jpg" width="700"/> </div><br>
 
 ##### 加密
 
@@ -14760,7 +14760,7 @@ HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）�
 - 优点：运算速度快；
 - 缺点：无法安全地将密钥传输给通信方。
 
-<div align="center"> <img src="pics/7fffa4b8-b36d-471f-ad0c-a88ee763bb76.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/7fffa4b8-b36d-471f-ad0c-a88ee763bb76.png" width="600"/> </div><br>
 
 ###### 2.非对称密钥加密
 
@@ -14773,13 +14773,13 @@ HTTPS 并不是新协议，而是让 HTTP 先和 SSL（Secure Sockets Layer）�
 - 优点：可以更安全地将公开密钥传输给通信发送方；
 - 缺点：运算速度慢。
 
-<div align="center"> <img src="pics/39ccb299-ee99-4dd1-b8b4-2f9ec9495cb4.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/39ccb299-ee99-4dd1-b8b4-2f9ec9495cb4.png" width="600"/> </div><br>
 
 ###### 3. HTTPS 采用的加密方式
 
 HTTPS 采用混合的加密机制，使用非对称密钥加密用于传输对称密钥来保证传输过程的安全性，之后使用对称密钥加密进行通信来保证通信过程的效率。（下图中的 Session Key 就是对称密钥）
 
-<div align="center"> <img src="pics/How-HTTPS-Works.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/How-HTTPS-Works.png" width="600"/> </div><br>
 
 ##### 认证
 
@@ -14791,7 +14791,7 @@ HTTPS 采用混合的加密机制，使用非对称密钥加密用于传输对�
 
 进行 HTTPS 通信时，服务器会把证书发送给客户端。客户端取得其中的公开密钥之后，先使用数字签名进行验证，如果验证通过，就可以开始通信了。
 
-<div align="center"> <img src="pics/2017-06-11-ca.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/2017-06-11-ca.png" width=""/> </div><br>
 
 ##### 完整性保护
 
@@ -14820,7 +14820,7 @@ HTTP/1.x 实现简单是以牺牲性能为代价的：
 
 HTTP/2.0 将报文分成 HEADERS 帧和 DATA 帧，它们都是二进制格式的。
 
-<div align="center"> <img src="pics/86e6a91d-a285-447a-9345-c5484b8d0c47.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/86e6a91d-a285-447a-9345-c5484b8d0c47.png" width="400"/> </div><br>
 
 在通信过程中，只会有一个 TCP 连接存在，它承载了任意数量的双向数据流（Stream）。
 
@@ -14828,13 +14828,13 @@ HTTP/2.0 将报文分成 HEADERS 帧和 DATA 帧，它们都是二进制格式�
 - 消息（Message）是与逻辑请求或响应对应的完整的一系列帧。
 - 帧（Frame）是最小的通信单位，来自不同数据流的帧可以交错发送，然后再根据每个帧头的数据流标识符重新组装。
 
-<div align="center"> <img src="pics/af198da1-2480-4043-b07f-a3b91a88b815.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/af198da1-2480-4043-b07f-a3b91a88b815.png" width="600"/> </div><br>
 
 ##### 服务端推送
 
 HTTP/2.0 在客户端请求一个资源时，会把相关的资源一起发送给客户端，客户端就不需要再次发起请求了。例如客户端请求 page.html 页面，服务端就把 script.js 和 style.css 等与之相关的资源一起发给客户端。
 
-<div align="center"> <img src="pics/e3f1657c-80fc-4dfa-9643-bf51abd201c6.png" width="800"/> </div><br>
+<div align="center"> <img src="/pics/e3f1657c-80fc-4dfa-9643-bf51abd201c6.png" width="800"/> </div><br>
 
 ##### 首部压缩
 
@@ -14844,7 +14844,7 @@ HTTP/2.0 要求客户端和服务器同时维护和更新一个包含之前见�
 
 不仅如此，HTTP/2.0 也使用 Huffman 编码对首部字段进行压缩。
 
-<div align="center"> <img src="pics/_u4E0B_u8F7D.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/_u4E0B_u8F7D.png" width="600"/> </div><br>
 
 #### 八、HTTP/1.1 新特性
 
@@ -14974,7 +14974,7 @@ DELETE /idX/delete HTTP/1.1   -> Returns 404
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 5.3 节 Socket
 
@@ -15007,7 +15007,7 @@ Unix 有五种 I/O 模型：
 ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen);
 ```
 
-<div align="center"> <img src="pics/1492928416812_4.png"/> </div><br>
+<div align="center"> <img src="/pics/1492928416812_4.png"/> </div><br>
 
 ##### 非阻塞式 I/O
 
@@ -15015,7 +15015,7 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *
 
 由于 CPU 要处理更多的系统调用，因此这种模型的 CPU 利用率比较低。
 
-<div align="center"> <img src="pics/1492929000361_5.png"/> </div><br>
+<div align="center"> <img src="/pics/1492929000361_5.png"/> </div><br>
 
 ##### I/O 复用
 
@@ -15025,7 +15025,7 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *
 
 如果一个 Web 服务器没有 I/O 复用，那么每一个 Socket 连接都需要创建一个线程去处理。如果同时有几万个连接，那么就需要创建相同数量的线程。相比于多进程和多线程技术，I/O 复用不需要进程线程创建和切换的开销，系统开销更小。
 
-<div align="center"> <img src="pics/1492929444818_6.png"/> </div><br>
+<div align="center"> <img src="/pics/1492929444818_6.png"/> </div><br>
 
 ##### 信号驱动 I/O
 
@@ -15033,7 +15033,7 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *
 
 相比于非阻塞式 I/O 的轮询方式，信号驱动 I/O 的 CPU 利用率更高。
 
-<div align="center"> <img src="pics/1492929553651_7.png"/> </div><br>
+<div align="center"> <img src="/pics/1492929553651_7.png"/> </div><br>
 
 ##### 异步 I/O
 
@@ -15041,7 +15041,7 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *
 
 异步 I/O 与信号驱动 I/O 的区别在于，异步 I/O 的信号是通知应用进程 I/O 完成，而信号驱动 I/O 的信号是通知应用进程可以开始 I/O。
 
-<div align="center"> <img src="pics/1492930243286_8.png"/> </div><br>
+<div align="center"> <img src="/pics/1492930243286_8.png"/> </div><br>
 
 ##### 五大 I/O 模型比较
 
@@ -15052,7 +15052,7 @@ ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *
 
 非阻塞式 I/O 、信号驱动 I/O 和异步 I/O 在第一阶段不会阻塞。
 
-<div align="center"> <img src="pics/1492928105791_3.png"/> </div><br>
+<div align="center"> <img src="/pics/1492928105791_3.png"/> </div><br>
 
 #### 二、I/O 复用
 
@@ -15286,7 +15286,7 @@ poll 没有最大描述符数量的限制，如果平台支持并且对实时性
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 # 第 6 章 操作系统
 
@@ -15352,7 +15352,7 @@ poll 没有最大描述符数量的限制，如果平台支持并且对实时性
 
 如果一个进程在用户态需要使用内核态的功能，就进行系统调用从而陷入内核，由操作系统代为完成。
 
-<div align="center"> <img src="pics/tGPV0.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/tGPV0.png" width="600"/> </div><br>
 
 Linux 的系统调用主要有以下这些：
 
@@ -15381,7 +15381,7 @@ Linux 的系统调用主要有以下这些：
 
 因为需要频繁地在用户态和核心态之间进行切换，所以会有一定的性能损失。
 
-<div align="center"> <img src="pics/2_14_microkernelArchitecture.jpg"/> </div><br>
+<div align="center"> <img src="/pics/2_14_microkernelArchitecture.jpg"/> </div><br>
 
 #### 中断分类
 
@@ -15401,7 +15401,7 @@ Linux 的系统调用主要有以下这些：
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 进程管理
 
@@ -15415,7 +15415,7 @@ Linux 的系统调用主要有以下这些：
 
 下图显示了 4 个程序创建了 4 个进程，这 4 个进程可以并发地执行。
 
-<div align="center"> <img src="pics/a6ac2b08-3861-4e85-baa8-382287bfee9f.png"/> </div><br>
+<div align="center"> <img src="/pics/a6ac2b08-3861-4e85-baa8-382287bfee9f.png"/> </div><br>
 
 ##### 2. 线程
 
@@ -15425,7 +15425,7 @@ Linux 的系统调用主要有以下这些：
 
 QQ 和浏览器是两个进程，浏览器进程里面有很多线程，例如 HTTP 请求线程、事件响应线程、渲染线程等等，线程的并发执行使得在浏览器中点击一个新链接从而发起 HTTP 请求时，浏览器还可以响应用户的其它事件。
 
-<div align="center"> <img src="pics/3cd630ea-017c-488d-ad1d-732b4efeddf5.png"/> </div><br>
+<div align="center"> <img src="/pics/3cd630ea-017c-488d-ad1d-732b4efeddf5.png"/> </div><br>
 
 ##### 3. 区别
 
@@ -15447,7 +15447,7 @@ QQ 和浏览器是两个进程，浏览器进程里面有很多线程，例如 H
 
 #### 进程状态的切换
 
-<div align="center"> <img src="pics/ProcessState.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/ProcessState.png" width="500"/> </div><br>
 
 - 就绪状态（ready）：等待被调度
 - 运行状态（running）
@@ -15495,7 +15495,7 @@ QQ 和浏览器是两个进程，浏览器进程里面有很多线程，例如 H
 - 因为进程切换都要保存进程的信息并且载入新进程的信息，如果时间片太小，会导致进程切换得太频繁，在进程切换上就会花过多时间。
 - 而如果时间片过长，那么实时性就不能得到保证。
 
-<div align="center"> <img src="pics/8c662999-c16c-481c-9f40-1fdba5bc9167.png"/> </div><br>
+<div align="center"> <img src="/pics/8c662999-c16c-481c-9f40-1fdba5bc9167.png"/> </div><br>
 
 **2.2 优先级调度** 
 
@@ -15513,7 +15513,7 @@ QQ 和浏览器是两个进程，浏览器进程里面有很多线程，例如 H
 
 可以将这种调度算法看成是时间片轮转调度算法和优先级调度算法的结合。
 
-<div align="center"> <img src="pics/042cf928-3c8e-4815-ae9c-f2780202c68f.png"/> </div><br>
+<div align="center"> <img src="/pics/042cf928-3c8e-4815-ae9c-f2780202c68f.png"/> </div><br>
 
 ##### 3. 实时系统
 
@@ -15831,7 +15831,7 @@ void reader()
 
 ##### 2. 哲学家进餐问题
 
-<div align="center"> <img src="pics/a9077f06-7584-4f2b-8c20-3a8e46928820.jpg"/> </div><br>
+<div align="center"> <img src="/pics/a9077f06-7584-4f2b-8c20-3a8e46928820.jpg"/> </div><br>
 
 五个哲学家围着一张圆桌，每个哲学家面前放着食物。哲学家的生活有两种交替活动：吃饭以及思考。当一个哲学家吃饭时，需要先拿起自己左右两边的两根筷子，并且一次只能拿起一根筷子。
 
@@ -15925,7 +15925,7 @@ int pipe(int fd[2]);
 - 只支持半双工通信（单向交替传输）；
 - 只能在父子进程或者兄弟进程中使用。
 
-<div align="center"> <img src="pics/53cd9ade-b0a6-4399-b4de-7f1fbd06cdfb.png"/> </div><br>
+<div align="center"> <img src="/pics/53cd9ade-b0a6-4399-b4de-7f1fbd06cdfb.png"/> </div><br>
 
 ##### 2. FIFO
 
@@ -15939,7 +15939,7 @@ int mkfifoat(int fd, const char *path, mode_t mode);
 
 FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户进程和服务器进程之间传递数据。
 
-<div align="center"> <img src="pics/2ac50b81-d92a-4401-b9ec-f2113ecc3076.png"/> </div><br>
+<div align="center"> <img src="/pics/2ac50b81-d92a-4401-b9ec-f2113ecc3076.png"/> </div><br>
 
 ##### 3. 消息队列
 
@@ -15969,13 +15969,13 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 死锁
 
 #### 必要条件
 
-<div align="center"> <img src="pics/c037c901-7eae-4e31-a1e4-9d41329e5c3e.png"/> </div><br>
+<div align="center"> <img src="/pics/c037c901-7eae-4e31-a1e4-9d41329e5c3e.png"/> </div><br>
 
 - 互斥：每个资源要么已经分配给了一个进程，要么就是可用的。
 - 占有和等待：已经得到了某个资源的进程可以再请求新的资源。
@@ -16007,7 +16007,7 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 
 ##### 1. 每种类型一个资源的死锁检测
 
-<div align="center"> <img src="pics/b1fa0453-a4b0-4eae-a352-48acca8fff74.png"/> </div><br>
+<div align="center"> <img src="/pics/b1fa0453-a4b0-4eae-a352-48acca8fff74.png"/> </div><br>
 
 上图为资源分配图，其中方框表示资源，圆圈表示进程。资源指向进程表示该资源已经分配给该进程，进程指向资源表示进程请求获取该资源。
 
@@ -16017,7 +16017,7 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 
 ##### 2. 每种类型多个资源的死锁检测
 
-<div align="center"> <img src="pics/e1eda3d5-5ec8-4708-8e25-1a04c5e11f48.png"/> </div><br>
+<div align="center"> <img src="/pics/e1eda3d5-5ec8-4708-8e25-1a04c5e11f48.png"/> </div><br>
 
 上图中，有三个进程四个资源，每个数据代表的含义如下：
 
@@ -16066,7 +16066,7 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 
 ##### 1. 安全状态
 
-<div align="center"> <img src="pics/ed523051-608f-4c3f-b343-383e2d194470.png"/> </div><br>
+<div align="center"> <img src="/pics/ed523051-608f-4c3f-b343-383e2d194470.png"/> </div><br>
 
 图 a 的第二列 Has 表示已拥有的资源数，第三列 Max 表示总共需要的资源数，Free 表示还有可以使用的资源数。从图 a 开始出发，先让 B 拥有所需的所有资源（图 b），运行结束后释放 B，此时 Free 变为 5（图 c）；接着以同样的方式运行 C 和 A，使得所有进程都能成功运行，因此可以称图 a 所示的状态时安全的。
 
@@ -16078,13 +16078,13 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 
 一个小城镇的银行家，他向一群客户分别承诺了一定的贷款额度，算法要做的是判断对请求的满足是否会进入不安全状态，如果是，就拒绝请求；否则予以分配。
 
-<div align="center"> <img src="pics/d160ec2e-cfe2-4640-bda7-62f53e58b8c0.png"/> </div><br>
+<div align="center"> <img src="/pics/d160ec2e-cfe2-4640-bda7-62f53e58b8c0.png"/> </div><br>
 
 上图 c 为不安全状态，因此算法会拒绝之前的请求，从而避免进入图 c 中的状态。
 
 ##### 3. 多个资源的银行家算法
 
-<div align="center"> <img src="pics/62e0dd4f-44c3-43ee-bb6e-fedb9e068519.png"/> </div><br>
+<div align="center"> <img src="/pics/62e0dd4f-44c3-43ee-bb6e-fedb9e068519.png"/> </div><br>
 
 上图中有五个进程，四个资源。左边的图表示已经分配的资源，右边的图表示还需要分配的资源。最右边的 E、P 以及 A 分别表示：总资源、已分配资源以及可用资源，注意这三个为向量，而不是具体数值，例如 A=(1020)，表示 4 个资源分别还剩下 1/0/2/0。
 
@@ -16100,7 +16100,7 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 内存管理
 
@@ -16112,7 +16112,7 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 
 从上面的描述中可以看出，虚拟内存允许程序不用将地址空间中的每一页都映射到物理内存，也就是说一个程序不需要全部调入内存就可以运行，这使得有限的内存运行大程序成为可能。例如有一台计算机可以产生 16 位地址，那么一个程序的地址空间范围是 0\~64K。该计算机只有 32KB 的物理内存，虚拟内存技术允许该计算机运行一个 64K 大小的程序。
 
-<div align="center"> <img src="pics/7b281b1e-0595-402b-ae35-8c91084c33c1.png"/> </div><br>
+<div align="center"> <img src="/pics/7b281b1e-0595-402b-ae35-8c91084c33c1.png"/> </div><br>
 
 #### 分页系统地址映射
 
@@ -16122,7 +16122,7 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 
 下图的页表存放着 16 个页，这 16 个页需要用 4 个比特位来进行索引定位。例如对于虚拟地址（0010 000000000100），前 4 位是存储页面号 2，读取表项内容为（110 1），页表项最后一位表示是否存在于内存中，1 表示存在。后 12 位存储偏移量。这个页对应的页框的地址为 （110 000000000100）。
 
-<div align="center"> <img src="pics/cf4386a1-58c9-4eca-a17f-e12b1e9770eb.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/cf4386a1-58c9-4eca-a17f-e12b1e9770eb.png" width="500"/> </div><br>
 
 #### 页面置换算法
 
@@ -16162,7 +16162,7 @@ FIFO 常用于客户-服务器应用程序中，FIFO 用作汇聚点，在客户
 4，7，0，7，1，0，1，2，1，2，6
 ```
 
-<div align="center"> <img src="pics/eb859228-c0f2-4bce-910d-d9f76929352b.png"/> </div><br>
+<div align="center"> <img src="/pics/eb859228-c0f2-4bce-910d-d9f76929352b.png"/> </div><br>
 
 ##### 3. 最近未使用
 
@@ -16193,7 +16193,7 @@ FIFO 算法可能会把经常使用的页面置换出去，为了避免这一问
 
 当页面被访问 (读或写) 时设置该页面的 R 位为 1。需要替换的时候，检查最老页面的 R 位。如果 R 位是 0，那么这个页面既老又没有被使用，可以立刻置换掉；如果是 1，就将 R 位清 0，并把该页面放到链表的尾端，修改它的装入时间使它就像刚装入的一样，然后继续从链表的头部开始搜索。
 
-<div align="center"> <img src="pics/ecf8ad5d-5403-48b9-b6e7-f2e20ffe8fca.png"/> </div><br>
+<div align="center"> <img src="/pics/ecf8ad5d-5403-48b9-b6e7-f2e20ffe8fca.png"/> </div><br>
 
 ##### 6. 时钟
 
@@ -16201,7 +16201,7 @@ FIFO 算法可能会把经常使用的页面置换出去，为了避免这一问
 
 第二次机会算法需要在链表中移动页面，降低了效率。时钟算法使用环形链表将页面连接起来，再使用一个指针指向最老的页面。
 
-<div align="center"> <img src="pics/5f5ef0b6-98ea-497c-a007-f6c55288eab1.png"/> </div><br>
+<div align="center"> <img src="/pics/5f5ef0b6-98ea-497c-a007-f6c55288eab1.png"/> </div><br>
 
 #### 分段
 
@@ -16209,11 +16209,11 @@ FIFO 算法可能会把经常使用的页面置换出去，为了避免这一问
 
 下图为一个编译器在编译过程中建立的多个表，有 4 个表是动态增长的，如果使用分页系统的一维地址空间，动态增长的特点会导致覆盖问题的出现。
 
-<div align="center"> <img src="pics/22de0538-7c6e-4365-bd3b-8ce3c5900216.png"/> </div><br>
+<div align="center"> <img src="/pics/22de0538-7c6e-4365-bd3b-8ce3c5900216.png"/> </div><br>
 
 分段的做法是把每个表分成段，一个段构成一个独立的地址空间。每个段的长度可以不同，并且可以动态增长。
 
-<div align="center"> <img src="pics/e0900bb2-220a-43b7-9aa9-1d5cd55ff56e.png"/> </div><br>
+<div align="center"> <img src="/pics/e0900bb2-220a-43b7-9aa9-1d5cd55ff56e.png"/> </div><br>
 
 #### 段页式
 
@@ -16233,7 +16233,7 @@ FIFO 算法可能会把经常使用的页面置换出去，为了避免这一问
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 设备管理
 
@@ -16246,7 +16246,7 @@ FIFO 算法可能会把经常使用的页面置换出去，为了避免这一问
 - 制动手臂（Actuator arm）：用于在磁道之间移动磁头；
 - 主轴（Spindle）：使整个盘面转动。
 
-<div align="center"> <img src="pics/014fbc4d-d873-4a12-b160-867ddaed9807.jpg"/> </div><br>
+<div align="center"> <img src="/pics/014fbc4d-d873-4a12-b160-867ddaed9807.jpg"/> </div><br>
 
 #### 磁盘调度算法
 
@@ -16274,7 +16274,7 @@ FIFO 算法可能会把经常使用的页面置换出去，为了避免这一问
 
 虽然平均寻道时间比较低，但是不够公平。如果新到达的磁道请求总是比一个在等待的磁道请求近，那么在等待的磁道请求会一直等待下去，也就是出现饥饿现象。具体来说，两端的磁道请求更容易出现饥饿现象。
 
-<div align="center"> <img src="pics/4e2485e4-34bd-4967-9f02-0c093b797aaa.png"/> </div><br>
+<div align="center"> <img src="/pics/4e2485e4-34bd-4967-9f02-0c093b797aaa.png"/> </div><br>
 
 ##### 3. 电梯算法
 
@@ -16286,13 +16286,13 @@ FIFO 算法可能会把经常使用的页面置换出去，为了避免这一问
 
 因为考虑了移动方向，因此所有的磁盘请求都会被满足，解决了 SSTF 的饥饿问题。
 
-<div align="center"> <img src="pics/271ce08f-c124-475f-b490-be44fedc6d2e.png"/> </div><br>
+<div align="center"> <img src="/pics/271ce08f-c124-475f-b490-be44fedc6d2e.png"/> </div><br>
 
 #### 微信公众号
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 链接
 
@@ -16318,7 +16318,7 @@ gcc -o hello hello.c
 
 这个过程大致如下：
 
-<div align="center"> <img src="pics/b396d726-b75f-4a32-89a2-03a7b6e19f6f.jpg" width="800"/> </div><br>
+<div align="center"> <img src="/pics/b396d726-b75f-4a32-89a2-03a7b6e19f6f.jpg" width="800"/> </div><br>
 
 - 预处理阶段：处理以 # 开头的预处理命令；
 - 编译阶段：翻译成汇编文件；
@@ -16332,7 +16332,7 @@ gcc -o hello hello.c
 - 符号解析：每个符号对应于一个函数、一个全局变量或一个静态变量，符号解析的目的是将每个符号引用与一个符号定义关联起来。
 - 重定位：链接器通过把每个符号定义与一个内存位置关联起来，然后修改所有对这些符号的引用，使得它们指向这个内存位置。
 
-<div align="center"> <img src="pics/47d98583-8bb0-45cc-812d-47eefa0a4a40.jpg"/> </div><br>
+<div align="center"> <img src="/pics/47d98583-8bb0-45cc-812d-47eefa0a4a40.jpg"/> </div><br>
 
 #### 目标文件
 
@@ -16352,13 +16352,13 @@ gcc -o hello hello.c
 - 在给定的文件系统中一个库只有一个文件，所有引用该库的可执行目标文件都共享这个文件，它不会被复制到引用它的可执行文件中；
 - 在内存中，一个共享库的 .text 节（已编译程序的机器代码）的一个副本可以被不同的正在运行的进程共享。
 
-<div align="center"> <img src="pics/76dc7769-1aac-4888-9bea-064f1caa8e77.jpg"/> </div><br>
+<div align="center"> <img src="/pics/76dc7769-1aac-4888-9bea-064f1caa8e77.jpg"/> </div><br>
 
 #### 微信公众号
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 ### 参考资料
 
 - Tanenbaum A S, Bos H. Modern operating systems[M]. Prentice Hall Press, 2014.
@@ -16460,7 +16460,7 @@ Linux 发行版是 Linux 内核及各种应用软件的集成版本。
 - 编辑模式（Insert mode）：按下 "i" 等按键之后进入，可以对文本进行编辑；
 - 指令列模式（Bottom-line mode）：按下 ":" 按键之后进入，用于保存退出等操作。
 
-<div align="center"> <img src="pics/b5e9fa4d-78d3-4176-8273-756d970742c7.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/b5e9fa4d-78d3-4176-8273-756d970742c7.png" width="500"/> </div><br>
 
 在指令列模式下，有以下命令用于离开或者保存文件。
 
@@ -16494,25 +16494,25 @@ GNU 计划，译为革奴计划，它的目标是创建一套完全自由的操�
 
 IDE（ATA）全称 Advanced Technology Attachment，接口速度最大为 133MB/s，因为并口线的抗干扰性太差，且排线占用空间较大，不利电脑内部散热，已逐渐被 SATA 所取代。
 
-<div align="center"> <img src="pics/924914c0-660c-4e4a-bbc0-1df1146e7516.jpg" width="400"/> </div><br>
+<div align="center"> <img src="/pics/924914c0-660c-4e4a-bbc0-1df1146e7516.jpg" width="400"/> </div><br>
 
 ##### 2. SATA
 
 SATA 全称 Serial ATA，也就是使用串口的 ATA 接口，抗干扰性强，且对数据线的长度要求比 ATA 低很多，支持热插拔等功能。SATA-II 的接口速度为 300MiB/s，而 SATA-III 标准可达到 600MiB/s 的传输速度。SATA 的数据线也比 ATA 的细得多，有利于机箱内的空气流通，整理线材也比较方便。
 
-<div align="center"> <img src="pics/f9f2a16b-4843-44d1-9759-c745772e9bcf.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/f9f2a16b-4843-44d1-9759-c745772e9bcf.jpg" width=""/> </div><br>
 
 ##### 3. SCSI
 
 SCSI 全称是 Small Computer System Interface（小型机系统接口），SCSI 硬盘广为工作站以及个人电脑以及服务器所使用，因此会使用较为先进的技术，如碟片转速 15000rpm 的高转速，且传输时 CPU 占用率较低，但是单价也比相同容量的 ATA 及 SATA 硬盘更加昂贵。
 
-<div align="center"> <img src="pics/f0574025-c514-49f5-a591-6d6a71f271f7.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/f0574025-c514-49f5-a591-6d6a71f271f7.jpg" width=""/> </div><br>
 
 ##### 4. SAS
 
 SAS（Serial Attached SCSI）是新一代的 SCSI 技术，和 SATA 硬盘相同，都是采取序列式技术以获得更高的传输速度，可达到 6Gb/s。此外也通过缩小连接线改善系统内部空间等。
 
-<div align="center"> <img src="pics/6729baa0-57d7-4817-b3aa-518cbccf824c.jpg" width=""/> </div><br>
+<div align="center"> <img src="/pics/6729baa0-57d7-4817-b3aa-518cbccf824c.jpg" width=""/> </div><br>
 
 #### 磁盘的文件名
 
@@ -16547,7 +16547,7 @@ GPT 没有扩展分区概念，都是主分区，每个 LBA 可以分 4 个分�
 
 MBR 不支持 2.2 TB 以上的硬盘，GPT 则最多支持到 2<sup>33</sup> TB = 8 ZB。
 
-<div align="center"> <img src="pics/GUID_Partition_Table_Scheme.svg.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/GUID_Partition_Table_Scheme.svg.png" width="400"/> </div><br>
 
 #### 开机检测程序
 
@@ -16555,7 +16555,7 @@ MBR 不支持 2.2 TB 以上的硬盘，GPT 则最多支持到 2<sup>33</sup> TB 
 
 BIOS（Basic Input/Output System，基本输入输出系统），它是一个固件（嵌入在硬件中的软件），BIOS 程序存放在断电后内容不会丢失的只读内存中。
 
-<div align="center"> <img src="pics/50831a6f-2777-46ea-a571-29f23c85cc21.jpg"/> </div><br>
+<div align="center"> <img src="/pics/50831a6f-2777-46ea-a571-29f23c85cc21.jpg"/> </div><br>
 
 BIOS 是开机的时候计算机执行的第一个程序，这个程序知道可以开机的磁盘，并读取磁盘第一个扇区的主要开机记录（MBR），由主要开机记录（MBR）执行其中的开机管理程序，这个开机管理程序会加载操作系统的核心文件。
 
@@ -16563,7 +16563,7 @@ BIOS 是开机的时候计算机执行的第一个程序，这个程序知道可
 
 下图中，第一扇区的主要开机记录（MBR）中的开机管理程序提供了两个选单：M1、M2，M1 指向了 Windows 操作系统，而 M2 指向其它分区的启动扇区，里面包含了另外一个开机管理程序，提供了一个指向 Linux 的选单。
 
-<div align="center"> <img src="pics/f900f266-a323-42b2-bc43-218fdb8811a8.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/f900f266-a323-42b2-bc43-218fdb8811a8.jpg" width="600"/> </div><br>
 
 安装多重引导，最好先安装 Windows 再安装 Linux。因为安装 Windows 时会覆盖掉主要开机记录（MBR），而 Linux 可以选择将开机管理程序安装在主要开机记录（MBR）或者其它分区的启动扇区，并且可以设置开机管理程序的选单。
 
@@ -16589,17 +16589,17 @@ BIOS 不可以读取 GPT 分区表，而 UEFI 可以。
 - superblock：记录文件系统的整体信息，包括 inode 和 block 的总量、使用量、剩余量，以及文件系统的格式与相关信息等；
 - block bitmap：记录 block 是否被使用的位图。
 
-<div align="center"> <img src="pics/BSD_disk.png" width="800"/> </div><br>
+<div align="center"> <img src="/pics/BSD_disk.png" width="800"/> </div><br>
 
 #### 文件读取
 
 对于 Ext2 文件系统，当要读取一个文件的内容时，先在 inode 中查找文件内容所在的所有 block，然后把所有 block 的内容读出来。
 
-<div align="center"> <img src="pics/12a65cc6-20e0-4706-9fe6-3ba49413d7f6.png" width="500px"> </div><br>
+<div align="center"> <img src="/pics/12a65cc6-20e0-4706-9fe6-3ba49413d7f6.png" width="500px"> </div><br>
 
 而对于 FAT 文件系统，它没有 inode，每个 block 中存储着下一个 block 的编号。
 
-<div align="center"> <img src="pics/5b718e86-7102-4bb6-8ca5-d1dd791530c5.png" width="500px"> </div><br>
+<div align="center"> <img src="/pics/5b718e86-7102-4bb6-8ca5-d1dd791530c5.png" width="500px"> </div><br>
 
 #### 磁盘碎片
 
@@ -16636,7 +16636,7 @@ inode 具有以下特点：
 
 inode 中记录了文件内容所在的 block 编号，但是每个 block 非常小，一个大文件随便都需要几十万的 block。而一个 inode 大小有限，无法直接引用这么多 block 编号。因此引入了间接、双间接、三间接引用。间接引用让 inode 记录的引用 block 块记录引用信息。
 
-<div align="center"> <img src="pics/inode_with_signatures.jpg" width="600"/> </div><br>
+<div align="center"> <img src="/pics/inode_with_signatures.jpg" width="600"/> </div><br>
 
 #### 目录
 
@@ -16662,7 +16662,7 @@ ext3/ext4 文件系统引入了日志功能，可以利用日志来修复文件�
 - /usr (unix software resource)：所有系统默认软件都会安装到这个目录；
 - /var (variable)：存放系统或程序运行过程中的数据文件。
 
-<div align="center"> <img src="pics/linux-filesystem.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/linux-filesystem.png" width=""/> </div><br>
 
 ### 五、文件
 
@@ -16829,7 +16829,7 @@ cp [-adfilprsu] source destination
 
 #### 链接
 
-<div align="center"> <img src="pics/1e46fd03-0cda-4d60-9b1c-0c256edaf6b2.png" width="450px"> </div><br>
+<div align="center"> <img src="/pics/1e46fd03-0cda-4d60-9b1c-0c256edaf6b2.png" width="450px"> </div><br>
 
 ```html
 # ln [-sf] source_filename dist_filename
@@ -16956,7 +16956,7 @@ example: find . -name "shadow*"
 
 +4、4 和 -4 的指示的时间范围如下：
 
-<div align="center"> <img src="pics/658fc5e7-79c0-4247-9445-d69bf194c539.png" width=""/> </div><br>
+<div align="center"> <img src="/pics/658fc5e7-79c0-4247-9445-d69bf194c539.png" width=""/> </div><br>
 
 **② 与文件拥有者和所属群组有关的选项** 
 
@@ -17470,7 +17470,7 @@ dmtsai lines: 5 columns: 9
 | T | stopped (either by a job control signal or because it is being traced) <br> 结束，进程既可以被作业控制信号结束，也可能是正在被追踪。|
 <br>
 
-<div align="center"> <img src="pics/2bab4127-3e7d-48cc-914e-436be859fb05.png" width="490px"/> </div><br>
+<div align="center"> <img src="/pics/2bab4127-3e7d-48cc-914e-436be859fb05.png" width="490px"/> </div><br>
 
 #### SIGCHLD
 
@@ -17483,7 +17483,7 @@ dmtsai lines: 5 columns: 9
 
 在子进程退出时，它的进程描述符不会立即释放，这是为了让父进程得到子进程信息，父进程通过 wait() 和 waitpid() 来获得一个已经退出的子进程的信息。
 
-<div align="center"> <!-- <img src="pics/flow.png" width=""/> --> </div><br>
+<div align="center"> <!-- <img src="/pics/flow.png" width=""/> --> </div><br>
 
 #### wait()
 
@@ -17552,7 +17552,7 @@ options 参数主要有 WNOHANG 和 WUNTRACED 两个选项，WNOHANG 可以使 w
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 # 第 7 章 算法
 
@@ -17583,7 +17583,7 @@ Output:
 
 以 (2, 3, 1, 0, 2, 5) 为例，遍历到位置 4 时，该位置上的数为 2，但是第 2 个位置上已经有一个 2 的值了，因此可以知道 2 重复：
 
-<div align="center"> <img src="pics/49d2adc1-b28a-44bf-babb-d44993f4a2e3.gif" width="250px"> </div><br>
+<div align="center"> <img src="/pics/49d2adc1-b28a-44bf-babb-d44993f4a2e3.gif" width="250px"> </div><br>
 
 ```java
 public boolean duplicate(int[] nums, int length, int[] duplication) {
@@ -17636,7 +17636,7 @@ Given target = 20, return false.
 
 该二维数组中的一个数，小于它的数一定在其左边，大于它的数一定在其下边。因此，从右上角开始查找，就可以根据 target 和当前元素的大小关系来缩小查找区间，当前元素的查找区间为左下角的所有元素。
 
-<div align="center"> <img src="pics/0ad9f7ba-f408-4999-a77a-9b73562c9088.gif" width="200px"> </div><br>
+<div align="center"> <img src="/pics/0ad9f7ba-f408-4999-a77a-9b73562c9088.gif" width="200px"> </div><br>
 
 ```java
 public boolean Find(int target, int[][] matrix) {
@@ -17680,7 +17680,7 @@ Output:
 
 从后向前遍是为了在改变 P2 所指向的内容时，不会影响到 P1 遍历原来字符串的内容。
 
-<div align="center"> <img src="pics/6980aef0-debe-4b4b-8da5-8b1befbc1408.gif" width="230px"> </div><br>
+<div align="center"> <img src="/pics/6980aef0-debe-4b4b-8da5-8b1befbc1408.gif" width="230px"> </div><br>
 
 ```java
 public String replaceSpace(StringBuffer str) {
@@ -17712,7 +17712,7 @@ public String replaceSpace(StringBuffer str) {
 
 从尾到头反过来打印出每个结点的值。
 
-<div align="center"> <img src="pics/f5792051-d9b2-4ca4-a234-a4a2de3d5a57.png" width="280px"> </div><br>
+<div align="center"> <img src="/pics/f5792051-d9b2-4ca4-a234-a4a2de3d5a57.png" width="280px"> </div><br>
 
 #### 解题思路
 
@@ -17740,7 +17740,7 @@ public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
 - 头结点是在头插法中使用的一个额外节点，这个节点不存储值；
 - 第一个节点就是链表的第一个真正存储值的节点。
 
-<div align="center"> <img src="pics/0dae7e93-cfd1-4bd3-97e8-325b032b716f.gif" width="370px"> </div><br>
+<div align="center"> <img src="/pics/0dae7e93-cfd1-4bd3-97e8-325b032b716f.gif" width="370px"> </div><br>
 
 ```java
 public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
@@ -17767,7 +17767,7 @@ public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
 
 栈具有后进先出的特点，在遍历链表时将值按顺序放入栈中，最后出栈的顺序即为逆序。
 
-<div align="center"> <img src="pics/9d1deeba-4ae1-41dc-98f4-47d85b9831bc.gif" width="300px"> </div><br>
+<div align="center"> <img src="/pics/9d1deeba-4ae1-41dc-98f4-47d85b9831bc.gif" width="300px"> </div><br>
 
 ```java
 public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
@@ -17791,13 +17791,13 @@ public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
 
 根据二叉树的前序遍历和中序遍历的结果，重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
 
-<div align="center"> <img src="pics/31d9adce-2af8-4754-8386-0aabb4e500b0.png" width="300"/> </div><br>
+<div align="center"> <img src="/pics/31d9adce-2af8-4754-8386-0aabb4e500b0.png" width="300"/> </div><br>
 
 #### 解题思路
 
 前序遍历的第一个值为根节点的值，使用这个值将中序遍历结果分成两部分，左部分为树的左子树中序遍历结果，右部分为树的右子树中序遍历的结果。
 
-<div align="center"> <img src="pics/c269e362-1128-4212-9cf3-d4c12b363b2f.gif" width="330px"> </div><br>
+<div align="center"> <img src="/pics/c269e362-1128-4212-9cf3-d4c12b363b2f.gif" width="330px"> </div><br>
 
 ```java
 // 缓存中序遍历数组每个值对应的索引
@@ -17847,11 +17847,11 @@ public class TreeLinkNode {
 
 ① 如果一个节点的右子树不为空，那么该节点的下一个节点是右子树的最左节点；
 
-<div align="center"> <img src="pics/b0611f89-1e5f-4494-a795-3544bf65042a.gif" width="220px"/> </div><br>
+<div align="center"> <img src="/pics/b0611f89-1e5f-4494-a795-3544bf65042a.gif" width="220px"/> </div><br>
 
 ② 否则，向上找第一个左链接指向的树包含该节点的祖先节点。
 
-<div align="center"> <img src="pics/95080fae-de40-463d-a76e-783a0c677fec.gif" width="200px"/> </div><br>
+<div align="center"> <img src="/pics/95080fae-de40-463d-a76e-783a0c677fec.gif" width="200px"/> </div><br>
 
 ```java
 public TreeLinkNode GetNext(TreeLinkNode pNode) {
@@ -17884,7 +17884,7 @@ public TreeLinkNode GetNext(TreeLinkNode pNode) {
 
 in 栈用来处理入栈（push）操作，out 栈用来处理出栈（pop）操作。一个元素进入 in 栈之后，出栈的顺序被反转。当元素要出栈时，需要先进入 out 栈，此时元素出栈顺序再一次被反转，因此出栈顺序就和最开始入栈顺序是相同的，先进入的元素先退出，这就是队列的顺序。
 
-<div align="center"> <img src="pics/3ea280b5-be7d-471b-ac76-ff020384357c.gif" width="350"/> </div><br>
+<div align="center"> <img src="/pics/3ea280b5-be7d-471b-ac76-ff020384357c.gif" width="350"/> </div><br>
 
 ```java
 Stack<Integer> in = new Stack<Integer>();
@@ -17910,7 +17910,7 @@ public int pop() throws Exception {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 10.1 斐波那契数列
 
@@ -17922,13 +17922,13 @@ public int pop() throws Exception {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?f(n)=\left\{\begin{array}{rcl}0&&{n=0}\\1&&{n=1}\\f(n-1)+f(n-2)&&{n>1}\end{array}\right." class="mathjax-pic"/></div> <br> -->
 
-<div align="center"> <img src="pics/45be9587-6069-4ab7-b9ac-840db1a53744.jpg" width="300px"> </div><br>
+<div align="center"> <img src="/pics/45be9587-6069-4ab7-b9ac-840db1a53744.jpg" width="300px"> </div><br>
 
 #### 解题思路
 
 如果使用递归求解，会重复计算一些子问题。例如，计算 f(4) 需要计算 f(3) 和 f(2)，计算 f(3) 需要计算 f(2) 和 f(1)，可以看到 f(2) 被重复计算了。
 
-<div align="center"> <img src="pics/c13e2a3d-b01c-4a08-a69b-db2c4e821e09.png" width="350px"/> </div><br>
+<div align="center"> <img src="/pics/c13e2a3d-b01c-4a08-a69b-db2c4e821e09.png" width="350px"/> </div><br>
 
 递归是将一个问题划分成多个子问题求解，动态规划也是如此，但是动态规划会把子问题的解缓存起来，从而避免重复求解子问题。
 
@@ -17988,23 +17988,23 @@ public class Solution {
 
 我们可以用 2\*1 的小矩形横着或者竖着去覆盖更大的矩形。请问用 n 个 2\*1 的小矩形无重叠地覆盖一个 2\*n 的大矩形，总共有多少种方法？
 
-<div align="center"> <img src="pics/b903fda8-07d0-46a7-91a7-e803892895cf.gif" width="100px"> </div><br>
+<div align="center"> <img src="/pics/b903fda8-07d0-46a7-91a7-e803892895cf.gif" width="100px"> </div><br>
 
 #### 解题思路
 
 当 n 为 1 时，只有一种覆盖方法：
 
-<div align="center"> <img src="pics/f6e146f1-57ad-411b-beb3-770a142164ef.png" width="100px"> </div><br>
+<div align="center"> <img src="/pics/f6e146f1-57ad-411b-beb3-770a142164ef.png" width="100px"> </div><br>
 
 当 n 为 2 时，有两种覆盖方法：
 
-<div align="center"> <img src="pics/fb3b8f7a-4293-4a38-aae1-62284db979a3.png" width="200px"> </div><br>
+<div align="center"> <img src="/pics/fb3b8f7a-4293-4a38-aae1-62284db979a3.png" width="200px"> </div><br>
 
 要覆盖 2\*n 的大矩形，可以先覆盖 2\*1 的矩形，再覆盖 2\*(n-1) 的矩形；或者先覆盖 2\*2 的矩形，再覆盖 2\*(n-2) 的矩形。而覆盖 2\*(n-1) 和 2\*(n-2) 的矩形可以看成子问题。该问题的递推公式如下：
 
 <!-- <div align="center"><img src="https://latex.codecogs.com/gif.latex?f(n)=\left\{\begin{array}{rcl}1&&{n=1}\\2&&{n=2}\\f(n-1)+f(n-2)&&{n>1}\end{array}\right." class="mathjax-pic"/></div> <br> -->
 
-<div align="center"> <img src="pics/508c6e52-9f93-44ed-b6b9-e69050e14807.jpg" width="350px"> </div><br>
+<div align="center"> <img src="/pics/508c6e52-9f93-44ed-b6b9-e69050e14807.jpg" width="350px"> </div><br>
 
 ```java
 public int RectCover(int n) {
@@ -18029,21 +18029,21 @@ public int RectCover(int n) {
 
 一只青蛙一次可以跳上 1 级台阶，也可以跳上 2 级。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。
 
-<div align="center"> <img src="pics/9dae7475-934f-42e5-b3b3-12724337170a.png" width="380px"> </div><br>
+<div align="center"> <img src="/pics/9dae7475-934f-42e5-b3b3-12724337170a.png" width="380px"> </div><br>
 
 #### 解题思路
 
 当 n = 1 时，只有一种跳法：
 
-<div align="center"> <img src="pics/72aac98a-d5df-4bfa-a71a-4bb16a87474c.png" width="250px"> </div><br>
+<div align="center"> <img src="/pics/72aac98a-d5df-4bfa-a71a-4bb16a87474c.png" width="250px"> </div><br>
 
 当 n = 2 时，有两种跳法：
 
-<div align="center"> <img src="pics/1b80288d-1b35-4cd3-aa17-7e27ab9a2389.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/1b80288d-1b35-4cd3-aa17-7e27ab9a2389.png" width="300px"> </div><br>
 
 跳 n 阶台阶，可以先跳 1 阶台阶，再跳 n-1 阶台阶；或者先跳 2 阶台阶，再跳 n-2 阶台阶。而 n-1 和 n-2 阶台阶的跳法可以看成子问题，该问题的递推公式为：
 
-<div align="center"> <img src="pics/508c6e52-9f93-44ed-b6b9-e69050e14807.jpg" width="350px"> </div><br>
+<div align="center"> <img src="/pics/508c6e52-9f93-44ed-b6b9-e69050e14807.jpg" width="350px"> </div><br>
 
 ```java
 public int JumpFloor(int n) {
@@ -18068,7 +18068,7 @@ public int JumpFloor(int n) {
 
 一只青蛙一次可以跳上 1 级台阶，也可以跳上 2 级... 它也可以跳上 n 级。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。
 
-<div align="center"> <img src="pics/cd411a94-3786-4c94-9e08-f28320e010d5.png" width="380px"> </div><br>
+<div align="center"> <img src="/pics/cd411a94-3786-4c94-9e08-f28320e010d5.png" width="380px"> </div><br>
 
 #### 解题思路
 
@@ -18127,13 +18127,13 @@ public int JumpFloorII(int target) {
 
 把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个非递减排序的数组的一个旋转，输出旋转数组的最小元素。
 
-<div align="center"> <img src="pics/0038204c-4b8a-42a5-921d-080f6674f989.png" width="210px"> </div><br>
+<div align="center"> <img src="/pics/0038204c-4b8a-42a5-921d-080f6674f989.png" width="210px"> </div><br>
 
 #### 解题思路
 
 将旋转数组对半分可以得到一个包含最小元素的新旋转数组，以及一个非递减排序的数组。新的旋转数组的数组元素是原数组的一半，从而将问题规模减少了一半，这种折半性质的算法的时间复杂度为 O(logN)（为了方便，这里将 log<sub>2</sub>N 写为 logN）。
 
-<div align="center"> <img src="pics/424f34ab-a9fd-49a6-9969-d76b42251365.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/424f34ab-a9fd-49a6-9969-d76b42251365.png" width="300px"> </div><br>
 
 此时问题的关键在于确定对半分得到的两个数组哪一个是旋转数组，哪一个是非递减数组。我们很容易知道非递减数组的第一个元素一定小于等于最后一个元素。
 
@@ -18195,13 +18195,13 @@ private int minNumber(int[] nums, int l, int h) {
 
 例如下面的矩阵包含了一条 bfce 路径。
 
-<div align="center"> <img src="pics/1db1c7ea-0443-478b-8df9-7e33b1336cc4.png" width="200px"> </div><br>
+<div align="center"> <img src="/pics/1db1c7ea-0443-478b-8df9-7e33b1336cc4.png" width="200px"> </div><br>
 
 #### 解题思路
 
 使用回溯法（backtracking）进行求解，它是一种暴力搜索方法，通过搜索所有可能的结果来求解问题。回溯法在一次搜索结束时需要进行回溯（回退），将这一次搜索过程中设置的状态进行清除，从而开始一次新的搜索过程。例如下图示例中，从 f 开始，下一步有 4 种搜索可能，如果先搜索 b，需要将 b 标记为已经使用，防止重复使用。在这一次搜索结束之后，需要将 b 的已经使用状态清除，并搜索 c。
 
-<div align="center"> <img src="pics/dc964b86-7a08-4bde-a3d9-e6ddceb29f98.png" width="200px"> </div><br>
+<div align="center"> <img src="/pics/dc964b86-7a08-4bde-a3d9-e6ddceb29f98.png" width="200px"> </div><br>
 
 本题的输入是数组而不是矩阵（二维数组），因此需要先将数组转换成矩阵。
 
@@ -18415,7 +18415,7 @@ public int NumberOf1(int n) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?x^n=\left\{\begin{array}{rcl}(x*x)^{n/2}&&{n\%2=0}\\x*(x*x)^{n/2}&&{n\%2=1}\end{array}\right." class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/48b1d459-8832-4e92-938a-728aae730739.jpg" width="330px"> </div><br>
+<div align="center"> <img src="/pics/48b1d459-8832-4e92-938a-728aae730739.jpg" width="330px"> </div><br>
 
 因为 (x\*x)<sup>n/2</sup> 可以通过递归求解，并且每次递归 n 都减小一半，因此整个算法的时间复杂度为 O(logN)。
 
@@ -18484,11 +18484,11 @@ private void printNumber(char[] number) {
 
 ① 如果该节点不是尾节点，那么可以直接将下一个节点的值赋给该节点，然后令该节点指向下下个节点，再删除下一个节点，时间复杂度为 O(1)。
 
-<div align="center"> <img src="pics/1176f9e1-3442-4808-a47a-76fbaea1b806.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/1176f9e1-3442-4808-a47a-76fbaea1b806.png" width="600"/> </div><br>
 
 ② 否则，就需要先遍历链表，找到节点的前一个节点，然后让前一个节点指向 null，时间复杂度为 O(N)。
 
-<div align="center"> <img src="pics/4bf8d0ba-36f0-459e-83a0-f15278a5a157.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/4bf8d0ba-36f0-459e-83a0-f15278a5a157.png" width="600"/> </div><br>
 
 综上，如果进行 N 次操作，那么大约需要操作节点的次数为 N-1+N=2N-1，其中 N-1 表示 N-1 个不是尾节点的每个节点以 O(1) 的时间复杂度操作节点的总次数，N 表示 1 个尾节点以 O(N) 的时间复杂度操作节点的总次数。(2N-1)/N \~ 2，因此该算法的平均时间复杂度为 O(1)。
 
@@ -18522,7 +18522,7 @@ public ListNode deleteNode(ListNode head, ListNode tobeDelete) {
 
 #### 题目描述
 
-<div align="center"> <img src="pics/17e301df-52e8-4886-b593-841a16d13e44.png" width="450"/> </div><br>
+<div align="center"> <img src="/pics/17e301df-52e8-4886-b593-841a16d13e44.png" width="450"/> </div><br>
 
 #### 解题描述
 
@@ -18587,7 +18587,7 @@ public boolean match(char[] str, char[] pattern) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 20. 表示数值的字符串
 
@@ -18646,7 +18646,7 @@ public boolean isNumeric(char[] str) {
 
 需要保证奇数和奇数，偶数和偶数之间的相对位置不变，这和书本不太一样。
 
-<div align="center"> <img src="pics/d03a2efa-ef19-4c96-97e8-ff61df8061d3.png" width="200px"> </div><br>
+<div align="center"> <img src="/pics/d03a2efa-ef19-4c96-97e8-ff61df8061d3.png" width="200px"> </div><br>
 
 #### 解题思路
 
@@ -18707,7 +18707,7 @@ private void swap(int[] nums, int i, int j) {
 
 设链表的长度为 N。设置两个指针 P1 和 P2，先让 P1 移动 K 个节点，则还有 N - K 个节点可以移动。此时让 P1 和 P2 同时移动，可以知道当 P1 移动到链表结尾时，P2 移动到第 N - K 个节点处，该位置就是倒数第 K 个节点。
 
-<div align="center"> <img src="pics/6b504f1f-bf76-4aab-a146-a9c7a58c2029.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/6b504f1f-bf76-4aab-a146-a9c7a58c2029.png" width="500"/> </div><br>
 
 ```java
 public ListNode FindKthToTail(ListNode head, int k) {
@@ -18741,7 +18741,7 @@ public ListNode FindKthToTail(ListNode head, int k) {
 
 在相遇点，slow 要到环的入口点还需要移动 z 个节点，如果让 fast 重新从头开始移动，并且速度变为每次移动一个节点，那么它到环入口点还需要移动 x 个节点。在上面已经推导出 x=z，因此 fast 和 slow 将在环入口点相遇。
 
-<div align="center"> <img src="pics/bb7fc182-98c2-4860-8ea3-630e27a5f29f.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/bb7fc182-98c2-4860-8ea3-630e27a5f29f.png" width="500"/> </div><br>
 
 ```java
 public ListNode EntryNodeOfLoop(ListNode pHead) {
@@ -18804,7 +18804,7 @@ public ListNode ReverseList(ListNode head) {
 
 #### 题目描述
 
-<div align="center"> <img src="pics/c094d2bc-ec75-444b-af77-d369dfb6b3b4.png" width="400"/> </div><br>
+<div align="center"> <img src="/pics/c094d2bc-ec75-444b-af77-d369dfb6b3b4.png" width="400"/> </div><br>
 
 #### 解题思路
 
@@ -18856,7 +18856,7 @@ public ListNode Merge(ListNode list1, ListNode list2) {
 
 #### 题目描述
 
-<div align="center"> <img src="pics/84a5b15a-86c5-4d8e-9439-d9fd5a4699a1.jpg" width="450"/> </div><br>
+<div align="center"> <img src="/pics/84a5b15a-86c5-4d8e-9439-d9fd5a4699a1.jpg" width="450"/> </div><br>
 
 #### 解题思路
 
@@ -18884,7 +18884,7 @@ private boolean isSubtreeWithRoot(TreeNode root1, TreeNode root2) {
 
 #### 题目描述
 
-<div align="center"> <img src="pics/0c12221f-729e-4c22-b0ba-0dfc909f8adf.jpg" width="300"/> </div><br>
+<div align="center"> <img src="/pics/0c12221f-729e-4c22-b0ba-0dfc909f8adf.jpg" width="300"/> </div><br>
 
 #### 解题思路
 
@@ -18910,7 +18910,7 @@ private void swap(TreeNode root) {
 
 #### 题目描述
 
-<div align="center"> <img src="pics/0c12221f-729e-4c22-b0ba-0dfc909f8adf.jpg" width="300"/> </div><br>
+<div align="center"> <img src="/pics/0c12221f-729e-4c22-b0ba-0dfc909f8adf.jpg" width="300"/> </div><br>
 
 #### 解题思路
 
@@ -18940,7 +18940,7 @@ boolean isSymmetrical(TreeNode t1, TreeNode t2) {
 
 下图的矩阵顺时针打印结果为：1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10
 
-<div align="center"> <img src="pics/48517227-324c-4664-bd26-a2d2cffe2bfe.png" width="200px"> </div><br>
+<div align="center"> <img src="/pics/48517227-324c-4664-bd26-a2d2cffe2bfe.png" width="200px"> </div><br>
 
 #### 解题思路
 
@@ -18969,7 +18969,7 @@ public ArrayList<Integer> printMatrix(int[][] matrix) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 30. 包含 min 函数的栈
 
@@ -19044,7 +19044,7 @@ public boolean IsPopOrder(int[] pushSequence, int[] popSequence) {
 
 例如，以下二叉树层次遍历的结果为：1,2,3,4,5,6,7
 
-<div align="center"> <img src="pics/d5e838cf-d8a2-49af-90df-1b2a714ee676.jpg" width="250"/> </div><br>
+<div align="center"> <img src="/pics/d5e838cf-d8a2-49af-90df-1b2a714ee676.jpg" width="250"/> </div><br>
 
 #### 解题思路
 
@@ -19152,7 +19152,7 @@ public ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
 
 例如，下图是后序遍历序列 1,3,2 所对应的二叉搜索树。
 
-<div align="center"> <img src="pics/13454fa1-23a8-4578-9663-2b13a6af564a.jpg" width="150"/> </div><br>
+<div align="center"> <img src="/pics/13454fa1-23a8-4578-9663-2b13a6af564a.jpg" width="150"/> </div><br>
 
 #### 解题思路
 
@@ -19187,7 +19187,7 @@ private boolean verify(int[] sequence, int first, int last) {
 
 下图的二叉树有两条和为 22 的路径：10, 5, 7 和 10, 12
 
-<div align="center"> <img src="pics/ed77b0e6-38d9-4a34-844f-724f3ffa2c12.jpg" width="200"/> </div><br>
+<div align="center"> <img src="/pics/ed77b0e6-38d9-4a34-844f-724f3ffa2c12.jpg" width="200"/> </div><br>
 
 #### 解题思路
 
@@ -19234,21 +19234,21 @@ public class RandomListNode {
 }
 ```
 
-<div align="center"> <img src="pics/66a01953-5303-43b1-8646-0c77b825e980.png" width="300"/> </div><br>
+<div align="center"> <img src="/pics/66a01953-5303-43b1-8646-0c77b825e980.png" width="300"/> </div><br>
 
 #### 解题思路
 
 第一步，在每个节点的后面插入复制的节点。
 
-<div align="center"> <img src="pics/dfd5d3f8-673c-486b-8ecf-d2082107b67b.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/dfd5d3f8-673c-486b-8ecf-d2082107b67b.png" width="600"/> </div><br>
 
 第二步，对复制节点的 random 链接进行赋值。
 
-<div align="center"> <img src="pics/cafbfeb8-7dfe-4c0a-a3c9-750eeb824068.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/cafbfeb8-7dfe-4c0a-a3c9-750eeb824068.png" width="600"/> </div><br>
 
 第三步，拆分。
 
-<div align="center"> <img src="pics/e151b5df-5390-4365-b66e-b130cd253c12.png" width="600"/> </div><br>
+<div align="center"> <img src="/pics/e151b5df-5390-4365-b66e-b130cd253c12.png" width="600"/> </div><br>
 
 ```java
 public RandomListNode Clone(RandomListNode pHead) {
@@ -19290,7 +19290,7 @@ public RandomListNode Clone(RandomListNode pHead) {
 
 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
 
-<div align="center"> <img src="pics/05a08f2e-9914-4a77-92ef-aebeaecf4f66.jpg" width="400"/> </div><br>
+<div align="center"> <img src="/pics/05a08f2e-9914-4a77-92ef-aebeaecf4f66.jpg" width="400"/> </div><br>
 
 #### 解题思路
 
@@ -19430,7 +19430,7 @@ public int MoreThanHalfNum_Solution(int[] nums) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 40. 最小的 K 个数
 
@@ -19840,7 +19840,7 @@ public int GetUglyNumber_Solution(int N) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 50. 第一个只出现一次的字符位置
 
@@ -19947,7 +19947,7 @@ private void merge(int[] nums, int l, int m, int h) {
 
 #### 题目描述
 
-<div align="center"> <img src="pics/5f1cb999-cb9a-4f6c-a0af-d90377295ab8.png" width="500"/> </div><br>
+<div align="center"> <img src="/pics/5f1cb999-cb9a-4f6c-a0af-d90377295ab8.png" width="500"/> </div><br>
 
 #### 解题思路
 
@@ -20039,7 +20039,7 @@ private void inOrder(TreeNode root, int k) {
 
 从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。
 
-<div align="center"> <img src="pics/ba355101-4a93-4c71-94fb-1da83639727b.jpg" width="350px"/> </div><br>
+<div align="center"> <img src="/pics/ba355101-4a93-4c71-94fb-1da83639727b.jpg" width="350px"/> </div><br>
 
 #### 解题思路
 
@@ -20057,7 +20057,7 @@ public int TreeDepth(TreeNode root) {
 
 平衡二叉树左右子树高度差不超过 1。
 
-<div align="center"> <img src="pics/af1d1166-63af-47b6-9aa3-2bf2bd37bd03.jpg" width="250px"/> </div><br>
+<div align="center"> <img src="/pics/af1d1166-63af-47b6-9aa3-2bf2bd37bd03.jpg" width="250px"/> </div><br>
 
 #### 解题思路
 
@@ -20309,7 +20309,7 @@ public ArrayList<Integer> maxInWindows(int[] num, int size) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 60. n 个骰子的点数
 
@@ -20319,7 +20319,7 @@ public ArrayList<Integer> maxInWindows(int[] num, int size) {
 
 把 n 个骰子仍在地上，求点数和为 s 的概率。
 
-<div align="center"> <img src="pics/195f8693-5ec4-4987-8560-f25e365879dd.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/195f8693-5ec4-4987-8560-f25e365879dd.png" width="300px"> </div><br>
 
 #### 解题思路
 
@@ -20392,7 +20392,7 @@ public List<Map.Entry<Integer, Double>> dicesSum(int n) {
 
 五张牌，其中大小鬼为癞子，牌面为 0。判断这五张牌是否能组成顺子。
 
-<div align="center"> <img src="pics/eaa506b6-0747-4bee-81f8-3cda795d8154.png" width="350px"> </div><br>
+<div align="center"> <img src="/pics/eaa506b6-0747-4bee-81f8-3cda795d8154.png" width="350px"> </div><br>
 
 #### 解题思路
 
@@ -20451,7 +20451,7 @@ public int LastRemaining_Solution(int n, int m) {
 
 可以有一次买入和一次卖出，买入必须在前。求最大收益。
 
-<div align="center"> <img src="pics/42661013-750f-420b-b3c1-437e9a11fb65.png" width="220px"> </div><br>
+<div align="center"> <img src="/pics/42661013-750f-420b-b3c1-437e9a11fb65.png" width="220px"> </div><br>
 
 #### 解题思路
 
@@ -20523,7 +20523,7 @@ public int Add(int a, int b) {
 
 给定一个数组 A[0, 1,..., n-1]，请构建一个数组 B[0, 1,..., n-1]，其中 B 中的元素 B[i]=A[0]\*A[1]\*...\*A[i-1]\*A[i+1]\*...\*A[n-1]。要求不能使用除法。
 
-<div align="center"> <img src="pics/4240a69f-4d51-4d16-b797-2dfe110f30bd.png" width="250px"> </div><br>
+<div align="center"> <img src="/pics/4240a69f-4d51-4d16-b797-2dfe110f30bd.png" width="250px"> </div><br>
 
 #### 解题思路
 
@@ -20587,7 +20587,7 @@ public int StrToInt(String str) {
 
 二叉查找树中，两个节点 p, q 的公共祖先 root 满足 root.val >= p.val && root.val <= q.val。
 
-<div align="center"> <img src="pics/047faac4-a368-4565-8331-2b66253080d3.jpg" width="220"/> </div><br>
+<div align="center"> <img src="/pics/047faac4-a368-4565-8331-2b66253080d3.jpg" width="220"/> </div><br>
 
 ```java
 public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
@@ -20607,7 +20607,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
 在左右子树中查找是否存在 p 或者 q，如果 p 和 q 分别在两个子树中，那么就说明根节点就是最低公共祖先。
 
-<div align="center"> <img src="pics/d27c99f0-7881-4f2d-9675-c75cbdee3acd.jpg" width="250"/> </div><br>
+<div align="center"> <img src="/pics/d27c99f0-7881-4f2d-9675-c75cbdee3acd.jpg" width="250"/> </div><br>
 
 ```java
 public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
@@ -20623,7 +20623,7 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 ### 参考文献
 
 何海涛. 剑指 Offer[M]. 电子工业出版社, 2012.
@@ -20866,7 +20866,7 @@ private boolean isSubstr(String s, String target) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 排序
 
@@ -21054,7 +21054,7 @@ public String frequencySort(String s) {
 
 有三种颜色的球，算法的目标是将这三种球按颜色顺序正确地排列。它其实是三向切分快速排序的一种变种，在三向切分快速排序中，每次切分都将数组分成三个区间：小于切分元素、等于切分元素、大于切分元素，而该算法是将数组分成三个区间：等于红色、等于白色、等于蓝色。
 
-<div align="center"> <img src="pics/7a3215ec-6fb7-4935-8b0d-cb408208f7cb.png"/> </div><br>
+<div align="center"> <img src="/pics/7a3215ec-6fb7-4935-8b0d-cb408208f7cb.png"/> </div><br>
 
 ##### 1. 按颜色进行排序
 
@@ -21092,7 +21092,7 @@ private void swap(int[] nums, int i, int j) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 贪心思想
 
@@ -21450,7 +21450,7 @@ private int char2Index(char c) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 二分查找
 
@@ -21739,7 +21739,7 @@ private int binarySearch(int[] nums, int target) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 分治
 
@@ -21848,7 +21848,7 @@ private List<TreeNode> generateSubtrees(int s, int e) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 搜索
 
@@ -21856,7 +21856,7 @@ private List<TreeNode> generateSubtrees(int s, int e) {
 
 #### BFS
 
-<div align="center"> <img src="pics/95903878-725b-4ed9-bded-bc4aae0792a9.jpg"/> </div><br>
+<div align="center"> <img src="/pics/95903878-725b-4ed9-bded-bc4aae0792a9.jpg"/> </div><br>
 
 广度优先搜索一层一层地进行遍历，每层遍历都以上一层遍历的结果作为起点，遍历一个距离能访问到的所有节点。需要注意的是，遍历过的节点不能再次被遍历。
 
@@ -22085,7 +22085,7 @@ private int getShortestPath(List<Integer>[] graphic, int start, int end) {
 
 #### DFS
 
-<div align="center"> <img src="pics/74dc31eb-6baa-47ea-ab1c-d27a0ca35093.png"/> </div><br>
+<div align="center"> <img src="/pics/74dc31eb-6baa-47ea-ab1c-d27a0ca35093.png"/> </div><br>
 
 广度优先搜索一层一层遍历，每一层得到的所有新节点，要用队列存储起来以备下一层遍历的时候再遍历。
 
@@ -22396,7 +22396,7 @@ Backtracking（回溯）属于 DFS。
 
 [17. Letter Combinations of a Phone Number (Medium)](https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/)
 
-<div align="center"> <img src="pics/9823768c-212b-4b1a-b69a-b3f59e07b977.jpg"/> </div><br>
+<div align="center"> <img src="/pics/9823768c-212b-4b1a-b69a-b3f59e07b977.jpg"/> </div><br>
 
 ```html
 Input:Digit string "23"
@@ -22973,7 +22973,7 @@ private boolean isPalindrome(String s, int begin, int end) {
 
 [37. Sudoku Solver (Hard)](https://leetcode.com/problems/sudoku-solver/description/)
 
-<div align="center"> <img src="pics/0e8fdc96-83c1-4798-9abe-45fc91d70b9d.png"/> </div><br>
+<div align="center"> <img src="/pics/0e8fdc96-83c1-4798-9abe-45fc91d70b9d.png"/> </div><br>
 
 ```java
 private boolean[][] rowsUsed = new boolean[9][10];
@@ -23030,7 +23030,7 @@ private int cubeNum(int i, int j) {
 
 [51. N-Queens (Hard)](https://leetcode.com/problems/n-queens/description/)
 
-<div align="center"> <img src="pics/067b310c-6877-40fe-9dcf-10654e737485.jpg"/> </div><br>
+<div align="center"> <img src="/pics/067b310c-6877-40fe-9dcf-10654e737485.jpg"/> </div><br>
 
 在 n\*n 的矩阵中摆放 n 个皇后，并且每个皇后不能在同一行，同一列，同一对角线上，求所有的 n 皇后的解。
 
@@ -23038,11 +23038,11 @@ private int cubeNum(int i, int j) {
 
 45 度对角线标记数组的长度为 2 \* n - 1，通过下图可以明确 (r, c) 的位置所在的数组下标为 r + c。
 
-<div align="center"> <img src="pics/9c422923-1447-4a3b-a4e1-97e663738187.jpg" width="300px"> </div><br>
+<div align="center"> <img src="/pics/9c422923-1447-4a3b-a4e1-97e663738187.jpg" width="300px"> </div><br>
 
 135 度对角线标记数组的长度也是 2 \* n - 1，(r, c) 的位置所在的数组下标为 n - 1 - (r - c)。
 
-<div align="center"> <img src="pics/7a85e285-e152-4116-b6dc-3fab27ba9437.jpg" width="300px"> </div><br>
+<div align="center"> <img src="/pics/7a85e285-e152-4116-b6dc-3fab27ba9437.jpg" width="300px"> </div><br>
 
 ```java
 private List<List<String>> solutions;
@@ -23095,7 +23095,7 @@ private void backtracking(int row) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 动态规划
 
@@ -23115,7 +23115,7 @@ private void backtracking(int row) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?dp[i]=dp[i-1]+dp[i-2]" class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/14fe1e71-8518-458f-a220-116003061a83.png" width="200px"> </div><br>
+<div align="center"> <img src="/pics/14fe1e71-8518-458f-a220-116003061a83.png" width="200px"> </div><br>
 
 考虑到 dp[i] 只与 dp[i - 1] 和 dp[i - 2] 有关，因此可以只用两个变量来存储 dp[i - 1] 和 dp[i - 2]，使得原来的 O(N) 空间复杂度优化为 O(1) 复杂度。
 
@@ -23146,7 +23146,7 @@ public int climbStairs(int n) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?dp[i]=max(dp[i-2]+nums[i],dp[i-1])" class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/2de794ca-aa7b-48f3-a556-a0e2708cb976.jpg" width="350px"> </div><br>
+<div align="center"> <img src="/pics/2de794ca-aa7b-48f3-a556-a0e2708cb976.jpg" width="350px"> </div><br>
 
 ```java
 public int rob(int[] nums) {
@@ -23200,7 +23200,7 @@ private int rob(int[] nums, int first, int last) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?dp[i]=(i-1)*dp[i-2]+(i-1)*dp[i-1]" class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/da1f96b9-fd4d-44ca-8925-fb14c5733388.png" width="350px"> </div><br>
+<div align="center"> <img src="/pics/da1f96b9-fd4d-44ca-8925-fb14c5733388.png" width="350px"> </div><br>
 
 ##### 5. 母牛生产
 
@@ -23212,7 +23212,7 @@ private int rob(int[] nums, int first, int last) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?dp[i]=dp[i-1]+dp[i-3]" class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/879814ee-48b5-4bcb-86f5-dcc400cb81ad.png" width="250px"> </div><br>
+<div align="center"> <img src="/pics/879814ee-48b5-4bcb-86f5-dcc400cb81ad.png" width="250px"> </div><br>
 
 #### 矩阵路径
 
@@ -23258,7 +23258,7 @@ public int minPathSum(int[][] grid) {
 
 题目描述：统计从矩阵左上角到右下角的路径总数，每次只能向右或者向下移动。
 
-<div align="center"> <img src="pics/dc82f0f3-c1d4-4ac8-90ac-d5b32a9bd75a.jpg" width=""> </div><br>
+<div align="center"> <img src="/pics/dc82f0f3-c1d4-4ac8-90ac-d5b32a9bd75a.jpg" width=""> </div><br>
 
 ```java
 public int uniquePaths(int m, int n) {
@@ -23479,7 +23479,7 @@ public int numDecodings(String s) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?dp[n]=max\{1,dp[i]+1|S_i<S_n\&\&i<n\}" class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/ee994da4-0fc7-443d-ac56-c08caf00a204.jpg" width="350px"> </div><br>
+<div align="center"> <img src="/pics/ee994da4-0fc7-443d-ac56-c08caf00a204.jpg" width="350px"> </div><br>
 
 对于一个长度为 N 的序列，最长递增子序列并不一定会以 S<sub>N</sub> 为结尾，因此 dp[N] 不是序列的最长递增子序列的长度，需要遍历 dp 数组找出最大值才是所要的结果，max{ dp[i] | 1 <= i <= N} 即为所求。
 
@@ -23646,7 +23646,7 @@ public int wiggleMaxLength(int[] nums) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?dp[i][j]=\left\{\begin{array}{rcl}dp[i-1][j-1]&&{S1_i==S2_j}\\max(dp[i-1][j],dp[i][j-1])&&{S1_i<>S2_j}\end{array}\right." class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/ecd89a22-c075-4716-8423-e0ba89230e9a.jpg" width="450px"> </div><br>
+<div align="center"> <img src="/pics/ecd89a22-c075-4716-8423-e0ba89230e9a.jpg" width="450px"> </div><br>
 
 对于长度为 N 的序列 S<sub>1</sub> 和长度为 M 的序列 S<sub>2</sub>，dp[N][M] 就是序列 S<sub>1</sub> 和序列 S<sub>2</sub> 的最长公共子序列长度。
 
@@ -23686,7 +23686,7 @@ public int lengthOfLCS(int[] nums1, int[] nums2) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?dp[i][j]=max(dp[i-1][j],dp[i-1][j-w]+v)" class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/8cb2be66-3d47-41ba-b55b-319fc68940d4.png" width="400px"> </div><br>
+<div align="center"> <img src="/pics/8cb2be66-3d47-41ba-b55b-319fc68940d4.png" width="400px"> </div><br>
 
 ```java
 public int knapsack(int W, int N, int[] weights, int[] values) {
@@ -23711,7 +23711,7 @@ public int knapsack(int W, int N, int[] weights, int[] values) {
 
 <!--<div align="center"><img src="https://latex.codecogs.com/gif.latex?dp[j]=max(dp[j],dp[j-w]+v)" class="mathjax-pic"/></div> <br>-->
 
-<div align="center"> <img src="pics/9ae89f16-7905-4a6f-88a2-874b4cac91f4.jpg" width="300px"> </div><br>
+<div align="center"> <img src="/pics/9ae89f16-7905-4a6f-88a2-874b4cac91f4.jpg" width="300px"> </div><br>
 
 因为 dp[j-w] 表示 dp[i-1][j-w]，因此不能先求 dp[i][j-w]，以防将 dp[i-1][j-w] 覆盖。也就是说要先计算 dp[i][j] 再计算 dp[i][j-w]，在程序实现时需要按倒序来循环求解。
 
@@ -24055,7 +24055,7 @@ public int combinationSum4(int[] nums, int target) {
 
 题目描述：交易之后需要有一天的冷却时间。
 
-<div align="center"> <img src="pics/83acbb02-872a-4178-b22a-c89c3cb60263.jpg" width="300px"> </div><br>
+<div align="center"> <img src="/pics/83acbb02-872a-4178-b22a-c89c3cb60263.jpg" width="300px"> </div><br>
 
 ```java
 public int maxProfit(int[] prices) {
@@ -24096,7 +24096,7 @@ The total profit is ((8 - 1) - 2) + ((9 - 4) - 2) = 8.
 
 题目描述：每交易一次，都要支付一定的费用。
 
-<div align="center"> <img src="pics/1e2c588c-72b7-445e-aacb-d55dc8a88c29.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/1e2c588c-72b7-445e-aacb-d55dc8a88c29.png" width="300px"> </div><br>
 
 ```java
 public int maxProfit(int[] prices, int fee) {
@@ -24302,7 +24302,7 @@ public int minSteps(int n) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 数学
 
@@ -24790,7 +24790,7 @@ public int maximumProduct(int[] nums) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 链表
 
@@ -25126,7 +25126,7 @@ public ListNode oddEvenList(ListNode head) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 树
 
@@ -26078,7 +26078,7 @@ private void inOrder(TreeNode node, List<Integer> nums) {
 
 #### Trie
 
-<div align="center"> <img src="pics/5c638d59-d4ae-4ba4-ad44-80bdc30f38dd.jpg"/> </div><br>
+<div align="center"> <img src="/pics/5c638d59-d4ae-4ba4-ad44-80bdc30f38dd.jpg"/> </div><br>
 
 Trie，又称前缀树或字典树，用于判断字符串是否存在或者是否具有某种字符串前缀。
 
@@ -26213,7 +26213,7 @@ class MapSum {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 栈和队列
 
@@ -26432,7 +26432,7 @@ public int[] nextGreaterElements(int[] nums) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 哈希表
 
@@ -26555,7 +26555,7 @@ private int maxCount(Map<Integer, Integer> countForNum) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 字符串
 
@@ -26776,7 +26776,7 @@ public int countBinarySubstrings(String s) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 数组与矩阵
 
@@ -27202,7 +27202,7 @@ public int maxChunksToSorted(int[] arr) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 图
 
@@ -27457,7 +27457,7 @@ private class UF {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 位运算
 
@@ -27866,7 +27866,7 @@ public int[] countBits(int num) {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ## 第 7.3 节 算法
 
@@ -28092,7 +28092,7 @@ public class StopWatch {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 排序
 
@@ -28127,7 +28127,7 @@ public abstract class Sort<T extends Comparable<T>> {
 
 选择排序需要 \~N<sup>2</sup>/2 次比较和 \~N 次交换，它的运行时间与输入无关，这个特点使得它对一个已经排序的数组也需要这么多的比较和交换操作。
 
-<div align="center"> <img src="pics/bc6be2d0-ed5e-4def-89e5-3ada9afa811a.gif" width="230px"> </div><br>
+<div align="center"> <img src="/pics/bc6be2d0-ed5e-4def-89e5-3ada9afa811a.gif" width="230px"> </div><br>
 
 ```java
 public class Selection<T extends Comparable<T>> extends Sort<T> {
@@ -28154,7 +28154,7 @@ public class Selection<T extends Comparable<T>> extends Sort<T> {
 
 在一轮循环中，如果没有发生交换，那么说明数组已经是有序的，此时可以直接退出。
 
-<div align="center"> <img src="pics/0f8d178b-52d8-491b-9dfd-41e05a952578.gif" width="200px"> </div><br>
+<div align="center"> <img src="/pics/0f8d178b-52d8-491b-9dfd-41e05a952578.gif" width="200px"> </div><br>
 
 ```java
 public class Bubble<T extends Comparable<T>> extends Sort<T> {
@@ -28188,7 +28188,7 @@ public class Bubble<T extends Comparable<T>> extends Sort<T> {
 - 最坏的情况下需要 \~N<sup>2</sup>/2 比较以及 \~N<sup>2</sup>/2 次交换，最坏的情况是数组是倒序的；
 - 最好的情况下需要 N-1 次比较和 0 次交换，最好的情况就是数组已经有序了。
 
-<div align="center"> <img src="pics/35253fa4-f60a-4e3b-aaec-8fc835aabdac.gif" width="200px"> </div><br>
+<div align="center"> <img src="/pics/35253fa4-f60a-4e3b-aaec-8fc835aabdac.gif" width="200px"> </div><br>
 
 ```java
 public class Insertion<T extends Comparable<T>> extends Sort<T> {
@@ -28211,7 +28211,7 @@ public class Insertion<T extends Comparable<T>> extends Sort<T> {
 
 希尔排序使用插入排序对间隔 h 的序列进行排序。通过不断减小 h，最后令 h=1，就可以使得整个数组是有序的。
 
-<div align="center"> <img src="pics/7818c574-97a8-48db-8e62-8bfb030b02ba.png" width="450px"> </div><br>
+<div align="center"> <img src="/pics/7818c574-97a8-48db-8e62-8bfb030b02ba.png" width="450px"> </div><br>
 
 ```java
 public class Shell<T extends Comparable<T>> extends Sort<T> {
@@ -28245,7 +28245,7 @@ public class Shell<T extends Comparable<T>> extends Sort<T> {
 
 归并排序的思想是将数组分成两部分，分别进行排序，然后归并起来。
 
-<div align="center"> <img src="pics/ec840967-d127-4da3-b6bb-186996c56746.png" width="300px"> </div><br>
+<div align="center"> <img src="/pics/ec840967-d127-4da3-b6bb-186996c56746.png" width="300px"> </div><br>
 
 ##### 1. 归并方法
 
@@ -28339,7 +28339,7 @@ public class Down2UpMergeSort<T extends Comparable<T>> extends MergeSort<T> {
 - 归并排序将数组分为两个子数组分别排序，并将有序的子数组归并使得整个数组排序；
 - 快速排序通过一个切分元素将数组分为两个子数组，左子数组小于等于切分元素，右子数组大于等于切分元素，将这两个子数组排序也就将整个数组排序了。
 
-<div align="center"> <img src="pics/6234eb3d-ccf2-4987-a724-235aef6957b1.png" width="280px"> </div><br>
+<div align="center"> <img src="/pics/6234eb3d-ccf2-4987-a724-235aef6957b1.png" width="280px"> </div><br>
 
 ```java
 public class QuickSort<T extends Comparable<T>> extends Sort<T> {
@@ -28370,7 +28370,7 @@ public class QuickSort<T extends Comparable<T>> extends Sort<T> {
 
 取 a[l] 作为切分元素，然后从数组的左端向右扫描直到找到第一个大于等于它的元素，再从数组的右端向左扫描找到第一个小于它的元素，交换这两个元素。不断进行这个过程，就可以保证左指针 i 的左侧元素都不大于切分元素，右指针 j 的右侧元素都不小于切分元素。当两个指针相遇时，将切分元素 a[l] 和 a[j] 交换位置。
 
-<div align="center"> <img src="pics/c4859290-e27d-4f12-becf-e2a5c1f3a275.gif" width="320px"> </div><br>
+<div align="center"> <img src="/pics/c4859290-e27d-4f12-becf-e2a5c1f3a275.gif" width="320px"> </div><br>
 
 ```java
 private int partition(T[] nums, int l, int h) {
@@ -28474,7 +28474,7 @@ public T select(T[] nums, int k) {
 
 堆可以用数组来表示，这是因为堆是完全二叉树，而完全二叉树很容易就存储在数组中。位置 k 的节点的父节点位置为 k/2，而它的两个子节点的位置分别为 2k 和 2k+1。这里不使用数组索引为 0 的位置，是为了更清晰地描述节点的位置关系。
 
-<div align="center"> <img src="pics/f48883c8-9d8a-494e-99a4-317d8ddb8552.png" width="170px"> </div><br>
+<div align="center"> <img src="/pics/f48883c8-9d8a-494e-99a4-317d8ddb8552.png" width="170px"> </div><br>
 
 ```java
 public class Heap<T extends Comparable<T>> {
@@ -28510,7 +28510,7 @@ public class Heap<T extends Comparable<T>> {
 
 在堆中，当一个节点比父节点大，那么需要交换这个两个节点。交换后还可能比它新的父节点大，因此需要不断地进行比较和交换操作，把这种操作称为上浮。
 
-<div align="center"> <img src="pics/99d5e84e-fc2a-49a3-8259-8de274617756.gif" width="270px"> </div><br>
+<div align="center"> <img src="/pics/99d5e84e-fc2a-49a3-8259-8de274617756.gif" width="270px"> </div><br>
 
 ```java
 private void swim(int k) {
@@ -28523,7 +28523,7 @@ private void swim(int k) {
 
 类似地，当一个节点比子节点来得小，也需要不断地向下进行比较和交换操作，把这种操作称为下沉。一个节点如果有两个子节点，应当与两个子节点中最大那个节点进行交换。
 
-<div align="center"> <img src="pics/4bf5e3fb-a285-4138-b3b6-780956eb1df1.gif" width="270px"> </div><br>
+<div align="center"> <img src="/pics/4bf5e3fb-a285-4138-b3b6-780956eb1df1.gif" width="270px"> </div><br>
 
 ```java
 private void sink(int k) {
@@ -28572,13 +28572,13 @@ public T delMax() {
 
 无序数组建立堆最直接的方法是从左到右遍历数组进行上浮操作。一个更高效的方法是从右至左进行下沉操作，如果一个节点的两个节点都已经是堆有序，那么进行下沉操作可以使得这个节点为根节点的堆有序。叶子节点不需要进行下沉操作，可以忽略叶子节点的元素，因此只需要遍历一半的元素即可。
 
-<div align="center"> <img src="pics/c2ca8dd2-8d00-4a3e-bece-db7849ac9cfd.gif" width="210px"> </div><br>
+<div align="center"> <img src="/pics/c2ca8dd2-8d00-4a3e-bece-db7849ac9cfd.gif" width="210px"> </div><br>
 
 ####### 5.2 交换堆顶元素与最后一个元素
 
 交换之后需要进行下沉操作维持堆的有序状态。
 
-<div align="center"> <img src="pics/d156bcda-ac8d-4324-95e0-0c8df41567c9.gif" width="250px"> </div><br>
+<div align="center"> <img src="/pics/d156bcda-ac8d-4324-95e0-0c8df41567c9.gif" width="250px"> </div><br>
 
 ```java
 public class HeapSort<T extends Comparable<T>> extends Sort<T> {
@@ -28652,7 +28652,7 @@ Java 主要排序方法为 java.util.Arrays.sort()，对于原始数据类型使
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 并查集
 
@@ -28660,7 +28660,7 @@ Java 主要排序方法为 java.util.Arrays.sort()，对于原始数据类型使
 
 用于解决动态连通性问题，能动态连接两个点，并且判断两个点是否连通。
 
-<div align="center"> <img src="pics/02943a90-7dd4-4e9a-9325-f8217d3cc54d.jpg" width="350"/> </div><br>
+<div align="center"> <img src="/pics/02943a90-7dd4-4e9a-9325-f8217d3cc54d.jpg" width="350"/> </div><br>
 
 | 方法 | 描述 |
 | :---: | :---: |
@@ -28699,7 +28699,7 @@ public abstract class UF {
 
 但是 union 操作代价却很高，需要将其中一个连通分量中的所有节点 id 值都修改为另一个节点的 id 值。
 
-<div align="center"> <img src="pics/0972501d-f854-4d26-8fce-babb27c267f6.jpg" width="320"/> </div><br>
+<div align="center"> <img src="/pics/0972501d-f854-4d26-8fce-babb27c267f6.jpg" width="320"/> </div><br>
 
 ```java
 public class QuickFindUF extends UF {
@@ -28737,7 +28737,7 @@ public class QuickFindUF extends UF {
 
 但是 find 操作开销很大，因为同一个连通分量的节点 id 值不同，id 值只是用来指向另一个节点。因此需要一直向上查找操作，直到找到最上层的节点。
 
-<div align="center"> <img src="pics/11b27de5-5a9d-45e4-95cc-417fa3ad1d38.jpg" width="280"/> </div><br>
+<div align="center"> <img src="/pics/11b27de5-5a9d-45e4-95cc-417fa3ad1d38.jpg" width="280"/> </div><br>
 
 ```java
 public class QuickUnionUF extends UF {
@@ -28768,7 +28768,7 @@ public class QuickUnionUF extends UF {
 
 这种方法可以快速进行 union 操作，但是 find 操作和树高成正比，最坏的情况下树的高度为节点的数目。
 
-<div align="center"> <img src="pics/23e4462b-263f-4d15-8805-529e0ca7a4d1.jpg" width="100"/> </div><br>
+<div align="center"> <img src="/pics/23e4462b-263f-4d15-8805-529e0ca7a4d1.jpg" width="100"/> </div><br>
 
 #### 加权 Quick Union
 
@@ -28776,7 +28776,7 @@ public class QuickUnionUF extends UF {
 
 理论研究证明，加权 quick-union 算法构造的树深度最多不超过 logN。
 
-<div align="center"> <img src="pics/a9f18f8a-c1ea-422e-aa56-d91716b0f755.jpg" width="150"/> </div><br>
+<div align="center"> <img src="/pics/a9f18f8a-c1ea-422e-aa56-d91716b0f755.jpg" width="150"/> </div><br>
 
 ```java
 public class WeightedQuickUnionUF extends UF {
@@ -28836,7 +28836,7 @@ public class WeightedQuickUnionUF extends UF {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 栈和队列
 
@@ -29132,7 +29132,7 @@ public class ListQueue<Item> implements MyQueue<Item> {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 符号表
 
@@ -29347,13 +29347,13 @@ public class BinarySearchOrderedST<Key extends Comparable<Key>, Value> implement
 
 **二叉树**  是一个空链接，或者是一个有左右两个链接的节点，每个链接都指向一颗子二叉树。
 
-<div align="center"> <img src="pics/c11528f6-fc71-4a2b-8d2f-51b8954c38f1.jpg" width="180"/> </div><br>
+<div align="center"> <img src="/pics/c11528f6-fc71-4a2b-8d2f-51b8954c38f1.jpg" width="180"/> </div><br>
 
 **二叉查找树** （BST）是一颗二叉树，并且每个节点的值都大于等于其左子树中的所有节点的值而小于等于右子树的所有节点的值。
 
 BST 有一个重要性质，就是它的中序遍历结果递增排序。
 
-<div align="center"> <img src="pics/ef552ae3-ae0d-4217-88e6-99cbe8163f0c.jpg" width="200"/> </div><br>
+<div align="center"> <img src="/pics/ef552ae3-ae0d-4217-88e6-99cbe8163f0c.jpg" width="200"/> </div><br>
 
 基本数据结构：
 
@@ -29427,7 +29427,7 @@ private Value get(Node x, Key key) {
 
 当插入的键不存在于树中，需要创建一个新节点，并且更新上层节点的链接指向该节点，使得该节点正确地链接到树中。
 
-<div align="center"> <img src="pics/58b70113-3876-49af-85a9-68eb00a72d59.jpg" width="200"/> </div><br>
+<div align="center"> <img src="/pics/58b70113-3876-49af-85a9-68eb00a72d59.jpg" width="200"/> </div><br>
 
 ```java
  @Override
@@ -29456,11 +29456,11 @@ private Node put(Node x, Key key, Value value) {
 
 最好的情况下树是完全平衡的，每条空链接和根节点的距离都为 logN。
 
-<div align="center"> <img src="pics/c395a428-827c-405b-abd7-8a069316f583.jpg" width="200"/> </div><br>
+<div align="center"> <img src="/pics/c395a428-827c-405b-abd7-8a069316f583.jpg" width="200"/> </div><br>
 
 在最坏的情况下，树的高度为 N。
 
-<div align="center"> <img src="pics/5ea609cb-8ad4-4c4c-aee6-45a40a81794a.jpg" width="200"/> </div><br>
+<div align="center"> <img src="/pics/5ea609cb-8ad4-4c4c-aee6-45a40a81794a.jpg" width="200"/> </div><br>
 
 ##### 4. floor()
 
@@ -29538,7 +29538,7 @@ private Node min(Node x) {
 
 令指向最小节点的链接指向最小节点的右子树。
 
-<div align="center"> <img src="pics/31b7e8de-ed11-4f69-b5fd-ba454120ac31.jpg" width="450"/> </div><br>
+<div align="center"> <img src="/pics/31b7e8de-ed11-4f69-b5fd-ba454120ac31.jpg" width="450"/> </div><br>
 
 ```java
 public void deleteMin() {
@@ -29559,7 +29559,7 @@ public Node deleteMin(Node x) {
 - 如果待删除的节点只有一个子树，  那么只需要让指向待删除节点的链接指向唯一的子树即可；
 - 否则，让右子树的最小节点替换该节点。
 
-<div align="center"> <img src="pics/23b9d625-ef28-42b5-bb22-d7aedd007e16.jpg" width="400"/> </div><br>
+<div align="center"> <img src="/pics/23b9d625-ef28-42b5-bb22-d7aedd007e16.jpg" width="400"/> </div><br>
 
 ```java
 public void delete(Key key) {
@@ -29622,7 +29622,7 @@ private List<Key> keys(Node x, Key l, Key h) {
 
 2-3 查找树引入了 2- 节点和 3- 节点，目的是为了让树平衡。一颗完美平衡的 2-3 查找树的所有空链接到根节点的距离应该是相同的。
 
-<div align="center"> <img src="pics/1097658b-c0e6-4821-be9b-25304726a11c.jpg" width="160px"/> </div><br>
+<div align="center"> <img src="/pics/1097658b-c0e6-4821-be9b-25304726a11c.jpg" width="160px"/> </div><br>
 
 ##### 1. 插入操作
 
@@ -29632,11 +29632,11 @@ private List<Key> keys(Node x, Key l, Key h) {
 
 - 如果插入到 2- 节点上，那么直接将新节点和原来的节点组成 3- 节点即可。
 
-<div align="center"> <img src="pics/0c6f9930-8704-4a54-af23-19f9ca3e48b0.jpg" width="350"/> </div><br>
+<div align="center"> <img src="/pics/0c6f9930-8704-4a54-af23-19f9ca3e48b0.jpg" width="350"/> </div><br>
 
 - 如果是插入到 3- 节点上，就会产生一个临时 4- 节点时，需要将 4- 节点分裂成 3 个 2- 节点，并将中间的 2- 节点移到上层节点中。如果上移操作继续产生临时 4- 节点则一直进行分裂上移，直到不存在临时 4- 节点。
 
-<div align="center"> <img src="pics/7002c01b-1ed5-475a-9e5f-5fc8a4cdbcc0.jpg" width="460"/> </div><br>
+<div align="center"> <img src="/pics/7002c01b-1ed5-475a-9e5f-5fc8a4cdbcc0.jpg" width="460"/> </div><br>
 
 ##### 2. 性质
 
@@ -29648,7 +29648,7 @@ private List<Key> keys(Node x, Key l, Key h) {
 
 红黑树是 2-3 查找树，但它不需要分别定义 2- 节点和 3- 节点，而是在普通的二叉查找树之上，为节点添加颜色。指向一个节点的链接颜色如果为红色，那么这个节点和上层节点表示的是一个 3- 节点，而黑色则是普通链接。
 
-<div align="center"> <img src="pics/f1912ba6-6402-4321-9aa8-13d32fd121d1.jpg" width="240"/> </div><br>
+<div align="center"> <img src="/pics/f1912ba6-6402-4321-9aa8-13d32fd121d1.jpg" width="240"/> </div><br>
 
 红黑树具有以下性质：
 
@@ -29657,7 +29657,7 @@ private List<Key> keys(Node x, Key l, Key h) {
 
 画红黑树时可以将红链接画平。
 
-<div align="center"> <img src="pics/f5cb6028-425d-4939-91eb-cca9dd6b6c6c.jpg" width="220"/> </div><br>
+<div align="center"> <img src="/pics/f5cb6028-425d-4939-91eb-cca9dd6b6c6c.jpg" width="220"/> </div><br>
 
 ```java
 public class RedBlackBST<Key extends Comparable<Key>, Value> extends BST<Key, Value> {
@@ -29677,7 +29677,7 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> extends BST<Key, Va
 
 因为合法的红链接都为左链接，如果出现右链接为红链接，那么就需要进行左旋转操作。
 
-<div align="center"> <img src="pics/f4d534ab-0092-4a81-9e5b-ae889b9a72be.jpg" width="480"/> </div><br>
+<div align="center"> <img src="/pics/f4d534ab-0092-4a81-9e5b-ae889b9a72be.jpg" width="480"/> </div><br>
 
 ```java
 public Node rotateLeft(Node h) {
@@ -29696,7 +29696,7 @@ public Node rotateLeft(Node h) {
 
 进行右旋转是为了转换两个连续的左红链接，这会在之后的插入过程中探讨。
 
-<div align="center"> <img src="pics/63c8ffea-a9f2-4ebe-97d1-d71be71246f9.jpg" width="480"/> </div><br>
+<div align="center"> <img src="/pics/63c8ffea-a9f2-4ebe-97d1-d71be71246f9.jpg" width="480"/> </div><br>
 
 ```java
 public Node rotateRight(Node h) {
@@ -29715,7 +29715,7 @@ public Node rotateRight(Node h) {
 
 一个 4- 节点在红黑树中表现为一个节点的左右子节点都是红色的。分裂 4- 节点除了需要将子节点的颜色由红变黑之外，同时需要将父节点的颜色由黑变红，从 2-3 树的角度看就是将中间节点移到上层节点。
 
-<div align="center"> <img src="pics/094b279a-b2db-4be7-87a3-b2a039c7448e.jpg" width="270"/> </div><br>
+<div align="center"> <img src="/pics/094b279a-b2db-4be7-87a3-b2a039c7448e.jpg" width="270"/> </div><br>
 
 ```java
 void flipColors(Node h) {
@@ -29733,7 +29733,7 @@ void flipColors(Node h) {
 - 如果左子节点是红色的，而且左子节点的左子节点也是红色的，进行右旋转；
 - 如果左右子节点均为红色的，进行颜色转换。
 
-<div align="center"> <img src="pics/4c457532-550b-4eca-b881-037b84b4934b.jpg" width="430"/> </div><br>
+<div align="center"> <img src="/pics/4c457532-550b-4eca-b881-037b84b4934b.jpg" width="430"/> </div><br>
 
 ```java
 @Override
@@ -29858,7 +29858,7 @@ public class Transaction {
 
 对于 N 个键，M 条链表 (N>M)，如果哈希函数能够满足均匀性的条件，每条链表的大小趋向于 N/M，因此未命中的查找和插入操作所需要的比较次数为 \~N/M。
 
-<div align="center"> <img src="pics/cbbfe06c-f0cb-47c4-bf7b-2780aebd98b2.png" width="330px"> </div><br>
+<div align="center"> <img src="/pics/cbbfe06c-f0cb-47c4-bf7b-2780aebd98b2.png" width="330px"> </div><br>
 
 ##### 3. 线性探测法
 
@@ -29866,7 +29866,7 @@ public class Transaction {
 
 使用线性探测法，数组的大小 M 应当大于键的个数 N（M>N)。
 
-<div align="center"> <img src="pics/0dbc4f7d-05c9-4aae-8065-7b7ea7e9709e.gif" width="350px"> </div><br>
+<div align="center"> <img src="/pics/0dbc4f7d-05c9-4aae-8065-7b7ea7e9709e.gif" width="350px"> </div><br>
 
 ```java
 public class LinearProbingHashST<Key, Value> implements UnorderedST<Key, Value> {
@@ -29967,7 +29967,7 @@ public void delete(Key key) {
 
 线性探测法的成本取决于连续条目的长度，连续条目也叫聚簇。当聚簇很长时，在查找和插入时也需要进行很多次探测。例如下图中 2\~4 位置就是一个聚簇。
 
-<div align="center"> <img src="pics/ace20410-f053-4c4a-aca4-2c603ff11bbe.png" width="340px"> </div><br>
+<div align="center"> <img src="/pics/ace20410-f053-4c4a-aca4-2c603ff11bbe.png" width="340px"> </div><br>
 
 α = N/M，把 α 称为使用率。理论证明，当 α 小于 1/2 时探测的预计次数只在 1.5 到 2.5 之间。为了保证散列表的性能，应当调整数组的大小，使得 α 在 [1/4, 1/2] 之间。
 
@@ -30043,13 +30043,13 @@ public class SparseVector {
 
 更多精彩内容将发布在微信公众号 CyC2018 上，你也可以在公众号后台和我交流学习和求职相关的问题。另外，公众号提供了该项目的 PDF 等离线阅读版本，后台回复 "下载" 即可领取。公众号也提供了一份技术面试复习大纲，不仅系统整理了面试知识点，而且标注了各个知识点的重要程度，从而帮你理清多而杂的面试知识点，后台回复 "大纲" 即可领取。我基本是按照这个大纲来进行复习的，对我拿到了 BAT 头条等 Offer 起到很大的帮助。你们完全可以和我一样根据大纲上列的知识点来进行复习，就不用看很多不重要的内容，也可以知道哪些内容很重要从而多安排一些复习时间。
 
-<div align="center"><img width="480px" src="pics/公众号海报4.png"></img></div>
+<div align="center"><img width="480px" src="/pics/公众号海报4.png"></img></div>
 
 ### 其它
 
 #### 汉诺塔
 
-<div align="center"> <img src="pics/69d6c38d-1dec-4f72-ae60-60dbc10e9d15.png" width="300"/> </div><br>
+<div align="center"> <img src="/pics/69d6c38d-1dec-4f72-ae60-60dbc10e9d15.png" width="300"/> </div><br>
 
 有三个柱子，分别为 from、buffer、to。需要将 from 上的圆盘全部移动到 to 上，并且要保证小圆盘始终在大圆盘上。
 
@@ -30057,15 +30057,15 @@ public class SparseVector {
 
 ① 将 n-1 个圆盘从 from -> buffer
 
-<div align="center"> <img src="pics/f9240aa1-8d48-4959-b28a-7ca45c3e4d91.png" width="300"/> </div><br>
+<div align="center"> <img src="/pics/f9240aa1-8d48-4959-b28a-7ca45c3e4d91.png" width="300"/> </div><br>
 
 ② 将 1 个圆盘从 from -> to
 
-<div align="center"> <img src="pics/f579cab0-3d49-4d00-8e14-e9e1669d0f9f.png" width="300"/> </div><br>
+<div align="center"> <img src="/pics/f579cab0-3d49-4d00-8e14-e9e1669d0f9f.png" width="300"/> </div><br>
 
 ③ 将 n-1 个圆盘从 buffer -> to
 
-<div align="center"> <img src="pics/d02f74dd-8e33-4f3c-bf29-53203a06695a.png" width="300"/> </div><br>
+<div align="center"> <img src="/pics/d02f74dd-8e33-4f3c-bf29-53203a06695a.png" width="300"/> </div><br>
 
 如果只有一个圆盘，那么只需要进行一次移动操作。
 
@@ -30116,7 +30116,7 @@ from H1 to H3
 
 生成编码时，从根节点出发，向左遍历则添加二进制位 0，向右则添加二进制位 1，直到遍历到叶子节点，叶子节点代表的字符的编码就是这个路径编码。
 
-<div align="center"> <img src="pics/8edc5164-810b-4cc5-bda8-2a2c98556377.jpg" width="300"/> </div><br>
+<div align="center"> <img src="/pics/8edc5164-810b-4cc5-bda8-2a2c98556377.jpg" width="300"/> </div><br>
 
 ```java
 public class Huffman {
