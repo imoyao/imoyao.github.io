@@ -1,3 +1,11 @@
+---
+title: first-wiki
+toc: true
+date: 2020-05-23 11:02:28
+tags:
+
+---
+
 # 1. PG 介绍
 继上次分享的[《Ceph 介绍及原理架构分享》](https://www.jianshu.com/p/cc3ece850433)，这次主要来分享 Ceph 中的 PG 各种状态详解，PG 是最复杂和难于理解的概念之一，PG 的复杂如下：
  - 在架构层次上，PG 位于 RADOS 层的中间。 

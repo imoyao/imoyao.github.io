@@ -1,3 +1,11 @@
+---
+title: first-wiki
+toc: true
+date: 2020-05-23 11:02:28
+tags:
+
+---
+
 # 1. 问题
 ceph 集群警告信息如下：
 ```plain
