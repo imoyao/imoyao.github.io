@@ -285,7 +285,7 @@ Monitor 通常是轻量级进程，但它们会频繁调用 `fsync()` ，这会�
 
 我们建议同时部署 public（前端）网络和 cluster（后端）网络，这样能更好地满足对象复制的网络性能需求。另一个优点是你可以运营一个不连接互联网的集群，以此避免某些拒绝服务攻击。 OSD 们互联和检查心跳时会优选 cluster（后端）网络。
 
-![](http://i.imgur.com/1NvAPXa.png)
+![如图](http://i.imgur.com/1NvAPXa.png)
 
 然而，如果 cluster（后端）网络失败、或出现了明显的延时，同时 public（前端）网络却运行良好， OSD 目前不能很好地处理这种情况。这时 OSD 们会向 monitor 报告邻居 `down` 了、同时报告自己是 `up` 的，我们把这种情形称为震荡（ flapping ）。
 

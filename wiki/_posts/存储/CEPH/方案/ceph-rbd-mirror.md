@@ -52,7 +52,7 @@ mirroring 是基于存储池进行的 peer，ceph 支持两种模式的镜像，
 
 *   只有指定的镜像才会进行备份
 
-[](http://wiki.intra.xiaojukeji.com/pages/viewpage.action?pageId=117858533)
+[参见](http://wiki.intra.xiaojukeji.com/pages/viewpage.action?pageId=117858533)
 
 ## 2.1 存储池模式
 ### 2.1.1 创建存储池

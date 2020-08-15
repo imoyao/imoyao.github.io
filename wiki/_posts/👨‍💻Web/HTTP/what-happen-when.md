@@ -38,13 +38,13 @@ cover: /images/internet1-100649339.jpg
 
 **检查缓存**
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822181538.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822181538.png)
 
 ## 二、DNS 查询
 
 **基本步骤**
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822181732.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822181732.png)
 
 **1. 浏览器缓存**
 
@@ -66,7 +66,7 @@ ISP DNS 就是在客户端电脑上设置的首选 DNS 服务器，它们在大�
 
 在前面所有步骤没有缓存的情况下，本地 DNS 服务器会将请求转发到互联网上的根域，下面这个图很好的诠释了整个流程：
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/1604181361-5a1397cca5644_articlex.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/1604181361-5a1397cca5644_articlex.png)
 
 > 根域名服务器：[维基百科](https://zh.wikipedia.org/wiki/%E6%A0%B9%E7%B6%B2%E5%9F%9F%E5%90%8D%E7%A8%B1%E4%BC%BA%E6%9C%8D%E5%99%A8)
 
@@ -81,7 +81,7 @@ ISP DNS 就是在客户端电脑上设置的首选 DNS 服务器，它们在大�
 
 TCP/IP 分为四层，在发送数据时，每层都要对数据进行封装：
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822182400.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822182400.png)
 
 ### **1. 应用层：发送 HTTP 请求**
 
@@ -145,7 +145,7 @@ TCP/IP 分为四层，在发送数据时，每层都要对数据进行封装：
 
 **大致流程**
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822183251.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822183251.png)
 
 **HTTPD**
 
@@ -193,13 +193,13 @@ TCP/IP 分为四层，在发送数据时，每层都要对数据进行封装：
 
 **浏览器内核**
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/961f7b5d-9e06-4006-ab99-974e8e9e2ba5.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/961f7b5d-9e06-4006-ab99-974e8e9e2ba5.png)
 
 不同的浏览器内核，渲染过程也不完全相同，但大致流程都差不多。
 
 **基本流程**
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822183712.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822183712.png)
 
 ### **1.HTML 解析**
 
@@ -241,7 +241,7 @@ TCP/IP 分为四层，在发送数据时，每层都要对数据进行封装：
 </html>
 ```
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/1355879024-573db51949951_articlex.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/1355879024-573db51949951_articlex.png)
 
 **浏览器容错进制**
 
@@ -333,7 +333,7 @@ reflow 基本是无法避免的，因为当你滑动一下鼠标、resize 窗口
 
 **大致流程**
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822184523.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822184523.png)
 
 可以分为三个阶段：
 
@@ -371,7 +371,7 @@ JS 有三种运行环境：
 
 **JS 线程**
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822184731.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822184731.png)
 
 虽然 JS 是单线程的，但实际上参与工作的线程一共有四个：
 
@@ -397,7 +397,7 @@ JS 有三种运行环境：
 
 微任务的执行在宏任务的同步任务之后，在异步任务之前。
 
-![](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822185002.png)
+![如图](https://gd4ark-1258805822.cos.ap-guangzhou.myqcloud.com/images/20190822185002.png)
 
 **代码例子**
 

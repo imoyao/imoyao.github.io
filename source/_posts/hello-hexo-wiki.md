@@ -131,5 +131,9 @@ hexo s
 1. Wikitten 主题会根据目录自动生成分类，所以不建议在文章的 front matter 中再去定义 categories 字段，或者定义 categories 之后直接放到首页 index 目录即可，不然可能导致分类出现重合。
 2. 为了以后“分家”方便（降低耦合度），建议不要和主站的图片目录放到一个文件夹中，比如我的主站图片在`sources/images/`文件夹下，则 wiki 的图片可以放到`sources/pics/`或者`sources/imgs/`目录下，这样以后如果要做拆分，直接剪切相应目录即可。当然，如果你使用 OSS 存储或图床服务，则不需要这样麻烦。
 
+## 发现问题
+
+1. wiki页面中文锚点无法点击！
+
 ## 参考链接
 [Hexo 同时使用两种主题](https://konfido.github.io/2019/03/16/hexo-wiki/)
