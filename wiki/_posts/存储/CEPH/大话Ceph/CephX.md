@@ -106,7 +106,7 @@ ceph-deploy-ceph.log
 
 用一张图来表明秘钥的生成关系：
 
-![](https://github.com/junfsir/jNote/raw/master/images/ceph-keyring.jpg)
+![如图](https://github.com/junfsir/jNote/raw/master/images/ceph-keyring.jpg)
 
 通过这张图，我们可以很容易理解 `bootstrap` 的几个用户的用处了，就是用于引导生成对应类用户的用户，比如`bootstrap-osd` 用于引导生成所有 `osd.N` 用户。
 

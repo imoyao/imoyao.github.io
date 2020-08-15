@@ -166,7 +166,7 @@ if __name__ == '__main__':
 
 ```Python
 def multi_expression_starred():
-    # print(type(lambda *n: n*i for i in range(5)))     # 去掉注释则 >>>: <class 'generator'>
+    # print(type(lambda *n: n*i for i in range(5)))     # 注释行打印 >>>: <class 'generator'>
     return [lambda *n: n * i for i in range(5)]
 
 
