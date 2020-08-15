@@ -8,7 +8,8 @@ tags:
 top: 4
 
 ---
-> JSON (JavaScript Object Notation) <http://json.org> is a subset of JavaScript syntax (ECMA-262 3rd edition) used as a lightweight data interchange format.
+> JSON (JavaScript Object Notation) (http://json.org)
+        is a subset of JavaScript syntax (ECMA-262 3rd edition) used as a lightweight data interchange format.
 
 JSON 通常用于在 Web 客户端和服务器数据交换，即把`字符串类型`的数据转换成`Python基本数据类型`或者将`Python基本数据类型`转换成`字符串类型`。
 

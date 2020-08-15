@@ -1,3 +1,11 @@
+---
+title: first-wiki
+toc: true
+date: 2020-05-23 11:02:28
+tags:
+
+---
+
 **转载：**http://bean-li.github.io/atop-exit-code/
 
 # 1. 前言

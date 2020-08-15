@@ -31,12 +31,12 @@ Ceph 是一个可靠的、自治的、可扩展的分布式存储系统，它支
 
   
 
-![](https://pic4.zhimg.com/v2-0d3613d440c363e41a3578c2cc6fa167_b.jpg)
+![如图](https://pic4.zhimg.com/v2-0d3613d440c363e41a3578c2cc6fa167_b.jpg)
 
 图 2.1 Ceph 整体架构
 
 
-![](https://pic2.zhimg.com/v2-9ca4cbee64e6d4e63246803abb892fe9_b.jpg)
+![如图](https://pic2.zhimg.com/v2-9ca4cbee64e6d4e63246803abb892fe9_b.jpg)
 
 图 2.2 Ceph 分层架构
 
@@ -44,7 +44,7 @@ Ceph 是一个可靠的、自治的、可扩展的分布式存储系统，它支
 
 此处以 CephFS 为例简要介绍 Ceph 的 IO 流程。首先由客户端发起 IO 请求，对提供的文件系统接口的 IO 请求可以大致分为文件数据 IO 请求和元数据 IO 请求。元数据 IO 请求对应地和元数据管理服务集群进行通信即可，此处重点介绍文件数据的 IO 处理流程。客户端发起对应的文件 IO，调用 libcephfs 的相关接口，libcephfs 作为 librados 的客户端，会运行简单的 HASH 路由算法计算此次 IO 请求对应的 PG，再根据 CRUSH 算法计算出 PG 对应的 OSD 组，返回 OSD 信息给客户端即 libcephfs 之后，对应地客户端将读写请求发送到 OSD 上进行处理。而 OSD 集群中的每一个 OSD 进程都运行在独立的存储驱动器上，OSD 接收到对应的 IO 请求之后，根据对应的后端存储类型，执行对应后端存储引擎的 IO 操作，如选择了文件系统作为后端存储引擎，则相应地需要将 IO 请求转化为文件的读写。
 
-![](https://pic1.zhimg.com/v2-66ce776dba626eac7be8900cac6c84c4_b.jpg)
+![如图](https://pic1.zhimg.com/v2-66ce776dba626eac7be8900cac6c84c4_b.jpg)
 
 图 2.3 Ceph IO 流程
 
@@ -82,7 +82,7 @@ Ceph 于 2015 年开发了 NewStore，一种键值存储引擎来管理元数据
 
   
 
-![](https://pic2.zhimg.com/v2-4d75f6562cb54be85356df80485a3085_b.jpg)
+![如图](https://pic2.zhimg.com/v2-4d75f6562cb54be85356df80485a3085_b.jpg)
 
 图 2.4 Ceph 后端引擎发展历程
 
@@ -104,7 +104,7 @@ FileStore，也就是利用文件系统的 POSIX 接口实现 ObjectStore API。
 
   
 
-![](https://pic3.zhimg.com/v2-229c263cdf2ad52bf0e0b78162e36606_b.jpg)
+![如图](https://pic3.zhimg.com/v2-229c263cdf2ad52bf0e0b78162e36606_b.jpg)
 
 图 3‑1 FileStore 架构图
 
@@ -168,7 +168,7 @@ RADOS 中的对象通过 hash 函数映射到不同的 PG 中，并且按照 has
 
   
 
-![](https://pic1.zhimg.com/v2-9d3b3be70608285d84ffb99d2c2cdbe4_b.jpg)
+![如图](https://pic1.zhimg.com/v2-9d3b3be70608285d84ffb99d2c2cdbe4_b.jpg)
 
 图 3‑2 分割文件夹时后端存储的性能表现
 
@@ -196,7 +196,7 @@ NewStore 的关键数据结构和 KV 数据分布如图所示。NewStore 首先�
 
   
 
-![](https://pic2.zhimg.com/v2-f3aa7bb87bdaca174b9c8b6d25309c99_b.jpg)
+![如图](https://pic2.zhimg.com/v2-f3aa7bb87bdaca174b9c8b6d25309c99_b.jpg)
 
 图 3-3 NewStore 的 KV 数据分布
 
@@ -240,7 +240,7 @@ BlueStore 是最终基于 RocksDB 和 BlockDevice 实现的 Ceph 的对象存储
 
   
 
-![](https://pic2.zhimg.com/v2-6359874d098439453ac4b0adb78121cd_b.jpg)
+![如图](https://pic2.zhimg.com/v2-6359874d098439453ac4b0adb78121cd_b.jpg)
 
 图 3-4 BlueStore 架构图
 
@@ -252,7 +252,7 @@ BlueStore 是最终基于 RocksDB 和 BlockDevice 实现的 Ceph 的对象存储
 
   
 
-![](https://pic2.zhimg.com/v2-cf23a9da5384d7ba47fff8e0f712f665_b.jpg)
+![如图](https://pic2.zhimg.com/v2-cf23a9da5384d7ba47fff8e0f712f665_b.jpg)
 
 图 3-5 BlueFS 架构图
 
