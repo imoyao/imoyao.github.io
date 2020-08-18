@@ -133,7 +133,7 @@ hexo s
 
 ## 发现问题
 
-1. wiki页面中文锚点无法点击！
+1. wiki 页面中文锚点无法点击！
 
 ## 参考链接
 [Hexo 同时使用两种主题](https://konfido.github.io/2019/03/16/hexo-wiki/)
