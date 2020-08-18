@@ -54,6 +54,9 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/images/about-bg.jpg
 <div class="zhihu-card" data-userhash="imoyao" data-theme="zhihu_new" data-width="400" data-height="225"></div>
 <script src="https://laike9m.github.io/zhihu-card/dist/widget.js"></script>
 
+<img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=imoyao&hide_langs_below=1&theme=default&line_height=27&layout=compact" />
+<img align="center" src="https://github-readme-stats.vercel.app/api?username=imoyao&show_icons=true&count_private=true&include_all_commits=true&line_height=21" alt="imoyao's Github Stats" />
+
 ### 技术问题解决之道
 
 1. 重启过了没？
