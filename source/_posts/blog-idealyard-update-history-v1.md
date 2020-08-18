@@ -28,6 +28,14 @@ reward: true
 
 回首看来，没有打败你的最终都会让你更加强大，不过在第一次面对这些问题的时候还真是有点找不到北。
 
+## 预览
+
+<iframe class="bilibili" src="https://xbeibeix.com/api/bilibili/biliplayer/?url=BV11v411v76q" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+如果上方无法打开，请访问下方链接。
+
+<iframe class="bilibili" src="//player.bilibili.com/player.html?aid=244176193&bvid=BV11v411v76q&cid=221300555&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
 ## 展望
 目前基本完成了一个博客的完整功能，但是其实还有很多的小 Bug 需要解决。而且在开发的过程中又产生了一些新想法，还需要自己抽时间落地。具体请阅读 [我的博客 idealyard 待办事项记录](/blog/2019-08-29/blog-idealyard-TODO/)。
 
