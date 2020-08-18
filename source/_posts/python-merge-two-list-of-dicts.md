@@ -84,8 +84,7 @@ def merge_iterables_of_dict(shared_key, *iterables):
        dictionary.pop(shared_key)
    return result
 ```
-使用这个函数：
-`merge_iterables_of_dict('id',l1,l2)`
+使用这个函数：`merge_iterables_of_dict('id',l1,l2)`，注意，li和l2的顺序会影响返回结果，更“靠谱”的数据应该放到iterables后方（参考字典`update`方法的更新逻辑）。
 
 ## 参考链接
 
