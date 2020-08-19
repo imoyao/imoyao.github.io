@@ -5,6 +5,8 @@ tags:
 - CEPH
 - 环境搭建
 - CentOS7
+top: 2
+reward: true
 cover: /images/logos/ceph-logo.svg
 categories:
 - 工作日常
