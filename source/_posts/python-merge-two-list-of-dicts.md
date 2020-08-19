@@ -55,7 +55,7 @@ for item in l2:
 
 ```
 但是这种办法有一个缺陷：我们会对所有输入的字典进行更新，为了消除这个影响，我们从一个空字典开始，更新每一个键，当然也包括 id，之后弹出额外的键，可以使用[defaultdict](https://docs.python.org/3/library/collections.html#collections.defaultdict):
-
+简单介绍参考：[James Tauber : Evolution of Default Dictionaries in Python](https://jtauber.com/blog/2008/02/27/evolution_of_default_dictionaries_in_python/)
 4.  第三版代码
 ```python
 from collections import defaultdict
