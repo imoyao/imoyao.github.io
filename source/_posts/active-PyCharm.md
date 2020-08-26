@@ -16,7 +16,7 @@ cover: /images/PyCharm.png
 
 ## 更新
 1. 跳转到该开源项目：[ide-eval-resetter: Reset your IDE eval information.](https://gitee.com/pengzhile/ide-eval-resetter)；
-2. 下载插件[releases](https://gitee.com/pengzhile/ide-eval-resetter/releases)，安装扩展（类似于Chrome 安装非官方扩展的方法）；
+2. 下载插件[releases](https://gitee.com/pengzhile/ide-eval-resetter/releases)，安装扩展（类似于 Chrome 安装非官方扩展的方法）；
 ![PyCharm-2020.2](/images/PyCharm-2020-2.png)
 3. 点击 `Help` 或 `Get Help` -> `Reset IDE's Eval` 菜单；
 4. 重启 IDE；
@@ -26,10 +26,10 @@ cover: /images/PyCharm.png
 以下为个人记录备用，用于迷路之后的操作，普通使用者可以忽略。
 1. 关注公众号，发`?`求助；
 2. 收到回复之后破解谜面；
-3. 安装 pycryptodome
-    ```bash
+3. 安装 pycryptodome    
+ ```plain
     pip3 install -i https://pypi.douban.com/simple pycryptodome
-    ```
+ ```
 4. 获取地址，得到谜底。
 ```python
 # -*- coding:utf-8 -*-
