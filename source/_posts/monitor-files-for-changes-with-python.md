@@ -1,14 +1,95 @@
 ---
-title: 一种基于 pyinotify 和 rsync 实现的文件目录同步方案
+title: Python 如何实现跨主机文件目录同步？（基于 watchdog 和 rsync）
 date: 2020-07-22 10:19:18
 tags:
 - 文件同步
 - pyinotify
+- watchdog
 categories: 项目相关
 password: estor
 ---
-## 架构
-pyinotify实现目录监控，rsync实现文件同步。
+## 更新
+{% note danger %}
+根据该文：[Why you should not use pyinotify | teideal glic deisbhéalach](http://www.serpentine.com/blog/2008/01/04/why-you-should-not-use-pyinotify/)，pyinotify 并**不是**一个监控文件的好的方案，总结一下主要问题有：
+1. 函数异常处理不正确
+使用 pyinotify 的程序很容易丢失其目录层次结构的各个部分。如果`inotify_add_watch`调用失败并不会调用`OSError`，而是返回一个-1 的错误码，但是没有错误信息告诉调用者到底是什么错误（如添加的是一个不存在的目录还是超出系统 `max_user_watches` 限制）。
+2. 性能差
+每次要遍历 20 个元素的字典，同时对每个报告的时间执行最多 60 次的属性查找，其中基于%格式最多可达 40 次！在程序运行时，执行 top 查看一下内存占用吧！
+3. 锁机制
+4. 代码不够 pythonic，接口丑陋。
+
+在[这里· Issue #87 · seb-m/pyinotify](https://github.com/seb-m/pyinotify/issues/87)作者并没有正面回复社区的疑问。
+{% endnote %}
+鉴于上述原因，本人不再尝试 pyinotify，转向使用[watchdog](https://github.com/gorakhargosh/watchdog)，代码写法参考了[此处](https://stackoverflow.com/a/18599427)和[此处](http://thepythoncorner.com/dev/how-to-create-a-watchdog-in-python-to-look-for-filesystem-changes/)。
+## 代码
+```python
+# coding=utf-8
+# !/usr/bin/python
+
+from datetime import datetime
+import time
+import random
+
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+
+
+class MyHandler(FileSystemEventHandler):
+    """
+    [python watchdog monitoring file for changes - Stack Overflow](https://stackoverflow.com/questions/18599339/python-watchdog-monitoring-file-for-changes/18599427#18599427)
+    """
+
+    def __init__(self):
+        self.last_modified = datetime.now()
+        super(MyHandler).__init__()
+
+    def on_created(self, event):
+        print(f"hey, {event.src_path} has been created! last_modified：{self.last_modified}")
+
+    def on_deleted(self, event):
+        print(f"Nope! Someone deleted {event.src_path}!")
+
+    def on_modified(self, event):
+
+        print(f'event type: {event.event_type}  path : {event.src_path},last_modified：{self.last_modified}')
+
+
+def main(path='.'):
+    event_handler = MyHandler()
+    observer = Observer()
+    observer.schedule(event_handler, path=path, recursive=False)
+    observer.start()
+
+    try:
+        while True:
+            # for test
+            int_t = random.randint(1, 10)
+            with open('test.txt','a+') as f:
+                f.write(f'hahahahah-------{int_t}\n')
+                time.sleep(int_t)
+
+            time.sleep(1)
+    except KeyboardInterrupt:
+        observer.stop()
+    observer.join()
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+更多关于文件系统监控的项目可以参考[这里](https://github.com/gorakhargosh/watchdog#why-watchdog)。
+
+---
+
+## 前言
+在使用 DRBD 用于块设备同步时由于网络异常可能出现数据不一致，此时为了避免 DRBD 脑裂引入仲裁机制，而引入仲裁机制的时候，我们难免需要使用配置文件记录一部分配置文件的信息，之后，在某一个仲裁成员机上修改配置，配置文件信息应该保证同步到其他成员机上。本文使用[pyinotify](http://pythonic.zoomquiet.top/data/20081023114228/index.html)和 rsync 实现一种文件同步的方案，其中 pyinotify 实现目录监控，rsync 实现文件同步。
+{% note info %}
+Pyinotify 底层实现依赖于 Linux 的 inofy 机制，而这属于 kernel 2.6.13 以上的特性。
+{% endnote %}
+
+## 代码
 ```python
 
 import os
@@ -45,7 +126,6 @@ class EventHandler(pyinotify.ProcessEvent):
 
 
     def process_IN_MODIFY(self, event):
-        logger.info('123456------------')
         self.sync_file()
         logger.info("MODIFY event : %s  %s" % (os.path.join(event.path, event.name), datetime.datetime.now()))
 
@@ -57,7 +137,7 @@ class EventHandler(pyinotify.ProcessEvent):
         生产卷推，镜像卷拉（关机之后，再起来应该已经发生仲裁，检查即可）
         :return:
         """
-        logger.info(f'======000000000000-------{is_push}-----')
+        logger.info('----do sth--')
 
 
 
@@ -124,3 +204,6 @@ def main():
 if __name__ == '__main__':
     oa_notifier()
 ```
+## 推荐阅读
+Windows 可能有用的解决方案：[Tim Golden's Python Stuff: Watch a Directory for Changes](http://timgolden.me.uk/python/win32_how_do_i/watch_directory_for_changes.html)
+[python - Detect File Change Without Polling - Stack Overflow](https://stackoverflow.com/questions/5738442/detect-file-change-without-polling)
