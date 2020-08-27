@@ -1,0 +1,115 @@
+---
+title: 一种基于 DRBD 实现的双活解决方案
+date: 2020-07-22 10:19:18
+tags:
+- DRBD
+- 存储
+categories: 项目相关
+password: estor
+---
+{% note info %}
+**版本信息**    
+cat /proc/drbd 
+version: 8.4.5 (api:1/proto:86-101)
+srcversion: D71ED6FF152163F9B784DD3 
+{% endnote %}
+## 架构
+我们通过 DRBD 双主模式实现两台双控存储服务器之间的数据同步的同时实现共同承担业务数据的读写。在初始化时，通过定义优先级实现生产卷和镜像卷的配置，保证生产卷配置更强从而承担更多的业务。
+![整体设计图](/images/AA-DRBD/AA-DRBD.png)
+## 定义
+控制器：controller/host
+分组、节点：group/node
+仲裁域：zone
+
+## 具体实现
+### 整体
+双控服务器在内部通过 heartbeat+pacemaker+corosync 实现宕机等异常发生时事件通知，DRBD 通过专用网络实现两个控制器之间的数据同步。同时配置第三节点做为仲裁服务器，当 DRBD 因为网络异常导致连接异常时，向管理系统告知事件发生，之后存储控制器通过抢占仲裁服务器保证最终只有一个数据节点继续提供服务，未抢占到仲裁的节点自动降备，自身数据标记为 outdated，不再对外提供服务，从而避免数据两边读写发生脑裂事故。当异常修复之后，存储管理员手动恢复异常服务器，将之前 DRBD 被标记为备机的节点重新激活，然后数据从主机同步到备机，两边的数据重新恢复 UpToDate，之后业务恢复正常。
+### 仲裁服务
+通过 go 编写仲裁服务包括以下几个部分：远程调用模块、仲裁模块、日志模块、数据管理模块、安全访问模块(暂定)
+根据业务实际需要，目前仲裁服务支持以下功能：
+1. 初始化（init）
+2. 重置（reset）
+3. 状态探测（probe）
+4. 增加节点（add）
+5. 删除节点（delete）
+6. 更新节点（update）
+7. 抢占（freeze）
+8. 查询抢占结果（inquire）
+9. 释放抢占（release）
+10. 销毁（destroy）
+### 管理系统
+![管理系统流程图](/images/AA-DRBD/ODSP.png)
+
+[完整流程 - ProcessOn](https://www.processon.com/view/link/5f100b71f346fb2bfb290a20)
+
+### 界面
+![仲裁服务初始化](/images/AA-DRBD/yxt-init.png)
+![仲裁服务管理](/images/AA-DRBD/yxt-manage.png)
+[原型图](https://modao.cc/app/701a9917a82f111aec9c62a32f241770?simulator_type=device&sticky)
+
+## Q&A
+
+1. 如何通知仲裁并实现抢占？
+参见[使用DRBD和Pacemaker集群栈](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#ch-pacemaker)，因为我们使用GFS文件系统，所以参考此处：[将GFS与DRBD结合使用](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#ch-gfs)
+> 将DRBD资源设置为包含共享的Global File System(GFS)的块设备所需的步骤。它包括GFS和GFS2。要在DRBD上使用GFS，必须在indexterm中配置[DRBD|dual-primary mode](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#s-dual-primary-mode)。
+
+我们首先需要对drbd资源进行配置，具体资源配置为：
+ ```plain
+ resource r1 {
+    net{
+        timeout  300;
+        ping-int 60;
+        ping-timeout 600; 
+        ko-count 7;
+        socket-check-timeout 1;
+        protocol C;
+        allow-two-primaries yes;        # 允许双主
+    }
+
+    disk{
+        fencing resource-and-stonith;       # 定义双主模式下连接断开时的处理策略 ①
+    }
+
+    handlers{
+        fence-peer "/root/DRBD/notify/drbd_notify.sh drbd1 fence-peer";     # 配置连接断开时的fence功能
+        before-resync-target "/root/DRBD/notify/drbd_notify.sh drbd1 sync-target-start";    # 同步目标端（target）开始同步通知
+        after-resync-target "/root/DRBD/notify/drbd_notify.sh brbd1 sync-target-done";  # 同步目标端完成同步通知
+    }
+
+    device /dev/drbd1;
+
+    disk  /dev/StorPool11/SANLun10;
+    meta-disk internal;
+    on controller-1 {
+        address 10.10.12.2:32455;
+    }
+
+    on controller-2 {
+        address 10.10.12.3:32455;
+    }
+
+}
+ ```
+ 1. 磁盘fencing配置策略
+    - dont-care：默认策略，不执行fencing策略
+    - resource-only:仅执行fence-peer，需要说明的是，该功能并不是fence-peer的使能开关，而是说明除fence-peer外不需要做额外的其他工作
+    - resource-and-stonith：冻结io并等待fence-peer的执行结果，根据执行结果决定是否解除冻结， 解除冻结需要对端处于outdate状态。
+ 2. handler 配置策略
+  - fence-peer
+    目前我们自定义的返回码如下所示:
+    ```
+    3：对端处磁盘于inconsistent或者更糟糕的状态，
+     返回该值后，本端将把对端磁盘状态设置为inconsistent状态。
+    4：对端处于outdate状态，返回该值后，本端将把对端磁盘状态设置为outdate。本端挂起将会被解除 
+    5: 对端已经关机，返回该值后，本端将对端磁盘状态设置为outdate，本端挂起将会被解除
+    6：对端角色为主，返回该值后，本端磁盘状态自动变为outdate状态
+    7：对端被成功爆头，返回该值后，本端将对端磁盘状态设置为outdate，本端挂起将会被解除
+    101: 将本端所有io以错误码-EIO返回，磁盘状态不改变，挂起状态将会被解除
+    其他值: 打印 “fence-peer helper broken, returned N"日志后返回，不做其他处理。
+    ```
+  - before-resync-target: 同步目标端开始同步通知
+    0: 通知成功
+    其他: 通知失败，断开连接
+  - after-resync-target: 同步目标端完成同步通知
+    返回值不影响执行
+
