@@ -45,20 +45,21 @@ def multi_func():
     return foo
 ```
 ## 为了实现目标，你应该这样
-1. 最一般的解决方案可以说是有点取巧（ `hack` ）。由于 `Python` 拥有在前文提到的为函数默认参数赋值的行为（参见 [可变默认参数](http://docs.python-guide.org/en/latest/writing/gotchas/#default-args) ）,你可以像下面这样创建一个立即绑定参数的闭包：
+1. 最一般的解决方案可以说是有点取巧（ `hack` ）。由于 `Python` 拥有在前文提到的为函数的默认参数赋值的行为（参见 [可变默认参数](http://docs.python-guide.org/en/latest/writing/gotchas/#default-args) ）,你可以像下面这样创建一个立即绑定参数的闭包：
 
-```python
+ ```python
 def multi_expression_hack():
     return [lambda n, i=i: n * i for i in range(5)]     # 此处用法参见《Python Cookbook》7.7 匿名函数捕获变量值
 
 
 if __name__ == '__main__':
     print([func(10) for func in multi_expression_hack()])
-```
+ ```
+ 此处会在函数内部再次定义一个局部变量。
 
 2. 或者，你可以使用 `functools.partial` 函数（偏函数）：
 
-```python
+ ```python
 from functools import partial
 from operator import mul
 
@@ -69,22 +70,22 @@ def partial_func():
 
 if __name__ == '__main__':
     print([func(10) for func in partial_func()])
-```
+ ```
 
 3. 优雅的写法，直接用生成器表达式：
 
-```python
+ ```python
 def gen_expression():
     return (lambda n: n * i for i in range(5))
 
 
 if __name__ == '__main__':
     print([gen(10) for gen in gen_expression()])
-```
+ ```
 
 4. 利用 `yield` 的惰性求值思想编写生成器函数：
 
-```python
+ ```python
 def gen_func():
     for i in range(5):
         yield lambda n: i * n
@@ -92,7 +93,7 @@ def gen_func():
 
 if __name__ == '__main__':
     print([gen(10) for gen in gen_func()])
-```
+ ```
 
 ## 当陷阱不是一个陷阱
 
