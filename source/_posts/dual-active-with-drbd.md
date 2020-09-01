@@ -23,7 +23,17 @@ srcversion: D71ED6FF152163F9B784DD3
 
 ## 具体实现
 ### 整体
-双控服务器在内部通过 heartbeat+pacemaker+corosync 实现宕机等异常发生时事件通知，DRBD 通过专用网络实现两个控制器之间的数据同步。同时配置第三节点做为仲裁服务器，当 DRBD 因为网络异常导致连接异常时，向管理系统告知事件发生，之后存储控制器通过抢占仲裁服务器保证最终只有一个数据节点继续提供服务，未抢占到仲裁的节点自动降备，自身数据标记为 outdated，不再对外提供服务，从而避免数据两边读写发生脑裂事故。当异常修复之后，存储管理员手动恢复异常服务器，将之前 DRBD 被标记为备机的节点重新激活，然后数据从主机同步到备机，两边的数据重新恢复 UpToDate，之后业务恢复正常。
+双控服务器在底层通过 DRBD 专用网络实现两个控制器之间的数据同步。同时配置第三节点做为仲裁服务器。 正常情况下。通过两台双控机器的 AO 路径下发数据，块存储通过 DRBD 实现数据自动复制。   
+
+当 DRBD 因为网络链路异常时，首先`drbdadm pause-sync`同步，然后通过 DRBD 配置文件中的 handler 自定义脚本向管理系统告知监测到链路异常事件发生，之后存储控制器通过抢占仲裁服务保证最终只有一个数据节点继续提供服务，然后`drbdadm resume-sync`恢复抢占到节点的读写事件。而未抢占到仲裁的节点自动将 LUN 断开连接，然后本端（未抢占到仲裁端）自动降备，自身数据标记为 outdated，断开连接，不再对外提供服务，从而避免数据两边读写发生脑裂事故。
+
+如果情况向更糟发生，即接管业务端继续发生接管事件：此时 AN 端处理逻辑是发生控制器之间的接管。将原来控一上的业务接管到控二上面，drbd 重新输出提供业务支持；对于非抢占组控制器：如果控制器之间接管发生，它也会接管资源，只是必须保证 drbd 是标记`outdated`，同时不会向上游提供服务。   
+{% note info %}
+在这种情况下的恢复，此时drbd备机上面恢复到什么程度？只是升主，资源被接管到在控二上面，不会恢复到原来一样还跑在控一上面的状况。
+{% endnote %}
+
+当链路异常修复之后，存储管理员手动恢复异常服务器，将之前 DRBD 被标记为备机的节点重新激活，然后数据从主机同步到备机，两边的数据重新建立数据恢复 UpToDate，之后等待 handler 中的事件通知脚本表示数据同步完成，然后业务恢复正常。
+
 ### 仲裁服务
 通过 go 编写仲裁服务包括以下几个部分：远程调用模块、仲裁模块、日志模块、数据管理模块、安全访问模块(暂定)
 根据业务实际需要，目前仲裁服务支持以下功能：
@@ -50,10 +60,10 @@ srcversion: D71ED6FF152163F9B784DD3
 ## Q&A
 
 1. 如何通知仲裁并实现抢占？
-参见[使用DRBD和Pacemaker集群栈](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#ch-pacemaker)，因为我们使用GFS文件系统，所以参考此处：[将GFS与DRBD结合使用](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#ch-gfs)
-> 将DRBD资源设置为包含共享的Global File System(GFS)的块设备所需的步骤。它包括GFS和GFS2。要在DRBD上使用GFS，必须在indexterm中配置[DRBD|dual-primary mode](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#s-dual-primary-mode)。
+参见[使用 DRBD 和 Pacemaker 集群栈](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#ch-pacemaker)，因为我们使用 GFS 文件系统，所以参考此处：[将 GFS 与 DRBD 结合使用](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#ch-gfs)
+> 将 DRBD 资源设置为包含共享的 Global File System(GFS)的块设备所需的步骤。它包括 GFS 和 GFS2。要在 DRBD 上使用 GFS，必须在 indexterm 中配置[DRBD|dual-primary mode](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#s-dual-primary-mode)。
 
-我们首先需要对drbd资源进行配置，具体资源配置为：
+我们首先需要对 drbd 资源进行配置，具体资源配置为：
  ```plain
  resource r1 {
     net{
@@ -90,14 +100,14 @@ srcversion: D71ED6FF152163F9B784DD3
 
 }
  ```
- 1. 磁盘fencing配置策略
-    - dont-care：默认策略，不执行fencing策略
-    - resource-only:仅执行fence-peer，需要说明的是，该功能并不是fence-peer的使能开关，而是说明除fence-peer外不需要做额外的其他工作
-    - resource-and-stonith：冻结io并等待fence-peer的执行结果，根据执行结果决定是否解除冻结， 解除冻结需要对端处于outdate状态。
+ 1. 磁盘 fencing 配置策略
+    - dont-care：默认策略，不执行 fencing 策略
+    - resource-only:仅执行 fence-peer，需要说明的是，该功能并不是 fence-peer 的使能开关，而是说明除 fence-peer 外不需要做额外的其他工作
+    - resource-and-stonith：冻结 io 并等待 fence-peer 的执行结果，根据执行结果决定是否解除冻结， 解除冻结需要对端处于 outdate 状态。
  2. handler 配置策略
   - fence-peer
     目前我们自定义的返回码如下所示:
-    ```
+    ```plain
     3：对端处磁盘于inconsistent或者更糟糕的状态，
      返回该值后，本端将把对端磁盘状态设置为inconsistent状态。
     4：对端处于outdate状态，返回该值后，本端将把对端磁盘状态设置为outdate。本端挂起将会被解除 
@@ -113,3 +123,5 @@ srcversion: D71ED6FF152163F9B784DD3
   - after-resync-target: 同步目标端完成同步通知
     返回值不影响执行
 
+## 推荐阅读
+[双活数据中心架构分析及优缺点_存储我最懂-CSDN 博客](https://blog.csdn.net/shouqian_com/article/details/52525021)
