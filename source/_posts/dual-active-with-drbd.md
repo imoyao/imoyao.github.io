@@ -117,11 +117,18 @@ srcversion: D71ED6FF152163F9B784DD3
     101: 将本端所有io以错误码-EIO返回，磁盘状态不改变，挂起状态将会被解除
     其他值: 打印 “fence-peer helper broken, returned N"日志后返回，不做其他处理。
     ```
+
+    执行的操作是：标记对端outdate、对端drbd降备(secondary)、本端drbd断开与对端的连接（disconnect）
+
   - before-resync-target: 同步目标端开始同步通知
     0: 通知成功
     其他: 通知失败，断开连接
+
   - after-resync-target: 同步目标端完成同步通知
     返回值不影响执行
 
+    执行的操作是：
+    1. 对端升主、重新建立连接
+    2. 置标志位，可以升主
 ## 推荐阅读
 [双活数据中心架构分析及优缺点_存储我最懂-CSDN 博客](https://blog.csdn.net/shouqian_com/article/details/52525021)
