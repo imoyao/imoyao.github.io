@@ -54,7 +54,7 @@ def multi_expression_hack():
 
 if __name__ == '__main__':
     print([func(10) for func in multi_expression_hack()])
- ```
+ ```plain
  此处会在函数内部再次定义一个局部变量。
 
 2. 或者，你可以使用 `functools.partial` 函数（偏函数）：
@@ -79,9 +79,9 @@ if __name__ == '__main__':
         return (lambda n: n * i for i in range(5))
 
 
-    if __name__ == '__main__':
+    if __name__ == '__main__':plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         print([gen(10) for gen in gen_expression()])
- ```
+ ```plain
 
 4. 利用 `yield` 的惰性求值思想编写生成器函数：
 
