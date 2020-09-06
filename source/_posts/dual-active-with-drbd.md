@@ -6,6 +6,7 @@ tags:
 - 存储
 categories: 项目相关
 password: estor
+cover: /images/dual.jpg
 ---
 {% note info %}
 **版本信息**    
@@ -29,7 +30,7 @@ srcversion: D71ED6FF152163F9B784DD3
 
 如果情况向更糟发生，即接管业务端继续发生接管事件：此时 AN 端处理逻辑是发生控制器之间的接管。将原来控一上的业务接管到控二上面，drbd 重新输出提供业务支持；对于非抢占组控制器：如果控制器之间接管发生，它也会接管资源，只是必须保证 drbd 是标记`outdated`，同时不会向上游提供服务。   
 {% note info %}
-在这种情况下的恢复，此时drbd备机上面恢复到什么程度？只是升主，资源被接管到在控二上面，不会恢复到原来一样还跑在控一上面的状况。
+在这种情况下的恢复，此时 drbd 备机上面恢复到什么程度？只是升主，资源被接管到在控二上面，不会恢复到原来一样还跑在控一上面的状况。
 {% endnote %}
 
 当链路异常修复之后，存储管理员手动恢复异常服务器，将之前 DRBD 被标记为备机的节点重新激活，然后数据从主机同步到备机，两边的数据重新建立数据恢复 UpToDate，之后等待 handler 中的事件通知脚本表示数据同步完成，然后业务恢复正常。
@@ -118,7 +119,7 @@ srcversion: D71ED6FF152163F9B784DD3
     其他值: 打印 “fence-peer helper broken, returned N"日志后返回，不做其他处理。
     ```
 
-    执行的操作是：标记对端outdate、对端drbd降备(secondary)、本端drbd断开与对端的连接（disconnect）
+    执行的操作是：标记对端 outdate、对端 drbd 降备(secondary)、本端 drbd 断开与对端的连接（disconnect）
 
   - before-resync-target: 同步目标端开始同步通知
     0: 通知成功
