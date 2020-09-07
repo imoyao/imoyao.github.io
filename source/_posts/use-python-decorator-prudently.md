@@ -171,7 +171,7 @@ def foo():
 
 ```
 我们通过`GLOBAL_ENABLE_FLAG`分别定义的`bool`值可以将装饰器启用或者禁用。这个方式也适用于多个装饰器的时候，只不过我们需要定义更多的 bool 变量来控制而已。
-
+实践代码可以参考此处[Leveraging the power of decorators in Python’s unit-test framework | by Vivek Shrivastava | Medium](https://medium.com/@AuthorVivek/leveraging-the-power-of-decorators-in-pythons-unit-test-framework-5ae0285d0d27)，注意文中说到的 *second point*。
 ## 凡有导入，必留痕迹
 调用被装饰函数会导致装饰器函数外部逻辑的执行。示例代码如下：
 我们在第一个模块中编写一个装饰器`deco`：
