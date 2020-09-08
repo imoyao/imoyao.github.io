@@ -128,7 +128,8 @@ srcversion: D71ED6FF152163F9B784DD3
     返回值不影响执行
 
     执行的操作是：
-    1. 对端升主、重新建立连接
-    2. 置标志位，可以升主
+    1. 检查是否DRBD建立正常连接；
+    2. 如果正常建立连接，则对端升主：`primary/secondary` 变为 `primary/primary`；
+    3. SCST重新输出，建立连接提供服务。
 ## 推荐阅读
 [双活数据中心架构分析及优缺点_存储我最懂-CSDN 博客](https://blog.csdn.net/shouqian_com/article/details/52525021)
