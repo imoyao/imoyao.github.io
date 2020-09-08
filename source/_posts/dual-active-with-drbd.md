@@ -118,7 +118,6 @@ srcversion: D71ED6FF152163F9B784DD3
     101: 将本端所有io以错误码-EIO返回，磁盘状态不改变，挂起状态将会被解除
     其他值: 打印 “fence-peer helper broken, returned N"日志后返回，不做其他处理。
     ```
-
     执行的操作是：标记对端 outdate、对端 drbd 降备(secondary)、本端 drbd 断开与对端的连接（disconnect）
 
   - before-resync-target: 同步目标端开始同步通知
