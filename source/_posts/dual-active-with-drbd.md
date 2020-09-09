@@ -118,7 +118,6 @@ srcversion: D71ED6FF152163F9B784DD3
     101: 将本端所有io以错误码-EIO返回，磁盘状态不改变，挂起状态将会被解除
     其他值: 打印 “fence-peer helper broken, returned N"日志后返回，不做其他处理。
     ```
-
     执行的操作是：标记对端 outdate、对端 drbd 降备(secondary)、本端 drbd 断开与对端的连接（disconnect）
 
   - before-resync-target: 同步目标端开始同步通知
@@ -129,7 +128,18 @@ srcversion: D71ED6FF152163F9B784DD3
     返回值不影响执行
 
     执行的操作是：
-    1. 对端升主、重新建立连接
-    2. 置标志位，可以升主
+    1. 检查是否DRBD建立正常连接；
+    2. 如果正常建立连接，则对端升主：`primary/secondary` 变为 `primary/primary`；
+    3. SCST重新输出，建立连接提供服务。
+## 双主模式创建之后流程
+1. 初始化角色为secondary/secondary；
+2. 将一端强制升主：primary，此时连接状态变为`SyncSource`和`SyncTarget`
+等待同步完成
+```plain
+10:drbds10/0  Connected Primary/Secondary UpToDate/UpToDate 
+```
+发送handler控制升主
+3. 备机端收到指令升为主端
+
 ## 推荐阅读
 [双活数据中心架构分析及优缺点_存储我最懂-CSDN 博客](https://blog.csdn.net/shouqian_com/article/details/52525021)
