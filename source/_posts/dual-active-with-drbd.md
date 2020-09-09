@@ -131,5 +131,15 @@ srcversion: D71ED6FF152163F9B784DD3
     1. 检查是否DRBD建立正常连接；
     2. 如果正常建立连接，则对端升主：`primary/secondary` 变为 `primary/primary`；
     3. SCST重新输出，建立连接提供服务。
+## 双主模式创建之后流程
+1. 初始化角色为secondary/secondary；
+2. 将一端强制升主：primary，此时连接状态变为`SyncSource`和`SyncTarget`
+等待同步完成
+```plain
+10:drbds10/0  Connected Primary/Secondary UpToDate/UpToDate 
+```
+发送handler控制升主
+3. 备机端收到指令升为主端
+
 ## 推荐阅读
 [双活数据中心架构分析及优缺点_存储我最懂-CSDN 博客](https://blog.csdn.net/shouqian_com/article/details/52525021)
