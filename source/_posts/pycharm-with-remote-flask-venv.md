@@ -1,5 +1,5 @@
 ---
-title: 如何配置 Pycharm 使用远程的 Flask 虚拟开发环境？
+title: 如何配置 PyCharm 使用远程的 Flask 虚拟开发环境？
 date: 2019-05-06 13:56:35
 tags:
 - PyCharm
