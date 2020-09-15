@@ -95,7 +95,7 @@ drbd0                 147:0    0    2G  0 disk /media
 
 首先根据需求更改`DRBD`全局配置`/etc/drbd.d/global_common.conf`:
 
-此处可参阅另一篇文章：[DRBD 全局配置](https://imoyao.github.io/blog/2017-09-11/Record_of_drbd/#global-common-conf配置（示例）)
+此处可参阅另一篇文章：[DRBD 全局配置](/blog/2017-09-11/Record_of_drbd/#global-common-conf配置（示例）)
 
 ### 创建`DRBD`配置文件
 
