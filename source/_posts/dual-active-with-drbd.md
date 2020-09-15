@@ -140,6 +140,11 @@ srcversion: D71ED6FF152163F9B784DD3
 ```
 发送handler控制升主
 3. 备机端收到指令升为主端
-
+## 恢复
+用户点击重置仲裁按钮，首先判断是否具备重置条件？
+1. 是否已配置仲裁且仲裁已经发生抢占；
+2. 被恢复节点是否已经具备恢复条件；
+3. DRBD状态(dstate)是否已经处于`UpToDate/UpToDate`
+判断以上情况均满足之后，发起重置grpc请求，重置仲裁以免下一次仲裁时发生脑裂。
 ## 推荐阅读
 [双活数据中心架构分析及优缺点_存储我最懂-CSDN 博客](https://blog.csdn.net/shouqian_com/article/details/52525021)
