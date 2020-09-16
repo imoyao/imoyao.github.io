@@ -10,7 +10,6 @@ cover: /images/logos/ceph-logo.svg
 categories:
 - 工作日常
 ---
-
 ## 前言
 在 [上文](/blog/2020-03-15/ceph-deploy-install-ceph-nautilus-on-CentOS7/) 中我们使用 ceph-deploy 搭建 ceph 集群。而当前版本 ceph-deploy 不支持用户指定小版本号，使用`--release`只支持安装最新稳定版。当然我们可以手动搭建，但是操作下来耗时且容易出错，毕竟~~人生苦短（我太懒了）~~。
 ## 版本信息
