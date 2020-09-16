@@ -83,8 +83,8 @@ drbdadm secondary drbd[Num]
 # drbd主端：
 drbdadm resize drbd[Num]
 ```
-
-## global_common.conf 配置（示例）
+## 配置文件
+### global_common.conf 配置（示例）
 
 ```shell
 global {
@@ -147,9 +147,9 @@ common {            # 定义drbd设备共享的属性信息
 5. 如果`DRBD`状态下关机双控恢复不过来，尝试删除`DRBD`配置信息，然后停掉`DRBD`端 ODSP 和`mysql`重启之后即可；(此条仅针对公司项目)
 
 
-## 单个`drbd`配置文件（以 drbd10.res 为例）
+### 单个`drbd`配置文件（以 drbd10.res 为例）
 
-### 项目中的配置方案
+- 项目中的配置方案
 
 ```shell
 resource drbd11 {
@@ -168,9 +168,9 @@ resource drbd11 {
 }
 ```
 
-### 另外一种配置方案
+- 另外一种配置方案
 
-来自[这里](https://www.suse.com/documentation/sle_ha/book_sleha/data/sec_ha_drbd_configure.html)
+来自[这里](https://documentation.suse.com/zh-cn/sle-ha/15-GA/html/SLE-HA-all/cha-ha-drbd.html#pro-drbd-configure)
 
 ```shell
 resource r0 {   # ①
@@ -206,15 +206,15 @@ drbd0 minor 0 (/dev/ is optional) or /dev/drbd0
 
 The raw device that is replicated between nodes. Note, in this example the devices are the same on both nodes. If you need different devices, move the disk parameter into the on host.
 
-4.`meta-disk`参数通常包含隐式值，但是你也可以指定一个显式设备保存元数据。详情参见：[这里>>>](http://www.drbd.org/users-guide-emb/ch-internals.html#s-metadata)
+4.`meta-disk`参数通常包含隐式值`internal`，但是你也可以指定一个显式设备保存元数据。详情参见：[这里>>>](http://www.drbd.org/users-guide-emb/ch-internals.html#s-metadata)
 
 The meta-disk parameter usually contains the value internal, but it is possible to specify an explicit device to hold the meta data. See http://www.drbd.org/users-guide-emb/ch-internals.html#s-metadata for more information.
 
-5.`on`节配置指明改配置应用于具体哪个`host`。
+5.`on`节配置指明改配置应用于具体哪个`host`主机。
 
 The on section states which host this configuration statement applies to.
 
-6.各节点的`IP`地址和端口号。每个资源需要一个单独的端口，通常以`7788`开始。
+6.各节点的`IP`地址和端口号。每个资源需要一个单独的端口，通常从`7788`开始。DRBD 资源的两个端口必须相同。
 
 The IP address and port number of the respective node. Each resource needs an individual port, usually starting with 7788.
 
