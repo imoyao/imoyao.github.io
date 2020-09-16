@@ -18,22 +18,22 @@ srcversion: D71ED6FF152163F9B784DD3
 我们通过 DRBD 双主模式实现两台双控存储服务器之间的数据同步的同时实现共同承担业务数据的读写。在初始化时，通过定义优先级实现生产卷和镜像卷的配置，保证生产卷配置更强从而承担更多的业务。
 ![整体设计图](/images/AA-DRBD/AA-DRBD.png)
 ## 定义
-控制器：controller/host
-分组、节点：group/node
+控制器：controller/host，指一台双控服务器上面的两台主控；
+分组、节点：group/node，指双控服务器，如：A1,A2；
 仲裁域：zone
 
 ## 具体实现
 ### 整体
-双控服务器在底层通过 DRBD 专用网络实现两个控制器之间的数据同步。同时配置第三节点做为仲裁服务器。 正常情况下。通过两台双控机器的 AO 路径下发数据，块存储通过 DRBD 实现数据自动复制。   
+双控服务器内部使用心跳口通信，两台双控服务器之间通过专用网络保障 DRBD 块设备的数据同步。同时配置第三节点作为仲裁服务器。正常情况下，通过两台双控机器的 AO 路径下发数据，块存储通过 DRBD 实现数据自动复制。
 
-当 DRBD 因为网络链路异常时，首先`drbdadm pause-sync`同步，然后通过 DRBD 配置文件中的 handler 自定义脚本向管理系统告知监测到链路异常事件发生，之后存储控制器通过抢占仲裁服务保证最终只有一个数据节点继续提供服务，然后`drbdadm resume-sync`恢复抢占到节点的读写事件。而未抢占到仲裁的节点自动将 LUN 断开连接，然后本端（未抢占到仲裁端）自动降备，自身数据标记为 outdated，断开连接，不再对外提供服务，从而避免数据两边读写发生脑裂事故。
+当 DRBD 因为网络链路异常时，首先`drbdadm pause-sync`暂停同步，然后通过 DRBD 资源配置文件中的 handler 自定义脚本向管理系统告知监测到链路异常事件发生，之后存储控制器相继发起 freeze 请求通过抢占仲裁服务保证最终只有一个数据节点（控制）继续提供服务。然后`drbdadm resume-sync`恢复抢占到节点的读写事件。而未抢占到仲裁的节点自动将 LUN 断开连接/通过 detach 脱离连接，然后本端（未抢占到仲裁端）自动降备（secondary），并将自身数据标记为 outdated，断开连接（down），不再对外提供服务，从而避免数据两边读写发生脑裂事故。
 
-如果情况向更糟发生，即接管业务端继续发生接管事件：此时 AN 端处理逻辑是发生控制器之间的接管。将原来控一上的业务接管到控二上面，drbd 重新输出提供业务支持；对于非抢占组控制器：如果控制器之间接管发生，它也会接管资源，只是必须保证 drbd 是标记`outdated`，同时不会向上游提供服务。   
+如果情况向更糟发生，即接管业务端继续发生接管事件：此时 AN 端处理逻辑是发生控制器之间的接管。将原来控一上的业务接管到控二上面，DRBD 重新输出提供业务支持；对于非抢占组控制器：如果控制器之间接管发生，它也会接管资源，只是必须保证 DRBD 是标记`outdated`，同时不会向上游提供服务。
 {% note info %}
-在这种情况下的恢复，此时 drbd 备机上面恢复到什么程度？只是升主，资源被接管到在控二上面，不会恢复到原来一样还跑在控一上面的状况。
+在这种情况下的恢复，此时 DRBD 备机上面恢复到什么程度？只是升主，资源被接管到在控二上面，不会恢复到原来一样还跑在控一上面的状况。
 {% endnote %}
 
-当链路异常修复之后，存储管理员手动恢复异常服务器，将之前 DRBD 被标记为备机的节点重新激活，然后数据从主机同步到备机，两边的数据重新建立数据恢复 UpToDate，之后等待 handler 中的事件通知脚本表示数据同步完成，然后业务恢复正常。
+当链路异常修复之后，存储管理员手动恢复异常服务器，将之前 DRBD 被标记为 down 的资源重新 up，如果需要则重连（connect），然后等待在此期间的数据从主机同步回流到备份卷。之后用户重置仲裁，检查数据状态恢复至 UpToDate/UpToDate，此时重置仲裁（unfreeze），同时 DRBD 升主（primary）。handler 中的事件通知脚本表示数据同步完成，然后业务恢复正常。
 
 ### 仲裁服务
 通过 go 编写仲裁服务包括以下几个部分：远程调用模块、仲裁模块、日志模块、数据管理模块、安全访问模块(暂定)
@@ -48,6 +48,7 @@ srcversion: D71ED6FF152163F9B784DD3
 8. 查询抢占结果（inquire）
 9. 释放抢占（release）
 10. 销毁（destroy）
+
 ### 管理系统
 ![管理系统流程图](/images/AA-DRBD/ODSP.png)
 
@@ -64,7 +65,7 @@ srcversion: D71ED6FF152163F9B784DD3
 参见[使用 DRBD 和 Pacemaker 集群栈](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#ch-pacemaker)，因为我们使用 GFS 文件系统，所以参考此处：[将 GFS 与 DRBD 结合使用](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#ch-gfs)
 > 将 DRBD 资源设置为包含共享的 Global File System(GFS)的块设备所需的步骤。它包括 GFS 和 GFS2。要在 DRBD 上使用 GFS，必须在 indexterm 中配置[DRBD|dual-primary mode](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#s-dual-primary-mode)。
 
-我们首先需要对 drbd 资源进行配置，具体资源配置为：
+我们首先需要对 DRBD 资源进行配置，具体资源配置为：
  ```plain
  resource r1 {
     net{
@@ -88,14 +89,13 @@ srcversion: D71ED6FF152163F9B784DD3
     }
 
     device /dev/drbd1;
-
     disk  /dev/StorPool11/SANLun10;
     meta-disk internal;
     on controller-1 {
         address 10.10.12.2:32455;
     }
 
-    on controller-2 {
+    on controller-x {
         address 10.10.12.3:32455;
     }
 
@@ -118,27 +118,28 @@ srcversion: D71ED6FF152163F9B784DD3
     101: 将本端所有io以错误码-EIO返回，磁盘状态不改变，挂起状态将会被解除
     其他值: 打印 “fence-peer helper broken, returned N"日志后返回，不做其他处理。
     ```
-    执行的操作是：标记对端 outdate、对端 drbd 降备(secondary)、本端 drbd 断开与对端的连接（disconnect）
+    执行的操作是：标记对端 outdate、对端 DRBD 降备(secondary)、本端 DRBD 断开与对端的连接（down）
 
   - before-resync-target: 同步目标端开始同步通知
+    ```plain
     0: 通知成功
     其他: 通知失败，断开连接
-
+    ```
   - after-resync-target: 同步目标端完成同步通知
     返回值不影响执行
 
     执行的操作是：
-    1. 检查是否DRBD建立正常连接；
+    1. 检查是否 DRBD 建立正常连接；
     2. 如果正常建立连接，则对端升主：`primary/secondary` 变为 `primary/primary`；
-    3. SCST重新输出，建立连接提供服务。
+    3. SCST 重新输出，建立连接提供服务。
 ## 双主模式创建之后流程
-1. 初始化角色为secondary/secondary；
+1. 初始化角色为 secondary/secondary；
 2. 将一端强制升主：primary，此时连接状态变为`SyncSource`和`SyncTarget`
 等待同步完成
 ```plain
 10:drbds10/0  Connected Primary/Secondary UpToDate/UpToDate 
 ```
-发送handler控制升主
+控制升主
 3. 备机端收到指令升为主端
 
 ## 推荐阅读

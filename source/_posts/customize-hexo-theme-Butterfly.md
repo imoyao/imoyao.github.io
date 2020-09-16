@@ -25,7 +25,7 @@ subtitle: 生命不息，折腾不止
 {% endgallery %}
 想上车的看这里：
 1. [使用 zeit.co 托管 Hexo 静态博客 | Muniao's blog](https://www.qtmuniao.com/2020/03/15/hexo-to-zeit-co/)
-2. [🔨工具：使用vercel加速Hexo静态博客访问 | RealCat](https://vincentqin.tech/posts/speedup-gitpage/)
+2. [🔨工具：使用 vercel 加速 Hexo 静态博客访问 | RealCat](https://vincentqin.tech/posts/speedup-gitpage/)
 3. [使用 Vercel 自动部署博客网站 | Editio's Dream](https://editio.me/2020/vercel/)
 
 ## 已完成
@@ -259,4 +259,4 @@ git remote set-url --add origin {你的 gitee 项目地址}
 （当然我们也可以手动点击 gitee 网页上的同步按钮强制从 github 上更新）
 
 ## 推荐阅读
-[Hexo博客之butterfly主题优雅魔改系列（持续更新） | 小康博客](https://www.antmoe.com/posts/a811d614/index.html)
+[Hexo 博客之 butterfly 主题优雅魔改系列（持续更新） | 小康博客](https://www.antmoe.com/posts/a811d614/index.html)

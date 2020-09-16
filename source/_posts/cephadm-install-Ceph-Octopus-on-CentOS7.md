@@ -98,7 +98,7 @@ total 36
     ./cephadm add-repo --release octopus
     -bash: ./cephadm: /usr/bin/python3: bad interpreter: No such file or directory
     ```
-    这是因为系统中缺少 Python3 支持，所以要安装 Python3，关于 Python3 的安装可以参考此处👉
+    这是因为系统中缺少 Python3 支持，所以要安装 Python3，关于 Python3 的安装可以参考此处👇
     - [Python3 环境搭建 | 菜鸟教程](https://www.runoob.com/python3/python3-install.html) 
     - [Linux 下安装 Python 报错：zlib not available - 寒爵 - 博客园](https://www.cnblogs.com/Jimc/p/10218062.html)    
     安装之后验证：
