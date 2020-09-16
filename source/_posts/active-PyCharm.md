@@ -22,6 +22,11 @@ cover: /images/PyCharm.png
 4. 重启 IDE；
 5. 重新评估，以后每个月重新操作一次。
 6. 祝大家早日实现“编辑器自由”！
+{% note warning %}
+如果不小心错过试用期怎么重置（会强制退出）？
+ 1. 打开注册表；
+ 2. 删除`计算机\HKEY_CURRENT_USER\Software\JavaSoft\Prefs`下的`.idexxx`目录。
+{% endnote %}
 ---
 以下为个人记录备用，用于迷路之后的操作，普通使用者可以忽略。
 1. 关注公众号，发`?`求助；

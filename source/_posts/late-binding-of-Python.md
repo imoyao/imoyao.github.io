@@ -79,7 +79,7 @@ if __name__ == '__main__':
         return (lambda n: n * i for i in range(5))
 
 
-    if __name__ == '__main__':plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    if __name__ == '__main__':plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
         print([gen(10) for gen in gen_expression()])
  ```plain
 
