@@ -147,5 +147,13 @@ srcversion: D71ED6FF152163F9B784DD3
 2. 被恢复节点是否已经具备恢复条件；
 3. DRBD状态(dstate)是否已经处于`UpToDate/UpToDate`
 判断以上情况均满足之后，发起重置grpc请求，重置仲裁以免下一次仲裁时发生脑裂。
+
+需要在通知之后针对手动down的drbd进行恢复；
+恢复流程：生产卷端connect，镜像卷端up；
+之后：
+1. 等待数据完成同步；
+2. 用户点击界面reset。判断数据同步完成；
+3. 重置仲裁、升主、attach输出继续提供服务；
+
 ## 推荐阅读
 [双活数据中心架构分析及优缺点_存储我最懂-CSDN 博客](https://blog.csdn.net/shouqian_com/article/details/52525021)
