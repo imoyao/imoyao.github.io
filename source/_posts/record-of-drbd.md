@@ -40,7 +40,7 @@ drbdadm -V
 **注意:**目前官网上面 8.0 – 8.3.x 已标注为`Deprecated`即不建议使用状态。
 
 ## drbd 状态记录
-[本部分内容详见此处](https://imoyao.github.io/blog/2018-08-29/state-of-drbd/)
+本部分内容详见[此处](/blog/2018-08-29/state-of-drbd/)
 
 ## 清除单个 `DRBD` 资源配置：(以 drbd10 为例)
 
@@ -150,8 +150,7 @@ common {            # 定义drbd设备共享的属性信息
 ### 单个`drbd`配置文件（以 drbd10.res 为例）
 
 - 项目中的配置方案
-
-```shell
+ ```shell
 resource drbd11 {
     on controller-1 {
         device /dev/drbd11;
@@ -166,13 +165,12 @@ resource drbd11 {
         meta-disk internal;
     }
 }
-```
-
+ ```
+ 
 - 另外一种配置方案
+ 来自[这里](https://documentation.suse.com/zh-cn/sle-ha/15-GA/html/SLE-HA-all/cha-ha-drbd.html#pro-drbd-configure)
 
-来自[这里](https://documentation.suse.com/zh-cn/sle-ha/15-GA/html/SLE-HA-all/cha-ha-drbd.html#pro-drbd-configure)
-
-```shell
+ ```shell
 resource r0 {   # ①
   device /dev/drbd0; # ②
   disk /dev/sda1;   # ③
@@ -187,39 +185,25 @@ resource r0 {   # ①
     rate  7M;   # ⑦
   }
 }
-```
-翻译以看懂为目的：
-
-1.允许某些系统服务项关联的名称，如：nfs, http, mysql_0, postgres_wal 等；
+ ```
+翻译以看懂为目的：   
+1. 允许某些系统服务项关联的名称，如：nfs, http, mysql_0, postgres_wal 等；
 Name that allows some association to the service that needs them. For example, nfs, http, mysql_0, postgres_wal, etc.
-
-2.`DRBD`设备名称及编号；
+2. `DRBD`设备名称及编号；
 The device name for DRBD and its minor number.
-
 在上面的例子中，`drbd`的编号是`0`。udev 集成脚本提供符号链接`/dev/drbd/by-res/nfs/0`。或者，也可以省略配置中的设备节点名称，然后使用下面这种形式代替：
 `drbd0 minor 0`（/dev/可选）或`/dev/drbd0`；
-
 In the example above, the minor number 0 is used for DRBD. The udev integration scripts will give you a symbolic link /dev/drbd/by-res/nfs/0. Alternatively, omit the device node name in the configuration and use the following line instead:
 drbd0 minor 0 (/dev/ is optional) or /dev/drbd0
-
-3.节点之间进行复制的原始设备。注意：在本例中，两个节点上面的设备是相同的。若使用不同设备，请将磁盘参数移动到状态为`on`节点上。（？）
-
+3. 节点之间进行复制的原始设备。注意：在本例中，两个节点上面的设备是相同的。若使用不同设备，请将磁盘参数移动到状态为`on`节点上。（？）
 The raw device that is replicated between nodes. Note, in this example the devices are the same on both nodes. If you need different devices, move the disk parameter into the on host.
-
-4.`meta-disk`参数通常包含隐式值`internal`，但是你也可以指定一个显式设备保存元数据。详情参见：[这里>>>](http://www.drbd.org/users-guide-emb/ch-internals.html#s-metadata)
-
+4. `meta-disk`参数通常包含隐式值`internal`，但是你也可以指定一个显式设备保存元数据。详情参见：[这里>>>](http://www.drbd.org/users-guide-emb/ch-internals.html#s-metadata)
 The meta-disk parameter usually contains the value internal, but it is possible to specify an explicit device to hold the meta data. See http://www.drbd.org/users-guide-emb/ch-internals.html#s-metadata for more information.
-
-5.`on`节配置指明改配置应用于具体哪个`host`主机。
-
+5. `on`节配置指明改配置应用于具体哪个`host`主机。
 The on section states which host this configuration statement applies to.
-
-6.各节点的`IP`地址和端口号。每个资源需要一个单独的端口，通常从`7788`开始。DRBD 资源的两个端口必须相同。
-
+6. 各节点的`IP`地址和端口号。每个资源需要一个单独的端口，通常从`7788`开始。DRBD 资源的两个端口必须相同。
 The IP address and port number of the respective node. Each resource needs an individual port, usually starting with 7788.
-
-7.同步率。将其设置为磁盘读写和网络带宽的三分之一。仅限制重新同步，而不是复制。
-
+7. 同步率。将其设置为磁盘读写和网络带宽的三分之一。仅限制重新同步，而不是复制。
 The synchronization rate. Set it to one third of the lower of the disk- and network bandwidth. It only limits the resynchronization, not the replication.
 
 ## 主从切换
