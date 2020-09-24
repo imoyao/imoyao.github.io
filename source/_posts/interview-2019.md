@@ -147,7 +147,7 @@ zset 集合可以完成有序执行、按照`优先级执行`的情况；
 > https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/
 
 ### Python 垃圾回收机制
-[Python 垃圾回收机制](https://github.com/imoyao/interview_python#24-python%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6)
+[Python 垃圾回收机制](https://wiki.masantu.com/wiki/%F0%9F%92%BB%E5%B7%A5%E4%BD%9C/%F0%9F%90%8DPython/%E9%9D%A2%E8%AF%95/interview-of-python/#Python-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6)
 - 引用计数  
 PyObject 是每个对象必有的内容，其中 ob_refcnt 就是做为引用计数。当一个对象有新的引用时，它的 ob_refcnt 就会增加，当引用它的对象被删除，它的 ob_refcnt 就会减少。引用计数为 0 时，该对象生命就结束了。
 - 标记-清除机制   
@@ -336,11 +336,11 @@ a = Parent()
 b = Child1()
 c = Child2()
 
-print(a.x，b.x，c.x)  # (10， 10， 10)
+print(a.x,b.x,c.x)  # (10, 10, 10)
 a.x = 20
-print(a.x，b.x，c.x)  # (20， 10， 10)
+print(a.x,b.x,c.x)  # (20, 10, 10)
 b.x = 30
-print(a.x，b.x，c.x)  # (20， 30， 10)
+print(a.x,b.x,c.x)  # (20, 30, 10)
 ```
 ```python
 class A:
@@ -349,19 +349,19 @@ class A:
 class B:
     x = 'b'
 
-class C(A，B):
+class C(A,B):
     pass
 
-class D(B，A):
+class D(B,A):
     pass
 
-print(A.x，B.x，C.x，D.x)  # ('a'， 'b'， 'a'， 'b')
+print(A.x,B.x,C.x,D.x)  # ('a', 'b', 'a', 'b')
 A.x = 'a1'
-print(A.x，B.x，C.x，D.x)  # ('a1'， 'b'， 'a1'， 'b')
+print(A.x,B.x,C.x,D.x)  # ('a1', 'b', 'a1', 'b')
 B.x = 'b1'
-print(A.x，B.x，C.x，D.x)  # ('a1'， 'b1'， 'a1'， 'b1')
+print(A.x,B.x,C.x,D.x)  # ('a1', 'b1', 'a1', 'b1')
 C.x = 'c'
-print(A.x，B.x，C.x，D.x)  # ('a1'， 'b1'， 'c'， 'b1')
+print(A.x,B.x,C.x,D.x)  # ('a1', 'b1', 'c', 'b1')
 ```
 
 ## 更多
