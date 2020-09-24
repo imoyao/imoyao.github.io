@@ -11,6 +11,7 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/images/friends.jpg
 
 ### Linux
 - [鸟哥的 Linux 私房菜](http://cn.linux.vbird.org/)
+- [Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux](https://git.io/linux)
 
 ### 其他
 - [Welcome to ansheng’s blog!](https://blog.ansheng.me/)
