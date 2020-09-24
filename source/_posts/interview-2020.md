@@ -34,3 +34,8 @@ categories:
 
 ### RAID 是什么？各类型之间的区别
  参见：[RAID 是什么？各类型之间的区别？ | 别院牧志](/wiki/%E5%AD%98%E5%82%A8/diff-raid/)
+
+## Python
+
+### 可变/不可变、引用类型/传值类型、深拷贝/浅拷贝
+dict、list、set是可变类型
