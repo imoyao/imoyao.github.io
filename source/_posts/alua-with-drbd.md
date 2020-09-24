@@ -61,6 +61,63 @@ srcversion: D71ED6FF152163F9B784DD3
 ![仲裁服务管理](/images/AA-DRBD/yxt-manage.png)
 [原型图](https://modao.cc/app/701a9917a82f111aec9c62a32f241770?simulator_type=device&sticky)
 
+### 代码
+此处只记录一部分关键性代码。
+- 获取gRPC异常
+参看此处：[python grpc: confusion with grpc._channel._Rendezvous · Issue #9270 · grpc/grpc](https://github.com/grpc/grpc/issues/9270)    
+```python
+import grpc
+import logger
+
+def do_rpc():
+    try:
+        pass
+    except grpc.RpcError as e:
+        logger.debug('===0=====reply Exception:{}', e)
+        # see also:[python grpc: confusion with grpc._channel._Rendezvous · Issue #9270 · grpc/grpc](https://github.com/grpc/grpc/issues/9270)
+        code = e.code()
+        msg = e.details()
+        if code == grpc.StatusCode.UNAVAILABLE:
+            return {'state': '1', 'result': {'message': '14009'}}
+        else:
+            return {'state': '1', 'result': {'message': msg}}
+```
+- 更新配置文件
+难点主要在于需要保持文件的一致性，刚开始使用加锁，但是似乎无法实现原子操作（文件写入还是会异常）后来使用重命名方法可以实现目的。具体参看：[使用 Python 进行稳定可靠的文件操作 - OSCHINA](https://www.oschina.net/translate/reliable-file-updates-with-python?lang=chs&p=1)    
+```python
+import json
+from contextlib import contextmanager
+import tempfile
+import os
+
+import setting
+import logger
+
+# CONTEXT_LOCK = threading.RLock() 
+
+@contextmanager
+def json_context(filename=setting.REFEREE_CONF_FP):
+    """一个简单的上下文管理器，用于更新json配置
+    :param context_lock: Lock, 上下文锁
+    :param filename: str,
+    :return:
+    """
+    # global CONTEXT_LOCK
+    # if not context_lock:
+    #     context_lock = CONTEXT_LOCK
+    # context_lock.acquire()
+    with open(filename, encoding='utf-8') as f:
+        info = json.load(f, strict=False)
+    yield info
+    # 写进临时文件然后重命名 see also:https://www.oschina.net/translate/reliable-file-updates-with-python
+    with tempfile.NamedTemporaryFile(
+            'w', dir=os.path.dirname(filename), delete=False) as tf:
+        json.dump(info, tf, indent=4)
+        tempname = tf.name
+    logger.info('-------tn---{},f:{}',tempname, filename)
+    os.rename(tempname, filename)
+```
+
 ## Q&A
 
 1. 如何通知仲裁并实现抢占？
