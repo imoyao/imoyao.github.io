@@ -79,9 +79,9 @@ if __name__ == '__main__':
         return (lambda n: n * i for i in range(5))
 
 
-    if __name__ == '__main__':plainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplainplain
+    if __name__ == '__main__':
         print([gen(10) for gen in gen_expression()])
- ```plain
+ ```
 
 4. 利用 `yield` 的惰性求值思想编写生成器函数：
 

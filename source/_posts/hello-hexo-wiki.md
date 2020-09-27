@@ -10,9 +10,15 @@ tags:
 categories:
 - 博客个性化
 ---
+## 更新
+{% note warning %}
+**@depracate**
+
+由于一些难以预料的错误(如页面锚点无法点击跳转（不确定是否确实为子系统导致）)，本人已将 wiki 和主站作为两个仓库分割。所以本内容现在只作为参考，遇到具体问题请自行搜索解决。
+{% endnote %}
 
 ## 缘起
-想在博客系统的基础上搭建一个 [wiki 系统](/wiki) ，用于实现一些知识体系的积累。当然可以通过创建两个 hexo 仓库分别用于渲染博客页面（主题一）和 wiki 页面（主题二）；但是每次进行知识管理的时候就要切换不同的仓库目录，而且部分文件可能产生冗余（如：npm install 产生的 node_modules），所以本文实践利用一个 hexo 仓库内渲染生成使用不同 theme 生成主页和 wiki 页面，以实现一次部署和统一管理。
+想在博客系统的基础上搭建一个 [wiki 系统](https://wiki.masantu.com/) ，用于实现一些非原创知识体系的积累。当然可以通过创建两个 hexo 仓库分别用于渲染博客页面（主题一）和 wiki 页面（主题二）；但是每次进行知识管理的时候就要切换不同的仓库目录，而且部分文件可能产生冗余（如：npm install 产生的 node_modules），所以本文实践利用一个 hexo 仓库内渲染生成使用不同 theme 生成主页和 wiki 页面，以实现一次部署和统一管理。
 
 ## TL;DR
 [使用代替配置文件-配置 | Hexo](https://hexo.io/zh-cn/docs/configuration#%E4%BD%BF%E7%94%A8%E4%BB%A3%E6%9B%BF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
@@ -76,7 +82,7 @@ cp -f themes/Wikitten/_config.yml.example themes/Wikitten/_config.yml
 + default_layout: wiki
 ```
 
-##  使用
+## 使用
 
 ### 创建别名（可选）
 主要目的是简化输入，如果不嫌麻烦，可以每次输入指令。

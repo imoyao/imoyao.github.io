@@ -38,4 +38,44 @@ categories:
 ## Python
 
 ### 可变/不可变、引用类型/传值类型、深拷贝/浅拷贝
-dict、list、set是可变类型
+dict、list、set 是可变类型
+
+## 中国电信云
+
+1. TCP 的 socket 粘包问题
+[Socket 中粘包问题浅析及其解决方案 - 代码星冰乐](https://www.hchstudio.cn/article/2018/d5b3/)
+[Socket 粘包问题 - liuslayer - 博客园](https://www.cnblogs.com/liuslayer/p/5441870.html)
+[socket 粘包问题解决 - 要一直走下去 - 博客园](https://www.cnblogs.com/staff/p/9643682.html)
+[对于 Socket 粘包的困惑? - 知乎](https://www.zhihu.com/question/49144553)
+[Socket 编程（4）TCP 粘包问题及解决方案 - melonstreet - 博客园](https://www.cnblogs.com/QG-whz/p/5537447.html)
+[python--(socket 与粘包解决方案) - 孔辉 - 博客园](https://www.cnblogs.com/konghui/p/9804914.html#top)
+[Python 中的粘包、socket 初识 - 知乎](https://zhuanlan.zhihu.com/p/99736833)
+[怎么解决 TCP 网络传输「粘包」问题？ - 知乎](https://www.zhihu.com/question/20210025)
+2. 后端数据校验怎么做的？
+一般就是用装饰器或者 assert，网上查到一个[JSON Schema | The home of JSON Schema](http://json-schema.org/)和 Flask 专用的扩展[sanjeevan/flask-json-schema: Flask extension to validate JSON requests using the jsonschema spec](https://github.com/sanjeevan/flask-json-schema)
+3. MySQL 事务语法
+
+4. 磁盘点灯对盘位使用什么工具？
+`smartctl`与`sas2ircu`
+[linux 磁盘与磁盘槽位的对应关系](http://llxwj.top/post/storage/linux_disk_slot/)
+[如何通过硬盘盘符查询硬盘槽位 - 华为服务器 维护宝典 14 - 华为](https://support.huawei.com/enterprise/zh/doc/EDOC1000041337/75f2d44b)
+
+5. RESTful 的缺点是什么？
+ 1. 不是所有的东西都是“资源”，尤其是在业务系统中；
+ 2. 状态码，有的时候你需要“不存在的”一个状态码来描述你的操作；
+一个适用于简单操作的接口规范而已，无规矩不成方圆，复杂操作并不适用，还是看业务发展需求的。
+[Restful 的理解，Restful 优缺点 - Alan 大 bug - 博客园](https://www.cnblogs.com/binlin1987/p/6971808.html)
+[REST 的缺点是什么？-InfoQ](https://www.infoq.cn/article/2013/06/rest-drawbacks)
+6. gRPC 与 RESTful 有什么区别？
+- 优点
+1. protobuf 二进制消息，性能好/效率高（空间和时间效率都很不错）
+2. proto 文件生成目标代码，简单易用
+3. 序列化反序列化直接对应程序中的数据类，不需要解析后在进行映射(XML,JSON 都是这种方式)
+4. 支持向前兼容（新加字段采用默认值）和向后兼容（忽略新加字段），简化升级
+5. 支持多种语言（可以把 proto 文件看做 IDL 文件）
+- 缺点
+1. GRPC 尚未提供连接池，需要自行实现
+2.  尚未提供“服务发现”、“负载均衡”机制
+3. 因为基于 HTTP2，绝大部多数 HTTP Server、Nginx 都尚不支持，即 Nginx 不能将 GRPC 请求作为 HTTP 请求来负载均衡，而是作为普通的 TCP 请求。（nginx1.9 版本已支持）
+4. Protobuf 二进制可读性差（貌似提供了 Text_Fromat 功能）
+5. 默认不具备动态特性（可以通过动态定义生成消息类型或者动态编译支持）

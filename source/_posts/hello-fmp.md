@@ -23,7 +23,7 @@ categories:
  * [QDII 基金净值预估](https://re-ra.xyz/QDII-%E5%9F%BA%E9%87%91%E5%87%80%E5%80%BC%E9%A2%84%E4%BC%B0/)
  * [xalpha 诞生记](https://re-ra.xyz/xalpha-%E8%AF%9E%E7%94%9F%E8%AE%B0/)
  * [云上的 Jupyter Notebook](https://re-ra.xyz/%E4%BA%91%E4%B8%8A%E7%9A%84-Jupyter-Notebook/)
-- [Tushare大数据](https://tushare.pro/document/2)
+- [Tushare 大数据](https://tushare.pro/document/2)
 
 ### 前端页面
 
