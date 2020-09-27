@@ -11,10 +11,10 @@ categories:
 ---
 
 ## 前言
-我们知道：Python中一切类文件操作的最佳实践都是使用`with`语句。（如果对于这个说法有疑惑，请参考阅读：[language features - What is the python "with" statement designed for? - Stack Overflow](https://stackoverflow.com/questions/3012488/what-is-the-python-with-statement-designed-for)）在编写[仲裁服务](/blog/2020-07-22/dual-active-with-drbd/)时，我们需要将仲裁服务器的信息记录进配置文件`referee.conf`。同时，不可避免地需要对该文件进行更新。由于系统需要对文件在某个线程中进行读，与此同时另一个线程可能正在对其进行修改。此时，使配置文件操作保持原子性便至关重要。
+我们知道：Python 中一切类文件操作的最佳实践都是使用`with`语句。（如果对于这个说法有疑惑，请参考阅读：[language features - What is the python "with" statement designed for? - Stack Overflow](https://stackoverflow.com/questions/3012488/what-is-the-python-with-statement-designed-for)）在编写[仲裁服务](/blog/2020-07-22/dual-active-with-drbd/)时，我们需要将仲裁服务器的信息记录进配置文件`referee.conf`。同时，不可避免地需要对该文件进行更新。由于系统需要对文件在某个线程中进行读，与此同时另一个线程可能正在对其进行修改。此时，使配置文件操作保持原子性便至关重要。
 
 ## 说明
-比如我们要将`enable`由`True `改为`False`代表禁用该功能。同时另一个线程读取仲裁服务器的`ip`以不停探测仲裁服务运行状态。则必须保证文件修改操作具有原子性。即使使用with打开，还是会有一个窗口导致文件被打开但是新内容没有被刷写，此时意外掉电或重新进入窗口，则可能会导致：数据修改失效、文件被清空等，即无法避免竞态操作。
+比如我们要将`enable`由`True`改为`False`代表禁用该功能。同时另一个线程读取仲裁服务器的`ip`以不停探测仲裁服务运行状态。则必须保证文件修改操作具有原子性。即使使用 with 打开，还是会有一个窗口导致文件被打开但是新内容没有被刷写，此时意外掉电或重新进入窗口，则可能会导致：数据修改失效、文件被清空等，即无法避免竞态操作。
 
 ## 解决方案
 一种可行的方案是让文件真正落盘，然后对文件重命名。参考代码：
