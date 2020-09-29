@@ -75,13 +75,13 @@ if __name__ == '__main__':
 3. 优雅的写法，直接用生成器表达式：
 
  ```python
-    def gen_expression():
-        return (lambda n: n * i for i in range(5))
+def gen_expression():
+    return (lambda n: n * i for i in range(5))
 
 
-    if __name__ == '__main__':
-        print([gen(10) for gen in gen_expression()])
- ```
+if __name__ == '__main__':
+    print([gen(10) for gen in gen_expression()])
+ ```plain
 
 4. 利用 `yield` 的惰性求值思想编写生成器函数：
 

@@ -43,6 +43,10 @@ dict、list、set 是可变类型
 ## 中国电信云
 
 1. TCP 的 socket 粘包问题
+```python
+import struct
+bytes_len = struct.pack('i',len(send_msg))
+```
 [Socket 中粘包问题浅析及其解决方案 - 代码星冰乐](https://www.hchstudio.cn/article/2018/d5b3/)
 [Socket 粘包问题 - liuslayer - 博客园](https://www.cnblogs.com/liuslayer/p/5441870.html)
 [socket 粘包问题解决 - 要一直走下去 - 博客园](https://www.cnblogs.com/staff/p/9643682.html)
