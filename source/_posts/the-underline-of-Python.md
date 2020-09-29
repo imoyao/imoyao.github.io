@@ -168,12 +168,10 @@ _()
 ### 参考来源
 
 1. [PEP 8 -- Style Guide for Python Code](http://pep8.org/#descriptive-naming-styles)
-
 2. [Python basic cheatsheet](https://www.pythonsheets.com/notes/python-basic.html#python-naming-rule)
-
 3. [The Meaning of Underscores in Python – dbader.org](https://dbader.org/blog/meaning-of-underscores-in-python)
-
 4. [Python 中的下划线_有多少个意思？- 知乎](https://www.zhihu.com/question/268940585/answer/344852737)
+5. [Python 的类的下划线命名有什么不同？ - 知乎](https://www.zhihu.com/question/19754941)
 
 ## 派森多一点
 
