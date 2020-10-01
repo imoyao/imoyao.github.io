@@ -19,6 +19,7 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/images/friends.jpg
 - [捕蛇者说](https://pythonhunter.org/)
 - [张先森的代码小屋](nullcc.github.io)
 - [Python 工匠](https://github.com/piglei/one-python-craftsman)
+- [zrong's Blog | Every man dies but not every man really lives.](https://blog.zengrong.net/)
 
 ### 运维
 - [Wikitten](http://wiki.361way.com/)
