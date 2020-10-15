@@ -83,3 +83,50 @@ bytes_len = struct.pack('i',len(send_msg))
 3. 因为基于 HTTP2，绝大部多数 HTTP Server、Nginx 都尚不支持，即 Nginx 不能将 GRPC 请求作为 HTTP 请求来负载均衡，而是作为普通的 TCP 请求。（nginx1.9 版本已支持）
 4. Protobuf 二进制可读性差（貌似提供了 Text_Fromat 功能）
 5. 默认不具备动态特性（可以通过动态定义生成消息类型或者动态编译支持）
+
+## unitedStack(同方有云)
+1. 跳出循环的方式
+- break
+- return
+- raise Exception
+2. 代码调试
+- print
+- log
+- pdb
+- pycharm debug
+[Python 调试代码的 4 种方法：print、log、pdb、PyCharm 的 debug_xiemanR 的专栏-CSDN 博客](https://blog.csdn.net/xiemanR/article/details/72775737)
+3. 索引优缺点
+- 优点
+索引可以减少服务器需要扫描的数据量，从而大大提高查询效率。
+唯一索引能保证表中数据的唯一性。
+利用索引对数据存储的特性，可以使查询语句避免排序和创建临时表。
+索引可以将随机 I/O 变为顺序 I/O。
+- 缺点
+索引的创建和维护会造成工作量的增加。
+索引会造成数据量的增加，除了数据表中数据占数据空间之外，每一个索引还要占一定的物理空间。
+不恰当的使用索引会造成服务器重复扫描数据，造成查询浪费。
+4. class 实现上下文管理器
+实现`__enter__`和`__exit__`方法
+5. js 异步编程返回的对象类型
+Promise 对象
+6. 什么是 RESTful？哪些操作是幂等的？
+HTTP 幂等方法是指无论调用多少次都不会有不同结果的 HTTP 方法。它无论是调用一次，还是十次都无关紧要。结果仍应相同。再次强调， 它只作用于结果而非资源本身。它仍可能被操纵（如一个更新的 timestamp），提供这一信息并不影响（当前）资源的表现形式。
+{%raw%}
+<table>
+<tbody><tr><th>HTTP Method</th><th>Idempotent</th><th>Safe</th></tr>
+    <tr><td>OPTIONS    </td><td>yes       </td><td>yes</td></tr>
+    <tr><td>GET        </td><td>yes       </td><td>yes</td></tr>
+    <tr><td>HEAD       </td><td>yes       </td><td>yes</td></tr>
+    <tr><td>PUT        </td><td>yes       </td><td>no </td></tr>
+    <tr><td>POST       </td><td>no        </td><td>no </td></tr>
+    <tr><td>DELETE     </td><td>yes       </td><td>no </td></tr>
+    <tr><td>PATCH      </td><td>no        </td><td>no </td></tr>
+</tbody></table>
+{%endraw%}
+[哪些是幂等或/且安全的方法？ - RESTful 手册](https://sofish.github.io/restcookbook/http%20methods/idempotency/)
+
+## 同方有云
+
+1. Python中如何动态调用类方法？
+参阅[Python 中动态调用函数或类的方法 | 别院牧志](/blog/2020-10-15/python-call-method-dynamically/)
+2. 项目中实际使用继承和多态的例子？
