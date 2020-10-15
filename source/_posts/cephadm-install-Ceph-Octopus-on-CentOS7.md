@@ -36,7 +36,42 @@ subtitle: 正所谓“江上代有才人出，各领风骚数百年。”，从 
  ceph --version
  ceph version 15.1.1 (4536217610b4c55c08a293e67f5ae1f1129190be) octopus (rc)
  ```
-因为安装的是普通版本而不是最小安装，所以 ntp、lvm 管理工具等默认已经安装。
+因为系统安装的是普通版本而不是最小安装，所以 ntp、lvm 管理工具等默认已经安装。
+
+## 介绍
+Cephadm 通过 SSH 从管理守护程序连接到主机来部署和管理 Ceph 群集，以添加、删除或更新 Ceph 守护程序的容器。它不依赖于外部配置或编排工具，如 Ansible、Rook 或 Salt。
+
+Cephadm 管理 Ceph 群集的整个生命周期。它首先在单个节点（一个`monitor`和一个`mgr`）上引导一个最简的 Ceph 群集，然后使用业务流程接口（后续命令（“day 2” commands））扩展群集以包括所有主机并预配所有 Ceph 守护进程和服务。这可以通过 Ceph 命令行接口 （CLI） 或dashboard  （GUI） 执行完成。
+
+## 发展动向
+目前cephadm仍然在进一步开发，功能正在有条不紊地进行着，使用cephadm是一个差强人意的选择。
+以下组件的 Cephadm 管理目前得到良好支持：
+
+- Monitors
+- Managers
+- OSDs
+- CephFS 文件系统
+- rbd-mirror
+
+以下组件正在使用 cephadm，但文档并不像我们希望的那么完整，而且在不久的将来使用可能会有一些变化：
+
+- RGW
+- dmcrypt Osds
+
+Cephadm 对以下功能的支持仍在开发中：
+
+- NFS
+- iSCSI
+
+如果遇到问题，您始终可以使用：
+```bash
+ceph orch pause
+```
+或使用如下指令完全关闭 cephadm：
+```bash
+ceph orch set backend ''
+ceph mgr module disable cephadm
+```
 
 ## 安装 cephadm
 - 下载 cephadm 并赋权
@@ -99,12 +134,13 @@ total 36
     -bash: ./cephadm: /usr/bin/python3: bad interpreter: No such file or directory
     ```
     这是因为系统中缺少 Python3 支持，所以要安装 Python3，关于 Python3 的安装可以参考此处👇
-    - [Python3 环境搭建 | 菜鸟教程](https://www.runoob.com/python3/python3-install.html) 
-    - [Linux 下安装 Python 报错：zlib not available - 寒爵 - 博客园](https://www.cnblogs.com/Jimc/p/10218062.html)    
+    1. [Python3 环境搭建 | 菜鸟教程](https://www.runoob.com/python3/python3-install.html) 
+    2. [安装Python所需依赖环境 - 寒爵 - 博客园](https://www.cnblogs.com/Jimc/p/10218062.html) 
     安装之后验证：
     ```shell
     python3 -V
     ```
+    返回版本信息：
     ```plain
     Python 3.8.2
     ```
@@ -143,7 +179,11 @@ mkdir -p /etc/ceph
 ```plain
 cephadm bootstrap --mon-ip *<mon-ip>*   # 此处指定moniter地址
 ```
-注意，此处指定为 ssh 登录的 ip 时一直提示端口占用，且 mon 进程一直启不来，后来改成另一个节点之后可以正常部署，此处需要查阅更多资料！ # TODO
+{% note warning %}
+ ### TODO
+注意，此处指定为 ssh 登录的 ip 时一直提示端口占用，且 mon 进程一直启不来，后来改成另一个节点之后可以正常部署，需要查阅更多资料确认！
+{% endnote %}
+
 ```shell
 cephadm bootstrap --mon-ip 172.18.1.128
 ```
@@ -344,4 +384,4 @@ ceph orch host add *newhost*
 ```
 
 ## 参考链接
-- [Deploying a new Ceph cluster — Ceph Documentation](https://docs.ceph.com/docs/octopus/cephadm/install/#)
+- [Deploying a new Ceph cluster — Ceph Documentation](https://docs.ceph.com/en/latest/cephadm/)
