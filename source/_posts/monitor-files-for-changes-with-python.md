@@ -204,6 +204,10 @@ def main():
 if __name__ == '__main__':
     oa_notifier()
 ```
+关于双向同步可能导致的无限循环问题，可参考此处：[服务器之间实时双向同步有什么较好的解决方案？ - SegmentFault 思否](https://segmentfault.com/q/1010000002552394)
+
+> 可能会导致死循环，但你可以通过排除同步临时文件（..开头，--exclude-from=your_rsync_exclude.lst）来避免这个问题
+
 ## 推荐阅读
 Windows 可能有用的解决方案：[Tim Golden's Python Stuff: Watch a Directory for Changes](http://timgolden.me.uk/python/win32_how_do_i/watch_directory_for_changes.html)
 [python - Detect File Change Without Polling - Stack Overflow](https://stackoverflow.com/questions/5738442/detect-file-change-without-polling)
