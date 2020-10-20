@@ -9,13 +9,13 @@ tags:
 ---
 ## 组件介绍
 
-1. Nginx: 高性能`Web`服务器+负责反向代理;
+1. Nginx: 高性能`Web`服务器，负责反向代理；
 
-2. gunicorn: 高性能 WSGI 服务器;
+2. gunicorn: 高性能 WSGI 服务器；
 
-3. gevent: 将`Python`同步代码转换为异步的协议库;
+3. gevent: 将`Python`同步代码转换为异步的协议库；
 
-4. supervisor: 监控服务流程的工具;
+4. supervisor: 监控服务流程的工具；
 
 ## 版本信息
 ```bash
