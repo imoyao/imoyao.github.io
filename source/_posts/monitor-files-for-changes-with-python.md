@@ -204,10 +204,21 @@ def main():
 if __name__ == '__main__':
     oa_notifier()
 ```
+## 注意事项
 
 关于双向同步可能导致的无限循环问题，可参考此处：[服务器之间实时双向同步有什么较好的解决方案？ - SegmentFault 思否](https://segmentfault.com/q/1010000002552394)
 
 > 可能会导致死循环，但你可以通过排除同步临时文件（..开头，--exclude-from=your_rsync_exclude.lst）来避免这个问题
+
+>使用rsync一定要注意的一点是，源路径如果是一个目录的话，带上尾随斜线和不带尾随斜线是不一样的，不带尾随斜线表示的是整个目录包括目录本身，带上尾随斜线表示的是目录中的文件，不包括目录本身。
+
+例如：
+```shell
+[root@imoyao ~]# rsync -a /etc /tmp
+[root@imoyao ~]# rsync -a /etc/ /tmp
+```
+第一个命令会在`/tmp`目录下创建`etc`目录，而第二个命令不会在`/tmp`目录下创建`etc`目录，源路径`/etc/`中的所有文件都直接放在`/tmp`目录下。
+
 
 ## 推荐阅读
 Windows 可能有用的解决方案：[Tim Golden's Python Stuff: Watch a Directory for Changes](http://timgolden.me.uk/python/win32_how_do_i/watch_directory_for_changes.html)
