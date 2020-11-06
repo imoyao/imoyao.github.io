@@ -29,7 +29,7 @@ def baz():
     print('baz……')
 
 ```
-在main中调用：
+在 main 中调用：
 ```python
 # main.py
 module_name = 'module'
@@ -47,7 +47,7 @@ this is bar
 baz……
 ```
 - 解释
-这里请参阅[ exec() 官方文档](https://docs.python.org/zh-cn/3/library/functions.html#exec)，相当于使用`exec()`执行了一句`import module`语句，后面的也就不用解释了。
+这里请参阅[exec() 官方文档](https://docs.python.org/zh-cn/3/library/functions.html#exec)，相当于使用`exec()`执行了一句`import module`语句，后面的也就不用解释了。
 > 这个函数支持动态执行 Python 代码。object 必须是字符串或者代码对象。如果是字符串，那么该字符串将被解析为一系列 Python 语句并执行（除非发生语法错误）
 值得注意的是，实际上对于 exec() 的正确使用是比较难的。
 >
@@ -65,12 +65,12 @@ baz……
 ```
 
 ## 使用`__import__`魔法方法
-单独使用__import__() 可以直接加载模块，但是当需要动态加载类、函数时，就需要配合getattr来实现。
+单独使用__import__() 可以直接加载模块，但是当需要动态加载类、函数时，就需要配合 getattr 来实现。
 实现步骤：
 
 1. 获取模块名(module_name)
-2. 使用__import__(module_name)导入Python模块
-3. 使用getattr(module_name, class_name/function_name)获取类、方法的对象
+2. 使用__import__(module_name)导入 Python 模块
+3. 使用 getattr(module_name, class_name/function_name)获取类、方法的对象
 
 - 示例代码
 ```python
@@ -117,7 +117,7 @@ module_obj.baz()
 
 ```
 
-## 使用importlib
+## 使用 importlib
 这种方式其实是`__import__()` 方式的扩展。`Python`官方文档推荐程序式地导入模块时应该使用 `import_module()` 而不是`__import__`。
 这里我们继续使用上面定义好的`module.py`模块。
 ```python
@@ -141,7 +141,7 @@ module_obj.bar()
 > 第二个目的是实现 import 的部分被公开在这个包中，使得用户更容易创建他们自己的自定义对象 (通常被称为 importer) 来参与到导入过程中。
 
 ## 应用场景
-我们在使用redis的时候，有时候需要添加一个代理类，示例如下：
+我们在使用 redis 的时候，有时候需要添加一个代理类，示例如下：
 ```python
 class RedisClient:
     def init_con(self, *args, **kwargs):
@@ -150,14 +150,14 @@ class RedisClient:
         pass
 
 ```
-然后希望直接通过这个 RedisClient 执行redis相关操作, 比如 set, get, hget...
+然后希望直接通过这个 RedisClient 执行 redis 相关操作, 比如 set, get, hget...
 ```python
 rc = RedisClient()
 rc.set(...)
 rc.get(...)
 ...
 ```
-这样调用的话, 就需要将 pyredis 中的所有函数都在RedisClient 中写一遍, 那就有点得不偿失了。
+这样调用的话, 就需要将 pyredis 中的所有函数都在 RedisClient 中写一遍, 那就有点得不偿失了。
 
 这里实际就是希望能够做到动态调用, 将 RedisClient 中的操作, 根据操作名, 直接映射到实际的 pyredis 操作之上。
 
@@ -176,10 +176,10 @@ if __name__ == '__main__':
     redis_client.init_con(...)
     redis_client.set('key_name', 'key_value')
 ```
-这样，就实现动态调动pyredis的操作的目的了。
+这样，就实现动态调动 pyredis 的操作的目的了。
 
 ## 参考链接
-[Python动态加载模块、类、函数的几种方式 - Threezh1's blog](https://threezh1.com/2019/07/12/Python%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/#1-exec)
+[Python 动态加载模块、类、函数的几种方式 - Threezh1's blog](https://threezh1.com/2019/07/12/Python%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/#1-exec)
 [python 类方法的动态调用 - u3v3](https://www.u3v3.com/ar/1313)
 
 ## 推荐阅读
