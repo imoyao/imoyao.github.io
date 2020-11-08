@@ -41,10 +41,10 @@ subtitle: 正所谓“江上代有才人出，各领风骚数百年。”，从 
 ## 介绍
 Cephadm 通过 SSH 从管理守护程序连接到主机来部署和管理 Ceph 群集，以添加、删除或更新 Ceph 守护程序的容器。它不依赖于外部配置或编排工具，如 Ansible、Rook 或 Salt。
 
-Cephadm 管理 Ceph 群集的整个生命周期。它首先在单个节点（一个`monitor`和一个`mgr`）上引导一个最简的 Ceph 群集，然后使用业务流程接口（后续命令（“day 2” commands））扩展群集以包括所有主机并预配所有 Ceph 守护进程和服务。这可以通过 Ceph 命令行接口 （CLI） 或dashboard  （GUI） 执行完成。
+Cephadm 管理 Ceph 群集的整个生命周期。它首先在单个节点（一个`monitor`和一个`mgr`）上引导一个最简的 Ceph 群集，然后使用业务流程接口（后续命令（“day 2” commands））扩展群集以包括所有主机并预配所有 Ceph 守护进程和服务。这可以通过 Ceph 命令行接口 （CLI） 或 dashboard  （GUI） 执行完成。
 
 ## 发展动向
-目前cephadm仍然在进一步开发，功能正在有条不紊地进行着，使用cephadm是一个差强人意的选择。
+目前 cephadm 仍然在进一步开发，功能正在有条不紊地进行着，使用 cephadm 是一个差强人意的选择。
 以下组件的 Cephadm 管理目前得到良好支持：
 
 - Monitors
@@ -135,7 +135,7 @@ total 36
     ```
     这是因为系统中缺少 Python3 支持，所以要安装 Python3，关于 Python3 的安装可以参考此处👇
     1. [Python3 环境搭建 | 菜鸟教程](https://www.runoob.com/python3/python3-install.html) 
-    2. [安装Python所需依赖环境 - 寒爵 - 博客园](https://www.cnblogs.com/Jimc/p/10218062.html) 
+    2. [安装 Python 所需依赖环境 - 寒爵 - 博客园](https://www.cnblogs.com/Jimc/p/10218062.html) 
     安装之后验证：
     ```shell
     python3 -V
