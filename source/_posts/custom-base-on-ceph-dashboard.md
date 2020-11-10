@@ -350,5 +350,4 @@ OSD 编辑：洗刷、深度洗刷、设置权重、标记、销毁、清除
 守护进程创建、更新、删除
 
 ## 更多  
-首先阅读[HACKING.rst](./HACKING.rst)文档，然后阅读[文档目录](docs/)了解更多。
 同事写的备忘录：[有道云笔记](https://note.youdao.com/ynoteshare1/index.html?id=550ed97b36101aab178afe9081cd52ee)
