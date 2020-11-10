@@ -737,10 +737,10 @@ yum -y install grafana
 systemctl start grafana-server.service 
 systemctl enable grafana-server.service
 ```
+
 ## 安装 promethus
 1. 下载安装包，
-下载地址：https://prometheus.io/download/
-
+下载地址：`https://prometheus.io/download/`
 2. 解压压缩包
 ```bash
 tar fvxz prometheus-2.14.0.linux-amd64.tar.gz
@@ -832,12 +832,12 @@ systemctl restart prometheus
 5. 点击 HOME--》Import dashboard, 选择合适的 dashboard，记录编号
 
 ## 参考资料
-- [Preflight Checklist — Ceph Documentation](https://docs.ceph.com/docs/nautilus/start/quick-start-preflight/)
-- [Storage Cluster Quick Start — Ceph Documentation](https://docs.ceph.com/docs/nautilus/start/quick-ceph-deploy/)
+- [Preflight Checklist — Ceph Documentation](https://docs.ceph.com/en/nautilus/start/quick-start-preflight/)
+- [Storage Cluster Quick Start — Ceph Documentation](https://docs.ceph.com/en/nautilus/start/quick-ceph-deploy/)
 - [Quick Guide to Install and Configure Ceph Cluster on CentOS 7](https://www.linuxtechi.com/install-configure-ceph-cluster-centos-7/)
 - [单机版 Ceph 环境部署，Linux 平台 - 知乎](https://zhuanlan.zhihu.com/p/67832892)
 - [初试 Centos7 上 Ceph 存储集群搭建_运维_哎_小羊的博客-CSDN 博客](https://blog.csdn.net/aixiaoyang168/article/details/78788703)
-- [ceph-deploy – Ceph deployment tool — Ceph Documentation](https://docs.ceph.com/docs/nautilus/man/8/ceph-deploy/)
+- [ceph-deploy – Ceph deployment tool — Ceph Documentation](https://docs.ceph.com/en/latest/man/8/ceph-deploy/)
 - [ceph-deploy 命令详解_运维_ns2250225-CSDN 博客](https://blog.csdn.net/ns2250225/article/details/69978355)
 - [全网最详细的 Ceph14.2.5 集群部署及配置文件详解，快来看看吧-博客园](https://www.cnblogs.com/passzhang/p/12151835.html)
 - [Ceph 文件系统-全网最炫酷的 Ceph Dashboard 页面和 Ceph 监控-博客园](https://www.cnblogs.com/passzhang/p/12179816.html)
