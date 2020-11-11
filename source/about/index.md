@@ -70,6 +70,7 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/images/about-bg.jpg
 - 向互联网精神布道者、理想主义者、 `web.py` 的作者—— *The Internet's Own Boy:Aaron Swartz* 致以崇高的敬意；  
     1. 了解网友对他的评价请戳：[亚伦·斯沃茨 (Aaron Swartz) 是怎么样一个人？](https://www.zhihu.com/question/20711220)
     2. 通过雪泥鸿爪了解其性格：[The web.py Philosophy](http://webpy.org/philosophy)
+- 国士无双，向两弹一星功勋奖章获得者钱学森致敬。参见：[钱学森是个怎样的人？ - 知乎](https://www.zhihu.com/question/19622126/answer/76463009)
 
 <h2 class="slogan"><i class="fa fa-bell"></i>  其他</h2>
 

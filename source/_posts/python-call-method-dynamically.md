@@ -65,12 +65,12 @@ baz……
 ```
 
 ## 使用`__import__`魔法方法
-单独使用__import__() 可以直接加载模块，但是当需要动态加载类、函数时，就需要配合 getattr 来实现。
+单独使用`__import__()` 可以直接加载模块，但是当需要动态加载类、函数时，就需要配合 getattr 来实现。
 实现步骤：
 
 1. 获取模块名(module_name)
-2. 使用__import__(module_name)导入 Python 模块
-3. 使用 getattr(module_name, class_name/function_name)获取类、方法的对象
+2. 使用`__import__(module_name)`导入 Python 模块
+3. 使用 `getattr(module_name, class_name/function_name)`获取类、方法的对象
 
 - 示例代码
 ```python

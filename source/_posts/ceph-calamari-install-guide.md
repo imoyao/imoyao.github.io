@@ -2,7 +2,7 @@
 title: ceph-calamari 安装记录
 date: 2019-10-23 16:44:31
 tags:
-- Ceph
+- CEPH
 - Calamari
 ---
 {% note danger no-icon %} 

@@ -11,7 +11,7 @@ tags:
 
 1. Nginx: 高性能`Web`服务器，负责反向代理；
 
-2. gunicorn: 高性能 WSGI 服务器；
+2. gunicorn: （Green Unicorn，绿色独角兽）高性能 uWSGI 服务器；
 
 3. gevent: 将`Python`同步代码转换为异步的协议库；
 
