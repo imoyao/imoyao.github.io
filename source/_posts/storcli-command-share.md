@@ -9,7 +9,7 @@ tags:
 categories:
 - 教程记录
 ---
-目前`LSI RAID`卡使用的配置工具主要有：`Megaraid Storage Manager`（MSM，图形环境）、`MegaCLI`（字符界面）、`StorCLI`（字符界面）。其中`StorCLI`作为`MegaCLI`后继者整合了`LSI`和原来`3ware`的产品支持，兼容`MegaCLI`命令的同时更加简洁。[前面的文章](/blog/2017-11-20/megacli_command_share/)记录了`MegaCli`常用管理命令，本篇主要记录`StorCLI`的使用。
+目前`LSI RAID`卡使用的配置工具主要有：`Megaraid Storage Manager`（MSM，图形环境）、`MegaCLI`（字符界面）、`StorCLI`（字符界面）。其中`StorCLI`作为`MegaCLI`后继者整合了`LSI`和原来`3ware`的产品支持，兼容`MegaCLI`命令的同时更加简洁。[前面的文章](/blog/2017-11-20/megacli-command-share/)记录了`MegaCli`常用管理命令，本篇主要记录`StorCLI`的使用。
 
 <!--more-->
 
@@ -76,7 +76,7 @@ storcli /cx /eall /sall show (all)
 
 返回结果
 
-```shell
+```plain
 Controller = 0
 Status = Success
 Description = Show Drive Information Succeeded.
@@ -186,7 +186,7 @@ storcli /c0 /eall /sall show
 ```
 此时的返回结果：
 
-```shell
+```plain
 Controller = 0
 Status = Success
 Description = Show Drive Information Succeeded.

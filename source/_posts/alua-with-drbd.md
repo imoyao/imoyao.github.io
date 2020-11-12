@@ -5,6 +5,7 @@ tags:
 - DRBD
 - 存储
 - ALUA
+- 双活
 categories: 项目相关
 password: estor
 cover: /images/dual.jpg
@@ -225,6 +226,97 @@ def json_context(filename=setting.REFEREE_CONF_FP):
 1. 等待数据完成同步；
 2. 用户点击界面 reset。判断数据同步完成；
 3. 重置仲裁、升主、attach 输出继续提供服务；
+
+## TODO（待整理）
+## 有仲裁
+
+### 网络异常
+
+#### 抢占
+首先根据 drbd 资源中的 net 的配置，即使检测到网络异常也不会立刻发生仲裁的抢占，而是先发生组内接管。在 timeout 之后，如果网络还是没有恢复，则会发生抢占，调用 handler 中的脚本去 grpc 发生仲裁抢占，参见：ODSP.drbd_notify_action.TaggedActor.fence_peer，然后势必有一边抢占到仲裁（exit_code=4），另一边则为其他组成员已抢占(exit_code=101)，抢占到的一边继续 drbd 提供读写服务，未抢占到的一边 down 掉服务,参见：ODSP.referee.take_action.refuse，数据过来返回 error。
+
+---
+
+管理员介入，恢复网络异常，同时通过页面错误恢复 drbd 连接，即重启操作，参见：ODSP.drbd.peradrbd.do_up，此步应该确保 down 掉的 drbd 全部 up 起来，后台显示 connect 状态。
+
+等待建立连接的 drbd 自动恢复数据同步。
+
+#### 恢复
+
+用户点击仲裁重置按钮，此时首先判断是否具备仲裁恢复条件：每个 drbd 都恢复到 UpToDate/UpToDate 状态（表示数据恢复完成），参见：ODSP.drbd.peradrbd.before_reset_rfr，然后发起重置操作，重置成功修改数据库和配置，同时对刚才 refuse 掉的 drbd 进行 provide 操作。参见：ODSP.referee.take_action.provide，此时仲裁恢复。整个流程参见：ODSP.referee.perarefer.reset_referee
+
+### 双控内部一台控制器宕机
+
+根据 net 超时配置不同仲裁可能发生抢占，也有可能不发生。
+
+#### 发生抢占
+1. 如果是宕机（B1）端(B2)抢占到仲裁，则另一台机器（A）会 refuse
+
+   ##### 接管
+  
+  此时未关机端会直接都不提供服务，drbd 全 down 掉，而关机这边存活的控制器(B2)在发生接管后升主并接管完成。
+  
+  *TODO：*
+  
+  - [ ] 此时是否会触发 after_sync_target 事件，如果不触发，又不使用界面的 reset 仲裁功能，A 端什么时候升主？
+  
+  ~~等待同步完成，A 端使用 ODSP.drbd_notify_action.TaggedActor.after_sync_target 逻辑自动升主并连接提供服务。~~
+
+2. 如果非宕机端抢占到仲裁（A），宕机这边(B)也会接管资源
+     A 机器继续提供读写服务，宕机端（B1）资源会在继续在线的控制器(B2)这边发生接管。涉及 drbd 部分逻辑参见：ODSP.diskraid.raidaction.switch_drbd
+
+     - 接管
+       1. 修改 take_over_all 逻辑，提供快速处理链路的方案（take_over_all 会因为无法断开而导致链路不返回失败，处理由于 drbd 设备没有升主无法完成 cache 接管操作），对双主 drbd 需要单独处理
+       2. 只需要 ODSP.drbd_notify_action.TaggedActor.after_sync_target 脚本处理：升主、建立连接继续提供服务（此时链路通）
+       
+     - 恢复
+       等待另一台控制器重新开机，此时需要先点击控制器管理界面的恢复接管。（目前 cache 连接会提示`connect is failed`）资源恢复，然后 drbd 处于 secondary 状态
+    - [ ] 需要处理 scst 混合输出问题
+
+等待另一台控制器重新开机，此时需要先点击控制器管理界面的恢复接管。目前 cache 连接会提示`connect is failed`，因为接管这边必须是 drbd primary 状态。而之前设计的逻辑是点击恢复仲裁才会去 drbd 升主。
+
+#### 不发生抢占
+
+暂时没有考虑
+
+### 初始化
+
+1. 如果没有发生仲裁，通过同步目标端的`ODSP.drbd_notify_action.TaggedActor#before_sync_target`通知输出同步源端，通过 sync_after 输出同步目标端（目前是点界面的，希望是主动的）；
+2. 如果发生仲裁，则抢占成功端可以正常输出，代码参见`ODSP.san.digisan.decoratedealaddcahe`；抢占失败端和接管恢复一样，根据设计思路选择手动或者主动的输出方式（目前是点界面的，希望是主动的）；需要确保输出的配置和之前没有变化。
+   - [ ] 需要处理 scst 混合输出问题
+
+### scst 混合输出问题
+
+​	初始化和恢复涉及 scstadm -config /etc/scst.conf, 该命令需要 drbd 卷均添加 cache 完毕，否则会报错甚至导致内核崩溃。
+
+## 无仲裁
+
+关机、重启操作和两台机器相继拔电源线会触发 bbu 事件。参见：`ODSP.referee.perarefer.bbu_notify`
+我们的主导思想是：让先关机一边转变成镜像卷，而后关机的一台机器成为生产卷组，这样就可以保证即使两台机器都关机，也不会因为重新启动的先后顺序问题导致现在的数据更旧端变成生产卷使数据刷写下去。
+
+这种状况下有三种情景需要考虑：
+
+1. grp1 关机，grp2 保持开机（在关机机器重新开机过程中不关机）
+
+   grp1 开机之后状态变为 Secondary/Primary。点击 reset 时需要通过 count 判断在哪边进行升主操作，如果 count 是 2，则说明是数据多端，则发送到镜像卷端去 provide 提供服务
+
+2. grp1 关机，grp2 之后也关机
+
+   开机之后是 Secondary/Secondary 状态。此时升主操作只能在现在的生产卷端（后关机节点）进行，然后点击界面 reset 重置仲裁。
+
+3. 两台设备同时掉电关机
+
+  此时可能同时 count=2 或者来不及置 count，则会发生脑裂！此时两边均不可升主(drbd 数据量可能会有细微差异)。
+  
+{% note info %}
+我们现在限制只可以在生产卷端点击 reset，这样的话，peovide 只需要发送到对端（必然是镜像端）去执行即可，不需要耗时去判断那边是生产卷端。
+{% endnote %}
+
+{% note danger %}
+**问题**
+1. 由于网络异常，socket 置 count 未成功，则无法判断那边是最后数据多端
+2. 如果镜像卷先关机，也需要置 count 表示发生仲裁
+{% endnote %}
 
 ## 推荐阅读
 [双活数据中心架构分析及优缺点_存储我最懂-CSDN 博客](https://blog.csdn.net/shouqian_com/article/details/52525021)

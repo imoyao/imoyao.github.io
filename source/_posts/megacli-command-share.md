@@ -8,8 +8,9 @@ tags:
 - 存储
 categories:
 - 教程记录
+subtitle: 进行存储开发时需要创建磁盘阵列，本文主要记录 RAID 卡管理工具`MegaCli`的使用。需要注意的是，目前该管理工具因为商业收购已经被官方“弃坑”，`StorCLI`作为后继者整合了`LSI`和原来`3ware`的产品支持，兼容`MegaCLI`命令的同时更加简洁。
 ---
-进行存储开发时需要创建磁盘阵列，本文主要记录 RAID 卡管理工具`MegaCli`的使用。需要注意的是，目前该管理工具因为商业收购已经被官方“弃坑”，`StorCLI`作为后继者整合了`LSI`和原来`3ware`的产品支持，兼容`MegaCLI`命令的同时更加简洁，参阅[此篇](https://imoyao.github.io/blog/2017-12-27/storcli_command_share/)。
+进行存储开发时需要创建磁盘阵列，本文主要记录 RAID 卡管理工具`MegaCli`的使用。需要注意的是，目前该管理工具因为商业收购已经被官方“弃坑”，`StorCLI`作为后继者整合了`LSI`和原来`3ware`的产品支持，兼容`MegaCLI`命令的同时更加简洁，参阅[此篇](/blog/2017-12-27/storcli_command_share/)。
 <!--more-->
 
 ## 巡读
@@ -424,19 +425,19 @@ MegaCli -ldsetprop -endskcache -L0 -a0
 ```
 ## 查询篇
 
-- 显示 BBU 状态信息    
+- 显示 BBU 状态信息 
 ```shell
 MegaCli -AdpBbuCmd -GetBbuStatus –aALL 
-``` 
-- 显示 BBU 容量信息    
+```
+- 显示 BBU 容量信息  
 ```shell
 MegaCli -AdpBbuCmd -GetBbuCapacityInfo –aALL 
 ```
-- 显示 BBU 设计参数    
+- 显示 BBU 设计参数  
 ```shell
 MegaCli -AdpBbuCmd -GetBbuDesignInfo –aALL
 ```
-- 显示当前 BBU 属性   
+- 显示当前 BBU 属性  
 ```shell
 MegaCli -AdpBbuCmd -GetBbuProperties –aALL 
 ```
@@ -472,7 +473,6 @@ MegaCli -AdpGetTime –aALL
 ```shell
 MegaCli -AdpAllInfo –aAll 
 ```
-
 - 显示 RAID 卡型号，RAID 设置，Disk 相关信息      
 ```shell
 MegaCli -cfgdsply –aALL 
@@ -480,7 +480,7 @@ MegaCli -cfgdsply –aALL
 - 查询 RAID 阵列个数    
 ```shell
 MegaCli -cfgdsply -aALL |grep "Number of DISK GROUPS:"
-``` 
+```
 - 查看 Cache 策略设置    
 ```shell
 MegaCli -cfgdsply -aALL |grep Polic
@@ -500,6 +500,7 @@ MegaCli -PDRbld -ShowProg -PhysDrv [1:5] -a0
 ```shell
 MegaCli -FwTermLog dsply -a0 > adp2.log
 ```
+
 ## 设置篇
 
 ### 创建/删除阵列
@@ -532,7 +533,6 @@ MegaCli -LDBI -ShowProg -LALL -aALL
 MegaCli -LDBI -ProgDsply -LALL -aALL 
 ```
 ### 设置磁盘缓存策略 
-
 缓存策略解释：
 
 |代码|含义|
@@ -546,7 +546,6 @@ MegaCli -LDBI -ProgDsply -LALL -aALL
 |Direct|-    |
 
 eg：
-
 ```shell
 MegaCli -LDSetProp WT|WB|NORA|RA|ADRA -L0 -a0 
 # or 
@@ -637,7 +636,7 @@ MegaCli -CfgForeign -Scan -a0
 ## 其他
 
 磁盘状态 State 
-```shell
+```plain
 ("Failed", "Online, Spun Up", "Online, Spun Down", "Unconfigured(bad)", "Unconfigured(good), Spun down", "Hotspare, Spun down", "Hotspare, Spun up" or "not Online")
 ```
 
