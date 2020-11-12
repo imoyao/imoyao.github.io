@@ -69,11 +69,24 @@ mv proxy.conf.json.sample proxy.conf.json
 }
 
 ```
+其中端口号可以使用`ceph mgr services`获取到，即输出中的`dashboard`字段中所指：
+```plain
+{
+    "dashboard": "http://node-c1:8080/"
+}
+
+```
 6. 运行前端服务
 ```shell
 npm start
 ```
 之后，如果使用默认配置，则访问`http://localhost:4200/`进行开发，外部网络访问，替换为服务所属机器的 ip 即可。
+
+7. 版本释出
+```shell
+npm run-script build
+```
+该命令会在 frontend 目录下释出`dist`目录。
 
 ### 后端
 1. 安装 pip

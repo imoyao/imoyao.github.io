@@ -1,9 +1,10 @@
 ---
-title: 开篇：基金管理计划
+title: 开篇 | 基金管理计划
 date: 2020-09-17 09:59:43
 tags:
 - FMP
 - 基金
+- TODO
 categories:
 - Projects
 - FMP
