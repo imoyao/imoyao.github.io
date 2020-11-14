@@ -202,6 +202,7 @@ if __name__ == '__main__':
 ## 参考链接
 - [Is it a bad idea to define a local class inside a function in python?](https://stackoverflow.com/questions/22497985/is-it-a-bad-idea-to-define-a-local-class-inside-a-function-in-python)
 - [Inner Classes in Python](https://www.datacamp.com/community/tutorials/inner-classes-python)
+
 ### TODO
 - [Creating a class within a function and access a function defined in the containing function's scope](https://stackoverflow.com/questions/4296677/creating-a-class-within-a-function-and-access-a-function-defined-in-the-containi)
 - [How references to variables are resolved in Python](https://stackoverflow.com/questions/20246523/how-references-to-variables-are-resolved-in-python)
