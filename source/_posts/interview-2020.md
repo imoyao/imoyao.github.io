@@ -30,7 +30,9 @@ categories:
 2. 文件存储：文件存储的特点是一个具有**目录树**结构的大文件夹，大家都可以获取文件。
 
 3. 块存储：块存储的特点是不能直接被操作系统访问，在分区、创建逻辑卷、格式化为指定文件系统后才可以使用，与平常主机内置硬盘的方式完全无异。
-参见[块存储、文件存储、对象存储这三者的本质差别是什么？ - 知乎](https://www.zhihu.com/question/21536660)
+
+这三者的本质差别是使用数据的“用户”不同：块存储的用户是可以读写块设备的软件系统，例如传统的文件系统、数据库；文件存储的用户是自然人（电脑客户机）；对象存储的用户则是其它计算机软件。
+ 参见：[块存储、文件存储、对象存储这三者的本质差别是什么？ - 知乎](https://www.zhihu.com/question/21536660)
 
 ### RAID 是什么？各类型之间的区别
  参见：[RAID 是什么？各类型之间的区别？ | 别院牧志](https://wiki.masantu.com/wiki/%F0%9F%92%BB%E5%B7%A5%E4%BD%9C/%E5%AD%98%E5%82%A8/diff-raid/)
@@ -139,6 +141,16 @@ HTTP 幂等方法是指无论调用多少次都不会有不同结果的 HTTP 方
 4. 在视图函数处理过程中，很有可能因为某些操作而导致异常的产生，此时 Web 应用应该判断异常产生的由来，并进行统一的*异常处理*。 不管是数据库连接异常，还是用户表单验证未通过，都应该给出一个统一的应答，这样便于前端的数据处理，也能够让用户知道到底发生了什么。
 5. 处理完业务逻辑，最后返回一个 HTTP 的响应给客户端，HTTP 的响应内容同样有标准的格式。无论是什么客户端或者是什么服务端，大家只要按照 HTTP 的协议标准来实现的话，那么它一定是通用的。
 
--### 参考链接
-[一文理解 Flask Web 开发](https://smartkeyerror.com/Flask-Web)
-[用户访问 web 服务器过程精解_达龙 - SegmentFault 思否](https://segmentfault.com/a/1190000010537218)
+### 参考链接
+1. [一文理解 Flask Web 开发](https://smartkeyerror.com/Flask-Web)
+2. [用户访问 web 服务器过程精解_达龙 - SegmentFault 思否](https://segmentfault.com/a/1190000010537218)
+
+## 佳讯飞鸿
+- Python2 与 Python3 区别？
+[Python 2 和 Python 3 有哪些主要区别？ - 知乎](https://www.zhihu.com/question/19698598)
+- 谈谈你对 Pythonic 的理解？
+```python
+import this
+```
+[怎样才能写出 Pythonic 的代码？ - 知乎](https://www.zhihu.com/question/21408921)
+

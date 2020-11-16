@@ -141,7 +141,7 @@ zset 集合可以完成有序执行、按照`优先级执行`的情况；
 3：非递归实现特点： 深度优先一般采用递归实现，如改用非递归，则可需要来模拟栈，当需要先遍历当前节点的儿子结点时（例如中序遍历）需要将其压入栈中，先遍历其儿子结点，然后再将其弹出栈，遍历当前节点。广度优先一般采用非递归来实现，用一个队列来保存依次需要遍历的节点。 
 1. [二叉树深度优先遍历（DFS）和广度优先遍历（BFS）](https://www.masantu.com/blog/2019-10-28/binary-tree-BFS-and-DFS/)
 2. [简述树的深度优先算法、广度优先算法，及非递归实现的特点](https://www.nowcoder.com/questionTerminal/b194924b44b144e8a238819a0a6dae42)   
-3. [广度优先搜索(BFS)和深度优先搜索(DFS)](https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/)
+3. [广度优先搜索(BFS)和深度优先搜索(DFS)](https://nullcc.github.io/2018/06/07/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2(BFS)%E5%92%8C%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2(DFS)/)
 > https://nullcc.github.io/2018/06/07/广度优先搜索(BFS)和深度优先搜索(DFS)/
 
 ### Python 垃圾回收机制

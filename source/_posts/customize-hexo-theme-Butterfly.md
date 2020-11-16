@@ -258,5 +258,8 @@ git remote set-url --add origin {你的 gitee 项目地址}
 ```
 （当然我们也可以手动点击 gitee 网页上的同步按钮强制从 github 上更新）
 
+## 其他工具
+- [死链检测](https://www.deadlinkchecker.com/website-dead-link-checker.asp)
+
 ## 推荐阅读
 [Hexo 博客之 butterfly 主题优雅魔改系列（持续更新） | 小康博客](https://www.antmoe.com/posts/a811d614/index.html)

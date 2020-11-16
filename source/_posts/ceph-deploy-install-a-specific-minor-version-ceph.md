@@ -236,6 +236,6 @@ Error in sys.exitfunc:
 本文通过搭建本地镜像源然后指定的方式间接完成了 ceph 集群的安装。
 
 ## 参考链接
-- [install — ceph-deploy 2.0.2 documentation](https://docs.ceph.com/ceph-deploy/docs/install.html#install)
+- [install — ceph-deploy 2.0.2 documentation](https://docs.ceph.com/projects/ceph-deploy/en/latest/#installation)
 - [ceph-deploy-specific-version.md at thaonguyenvan/notes-storage](https://github.com/thaonguyenvan/notes-storage/blob/51e6eeb02c34767ad84d350c2462bdccc179c35c/ceph/setup/ceph-deploy-specific-version.md)
 

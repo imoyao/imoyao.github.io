@@ -17,7 +17,7 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/images/friends.jpg
 - [Welcome to ansheng’s blog!](https://blog.ansheng.me/)
 - [laike9m's blog](https://laike9m.com/)
 - [捕蛇者说](https://pythonhunter.org/)
-- [张先森的代码小屋](nullcc.github.io)
+- [张先森的代码小屋](https://nullcc.github.io/)
 - [Python 工匠](https://github.com/piglei/one-python-craftsman)
 - [zrong's Blog | Every man dies but not every man really lives.](https://blog.zengrong.net/)
 

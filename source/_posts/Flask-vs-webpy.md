@@ -34,7 +34,7 @@ toc: true
 - **官方文档** - `Flask`具有良好的官方文档，并且有国内使用者翻译的中文文档；`Web.py`只有勉强够用、捉襟见肘的入门级官方文档，剩下的需要开发人员自行摸索。
 - **社区活跃度** - `Flask`拥有活跃的社区文化和数量庞大的拥趸者，`Web.py`国内只有不活跃的专门的豆瓣小组或者在一些热门`Python`社区偶有提及。
 - 第三方扩展  
-    - 表单 - `Flask` 使用扩展`Flask-WTF`和`WTForms`可以实现很好的表单验证和 `csrf` 安全保护；（参阅[Flask-WTF 与 WTForms 的用法详解](https://www.jianshu.com/p/7e16877757f8)）；而`Web.py`自带[Form 库](http://webpy.org/form)，可以实现表单及简单校验。
+    - 表单 - `Flask` 使用扩展`Flask-WTF`和`WTForms`可以实现很好的表单验证和 `csrf` 安全保护；（参阅[Flask-WTF 与 WTForms 的用法详解](https://www.jianshu.com/p/7e16877757f8)）；而`Web.py`自带[Form 库](https://webpy.org/cookbook/forms)，可以实现表单及简单校验。
     - 数据库 -  `Flask` 使用扩展`Flask-SQLAlchemy`实现对数据库的`ORM`操作，可以很好地管理和实现数据库的迁移(借助`Flask-Migrate`)工作；`Web.py`我们使用自己封装的`database.py`。
     - 身份验证和权限 - `Flask`提供安全`cookie`作为您自己实现的工具，第三方扩展如`Flask-Login`(用户会话管理)，`Flask-HTTPAuth`<sup>①</sup>（简化了使用`Flask`路由的`HTTP`身份验证的使用），`Flask-Security`（提供一站式管理）， `Flask-Social`（用于添加“社交”或`OAuth`登录和连接管理）等，这些扩展良莠不齐，使用时需要对其有个初步了解并进行遴选；`Web.py`还是要自己造轮子。
     - `RESTful` - 使用`Flask-RESTful` 可以创建`REST`的`API`。
