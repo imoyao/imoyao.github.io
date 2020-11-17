@@ -134,7 +134,28 @@ def json_context(filename=setting.REFEREE_CONF_FP):
 > 将 DRBD 资源设置为包含共享的 Global File System(GFS)的块设备所需的步骤。它包括 GFS 和 GFS2。要在 DRBD 上使用 GFS，必须在 indexterm 中配置[DRBD|dual-primary mode](https://www.linbit.com/drbd-user-guide/drbd-guide-9_0-cn/#s-dual-primary-mode)。
 
 我们首先需要对 DRBD 资源进行配置，具体资源配置为：
+```plain
+# global.conf
+    disk {
+        on-io-error detach;
+        no-disk-flushes ;
+        no-disk-barrier;
+        c-plan-ahead 0;
+        c-fill-target 24M;
+        c-min-rate 80M;
+        c-max-rate 720M;
+    } 
+
+```
+本地扇区访问出错时，依赖于on-io-error配置。
+- pass-on: 主端将错误上报上层，本端磁盘进入inconsistent状态；
+- call-local-io-error：调用本地脚本，磁盘先进入fail的状态，最后进入diskless状态；
+- detach：磁盘状态先进入fail的状态，最后进入diskless状态；
+
+当本地完全无法访问时，则出现本端处于没有磁盘的状态，如果资源处于连接状态则将请求发到对端。
+
  ```plain
+ # 单个资源配置
  resource r1 {
     net{
         timeout  300;
@@ -234,8 +255,6 @@ def json_context(filename=setting.REFEREE_CONF_FP):
 
 #### 抢占
 首先根据 drbd 资源中的 net 的配置，即使检测到网络异常也不会立刻发生仲裁的抢占，而是先发生组内接管。在 timeout 之后，如果网络还是没有恢复，则会发生抢占，调用 handler 中的脚本去 grpc 发生仲裁抢占，参见：ODSP.drbd_notify_action.TaggedActor.fence_peer，然后势必有一边抢占到仲裁（exit_code=4），另一边则为其他组成员已抢占(exit_code=101)，抢占到的一边继续 drbd 提供读写服务，未抢占到的一边 down 掉服务,参见：ODSP.referee.take_action.refuse，数据过来返回 error。
-
----
 
 管理员介入，恢复网络异常，同时通过页面错误恢复 drbd 连接，即重启操作，参见：ODSP.drbd.peradrbd.do_up，此步应该确保 down 掉的 drbd 全部 up 起来，后台显示 connect 状态。
 
