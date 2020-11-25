@@ -147,10 +147,10 @@ def json_context(filename=setting.REFEREE_CONF_FP):
     } 
 
 ```
-本地扇区访问出错时，依赖于on-io-error配置。
-- pass-on: 主端将错误上报上层，本端磁盘进入inconsistent状态；
-- call-local-io-error：调用本地脚本，磁盘先进入fail的状态，最后进入diskless状态；
-- detach：磁盘状态先进入fail的状态，最后进入diskless状态；
+本地扇区访问出错时，依赖于 on-io-error 配置。
+- pass-on: 主端将错误上报上层，本端磁盘进入 inconsistent 状态；
+- call-local-io-error：调用本地脚本，磁盘先进入 fail 的状态，最后进入 diskless 状态；
+- detach：磁盘状态先进入 fail 的状态，最后进入 diskless 状态；
 
 当本地完全无法访问时，则出现本端处于没有磁盘的状态，如果资源处于连接状态则将请求发到对端。
 
