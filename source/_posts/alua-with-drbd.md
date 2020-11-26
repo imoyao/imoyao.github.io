@@ -249,8 +249,16 @@ def json_context(filename=setting.REFEREE_CONF_FP):
 3. 重置仲裁、升主、attach 输出继续提供服务；
 
 ## TODO（待整理）
+
 ## 有仲裁
 
+### 一台双控整体关机
+此时会发生抢占，可能是两种结果：
+
+1. 被关机端抢占到仲裁（应该避免）
+ 此时正常存活端被 detach 掉 cache，scst 继续输出，但无法提供读写；关机端重启之后，DRBD 会自动升主，输出可以读写，而未关机端只能依靠用户手动启动服务，然后两边同步数据，等到数据同步完成，自动调用`do_after_sync`升主并`attach`服务；
+2. 未关机端抢占到仲裁（希望实现）
+ 此时关机端 detach 掉 cache，开机之后 DRBD 以 secondary 的身份起来，然后主端自动将期间的数据同步过去，数据同步完成之后，调用`do_after_sync`升主，然后此时需要进入`do_add_action`逻辑，即需要手动添加 cache 同时启动 san 服务重新 enable 服务；
 ### 网络异常
 
 #### 抢占
