@@ -36,6 +36,18 @@ reward: true
 
 <iframe class="bilibili" src="//player.bilibili.com/player.html?aid=244176193&bvid=BV11v411v76q&cid=221300555&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
+## 交流
+1. 技术问题请尽量使用[Issues · imoyao/idealyard](https://github.com/imoyao/idealyard/issues)提问回馈社区，参阅：[Issue #15 · imoyao/idealyard](https://github.com/imoyao/idealyard/issues/15)
+2. 在网友的提议下建立了 QQ 群，群号：613922612。但是请注意：该项目为单纯开源，本人并不靠此盈利（有自己的砖要搬），在可预见的未来也**没有可能**投入到为大家答疑解惑中去。所以该群的目的更多是建立一个小白之间互相交流的途径。如果可能，请在公开场合讨论你的问题而不是简单地抛出截图等待答案。
+
+![QQ 群扫码关注](https://cdn.jsdelivr.net/gh/imoyao/idealyard@master/document/src/idealyard-qq-group.png)
+
+{%raw%}
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=Em75uvDaupjSZzL-Y_C9FqzzFUUPiBAA&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="脚踏实地，仰望星空" title="Flask 交流群"></a>
+{%endraw%}
+
+3. 友善、友善、友善。网络一线牵，珍惜这段缘。请务必和善、诚恳地对待其他同学。
+
 ## 展望
 目前基本完成了一个博客的完整功能，但是其实还有很多的小 Bug 需要解决。而且在开发的过程中又产生了一些新想法，还需要自己抽时间落地。具体请阅读 [我的博客 idealyard 待办事项记录](/blog/2019-08-29/blog-idealyard-TODO/)。
 

@@ -110,8 +110,15 @@ with atomic_write('foo.txt', overwrite=True) as f:
     f.write('Hello world.')
     # "foo.txt" doesn't exist yet.
 ```
+{% note warning %}
+**注意**：
+如果是 json/pickle 文件可以使用`rb`格式写，这样才是原子性的，参见[Can it work with pickle.dump/json.dump instead of text only ? · Issue #29 · untitaker/python-atomicwrites](https://github.com/untitaker/python-atomicwrites/issues/29)
+{% endnote %}
 
-**注意**：如果是 json/pickle 文件可以使用`rb`格式写，这样才是原子性的，参见[Can it work with pickle.dump/json.dump instead of text only ? · Issue #29 · untitaker/python-atomicwrites](https://github.com/untitaker/python-atomicwrites/issues/29)
+```python
+with atomic_write(mode='wb') as f:
+    f.write(json.dumps(info, indent=4).encode(encoding='utf-8'))
+```
 
 ## 推荐阅读
 - [Reliable file updates with Python – gocept blog](https://blog.gocept.com/2013/07/15/reliable-file-updates-with-python/)
