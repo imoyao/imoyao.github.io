@@ -102,11 +102,10 @@ cover: /images/photo-1475767770551-49f1b43f71cd.jpg
    - [x] 消息提示已完成；
    - [ ] 需要完成激活邮箱；
 - [ ] 使用 swagger 生成 Flask RESTful    
-    参考[使用 swagger 生成 Flask RESTful API - 古寺比的寺 - SegmentFault 思否](https://segmentfault.com/a/1190000010144742)
+  参考[使用 swagger 生成 Flask RESTful API - 古寺比的寺 - SegmentFault 思否](https://segmentfault.com/a/1190000010144742)
 - [ ] `vendor`文件过大，导致首页刷新时间过长；
- 参考[这里](https://forum.vuejs.org/t/vue-cli-vendor-js/37246)  
- 参考[这里](https://segmentfault.com/q/1010000008832754)  
- 参考[这里](https://www.jianshu.com/p/e78c2210c410)
+
+  参考 1. [这里](https://forum.vuejs.org/t/vue-cli-vendor-js/37246)  2. [这里](https://segmentfault.com/q/1010000008832754)  3. [这里](https://www.jianshu.com/p/e78c2210c410)
 - [ ] 使用`盘古之白`之后不能输入`emoji`表情；
  ```plain
   pymysql.err.InternalError: (1366, "Incorrect string value: '\\xF0\\x9F\\x98\\x98</...' for column 'content_html' at row 1")
