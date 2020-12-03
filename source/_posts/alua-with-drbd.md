@@ -38,6 +38,7 @@ srcversion: D71ED6FF152163F9B784DD3
 
 - 如果仲裁处于`disable`的禁用状态
 则接收到 handler 事件之后，需要生产卷明确告知镜像卷抢占才会发生接管。所谓的明确告知有以下两种情况：
+
 1. 生产卷机器整体关机
 2. 生产卷两台控制器相继下线，通过[BBU](https://forum.huawei.com/enterprise/zh/thread-344765-1-1.html)告知镜像卷需要接管，当两次同时告知，则镜像卷接管。
 
@@ -258,7 +259,7 @@ def json_context(filename=setting.REFEREE_CONF_FP):
 1. 被关机端抢占到仲裁（应该避免）
  此时正常存活端被 detach 掉 cache，scst 继续输出，但无法提供读写；关机端重启之后，DRBD 会自动升主，输出可以读写，而未关机端只能依靠用户手动启动服务，然后两边同步数据，等到数据同步完成，自动调用`do_after_sync`升主并`attach`服务；
 2. 未关机端抢占到仲裁（希望实现）
- 此时关机端 detach 掉 cache，开机之后 DRBD 以 secondary 的身份起来，然后主端自动将期间的数据同步过去，数据同步完成之后，调用`do_after_sync`升主，然后此时需要进入`do_add_action`逻辑，即需要手动添加 cache 同时启动 san 服务重新 enable 服务；
+ 此时关机端 detach 掉 cache，开机之后 DRBD 以 secondary 的身份起来建立连接，然后主端自动将期间的数据同步过去；数据同步完成之后，调用`do_after_sync`升主，然后此时需要进入`do_add_action`逻辑，即需要手动添加 cache 同时启动 san 服务重新 enable 服务；
 ### 网络异常
 
 #### 抢占
@@ -318,18 +319,18 @@ def json_context(filename=setting.REFEREE_CONF_FP):
 
 ## 无仲裁
 
-关机、重启操作和两台机器相继拔电源线会触发 bbu 事件。参见：`ODSP.referee.perarefer.bbu_notify`
-我们的主导思想是：让先关机一边转变成镜像卷，而后关机的一台机器成为生产卷组，这样就可以保证即使两台机器都关机，也不会因为重新启动的先后顺序问题导致现在的数据更旧端变成生产卷使数据刷写下去。
+关机、重启操作或两台机器相继拔电源线会触发 bbu 事件。参见：`ODSP.referee.perarefer.bbu_notify`
+我们的主导思想是：让先关机一台服务器变成镜像卷组，而后关机的一台服务器器成为生产卷组，这样就可以保证即使两台机器都关机，也不会因为重新启动的先后顺序问题导致现在的数据更旧端变成生产卷使数据刷写下去。
 
 这种状况下有三种情景需要考虑：
 
 1. grp1 关机，grp2 保持开机（在关机机器重新开机过程中不关机）
 
-   grp1 开机之后状态变为 Secondary/Primary。点击 reset 时需要通过 count 判断在哪边进行升主操作，如果 count 是 2，则说明是数据多端，则发送到镜像卷端去 provide 提供服务
+   grp1 开机之后状态变为 Secondary/Primary。在生产卷组端点击 reset ~~时需要通过 count 判断在哪边进行升主操作，如果 count 是 2，则说明是数据多端，则~~ 发送到镜像卷端去 provide 提供服务（添加 cache 同时启动服务）。由于需要修改配置文件，所以我们只能在生产卷点击，这样修改不会出错（rsync 同步时判断生产端逻辑）
 
 2. grp1 关机，grp2 之后也关机
 
-   开机之后是 Secondary/Secondary 状态。此时升主操作只能在现在的生产卷端（后关机节点）进行，然后点击界面 reset 重置仲裁。
+   开机之后是 Secondary/Secondary 状态。此时用户点击升主操作（我们希望是在生产卷首先升主，但是如果用户在镜像卷端点击，提示用户之后也可以强制升主（逻辑上的）），之后添加 cache，然后启动本端的 san 服务，需要注意本台机器的两个控制器都要启动服务，然后点击界面 reset 重置仲裁，之后添加 cache，两边启动 san 服务输出。
 
 3. 两台设备同时掉电关机
 
