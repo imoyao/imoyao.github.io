@@ -12,7 +12,7 @@ cover: /images/PyCharm.png
 
 ## 说明
 
-本记录来源网络，仅用于个人记录，若收到官方律师函后果自负。希望不差钱的同学爱护同行，支持正版，去[官网购买 PyCharm Professional](https://www.jetbrains.com/zh-cn/pycharm/buy/#personal?billing=yearly)，组织用户可以在 [这里](https://www.jetbrains.com/zh-cn/pycharm/buy/#discounts?billing=yearly)关注优惠政策。
+本记录来源网络，仅用于个人记录，若收到官方律师函后果自负。希望不差钱的同学爱护同行，支持正版，去 [官网购买 PyCharm Professional](https://www.jetbrains.com/zh-cn/pycharm/buy/#personal?billing=yearly)，组织用户可以在 [这里](https://www.jetbrains.com/zh-cn/pycharm/buy/#discounts?billing=yearly) 关注优惠政策。
 
 ## 更新
 1. 跳转到该开源项目：[ide-eval-resetter: Reset your IDE eval information.](https://gitee.com/pengzhile/ide-eval-resetter)；
@@ -24,8 +24,8 @@ cover: /images/PyCharm.png
 6. 祝大家早日实现“编辑器自由”！
 {% note warning %}
 如果不小心错过试用期怎么重置（会强制退出）？
- 1. 打开注册表；
- 2. 删除`计算机\HKEY_CURRENT_USER\Software\JavaSoft\Prefs`下的`.idexxx`目录。
+ 1. `Win+R`输入`regedit`打开注册表；
+ 2. 删除`计算机\HKEY_CURRENT_USER\Software\JavaSoft\Prefs`下的`.idexxx`和`ide-eval-resetter`目录。
 {% endnote %}
 ---
 以下为个人记录备用，用于迷路之后的操作，普通使用者可以忽略。
