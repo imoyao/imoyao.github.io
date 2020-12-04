@@ -8,6 +8,7 @@ tags:
 categories:
 - Projects
 - FMP
+cover: /images/piggy-bank-fund.jpg
 ---
 ## 缘起
 网上看到[财帮子](https://dbanotes.net/arch/caibangzi_web_arch.html)被网友念念不忘，计划做一个管理基金的工具性网站：Fund Manage Platform/Plan，项目名称暂定[fundmate](https://github.com/imoyao/fundmate)。
