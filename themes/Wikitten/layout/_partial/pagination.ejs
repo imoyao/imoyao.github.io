@@ -1,9 +1,0 @@
-<% if (page.prev || page.next)  { %>
-    <nav id="page-nav">
-    <%- paginator({
-        prev_text: '<i class="fa fa-fw fa-chevron-left"></i>' + __('nav.prev'),
-        next_text: __('nav.next') + '<i class="fa fa-fw fa-chevron-right"></i>',
-        escape: false
-    }) %>
-    </nav>
-<% } %>
