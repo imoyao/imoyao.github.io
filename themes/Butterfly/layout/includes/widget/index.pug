@@ -1,22 +1,17 @@
-if theme.aside.enable 
-  if page.aside !== false
-    #aside_content.aside_content
-      if theme.aside.card_author.enable
-        !=partial('includes/widget/card_author', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_announcement.enable && page.current === 1
-        !=partial('includes/widget/card_announcement', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_recent_post.enable
-        !=partial('includes/widget/card_recent_post', {}, {cache:theme.fragment_cache})
-      if theme.ad && theme.ad.aside
-        !=partial('includes/widget/card_ad', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_categories.enable && page.type !== 'categories'
-        !=partial('includes/widget/card_categories', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_tags.enable && page.type !== 'tags'
-        !=partial('includes/widget/card_tags', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_archives.enable
-        !=partial('includes/widget/card_archives', {}, {cache:theme.fragment_cache})
-      //添加友链侧边栏
-      if theme.aside.card_links.enable
-        !=partial('includes/widget/card_links', {}, {cache:theme.fragment_cache})
-      if theme.aside.card_webinfo && page.current === 1
-        !=partial('includes/widget/card_webinfo', {}, {cache:theme.fragment_cache})  
+#aside_content.aside_content
+  !=partial('includes/widget/card_author', {}, {cache:theme.fragment_cache})
+  !=partial('includes/widget/card_announcement', {}, {cache:theme.fragment_cache})
+  .sticky_layout
+    if is_post()
+      if showToc
+        include ./card_post_toc.pug
+      !=partial('includes/widget/card_recent_post', {}, {cache:theme.fragment_cache})
+      !=partial('includes/widget/card_ad', {}, {cache:theme.fragment_cache})
+    else
+      !=partial('includes/widget/card_recent_post', {}, {cache:theme.fragment_cache})
+      !=partial('includes/widget/card_ad', {}, {cache:theme.fragment_cache})
+      !=partial('includes/widget/card_newest_comment', {}, {cache:theme.fragment_cache})
+      !=partial('includes/widget/card_categories', {}, {cache:theme.fragment_cache})
+      !=partial('includes/widget/card_tags', {}, {cache:theme.fragment_cache})
+      !=partial('includes/widget/card_archives', {}, {cache:theme.fragment_cache})
+      !=partial('includes/widget/card_webinfo', {}, {cache:theme.fragment_cache})
