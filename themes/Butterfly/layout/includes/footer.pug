@@ -6,6 +6,12 @@
       .copyright!= `&copy;${theme.footer.owner.since} - ${nowYear} By ${config.author}`
     else
       .copyright!= `&copy;${nowYear} By ${config.author}`
+    // footer 信息
+  .footer-slogan
+    a(href='/about/')
+      span=config.author
+    i.fa.fa-heart(aria-hidden="true")
+    span#sp-slogan= config.slogan
   if theme.footer.copyright
     .framework-info
       span= _p('footer.framework') + ' '
@@ -21,3 +27,12 @@
         if theme.footer.ICP.icon
           img.icp-icon(src=url_for(theme.footer.ICP.icon) alt='ICP')
         span=theme.footer.ICP.text
+  // footer 996
+  if theme.shields.enable
+    .badge
+      each link_string, _ in theme.shields.list
+        - var urls = link_string.split('||')
+        - var img_url = trim(urls[0])
+        - var link_url = trim(urls[1])
+        a(href=link_url)
+          img.icp-icon(src=url_for(img_url))

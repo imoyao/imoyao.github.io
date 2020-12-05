@@ -1,8 +1,10 @@
-.card-widget.card-links
-  .card-content
-    .item-headline
-      i.fas.fa-user-friends(aria-hidden="true")
-      span= _p('Link')
-    ul
-      each item in site.data.link.class.link_list
-        a(href=item.link title=item.name target="_blank")=item.name
+if theme.aside.card_links.enable
+  if site.data.link
+    .card-widget.card-links
+      .card-content
+        .item-headline
+          i.fas.fa-user-friends(aria-hidden="true")
+          span= _p('Link')
+        ul
+          each item in site.data.link.class.link_list
+            a(href=item.link title=item.name target="_blank")=item.name

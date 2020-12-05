@@ -18,6 +18,7 @@ menu:
      #     - Music || /music/ || fas fa-music
      #     - Movie || /movies/ || fas fa-video
      - B&M History || /douban/ || fa fa-history
+     - Whisper || /whisper/ || far fa-comment-dots
 
 # Hide the child menu items in mobile sidebar
 hide_sidebar_menu_child: false
@@ -25,7 +26,7 @@ hide_sidebar_menu_child: false
 # Code Blocks (代碼相關)
 # --------------------------------------
 
-highlight_theme: light #  darker / pale night / light / ocean / mac / mac light / false
+highlight_theme: mac light #  darker / pale night / light / ocean / mac / mac light / false
 highlight_copy: true # copy button
 highlight_lang: true # show the code language
 highlight_shrink: false # true: shrink the code blocks / false: expand the code blocks | none: expand code blocks and hide the button
@@ -112,7 +113,7 @@ tag_per_img:
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img:  /img/category.jpg
+category_img: /img/category.jpg
 
 # The banner image of category page
 # format:
@@ -261,7 +262,7 @@ comments:
   # Up to two comments system, the first will be shown as default
   # Choose: Disqus/Disqusjs/Livere/Gitalk/Valine/Utterances/Facebook Comments
   use:
-  # - Valine
+   - Valine
   # - Disqus
   text: true # Display the comment name next to the button
   # lazyload: The comment system will be load when comment element enters the browser's viewport.
@@ -508,7 +509,7 @@ tag_ui: # 留空或 index
 background:
 
 # Footer Background
-footer_bg: false
+footer_bg: /images/footer.svg
 
 # the position of bottom right button/default unit: px (右下角按鈕距離底部的距離/默認單位為px)
 rightside-bottom:
@@ -644,8 +645,8 @@ aside:
     enable: true
     description:
     button:
-      icon: fab fa-github
-      text: Follow Me
+      icon: fab fa-zhihu
+      text: 来知乎和我互动
       link: https://zhihu.com/imoyao
   card_announcement:
     enable: true
@@ -782,8 +783,8 @@ note:
 # Artitalk
 # see https://artitalk.js.org/
 artitalk:
-  appId:
-  appKey:
+  appId: 3dqIwKxArTg0GQYBBxyaRR0m-MdYXbMMI
+  appKey: MNUNepUQWr5HIjrY6GmKS2ta
   option:
 
 # Pjax [Beta]
@@ -792,7 +793,7 @@ artitalk:
 pjax:
   enable: false
   exclude:
-    # - xxxx
+     - whisper    # 说说页面排除，否则有bug
     # - xxxx
 
 # Inject the css and script (aplayer/meting)

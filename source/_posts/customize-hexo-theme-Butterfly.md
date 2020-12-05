@@ -92,9 +92,10 @@ if theme.douban_background.enable
 
 #### 标签外挂
 - [x] ~~参考`Next`[主题外挂](https://hexo-theme-next.netlify.com/docs/tag-plugins/)~~
-参见[此处](https://vuejs.org/v2/cookbook/serverless-blog.html) note 挂件；
-建议阅读[標籤外掛(Tag Plugins) | Butterfly](https://demo.jerryc.me/posts/2df239ce/)
+参见 [此处](https://vuejs.org/v2/cookbook/serverless-blog.html) note 挂件；
+建议阅读 [标签外挂(Tag Plugins) | Butterfly](https://demo.jerryc.me/posts/2df239ce/)
 `gallery`已经实现需求，所以没有必要实现了。
+
 {% gallery %} 
 
 ![](https://images.unsplash.com/photo-1578028076641-ef1d08387c14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80) 

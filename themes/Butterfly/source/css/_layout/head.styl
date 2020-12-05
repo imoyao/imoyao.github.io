@@ -273,6 +273,13 @@ _:future,
     text-shadow: .1rem .1rem .2rem rgba($dark-black, .15)
     font-weight: bold
     cursor: pointer
+    //网站换为图片之后加样式
+    .site-logo
+      display: inline-block;
+      vertical-align: middle;
+      width: 150px;
+      height: 40px
+      background-size: cover!important;
 
   .menus_items
     display: inline
@@ -301,7 +308,7 @@ _:future,
           z-index: -1
           width: 0
           height: 3px
-          background-color: lighten($theme-color, 30%)
+          background-color: $netease-red
           content: ''
           transition: all .3s ease-in-out
 

@@ -1,0 +1,208 @@
+//=======自定义样式=======
+.slogan
+  font-size: 1.2em
+  color: $emphatic-red
+  display: block
+  margin-bottom: 1em
+
+.footer-slogan
+  i
+    color $emphatic-red
+    padding 0 .4em
+
+figcaption
+  text-align center
+  margin-top .66667em
+  margin-bottom 1.5em
+  padding 0 1em
+  font-size .9em
+  line-height 1.5
+  color #999999
+
+#iframe
+  overflow:hidden
+  //豆瓣iframe嵌入
+  iframe
+    width:103%;
+    height:2000px;
+    border: none
+.no-aside-page
+  width:100% !important
+  padding:20px !important
+
+/*哔哩哔哩视频适配*/
+
+.bilibili {
+    position: relative;
+    width: 100%;
+}
+@media only screen and (max-width: 767px) {
+    .bilibili {height: 15em;max-width: 25em;}
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .bilibili {height: 20em;max-width: 30em;}
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .bilibili {height: 30em;max-width: 40em;}
+}
+@media only screen and (min-width: 1200px) {
+    .bilibili {height: 40em;max-width: 50em;}
+}
+
+//自定义首页描述
+.descript_area
+  display: block
+  width: 100%
+
+.descript_area .txt
+  text-align: center
+  font-size: 24px
+  color: #5f6464
+  line-height: 54px
+  padding: 105px 0 74px
+
+.descript_area .txt span.m
+  display: none
+
+.descript_area .txt span.pc
+  display: block
+
+@media screen and (max-width: 375px )
+  .descript_area .txt
+    padding: 48px 20px 24px
+    text-align: left
+
+  .descript_area .txt span.pc
+    display: none
+
+  // copy ger 友链
+.card-links
+  ul
+    padding-left: 0
+    display: inline-block
+    a
+      word-break: keep-all
+      text-decoration none
+      height: 40px
+      line-height: 35px
+      border-radius: 8px
+      padding: 3px 11px
+      margin: 3px 10px 0 0
+      -moz-transition: all 0.5s
+      -webkit-transition: all 0.5s
+      -o-transition: all 0.5s
+      transition: all 0.5s
+      color: #FFF
+      &:nth-child(8n-7)
+        background: #8A9B0F
+      &:nth-child(8n-6)
+        background: #EB6841
+      &:nth-child(8n-5)
+        background: #3FB8AF
+      &:nth-child(8n-4)
+        background: #FE4365
+      &:nth-child(8n-3)
+        background: #FC9D9A
+      &:nth-child(8n-2)
+        background: #EDC951
+      &:nth-child(8n-1)
+        background: #C8C8A9
+      &:nth-child(8n)
+        background: #83AF9B
+      &:first-child
+        background: #036564
+      &:last-child
+        background: #3299BB
+      &:hover
+        border-radius: 0
+        text-shadow: #000 1px 1px 1px
+
+//网站换为图片之后加样式
+.site-logo
+  display: inline-block;
+  vertical-align: middle;
+  width: 150px;
+  height: 40px
+  background-size: cover!important;
+
+//结束语分割词
+.divider, divider-vertical
+  position: relative;
+  top: -0.06em;
+  display: inline-block;
+  width: 1px;
+  height: 0.9em;
+  margin: 0 8px;
+  vertical-align: middle;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  -webkit-font-feature-settings: 'tnum';
+  font-feature-settings: 'tnum';
+  background: #e8e8e8;
+
+.divider-horizontal
+  display: block;
+  clear: both;
+  width: 100%;
+  min-width: 100%;
+  height: 1px;
+  margin: 24px 0;
+
+.divider-horizontal.divider-with-text-center
+  display: table;
+  margin: 16px 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+  font-size: 16px;
+  white-space: nowrap;
+  text-align: center;
+  background: transparent;
+  &:before
+  &:after
+    position: relative;
+    top: 50%;
+    display: table-cell;
+    width: 50%;
+    border-top: 1px solid #e8e8e8;
+    -webkit-transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
+    content: '';
+
+.divider-inner-text
+  display: inline-block;
+  margin: 0 24px;
+  box-shadow: inset 0 -0.5em rgba(0,132,255,.2);
+
+
+table
+    width: 100%; /*表格宽度*/
+    max-width: 65em; /*表格最大宽度，避免表格过宽*/
+    border: 1px solid #dedede; /*表格外边框设置*/
+    margin: 15px auto; /*外边距*/
+    border-collapse: collapse; /*使用单一线条的边框*/
+    empty-cells: show; /*单元格无内容依旧绘制边框*/
+  th
+    font-weight: bold; /*加粗*/
+    text-align: center !important; /*内容居中，加上 !important 避免被 Markdown 样式覆盖*/
+    background: rgba(158,188,226,0.2); /*背景色*/
+
+  td
+    height: 35px; /*统一每一行的默认高度*/
+    border: 1px solid #dedede; /*内部边框样式*/
+    padding: 0 10px; /*内边距*/
+
+  tbody tr:nth-child(2n)
+    background: rgba(158,188,226,0.12);
+
+  tr:hover
+    background: #efefef;
+
+  td:nth-child(1)
+    white-space: nowrap;

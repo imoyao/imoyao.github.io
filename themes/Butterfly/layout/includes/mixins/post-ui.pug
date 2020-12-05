@@ -61,7 +61,8 @@ mixin postUI(posts)
           when false
             - break
           when 1
-            .content!= article.description
+            //有描述优先描述，没有的时候再去自动截取
+            .content!= article.description || article.subtitle || article.excerpt
           when 2
             if article.description
               .content!= article.description

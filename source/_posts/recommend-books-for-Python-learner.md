@@ -1,5 +1,5 @@
 ---
-title: Python 资源推荐--[书籍篇]
+title: 书籍篇 | Python 资源整理推荐
 date: 2017-12-03 09:55:55
 tags:
 - Python
@@ -73,7 +73,7 @@ tags:
 
 读完上面的书，你已经可以写出`Pythonic`的代码了，应该对`Python`有了自己的理解，并且也会有自己的方向，可以确定自己的发展方向：Web 应用开发、爬虫数据分析、网络安全、运维测试、`Linux`系统开发、人工智能/机器学习。相信这个时候你已经不再需要别人的推荐，那么是时候为`Python`的蓬勃发展贡献自己的力量啦！
 
-## More
+## 推荐阅读
 
 [免费中文 Python 电子书（教程）](https://foofish.net/python-free-ebook.html)
 [Awesome Python Books](https://github.com/Junnplus/awesome-python-books/blob/master/README-ZH_CN.md)

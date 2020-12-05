@@ -1,4 +1,4 @@
-if theme.aside.card_tags.enable
+if theme.aside.card_tags.enable && page.type !== 'tags'
   if site.tags.length
     .card-widget.card-tags
       .card-content

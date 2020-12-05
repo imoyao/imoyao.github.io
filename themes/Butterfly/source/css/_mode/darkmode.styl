@@ -155,3 +155,19 @@ if hexo-config('darkmode.enable') || hexo-config('display_mode') == 'dark'
 
     #operare_artitalk .c2
       background: #121212
+
+    //====imoyao==表格暗色模式========
+    table
+      tbody
+        tr:nth-child(1)
+          &:hover
+            background: #1f1f1f
+        tr:nth-child(n)
+          &:hover
+            background: #2c2c2c
+        tr:nth-child(2n)
+          &:hover
+            background: alpha(#FFFFFF, .7)
+
+    .divider-inner-text
+      color: rgba(255,255,255,0.6)

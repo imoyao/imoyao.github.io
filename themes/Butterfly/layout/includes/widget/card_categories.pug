@@ -1,4 +1,4 @@
-if theme.aside.card_categories.enable
+if theme.aside.card_categories.enable && page.type !== 'categories'
   if site.categories.length
     .card-widget.card-categories
         .card-content

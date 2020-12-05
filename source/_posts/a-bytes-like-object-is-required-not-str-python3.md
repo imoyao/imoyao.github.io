@@ -10,6 +10,10 @@ tags:
 - UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb3 in position 38: invalid start byte
 <!--more-->
 
+## TL;DR
+
+> 导致这个问题主要的原因是你调用的是字符`str`类型的方法而你给传递的是一个字节`byte`类型的对象。
+
 ## 先上代码
 
 ```python
@@ -161,7 +165,7 @@ TypeError                                 Traceback (most recent call last)
 
 TypeError: a bytes-like object is required, not 'str'
 ```
----
+所以提示类型错误，如果你的*字节*是`byte`型，可以尝试先`decode`转为*字符*类型之后再执行相应的`str`方法。
 ###  解决办法
 ```plain
 In [20]: a = b'123|456'                                                                                        

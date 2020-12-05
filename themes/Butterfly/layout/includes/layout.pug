@@ -14,8 +14,13 @@ html(lang=config.language data-theme=theme.display_mode class=htmlClassHideAside
       
     !=partial('includes/sidebar', {}, {cache:theme.fragment_cache})
 
+
     #body-wrap
       include ./header/index.pug
+
+      //只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery
+      if(page.current === 1)
+        include ./index-desc-card.pug
 
       main#content-inner.layout(class=hideAside)
         if body
