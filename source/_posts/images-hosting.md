@@ -55,6 +55,8 @@ date: 2020-12-06 10:52:09
 
 [![Image Upload - SM.MS - Simple Free Image Hosting](https://i.loli.net/2020/12/06/ZODeJTQL7vpSBaW.jpg)](https://sm.ms/)
 
+[![图壳](https://static01.imgkr.com/temp/77df24ba89314c24bff7750f10b4d187.jpg)](https://imgkr.com/)
+
 [![postimages](https://i.postimg.cc/tRNvCQQR/image.jpg)](https://postimages.org/)
 
 ### 开发者

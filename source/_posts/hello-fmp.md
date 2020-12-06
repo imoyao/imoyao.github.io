@@ -29,8 +29,5 @@ cover: /images/piggy-bank-fund.jpg
 
 ### 前端页面
 
-### 其他
+### TODO
 资源收集整理参见：[Notes](https://github.com/imoyao/fundmate/projects/1)
-
-## TODO
-[Notes](https://github.com/imoyao/fundmate/projects/1)
