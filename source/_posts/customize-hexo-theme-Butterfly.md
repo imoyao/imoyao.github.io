@@ -13,7 +13,7 @@ subtitle: 生命不息，折腾不止
 本文主要针对 hexo-theme-butterfly 主题进行了个性化自定义，并对修改内容做了简单介绍。
 <!--more-->
 {%note no-icon%}
-原作者文档👉 [hexo-theme-butterfly 安装文档](https://demo.jerryc.me/)
+原作者文档👉 [hexo-theme-butterfly 安装文档](https://butterfly.js.org/)
 {%endnote%}
 ## 加速访问
 偶然间知道一个加速网站的方法：使用 [Vercel](https://vercel.com/) 加速访问，不看广告看疗效👇

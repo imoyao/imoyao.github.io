@@ -37,7 +37,7 @@ cover: /images/plan.jpeg
 
 通过目标分解，我们会意识到这些事情虽然复杂，要做好的难度比较高，但是并非不可企及。先将大目标分解成小目标，然后再一步步通过实现小目标的方式，看到一条有希望实现大目标的道路。
 
-## 最后
+## 写在最后
 
 {%blockquote eBay 创始团队成员马蒂·卡根（Marty Cagan） https://mgadams.com/the-founders-guide-to-actually-understanding-users-c68feaecac44 %}
 关于产品有两个令人不快的事实：

@@ -9,7 +9,7 @@ tags:
 categories:
 - Python
 subtitle: 使用新的语法特性时，请注意不要过度使用。
-cover: /images/rzdf/Snipaste_2020-09-07_00-03-21.png
+cover: https://cdn.jsdelivr.net/gh/masantu/statics@master/images/Let-The-Bullets-Fly/Snipaste_2020-09-07_00-03-21.png
 ---
 在学会使用装饰器之后，我们可能时不时地在心理暗示下使用它，下面是我个人总结的一些代码实践中遇到的问题，主要参考 [这一篇](https://stackoverflow.com/questions/739654/how-to-make-a-chain-of-function-decorators/1594484#1594484) 中关于装饰器链式调用中讨论的问题。
 
