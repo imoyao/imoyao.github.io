@@ -6,9 +6,9 @@ comments: false
 top_img: https://cdn.jsdelivr.net/gh/masantu/statics/images/about-bg.jpg
 ---
 
-![五彩斑斓的黑，土丑土丑的就完事啦🙃](/img/horizontal-logo-about-banner.png)
+![五彩斑斓的黑，土丑土丑的就完事啦🙃](https://cdn.jsdelivr.net/gh/masantu/statics@master/img/horizontal-logo-about-banner.png)
 
-![病木重生 · 2018 年摄于北京·香山](/img/A-withered-tree-comes-to-life-again-compressed.jpg)
+![病木重生 · 2018 年摄于北京·香山](https://cdn.jsdelivr.net/gh/masantu/statics@master/img/A-withered-tree-comes-to-life-again.jpg)
 
 
 <video src="https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3YvcyFBbnVXTzVzdVUyYlZoMmJidUFlbHRLNTFERE1iP2U9aHdIN0tx.mp4" controls="controls" style="max-width: 100%; display: block; margin-left: auto; margin-right: auto;"> Your browser does not support the video tag. </video>
@@ -103,11 +103,11 @@ top_img: https://cdn.jsdelivr.net/gh/masantu/statics/images/about-bg.jpg
 {% endnote %}
 人人为我，我为人人。感谢您为中国公益事业的慷慨解囊！💕 
 
-![腾讯公益](/img/PublicWelfare-for-Children.jpg)
+![腾讯公益](https://cdn.jsdelivr.net/gh/masantu/statics@master/img/PublicWelfare-for-Children.jpg)
 
 <h2 class="slogan"><i class="fa fa-copyright"></i>  版权声明<sub>（特殊声明除外）</sub></h2>
 {% raw %}
 <figcaption>
-    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="/img/by-nc-sa.png" /></a><br />本博客作品采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a> 进行许可。
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://cdn.jsdelivr.net/gh/masantu/statics@master/img/by-nc-sa.png" /></a><br />本博客作品采用 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a> 进行许可。
 </figcaption>
 {% endraw %}

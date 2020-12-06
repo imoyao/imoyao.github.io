@@ -47,13 +47,15 @@ date: 2020-12-06 10:52:09
 
 ### 图床测试
 
+为了实验上述免费图床的有效性，我分别上传了一张图片以供测试。如果他们的服务可用，则可以在下方看到图片被正常加载。如果只是临时使用，可以点击图片直达使用。
+
 [![路过图床](https://s3.ax1x.com/2020/12/06/DXaxFs.jpg)](https://imgchr.com/i/DXaxFs)
 
 [![聚合图床](https://pic.downk.cc/item/5fcc7602394ac5237839e4bf.jpg)](https://www.superbed.cn/)
 
-[![postimages](https://i.postimg.cc/tRNvCQQR/image.jpg)](https://postimages.org/)
-
 [![Image Upload - SM.MS - Simple Free Image Hosting](https://i.loli.net/2020/12/06/ZODeJTQL7vpSBaW.jpg)](https://sm.ms/)
+
+[![postimages](https://i.postimg.cc/tRNvCQQR/image.jpg)](https://postimages.org/)
 
 ### 开发者
 [0xDkd/auxpi: 🍭 集合多家 API 的新一代图床](https://github.com/0xDkd/auxpi)
@@ -97,6 +99,16 @@ https://cdn.jsdelivr.net/gh/{imoyao}/{statics}@{master}/{file_path_with_name}
 参考阅读[文件同步工具 GoodSync 限免又来了，这货到底有什么用？ - 小众软件](https://www.appinn.com/goodsync-2019/)
 
 最终选择：[FreeFileSync](https://freefilesync.org/download.php)
+
+![配置自定义规则](https://cdn.jsdelivr.net/gh/masantu/statics/images/20201206160024.png)
+
+{% note warning %}
+
+**注意**
+
+同步配置时选择*自定义*，上方选择可能出现的情形，下方选择当出现配置情形时需要做的动作，最好不要把右侧镜像目录的图片删除。如果对自己的配置不确定，请保证回收站可用的同时对处理逻辑进行测试！
+{% endnote %}
+
 使用教程：[强大的备份软件FreeFileSync - 知乎](https://zhuanlan.zhihu.com/p/140026821)
 
 ### 剪切图片直接上传仓库
