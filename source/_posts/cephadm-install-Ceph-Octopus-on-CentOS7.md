@@ -180,7 +180,7 @@ mkdir -p /etc/ceph
 cephadm bootstrap --mon-ip *<mon-ip>*   # 此处指定moniter地址
 ```
 {% note warning %}
- ### TODO
+**TODO**
 注意，此处指定为 ssh 登录的 ip 时一直提示端口占用，且 mon 进程一直启不来，后来改成另一个节点之后可以正常部署，需要查阅更多资料确认！
 {% endnote %}
 
@@ -335,7 +335,7 @@ ceph 官方建议启用对 ceph 命令的轻松访问，我们有以下途径可
     其中的`fsid`可以在上一条返回信息中找到，或者在`ceph.conf`中进行查看。
     ```plain
     INFO:cephadm:Using recent ceph image ceph/daemon-base:latest
-    
+    ```
 - 安装 ceph-common 包，包含了`ceph`, `rbd`, `mount.ceph` (用于挂载 CephFS 文件系统)等；
     ```shell
     cephadm add-repo --release octopus          # 此处会更新源，如果需要使用国内源请不要执行
