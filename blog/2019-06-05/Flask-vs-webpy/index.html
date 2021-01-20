@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python 之 Web 开发框架对比——Flask vs Web.py | 别院牧志</title><meta name="keywords" content="Python,Flask,Web.py,Web 开发"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="Python 常用的web开发框架有很多如Django、Flask、Tornado、Web.py等，我们之前项目中使用的是 Web.py，但是新项目中选择哪个？或许是个值得思考的问题。本文主要对Web.py和Flask进行一个简单的对比。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 之 Web 开发框架对比——Flask vs Web.py">
+<meta property="og:url" content="https://www.masantu.com/blog/2019-06-05/Flask-vs-webpy/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="Python 常用的web开发框架有很多如Django、Flask、Tornado、Web.py等，我们之前项目中使用的是 Web.py，但是新项目中选择哪个？或许是个值得思考的问题。本文主要对Web.py和Flask进行一个简单的对比。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302">
+<meta property="article:published_time" content="2019-06-05T10:03:49.000Z">
+<meta property="article:modified_time" content="2021-01-20T14:14:12.560Z">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Flask">
+<meta property="article:tag" content="Web.py">
+<meta property="article:tag" content="Web 开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/blog/2019-06-05/Flask-vs-webpy/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-20 22:14:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python 之 Web 开发框架对比——Flask vs Web.py</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-06-05T10:03:49.000Z" title="发表于 2019-06-05 18:03:49">2019-06-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-20T14:14:12.560Z" title="更新于 2021-01-20 22:14:12">2021-01-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><script src="\assets\js\APlayer.min.js"> </script><p><code>Python</code> 常用的<code>web</code>开发框架有很多如<code>Django</code>、<code>Flask</code>、<code>Tornado</code>、<code>Web.py</code>等，我们之前项目中使用的是 <code>Web.py</code>，但是新项目中选择哪个？或许是个值得思考的问题。本文主要对<code>Web.py</code>和<code>Flask</code>进行一个简单的对比。</p>
+<a id="more"></a>
+<h2 id="为什么要从Web-py迁移到Flask"><a href="#为什么要从Web-py迁移到Flask" class="headerlink" title="为什么要从Web.py迁移到Flask"></a>为什么要从<code>Web.py</code>迁移到<code>Flask</code></h2><p>大势所趋。根据最新的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jetbrains.com/research/python-developers-survey-2018/">Python 开发者调研-2018</a>结果显示，<code>Flask</code>和<code>Django</code>已经成为最流行的<code>web</code>开发框架。对企业的良性发展和开发者个人成长而言，使用热门技术都是值得鼓励且必要的。而且，众所周知，官方计划在<code>2020</code>年停止<code>Python2</code>支持，而相比<code>Flask</code>而言，<code>Web.py</code>的版本更新计划有点跟不上节奏的感觉。</p>
+<p><img src="/img/loading.svg" data-lazy-src="/images/Web-frameworks-python-developers-survey-2018.jpg" alt="Web-frameworks-python-developers-survey-2018"></p>
+<h2 id="TL-DR，Flask-对比-Web-py-的不同点"><a href="#TL-DR，Flask-对比-Web-py-的不同点" class="headerlink" title="TL;DR，Flask 对比 Web.py 的不同点"></a>TL;DR，<code>Flask</code> 对比 <code>Web.py</code> 的不同点</h2><p><code>Flask</code>拥有活跃的社区文化和丰富而强大的第三方扩展，而<code>Web.py</code>在原作者（Aaron Swartz）自杀之后自身维护已举步维艰，第三方扩展的发展更是不言而喻。</p>
+<ul>
+<li><strong>维护积极性</strong>  - 最新版本分别为<code>Flask-1.0.2</code>和 <code>webpy-0.39</code>。</li>
+</ul>
+<div class="justified-gallery"><p><img src="/img/loading.svg" data-lazy-src="/images/flask-contributors.jpg" alt="flask-contributors"><br><img src="/img/loading.svg" data-lazy-src="/images/webpy-contributors.jpg" alt="webpy-contributors"></p>
+          </div>
+<ul>
+<li><strong>官方文档</strong> - <code>Flask</code>具有良好的官方文档，并且有国内使用者翻译的中文文档；<code>Web.py</code>只有勉强够用、捉襟见肘的入门级官方文档，剩下的需要开发人员自行摸索。</li>
+<li><strong>社区活跃度</strong> - <code>Flask</code>拥有活跃的社区文化和数量庞大的拥趸者，<code>Web.py</code>国内只有不活跃的专门的豆瓣小组或者在一些热门<code>Python</code>社区偶有提及。</li>
+<li>第三方扩展  <ul>
+<li>表单 - <code>Flask</code> 使用扩展<code>Flask-WTF</code>和<code>WTForms</code>可以实现很好的表单验证和 <code>csrf</code> 安全保护；（参阅<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jianshu.com/p/7e16877757f8">Flask-WTF 与 WTForms 的用法详解</a>）；而<code>Web.py</code>自带<a target="_blank" rel="external nofollow noopener noreferrer" href="https://webpy.org/cookbook/forms">Form 库</a>，可以实现表单及简单校验。</li>
+<li>数据库 -  <code>Flask</code> 使用扩展<code>Flask-SQLAlchemy</code>实现对数据库的<code>ORM</code>操作，可以很好地管理和实现数据库的迁移(借助<code>Flask-Migrate</code>)工作；<code>Web.py</code>我们使用自己封装的<code>database.py</code>。</li>
+<li>身份验证和权限 - <code>Flask</code>提供安全<code>cookie</code>作为您自己实现的工具，第三方扩展如<code>Flask-Login</code>(用户会话管理)，<code>Flask-HTTPAuth</code><sup>①</sup>（简化了使用<code>Flask</code>路由的<code>HTTP</code>身份验证的使用），<code>Flask-Security</code>（提供一站式管理）， <code>Flask-Social</code>（用于添加“社交”或<code>OAuth</code>登录和连接管理）等，这些扩展良莠不齐，使用时需要对其有个初步了解并进行遴选；<code>Web.py</code>还是要自己造轮子。</li>
+<li><code>RESTful</code> - 使用<code>Flask-RESTful</code> 可以创建<code>REST</code>的<code>API</code>。</li>
+<li>强大的页面渲染 -<code>Flask</code>使用<code>jinja2</code>作为模板引擎；<code>Web.py</code>使用 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://webpy.org/templetor"><code>Templetor</code>类</a> ，类似<code>python</code> 语法的写法使其写起来信手拈来，无痛衔接。当然你也可以使用<code>Mako</code>模板引擎，两者平分秋色，甚至从语法上来说 web.py 略胜一筹。性能对比见这里👉 <a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.pythontip.com/blog/post/2239/">几个模板系统的性能对比</a></li>
+</ul>
+</li>
+<li>伸缩性 - <code>Flask</code>既可以像<code>Web.py</code>那样做微框架开发一个很小的<code>web</code>应用，也可以借助上方的各种扩展做到<code>Django</code>级别的应用。</li>
+</ul>
+<h2 id="Flask-框架"><a href="#Flask-框架" class="headerlink" title="Flask 框架"></a>Flask 框架</h2><blockquote>
+<p>Flask is a microframework for Python based on Werkzeug, Jinja 2 and good intentions.<br>Flask 是一个基于 <code>Jinja2</code> 模板引擎和 <code>Werkzeug WSGI</code> 套件的一个微型的<code>Web</code>开发框架。体现了<code>logo</code>中的口号<code>web development, one drop at a time.</code>(<code>web</code>开发，一次一滴。)</p>
+</blockquote>
+<h3 id="什么是-“微”"><a href="#什么是-“微”" class="headerlink" title="什么是 “微”"></a>什么是 “微”</h3><blockquote>
+<p>“微” (“Micro”) 并不是意味着把整个 <code>Web</code> 应用放入到一个 <code>Python</code> 文件，尽管确实可以这么做。当然“微” (“Micro”) 也不是意味 <code>Flask</code> 的功能上是不足的。微框架中的 “微” (“Micro”) 是指 <code>Flask</code> 旨在保持代码简洁且易于扩展。<code>Flask</code> 不会替你做出太多决策——比如使用何种数据库。而那些 <code>Flask</code> 所选择的——比如使用何种模板引擎——则很容易替换。除此之外的一切都可由你掌握。如此，<code>Flask</code> 可以与您珠联璧合。<br>默认情况下，<code>Flask</code> 并不包含数据库抽象层，表单验证或者任何其他现有的库( <code>Django</code> )能够处理的。相反，<code>Flask</code> 支持扩展，这些扩展能够添加功能到你的应用，像是 <code>Flask</code> 本身实现的一样。众多的扩展提供了数据库集成，表单验证，上传处理，多种开放的认证技术等功能。<code>Flask</code> 可能是“微”型的，但它可以游刃有余地应付需求繁杂的生产环境的使用。</p>
+</blockquote>
+<p>① 在 <code>Web</code> 应用中，我们经常需要保护我们的 <code>api</code>，以避免非法访问。比如，只允许登录成功的用户发表评论等。<code>Flask-HTTPAuth</code> 扩展可以很好地对 <code>HTTP</code> 的请求进行认证，不依赖于 <code>Cookie</code> 和 <code>Session</code>。而是基于密码和基于令牌 (<code>token</code>)。</p>
+<h2 id="Web-py-框架"><a href="#Web-py-框架" class="headerlink" title="Web.py 框架"></a><code>Web.py</code> 框架</h2><blockquote>
+<p>Web.py is a web framework for Python that is as simple as it is powerful.<br>Web.py 是一个简单且功能强大的用于 Python 语言的 web 框架。</p>
+</blockquote>
+<h3 id="Web-py设计哲学"><a href="#Web-py设计哲学" class="headerlink" title="Web.py设计哲学"></a><code>Web.py</code>设计哲学</h3><p><code>Web.py</code>的口号是<code>Think about the ideal way to write a web app. Write the code to make it happen.</code>（思考编写<code>web</code>应用程序的理想方式，然后去编写代码实现它。）<br>在用<code>Python</code>编写<code>web</code>应用程序的时候，我想象自己想要<code>API</code>的方式。它始于导入<code>web</code>，然后有一个定义<code>URL</code>的地方，处理<code>GET</code>和<code>POST</code>的简单函数和一些处理输入变量的东西。一旦代码对我来说看起来是正确的， 我就会想尽办法使它在不更改应用程序代码的情况下执行——结果就是 <code>Web.py</code>。<br>有人抱怨说我“搞了另一套模板语言”（yet another template language），我写了更多文字关于我的设计理念：<a target="_blank" rel="external nofollow noopener noreferrer" href="http://groups.google.com/group/webpy/msg/f266701d97e7ceb1">参阅</a></p>
+<p>你不必使用它——<code>Web.py</code>的每个部分都与其他部分完全分离。但你是对的， 它是“另一种模板语言”，而我不会为此道歉。<br><code>Web.py</code> 的目标是构建制作 <code>web</code> 应用程序的理想方法。如果为了实现这个目标需要有微小差异化的来重塑陈旧的东西， 我会捍卫自己对它们进行改造的权利。<code>理想的方式</code>和<code>几乎理想的方式</code>之间的区别， 正如马克·吐温所言：是闪电和萤火虫之间的区别。（The difference between the right word and the almost right word is the difference between lightning and the lightning Bug.）<br>但这些不仅仅是细微的差异。<code>Web.py</code> 允许您构建 <code>http</code> 响应， 而不暴露 <code>Python</code> 对象。<code>Web.py</code> 使数据库更易使用，而不试图使数据库看起来像一个对象。 <code>Web.py</code> 模板系统试图把 <code>Python</code> 纳入 <code>HTML</code>而不是想出另一种方法来编写 <code>HTML</code>。没多少人真正尝试过这么做的可能性。<br>你可以不同意这些方法更好并给出原因，但仅仅批评它们与众不同是浪费时间。是的， 它们天生骄傲。我的话讲完了。<br>文字来源：<a target="_blank" rel="external nofollow noopener noreferrer" href="http://webpy.org/philosophy">The Web.py Philosophy</a></p>
+<h2 id="Show-me-the-code"><a href="#Show-me-the-code" class="headerlink" title="Show me the code"></a>Show me the code</h2><h3 id="Web-py"><a href="#Web-py" class="headerlink" title="Web.py"></a>Web.py</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> web</span><br><span class="line"></span><br><span class="line">urls = (</span><br><span class="line">    <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;Index&#x27;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello, world!&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># def POST(self):</span></span><br><span class="line">    <span class="comment">#     pass    # TODO</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    web.config.debug = <span class="literal">False</span></span><br><span class="line">    app = web.application(urls, <span class="built_in">globals</span>())</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>导入<code>web</code>模块；</li>
+<li>组装<code>url</code>结构；<ul>
+<li>第一部分为匹配<code>URL</code>的正则表达式，第二部分是接受请求的类名称</li>
+</ul>
+</li>
+<li>定义类<ul>
+<li>定义处理<code>GET</code>请求的方法；</li>
+<li>定义（可选的）处理<code>POST</code>请求的方法；</li>
+</ul>
+</li>
+<li><code>debug</code>模式<br> 当应用在内建的服务器中运行时，它会以<code>debug</code>模式启动程序。在<code>debug</code>模式下，任何代码、模板的修改，都会让服务器重新加载它们，然后还会输出有用的错误消息。<br> 只有在生产环境中<code>debug</code>模式是关闭的，如果你想禁用<code>debug</code>模式，你可以在创建程序/模板前添加置为<code>False</code>。</li>
+<li>创建应用，这个<code>application</code>会在这个文件的全局命名空间中查找<code>urls</code>中定义的对应类。</li>
+<li>启动应用。</li>
+</ol>
+<h3 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># app.py</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,request</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span>,methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello_world</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello World!&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    打开调试模式的另一种设置方式</span></span><br><span class="line"><span class="string">    app.debug = True</span></span><br><span class="line"><span class="string">    app.run()</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>运行之后，浏览<code>http://IP_ADDR:5000/</code>即可访问。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ python app.py</span><br><span class="line"> * Running on http://0.0.0.0:5000/</span><br></pre></td></tr></table></figure><br>代码解释</p>
+<ol>
+<li>导入<code>Flask</code>类；</li>
+<li>实例化，即生成我们的 <code>WSGI</code> 应用，第一个参数是应用模块的名称。 如果你使用的是单一的模块（就如本例），第一个参数应该使用 <code>__name__</code>。我们还可以传递给它模块或包的名称。这样 <code>Flask</code> 才会知道去哪里寻找模板、静态文件等等。</li>
+<li>使用装饰器 <code>route()</code> 告诉 <code>Flask</code> 哪个 <code>URL</code> 才能触发我们的函数。<ul>
+<li>默认情况下，路由只会响应 <code>GET</code> 请求， 但是能够通过给 <code>route()</code> 装饰器提供 <code>methods</code> 参数改变。</li>
+</ul>
+</li>
+<li>定义函数，该函数名也是用来给特定函数生成 <code>URLs</code>，并且返回我们想要显示在用户浏览器上的信息。</li>
+<li>最后我们用函数 <code>run()</code> 启动本地服务器来运行我们的应用。<ul>
+<li><code>host=&#39;0.0.0.0&#39;</code>你可以让你的服务器对外可见。</li>
+<li><code>debug=True</code>开启调式模式，仅适用于开发阶段，在代码修改的时候服务器能够自动加载，发生错误之后可以更好追踪调试； <strong>生产模式时，一定要关闭该选项。</strong></li>
+</ul>
+</li>
+</ol>
+<p><strong>注意</strong><br>可能有人想要使用<code>Flask</code>实现<code>Web.py</code>类似的<code>RESTful</code>的代码设计风格，借助<code>Flask-RESTful</code>可以实现像<code>Web.py</code>一样的<code>RESTful</code>设计。示例如下：<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask_restful <span class="keyword">import</span> Resource, Api</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">api = Api(app)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span>(<span class="params">Resource</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> &#123;<span class="string">&#x27;hello&#x27;</span>: <span class="string">&#x27;world&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line">api.add_resource(HelloWorld, <span class="string">&#x27;/&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="关于-Flask-的蓝本-蓝图（Blueprint）"><a href="#关于-Flask-的蓝本-蓝图（Blueprint）" class="headerlink" title="关于 Flask 的蓝本/蓝图（Blueprint）"></a>关于 Flask 的蓝本/蓝图（Blueprint）</h2><p>在<code>Flask</code>中可以用<code>Blueprint</code> (蓝图) 实现应用的<strong>模块化</strong>，应用层次清晰，蓝图可以极大地<strong>简化大型应用</strong>并为扩展提供集中的注册入口。<br>蓝图通常作用于相同的<code>URL</code>前缀，如<code>/user/:id</code>、<code>/user/profile</code>这样的地址，都以<code>/user</code>开头，它们是一组用户相关的操作，那么就可以放在一个模块中。<br>在大型项目中，一般都是协同开发各共同进行的，使用蓝图可以避免互相干扰，开发人员一看路由就能很快的找到对应的视图，可以更容易地<strong>开发和维护</strong>项目。</p>
+<p>一个典型的使用蓝图组织应用的项目结构：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">app/</span><br><span class="line">    __init__.py</span><br><span class="line">    admin/</span><br><span class="line">        __init__.py</span><br><span class="line">        views.py</span><br><span class="line">        static/</span><br><span class="line">        templates/</span><br><span class="line">    home/</span><br><span class="line">        __init__.py</span><br><span class="line">        views.py</span><br><span class="line">        static/</span><br><span class="line">        templates/</span><br><span class="line">    control_panel/</span><br><span class="line">        __init__.py</span><br><span class="line">        views.py</span><br><span class="line">        static/</span><br><span class="line">        templates/</span><br><span class="line">    models.py</span><br><span class="line">    runserver.py</span><br></pre></td></tr></table></figure><br>参阅：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/31748237">如何理解 Flask 中的蓝本？</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>需求驱动，没有最好的框架，只有适合你的框架。<br>两者都是轻量级<code>web</code>开发框架（相较于<code>Django</code>而言），都具有良好的扩展性并遵循<code>Pythonic</code>设计，非常适合初学者学习与使用。<br><code>Web.py</code>坚持小而美的设计理念。简单直接，学习成本更低，对于新手理解 web 处理流程很有帮助，更适合敏捷开发和定制化，当然也就意味着可能需要自己造更多的轮子。<br>而<code>Flask</code>拥有庞杂的第三方扩展可以参考使用，具备良好的扩展性，遇到问题更好向社区寻求答案。当然，随着开发的深入，可能伴随一系列扩展的了解和学习，会消耗较多时间。但是相比<code>Django</code>这种<code>完美主义者用来赶期限的选择</code>，你不必一开始就学所有的东西（session、ORM、CSRF、Form、Template、Middleware 等），可以自主搭配，渐进开发。<br>所以，对于全新项目，为了后续的可持续迭代和维护，相比<code>Web.py</code>更建议选择<code>Flask</code>。</p>
+<h2 id="参考阅读"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读</h2><h3 id="框架对比"><a href="#框架对比" class="headerlink" title="框架对比"></a>框架对比</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://kite.com/blog/python/flask-vs-django-python">Flask vs Django</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.douban.com/group/topic/29598761/">Web.py,web2py,django 三者间到底是什么关系？有什么不同呢？- 豆瓣</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/20708601">Flask 框架怎么样，比起 Web.py 有哪些不同？- 知乎</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/questions/5695689/web-py-and-flask">Web.py-and-flask- StackOverflow</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.quora.com/Which-is-better-Flask-vs-web-py-Why">Which is better: Flask vs Web.py? Why?-Quora</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.reddit.com/r/Python/comments/28qr7c/can_anyone_explain_the_differences_between_web2py/">Can anyone explain the differences between web2py, Django, Flask, etc, and when I should use one or the other and what the benefits and drawbacks of each?-Reddit</a></li>
+</ul>
+<h3 id="Flask学习资源"><a href="#Flask学习资源" class="headerlink" title="Flask学习资源"></a><code>Flask</code>学习资源</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://flask.pocoo.org/">Welcome | Flask (A Python Microframework)</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://docs.jinkan.org/docs/flask/index.html">Flask 中文文档</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.ctolib.com/docs/sfile/head-first-flask/">Flask Web 开发入门</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.pythondoc.com/flask-mega-tutorial/index.html">欢迎进入 Flask 大型项目教程</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://book.douban.com/subject/26274202/">Flask Web 开发：基于 Python 的 Web 应用开发实战 -（狗书）</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://book.douban.com/subject/30310340/">Flask Web 开发实战 -（狼书）</a></li>
+</ul>
+<h3 id="Flask扩展"><a href="#Flask扩展" class="headerlink" title="Flask扩展"></a><code>Flask</code>扩展</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/humiaozuzu/awesome-flask">Awesome Flask(Flask 资源和插件的精选列表)</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.pythondoc.com/">Flask 文档和主流第三方扩展文档</a></li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/20711220">亚伦·斯沃茨 (Aaron Swartz) 是怎么样一个人？</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:immoyao@gmail.com" rel="external nofollow noopener noreferrer" target="_blank">imoyao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.masantu.com/blog/2019-06-05/Flask-vs-webpy/">https://www.masantu.com/blog/2019-06-05/Flask-vs-webpy/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.masantu.com" target="_blank">别院牧志</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Flask/">Flask</a><a class="post-meta__tags" href="/tags/Web-py/">Web.py</a><a class="post-meta__tags" href="/tags/Web-%E5%BC%80%E5%8F%91/">Web 开发</a></div><div class="post_share"><div class="social-share" data-image="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechatpay.jpg" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg" alt="alipay"></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/blog/2019-06-17/blog-idealyard-update-history-v1/"><img class="prev-cover" data-lazy-src="/images/nathan-anderson-XxyzpjYNY8k-unsplash.jpg" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">我的开源博客 idealyard 心路历程及其他</div></div></a></div><div class="next-post pull-right"><a href="/blog/2019-05-11/which-mysql-datatype-use-for-store-an-ip-address/"><img class="next-cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL 中存储 IP 地址应该选用何种数据类型？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blog/2019-08-07/how-to-deploy-flask-with-nginx-gunicorn-gevent-supervisor/" title="如何使用 Gunicorn+Gevent+Supervisor+Nginx 部署 Flask 应用"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-08-07</div><div class="title">如何使用 Gunicorn+Gevent+Supervisor+Nginx 部署 Flask 应用</div></div></a></div><div><a href="/blog/2019-10-18/interview-2019/" title="2019 面试记录"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-18</div><div class="title">2019 面试记录</div></div></a></div><div><a href="/blog/2020-10-15/python-call-method-dynamically/" title="Python 中动态调用函数或类的方法"><img class="cover" data-lazy-src="/images/esther-jiao-FKZwWLWgGyM-unsplash.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-15</div><div class="title">Python 中动态调用函数或类的方法</div></div></a></div><div><a href="/blog/2020-09-23/atomic-writing-to-file-with-python/" title="如何使用 Python 对文件进行原子性（atomic）读写操作？"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-23</div><div class="title">如何使用 Python 对文件进行原子性（atomic）读写操作？</div></div></a></div><div><a href="/blog/2020-09-03/use-python-decorator-prudently/" title="三思而后行：谨慎使用你的装饰器"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/Let-The-Bullets-Fly/Snipaste_2020-09-07_00-03-21.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-03</div><div class="title">三思而后行：谨慎使用你的装饰器</div></div></a></div><div><a href="/blog/2020-08-11/how-to-get-the-physical-interface-IP-address-from-an-interface/" title="如何通过网卡名称获取其所对应的 IP 地址"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-11</div><div class="title">如何通过网卡名称获取其所对应的 IP 地址</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BB%8EWeb-py%E8%BF%81%E7%A7%BB%E5%88%B0Flask"><span class="toc-number">1.</span> <span class="toc-text">为什么要从Web.py迁移到Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TL-DR%EF%BC%8CFlask-%E5%AF%B9%E6%AF%94-Web-py-%E7%9A%84%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">TL;DR，Flask 对比 Web.py 的不同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flask-%E6%A1%86%E6%9E%B6"><span class="toc-number">3.</span> <span class="toc-text">Flask 框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-%E2%80%9C%E5%BE%AE%E2%80%9D"><span class="toc-number">3.1.</span> <span class="toc-text">什么是 “微”</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-py-%E6%A1%86%E6%9E%B6"><span class="toc-number">4.</span> <span class="toc-text">Web.py 框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-py%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6"><span class="toc-number">4.1.</span> <span class="toc-text">Web.py设计哲学</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Show-me-the-code"><span class="toc-number">5.</span> <span class="toc-text">Show me the code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-py"><span class="toc-number">5.1.</span> <span class="toc-text">Web.py</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flask"><span class="toc-number">5.2.</span> <span class="toc-text">Flask</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E-Flask-%E7%9A%84%E8%93%9D%E6%9C%AC-%E8%93%9D%E5%9B%BE%EF%BC%88Blueprint%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">关于 Flask 的蓝本&#x2F;蓝图（Blueprint）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%98%85%E8%AF%BB"><span class="toc-number">8.</span> <span class="toc-text">参考阅读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6%E5%AF%B9%E6%AF%94"><span class="toc-number">8.1.</span> <span class="toc-text">框架对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flask%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90"><span class="toc-number">8.2.</span> <span class="toc-text">Flask学习资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flask%E6%89%A9%E5%B1%95"><span class="toc-number">8.3.</span> <span class="toc-text">Flask扩展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">8.4.</span> <span class="toc-text">其他</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何将代码打补丁（patch）？"></a><div class="content"><a class="title" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？">如何将代码打补丁（patch）？</a><time datetime="2020-11-04T09:57:53.000Z" title="发表于 2020-11-04 17:57:53">2020-11-04</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI',
+      appKey: 'CARePe7R247vdXACFg1fhk4E',
+      placeholder: '我们期待并欢迎理性、友好而和谐的声音……',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

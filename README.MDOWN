@@ -1,0 +1,7 @@
+# 欢迎访问 imoyao 的个人博客！[别院牧志](https://imoyao.github.io/)
+
+## 更新日志
+- 2020-05-23
+    添加主题[hexo-theme-Wikitten](https://github.com/zthxxx/hexo-theme-Wikitten)构建个人 wiki;
+- 2020-1-4
+    主题修改为[hexo-theme-butterfly](https://github.com/jerryc127/hexo-theme-butterfly/)

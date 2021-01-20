@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>别院牧志 - IMOYAO</title><meta name="keywords" content="别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="别院牧志">
+<meta property="og:url" content="https://www.masantu.com/page/6/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/page/6/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-01-21 00:28:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://bing.biturl.top/?resolution=1920&amp;format=image&amp;index=0&amp;mkt=zh-CN)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">别院牧志</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-06-18/how-to-use-celery-with-flask/" title="如何使用 flask-celery 实现异步任务？">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何使用 flask-celery 实现异步任务？"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-06-18/how-to-use-celery-with-flask/" title="如何使用 flask-celery 实现异步任务？">如何使用 flask-celery 实现异步任务？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-06-18T06:14:46.000Z" title="发表于 2019-06-18 14:14:46">2019-06-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="content"> 先决条件
+redis版本redis-cli --versionredis-cli 5.0.4
+celery版本celery --version4.3.0 (rhubarb)
+Flask和 Python 版本flask --versionFlask 1.0.2Python 3.6.5 (default, Apr  1 2018, 05:46:30) [GCC 7.3.0]
+Linux 版本lsb_release -aNo LSB modules are available.Distributor ID:	UbuntuDescription:	Ubuntu 18.04 LTSRelease:	18.04Codename:	bionic# ---uname -aLinux local 4.15.0-22-generic #24-Ubuntu SMP Wed May 16 12:15:17 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+Celery是什么
+
+概念Celery 是一个“自带电池”的专注于实时处理和任务调度的分布式任务队列，同时提供操作和维护分布 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-06-17/blog-idealyard-update-history-v1/" title="我的开源博客 idealyard 心路历程及其他">     <img class="post_bg" data-lazy-src="/images/nathan-anderson-XxyzpjYNY8k-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="我的开源博客 idealyard 心路历程及其他"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-06-17/blog-idealyard-update-history-v1/" title="我的开源博客 idealyard 心路历程及其他">我的开源博客 idealyard 心路历程及其他</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-06-17T04:25:06.000Z" title="发表于 2019-06-17 12:25:06">2019-06-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/Projects/">Projects</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Projects/IdealYard/">IdealYard</a></span></div><div class="content"> 今天（2019-09-12）基本完成了博客系统—— IdealYard 的雏形，当然，这距离臻于完美还有很长的路要走。但正所谓不怕走不到头，就怕一直不敢出发。虽然是个不起眼的项目，但是从无到有也消耗了不少精力，所以有必要做个简单记录。
+缘起一切缘起，都要从丘处机路过牛家村的那个下午说起……早就想动手搭建一个属于自己的博客项目，但是作为一名出色的国家一级退堂鼓表演家，总是找各种理由，一直未能计划成型落实。最后，终于在 G 小姐的鼓舞下开始着手编码了。
+技术选型因为主要开发语言是 Python，而目前 Python 社区已经发出公告将在 2020 年初停止 Python2 的维护。因此，选择使用 Python3 作为基本版本支持。在 框架选择 问题上，虽然之前主要使用 Web.py 开发，但鉴于 Web.py 目前的维护现状和社区活跃度，所以选择更受开发者青睐的 Flask 作为后端 web 开发框架；此外，使用到 Celery 做一些耗时请求异步处理，如注册验证邮件发送和博客数据库备份（由于时间关系暂时未做）。而前端则使用目前热门的框架 Vue 和 Element-UI 来构建。
+心路 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-06-05/Flask-vs-webpy/" title="Python 之 Web 开发框架对比——Flask vs Web.py">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="Python 之 Web 开发框架对比——Flask vs Web.py"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-06-05/Flask-vs-webpy/" title="Python 之 Web 开发框架对比——Flask vs Web.py">Python 之 Web 开发框架对比——Flask vs Web.py</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-06-05T10:03:49.000Z" title="发表于 2019-06-05 18:03:49">2019-06-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="content"> Python 常用的web开发框架有很多如Django、Flask、Tornado、Web.py等，我们之前项目中使用的是 Web.py，但是新项目中选择哪个？或许是个值得思考的问题。本文主要对Web.py和Flask进行一个简单的对比。
+
+为什么要从Web.py迁移到Flask大势所趋。根据最新的Python 开发者调研-2018结果显示，Flask和Django已经成为最流行的web开发框架。对企业的良性发展和开发者个人成长而言，使用热门技术都是值得鼓励且必要的。而且，众所周知，官方计划在2020年停止Python2支持，而相比Flask而言，Web.py的版本更新计划有点跟不上节奏的感觉。
+
+TL;DR，Flask 对比 Web.py 的不同点Flask拥有活跃的社区文化和丰富而强大的第三方扩展，而Web.py在原作者（Aaron Swartz）自杀之后自身维护已举步维艰，第三方扩展的发展更是不言而喻。
+
+维护积极性  - 最新版本分别为Flask-1.0.2和 webpy-0.39。
+
+
+          
+
+官方文档 - Flask具有良好的官方文档，并且有国内使用者翻译 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-05-11/which-mysql-datatype-use-for-store-an-ip-address/" title="MySQL 中存储 IP 地址应该选用何种数据类型？">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="MySQL 中存储 IP 地址应该选用何种数据类型？"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-05-11/which-mysql-datatype-use-for-store-an-ip-address/" title="MySQL 中存储 IP 地址应该选用何种数据类型？">MySQL 中存储 IP 地址应该选用何种数据类型？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-05-11T06:44:31.000Z" title="发表于 2019-05-11 14:44:31">2019-05-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="content"> 今天在项目开发时，遇到需要在数据库中存储 ip 地址，那么应该选用何种数据类型更加高效呢？如果存储的是IPV4地址，可以选择使用INT UNSIGNED，然后借助 MySQL 自带的 INET_ATON() 和  INET_NTOA()来存取数据；如果存储的是IPV6地址，可以选择使用VARBINARY()，然后借助 INET6_ATON()和INET6_NTOA() (MySQL5.6+支持)方法存取数据。
+
+针对IPv4地址mysql&gt; select inet_aton(&#x27;127.0.0.1&#x27;);+------------------------+| inet_aton(&#x27;127.0.0.1&#x27;) |+------------------------+|             2130706433 |+------------------------+1 row in set (0.00 sec)mysql&gt; select inet_ntoa(2130706433);+-----------------------+| inet ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-05-06/pycharm-with-remote-flask-venv/" title="如何配置 PyCharm 使用远程的 Flask 虚拟开发环境？">     <img class="post_bg" data-lazy-src="/images/PyCharm.png" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何配置 PyCharm 使用远程的 Flask 虚拟开发环境？"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-05-06/pycharm-with-remote-flask-venv/" title="如何配置 PyCharm 使用远程的 Flask 虚拟开发环境？">如何配置 PyCharm 使用远程的 Flask 虚拟开发环境？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-05-06T05:56:35.000Z" title="发表于 2019-05-06 13:56:35">2019-05-06</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="content"> 学习Flask开发的时候，因为主机是Windows环境，而日常跑服务的是Linux环境，所以需要通过配置pycharm使之使用远端的虚拟环境。
+
+创建虚拟机Flask环境略
+此处在网上可以找到很多写好的教程，不需要我再次叠床架屋了。
+配置Pycharm环境打开 Pycharm 的 setting 对话框，按照如下配置  
+
+依次输入真实远端信息之后，点击下一步，直到出现下方对话框
+
+依次修改将要使用的解释器和主机与远端需要保持同步的目录；
+
+如图设置之后运行，Run出现如下结果FLASK_APP = appFLASK_ENV = developmentFLASK_DEBUG = 1In folder D:/MYcode/flkssh://root@192.168.116.21:22/home/imoyao/envs/flk/bin/python -u -m flask run --host=0.0.0.0 * Serving Flask app &quot;app&quot; (lazy loading) * Environment: development * Debug mode ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-04-13/python-pass-by-object-reference/" title="Python 传值还是传引用？| 通过对象引用传递">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="Python 传值还是传引用？| 通过对象引用传递"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-04-13/python-pass-by-object-reference/" title="Python 传值还是传引用？| 通过对象引用传递">Python 传值还是传引用？| 通过对象引用传递</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-04-13T06:14:28.000Z" title="发表于 2019-04-13 14:14:28">2019-04-13</time></span></div><div class="content"> 
+本文译自 Is Python pass-by-reference or pass-by-value?
+
+“假设我对 Fat 说，或 Kevin 对 Fat 说，“你没有经历过上帝。你只不过经历了一些与上帝的品质、方面、性质、力量、智慧和善良有关的事情。”这就像是关于德国人讲的一个双重抽象倾向的笑话；德国英国文学权威宣称，“哈姆雷特不是莎士比亚写的；它只是由一个名叫莎士比亚的人写的。”在英语语境中，这句话的区别只是口头的，没有实际意义，尽管德语中这种表达存在差异（这解释了德国思想的一些奇怪特征）。”   –Valis，p71（Book-of-the-Month-Club Edition）
+
+Philip K. Dick 并不以其轻松或易懂的散文而闻名。绝大多数角色都很高。就像，真的，真的，真的很高。然而，在 Valis 的上述引文（1981 年出版）中，他对臭名昭着的Python参数传递范式给出了非常有远见的解释。Plus ça change, plus c’est omnomnomnom drugs.
+在编程语言中参数传递的两种最广为人知且易于理解的方法是按引用传递( pass-b ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-03-05/how-to-append-the-current-change-to-specified-commit/" title="如何把当前改动追加到某次指定 commit 上（非上次）">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何把当前改动追加到某次指定 commit 上（非上次）"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-03-05/how-to-append-the-current-change-to-specified-commit/" title="如何把当前改动追加到某次指定 commit 上（非上次）">如何把当前改动追加到某次指定 commit 上（非上次）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-03-05T01:56:37.000Z" title="发表于 2019-03-05 09:56:37">2019-03-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="content"> 注意：本例中使用Gerrit进行演示。
+
+暂存目前修改的代码 git stashgit stash list # 可以验证暂存是否成功
+查找到需要指定的commit的编号； git log
+  
+找到git rebase编号，即要修改的commit之前那个commit； git rebase --interactive a6f372877d26xxx0690aedf6dc6b6e7c
+    
+找到要更改的commit, 将行首的pick更改为edit, 保存退出；     
+本地修改需要修改的代码
+
+恢复暂存的修改
+ git stash pop 
+ 注意：如果此时有冲突，需要自己手动解决冲突
+
+解决冲突后，添加修改文件 git add xxx    # 文件名称git commit --amend
+回退到当前状态； git rebase --continue
+  注意：如果rebase版本较多，可能需要多次重复上述步骤，且每rebase一步，可能都要解决与其他组员commit的冲突；
+rebase 到 master 之后，push 当前版本到远程 git push origin 0 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-01-30/how-to-get-leaf-nodes-of-Ztree/" title="如何获取 Ztree 的所有叶子节点？">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何获取 Ztree 的所有叶子节点？"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-01-30/how-to-get-leaf-nodes-of-Ztree/" title="如何获取 Ztree 的所有叶子节点？">如何获取 Ztree 的所有叶子节点？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-01-30T07:06:19.000Z" title="发表于 2019-01-30 15:06:19">2019-01-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="content"> 使用Ztree时，treeNode.children只能获取到子节点，该如何拿到节点的叶子节点呢？
+
+创建初始化设置var setting = &#123;    data: &#123;        simpleData: &#123;            enable: true        &#125;    &#125;,    callback: &#123;        onCheck:onCheck,    &#125;&#125;;
+创建点击响应事件function onCheck(event, treeId, treeNode, clickFlag) &#123;        var treeObj = $(ELT).fn.zTree.getZTreeObj(&quot;datarecdirs&quot;);        var str = &quot;&quot;;        str = getAllChildNodes(treeNode,str);        // // 加上被选择节点自身        // str = str + &#x2 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-01-25/mysqld-dead-but-subsys-locked/" title="记一次 MySQL 错误 —— mysqld-dead-but-subsys-locked">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="记一次 MySQL 错误 —— mysqld-dead-but-subsys-locked"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-01-25/mysqld-dead-but-subsys-locked/" title="记一次 MySQL 错误 —— mysqld-dead-but-subsys-locked">记一次 MySQL 错误 —— mysqld-dead-but-subsys-locked</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-01-25T03:35:56.000Z" title="发表于 2019-01-25 11:35:56">2019-01-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="content"> 记一次MySQL服务出错排查过程。
+
+今天登录管理系统的时候输入账户信息没有反应，后台查看系统日志发现报错信息：# intailf /var/log/ODSP.log# out(部分有用信息)2019-01-25 11:30:07 database [line:263]: Can&#x27;t connect to local MySQL server through socket &#x27;/var/lib/mysql/mysql.sock&#x27; (2)
+查看MySQL服务状态# in/etc/init.d/mysqld status# outmysqld dead but subsys locked
+查看MySQL的log信息# intailf /var/log/mysqld.log# out（截取部分有用信息）700101 00:28:38 mysqld_safe mysqld from pid file /var/run/mysqld/mysqld.pid ended700101 00:28:42 mysqld_safe Starting mysqld daemon  ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2018-09-21/get-some-trouble-with-pip/" title="pip 小老弟，你怎么肥四？">     <img class="post_bg" data-lazy-src="/images/Python/pip-logo-large.svg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="pip 小老弟，你怎么肥四？"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-09-21/get-some-trouble-with-pip/" title="pip 小老弟，你怎么肥四？">pip 小老弟，你怎么肥四？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-09-21T07:52:52.000Z" title="发表于 2018-09-21 15:52:52">2018-09-21</time></span></div><div class="content"> 今天用pip的时候突然不能正常使用，在这里简单记录一下。
+提示pip版本不对错误提示You are using pip version 9.0.3, however version 18.0.1 is available.You should consider upgrading via the &#39;python -m pip install --upgrade pip&#39; command. 
+处理过程去官网下载最新版的包，直接解压安装即可；
+参考来源Python2.7 自带的 pip9.0 升级到 pip18.0
+明确已经安装pip，但是系统提示找不到pip错误提示-bash: &#x2F;home&#x2F;imoyao&#x2F;.local&#x2F;bin&#x2F;pip: No such file or directory
+解决方案1.which pip /usr/local/bin/pip2.pip -su: /usr/bin/pip: No such file or directory3.type pip pip is hashed (/usr/bin/ ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/5/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何将代码打补丁（patch）？"></a><div class="content"><a class="title" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？">如何将代码打补丁（patch）？</a><time datetime="2020-11-04T09:57:53.000Z" title="发表于 2020-11-04 17:57:53">2020-11-04</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/"><span class="card-category-list-name">Projects</span><span class="card-category-list-count">11</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/FMP/"><span class="card-category-list-name">FMP</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/GUSCSS/"><span class="card-category-list-name">GUSCSS</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/IdealYard/"><span class="card-category-list-name">IdealYard</span><span class="card-category-list-count">5</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2%E4%B8%AA%E6%80%A7%E5%8C%96/"><span class="card-category-list-name">博客个性化</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><span class="card-category-list-name">善用佳软</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">学习记录</span><span class="card-category-list-count">1</span></a></li>
+            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories/">
+                <span>查看更多</span><i class="fas fa-angle-right"></i></a></li>
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/ALUA/" style="font-size: 1.1em; color: #999">ALUA</a> <a href="/tags/Angular/" style="font-size: 1.16em; color: #999b9e">Angular</a> <a href="/tags/Butterfly/" style="font-size: 1.16em; color: #999b9e">Butterfly</a> <a href="/tags/CEPH/" style="font-size: 1.33em; color: #99a2af">CEPH</a> <a href="/tags/Calamari/" style="font-size: 1.1em; color: #999">Calamari</a> <a href="/tags/Celery/" style="font-size: 1.1em; color: #999">Celery</a> <a href="/tags/CentOS/" style="font-size: 1.16em; color: #999b9e">CentOS</a> <a href="/tags/CentOS7/" style="font-size: 1.21em; color: #999ea4">CentOS7</a> <a href="/tags/DRBD/" style="font-size: 1.39em; color: #99a4b4">DRBD</a> <a href="/tags/FMP/" style="font-size: 1.1em; color: #999">FMP</a> <a href="/tags/Flask/" style="font-size: 1.39em; color: #99a4b4">Flask</a> <a href="/tags/FundMate/" style="font-size: 1.1em; color: #999">FundMate</a> <a href="/tags/Gerrit/" style="font-size: 1.1em; color: #999">Gerrit</a> <a href="/tags/Git/" style="font-size: 1.16em; color: #999b9e">Git</a> <a href="/tags/HOWTO/" style="font-size: 1.27em; color: #99a0a9">HOWTO</a> <a href="/tags/Hexo/" style="font-size: 1.27em; color: #99a0a9">Hexo</a> <a href="/tags/Linux/" style="font-size: 1.33em; color: #99a2af">Linux</a> <a href="/tags/MariaDB/" style="font-size: 1.1em; color: #999">MariaDB</a> <a href="/tags/MegaCli/" style="font-size: 1.1em; color: #999">MegaCli</a> <a href="/tags/MySQL/" style="font-size: 1.27em; color: #99a0a9">MySQL</a> <a href="/tags/Nginx/" style="font-size: 1.1em; color: #999">Nginx</a> <a href="/tags/OCR/" style="font-size: 1.1em; color: #999">OCR</a> <a href="/tags/OKR/" style="font-size: 1.1em; color: #999">OKR</a> <a href="/tags/PyCharm/" style="font-size: 1.16em; color: #999b9e">PyCharm</a> <a href="/tags/Python/" style="font-size: 1.5em; color: #99a9bf">Python</a> <a href="/tags/Python3/" style="font-size: 1.1em; color: #999">Python3</a> <a href="/tags/RAID/" style="font-size: 1.16em; color: #999b9e">RAID</a> <a href="/tags/Redis/" style="font-size: 1.1em; color: #999">Redis</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/SqlAlchemy/" style="font-size: 1.1em; color: #999">SqlAlchemy</a> <a href="/tags/Storcli/" style="font-size: 1.1em; color: #999">Storcli</a> <a href="/tags/TCP/" style="font-size: 1.16em; color: #999b9e">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 1.1em; color: #999">TCP/IP</a> <a href="/tags/TODO/" style="font-size: 1.44em; color: #99a7ba">TODO</a> <a href="/tags/Vue/" style="font-size: 1.1em; color: #999">Vue</a> <a href="/tags/Web-%E5%BC%80%E5%8F%91/" style="font-size: 1.16em; color: #999b9e">Web 开发</a> <a href="/tags/Web-py/" style="font-size: 1.1em; color: #999">Web.py</a> <a href="/tags/ceph-deploy/" style="font-size: 1.1em; color: #999">ceph-deploy</a> <a href="/tags/decorator/" style="font-size: 1.1em; color: #999">decorator</a> <a href="/tags/dict/" style="font-size: 1.16em; color: #999b9e">dict</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives/">
+              <span>查看更多</span><i class="fas fa-angle-right"></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">77</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishdate="2017-11-19T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-01-20T16:28:31.873Z"></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "Valar Dohaeris,你如今的气质里，藏着你走过的路🚶‍♂、读过的书📚和爱过的人💖".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: false,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = 'Valar Dohaeris'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

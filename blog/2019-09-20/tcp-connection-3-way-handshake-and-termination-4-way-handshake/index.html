@@ -1,0 +1,362 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TCP 三次握手与四次挥手 | 别院牧志</title><meta name="keywords" content="网络,TCP"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="TCP 头部上面就是 TCP 协议头部的格式，它非常重要，是理解其它内容的基础，下面将每个字段的信息都详细的说明一下：  Source Port  16 位，用于标识源端口号（发送机器 TCP 端口） Destination Port  16 位，用于标识目的端口号（接收端口） Sequence Number  32 位，用于 TCP 段的字节级别编号。如果使用 TCP 连接，则为数据的每个字节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP 三次握手与四次挥手">
+<meta property="og:url" content="https://www.masantu.com/blog/2019-09-20/tcp-connection-3-way-handshake-and-termination-4-way-handshake/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="TCP 头部上面就是 TCP 协议头部的格式，它非常重要，是理解其它内容的基础，下面将每个字段的信息都详细的说明一下：  Source Port  16 位，用于标识源端口号（发送机器 TCP 端口） Destination Port  16 位，用于标识目的端口号（接收端口） Sequence Number  32 位，用于 TCP 段的字节级别编号。如果使用 TCP 连接，则为数据的每个字节">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302">
+<meta property="article:published_time" content="2019-09-20T10:03:19.000Z">
+<meta property="article:modified_time" content="2021-01-20T14:14:12.731Z">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="网络">
+<meta property="article:tag" content="TCP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/blog/2019-09-20/tcp-connection-3-way-handshake-and-termination-4-way-handshake/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-20 22:14:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">TCP 三次握手与四次挥手</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-09-20T10:03:19.000Z" title="发表于 2019-09-20 18:03:19">2019-09-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-20T14:14:12.731Z" title="更新于 2021-01-20 22:14:12">2021-01-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><script src="\assets\js\APlayer.min.js"> </script><h2 id="TCP-头部"><a href="#TCP-头部" class="headerlink" title="TCP 头部"></a>TCP 头部</h2><p><img src="/img/loading.svg" data-lazy-src="/images/tcp-head-en.jpg" alt="tcp头部"><br><img src="/img/loading.svg" data-lazy-src="/images/tcp-head-cn.jpg" alt="tcp头部"><br>上面就是 TCP 协议头部的格式，它非常重要，是理解其它内容的基础，下面将每个字段的信息都详细的说明一下：</p>
+<ul>
+<li>Source Port<br>  16 位，用于标识源端口号（发送机器 TCP 端口）</li>
+<li>Destination Port<br>  16 位，用于标识目的端口号（接收端口）</li>
+<li>Sequence Number<br>  32 位，用于 TCP 段的字节级别编号。如果使用 TCP 连接，则为数据的每个字节分配一个序列号。如果设置了 SYN 标志（在<em>三向握手连接</em>初始化期间），则是初始序列号。 然后，实际第一个数据字节的序列号将是此序列号加 1。例如，让设备在特定 TCP 报头中的数据的第一个字节在该字段 50000 中将具有其序列号。如果此数据包有 500 字节中的数据，那么此设备发送的下一个数据包将具有 50000 + 500 + 1 = 50501 的序列号。</li>
+<li>Acknowledgment Number<br>  32 位，确认序列号包含发送确认的一端所期望收到的下一个序号，因此，确认序号应当是上次已成功收到数据字节序号加 1。不过，只有当标志位中的 ACK 标志（下面介绍）为 1 时该确认序列号的字段才有效。主要用来解决不丢包的问题；</li>
+<li>Header Length<br>  4 位，显示 header 中 32 位字的数量。需要这个值是因为任选字段的长度是可变的。也称为数据偏移字段（Data Offset field）。 header 的最小为 5 个字（二进制模式为 0101）。</li>
+<li>Reserved<br>  6 位，常被设为 0；</li>
+<li>Control Bit Flags<br>  我们之前已经知道 TCP 是面向连接的协议。 面向连接协议的含义是，在可以传输任何数据之前，必须获得（obtained）并确认可靠的连接。 控制位控制着连接建立，数据传输和连接终止的整个过程。<br>  控制位列出如下：它们依次为 URG，ACK，PSH，RST，SYN，FIN。每个标志位的含义如下：   <ol>
+<li>URG：Urgent Pointer，此标志表示 TCP 包的紧急指针域（后面马上就要说到）有效，用来保证 TCP 连接不被中断，并且督促中间层设备要尽快处理这些数据；</li>
+<li>ACK：Acknowledgement，此标志表示应答域有效。就是说前面所说的 TCP 应答号将会包含在 TCP 数据包中；有两个取值：0 和 1，为 1 的时候表示应答域有效，反之为 0；</li>
+<li>PSH：push，这个标志位表示传送操作。所谓 Push 操作就是指在数据包到达接收端以后，立即传送给应用程序，而不是在缓冲区中排队；</li>
+<li>RST：reset，这个标志表示连接复位请求。用来复位那些产生错误的连接，也被用来拒绝错误和非法的数据包；</li>
+<li>SYN：synchronous，表示同步序号，用来建立连接。SYN 标志位和 ACK 标志位搭配使用，当连接请求的时候，SYN=1，ACK=0；连接被响应的时候，SYN=1，ACK=1；这个标志的数据包经常被用来进行端口扫描。扫描者发送一个只有 SYN 的数据包，如果对方主机响应了一个数据包回来，就表明这台主机存在这个端口；但是由于这种扫描方式只是进行 TCP 三次握手的第一次握手，因此这种扫描的成功表示被扫描的机器不很安全，一台安全的主机将会强制要求一个连接严格的进行 TCP 的三次握手；</li>
+<li>FIN： finish，表示发送端已经达到数据末尾。也就是说双方的数据传送完成，没有数据可以传送了，发送 FIN 标志位的 TCP 数据包后，连接将被断开。这个标志的数据包也经常被用于进行端口扫描。<br>需要注意的是：<ul>
+<li>不要将确认序号 ack 与标志位中的 ACK 搞混了。</li>
+<li>确认方 ack=发起方 req+1，两端配对。  </li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Window<br>  16bits，窗口字段用来控制对方发送的数据量，单位为字节。也就是有名的滑动窗口，用来进行流量控制。TCP 连接的一端根据设置的缓存空间大小确定自己的接收窗口大小，然后通知对方以确定对方的发送窗口的上限。</li>
+<li>Checksum<br>  16bits,检验和字段检验的范围包括首部和数据这两部分。在计算检验和时，要在 TCP 报文段的前面加上 12 字节的伪首部。</li>
+<li>Urgent Pointer<br>  紧急指针字段，16bits，紧急指针指出在本报文段中的紧急数据的最后一个字节的序号。</li>
+<li>Option<br>  长度可变，TCP 首部可以有多达 40 字节的可选信息，用于把附加信息传递给终点，或用来对齐其它选项。</li>
+</ul>
+<ol>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.omnisecu.com/tcpip/tcp-header.php">TCP Header Fields</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.inetdaemon.com/tutorials/internet/tcp/tcp_header.shtml">TCP Header</a></li>
+</ol>
+<h2 id="三次握手与四次挥手"><a href="#三次握手与四次挥手" class="headerlink" title="三次握手与四次挥手"></a>三次握手与四次挥手</h2><h3 id="三次握手（3-way-Handshake）"><a href="#三次握手（3-way-Handshake）" class="headerlink" title="三次握手（3-way Handshake）"></a>三次握手（3-way Handshake）</h3><p>所谓三次握手(Three-way Handshake)，是指建立一个 TCP 连接时，需要客户端和服务器总共发送 3 个包。</p>
+<p>三次握手的目的是连接服务器指定端口，建立 TCP 连接，并同步连接双方的序列号和确认号，交换 TCP 窗口大小信息。在 socket 编程中，客户端执行 <code>connect()</code> 时。将触发三次握手。</p>
+<ul>
+<li><p>第一次握手(SYN=1, ACK=0, ISN=x):<br> 设备 A（客户端）发送一个 <strong>SYN</strong>chronize 标志设置为 1, <strong>ACK</strong>nowledge 标志设置为 0，以及初始序列号 ISN (Initial Sequence Number) 为 x 的 TCP 连接请求报文段；</p>
+<p> 发送完毕后，客户端进入 <code>SYN_SEND</code> 状态，等待服务器的确认；</p>
+</li>
+<li><p>第二次握手(SYN=1, ACK=1, ISN=y, ACKnum=x+1):<br>  设备 B（服务器）接收设备 A 的 TCP 报文段，并返回 SYN = 1，ACK = 1，ISN = Y（设备 B 的初始序列号），确认编号(Acknowledgment Number )= x + 1（设备 B 接收到的设备 A 的 ISN 加 1）</p>
+<p> 发送完毕后，服务器端进入 <code>SYN_RCVD</code> 状态。此时服务器会把此种状态下请求连接放在一个队列里，我们把这种队列称之为<em>半连接队列</em>。</p>
+</li>
+<li><p>第三次握手(ACK=1, SYN=0, ACKnum=y+1,seq=x+1)<br>  设备 A(客户端)向设备 B(服务器)发送一个 TCP 报文段，以确认接收到设备 B 的 ISN，标志设置为 ACK = 1，序列号(Sequence number)= x+1，确认号(Acknowledgment number)= y+1</p>
+<p> 发送完毕后，客户端进入 <code>ESTABLISHED</code> 状态，当服务器端接收到这个包时，也进入 <code>ESTABLISHED</code> 状态，TCP 握手结束。</p>
+</li>
+</ul>
+<p>完成了三次握手，客户端和服务器端建立全双工通信（full-duplex communication），开始使用约定的序列号和确认号（ sequence 和 acknowledge numbers）传送数据。</p>
+<p>三次握手的过程的示意图如下：</p>
+<p><img src="/img/loading.svg" data-lazy-src="/images/tcp-connection-made-three-way-handshake.png" alt="three-way-handshake"><br><img src="/img/loading.svg" data-lazy-src="/images/3-way-handshake.png" alt="three-way-handshake"></p>
+<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.omnisecu.com/tcpip/tcp-three-way-handshake.php">3 way handshake, TCP Three-way handshake, TCP Synchronization</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.inetdaemon.com/tutorials/internet/tcp/3-way_handshake.shtml">TCP 3-Way Handshake (SYN,SYN-ACK,ACK)</a>  </li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.geeksforgeeks.org/tcp-3-way-handshake-process/">TCP 3-Way Handshake Process</a> </li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://study-ccna.com/tcp-three-way-handshake/">TCP three-way handshake</a> </li>
+</ul>
+<h3 id="四次挥手（TCP-Connection-Termination）"><a href="#四次挥手（TCP-Connection-Termination）" class="headerlink" title="四次挥手（TCP Connection Termination）"></a>四次挥手（TCP Connection Termination）</h3><p>当客户端和服务器通过三次握手建立了 TCP 连接以后，数据传送完毕，肯定是要断开 TCP 连接。TCP 的连接的解除需要发送四个包，因此称为四次挥手(Four-way handshake)。<strong>客户端或服务器均可主动发起挥手动作</strong>，在 socket 编程中，任何一方执行 <code>close()</code> 操作即可产生挥手操作。</p>
+<ul>
+<li><p>第一次挥手(FIN=1，seq=x)<br> （从客户端获得 FIN）——此处假定客户端应用程序决定要关闭连接。 （请注意，服务器也可以选择关闭连接）。这将导致客户端将 FIN 位设置为 1 的 TCP 报文段发送到服务器，并进入 FIN_WAIT_1 状态。当客户端处于 FIN_WAIT_1 状态时，它会等待来自服务器的带有 ACK 确认（acknowledgment）的 TCP 段。</p>
+<p> 发送完毕后，客户端进入 <code>FIN_WAIT_1</code> 状态，此时仍然可以接受数据。</p>
+</li>
+<li><p>第二次挥手(ACK=1，ACKnum=x+1)<br> （来自服务器的 ACK）——当服务器从发件人（客户端）收到 FIN 位段时，服务器立即向发件人（客户端）发送确认（ACK）报文段。Acknowledgment Number 为 Sequence Number 加 1；表明自己接受到了客户端关闭连接的请求，但还没有准备好关闭连接。</p>
+<p> 发送完毕后，服务器端进入 <code>CLOSE_WAIT</code> 状态，客户端接收到这个确认包之后，进入 <code>FIN_WAIT_2</code> 状态，等待服务器端发送关闭连接段。</p>
+</li>
+<li><p>第三次挥手(FIN=1，seq=y)</p>
+<p> （来自服务器的 FIN）服务器端准备好关闭连接时，向客户端发送结束连接请求，FIN 置为 1。</p>
+<p> 发送完毕后，服务器端进入 <code>LAST_ACK</code> 状态，等待来自客户端的最后一个 ACK。</p>
+</li>
+<li><p>第四次挥手(ACK=1，ACKnum=y+1)</p>
+<p> （来自客户端的 ACK）客户端接收到来自服务器端的关闭请求，发送一个确认报文段，并进入 <code>TIME_WAIT</code>状态，TIME_WAIT 状态允许客户端在 ACK 丢失的情况下重新发送最终确认的 ACK 包。</p>
+<p> 服务器端接收到这个确认包之后，关闭连接，进入 <code>CLOSED</code> 状态。</p>
+<p> 客户端等待了某个固定时间（两个最大段生命周期，2MSL，2 Maximum Segment Lifetime）之后，没有收到服务器端的 ACK ，认为服务器端已经正常关闭连接，于是自己也关闭连接，进入 <code>CLOSED</code> 状态。</p>
+<p> 处于 TIME_WAIT 状态的客户端所花费的时间取决于其实现，但典型值为 30 秒，1 分钟和 2 分钟。等待之后，连接正式关闭，并且客户端上的所有资源（包括端口号和缓冲区数据）都被释放。</p>
+</li>
+</ul>
+<p>四次挥手的示意图如下：</p>
+<p><img src="/img/loading.svg" data-lazy-src="/images/tcp-connection-closed-four-way-handshake.png" alt="four-way-handshake"></p>
+<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.tcpipguide.com/free/t_TCPConnectionTermination-2.htm">TCP Connection Termination</a>  </li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.geeksforgeeks.org/tcp-connection-termination/">TCP Connection Termination</a>   </li>
+</ul>
+<h4 id="完整状态转换图"><a href="#完整状态转换图" class="headerlink" title="完整状态转换图"></a>完整状态转换图</h4><p><img src="/img/loading.svg" data-lazy-src="/images/TCP-states-visited-by-ClientSide.png" alt="客户端"></p>
+<p><img src="/img/loading.svg" data-lazy-src="/images/TCP-states-visited-by-ServerSide.png" alt="服务端"></p>
+<hr>
+<h2 id="疑问解惑"><a href="#疑问解惑" class="headerlink" title="疑问解惑"></a>疑问解惑</h2><h3 id="ISN-是固定的吗"><a href="#ISN-是固定的吗" class="headerlink" title="ISN 是固定的吗"></a>ISN 是固定的吗</h3><p>三次握手的一个重要功能是客户端和服务端交换 ISN(Initial Sequence Number), 以便让对方知道接下来接收数据的时候如何按序列号组装数据。</p>
+<p>如果 ISN 是固定的，攻击者很容易猜出后续的确认号，因此 ISN 是动态生成的。</p>
+<h3 id="为什么要三次握手"><a href="#为什么要三次握手" class="headerlink" title="为什么要三次握手"></a>为什么要三次握手</h3><p>在谢希仁著《计算机网络》第四版中讲“三次握手”的目的是“为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误”。为了解决“网络中存在延迟的重复分组”的问题。    </p>
+<p>为什么 A 还要发送一次确认呢？这主要是为了防止己失效的连接请求报文段突然又传送到了 B ,因而产生错误。<br>所谓“己失效的连接请求报文段”是这样产生的：</p>
+<blockquote>
+<p>正常情况下：A 发出连接请求,但因连接请求报文丢失而未收到确认。于是 A 再重传一次连接请求。后来收到了确认，建立了连接。数据传输完毕后，就释放了连接。A 共发送了两个连接请求报文段。其中，第一个丢失，第二个到达了 B。没有“已失效的连接请求报文段”。</p>
+<p>现假定出现一种异常情况：即 A 发出的第一个连接请求报文段并没有丢失，而是在某些网络结点长时间滞留了，以致延误到连接释放以后的某个时间才到达 B。本来这是一个早己失效的报文段。但 B 收到此失效的连接请求报文段后，就误认为是 A 又发出一次新的连接请求。于是就向 A 发出确认报文段，同意建立连接，假定不采用“三次握手”，那么只要 B 发出确认，新的连接就建立了。<br>由于现在 A 并没有发出建立连接的请求。因此不会理睬 B 的确认。也不会向 B 发送数据。但 B 却以为新的运输连接己经建立了，并一直等待 A 发来数据。B 的许多资源就这样白白浪费了。<br>采用三次握手的办法可以防止上述现象的发生。例如在刚才的情况下，A 不会向 B 的确认发出确认。B 由于收不到确认。就知道 A 并没有要求建立连接。</p>
+</blockquote>
+<p>这就很明白了，<strong>防止服务器端的一直等待而浪费资源</strong>。</p>
+<p>在 Google Groups 的 TopLanguage 中看到一帖讨论 TCP“三次握手”觉得很有意思。贴主提出“TCP 建立连接为什么是三次握手？”的问题，在众多回复中，有一条回复写道：“这个问题的本质是：信道不可靠, 但是通信双发需要就某个问题达成一致。而要解决这个问题, 无论你在消息中包含什么信息, 三次通信是理论上的最小值。所以三次握手不是 TCP 本身的要求, 而是为了满足”在不可靠信道上可靠地传输信息”这一需求所导致的。请注意这里的本质需求,信道不可靠, 数据传输要可靠。三次达到了, 那后面你想接着握手也好, 发数据也好, 跟进行可靠信息传输的需求就没关系了。因此,如果信道是可靠的, 即无论什么时候发出消息, 对方一定能收到, 或者你不关心是否要保证对方收到你的消息, 那就能像 UDP 那样直接发送消息就可以了。”这可视为对“三次握手”目的的另一种解答思路。</p>
+<h3 id="通俗理解"><a href="#通俗理解" class="headerlink" title="通俗理解"></a>通俗理解</h3><p>但是为什么一定要进行三次握手来保证连接是双工的呢，一次不行么？两次不行么？我们举一个现实生活中两个人进行语言沟通的例子来模拟三次握手。<br>引用网上的一些通俗易懂的例子，虽然不太正确，后面会指出，但是不妨碍我们理解，大体就是这么个理解法。</p>
+<ul>
+<li>第一次对话：<br>老婆让甲出去打酱油，半路碰到一个朋友乙，甲问了一句：哥们你吃饭了么？<br>结果乙带着耳机听歌呢，根本没听到，没反应。甲心里想：跟你说话也没个音，不跟你说了，沟通失败。说明乙接受不到甲传过来的信息的情况下沟通肯定是失败的。<br>如果乙听到了甲说的话，那么第一次对话成功，接下来进行第二次对话。</li>
+<li>第二次对话：<br>乙听到了甲说的话，但是他是老外，中文不好，不知道甲说的啥意思也不知道怎样回答，于是随便回答了一句学过的中文 ：我去厕所了。甲一听立刻笑喷了，“去厕所吃饭”?道不同不相为谋，离你远点吧，沟通失败。说明乙无法做出正确应答的情况下沟通失败。<br>如果乙听到了甲的话，做出了正确的应答，并且还进行了反问：我吃饭了，你呢？那么第二次握手成功。<br>通过前两次对话证明了乙能够听懂甲说的话，并且能做出正确的应答。 接下来进行第三次对话。</li>
+<li>第三次对话：<br>甲刚和乙打了个招呼，突然老婆喊他，“你个死鬼，打个酱油咋这么半天，看我回家咋收拾你”，甲是个妻管严，听完吓得二话不说就跑回家了，把乙自己晾那了。乙心想：这什么人啊，得，我也回家吧，沟通失败。说明甲无法做出应答的情况下沟通失败。<br>如果甲也做出了正确的应答：我也吃了。那么第三次对话成功，两人已经建立起了顺畅的沟通渠道，接下来开始持续的聊天。<br>通过第二次和第三次的对话证明了甲能够听懂乙说的话，并且能做出正确的应答。<br>可见，两个人进行有效的语言沟通，这三次对话的过程是必须的。<br>为了保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手，为了保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手。<br>这个例子举得挺好的。不过个人感觉为什么是三次而不是二次，不是因为为了证明甲能听懂乙并回应（第二次乙能正确的响应甲说明俩人之间沟通已无障碍了），而是怕出现以下情况而浪费感情。这个情景是这样的（例子有点不实际意会就好）：甲在路上跟乙打招呼，由于刮风什么的这句活被吹跑了，然后甲又跟打了个招呼，乙听到了并作出了回应。此时不管是三次握手还是两次握手两个人都能愉快的沟通。0.1 秒后俩人四次挥手告别了。此时被风刮跑的那句话又传到了乙的耳朵里，乙认为甲又要跟他沟通，所以做出了响应的回应。（问题出现了）假如采用 2 次握手，乙就认定了甲要跟他沟通，于是就不停的等，浪费感情。可如果是采用 3 次握手，乙等了一会后发现甲没有回应他就认为甲走了然后自己也就走了！<br>这就很明白了，其实第三步是防止了乙的一直等待而浪费自己的时间，而不是为了保证甲能够正确回应乙的信息。</li>
+</ul>
+<h3 id="为什么要四次分手"><a href="#为什么要四次分手" class="headerlink" title="为什么要四次分手"></a>为什么要四次分手</h3><p>TCP 协议是一种面向连接的、可靠的、基于字节流的运输层通信协议。<br>TCP 是全双工模式，这就意味着，当主机 1 发出 FIN 报文段时，只是表示主机 1 已经没有数据要发送了，主机 1 告诉主机 2，它的数据已经全部发送完毕了；但是，这个时候主机 1 还是可以接受来自主机 2 的数据；当主机 2 返回 ACK 报文段时，表示它已经知道主机 1 没有数据发送了，但是主机 2 还是可以发送数据到主机 1 的；当主机 2 也发送了 FIN 报文段时，这个时候就表示主机 2 也没有数据要发送了，就会告诉主机 1，我也没有数据要发送了，之后彼此就会愉快地中断这次 TCP 连接。<br>如果要正确的理解四次分手的原理，就需要了解四次分手过程中的状态变化：  </p>
+<ul>
+<li>FIN_WAIT_1: 这个状态要好好解释一下，其实 FIN_WAIT_1 和 FIN_WAIT_2 状态的真正含义都是表示等待对方的 FIN 报文。而这两种状态的区别是：FIN_WAIT_1 状态实际上是当 SOCKET 在 ESTABLISHED 状态时，它想主动关闭连接，向对方发送了 FIN 报文，此时该 SOCKET 即进入到 FIN_WAIT_1 状态。而当对方回应 ACK 报文后，则进入到 FIN_WAIT_2 状态，当然在实际的正常情况下，无论对方何种情况下，都应该马上回应 ACK 报文，所以 FIN_WAIT_1 状态一般是比较难见到的，而 FIN_WAIT_2 状态还有时常常可以用 netstat 看到。（主动方）</li>
+<li>FIN_WAIT_2：上面已经详细解释了这种状态，实际上 FIN_WAIT_2 状态下的 SOCKET，表示半连接，也即有一方要求 close 连接，但另外还告诉对方，我暂时还有点数据需要传送给你(ACK 信息)，稍后再关闭连接。（主动方）</li>
+<li>CLOSE_WAIT：这种状态的含义其实是表示在等待关闭。怎么理解呢？当对方 close 一个 SOCKET 后发送 FIN 报文给自己，你系统毫无疑问地会回应一个 ACK 报文给对方，此时则进入到 CLOSE_WAIT 状态。接下来呢，实际上你真正需要考虑的事情是察看你是否还有数据发送给对方，如果没有的话，那么你也就可以 close 这个 SOCKET，发送 FIN 报文给对方，也即关闭连接。所以你在 CLOSE_WAIT 状态下，需要完成的事情是等待你去关闭连接。（被动方）</li>
+<li>LAST_ACK: 这个状态还是比较容易好理解的，它是被动关闭一方在发送 FIN 报文后，最后等待对方的 ACK 报文。当收到 ACK 报文后，也即可以进入到 CLOSED 可用状态了。（被动方）</li>
+<li>TIME_WAIT: 表示收到了对方的 FIN 报文，并发送出了 ACK 报文，就等 2MSL 后即可回到 CLOSED 可用状态了。如果 FINWAIT1 状态下，收到了对方同时带 FIN 标志和 ACK 标志的报文时，可以直接进入到 TIME_WAIT 状态，而无须经过 FIN_WAIT_2 状态。（主动方）</li>
+<li>CLOSED: 表示连接中断。</li>
+</ul>
+<h3 id="为什么连接的时候是三次握手，关闭的时候却是四次握手"><a href="#为什么连接的时候是三次握手，关闭的时候却是四次握手" class="headerlink" title="为什么连接的时候是三次握手，关闭的时候却是四次握手"></a>为什么连接的时候是三次握手，关闭的时候却是四次握手</h3><p>因为当 Server 端收到 Client 端的 SYN 连接请求报文后，可以直接发送 SYN+ACK 报文。其中 ACK 报文是用来应答的，SYN 报文是用来同步的。但是关闭连接时，当 Server 端收到 FIN 报文时，很可能并不会立即关闭 SOCKET，所以只能先回复一个 ACK 报文，告诉 Client 端，”你发的 FIN 报文我收到了”。只有等到我 Server 端所有的报文都发送完了，我才能发送 FIN 报文，因此不能一起发送。故需要四步握手。</p>
+<h3 id="为什么-TIME-WAIT-状态需要经过-2MSL-maximum-segment-lifetime：最大报文段生存时间-才能返回到-CLOSE-状态"><a href="#为什么-TIME-WAIT-状态需要经过-2MSL-maximum-segment-lifetime：最大报文段生存时间-才能返回到-CLOSE-状态" class="headerlink" title="为什么 TIME_WAIT 状态需要经过 2MSL(maximum segment lifetime：最大报文段生存时间)才能返回到 CLOSE 状态"></a>为什么 TIME_WAIT 状态需要经过 2MSL(maximum segment lifetime：最大报文段生存时间)才能返回到 CLOSE 状态</h3><ol>
+<li><p>可靠地实现 TCP 全双工连接的终止<br> 在进行关闭连接四路握手协议时，最后的 ACK 是由主动关闭端发出的，如果这个最终的 ACK 丢失，服务器将重发最终的 FIN，因此客户端必须维护状态信息允许它重发最终的 ACK。如果不维持这个状态信息，那么客户端将响应 RST 分节，服务器将此分节解释成一个错误（在 java 中会抛出 connection reset 的 SocketException)。因而，要实现 TCP 全双工连接的正常终止，必须处理终止序列四个分节中任何一个分节的丢失情况，主动关闭的客户端必须维持状态信息进入 TIME_WAIT 状态。</p>
+</li>
+<li><p>允许老的重复分节在网络中消逝<br> TCP 分节可能由于路由器异常而“迷途”，在迷途期间，TCP 发送端可能因确认超时而重发这个分节，迷途的分节在路由器修复后也会被送到最终目的地，这个原来的迷途分节就称为 lost duplicate。在关闭一个 TCP 连接后，马上又重新建立起一个相同的 IP 地址和端口之间的 TCP 连接，后一个连接被称为前一个连接的化身 （incarnation)，那么有可能出现这种情况，前一个连接的迷途重复分组在前一个连接终止后出现，从而被误解成从属于新的化身。为了避免这个情况，TCP 不允许处于 TIME_WAIT 状态的连接启动一个新的化身，因为 TIME_WAIT 状态持续 2MSL，就可以保证当成功建立一个 TCP 连接的时候，来自连接先前化身的重复分组已经在网络中消逝。</p>
+</li>
+</ol>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/unix21/article/details/16918307">为什么 TCP 的 TIME_WAIT 状态要保持 2MSL?</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="http://docs.52im.net/extend/docs/book/tcpip/vol1/18/">18.6.1 2MSL 等待状态</a>
+   </p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://people.na.infn.it/~garufi/didattica/CorsoAcq/Trasp/Lezione9/tcpip_ill/tcp_conn.htm">TCP Connection Establishment and Termination</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.inetdaemon.com/tutorials/internet/tcp/index.shtml">Transmission Control Protocol (TCP) Tutorials</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jawil/blog/issues/14">通俗大白话来理解 TCP 协议的三次握手和四次分手</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://blog.csdn.net/oney139/article/details/8103223">TCP 三次握手详解及释放连接过程</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jellythink.com/archives/240">简析 TCP 的三次握手与四次分手</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cnblogs.com/zhanglei93/p/6574714.html">TCP 协议设计原理</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://blog.csdn.net/whuslei/article/details/6667471">TCP 协议中的三次握手和四次挥手(图解)</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cnblogs.com/yuilin/archive/2012/11/05/2755298.html">理解 TCP 为什么需要进行三次握手(白话)</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/24853633">TCP 为什么是三次握手，为什么不是两次或四次？</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://juejin.im/post/58e36d35b123db15eb748856">面试时，你被问到过 TCP/IP 协议吗?</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hit-alibaba.github.io/interview/basic/network/TCP.html">TCP 协议</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cnblogs.com/hnrainll/archive/2011/10/14/2212415.html">TCP 三次握手及四次挥手详细图解</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cnblogs.com/rootq/articles/1377355.html">TCP 协议三次握手过程分析</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://baike.baidu.com/subview/32754/8048820.htm">百度百科：SYN 攻击</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.tldp.org/HOWTO/html_single/TCP-Keepalive-HOWTO/">TCP-Keepalive-HOWTO</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:immoyao@gmail.com" rel="external nofollow noopener noreferrer" target="_blank">imoyao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.masantu.com/blog/2019-09-20/tcp-connection-3-way-handshake-and-termination-4-way-handshake/">https://www.masantu.com/blog/2019-09-20/tcp-connection-3-way-handshake-and-termination-4-way-handshake/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.masantu.com" target="_blank">别院牧志</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a><a class="post-meta__tags" href="/tags/TCP/">TCP</a></div><div class="post_share"><div class="social-share" data-image="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechatpay.jpg" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg" alt="alipay"></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/blog/2019-09-21/differences-between-tcp-and-udp/"><img class="prev-cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">TCP 和 UDP 的区别</div></div></a></div><div class="next-post pull-right"><a href="/blog/2019-09-19/why-redis-is-so-fast/"><img class="next-cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">为什么 Redis 这么快？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blog/2019-09-21/differences-between-tcp-and-udp/" title="TCP 和 UDP 的区别"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-21</div><div class="title">TCP 和 UDP 的区别</div></div></a></div><div><a href="/blog/2020-08-11/how-to-get-the-physical-interface-IP-address-from-an-interface/" title="如何通过网卡名称获取其所对应的 IP 地址"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-11</div><div class="title">如何通过网卡名称获取其所对应的 IP 地址</div></div></a></div><div><a href="/blog/2019-11-19/the-detail-of-ping-a-domain/" title="Ping 某个域名的详细过程"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-19</div><div class="title">Ping 某个域名的详细过程</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-%E5%A4%B4%E9%83%A8"><span class="toc-number">1.</span> <span class="toc-text">TCP 头部</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">2.</span> <span class="toc-text">三次握手与四次挥手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%883-way-Handshake%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">三次握手（3-way Handshake）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%88TCP-Connection-Termination%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">四次挥手（TCP Connection Termination）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%9B%BE"><span class="toc-number">2.2.1.</span> <span class="toc-text">完整状态转换图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%96%91%E9%97%AE%E8%A7%A3%E6%83%91"><span class="toc-number">3.</span> <span class="toc-text">疑问解惑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ISN-%E6%98%AF%E5%9B%BA%E5%AE%9A%E7%9A%84%E5%90%97"><span class="toc-number">3.1.</span> <span class="toc-text">ISN 是固定的吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">3.2.</span> <span class="toc-text">为什么要三次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E4%BF%97%E7%90%86%E8%A7%A3"><span class="toc-number">3.3.</span> <span class="toc-text">通俗理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%9B%9B%E6%AC%A1%E5%88%86%E6%89%8B"><span class="toc-number">3.4.</span> <span class="toc-text">为什么要四次分手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9E%E6%8E%A5%E7%9A%84%E6%97%B6%E5%80%99%E6%98%AF%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%8C%E5%85%B3%E9%97%AD%E7%9A%84%E6%97%B6%E5%80%99%E5%8D%B4%E6%98%AF%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">3.5.</span> <span class="toc-text">为什么连接的时候是三次握手，关闭的时候却是四次握手</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-TIME-WAIT-%E7%8A%B6%E6%80%81%E9%9C%80%E8%A6%81%E7%BB%8F%E8%BF%87-2MSL-maximum-segment-lifetime%EF%BC%9A%E6%9C%80%E5%A4%A7%E6%8A%A5%E6%96%87%E6%AE%B5%E7%94%9F%E5%AD%98%E6%97%B6%E9%97%B4-%E6%89%8D%E8%83%BD%E8%BF%94%E5%9B%9E%E5%88%B0-CLOSE-%E7%8A%B6%E6%80%81"><span class="toc-number">3.6.</span> <span class="toc-text">为什么 TIME_WAIT 状态需要经过 2MSL(maximum segment lifetime：最大报文段生存时间)才能返回到 CLOSE 状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">3.7.</span> <span class="toc-text">参考资料</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何将代码打补丁（patch）？"></a><div class="content"><a class="title" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？">如何将代码打补丁（patch）？</a><time datetime="2020-11-04T09:57:53.000Z" title="发表于 2020-11-04 17:57:53">2020-11-04</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI',
+      appKey: 'CARePe7R247vdXACFg1fhk4E',
+      placeholder: '我们期待并欢迎理性、友好而和谐的声音……',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

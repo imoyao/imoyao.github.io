@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>如何通过网卡名称获取其所对应的 IP 地址 | 别院牧志</title><meta name="keywords" content="Python,网络"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="代码如果项目中有用到 netifaces 或者 psutil 库，可以直接使用下面的方法： 直接调用第三方库 netifacesdef via_netifaces():    &quot;&quot;&quot;    调用第三方模块netifaces    :return:     &quot;&quot;&quot;    ip_list &#x3D; []    for interface in n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何通过网卡名称获取其所对应的 IP 地址">
+<meta property="og:url" content="https://www.masantu.com/blog/2020-08-11/how-to-get-the-physical-interface-IP-address-from-an-interface/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="代码如果项目中有用到 netifaces 或者 psutil 库，可以直接使用下面的方法： 直接调用第三方库 netifacesdef via_netifaces():    &quot;&quot;&quot;    调用第三方模块netifaces    :return:     &quot;&quot;&quot;    ip_list &#x3D; []    for interface in n">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302">
+<meta property="article:published_time" content="2020-08-11T03:32:23.000Z">
+<meta property="article:modified_time" content="2021-01-20T14:14:12.639Z">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/blog/2020-08-11/how-to-get-the-physical-interface-IP-address-from-an-interface/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-20 22:14:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">如何通过网卡名称获取其所对应的 IP 地址</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-11T03:32:23.000Z" title="发表于 2020-08-11 11:32:23">2020-08-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-20T14:14:12.639Z" title="更新于 2021-01-20 22:14:12">2021-01-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><script src="\assets\js\APlayer.min.js"> </script><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>如果项目中有用到 netifaces 或者 psutil 库，可以直接使用下面的方法：</p>
+<h3 id="直接调用第三方库"><a href="#直接调用第三方库" class="headerlink" title="直接调用第三方库"></a>直接调用第三方库</h3><ul>
+<li>netifaces<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">via_netifaces</span>():</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    调用第三方模块netifaces</span></span><br><span class="line"><span class="string">    :return: </span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    ip_list = []</span><br><span class="line">    <span class="keyword">for</span> interface <span class="keyword">in</span> netifaces.interfaces():</span><br><span class="line">        <span class="keyword">if</span> interface <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">&#x27;lo&#x27;</span>, <span class="string">&#x27;sit0&#x27;</span>]:</span><br><span class="line">            b = netifaces.ifaddresses(interface).get(netifaces.AF_INET)</span><br><span class="line">            <span class="keyword">if</span> b:</span><br><span class="line">                <span class="keyword">for</span> link <span class="keyword">in</span> b:</span><br><span class="line">                    ip_list.append(link[<span class="string">&#x27;addr&#x27;</span>])</span><br><span class="line">    <span class="keyword">return</span> ip_list</span><br></pre></td></tr></table></figure></li>
+<li>psutil<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_net_ipaddr</span>():</span></span><br><span class="line">    ip_list = <span class="built_in">set</span>()</span><br><span class="line">    dic = psutil.net_if_addrs()</span><br><span class="line">    <span class="keyword">for</span> adapter <span class="keyword">in</span> dic:</span><br><span class="line">        snic_list = dic[adapter]</span><br><span class="line">        mac = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        ipv4 = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        ipv6 = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> snic <span class="keyword">in</span> snic_list:</span><br><span class="line">            <span class="keyword">if</span> snic.family.name <span class="keyword">in</span> &#123;<span class="string">&#x27;AF_LINK&#x27;</span>, <span class="string">&#x27;AF_PACKET&#x27;</span>&#125;:</span><br><span class="line">                mac = snic.address</span><br><span class="line">            <span class="keyword">elif</span> snic.family.name == <span class="string">&#x27;AF_INET&#x27;</span>:</span><br><span class="line">                ipv4 = snic.address</span><br><span class="line">            <span class="keyword">elif</span> snic.family.name == <span class="string">&#x27;AF_INET6&#x27;</span>:</span><br><span class="line">                ipv6 = snic.address</span><br><span class="line">            ip_list.add(ipv4)</span><br><span class="line">        print(<span class="string">&#x27;%s, %s, %s, %s&#x27;</span> % (adapter, mac, ipv4, ipv6))</span><br><span class="line">    <span class="keyword">return</span> ip_list</span><br></pre></td></tr></table></figure>
+如果觉得只是为了一个小功能引入第三方库有点大材小用，那么我们也可以自己造轮子。</li>
+</ul>
+<h3 id="标准库"><a href="#标准库" class="headerlink" title="标准库"></a>标准库</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">std_get_ip_list</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_ip_address_of_iface</span>(<span class="params">ifname</span>):</span></span><br><span class="line">        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</span><br><span class="line">        ip_addr = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ip_addr = socket.inet_ntoa(fcntl.ioctl(</span><br><span class="line">                s.fileno(),</span><br><span class="line">                <span class="number">0x8915</span>,</span><br><span class="line">                struct.pack(<span class="string">&#x27;256s&#x27;</span>, <span class="built_in">bytes</span>(ifname[:<span class="number">15</span>], <span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">            )[<span class="number">20</span>:<span class="number">24</span>])</span><br><span class="line">        <span class="keyword">except</span> OSError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> ip_addr</span><br><span class="line"></span><br><span class="line">    all_eth = os.listdir(<span class="string">&#x27;/sys/class/net/&#x27;</span>)</span><br><span class="line">    ip_list = []</span><br><span class="line">    <span class="keyword">for</span> eth <span class="keyword">in</span> all_eth:</span><br><span class="line">        <span class="keyword">if</span> eth <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">&#x27;lo&#x27;</span>, <span class="string">&#x27;sit0&#x27;</span>]:</span><br><span class="line">            ip = get_ip_address_of_iface(eth)</span><br><span class="line">            ip_list.append(ip)</span><br><span class="line">    <span class="keyword">return</span> ip_list</span><br></pre></td></tr></table></figure>
+<p>这段代码的原始出处是<a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/a/27423915">这里</a>，我们主要尝试解释一下它的工作原理。</p>
+<h2 id="原理解释"><a href="#原理解释" class="headerlink" title="原理解释"></a>原理解释</h2><h3 id="socket"><a href="#socket" class="headerlink" title="socket"></a>socket</h3><p>Python 的 socket 模块提供了有关网络接口的底层控制方法。<code>socket.socket</code> 函数会创建一个新的 socket 对象。它的用法如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">socket.socket(family&#x3D;AF_INET, type&#x3D;SOCK_STREAM, proto&#x3D;0, fileno&#x3D;None)</span><br></pre></td></tr></table></figure>
+<p>第一个参数 <code>family</code> 指定了网络地址的类型。最常用的值有两个：默认值 <code>AF_INET</code> 对应 IPv4，<code>AF_INET6</code> 是 IPv6。</p>
+<p>第二个参数 <code>type</code> 代表了传输层协议的类型。默认值 <code>SOCK_STREAM</code> 是我们熟知的 TCP 协议，而 <code>SOCK_DGRAM</code> 则对应 UDP 协议。</p>
+<p>因此，<code>s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)</code> 的含义是，创建一个使用 IPv4 网络和 UDP 协议的 socket 对象 <code>s</code>。</p>
+<p>为了获取网卡的 IP 地址，创建 TCP socket 或是 UDP socket 是没有差别的。由于 <code>socket.AF_INET</code> 和 <code>socket.SOCK_STREAM</code> 都是 <code>socket.socket</code> 函数的默认参数，所以这一行实际上可以简写成<code>s = socket.socket()</code>。</p>
+<p>socket 对象 <code>s</code> 创建后，可以通过 <code>s.fileno()</code> 获取这个 socket 的文件描述符（file descriptor）。</p>
+<p>另外，代码中的 <code>socket.inet_ntoa</code> 函数把一个 4 字节 IP 地址（即 <code>struct in_addr</code>）转化成点分十进制的可读形式。（网络字节顺序的整型值 -&gt;字符串形式的 IP 地址）</p>
+<p>现在，我们可以推断出，从 <code>fcntl.ioctl</code> 到 <code>[20:24]</code> 这一大段内容，是用来获取网卡对应的 4 字节 IP 地址的。</p>
+<h3 id="fcntl-与-ioctl"><a href="#fcntl-与-ioctl" class="headerlink" title="fcntl 与 ioctl"></a>fcntl 与 ioctl</h3><p><code>fcntl</code> 与 <code>ioctl</code> 是 UNIX/Linux 系统中用于文件控制和 I/O 控制的两个系统调用。Python 在此基础上进行了封装。函数 <code>ioctl</code> 的用法如下，参考<a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.python.org/zh-cn/3.7/library/fcntl.html#fcntl.fcntl">此处</a>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">fcntl.ioctl(fd, request, arg=<span class="number">0</span>, mutate_flag=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>参数 <code>fd</code> 是我们想控制的文件的文件描述符。在 UNIX/Linux 系统中，I/O 设备也用文件来表示，因此这里需要传入 socket 的文件操作符。</p>
+<p>参数 <code>request</code> 是我们想要进行的操作。这个操作由一个预定义的 32 位整数表示。</p>
+<div class="note info modern"><p>代码中使用的 <code>0x8915</code> 在 <code>/usr/include/linux/sockios.h</code> 文件中定义，它对应的符号是 <code>SIOCGIFADDR</code>，我们正是通过这一操作来取得 IPv4 地址。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@VM_0_16_centos ~]# cat &#x2F;usr&#x2F;include&#x2F;linux&#x2F;sockios.h |grep</span><br><span class="line"></span><br><span class="line">0x8915#define SIOCGIFADDR	0x8915		&#x2F;* get PA address	     *&#x2F;</span><br></pre></td></tr></table></figure>
+<p>想要查询 <code>ioctl</code> 支持的所有操作，可以在命令行中输入 <code>man ioctl_list</code>。</p>
+</div>
+<p>第三个参数 <code>arg</code> 是操作所需的参数，这通常是一个 32 位整数或一段二进制内容。<br><div class="note info modern"><p>根据<a target="_blank" rel="external nofollow noopener noreferrer" href="https://man7.org/linux/man-pages/man7/netdevice.7.html">文档</a>，使用 <code>SIOCGIFADDR</code> 时需要传入的参数是结构体 <code>struct ifreq</code>。<code>struct ifreq</code> 的定义位于 <code>/usr/include/net/if.h</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@VM_0_16_centos ~]# cat &#x2F;usr&#x2F;include&#x2F;net&#x2F;if.h | grep IFNAMSIZ</span><br><span class="line"></span><br><span class="line"># define IFNAMSIZ	IF_NAMESIZE</span><br><span class="line">	char ifrn_name[IFNAMSIZ];	&#x2F;* Interface name, e.g. &quot;en0&quot;.  *&#x2F;</span><br><span class="line">	char ifru_slave[IFNAMSIZ];	&#x2F;* Just fits the size *&#x2F;</span><br><span class="line">	char ifru_newname[IFNAMSIZ];</span><br><span class="line"># define _IOT_ifreq	_IOT(_IOTS(char),IFNAMSIZ,_IOTS(char),16,0,0)</span><br><span class="line"># define _IOT_ifreq_short _IOT(_IOTS(char),IFNAMSIZ,_IOTS(short),1,0,0)</span><br><span class="line"># define _IOT_ifreq_int	_IOT(_IOTS(char),IFNAMSIZ,_IOTS(int),1,0,0)</span><br></pre></td></tr></table></figure>
+<p>在我的计算机上，<code>IFNAMSIZ</code> 的值是 16，即网卡名称最长为 15 字节（第 16 个字节必须是 <code>\0</code> 用来表示字符串的结尾），而 <code>struct ifreq</code> 的大小是 40 字节。对于 <code>SIOCGIFADDR</code> 来说，只有前 16 个字节 <code>ifr_name</code> 是有意义的，后面的值都可以设定为 <code>0x00</code>。</p>
+<p>操作 <code>SIOCGIFADDR</code> 返回的结果也是 <code>struct ifreq</code> 结构体。其中，网卡的 IPv4 地址信息包含在 <code>struct sockaddr ifr_addr</code> 结构体内。这个 4 字节的 IP 地址位于 <code>struct ifreq</code> 结构体 20-23 字节处。所以我们会看到，<code>fcntl.ioctl</code> 返回的结果后面有 <code>[20:24]</code>——只需要把这 4 个字节拿去转换就可以了。</p>
+</div></p>
+<p>到现在为止，只要我们可以正确生成 40 字节的 <code>struct ifreq</code> 结构体，就可以通过 <code>ioctl</code> 拿到 IPv4 的地址。生成结构体需要用到 Python 的 <code>struct</code> 模块。</p>
+<h3 id="Python-struct-与-unicode-string"><a href="#Python-struct-与-unicode-string" class="headerlink" title="Python struct 与 unicode string"></a>Python struct 与 unicode string</h3><p>Python 的 <code>struct</code> 模块用于生成和解析二进制内容。<code>struct.pack</code> 的用法如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">struct.pack(fmt, v1, v2, ...)</span><br></pre></td></tr></table></figure>
+<p>这个函数比较像 <code>printf</code>，第一个参数用于设定格式，后续的参数用于填充内容。</p>
+<p><code>struct.pack(&#39;256s&#39;, ifname[:15])</code> 用 ifname 的前 15 个字节填充成了一个 256 字节的二进制空间，未指定内容的空间会用字节 <code>0x00</code> 填充。事实上，由于 <code>struct ifreq</code> 的大小只有 40 字节，将 <code>256s</code> 换成 <code>40s</code> 也能得到期望的 <code>struct ifreq</code> 结构体。</p>
+<p>最后我们来讲一讲字符串的问题。Python 2 是不区分 <code>str</code> 和 <code>bytes</code> 的，所以 <code>ifname</code> 这个字符串可以直接拿来当一组字节用。代码中的 <code>ifname[:15]</code> 是一种防御性的措施，即只保留前 15 个字节。如果确信用户的输入合法，直接使用 <code>ifname</code> 也可以。但是在 Python 3 中，由于字符串不能隐式地当作一组字节用，所以需要额外的转换。具体来说就是把</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct.pack(&#39;256s&#39;, ifname[:15])</span><br></pre></td></tr></table></figure>
+<p>变成<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">struct.pack(&#39;256s&#39;, bytes(ifname[:15], &#39;utf-8&#39;))</span><br></pre></td></tr></table></figure><br>其中 utf-8 是字符串 ifname 的编码方法。</p>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> fcntl</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_ip_address_of_iface</span>(<span class="params">ifname</span>):</span></span><br><span class="line">    s = socket.socket()</span><br><span class="line">    ip_addr = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 拿到网卡名称(15来自Linux底层定义，与操作系统有关)并截取之后转化为utf-8的bytes字符串</span></span><br><span class="line">        ifname_str2bytes = <span class="built_in">bytes</span>(ifname[:<span class="number">15</span>], <span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">        <span class="comment"># 构造`struct ifreq` 结构体，对bytes进行填充至256位长度</span></span><br><span class="line">        struct_ifreq = struct.pack(<span class="string">&#x27;256s&#x27;</span>, ifname_str2bytes)</span><br><span class="line">        <span class="comment"># 发起操作请求，拿到返回，截取其中4位长度的IP地址作为有效值</span></span><br><span class="line">        sockaddr_ifr_addr = fcntl.ioctl(s.fileno(),<span class="number">0x8915</span>,struct_ifreq)[<span class="number">20</span>:<span class="number">24</span>]</span><br><span class="line">        <span class="comment"># 对4位的ip进行转换</span></span><br><span class="line">        ip_addr = socket.inet_ntoa(sockaddr_ifr_addr)</span><br><span class="line">    <span class="keyword">except</span> OSError:</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> ip_addr</span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.cnblogs.com/my_life/articles/9187714.html">详解 Python 获取网卡 IP 地址 - bw_0927 - 博客园</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/questions/6243276/how-to-get-the-physical-interface-ip-address-from-an-interface">python - How to get the physical interface IP address from an interface - Stack Overflow</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:immoyao@gmail.com" rel="external nofollow noopener noreferrer" target="_blank">imoyao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.masantu.com/blog/2020-08-11/how-to-get-the-physical-interface-IP-address-from-an-interface/">https://www.masantu.com/blog/2020-08-11/how-to-get-the-physical-interface-IP-address-from-an-interface/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.masantu.com" target="_blank">别院牧志</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%BB%9C/">网络</a></div><div class="post_share"><div class="social-share" data-image="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechatpay.jpg" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg" alt="alipay"></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/blog/2020-09-03/use-python-decorator-prudently/"><img class="prev-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/Let-The-Bullets-Fly/Snipaste_2020-09-07_00-03-21.png" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">三思而后行：谨慎使用你的装饰器</div></div></a></div><div class="next-post pull-right"><a href="/blog/2020-07-22/alua-with-drbd/"><img class="next-cover" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/dual.jpg" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">一种基于 DRBD 实现的 ALUA 解决方案</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blog/2019-11-12/no-module-named-ctypes/" title="安装 Python3 提示找不到 _ctypes 模块"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-12</div><div class="title">安装 Python3 提示找不到 _ctypes 模块</div></div></a></div><div><a href="/blog/2019-12-25/active-PyCharm/" title="PyCharm 最新专业版（2020.2.2）激活"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/PyCharm.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-12-25</div><div class="title">PyCharm 最新专业版（2020.2.2）激活</div></div></a></div><div><a href="/blog/2020-10-15/python-call-method-dynamically/" title="Python 中动态调用函数或类的方法"><img class="cover" data-lazy-src="/images/esther-jiao-FKZwWLWgGyM-unsplash.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-10-15</div><div class="title">Python 中动态调用函数或类的方法</div></div></a></div><div><a href="/blog/2020-09-23/atomic-writing-to-file-with-python/" title="如何使用 Python 对文件进行原子性（atomic）读写操作？"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-23</div><div class="title">如何使用 Python 对文件进行原子性（atomic）读写操作？</div></div></a></div><div><a href="/blog/2020-09-03/use-python-decorator-prudently/" title="三思而后行：谨慎使用你的装饰器"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/Let-The-Bullets-Fly/Snipaste_2020-09-07_00-03-21.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-03</div><div class="title">三思而后行：谨慎使用你的装饰器</div></div></a></div><div><a href="/blog/2020-05-10/GUSCSS-lipstick-xiji-lylj/" title="不问色号 | 口红色号获取之烈艳蓝金系列"><img class="cover" data-lazy-src="/images/p2559419222.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-10</div><div class="title">不问色号 | 口红色号获取之烈艳蓝金系列</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">直接调用第三方库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%BA%93"><span class="toc-number">1.2.</span> <span class="toc-text">标准库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86%E8%A7%A3%E9%87%8A"><span class="toc-number">2.</span> <span class="toc-text">原理解释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#socket"><span class="toc-number">2.1.</span> <span class="toc-text">socket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fcntl-%E4%B8%8E-ioctl"><span class="toc-number">2.2.</span> <span class="toc-text">fcntl 与 ioctl</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-struct-%E4%B8%8E-unicode-string"><span class="toc-number">2.3.</span> <span class="toc-text">Python struct 与 unicode string</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="toc-number">2.4.</span> <span class="toc-text">完整代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">3.</span> <span class="toc-text">参考链接</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何将代码打补丁（patch）？"></a><div class="content"><a class="title" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？">如何将代码打补丁（patch）？</a><time datetime="2020-11-04T09:57:53.000Z" title="发表于 2020-11-04 17:57:53">2020-11-04</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI',
+      appKey: 'CARePe7R247vdXACFg1fhk4E',
+      placeholder: '我们期待并欢迎理性、友好而和谐的声音……',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

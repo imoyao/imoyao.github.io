@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>把两个 Git 仓库合并起来 | 别院牧志</title><meta name="keywords" content="Hexo,Butterfly,Git"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="缘起本人主题使用 hexo-theme-butterfly: 🦋 A Hexo Theme: Butterfly ，但是在此基础上又做了一些自定义。用过一段时间之后，作者的源仓库可能更新了很多没有的功能。之前的时候，每次都是手动 compare 并合并的，但是实践了两次之后，发现存在以下问题：  每次升级十分耗时 自己定义的功能在合并时可能丢失或遗漏  鉴于此，本文尝试使用一种较为智能的方式解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="把两个 Git 仓库合并起来">
+<meta property="og:url" content="https://www.masantu.com/blog/2020-12-07/merge-repos-with-git/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="缘起本人主题使用 hexo-theme-butterfly: 🦋 A Hexo Theme: Butterfly ，但是在此基础上又做了一些自定义。用过一段时间之后，作者的源仓库可能更新了很多没有的功能。之前的时候，每次都是手动 compare 并合并的，但是实践了两次之后，发现存在以下问题：  每次升级十分耗时 自己定义的功能在合并时可能丢失或遗漏  鉴于此，本文尝试使用一种较为智能的方式解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg">
+<meta property="article:published_time" content="2020-12-07T14:08:18.000Z">
+<meta property="article:modified_time" content="2021-01-20T14:14:12.665Z">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Butterfly">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/blog/2020-12-07/merge-repos-with-git/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-20 22:14:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">把两个 Git 仓库合并起来</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-20T14:14:12.665Z" title="更新于 2021-01-20 22:14:12">2021-01-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8D%9A%E5%AE%A2%E4%B8%AA%E6%80%A7%E5%8C%96/">博客个性化</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><script src="\assets\js\APlayer.min.js"> </script><h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>本人主题使用 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">hexo-theme-butterfly: 🦋 A Hexo Theme: Butterfly</a> ，但是在此基础上又做了一些自定义。用过一段时间之后，作者的源仓库可能更新了很多没有的功能。之前的时候，每次都是手动 compare 并合并的，但是实践了两次之后，发现存在以下问题：</p>
+<ol>
+<li>每次升级<strong>十分</strong>耗时</li>
+<li>自己定义的功能在合并时可能丢失或遗漏</li>
+</ol>
+<p>鉴于此，本文尝试使用一种较为智能的方式解决以上问题。</p>
+<h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL,DR"></a>TL,DR</h2><p>要想将源仓库（origin repo）合入（dest repo）中，那么可以将（origin repo）伪造成（dest repo）仓库的一个分支，然后合并到（dest repo）仓库中的指定分支（本文为 dev）。</p>
+<h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><ol>
+<li>本地新建目录<code>butterfly</code></li>
+<li>克隆目标仓库<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/imoyao/hexo-theme-butterfly.git imoyao</span><br></pre></td></tr></table></figure></li>
+<li>克隆源仓库<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/jerryc127/hexo-theme-butterfly.git</span><br></pre></td></tr></table></figure>
+<img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/20201207222903.png" alt="克隆两个仓库分别作为子目录"></li>
+<li>将源目录（jerryc）作为远程仓库添加到目标仓库（imoyao），并命名为<code>jerryc</code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add jerryc ../jerryc</span><br></pre></td></tr></table></figure></li>
+<li>从源仓库下载数据到本仓库<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git fetch jerryc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">remote: Enumerating objects: 139, done.</span><br><span class="line">remote: Counting objects: 100% (137&#x2F;137), done.</span><br><span class="line">remote: Compressing objects: 100% (28&#x2F;28), done.</span><br><span class="line">remote: Total 58 (delta 45), reused 43 (delta 30)</span><br><span class="line">Unpacking objects: 100% (58&#x2F;58), done.</span><br><span class="line">From ..&#x2F;jerryc</span><br><span class="line"> * [new branch]      dev        -&gt; jerryc&#x2F;dev</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="note success modern"><p><strong>git fetch</strong><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://git-scm.com/docs/git-fetch">Git - git-fetch Documentation</a></p>
+<blockquote>
+<p>git-fetch - Download objects and refs from another repository<br>git fetch 是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中。</p>
+<p>而 git pull 则是将远程主机的最新内容拉下来后直接合并，即：git pull = git fetch + git merge，这样可能会产生冲突，需要手动解决。</p>
+</blockquote>
+</div></li>
+<li><p>查看此时仓库信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 88b1cc553ce3c2b5e53dccb2ff259ddb078c333b (HEAD -&gt; dev, origin/dev, origin/HEAD)</span><br><span class="line">Author: Jerry &lt;***@gmail.com&gt;</span><br><span class="line">commit 88b1cc553ce3c2b5e53dccb2ff259ddb078c333b (HEAD -&gt; dev, origin/dev, origin</span><br><span class="line">/HEAD)</span><br><span class="line">Author: Jerry &lt;***@gmail.com&gt;</span><br><span class="line">Date:   Sat Nov 21 00:27:01 2020 +0800</span><br><span class="line"></span><br><span class="line"><span class="comment"># 省略内容</span></span><br><span class="line"></span><br><span class="line">commit 88b1cc553ce3c2b5e53dccb2ff259ddb078c333b (HEAD -&gt; dev, origin/dev, origin</span><br><span class="line">/HEAD)</span><br><span class="line">Author: Jerry &lt;***@gmail.com&gt;</span><br><span class="line">Date:   Sat Nov 21 00:27:01 2020 +0800</span><br><span class="line"></span><br><span class="line"><span class="comment"># 省略内容</span></span><br><span class="line"></span><br><span class="line">commit 7f03c3f71696fde1f1d3f1e969844ecde3d7f805</span><br><span class="line">Author: Jerry &lt;***@gmail.com&gt;</span><br><span class="line">Date:   Tue Nov 3 22:20:16 2020 +0800</span><br><span class="line"></span><br><span class="line"><span class="comment"># 省略内容</span></span><br><span class="line"></span><br><span class="line">```plain</span><br><span class="line">7. 将源仓库下载下来的 dev 分支作为新分支 checkout 到目标分支`updatedev`</span><br><span class="line">```bash</span><br><span class="line">git checkout -b updatedev jerryc/dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Switched to a new branch &#39;updatedev&#39;</span><br><span class="line">Branch &#39;updatedev&#39; set up to track remote branch &#39;dev&#39; from &#39;jerryc&#39;.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="note info modern"><p>此时分支状态<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  dev           # 我的开发分支</span><br><span class="line">  master        # 我的主分支</span><br><span class="line">* updatedev     # 作者和我的fetch之后的分支</span><br></pre></td></tr></table></figure></p>
+</div>
+</li>
+<li><p>切换到我的<code>dev</code>分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure>
+<div class="note info modern"><p>此时分支状态<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* dev</span><br><span class="line">  master</span><br><span class="line">  updatedev</span><br></pre></td></tr></table></figure></p>
+</div>
+</li>
+<li><p>合并<code>fetch</code>的分支代码到我的<code>dev</code>分支</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git merge updatedev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Updating 88b1cc5..dc1c7c5</span><br><span class="line">Fast-forward</span><br><span class="line"> _config.yml                                        |  6 +-</span><br><span class="line"> languages&#x2F;default.yml                              |  6 +-</span><br><span class="line"> languages&#x2F;en.yml                                   |  2 +</span><br><span class="line"> languages&#x2F;zh-CN.yml                                |  4 +-</span><br><span class="line"># 中间省略</span><br><span class="line"> source&#x2F;css&#x2F;_mode&#x2F;readmode.styl                     | 19 +++--</span><br><span class="line"> source&#x2F;js&#x2F;main.js                                  | 91 ++++++++++++++++------</span><br><span class="line"> source&#x2F;js&#x2F;utils.js                                 | 13 +++-</span><br><span class="line"> 31 files changed, 374 insertions(+), 169 deletions(-)</span><br><span class="line"> create mode 100644 layout&#x2F;includes&#x2F;third-party&#x2F;newest-comments&#x2F;twikoo-comment.pug</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="note warning modern"><p>补充：如果遇到如下报错：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fatal: refusing to merge unrelated histories</span><br></pre></td></tr></table></figure><br>那么可以<code>git merge</code>时加上<code>--allow-unrelated-histories</code>后缀：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge repo1 --allow-unrelated-histories</span><br></pre></td></tr></table></figure></p>
+</div>
+</li>
+<li><p>查看合并后代码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit dc1c7c5efdbb92de10a44cec2e15d16b84823ce7 (HEAD -&gt; dev, jerryc/dev, updatedev)</span><br><span class="line">Merge: 02af307 97fe932</span><br><span class="line">Author: Jerry Wong &lt;***@gmail.com&gt;</span><br><span class="line">Date:   Mon Dec 7 21:17:09 2020 +0800</span><br><span class="line"></span><br><span class="line"><span class="comment"># 省略内容</span></span><br><span class="line"></span><br><span class="line">commit 97fe932ad9c22fa4b5690d38b33242eed11742f0</span><br><span class="line">Author: 零度冷咖啡 &lt;***@outlook.com&gt;</span><br><span class="line">Date:   Mon Dec 7 08:25:02 2020 +0800</span><br><span class="line"></span><br><span class="line"><span class="comment"># 省略内容</span></span><br><span class="line"></span><br><span class="line">commit 01e7929c02a5fd018ab3171a381487a78f2df05c</span><br><span class="line">Merge: 7c3945f 02af307</span><br><span class="line">Author: 零度冷咖啡 &lt;***@outlook.com&gt;</span><br><span class="line">Date:   Mon Dec 7 08:22:17 2020 +0800</span><br><span class="line"></span><br><span class="line"><span class="comment"># 省略内容</span></span><br><span class="line"></span><br><span class="line">commit 02af3077e71d02071ad3c7e8b159149310597513</span><br><span class="line">Author: Jerry &lt;***@gmail.com&gt;</span><br><span class="line">Date:   Sat Dec 5 22:28:54 2020 +0800</span><br><span class="line"></span><br><span class="line"><span class="comment"># 省略内容</span></span><br><span class="line"></span><br><span class="line">commit 88b1cc553ce3c2b5e53dccb2ff259ddb078c333b (origin/dev, origin/HEAD)</span><br><span class="line">Author: Jerry &lt;***@gmail.com&gt;</span><br><span class="line">Date:   Sat Nov 21 00:27:01 2020 +0800</span><br><span class="line"></span><br><span class="line"><span class="comment"># 省略内容</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/Snipaste_2020-12-07_23-04-14.png" alt="点击可查看大图"></p>
+<p>横向拼图参考 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://jingyan.baidu.com/article/b0b63dbf2eb2264a483070f0.html">此处</a></p>
+</li>
+<li><p>删除无用的<code>fetch</code>分支<code>updatedev</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch -D updatedev</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Deleted branch updatedev (was dc1c7c5).</span><br></pre></td></tr></table></figure></li>
+<li>提交到远程仓库<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Administrator@PC201803221826 MINGW64 /h/mycode/butterfly/imoyao (dev)</span><br><span class="line">$ git add .</span><br><span class="line"></span><br><span class="line">Administrator@PC201803221826 MINGW64 /h/mycode/butterfly/imoyao (dev)</span><br><span class="line">$ git commit -m <span class="string">&#x27;updatedev&#x27;</span></span><br><span class="line">On branch dev</span><br><span class="line">Your branch is ahead of <span class="string">&#x27;origin/dev&#x27;</span> by 4 commits.</span><br><span class="line">  (use <span class="string">&quot;git push&quot;</span> to publish your <span class="built_in">local</span> commits)</span><br><span class="line"></span><br><span class="line">nothing to commit, working tree clean</span><br><span class="line"></span><br><span class="line">Administrator@PC201803221826 MINGW64 /h/mycode/butterfly/imoyao (dev)</span><br><span class="line">$ git push</span><br><span class="line">Total 0 (delta 0), reused 0 (delta 0)</span><br><span class="line">To https://github.com.cnpmjs.org/imoyao/hexo-theme-butterfly.git</span><br><span class="line">   88b1cc5..dc1c7c5  dev -&gt; dev</span><br></pre></td></tr></table></figure>
+同样的道理，我们可以把<code>master</code>分支与原作者保持同步。这个留给读者去实践练习。</li>
+</ol>
+<h2 id="更上一层楼"><a href="#更上一层楼" class="headerlink" title="更上一层楼"></a>更上一层楼</h2><p>把我自己修改的合并到我的仓库中。</p>
+<ol>
+<li>拷贝目录到同级目录<br><img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/20201208003600.png" alt="三个同级文件夹"></li>
+<li>初始化为仓库（否则无法执行 git 合并）<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Initialized empty Git repository in H:&#x2F;mycode&#x2F;butterfly&#x2F;masantu&#x2F;.git&#x2F;</span><br></pre></td></tr></table></figure></li>
+<li>在 masantu 仓库中 add 并 commit 代码作为一次提交<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&#x27;init mycode to repo&#x27;</span></span><br></pre></td></tr></table></figure></li>
+<li>添加远程仓库<code>masantu</code>并命名为<code>masantu</code><br>关于这条命令的解释<a target="_blank" rel="external nofollow noopener noreferrer" href="https://git-scm.com/docs/git-remote#Documentation/git-remote.txt-emaddem">Git - git-remote Documentation</a><blockquote>
+<p>git remote add [shortname] [url]<br>Add a remote named <name> for the repository at <url>. The command git fetch <name> can then be used to create and update remote-tracking branches <name>/<branch>.</branch></name></name></url></name></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git remote add masantu ../masantu</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+<li>将<code>masantu</code>仓库的代码拉到<code>imoyao</code>仓库中<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git fetch masantu</span><br><span class="line">warning: no common commits</span><br><span class="line">remote: Enumerating objects: 261, <span class="keyword">done</span>.</span><br><span class="line">remote: Counting objects: 100% (261/261), <span class="keyword">done</span>.</span><br><span class="line">remote: Compressing objects: 100% (259/259), <span class="keyword">done</span>.</span><br><span class="line">remote: Total 261 (delta 18), reused 0 (delta 0)</span><br><span class="line">Receiving objects: 100% (261/261), 259.62 KiB | 1.08 MiB/s, <span class="keyword">done</span>.</span><br><span class="line">Resolving deltas: 100% (18/18), <span class="keyword">done</span>.</span><br><span class="line">From ../masantu</span><br><span class="line"> * [new branch]      master     -&gt; masantu/master</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>以<code>masantu/master</code>作为基准新建分支<code>upmst</code>(updatemasantu 的简写)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout -b upmst masantu/master</span><br><span class="line">Switched to a new branch <span class="string">&#x27;upmst&#x27;</span></span><br><span class="line">Branch <span class="string">&#x27;upmst&#x27;</span> <span class="built_in">set</span> up to track remote branch <span class="string">&#x27;master&#x27;</span> from <span class="string">&#x27;masantu&#x27;</span>.</span><br></pre></td></tr></table></figure>
+<div class="note info modern"><p>此时分支状态<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch</span><br></pre></td></tr></table></figure><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  dev</span><br><span class="line">* upmst</span><br><span class="line">  master</span><br></pre></td></tr></table></figure></p>
+</div>
+</li>
+<li><p>切换分支到<code>dev</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git checkout dev</span><br><span class="line">Switched to branch <span class="string">&#x27;dev&#x27;</span></span><br><span class="line">Your branch is up to date with <span class="string">&#x27;origin/dev&#x27;</span>.</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git branch</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* dev</span><br><span class="line">  upmst</span><br><span class="line">  master</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>合并<code>masantu</code>分支到<code>dev</code><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git merge upmst --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">CONFLICT (add&#x2F;add): Merge conflict in source&#x2F;js&#x2F;utils.js</span><br><span class="line">Auto-merging source&#x2F;js&#x2F;utils.js</span><br><span class="line"># 省略内容</span><br><span class="line">Auto-merging source&#x2F;css&#x2F;_global&#x2F;function.styl</span><br><span class="line">CONFLICT (add&#x2F;add): Merge conflict in package.json</span><br></pre></td></tr></table></figure></li>
+<li>手动解决冲突</li>
+<li>测试（如果必要）并提交合并的代码</li>
+<li>删除刚才的分支和添加的远程源<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git branch -D upmst</span><br><span class="line">git remote remove masantu</span><br></pre></td></tr></table></figure>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2></li>
+</ol>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.itmuch.com/work/merge-two-git-repo-unrelated/">合并两个不相关的 Git 仓库 | 周立的博客 - 关注 Spring Cloud、Docker</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:immoyao@gmail.com" rel="external nofollow noopener noreferrer" target="_blank">imoyao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.masantu.com/blog/2020-12-07/merge-repos-with-git/">https://www.masantu.com/blog/2020-12-07/merge-repos-with-git/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.masantu.com" target="_blank">别院牧志</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a><a class="post-meta__tags" href="/tags/Butterfly/">Butterfly</a><a class="post-meta__tags" href="/tags/Git/">Git</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechatpay.jpg" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg" alt="alipay"></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/"><img class="prev-cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</div></div></a></div><div class="next-post pull-right"><a href="/blog/2020-12-06/images-hosting/"><img class="next-cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">免费个人博客图床解决方案</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blog/2020-01-06/customize-hexo-theme-Butterfly/" title="Hexo 主题 Butterfly 自定义之路"><img class="cover" data-lazy-src="/images/krzysztof-niewolny-f8JYQPq45uI-unsplash.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-06</div><div class="title">Hexo 主题 Butterfly 自定义之路</div></div></a></div><div><a href="/blog/2020-05-23/hello-hexo-wiki/" title="Hexo 同时使用两种主题（博客与 wiki 页面实现统一管理）"><img class="cover" data-lazy-src="/images/i-wana-all.gif" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">Hexo 同时使用两种主题（博客与 wiki 页面实现统一管理）</div></div></a></div><div><a href="/blog/2017-11-18/how-to-build-hexo-blog/" title="在搭建 Hexo 中遇到的问题记录"><img class="cover" data-lazy-src="https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-11-18</div><div class="title">在搭建 Hexo 中遇到的问题记录</div></div></a></div><div><a href="/blog/2020-01-08/diff-about-merge-rebase-sqush-of-Git/" title="Git merge/rebase/squash 的区别"><img class="cover" data-lazy-src="/images/logos/Git.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-08</div><div class="title">Git merge/rebase/squash 的区别</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%98%E8%B5%B7"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TL-DR"><span class="toc-number">2.</span> <span class="toc-text">TL,DR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">3.</span> <span class="toc-text">工作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E4%B8%8A%E4%B8%80%E5%B1%82%E6%A5%BC"><span class="toc-number">4.</span> <span class="toc-text">更上一层楼</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何将代码打补丁（patch）？"></a><div class="content"><a class="title" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？">如何将代码打补丁（patch）？</a><time datetime="2020-11-04T09:57:53.000Z" title="发表于 2020-11-04 17:57:53">2020-11-04</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI',
+      appKey: 'CARePe7R247vdXACFg1fhk4E',
+      placeholder: '我们期待并欢迎理性、友好而和谐的声音……',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

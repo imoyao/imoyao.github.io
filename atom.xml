@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>别院牧志</title>
+  <icon>https://www.masantu.com/icon.png</icon>
+  <subtitle>IMOYAO</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.masantu.com/"/>
+  <updated>2021-01-20T15:07:51.617Z</updated>
+  <id>https://www.masantu.com/</id>
+  
+  <author>
+    <name>imoyao</name>
+    <email>immoyao@gmail.com</email>
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</title>
+    <link href="https://www.masantu.com/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/"/>
+    <id>https://www.masantu.com/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/</id>
+    <published>2020-12-12T13:47:47.000Z</published>
+    <updated>2021-01-20T15:07:51.617Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;div class=&quot;note danger modern&quot;&gt;&lt;p&gt;&lt;strong&gt;风险提示&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;git 用户执行操作前，请确保你的
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="TODO" scheme="https://www.masantu.com/tags/TODO/"/>
+    
+      <category term="os.walk" scheme="https://www.masantu.com/tags/os-walk/"/>
+    
+      <category term="pathlib" scheme="https://www.masantu.com/tags/pathlib/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>把两个 Git 仓库合并起来</title>
+    <link href="https://www.masantu.com/blog/2020-12-07/merge-repos-with-git/"/>
+    <id>https://www.masantu.com/blog/2020-12-07/merge-repos-with-git/</id>
+    <published>2020-12-07T14:08:18.000Z</published>
+    <updated>2021-01-20T14:14:12.665Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;缘起&quot;&gt;&lt;a href=&quot;#缘起&quot; class=&quot;headerlink&quot; title=&quot;缘起&quot;&gt;&lt;/a&gt;缘起&lt;/h2&gt;&lt;p&gt;本人主题使用 &lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="博客个性化" scheme="https://www.masantu.com/categories/%E5%8D%9A%E5%AE%A2%E4%B8%AA%E6%80%A7%E5%8C%96/"/>
+    
+    
+      <category term="Hexo" scheme="https://www.masantu.com/tags/Hexo/"/>
+    
+      <category term="Butterfly" scheme="https://www.masantu.com/tags/Butterfly/"/>
+    
+      <category term="Git" scheme="https://www.masantu.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>免费个人博客图床解决方案</title>
+    <link href="https://www.masantu.com/blog/2020-12-06/images-hosting/"/>
+    <id>https://www.masantu.com/blog/2020-12-06/images-hosting/</id>
+    <published>2020-12-06T02:52:09.000Z</published>
+    <updated>2021-01-20T15:14:04.053Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="善用佳软" scheme="https://www.masantu.com/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"/>
+    
+    
+      <category term="博客" scheme="https://www.masantu.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="图床" scheme="https://www.masantu.com/tags/%E5%9B%BE%E5%BA%8A/"/>
+    
+      <category term="软件" scheme="https://www.masantu.com/tags/%E8%BD%AF%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>庖丁解牛 | 任务分解，各个击破</title>
+    <link href="https://www.masantu.com/blog/2020-12-05/browse-your-tasks/"/>
+    <id>https://www.masantu.com/blog/2020-12-05/browse-your-tasks/</id>
+    <published>2020-12-05T01:59:43.000Z</published>
+    <updated>2021-01-20T14:14:12.587Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;步骤&quot;&gt;&lt;a href=&quot;#步骤&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Projects" scheme="https://www.masantu.com/categories/Projects/"/>
+    
+      <category term="FMP" scheme="https://www.masantu.com/categories/Projects/FMP/"/>
+    
+    
+      <category term="TODO" scheme="https://www.masantu.com/tags/TODO/"/>
+    
+      <category term="项目" scheme="https://www.masantu.com/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+      <category term="OKR" scheme="https://www.masantu.com/tags/OKR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何将代码打补丁（patch）？</title>
+    <link href="https://www.masantu.com/blog/2020-11-04/git-patch-apply/"/>
+    <id>https://www.masantu.com/blog/2020-11-04/git-patch-apply/</id>
+    <published>2020-11-04T09:57:53.000Z</published>
+    <updated>2021-01-20T14:14:12.620Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="开源" scheme="https://www.masantu.com/tags/%E5%BC%80%E6%BA%90/"/>
+    
+      <category term="git" scheme="https://www.masantu.com/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 中动态调用函数或类的方法</title>
+    <link href="https://www.masantu.com/blog/2020-10-15/python-call-method-dynamically/"/>
+    <id>https://www.masantu.com/blog/2020-10-15/python-call-method-dynamically/</id>
+    <published>2020-10-15T13:09:27.000Z</published>
+    <updated>2021-01-20T14:14:12.684Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;使用exec-方法&quot;&gt;&lt;a href=&quot;#使用exec-方法&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="🐍PyTricks" scheme="https://www.masantu.com/categories/%F0%9F%90%8DPyTricks/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="编程" scheme="https://www.masantu.com/tags/%E7%BC%96%E7%A8%8B/"/>
+    
+      <category term="magic" scheme="https://www.masantu.com/tags/magic/"/>
+    
+      <category term="exec" scheme="https://www.masantu.com/tags/exec/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何使用 Python 对文件进行原子性（atomic）读写操作？</title>
+    <link href="https://www.masantu.com/blog/2020-09-23/atomic-writing-to-file-with-python/"/>
+    <id>https://www.masantu.com/blog/2020-09-23/atomic-writing-to-file-with-python/</id>
+    <published>2020-09-23T11:54:54.000Z</published>
+    <updated>2021-01-20T14:14:12.579Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;我们知道：Python
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="文件" scheme="https://www.masantu.com/tags/%E6%96%87%E4%BB%B6/"/>
+    
+      <category term="原子" scheme="https://www.masantu.com/tags/%E5%8E%9F%E5%AD%90/"/>
+    
+      <category term="并行" scheme="https://www.masantu.com/tags/%E5%B9%B6%E8%A1%8C/"/>
+    
+      <category term="上下文管理器" scheme="https://www.masantu.com/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AE%A1%E7%90%86%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>开篇 | 基金管理计划</title>
+    <link href="https://www.masantu.com/blog/2020-09-17/hello-fmp/"/>
+    <id>https://www.masantu.com/blog/2020-09-17/hello-fmp/</id>
+    <published>2020-09-17T01:59:43.000Z</published>
+    <updated>2021-01-20T14:14:12.621Z</updated>
+    
+    <summary type="html">
+    
+      有东西被加密了, 请输入密码查看！
+    
+    </summary>
+    
+    
+      <category term="Projects" scheme="https://www.masantu.com/categories/Projects/"/>
+    
+      <category term="FMP" scheme="https://www.masantu.com/categories/Projects/FMP/"/>
+    
+    
+      <category term="TODO" scheme="https://www.masantu.com/tags/TODO/"/>
+    
+      <category term="FMP" scheme="https://www.masantu.com/tags/FMP/"/>
+    
+      <category term="基金" scheme="https://www.masantu.com/tags/%E5%9F%BA%E9%87%91/"/>
+    
+      <category term="FundMate" scheme="https://www.masantu.com/tags/FundMate/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>三思而后行：谨慎使用你的装饰器</title>
+    <link href="https://www.masantu.com/blog/2020-09-03/use-python-decorator-prudently/"/>
+    <id>https://www.masantu.com/blog/2020-09-03/use-python-decorator-prudently/</id>
+    <published>2020-09-03T13:27:50.000Z</published>
+    <updated>2021-01-20T14:14:12.802Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;在学会使用装饰器之后，我们可能时不时地在心理暗示下使用它，下面是我个人总结的一些代码实践中遇到的问题，主要参考 &lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/categories/Python/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="TODO" scheme="https://www.masantu.com/tags/TODO/"/>
+    
+      <category term="装饰器" scheme="https://www.masantu.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    
+      <category term="decorator" scheme="https://www.masantu.com/tags/decorator/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何通过网卡名称获取其所对应的 IP 地址</title>
+    <link href="https://www.masantu.com/blog/2020-08-11/how-to-get-the-physical-interface-IP-address-from-an-interface/"/>
+    <id>https://www.masantu.com/blog/2020-08-11/how-to-get-the-physical-interface-IP-address-from-an-interface/</id>
+    <published>2020-08-11T03:32:23.000Z</published>
+    <updated>2021-01-20T14:14:12.639Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;代码&quot;&gt;&lt;a href=&quot;#代码&quot; class=&quot;headerlink&quot; title=&quot;代码&quot;&gt;&lt;/a&gt;代码&lt;/h2&gt;&lt;p&gt;如果项目中有用到 netifaces
+        
+      
+    
+    </summary>
+    
+    
+      <category term="工作日常" scheme="https://www.masantu.com/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="网络" scheme="https://www.masantu.com/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 如何实现跨主机文件目录同步？（基于 watchdog 和 rsync）</title>
+    <link href="https://www.masantu.com/blog/2020-07-22/monitor-files-for-changes-with-python/"/>
+    <id>https://www.masantu.com/blog/2020-07-22/monitor-files-for-changes-with-python/</id>
+    <published>2020-07-22T02:19:18.000Z</published>
+    <updated>2021-01-20T14:14:12.667Z</updated>
+    
+    <summary type="html">
+    
+      有东西被加密了, 请输入密码查看！
+    
+    </summary>
+    
+    
+      <category term="项目相关" scheme="https://www.masantu.com/categories/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3/"/>
+    
+    
+      <category term="文件同步" scheme="https://www.masantu.com/tags/%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/"/>
+    
+      <category term="pyinotify" scheme="https://www.masantu.com/tags/pyinotify/"/>
+    
+      <category term="watchdog" scheme="https://www.masantu.com/tags/watchdog/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一种基于 DRBD 实现的 ALUA 解决方案</title>
+    <link href="https://www.masantu.com/blog/2020-07-22/alua-with-drbd/"/>
+    <id>https://www.masantu.com/blog/2020-07-22/alua-with-drbd/</id>
+    <published>2020-07-22T02:19:18.000Z</published>
+    <updated>2021-01-20T14:14:12.576Z</updated>
+    
+    <summary type="html">
+    
+      有东西被加密了, 请输入密码查看！
+    
+    </summary>
+    
+    
+      <category term="项目相关" scheme="https://www.masantu.com/categories/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3/"/>
+    
+    
+      <category term="DRBD" scheme="https://www.masantu.com/tags/DRBD/"/>
+    
+      <category term="存储" scheme="https://www.masantu.com/tags/%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="ALUA" scheme="https://www.masantu.com/tags/ALUA/"/>
+    
+      <category term="双活" scheme="https://www.masantu.com/tags/%E5%8F%8C%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2020 面试记录（持续更新）</title>
+    <link href="https://www.masantu.com/blog/2020-06-09/interview-2020/"/>
+    <id>https://www.masantu.com/blog/2020-06-09/interview-2020/</id>
+    <published>2020-06-09T01:23:06.000Z</published>
+    <updated>2021-01-20T14:14:12.658Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;存储&quot;&gt;&lt;a href=&quot;#存储&quot; class=&quot;headerlink&quot; title=&quot;存储&quot;&gt;&lt;/a&gt;存储&lt;/h2&gt;&lt;h3
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="面试" scheme="https://www.masantu.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo 同时使用两种主题（博客与 wiki 页面实现统一管理）</title>
+    <link href="https://www.masantu.com/blog/2020-05-23/hello-hexo-wiki/"/>
+    <id>https://www.masantu.com/blog/2020-05-23/hello-hexo-wiki/</id>
+    <published>2020-05-23T03:02:28.000Z</published>
+    <updated>2021-01-20T14:14:12.623Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;更新&quot;&gt;&lt;a href=&quot;#更新&quot; class=&quot;headerlink&quot; title=&quot;更新&quot;&gt;&lt;/a&gt;更新&lt;/h2&gt;&lt;div class=&quot;note
+        
+      
+    
+    </summary>
+    
+    
+      <category term="博客个性化" scheme="https://www.masantu.com/categories/%E5%8D%9A%E5%AE%A2%E4%B8%AA%E6%80%A7%E5%8C%96/"/>
+    
+    
+      <category term="博客" scheme="https://www.masantu.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="Hexo" scheme="https://www.masantu.com/tags/Hexo/"/>
+    
+      <category term="wiki" scheme="https://www.masantu.com/tags/wiki/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>解决博客 idealyard 支持 emoji 显示问题</title>
+    <link href="https://www.masantu.com/blog/2020-05-15/idealyard-loves-emoji/"/>
+    <id>https://www.masantu.com/blog/2020-05-15/idealyard-loves-emoji/</id>
+    <published>2020-05-15T05:50:02.000Z</published>
+    <updated>2021-01-20T14:14:12.652Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;div class=&quot;note info modern&quot;&gt;&lt;h2 id=&quot;注意&quot;&gt;&lt;a href=&quot;#注意&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Projects" scheme="https://www.masantu.com/categories/Projects/"/>
+    
+      <category term="IdealYard" scheme="https://www.masantu.com/categories/Projects/IdealYard/"/>
+    
+    
+      <category term="博客" scheme="https://www.masantu.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="idealyard" scheme="https://www.masantu.com/tags/idealyard/"/>
+    
+      <category term="utf8mb4" scheme="https://www.masantu.com/tags/utf8mb4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>不问色号 | 口红色号获取之烈艳蓝金系列</title>
+    <link href="https://www.masantu.com/blog/2020-05-10/GUSCSS-lipstick-xiji-lylj/"/>
+    <id>https://www.masantu.com/blog/2020-05-10/GUSCSS-lipstick-xiji-lylj/</id>
+    <published>2020-05-10T02:52:09.000Z</published>
+    <updated>2021-01-20T14:14:12.565Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h2&gt;&lt;p&gt;在项目
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Projects" scheme="https://www.masantu.com/categories/Projects/"/>
+    
+      <category term="GUSCSS" scheme="https://www.masantu.com/categories/Projects/GUSCSS/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="爬虫" scheme="https://www.masantu.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何用 Python 识别图片文字（基于百度 OCR API）</title>
+    <link href="https://www.masantu.com/blog/2020-05-01/python-OCR/"/>
+    <id>https://www.masantu.com/blog/2020-05-01/python-OCR/</id>
+    <published>2020-05-01T15:57:06.000Z</published>
+    <updated>2021-01-20T14:14:12.683Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;p&gt;做项目的时候需要用到文字识别功能，以下是对一些方案的实践，最后选择了&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Projects" scheme="https://www.masantu.com/categories/Projects/"/>
+    
+      <category term="GUSCSS" scheme="https://www.masantu.com/categories/Projects/GUSCSS/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="OCR" scheme="https://www.masantu.com/tags/OCR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>🐍PyTricks | Python 中如何合并一个内字典列表？</title>
+    <link href="https://www.masantu.com/blog/2020-04-19/python-merge-two-list-of-dicts/"/>
+    <id>https://www.masantu.com/blog/2020-04-19/python-merge-two-list-of-dicts/</id>
+    <published>2020-04-19T02:19:44.000Z</published>
+    <updated>2021-01-20T14:14:12.690Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;有如下列表，要将他们按照 id
+        
+      
+    
+    </summary>
+    
+    
+      <category term="🐍PyTricks" scheme="https://www.masantu.com/categories/%F0%9F%90%8DPyTricks/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="dict" scheme="https://www.masantu.com/tags/dict/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>中国传统色 | 如何判断一个颜色属于什么色系？</title>
+    <link href="https://www.masantu.com/blog/2020-04-15/tell-me-rgb-values-nearest-color-with-Python/"/>
+    <id>https://www.masantu.com/blog/2020-04-15/tell-me-rgb-values-nearest-color-with-Python/</id>
+    <published>2020-04-15T15:19:44.000Z</published>
+    <updated>2021-01-20T14:14:12.733Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;在做 &lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Projects" scheme="https://www.masantu.com/categories/Projects/"/>
+    
+      <category term="GUSCSS" scheme="https://www.masantu.com/categories/Projects/GUSCSS/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="装饰器" scheme="https://www.masantu.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    
+      <category term="色系" scheme="https://www.masantu.com/tags/%E8%89%B2%E7%B3%BB/"/>
+    
+      <category term="颜色" scheme="https://www.masantu.com/tags/%E9%A2%9C%E8%89%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>中国传统色 | 朱砂痣还是白月光，哪个才是我们的心头好？</title>
+    <link href="https://www.masantu.com/blog/2020-04-13/Traditional-Chinese-Colors/"/>
+    <id>https://www.masantu.com/blog/2020-04-13/Traditional-Chinese-Colors/</id>
+    <published>2020-04-13T13:15:00.000Z</published>
+    <updated>2021-01-20T14:14:12.570Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Projects" scheme="https://www.masantu.com/categories/Projects/"/>
+    
+      <category term="GUSCSS" scheme="https://www.masantu.com/categories/Projects/GUSCSS/"/>
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,299 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>别院牧志 - IMOYAO</title><meta name="keywords" content="别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="别院牧志">
+<meta property="og:url" content="https://www.masantu.com/page/5/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/page/5/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-01-21 00:28:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://bing.biturl.top/?resolution=1920&amp;format=image&amp;index=0&amp;mkt=zh-CN)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">别院牧志</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-10-18/interview-2019/" title="2019 面试记录">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="2019 面试记录"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-10-18/interview-2019/" title="2019 面试记录">2019 面试记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-10-18T02:03:12.000Z" title="发表于 2019-10-18 10:03:12">2019-10-18</time></span></div><div class="content"> FunPlus (小视频业务)数据库的事务隔离机制隔离级别
+READ UNCOMMITTED（未提交读）这个级别，事务中的修改，即使没有提交，对其他事务也都是可见的。事务可以读取未提交的数据，被称为脏读（Dirty Read），这个级别性能不会比其他级别好太多，但缺乏其他级别的很多好处，一般很少使用。
+
+READ COMMITTED（提交读）这个级别是大多数数据库系统的默认隔离级别（但 MySQL 不是）。一个事务从开始直到提交之前，所做的任何修改对其他事务都是不可见的。这个级别也叫作不可重复读（nonrepeatable read），因为两次执行同样的查询，可能会得到不一样的结果。
+
+REPEATABLE READ（可重复读）该级别保证了在同一个事务中多次读取同样记录的结果是一致的，但依然无法解决另外一个幻读（Phantom Read）的问题。幻读，指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻行（Phantom Row）。InnoDB 和 XtraDB 存储引擎通过多版本并发控制（MVCC）解决了幻读 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-09-25/update-value-of-a-nested-dictionary-of-varying-depth/" title="🐍PyTricks | 如何更新一个嵌套字典的值？">     <img class="post_bg" data-lazy-src="/images/Python/Python-snake.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="🐍PyTricks | 如何更新一个嵌套字典的值？"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-09-25/update-value-of-a-nested-dictionary-of-varying-depth/" title="🐍PyTricks | 如何更新一个嵌套字典的值？">🐍PyTricks | 如何更新一个嵌套字典的值？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-09-25T02:35:58.000Z" title="发表于 2019-09-25 10:35:58">2019-09-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%F0%9F%90%8DPyTricks/">🐍PyTricks</a></span></div><div class="content"> import collectionsdef update_nested_dict(orig_dict, new_dict):    &quot;&quot;&quot;    更新嵌套字典    params = &#123;&#x27;state&#x27;:&#x27;1&#x27;,&#x27;message&#x27;:&#x27;9527&#x27;,&#x27;result&#x27;:&#123;&#x27;hello&#x27;:&#x27;world&#x27;,&#x27;foo&#x27;:&#x27;bar&#x27;,&#x27;age&#x27;:32&#125;&#125;    new_dict = &#123;&#x27;name&#x27;:&#x27;Peter&#x27;&#125;    &#123;&#x27;state&#x27;: &#x27;1&#x27;, &#x27;message&#x27;: &#x27;9527&#x27;, &#x27;name&#x27;: &#x27;Peter&#x27;, &#x27;result& ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-09-21/differences-between-tcp-and-udp/" title="TCP 和 UDP 的区别">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="TCP 和 UDP 的区别"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-09-21/differences-between-tcp-and-udp/" title="TCP 和 UDP 的区别">TCP 和 UDP 的区别</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-09-21T13:58:52.000Z" title="发表于 2019-09-21 21:58:52">2019-09-21</time></span></div><div class="content"> TCP 传输控制协议（ Transmission Control Protocol）和 UDP 用户数据报协议（User Datagram Protocol）是在传输层运行的主要协议。传输控制协议（TCP）和用户数据报协议（UDP）的操作方式非常不同，你可以根据需要选择传输控制协议（TCP）或用户数据报协议（UDP）。
+TCP 代表传输控制协议，它保证数据包的传送。该协议提供了广泛的错误检查机制，例如流控制和数据确认。传输控制协议（TCP）是面向连接的协议。在传输数据之前，必须确保在参与数据传输的设备之间建立连接。如果您的应用程序需要保证数据的传输，则必须选择 TCP 作为传输层协议。
+UDP 代表用户数据报协议，它以数据报模式运行。在此处应注意的主要区别是用户数据报协议（UDP）是一种无连接协议。用户数据报协议（UDP）仅具有使用校验和的基本错误检查机制。
+传输控制协议（TCP）和用户数据报协议（UDP）之间的区别传输控制协议（TCP）
+TCP 是面向连接的协议，这意味着设备应在传输数据之前打开连接，并在传输数据后正常关闭连接。
+
+TCP 确保将数据可靠地传递到目的地。
+
+TCP  ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-09-20/tcp-connection-3-way-handshake-and-termination-4-way-handshake/" title="TCP 三次握手与四次挥手">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="TCP 三次握手与四次挥手"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-09-20/tcp-connection-3-way-handshake-and-termination-4-way-handshake/" title="TCP 三次握手与四次挥手">TCP 三次握手与四次挥手</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-09-20T10:03:19.000Z" title="发表于 2019-09-20 18:03:19">2019-09-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">学习记录</a></span></div><div class="content"> TCP 头部上面就是 TCP 协议头部的格式，它非常重要，是理解其它内容的基础，下面将每个字段的信息都详细的说明一下：
+
+Source Port  16 位，用于标识源端口号（发送机器 TCP 端口）
+Destination Port  16 位，用于标识目的端口号（接收端口）
+Sequence Number  32 位，用于 TCP 段的字节级别编号。如果使用 TCP 连接，则为数据的每个字节分配一个序列号。如果设置了 SYN 标志（在三向握手连接初始化期间），则是初始序列号。 然后，实际第一个数据字节的序列号将是此序列号加 1。例如，让设备在特定 TCP 报头中的数据的第一个字节在该字段 50000 中将具有其序列号。如果此数据包有 500 字节中的数据，那么此设备发送的下一个数据包将具有 50000 + 500 + 1 = 50501 的序列号。
+Acknowledgment Number  32 位，确认序列号包含发送确认的一端所期望收到的下一个序号，因此，确认序号应当是上次已成功收到数据字节序号加 1。不过，只有当标志位中的 ACK 标志（下面介绍）为 1 时该确认序列号的 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-09-19/why-redis-is-so-fast/" title="为什么 Redis 这么快？">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="为什么 Redis 这么快？"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-09-19/why-redis-is-so-fast/" title="为什么 Redis 这么快？">为什么 Redis 这么快？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-09-19T13:05:31.000Z" title="发表于 2019-09-19 21:05:31">2019-09-19</time></span></div><div class="content"> 太长不看版
+Redis 是基于内存的访问，内存的读写速度非常快；
+
+Redis 是单线程的模型。保证了每个操作的原子性，省去了很多上下文切换线程的时间以及竞态而产生的消耗；
+
+Redis 使用多路复用技术，可以处理并发的连接。非阻塞 IO 内部实现采用 epoll，采用了 epoll+自己实现的简单的事件轮询（event loop）框架。epoll 中的读、写、关闭、连接都转化成了事件，然后利用 epoll 的多路复用特性，绝不在 io 上浪费一点时间。
+
+数据结构。Redis 全程使用 hash 结构，读取速度快，还有一些特殊的数据结构，对数据存储进行了优化，如压缩表，对短数据进行压缩存储，再如，跳表，使用有序的数据结构加快读取的速度。
+
+
+为什么 Redis 使用单线程因为 Redis 是基于内存的操作，CPU 不是 Redis 的瓶颈，Redis 的瓶颈最有可能是机器内存的大小或者网络带宽。既然单线程容易实现，而且 CPU 不会成为瓶颈，那就顺理成章地采用单线程的方案。
+详细原因
+不需要各种锁的性能消耗
+ Redis 的数据结构并不全是简单的 Key-Value，还有 list ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-08-29/blog-idealyard-TODO/" title="我的博客 idealyard 待办事项记录">     <img class="post_bg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/photo-1475767770551-49f1b43f71cd.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="我的博客 idealyard 待办事项记录"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-08-29/blog-idealyard-TODO/" title="我的博客 idealyard 待办事项记录">我的博客 idealyard 待办事项记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-29T11:28:06.000Z" title="发表于 2019-08-29 19:28:06">2019-08-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/Projects/">Projects</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Projects/IdealYard/">IdealYard</a></span></div><div class="content"> BUGs 记录前端
+ 新建文章报错；
+ 首页无限滚动时提示Duplicate keys detected: &#39;xxxx&#39;. This may cause an update error.
+ 用户注册页面；
+ 用户注册成功，但是跳转首页之后显示问题；
+
+
+ 用户写文章时，作者不是当前登录用户；
+ 点击页内锚点，跳转到文章分类页面，应该在本页面内跳转；
+ cookie 中密码没有加密；解决办法参考这里
+ token 超时时弹出很多 message,应该使用更友好的方式！或者精准提示，一次只提示一条即可；  解决办法：如何让 Element UI 的 Message 消息提示每次只弹出一个
+ 标签云  
+参考这里
+这里
+这里最终参考VueWordCloud 实现；
+
+
+ 记住密码；
+ 标签、分类页面，item 数量为 0 时，点击事件 disable；
+[x] 找回密码；
+
+ 前端异常处理；
+
+
+[x] 盘古之白
+
+有研究显示，打字的时候不喜欢在中文和英文之间加空格的人，感情路都走得很辛苦，有七成的比例会在 34 岁的时候跟自己不爱的人结婚，而其餘三成的人最后只能把遗產留给 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-08-07/how-to-deploy-flask-with-nginx-gunicorn-gevent-supervisor/" title="如何使用 Gunicorn+Gevent+Supervisor+Nginx 部署 Flask 应用">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何使用 Gunicorn+Gevent+Supervisor+Nginx 部署 Flask 应用"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-08-07/how-to-deploy-flask-with-nginx-gunicorn-gevent-supervisor/" title="如何使用 Gunicorn+Gevent+Supervisor+Nginx 部署 Flask 应用">如何使用 Gunicorn+Gevent+Supervisor+Nginx 部署 Flask 应用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-08-07T07:21:59.000Z" title="发表于 2019-08-07 15:21:59">2019-08-07</time></span></div><div class="content"> 组件介绍
+Nginx: 高性能Web服务器，负责反向代理；
+
+gunicorn: （Green Unicorn，绿色独角兽）高性能 uWSGI 服务器；
+
+gevent: 将Python同步代码转换为异步的协议库；
+
+supervisor: 监控服务流程的工具；
+
+
+版本信息-bash-4.2# gunicorn --versiongunicorn (version 19.9.0)
+安装 gunicorn 和 geventpip install gunicornpip install gevent
+配置 gunicorn# gun.pyimport osimport gevent.monkeygevent.monkey.patch_all()import multiprocessingif not os.path.exists(&#x27;log&#x27;):    os.mkdir(&#x27;log&#x27;)debug = Trueloglevel = &#x27;debug&#x27;# 绑定的ip及端口号bind = &#x27;0.0.0.0:5000&#x27;pi ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-07-11/a-bytes-like-object-is-required-not-str-python3/" title="Python3 报错&quot;TypeError:a-bytes-like-object-is-required,not-'str'&quot;解决办法">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="Python3 报错&quot;TypeError:a-bytes-like-object-is-required,not-'str'&quot;解决办法"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-07-11/a-bytes-like-object-is-required-not-str-python3/" title="Python3 报错&quot;TypeError:a-bytes-like-object-is-required,not-'str'&quot;解决办法">Python3 报错&quot;TypeError:a-bytes-like-object-is-required,not-'str'&quot;解决办法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-07-11T06:26:37.000Z" title="发表于 2019-07-11 14:26:37">2019-07-11</time></span></div><div class="content"> 今天在解析一个工具输出问题时遇到这两个编码错误，记录一下。
+
+TypeError: a bytes-like object is required, not ‘str’
+UnicodeDecodeError: ‘utf-8’ codec can’t decode byte 0xb3 in position 38: invalid start byte
+
+
+TL;DR
+导致这个问题主要的原因是你调用的是字符str类型的方法而你给传递的是一个字节byte类型的对象。
+
+先上代码import subprocessclass ExecCommandError(Exception):    passclass ExecCommand:    @staticmethod    def cust_popen_list(cmdlist, close_fds=True):        &quot;&quot;&quot;        subprocess.call只接受数组变量作为命令，并将数组的第一个元素作为命令，剩下的全部作为该命令的参数。        :param cmdlist:     ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2019-07-05/how-to-make-show-all-with-Vue/" title="如何在 Vue 中实现显示全部的功能？">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何在 Vue 中实现显示全部的功能？"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-07-05/how-to-make-show-all-with-Vue/" title="如何在 Vue 中实现显示全部的功能？">如何在 Vue 中实现显示全部的功能？</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-07-05T14:30:13.000Z" title="发表于 2019-07-05 22:30:13">2019-07-05</time></span></div><div class="content"> 功能分析我们可以简单分析一下功能实现：
+
+显示内容是从后台一次性获取到的，不存在点击“阅读更多”再去请求一次后台获取剩余数据的可能；
+通过第一步其实可以得出，网站是通过控制显示元素的高度来实现这一功能，而非控制内容的获取；
+可以看到“阅读更多”按钮上有一层渐变遮罩层，网站通过这一遮罩挡住剩余内容。
+
+完整代码&lt;!DOCTYPE html&gt;&lt;html lang&#x3D;&quot;en&quot;&gt;&lt;head&gt;  &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;  &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1.0&quot;&gt;  &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;ie&#x3D;edge&quot;&gt;  &lt;title&gt; ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2019-07-03/flask-sqlalchemy-many-to-many/" title="flask-sqlalchemy 中的多对多关系模型问题记录">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="flask-sqlalchemy 中的多对多关系模型问题记录"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2019-07-03/flask-sqlalchemy-many-to-many/" title="flask-sqlalchemy 中的多对多关系模型问题记录">flask-sqlalchemy 中的多对多关系模型问题记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-07-03T12:08:21.000Z" title="发表于 2019-07-03 20:08:21">2019-07-03</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/Projects/">Projects</a><i class="fas fa-angle-right"></i><a class="article-meta__categories" href="/categories/Projects/IdealYard/">IdealYard</a></span></div><div class="content"> 问题sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can&#x27;t proceed with initialization of other mappers. Triggering mapper: &#x27;mapped class Article-&gt;iy_article&#x27;. Original exception was: Error creating backref &#x27;articles&#x27; on relationship &#x27;Article.tags&#x27;: property of that name exists on mapper &#x27;mapped class Tag-&gt;iy_tag&#x27;
+出现这个错误是因为两个关系表中互相定义，意思是你的代码中可能同时包含下面的语句：
+# class Article:tags = db.relationship(&#x27;Tag&#x27;, seconda ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何将代码打补丁（patch）？"></a><div class="content"><a class="title" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？">如何将代码打补丁（patch）？</a><time datetime="2020-11-04T09:57:53.000Z" title="发表于 2020-11-04 17:57:53">2020-11-04</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/"><span class="card-category-list-name">Projects</span><span class="card-category-list-count">11</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/FMP/"><span class="card-category-list-name">FMP</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/GUSCSS/"><span class="card-category-list-name">GUSCSS</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/IdealYard/"><span class="card-category-list-name">IdealYard</span><span class="card-category-list-count">5</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2%E4%B8%AA%E6%80%A7%E5%8C%96/"><span class="card-category-list-name">博客个性化</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><span class="card-category-list-name">善用佳软</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">学习记录</span><span class="card-category-list-count">1</span></a></li>
+            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories/">
+                <span>查看更多</span><i class="fas fa-angle-right"></i></a></li>
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/ALUA/" style="font-size: 1.1em; color: #999">ALUA</a> <a href="/tags/Angular/" style="font-size: 1.16em; color: #999b9e">Angular</a> <a href="/tags/Butterfly/" style="font-size: 1.16em; color: #999b9e">Butterfly</a> <a href="/tags/CEPH/" style="font-size: 1.33em; color: #99a2af">CEPH</a> <a href="/tags/Calamari/" style="font-size: 1.1em; color: #999">Calamari</a> <a href="/tags/Celery/" style="font-size: 1.1em; color: #999">Celery</a> <a href="/tags/CentOS/" style="font-size: 1.16em; color: #999b9e">CentOS</a> <a href="/tags/CentOS7/" style="font-size: 1.21em; color: #999ea4">CentOS7</a> <a href="/tags/DRBD/" style="font-size: 1.39em; color: #99a4b4">DRBD</a> <a href="/tags/FMP/" style="font-size: 1.1em; color: #999">FMP</a> <a href="/tags/Flask/" style="font-size: 1.39em; color: #99a4b4">Flask</a> <a href="/tags/FundMate/" style="font-size: 1.1em; color: #999">FundMate</a> <a href="/tags/Gerrit/" style="font-size: 1.1em; color: #999">Gerrit</a> <a href="/tags/Git/" style="font-size: 1.16em; color: #999b9e">Git</a> <a href="/tags/HOWTO/" style="font-size: 1.27em; color: #99a0a9">HOWTO</a> <a href="/tags/Hexo/" style="font-size: 1.27em; color: #99a0a9">Hexo</a> <a href="/tags/Linux/" style="font-size: 1.33em; color: #99a2af">Linux</a> <a href="/tags/MariaDB/" style="font-size: 1.1em; color: #999">MariaDB</a> <a href="/tags/MegaCli/" style="font-size: 1.1em; color: #999">MegaCli</a> <a href="/tags/MySQL/" style="font-size: 1.27em; color: #99a0a9">MySQL</a> <a href="/tags/Nginx/" style="font-size: 1.1em; color: #999">Nginx</a> <a href="/tags/OCR/" style="font-size: 1.1em; color: #999">OCR</a> <a href="/tags/OKR/" style="font-size: 1.1em; color: #999">OKR</a> <a href="/tags/PyCharm/" style="font-size: 1.16em; color: #999b9e">PyCharm</a> <a href="/tags/Python/" style="font-size: 1.5em; color: #99a9bf">Python</a> <a href="/tags/Python3/" style="font-size: 1.1em; color: #999">Python3</a> <a href="/tags/RAID/" style="font-size: 1.16em; color: #999b9e">RAID</a> <a href="/tags/Redis/" style="font-size: 1.1em; color: #999">Redis</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/SqlAlchemy/" style="font-size: 1.1em; color: #999">SqlAlchemy</a> <a href="/tags/Storcli/" style="font-size: 1.1em; color: #999">Storcli</a> <a href="/tags/TCP/" style="font-size: 1.16em; color: #999b9e">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 1.1em; color: #999">TCP/IP</a> <a href="/tags/TODO/" style="font-size: 1.44em; color: #99a7ba">TODO</a> <a href="/tags/Vue/" style="font-size: 1.1em; color: #999">Vue</a> <a href="/tags/Web-%E5%BC%80%E5%8F%91/" style="font-size: 1.16em; color: #999b9e">Web 开发</a> <a href="/tags/Web-py/" style="font-size: 1.1em; color: #999">Web.py</a> <a href="/tags/ceph-deploy/" style="font-size: 1.1em; color: #999">ceph-deploy</a> <a href="/tags/decorator/" style="font-size: 1.1em; color: #999">decorator</a> <a href="/tags/dict/" style="font-size: 1.16em; color: #999b9e">dict</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives/">
+              <span>查看更多</span><i class="fas fa-angle-right"></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">77</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishdate="2017-11-19T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-01-20T16:28:31.873Z"></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "Valar Dohaeris,你如今的气质里，藏着你走过的路🚶‍♂、读过的书📚和爱过的人💖".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: false,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = 'Valar Dohaeris'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

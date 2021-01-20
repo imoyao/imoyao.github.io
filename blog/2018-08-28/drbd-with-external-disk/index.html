@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DRBD 使用外部元数据 | 别院牧志</title><meta name="keywords" content="DRBD,meta-data,元数据,存储"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DRBD 使用外部元数据">
+<meta property="og:url" content="https://www.masantu.com/blog/2018-08-28/drbd-with-external-disk/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302">
+<meta property="article:published_time" content="2018-08-28T02:57:00.000Z">
+<meta property="article:modified_time" content="2021-01-20T14:14:12.611Z">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="DRBD">
+<meta property="article:tag" content="meta-data">
+<meta property="article:tag" content="元数据">
+<meta property="article:tag" content="存储">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/blog/2018-08-28/drbd-with-external-disk/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-20 22:14:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">DRBD 使用外部元数据</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-08-28T02:57:00.000Z" title="发表于 2018-08-28 10:57:00">2018-08-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-20T14:14:12.611Z" title="更新于 2021-01-20 22:14:12">2021-01-20</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><script src="\assets\js\APlayer.min.js"> </script><p>裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。<br><a id="more"></a></p>
+<h2 id="meta-data存放位置优缺点比较"><a href="#meta-data存放位置优缺点比较" class="headerlink" title="meta data存放位置优缺点比较"></a><code>meta data</code>存放位置优缺点比较</h2><h3 id="internal-meta-data"><a href="#internal-meta-data" class="headerlink" title="internal meta-data"></a>internal meta-data</h3><p>meta-data 和数据存放在同一个底层设备之上，它通过在设备末端预留一个区域以存储元数据做到这一点。</p>
+<ul>
+<li>优点：</li>
+</ul>
+<p>一旦 meta-data 创建之后，就和实际数据绑在了一起，在维护上会更简单方便，不用担心 meta-data 会因为某些操作而丢失。另外在硬盘损坏丢失数据的同时，meta-data 也跟着一起丢失，当更换硬盘之后，只需要执行重建 meta-data 的命令即可，丢失的数据会很容易的从其他节点同步过来。</p>
+<ul>
+<li>缺点：</li>
+</ul>
+<p>如果底层设备是单一的磁盘，没有做 raid，也不是 lvm 等，那么可能会对写入吞吐量产生负面影响。因为每一次写 io 都需要更新 meta-data 里面的信息，那么每次写 io 都会有两次，而且肯定会有磁头的较大寻道移动，因为 meta-data 都是记录在设备的最末端的，这样就会造成写 io 的性能降低。</p>
+<h3 id="external-meta-data"><a href="#external-meta-data" class="headerlink" title="external meta data"></a>external meta data</h3><p><code>meta-data</code>存放在独立的，与存放数据的设备分开的设备之上。</p>
+<ul>
+<li>优点：</li>
+</ul>
+<p>与 internal meta-data 的缺点完全相对。对于某些写操作, 使用外部元数据会稍微改进延迟行为。</p>
+<ul>
+<li>缺点：</li>
+</ul>
+<p>由于 meta-data 存放在与数据设备分开的地方，就意味着如果磁盘故障且仅破坏生产数据 (而不是 DRBD 元数据), 则可以通过手动干预, 以使发起从幸存的节点到后续更换的磁盘上的完整数据同步。也就是管理维护会稍微麻烦一点，很小的一点点。</p>
+<p><strong>注意：</strong> 如果我们希望在已经存在数据的设备上面建立 drbd 的资源，并且不希望丢失该设备上面的数据，又没办法增大底层设备的容量，而且上层文件系统不支持收缩，我们就只能将 meta data 创建成 external 方式。</p>
+<h2 id="估算元数据大小"><a href="#估算元数据大小" class="headerlink" title="估算元数据大小"></a>估算元数据大小</h2><p>注意：如果公式渲染出错，可以去<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zohooo.github.io/jaxedit/">这里</a>预览</p>
+<p>你可以使用以下公式计算 DRBD 元数据的精确空间要求:</p>
+<p><img src="/img/loading.svg" data-lazy-src="https://docs.linbit.com/ug-src/users-guide-8.4/images/metadata-size-exact.png" alt="精确计算元数据大小"></p>
+<p>$$M_{S}= \lceil\frac{C_{s}}{2^{18}} \rceil \ast 8 \ast N + 72$$</p>
+<p>Cs 是存储设备扇区大小。N 是对端的数量，一般情况下 drbd 实现的是双节点，因此 N=1，可以不用考虑。</p>
+<p>您可以通过发出 blockdev –getsz <device>来检索设备大小。</device></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@Storage ~]# blockdev --getsz /dev/StorPool1/SANLun2</span><br><span class="line">2097152</span><br></pre></td></tr></table></figure>
+<p>结果中的 Ms 的大小也是用扇区表示的,要转换为 MB, 请除以 2048。(对于 512 字节的扇区大小, 这是除 s390 之外的所有 Linux 平台上的默认值)。<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">23</span>]: (math.ceil(<span class="number">2097152</span>/<span class="number">2</span>**<span class="number">18</span>)*<span class="number">8</span>+<span class="number">72</span>)/<span class="built_in">float</span>(<span class="number">2048</span>)</span><br><span class="line">Out[<span class="number">23</span>]: <span class="number">0.06640625</span></span><br></pre></td></tr></table></figure><br>在实践中, 你可以使用一个合理的好的近似, 下面给出。请注意, 在此公式中, 单位为兆字节(megabytes), 而非扇区:</p>
+<p><img src="/img/loading.svg" data-lazy-src="https://docs.linbit.com/ug-src/users-guide-8.4/images/metadata-size-approx.png" alt="预估计算元数据大小"></p>
+<p>$$M_{MB} \lt \frac{C_{MB}}{32768} \ast N + 1$$</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取块设备大小</span></span><br><span class="line">[root@Storage ~]# lsblk /dev/StorPool1/SANLun2</span><br><span class="line">NAME              MAJ:MIN RM SIZE RO TYPE MOUNTPOINT</span><br><span class="line">StorPool1-SANLun2 253:3    0   1G  0 lvm  </span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 预估元数据设备大小</span></span><br><span class="line">In [<span class="number">30</span>]: <span class="number">1024</span>/<span class="built_in">float</span>(<span class="number">32768</span>)+<span class="number">1</span></span><br><span class="line">Out[<span class="number">30</span>]: <span class="number">1.03125</span></span><br></pre></td></tr></table></figure>
+<p>此处插播一个小的知识点,来源参考<a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/starshine/article/details/8226320">这里</a>（解释）和<a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.maixj.net/ict/kbkib-mbmib-gbgib-15095">这里</a>（区别）。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名字</th>
+<th style="text-align:left">缩写</th>
+<th style="text-align:left">次方</th>
+<th style="text-align:left">名字</th>
+<th style="text-align:left">缩写</th>
+<th style="text-align:left">次方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">kilobyte</td>
+<td style="text-align:left">KB</td>
+<td style="text-align:left">10^3</td>
+<td style="text-align:left">kibibyte</td>
+<td style="text-align:left">KiB</td>
+<td style="text-align:left">2^10</td>
+</tr>
+<tr>
+<td style="text-align:left">megabyte</td>
+<td style="text-align:left">MB</td>
+<td style="text-align:left">10^6</td>
+<td style="text-align:left">mebibyte</td>
+<td style="text-align:left">MiB</td>
+<td style="text-align:left">2^20</td>
+</tr>
+<tr>
+<td style="text-align:left">gigabyte</td>
+<td style="text-align:left">GB</td>
+<td style="text-align:left">10^9</td>
+<td style="text-align:left">gibibyte</td>
+<td style="text-align:left">GiB</td>
+<td style="text-align:left">2^30</td>
+</tr>
+<tr>
+<td style="text-align:left">terabyte</td>
+<td style="text-align:left">TB</td>
+<td style="text-align:left">10^12</td>
+<td style="text-align:left">tebibyte</td>
+<td style="text-align:left">TiB</td>
+<td style="text-align:left">2^40</td>
+</tr>
+<tr>
+<td style="text-align:left">petabyte</td>
+<td style="text-align:left">PB</td>
+<td style="text-align:left">10^15</td>
+<td style="text-align:left">pebibyte</td>
+<td style="text-align:left">PiB</td>
+<td style="text-align:left">2^50</td>
+</tr>
+<tr>
+<td style="text-align:left">exabyte</td>
+<td style="text-align:left">EB</td>
+<td style="text-align:left">10^18</td>
+<td style="text-align:left">exbibyte</td>
+<td style="text-align:left">EiB</td>
+<td style="text-align:left">2^60</td>
+</tr>
+<tr>
+<td style="text-align:left">zettabyte</td>
+<td style="text-align:left">ZB</td>
+<td style="text-align:left">10^21</td>
+<td style="text-align:left">zebibyte</td>
+<td style="text-align:left">ZiB</td>
+<td style="text-align:left">2^70</td>
+</tr>
+<tr>
+<td style="text-align:left">yottabyte</td>
+<td style="text-align:left">YB</td>
+<td style="text-align:left">10^24</td>
+<td style="text-align:left">yobibyte</td>
+<td style="text-align:left">YiB</td>
+<td style="text-align:left">2^80</td>
+</tr>
+</tbody>
+</table>
+<h2 id="重置资源的大小"><a href="#重置资源的大小" class="headerlink" title="重置资源的大小"></a>重置资源的大小</h2><h3 id="在线增加"><a href="#在线增加" class="headerlink" title="在线增加"></a>在线增加</h3><p>需要满足两个条件：</p>
+<ol>
+<li><p>支持设备必须是逻辑卷</p>
+</li>
+<li><p>当前的资源必须处于<code>connected</code>的连接状态。</p>
+</li>
+</ol>
+<p>在两个节点给设备增加大小后，再确认只有一个节点处于<code>primary</code>状态。然后输入：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm resize &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<p>此命令会触发新扇区的同步，完成主节点到备用节点间的同步。</p>
+<p>如果你添加的空间是干净没有数据的，你可以使用<code>--assume-clean</code>选项：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm -- --assume-clean resize &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<p>来跳过额外的空间同步。</p>
+<h3 id="离线增加"><a href="#离线增加" class="headerlink" title="离线增加"></a>离线增加</h3><p>（此为高级功能，请自审之后使用。）</p>
+<ol>
+<li>资源被配置为 external meta data 时</li>
+</ol>
+<p>当 DRBD 在处于非活动情况下，在两个节点的支持设备被扩展时，且 DRBD 资源使用的是 external meta data，那么新的大小会自动被识别，不需要管理员干预。DRBD 设备将在下次两个节点活动并且成功建立网络连接之后，显示增加后的新容量。</p>
+<ol start="2">
+<li>资源被配置为 internal meta data 时</li>
+</ol>
+<p>当 DRBD 资源被配置为使用 internal meta data 时，在新大小变为可用之前, 则必须将此元数据移动到已扩容设备的末尾。为此, 请完成以下步骤:</p>
+<ul>
+<li>down 掉 DRBD 资源:</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm down &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在收缩之前将元数据保存在文本文件中</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm dump-md &lt;resource&gt; &gt; /tmp/metadata</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 以上步骤必须在两个节点上分别运行。不能在一个节点上保存了元数据然后在拷贝到另外一个节点上。否则就无法正常工作。</p>
+<ul>
+<li><p>在两个节点上给支持的块设备增加容量</p>
+</li>
+<li><p>分别在两个节点上调整/tmp/metadata 文件中<code>la-size-sect</code>的大小信息。注：这里 la-size-sect 指定的是扇区数量</p>
+</li>
+<li><p>重新初始化元数据区域</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm create-md &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>分别在两个节点上重新导入修正的元数据</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 此处使用bash脚本，需要确认可用性</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> drbdmeta_cmd=$(drbdadm -d dump-md &lt;resource&gt;)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="variable">$&#123;drbdmeta_cmd/dump-md/restore-md&#125;</span> /tmp/metadata</span></span><br><span class="line">Valid meta-data in place, overwrite? [need to type &#x27;yes&#x27; to confirm]</span><br><span class="line">yes</span><br><span class="line">Successfully restored meta data</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重新启用 DRBD 资源</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm up &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在一个节点上，设置 DRBD 为 primary</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm primary &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<p>至此，已完成 DRBD 设备大小的扩容。</p>
+<h3 id="在线缩小容量"><a href="#在线缩小容量" class="headerlink" title="在线缩小容量"></a>在线缩小容量</h3><p>注：在线缩小容量，仅支持<code>external metadata</code></p>
+<p>在缩小 DRBD 设备时必须首先缩小 DRBD 的上层块设备。例如文件系统。由于 DRBD 无法获知文件系统到底使用了多少空间，所以在缩小文件系统时需要格外小心防止数据丢失！文件系统是否可以被缩小取决于所使用的文件系统。大多数文件系统不支持在线缩减。XFS 也不支持在线缩减。</p>
+<p>因此，在缩小文件系统后，可以使用以下命令在线缩小 DRBD 设备容量。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm resize --size=&lt;new-size&gt;  &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="离线收缩容量"><a href="#离线收缩容量" class="headerlink" title="离线收缩容量"></a>离线收缩容量</h3><p>（此为高级功能，请自审之后使用。）</p>
+<p>如果在 DRBD 处于非活动状态时收缩后备块设备, DRBD 将拒绝在下次尝试<code>attach</code>期间<code>attach</code>到此块设备, 因为它现在太小 (external meta-data), 或者它将无法找到其元数据 (internal meta-data)。要变通解决这些问题, 请使用此过程 (如果不能使用上面的在线收缩):</p>
+<ul>
+<li><p>在 DRBD 还处于配置运行状态时，在一个节点上缩小文件系统</p>
+</li>
+<li><p>down 掉 DRBD 资源</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm down &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在缩小前保存元数据到一个文件中：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm dump-md &lt;resource&gt; &gt; /tmp/metadata</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 以上步骤必须在两个节点上分别运行。不能在一个节点上保存了元数据然后在拷贝到另外一个节点上。否则就无法正常工作。</p>
+<ul>
+<li><p>在两个节点上给支持的块设备缩小容量</p>
+</li>
+<li><p>分别在两个节点上调整/tmp/metadata 文件中<code>la-size-sect</code>的大小信息。注：这里 la-size-sect 指定的是扇区数量</p>
+</li>
+<li><p>重新初始化元数据区域</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm create-md &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>分别在两个节点上重新导入修正的元数据</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 此处使用bash脚本，需要确认可用性</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> drbdmeta_cmd=$(drbdadm -d dump-md &lt;resource&gt;)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="variable">$&#123;drbdmeta_cmd/dump-md/restore-md&#125;</span> /tmp/metadata</span></span><br><span class="line">Valid meta-data in place, overwrite? [need to type &#x27;yes&#x27; to confirm]</span><br><span class="line">yes</span><br><span class="line">Successfully restored meta data</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重新启用 DRBD 资源</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">drbdadm up &lt;resource&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a>其他说明</h2><h3 id="查看元数据"><a href="#查看元数据" class="headerlink" title="查看元数据"></a>查看元数据</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> down 掉drbd</span></span><br><span class="line">[root@Storage ~]# drbdadm down drbds2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看元数据出错</span></span><br><span class="line">[root@Storage ~]# drbdadm dump-md drbds2</span><br><span class="line">Found meta data is &quot;unclean&quot;, please apply-al first</span><br><span class="line">Command &#x27;drbdmeta 2 v08 /dev/StorPool1/SANLun2 internal dump-md&#x27; terminated with exit code 255</span><br><span class="line"><span class="meta">#</span><span class="bash"> 暂时不明白这句操作的含义，待查</span></span><br><span class="line">[root@Storage ~]# drbdadm apply-al drbds2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看meata-data</span></span><br><span class="line">[root@Storage ~]# drbdadm dump-md drbds2</span><br><span class="line"><span class="meta">#</span><span class="bash"> DRBD meta data dump</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2018-08-29 01:48:20 +0800 [1535478500]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Storage&gt; drbdmeta 2 v08 /dev/StorPool1/SANLun2 internal dump-md</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"></span><br><span class="line"><span class="bash">version <span class="string">&quot;v08&quot;</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> md_size_sect 136</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> md_offset 1073737728</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> al_offset 1073704960</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> bm_offset 1073672192</span></span><br><span class="line"></span><br><span class="line">uuid &#123;</span><br><span class="line">    0xDDB03F0DAF07DEDC; 0x0000000000000000; 0xE4689A94FBB0E78B; 0xE4679A94FBB0E78B;</span><br><span class="line">    flags 0x00000000;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> al-extents 1237;</span></span><br><span class="line">la-size-sect 2097016;</span><br><span class="line">bm-byte-per-bit 4096;</span><br><span class="line">device-uuid 0x625F486D2CB120D1;</span><br><span class="line">la-peer-max-bio-size 1048576;</span><br><span class="line">al-stripes 1;</span><br><span class="line">al-stripe-size-4k 8;</span><br><span class="line"><span class="meta">#</span><span class="bash"> bm-bytes 32768;</span></span><br><span class="line">bm &#123;</span><br><span class="line"><span class="meta">   #</span><span class="bash"> at 0kB</span></span><br><span class="line">    4096 times 0x0000000000000000;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> bits-set 0;</span></span><br></pre></td></tr></table></figure>
+<p>从此命令中可以获知不同标记代数的 uuid 值，以及 metadata 的元数据信息，例如 md_size_sect=1951744 表示元数据所在分区占用了 1951744 个扇区。注意，该命令不要在 drbd 设备已启动的情况下执行。</p>
+<p>知道这两个命令可以获取一些信息后，现在我们要做的是计算 metadata 部分的数据大小。这个大小在”修改 drbd 设备空间大小”时有用。</p>
+<p>首先获取元数据所在分区的扇区数。即上面结果中的”md_size_sect”。不过也可以使用块设备工具 blockdev 来获取。</p>
+<h2 id="参考来源"><a href="#参考来源" class="headerlink" title="参考来源"></a>参考来源</h2><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.linbit.com/docs/users-guide-8.4/#s-metadata">16.1. DRBD meta data</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.wenzizone.cn/2009/10/29/drbd%E4%B8%ADmetadata%E7%9A%84%E7%90%86%E8%A7%A3%E5%8E%9F%E5%88%9B.html">原创 | drbd 中 metadata 的理解</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/yuanhangq220/article/details/46634249">drbd 配置简述</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.cnblogs.com/f-ck-need-u/p/8678883.html">drbd(二)：配置和使用 - 骏马金龙 - 博客园</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:immoyao@gmail.com" rel="external nofollow noopener noreferrer" target="_blank">imoyao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.masantu.com/blog/2018-08-28/drbd-with-external-disk/">https://www.masantu.com/blog/2018-08-28/drbd-with-external-disk/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.masantu.com" target="_blank">别院牧志</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DRBD/">DRBD</a><a class="post-meta__tags" href="/tags/meta-data/">meta-data</a><a class="post-meta__tags" href="/tags/%E5%85%83%E6%95%B0%E6%8D%AE/">元数据</a><a class="post-meta__tags" href="/tags/%E5%AD%98%E5%82%A8/">存储</a></div><div class="post_share"><div class="social-share" data-image="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechatpay.jpg" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg" alt="alipay"></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/blog/2018-08-29/state-of-drbd/"><img class="prev-cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">DRBD 状态指标记录</div></div></a></div><div class="next-post pull-right"><a href="/blog/2018-05-27/split-brain-of-drbd/"><img class="next-cover" data-lazy-src="/images/logos/DRBD.png" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">关于 DRBD 脑裂问题的总结</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blog/2020-07-22/alua-with-drbd/" title="一种基于 DRBD 实现的 ALUA 解决方案"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/dual.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-22</div><div class="title">一种基于 DRBD 实现的 ALUA 解决方案</div></div></a></div><div><a href="/blog/2018-09-11/record-of-drbd/" title="DRBD 备忘记录"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-11</div><div class="title">DRBD 备忘记录</div></div></a></div><div><a href="/blog/2018-05-27/split-brain-of-drbd/" title="关于 DRBD 脑裂问题的总结"><img class="cover" data-lazy-src="/images/logos/DRBD.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-27</div><div class="title">关于 DRBD 脑裂问题的总结</div></div></a></div><div><a href="/blog/2018-08-29/state-of-drbd/" title="DRBD 状态指标记录"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-08-29</div><div class="title">DRBD 状态指标记录</div></div></a></div><div><a href="/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/" title="CentOS7 环境下配置 DRBD"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-01-11</div><div class="title">CentOS7 环境下配置 DRBD</div></div></a></div><div><a href="/blog/2018-01-11/how-to-install-drbd-on-CentOS7/" title="CentOS7 下源码安装 DRBD"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-01-11</div><div class="title">CentOS7 下源码安装 DRBD</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#meta-data%E5%AD%98%E6%94%BE%E4%BD%8D%E7%BD%AE%E4%BC%98%E7%BC%BA%E7%82%B9%E6%AF%94%E8%BE%83"><span class="toc-number">1.</span> <span class="toc-text">meta data存放位置优缺点比较</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#internal-meta-data"><span class="toc-number">1.1.</span> <span class="toc-text">internal meta-data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#external-meta-data"><span class="toc-number">1.2.</span> <span class="toc-text">external meta data</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%B0%E7%AE%97%E5%85%83%E6%95%B0%E6%8D%AE%E5%A4%A7%E5%B0%8F"><span class="toc-number">2.</span> <span class="toc-text">估算元数据大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E7%BD%AE%E8%B5%84%E6%BA%90%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="toc-number">3.</span> <span class="toc-text">重置资源的大小</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E5%A2%9E%E5%8A%A0"><span class="toc-number">3.1.</span> <span class="toc-text">在线增加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E7%BA%BF%E5%A2%9E%E5%8A%A0"><span class="toc-number">3.2.</span> <span class="toc-text">离线增加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E7%BC%A9%E5%B0%8F%E5%AE%B9%E9%87%8F"><span class="toc-number">3.3.</span> <span class="toc-text">在线缩小容量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A6%BB%E7%BA%BF%E6%94%B6%E7%BC%A9%E5%AE%B9%E9%87%8F"><span class="toc-number">3.4.</span> <span class="toc-text">离线收缩容量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E8%AF%B4%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">其他说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">4.1.</span> <span class="toc-text">查看元数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%9D%A5%E6%BA%90"><span class="toc-number">5.</span> <span class="toc-text">参考来源</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何将代码打补丁（patch）？"></a><div class="content"><a class="title" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？">如何将代码打补丁（patch）？</a><time datetime="2020-11-04T09:57:53.000Z" title="发表于 2020-11-04 17:57:53">2020-11-04</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI',
+      appKey: 'CARePe7R247vdXACFg1fhk4E',
+      placeholder: '我们期待并欢迎理性、友好而和谐的声音……',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

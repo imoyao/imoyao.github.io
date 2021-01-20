@@ -1,0 +1,55 @@
+backend:
+  name: git-gateway
+  branch: hexo
+media_folder: blog/themes/Butterfly/source/images
+public_folder: blog/public
+publish_mode: editorial_workflow
+collections:
+  - name: all_posts
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+        dateFormat: YYYY-MM-DD
+        timeFormat: 'HH:mm:ss'
+        format: 'YYYY-MM-DD HH:mm:ss'
+        required: false
+      - label: Tags
+        name: tags
+        widget: list
+        required: false
+      - label: Categories
+        name: categories
+        widget: list
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+        required: false
+      - label: Featured Image
+        name: cover
+        widget: image
+        required: false
+      - label: Permalink
+        name: permalink
+        widget: string
+        required: false
+      - label: Comments
+        name: comments
+        widget: boolean
+        default: true
+        required: false
+      - label: Hide
+        name: hide
+        widget: boolean
+        default: false
+        required: false
+    label: Post
+    folder: blog/source/_posts
+    create: true
+    editor:
+      preview: true
+    sort: 'date:desc'

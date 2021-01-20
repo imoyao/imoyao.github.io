@@ -1,0 +1,314 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>别院牧志 - IMOYAO</title><meta name="keywords" content="别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="别院牧志">
+<meta property="og:url" content="https://www.masantu.com/page/7/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="别院牧志, imoyao, idealyard, 张牧志, 牧志, Python, 编程, Python开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/page/7/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-01-21 00:28:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://bing.biturl.top/?resolution=1920&amp;format=image&amp;index=0&amp;mkt=zh-CN)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">别院牧志</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2018-09-11/record-of-drbd/" title="DRBD 备忘记录">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="DRBD 备忘记录"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-09-11/record-of-drbd/" title="DRBD 备忘记录">DRBD 备忘记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-09-11T09:56:38.000Z" title="发表于 2018-09-11 17:56:38">2018-09-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/">教程记录</a></span></div><div class="content"> 这是一个关于 DRBD 的使用备忘录。
+
+开始阅读之前，请先注意示例中使用的 DRBD 版本
+drbdadm -V# DRBDADM_VERSION=8.4.3
+注意：安装的 kernel-devel 的内核源码（内核源码路径/usr/src/kernel/）和当前系统的 kernel 版本(uname -r)不一致的话需要把当前内核更新一下。在2.6.33及以上版本的内核默认中有DRBD,之前在用的DRBD主要8.0、8.2、8.3 三个版本,对应的rpm包是drbd,drbd82和drbd83，因此需要安装对应的内核模块，对应的名字为kmod-drbd,kmod-drbd82,kmod-drbd83。由于drbd是作为内核模块进行工作的，故建议使用与内核对应的版本，对应关系如下表。
+
+
+
+Linux releases
+DRBD releases
+
+
+
+
+2.6.33
+8.3.7
+
+
+2.6.34
+8.3.7
+
+
+2.6.35
+8.3.8
+
+
+2.6.36
+8.3.8.1
+
+
+2.6.37
+8.3.9
+
+
+2.6.38
+8.3.9
+
+
+2.6.39
+8.3.10
+
+
+3.0 - 3 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2018-08-29/state-of-drbd/" title="DRBD 状态指标记录">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="DRBD 状态指标记录"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-08-29/state-of-drbd/" title="DRBD 状态指标记录">DRBD 状态指标记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-08-29T03:26:43.000Z" title="发表于 2018-08-29 11:26:43">2018-08-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/">教程记录</a></span></div><div class="content"> 在管理DRBD的时候，需要关注drbd相关的各种状态指标，本文主要记录相关的指令及显示含义。
+DRBD状态概览drbd-overviewdrbd statuscat /proc/drbd      # 9.0废止在drbd9中，更多的是使用drbdadm或drbdsetup来获取节点的状态信息。
+以上命令略有不同，可自行对照
+[root@Storage drbd]# pwd/usr/lib/drbd[root@Storage drbd]# ./drbd status# 输出示例drbd driver loaded OK; device status:version: 8.4.3 (api:1/proto:86-101)GIT-hash: 89a2942***221f964d3ee515 build by root@third, 2017-07-20 10:58:42m:res          cs            ro                 ds                 p       mounted       fstype0:drbd0        C ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2018-08-28/drbd-with-external-disk/" title="DRBD 使用外部元数据">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="DRBD 使用外部元数据"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-08-28/drbd-with-external-disk/" title="DRBD 使用外部元数据">DRBD 使用外部元数据</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-08-28T02:57:00.000Z" title="发表于 2018-08-28 10:57:00">2018-08-28</time></span></div><div class="content"> 裂脑一旦发生，需要及时排查问题所在，最大限度保护数据完整性。
+meta data存放位置优缺点比较internal meta-datameta-data 和数据存放在同一个底层设备之上，它通过在设备末端预留一个区域以存储元数据做到这一点。
+
+优点：
+
+一旦 meta-data 创建之后，就和实际数据绑在了一起，在维护上会更简单方便，不用担心 meta-data 会因为某些操作而丢失。另外在硬盘损坏丢失数据的同时，meta-data 也跟着一起丢失，当更换硬盘之后，只需要执行重建 meta-data 的命令即可，丢失的数据会很容易的从其他节点同步过来。
+
+缺点：
+
+如果底层设备是单一的磁盘，没有做 raid，也不是 lvm 等，那么可能会对写入吞吐量产生负面影响。因为每一次写 io 都需要更新 meta-data 里面的信息，那么每次写 io 都会有两次，而且肯定会有磁头的较大寻道移动，因为 meta-data 都是记录在设备的最末端的，这样就会造成写 io 的性能降低。
+external meta datameta-data存放在独立的，与存放数据的设备分开的设备之上。
+
+优点：
+
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2018-05-27/split-brain-of-drbd/" title="关于 DRBD 脑裂问题的总结">     <img class="post_bg" data-lazy-src="/images/logos/DRBD.png" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="关于 DRBD 脑裂问题的总结"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-05-27/split-brain-of-drbd/" title="关于 DRBD 脑裂问题的总结">关于 DRBD 脑裂问题的总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-05-27T02:57:00.000Z" title="发表于 2018-05-27 10:57:00">2018-05-27</time></span></div><div class="content"> 本文在编写时基于官网 8.4 英文版本。由于英语水平和当时认知所限，翻译中难免有聱牙诘屈甚至误导别人之处。今天翻阅官网发现已经出现了基于 9.0 版本的中文文档，所以大家可以直接去浏览官方文档。
+
+什么是DRBD脑裂脑裂(split brain)是指由于集群节点之间的所有网络链路的临时故障，以及可能由于集群管理软件的干预或人为错误，导致两个节点在断开连接时都切换到主节点（primary）角色的情况。这是一种潜在的有害状态，因为它意味着对数据的修改可能是在任一节点上进行的，而没有复制到对等节点。因此，在这种情况下，很可能已经创建了两个不同的数据集，这些数据集不能简单地合并。
+怎么判定脑裂查看日志信息如果DRBD出现脑裂，会在 /var/log/message 出现一条日志：
+Split-Brain detected but unresolved, dropping connection!
+当发生split brain之后，如果查看连接状态，其中至少会有一个是StandAlone状态，另外一个可能也是StandAlone（如果是同时发现split brain状态），也有可能是 WFCon ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2018-05-10/executing-select-where-in-using-mysqldb/" title="关于在 Python 中 MySQL 的 WHERE 子句中执行 IN 操作（list，tuple）的问题">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="关于在 Python 中 MySQL 的 WHERE 子句中执行 IN 操作（list，tuple）的问题"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-05-10/executing-select-where-in-using-mysqldb/" title="关于在 Python 中 MySQL 的 WHERE 子句中执行 IN 操作（list，tuple）的问题">关于在 Python 中 MySQL 的 WHERE 子句中执行 IN 操作（list，tuple）的问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-05-10T07:41:35.000Z" title="发表于 2018-05-10 15:41:35">2018-05-10</time></span></div><div class="content"> 今天在写代码的时候，有一处查询语句需要执行 IN 操作，结果直接join操作会出错。
+list_of_datas = [u&#x27;sde&#x27;, u&#x27;sdf&#x27;, u&#x27;sdb&#x27;, u&#x27;sdc&#x27;]sql = &quot;SELECT DiskId,Name,Sg,PhyId,ExpanderId,EProduct FROM Disk WHERE Used=&#x27;2&#x27; AND Name IN (%s)&quot; % &#x27;,&#x27;.join(list_of_datas)
+执行结果：
+SELECT DiskId, Name, Sg, PhyId, ExpanderId	, EProductFROM DiskWHERE Used = &#x27;2&#x27;	AND Name IN (sde, sdf, sdb, sdc)
+很明显与预期的结果是不一样的。因为 IN 操作中的选取字段应该是带引号的字符串，而不是直接显示的字符串。也就是说我们期望的WHERE子句中是WHERE Used = &#3 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2018-04-28/the-underline-of-Python/" title="关于 Python 中的下划线用法的记录">     <img class="post_bg" data-lazy-src="/images/Python/3D-Python-Logo.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="关于 Python 中的下划线用法的记录"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-04-28/the-underline-of-Python/" title="关于 Python 中的下划线用法的记录">关于 Python 中的下划线用法的记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-04-28T09:23:18.000Z" title="发表于 2018-04-28 17:23:18">2018-04-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content"> Py 乙己孔乙己自己知道不能和架构师谈天，便只好向实习生说话。
+有一回对我说道，“你写过Python么？”我略略点一点头。
+他说，“写过代码，……我便考你一考。Python中的下划线，怎样用的？”
+我想，搬砖一样的人，也配考我么？便回过脸去，不再理会。
+孔乙己等了许久，很恳切的说道，“不能写罢？……我教给你，记着！这些用法应该记着。将来做面试官的时候要用。”
+我暗想我和面试官的等级还很远呢，而且我们面试官也从不将这些问题拿来考应聘者；又好笑，又不耐烦，懒懒的答他道，“谁要你教，不就是命名变量，增加代码的可读性吗？”
+孔乙己显出极高兴的样子，将两个指头的长指甲敲着键盘，点头说，“对呀对呀！……下划线有 x 种写法，你知道么？”
+我愈不耐烦了，努着嘴走远。孔乙己刚用纸巾擦了擦键盘上的咖啡渍，想在IDE里写代码，见我毫不热心，便又叹一口气，显出极惋惜的样子。
+正文
+在交互式解释器中获取上一个语句执行的结果；
+
+&gt;&gt;&gt; 1+12&gt;&gt;&gt; _2&gt;&gt;&gt; _ * 510
+
+用来在函数、模块、包、变量名中分隔单词，增加可读性；
+
+var_foo_b ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2018-04-10/late-binding-of-Python/" title="浅析 Python 中的延迟绑定问题">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="浅析 Python 中的延迟绑定问题"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-04-10/late-binding-of-Python/" title="浅析 Python 中的延迟绑定问题">浅析 Python 中的延迟绑定问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-04-10T07:41:35.000Z" title="发表于 2018-04-10 15:41:35">2018-04-10</time></span></div><div class="content"> Python 使用中一个常见的困惑是 Python 在闭包(或在周围全局作用域（surrounding global scope）)中绑定变量的方式。你所写的函数：def multi_expression():    return [lambda n: n*i for i in range(5)]        if __name__ == &#x27;__main__&#x27;:    print([multi(10) for multi in multi_expression()])你所期望的是：一个包含 5 个函数返回值的列表，每个函数有它们自己的封闭变量 i 乘以它们的参数，得到:[0, 10, 20, 30, 40]而实际返回结果是：[40, 40, 40, 40, 40]创建了 5 个函数，它们全都是 4 乘以 n 。Python 的闭包是迟绑定 。这意味着闭包中用到的变量的值是在内部函数被调用时查询得到的。在这里, 每当调用任何函数返回时, i 的值是调用时在周围作用域（ surrounding scope）中查询到的。而到那个时候，循环已经完成， i 的值最终变成  ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2018-01-18/python-env-introduce/" title="Python 环境管理介绍">     <img class="post_bg" data-lazy-src="/images/Python/pipenv.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="Python 环境管理介绍"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-01-18/python-env-introduce/" title="Python 环境管理介绍">Python 环境管理介绍</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-01-18T06:18:31.000Z" title="发表于 2018-01-18 14:18:31">2018-01-18</time></span></div><div class="content"> 项目开发中可能需要用到不同版本的Python及相关的开发环境。比如Python2及Python3，或者有的项目需要 Django1.5 ，有的需要2.0，这个时候借助一些工具，往往可以达到事半功倍的效果。
+
+个人搭配既然别人都说不够理想，那就暂时处于观望阶段吧。目前个人在用的 Python 虚拟环境和包管理组合：虚拟环境管理：venv包管理：pip
+工作流python3 -m venv venvX    # 使用 venv 创建名为 venvX（可自定义） 的虚拟环境source venvX/bin/activate    # 激活虚拟环境venvX（上一步自定义虚拟环境名称）pip install -r requirements.txt # 使用pip安装依赖
+值得关注的
+PEP 582 – Python local packages directory | Python.org
+pdm 0.2.4 live demo - asciinema
+
+@更新
+2020-1-8今天看到一篇文章 Pipenv 有什么问题，作者是Pipenv的核心开发者，也对Poetry做了一点介绍，同时在  ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/" title="CentOS7 环境下配置 DRBD">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="CentOS7 环境下配置 DRBD"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-01-11/how-to-configure-drbd-on-CentOS7/" title="CentOS7 环境下配置 DRBD">CentOS7 环境下配置 DRBD</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-01-11T03:26:43.000Z" title="发表于 2018-01-11 11:26:43">2018-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8/">工作日常</a></span></div><div class="content"> 本文主要记录DRBD的配置过程和功能验证。
+本文使用64位CentOS，基本环境：
++-----------------------+              |               +----------------------+| [ DRBD_A (Server#1) ] | 10.10.17.18  |  10.10.17.19  | [DRBD_B (Server#2) ] ||       node01          +--------------+---------------+         node02       ||                       |                              |                      |+-----------------------+                              +----------------------+DRBD 服务器A ：ip:10.10.17.18，hostname：DRBD_ADRBD 服务器B ：ip:10.10.1 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/blog/2018-01-11/how-to-install-drbd-on-CentOS7/" title="CentOS7 下源码安装 DRBD">     <img class="post_bg" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="CentOS7 下源码安装 DRBD"></a></div><div class="recent-post-info"><a class="article-title" href="/blog/2018-01-11/how-to-install-drbd-on-CentOS7/" title="CentOS7 下源码安装 DRBD">CentOS7 下源码安装 DRBD</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-01-11T02:43:17.000Z" title="发表于 2018-01-11 10:43:17">2018-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/">教程记录</a></span></div><div class="content"> 最近开发中又要用到DRBD做远程复制的功能，网上搜到很多都是yum安装的办法，这里记录一下源码安装的办法。
+准备工作关闭防火墙systemctl disable firewalldsystemctl stop firewalld
+关闭 SELinuxsed -i -e &quot;s/=enforcing/=disabled/g&quot; /etc/selinux/configsetenforce 0 
+安装依赖yum -y update yum -y install gcc make automake autoconf libxslt libxslt-devel flex rpm-build wget
+注意： 安装kernel-devel一定要和uname -r获取结果一致。
+rpm -q kernel-develuname -r# 3.10.0-327.el7.x86_64
+返回的内核版本应当一致，否则建议用本地源安装kernel-devel。
+下载/解压源码官方地址：https://www.linbit.com/en/drbd-community/drbd-download/ ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">77</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">98</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="如何将代码打补丁（patch）？"></a><div class="content"><a class="title" href="/blog/2020-11-04/git-patch-apply/" title="如何将代码打补丁（patch）？">如何将代码打补丁（patch）？</a><time datetime="2020-11-04T09:57:53.000Z" title="发表于 2020-11-04 17:57:53">2020-11-04</time></div></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/"><span class="card-category-list-name">Projects</span><span class="card-category-list-count">11</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/FMP/"><span class="card-category-list-name">FMP</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/GUSCSS/"><span class="card-category-list-name">GUSCSS</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Projects/IdealYard/"><span class="card-category-list-name">IdealYard</span><span class="card-category-list-count">5</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2%E4%B8%AA%E6%80%A7%E5%8C%96/"><span class="card-category-list-name">博客个性化</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><span class="card-category-list-name">善用佳软</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">学习记录</span><span class="card-category-list-count">1</span></a></li>
+            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories/">
+                <span>查看更多</span><i class="fas fa-angle-right"></i></a></li>
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/ALUA/" style="font-size: 1.1em; color: #999">ALUA</a> <a href="/tags/Angular/" style="font-size: 1.16em; color: #999b9e">Angular</a> <a href="/tags/Butterfly/" style="font-size: 1.16em; color: #999b9e">Butterfly</a> <a href="/tags/CEPH/" style="font-size: 1.33em; color: #99a2af">CEPH</a> <a href="/tags/Calamari/" style="font-size: 1.1em; color: #999">Calamari</a> <a href="/tags/Celery/" style="font-size: 1.1em; color: #999">Celery</a> <a href="/tags/CentOS/" style="font-size: 1.16em; color: #999b9e">CentOS</a> <a href="/tags/CentOS7/" style="font-size: 1.21em; color: #999ea4">CentOS7</a> <a href="/tags/DRBD/" style="font-size: 1.39em; color: #99a4b4">DRBD</a> <a href="/tags/FMP/" style="font-size: 1.1em; color: #999">FMP</a> <a href="/tags/Flask/" style="font-size: 1.39em; color: #99a4b4">Flask</a> <a href="/tags/FundMate/" style="font-size: 1.1em; color: #999">FundMate</a> <a href="/tags/Gerrit/" style="font-size: 1.1em; color: #999">Gerrit</a> <a href="/tags/Git/" style="font-size: 1.16em; color: #999b9e">Git</a> <a href="/tags/HOWTO/" style="font-size: 1.27em; color: #99a0a9">HOWTO</a> <a href="/tags/Hexo/" style="font-size: 1.27em; color: #99a0a9">Hexo</a> <a href="/tags/Linux/" style="font-size: 1.33em; color: #99a2af">Linux</a> <a href="/tags/MariaDB/" style="font-size: 1.1em; color: #999">MariaDB</a> <a href="/tags/MegaCli/" style="font-size: 1.1em; color: #999">MegaCli</a> <a href="/tags/MySQL/" style="font-size: 1.27em; color: #99a0a9">MySQL</a> <a href="/tags/Nginx/" style="font-size: 1.1em; color: #999">Nginx</a> <a href="/tags/OCR/" style="font-size: 1.1em; color: #999">OCR</a> <a href="/tags/OKR/" style="font-size: 1.1em; color: #999">OKR</a> <a href="/tags/PyCharm/" style="font-size: 1.16em; color: #999b9e">PyCharm</a> <a href="/tags/Python/" style="font-size: 1.5em; color: #99a9bf">Python</a> <a href="/tags/Python3/" style="font-size: 1.1em; color: #999">Python3</a> <a href="/tags/RAID/" style="font-size: 1.16em; color: #999b9e">RAID</a> <a href="/tags/Redis/" style="font-size: 1.1em; color: #999">Redis</a> <a href="/tags/SQL/" style="font-size: 1.1em; color: #999">SQL</a> <a href="/tags/SqlAlchemy/" style="font-size: 1.1em; color: #999">SqlAlchemy</a> <a href="/tags/Storcli/" style="font-size: 1.1em; color: #999">Storcli</a> <a href="/tags/TCP/" style="font-size: 1.16em; color: #999b9e">TCP</a> <a href="/tags/TCP-IP/" style="font-size: 1.1em; color: #999">TCP/IP</a> <a href="/tags/TODO/" style="font-size: 1.44em; color: #99a7ba">TODO</a> <a href="/tags/Vue/" style="font-size: 1.1em; color: #999">Vue</a> <a href="/tags/Web-%E5%BC%80%E5%8F%91/" style="font-size: 1.16em; color: #999b9e">Web 开发</a> <a href="/tags/Web-py/" style="font-size: 1.1em; color: #999">Web.py</a> <a href="/tags/ceph-deploy/" style="font-size: 1.1em; color: #999">ceph-deploy</a> <a href="/tags/decorator/" style="font-size: 1.1em; color: #999">decorator</a> <a href="/tags/dict/" style="font-size: 1.16em; color: #999b9e">dict</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">十二月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives/">
+              <span>查看更多</span><i class="fas fa-angle-right"></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">77</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishdate="2017-11-19T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-01-20T16:28:31.873Z"></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    var typed = new Typed("#subtitle", {
+      strings: "Valar Dohaeris,你如今的气质里，藏着你走过的路🚶‍♂、读过的书📚和爱过的人💖".split(","),
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: false,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = 'Valar Dohaeris'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>
