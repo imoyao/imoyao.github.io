@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>使用 Python 计算你的现金流收益率 | 别院牧志</title><meta name="keywords" content="Python,TODO,IRR,XIRR,MIRR,XNPV,理财,经济学"><meta name="author" content="imoyao,immoyao@gmail.com"><meta name="copyright" content="imoyao"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="师爷：听说你理财了？韭菜：巴菲特水平也就一般吧。师爷：听说你去年理财了？韭菜：我他妈哪年不理财？查理·芒格书写得还行。师爷：听说你理财赚钱了？韭菜：赚了！你不想知道我的年化收益吗？师爷：对啊，多，多少呢？韭菜：一个韭菜，碰上牛市，什么收益都能有！师爷：嘘……你这个不知道天高地厚的赌徒、小韭菜！韭菜：你说什么？师爷：赌徒、韭菜！就是数据不够，要不然我非给你算明白了。韭菜：好啊，来呀，看看你怎么算！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Python 计算你的现金流收益率">
+<meta property="og:url" content="https://www.masantu.com/blog/2021-01-23/calculate-cash-flow-with-python/index.html">
+<meta property="og:site_name" content="别院牧志">
+<meta property="og:description" content="师爷：听说你理财了？韭菜：巴菲特水平也就一般吧。师爷：听说你去年理财了？韭菜：我他妈哪年不理财？查理·芒格书写得还行。师爷：听说你理财赚钱了？韭菜：赚了！你不想知道我的年化收益吗？师爷：对啊，多，多少呢？韭菜：一个韭菜，碰上牛市，什么收益都能有！师爷：嘘……你这个不知道天高地厚的赌徒、小韭菜！韭菜：你说什么？师爷：赌徒、韭菜！就是数据不够，要不然我非给你算明白了。韭菜：好啊，来呀，看看你怎么算！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302">
+<meta property="article:published_time" content="2021-01-23T02:14:41.988Z">
+<meta property="article:modified_time" content="2021-01-27T15:57:56.842Z">
+<meta property="article:author" content="imoyao">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="TODO">
+<meta property="article:tag" content="IRR">
+<meta property="article:tag" content="XIRR">
+<meta property="article:tag" content="MIRR">
+<meta property="article:tag" content="XNPV">
+<meta property="article:tag" content="理财">
+<meta property="article:tag" content="经济学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.masantu.com/blog/2021-01-23/calculate-cash-flow-with-python/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//hm.baidu.com"><link rel="preconnect" href="//fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="preconnect" href="//zz.bdstatic.com"><meta name="baidu-site-verification" content="code-ODCD2GPxMT"><meta name="yandex-verification" content="{&quot;theme_color&quot;:{&quot;enable&quot;:true,&quot;main&quot;:&quot;#49B1F5&quot;,&quot;paginator&quot;:&quot;#55af7b&quot;,&quot;button_hover&quot;:&quot;#FF7242&quot;,&quot;text_selection&quot;:&quot;#55af7b&quot;,&quot;link_color&quot;:&quot;#99a9bf&quot;,&quot;meta_color&quot;:&quot;#858585&quot;,&quot;hr_color&quot;:&quot;#A4D8FA&quot;,&quot;code_foreground&quot;:&quot;#F47466&quot;,&quot;code_background&quot;:&quot;rgba(27, 31, 35, .05)&quot;,&quot;toc_color&quot;:&quot;#55af7b&quot;,&quot;blockquote_padding_color&quot;:&quot;#49b1f5&quot;,&quot;blockquote_background_color&quot;:&quot;#49b1f5&quot;}}"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?231bfe4abce99ac3586b516eef2ea05e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: {"limitDay":500,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-27 23:57:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="别院牧志" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="onerror=null;src='/img/Ellipsis-5s-210px.svg'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">101</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">别院牧志</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="external nofollow noopener noreferrer" href="https://wiki.masantu.com/"><i class="fa-fw fa fa-book"></i><span> Wiki</span></a></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fas fa-user-friends"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fas fa-list"></i><span> More</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/douban/"><i class="fa-fw fa fa-history"></i><span> B&amp;M History</span></a></li><li><a class="site-page" href="/whisper/"><i class="fa-fw far fa-comment-dots"></i><span> Whisper</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">使用 Python 计算你的现金流收益率</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-23T02:14:41.988Z" title="发表于 2021-01-23 10:14:41">2021-01-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-27T15:57:56.842Z" title="更新于 2021-01-27 23:57:56">2021-01-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><!--只在首页（homepage）加载描述页面，灵感来源：blinkfox/hexo-theme-matery--><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><script src="\assets\js\APlayer.min.js"> </script><blockquote><p>师爷：听说你理财了？<br>韭菜：巴菲特水平也就一般吧。<br>师爷：听说你去年理财了？<br>韭菜：我他妈哪年不理财？查理·芒格书写得还行。<br>师爷：听说你理财赚钱了？<br>韭菜：赚了！你不想知道我的年化收益吗？<br>师爷：对啊，多，多少呢？<br>韭菜：一个韭菜，碰上牛市，什么收益都能有！<br>师爷：嘘……你这个不知道天高地厚的赌徒、小韭菜！<br>韭菜：你说什么？<br>师爷：赌徒、韭菜！就是数据不够，要不然我非给你算明白了。<br>韭菜：好啊，来呀，看看你怎么算！你就只剩下一张嘴，写几行烂代码的臭码农！</p>
+<footer><strong>《让韭菜飞》</strong></footer></blockquote>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><table>
+<thead>
+<tr>
+<th>函数语法</th>
+<th>适用范围</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NPV(rate,value1,[value2],…)</td>
+<td>适用于定期（例如每月或每年）发生的现金流确定净现值。</td>
+<td>每个现金流（指定为<code>value</code>）都发生在一个周期的末尾。<br> 如果第一期开始时有额外的现金流，应添加到 NPV 函数返回的值。</td>
+</tr>
+<tr>
+<td>XNPV(rate, values, dates)</td>
+<td>适用于以不规则时间间隔发生的现金流确定净现值。</td>
+<td>每个现金流（指定为<code>value</code>）在计划的付款日期发生。</td>
+</tr>
+<tr>
+<td>IRR(values,[guess])</td>
+<td>适用于定期（例如每月或每年）发生的现金流确定内部收益率。</td>
+<td>每个现金流（指定为<code>value</code>）都发生在一个周期的末尾。<br> IRR 通过迭代搜索过程计算，该过程从 IRR 的估计开始（指定为猜测值）然后反复改变该值，直到达到正确的 IRR。 指定 guess 参数是可选的；Excel 使用 10% 作为默认值。<br> 如果存在多个可接受的答案，则 IRR 函数仅返回找到的第一个答案。 如果 IRR 找不到任何答案，则返回#NUM！ 错误值。 如果出现错误或结果不是预期结果，请对 guess 使用不同的值。<br> <strong>注意</strong>：如果存在多个可能的内部收益率，则不同的猜测可能会返回不同的结果。</td>
+</tr>
+<tr>
+<td>XIRR(values,dates,[guess])</td>
+<td>适用于以不规则时间间隔发生的现金流确定内部收益率。</td>
+<td>每个现金流（指定为<code>value</code>）在计划的付款日期发生。<br> XIRR 通过迭代搜索过程计算，该过程以 IRR 的估计值开始（指定为 猜测 值）然后反复改变该值，直到达到正确的 XIRR。 指定 guess 参数是可选的；Excel 使用 10% 作为默认值。<br> 如果存在多个可接受的答案，则 XIRR 函数仅返回找到的第一个答案。 如果 XIRR 找不到任何答案，则返回#NUM！ 错误值。 如果出现错误或结果不是预期结果，请对 guess 使用不同的值。<br> <strong>注意</strong>：如果存在多个可能的内部收益率，则不同的猜测可能会返回不同的结果。</td>
+</tr>
+<tr>
+<td>MIRR(values,finance_rate,reinvest_rate)</td>
+<td>适用于定期发生的现金流（如每月或每年）确定修改的内部收益率，并考虑投资成本和在再投资现金时收到的利息。</td>
+<td>每个指定为值的现金流都发生在期末，但第一个现金流除外，该现金流指定为期初的值。<br> 在现金流中使用的资金所支付利率为 finance_rate。 在现金流上重新投资时收到的利率为 reinvest_rate。</td>
+</tr>
+</tbody>
+</table>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.amazon.cn/Microsoft-Excel-Analysis-Business-Modeling/dp/1509304215/">《Microsoft Excel Data Analysis and Business Modeling (5th Edition)》 【摘要 书评 试读】图书</a></p>
+<h3 id="PMT"><a href="#PMT" class="headerlink" title="PMT"></a>PMT</h3><p>根据固定付款额和固定利率计算贷款的付款额。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><ol>
+<li>M 同学以年化 4.9%的贷款利率(rate_in_year)以首付 3 成的方式购买一套面积 100 平，单价 150000 的房子，贷款周期 30 年（year）:<br>则<code>pv = 100*150000*(1-0.3)        # 1050000</code><br>其中需要贷款金额（pv）1050000，<br>到还完贷款（fv=0），他需要每个月还贷款多少钱？<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pmt = PMT()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pmt(<span class="number">0.049</span>,<span class="number">30</span>,<span class="number">1050000</span>)</span><br><span class="line">-<span class="number">5572.630566539454</span></span><br></pre></td></tr></table></figure></li>
+<li>为 3 年后的国际旅行存够 50000 元,年化利率 5%，则需要每个月存：<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pmt(<span class="number">0.05</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">50000</span>)                                                              </span><br><span class="line">-<span class="number">1290.2115218999443</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="NPV（Net-Present-Value）"><a href="#NPV（Net-Present-Value）" class="headerlink" title="NPV（Net Present Value）"></a>NPV（Net Present Value）</h3><p>此方法的理论是将投资的未来现金流量，全部折现成投资始日的价值，称为该投资的<strong>净现金流量</strong>，或称为<strong>净现值</strong>。<br>净现值（NPV）通过计算每个投资期间的成本（负现金流）和收益（正现金流）来确定。期限通常为一年，但可以按季度，半年或数月来衡量。在计算每个时期的现金流量后，每个时期的现值（PV）是通过以定期收益率（市场规定的收益率）贴现其未来价值（见公式）来实现的。<br>假设投资的净现值为正数，代表该投资的结果可以增加企业的价值；反之，如果投资评估的净现值为负数，代表此投资会减少企业的价值，不应该接受。</p>
+<h4 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h4><p>由于货币的时间值，今天收到一美元比明天收到一美元更有价值。 NPV 计算每个现金流系列的现值，并将它们相加得到净现值。每笔现金流入/流出被折算回其现值(PV)。然后对所有项进行求和。因此，NPV 是所有项的和。</p>
+<p><img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/mathpix 2021-01-23 12-17-05.png" alt><br>其中：<br><code>t</code> 是现金流的时间<br><code>i</code>是折现率/贴现率，即：具有相似风险的投资在每单位时间可获得的回报<br><code>Rt</code>是现金流，即：某个时期<code>t</code>的现金净流入-净流出额，出于教育目的，<code>R0</code> 通常放在总和的左侧，以强调其作为（减去）投资的作用。<br>该公式的结果乘以年度现金流入净额，然后减去初始现金支出的现值，但是如果现金流量的金额不相等，则将使用先前的公式来分别确定现金流量的现值。 12 个月内的任何现金流都不会被折现为净现值，但通常第一年的初始投资 R0 是负的现金流。</p>
+<p><img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/mathpix 2021-01-23 13-41-14.png" alt="NPV"></p>
+<p>其中：<br>Rt：某个时期<code>t</code>的现金流（现金净流入-净流出额）<br>i：周期<br>N：方案计算期(<code>i</code>的次数)<br>对于固定的现金流<code>R</code>，净现值<code>NPV</code>是一个有限几何级数：</p>
+<p><img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/mathpix 2021-01-23 13-54-02.png" alt="NPV"></p>
+<p>在上述公式中，包含<code>R0</code>项很重要。一个典型的资本项目包括一个大的负<code>R0</code>现金流(初始投资)和正的未来现金流(投资回报)。一个关键的评估是，对于给定的贴现率，净现值是正的(盈利)还是负的(亏损)。IRR 是 NPV 恰好为 0 时的折现率。</p>
+<h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><p>某公司决定引进新的产品线。当 =0 时，公司的直接投入成本为 100,000。回想一下，一个花费对于流出的现金流是负的，因此这个现金流表示为−100,000。公司假设该产品从 t=1 开始，在 12 年的时间里，每年产生 10,000 元的同等收益。为简单起见，假设公司在最初投入 10 万成本之后没有现金流流出。这也简化了一种假设，即每年最后一天的净收入都集中在一笔交易中。在 12 年结束时，产品不再提供任何现金流，并且在没有任何额外成本的情况下停止生产。假设实际年贴现率（<code>i</code>）为 10%。</p>
+<table>
+<thead>
+<tr>
+<th>年份（Year）</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>现金流</td>
+<td>-100000/(1+0.10)**0</td>
+<td>10000/(1+0.10)**1</td>
+<td>10000/(1+0.10)**2</td>
+<td>10000/(1+0.10)**3</td>
+<td>10000/(1+0.10)**4</td>
+<td>10000/(1+0.10)**5</td>
+<td>10000/(1+0.10)**6</td>
+<td>10000/(1+0.10)**7</td>
+<td>10000/(1+0.10)**8</td>
+<td>10000/(1+0.10)**9</td>
+<td>10000/(1+0.10)**10</td>
+<td>10000/(1+0.10)**11</td>
+</tr>
+<tr>
+<td>现值（PV）</td>
+<td>9,090.91</td>
+<td>8,264.46</td>
+<td>7,513.15</td>
+<td>6,830.13</td>
+<td>6,209.21</td>
+<td>5,644.74</td>
+<td>5,131.58</td>
+<td>4,665.07</td>
+<td>4,240.98</td>
+<td>3,855.43</td>
+<td>3,504.94</td>
+<td>3,186.31</td>
+</tr>
+</tbody>
+</table>
+<p>合计收入现金流：68,136.91，流出现金流量的总现值就是时间 t = 0 时的 100,000。则 NPV=68136.91-100000=-31953.09</p>
+<h4 id="贴现率-折现率（discount-rate）"><a href="#贴现率-折现率（discount-rate）" class="headerlink" title="贴现率/折现率（discount rate）"></a>贴现率/折现率（discount rate）</h4><p>贴现率又称门槛比率（Europe称为the refinancing rate，UK称为repo rate，US称为discount rate），是指商业银行办理票据贴现业务时，按一定的利率计算利息，这种利率即为贴现率，它是票据贴现者获得资金的价格。常用于票据贴现。企业所有的应收票据，在到期前需要资金周转时，可用票据向银行申请贴现或借款。银行同意时，按一定的利率从票据面值中扣除贴现或借款日到票据到期日止的利息，而付给余额。贴现率的高低，主要根据金融市场利率来决定。</p>
+<ul>
+<li>举例</li>
+</ul>
+<p>比如A企业拥有B企业给的100元票据，票据上规定了A企业可以在一段时间后去银行支取票面金额100，但A企业现金流紧张，希望当下立刻拿到现金，A企业拿票据来银行进行兑换；因为货币是有时间价值的，银行通过计算，提出当下可以给企业98元，那么贴现率就是2%。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://en.wikipedia.org/wiki/Net_present_value">Net present value - Wikipedia</a></p>
+<h3 id="IRR-Internal-Rate-of-Return"><a href="#IRR-Internal-Rate-of-Return" class="headerlink" title="IRR(Internal Rate of Return)"></a>IRR(Internal Rate of Return)</h3><p>内部回报率（英文：internal rate of return，缩写：IRR）是一种投资的评估方法，也就是找出资产潜在的回报率，其原理是利用内部回报率折现，投资的净现值恰好等于零。内部收益率（IRR）衡量投资的收益率。 “内部”一词是指内部利率不包括外部因素，如通货膨胀，资本成本或各种金融风险。</p>
+<h4 id="计算公式-1"><a href="#计算公式-1" class="headerlink" title="计算公式"></a>计算公式</h4><p><img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/mathpix 2021-01-23 10-49-56.png" alt="IRR"></p>
+<h4 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h4><ol>
+<li>现金流必须定期（如每月或每年）出现。</li>
+<li>时间本身是一个很大的变量<br>计算 NPV 是一个估值，例如折旧率和每年的现金流入等都是一个长远来看很难预测准确的值。预测的时间越长，预测是值越不会准确。所以如果根据计算，NPV 在很多年后才能是正数，那么这个年数就越不可靠。<br>然而企业投资决策除了要考虑净现值外，还需要考虑投资决策是否会影响行业内的竞争力，这种战略性考虑也是投资决策需要注重的部分。然而这些东西在计算 NPV 时都是无法考虑进去的。</li>
+</ol>
+<div class="note info modern"><h4 id="IRR-和-NPV-联系"><a href="#IRR-和-NPV-联系" class="headerlink" title="IRR 和 NPV 联系"></a>IRR 和 NPV 联系</h4><ol>
+<li>净现值（NPV）和内部收益率（IRR）均被称为现金流量折现法，因为它们将金钱的时间价值纳入资本投资项目评估中。 净现值和内部收益率均基于一系列的未来付款（负现金流），收入（正现金流），亏损（负现金流）或“无收益者”（零现金流）。</li>
+<li>IRR 函数与 NPV 函数密切相关。通过 IRR 计算得出的收益率对应于 0（零）NPV 的利率。</li>
+<li>NPV 确定项目是否获得更多或低于所需的收益率 (也称为障碍率) 并且擅长找出项目是否会盈利。 IRR 比 NPV 更进一步来确定项目的特定收益率。 NPV 和 IRR 都提供可用于比较竞争项目并针对业务做出最佳选择的数字。<br>IRR 和 NPV 联系参阅：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/27277841">IRR 和 NPV 的区别？ - 知乎</a></li>
+</ol>
+</div>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pmts = [-<span class="number">1000</span>, <span class="number">100</span>, -<span class="number">1300</span>, -<span class="number">2000</span>, <span class="number">5200</span>]</span><br><span class="line">irr = IRR()</span><br><span class="line">irr(pmts)</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/23591242">公司理财实践中，净现值等经常被使用吗？估计的折现率是否可靠？ - 知乎</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.zhihu.com/question/27693242">如何通俗易懂地解释折现率和贴现率 ? - 知乎</a></p>
+<h3 id="XIRR"><a href="#XIRR" class="headerlink" title="XIRR"></a>XIRR</h3><p>若要利用 IRR 函数来计算报酬率，现金流量必须是以“一期”为单位，也就是输入的现金流量必须有期数的观念。但是常常有些应用，现金流量并非定期式的。XIRR 传回来的报酬率已经是年报酬率。<br>返回一组不一定定期发生的现金流的内部收益率。</p>
+<h4 id="计算公式-2"><a href="#计算公式-2" class="headerlink" title="计算公式"></a>计算公式</h4><p><img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/mathpix 2021-01-23 10-51-09.png" alt></p>
+<h4 id="备注-1"><a href="#备注-1" class="headerlink" title="备注"></a>备注</h4><ol>
+<li>XIRR 预期至少有一个正现金流和一个负现金流；否则，XIRR 返回#NUM！ 错误值。</li>
+<li>如果日期中的任一数字不是有效日期，函数 XIRR 返回#VALUE！ 错误值。</li>
+<li>如果日期中的任意数字在开始日期之前，函数 XIRR 返回#NUM！ 错误值。</li>
+<li>如果值和日期包含不同数量的值，函数 XIRR 返回#NUM！ 错误值。</li>
+<li>大多数情况下，不必为函数 XIRR 的计算提供 guess 值。 如果省略， guess 值假定为 0.1 (10%)。</li>
+<li>函数 XIRR 与净现值函数 XNPV 密切相关。 函数 XIRR 计算的收益率即为函数 XNPV = 0 时的利率。</li>
+</ol>
+<h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dates = [datetime.date(<span class="number">2008</span>, <span class="number">1</span>, <span class="number">1</span>),</span><br><span class="line">             datetime.date(<span class="number">2008</span>, <span class="number">3</span>, <span class="number">1</span>),</span><br><span class="line">             datetime.date(<span class="number">2008</span>, <span class="number">10</span>, <span class="number">30</span>),</span><br><span class="line">             datetime.date(<span class="number">2009</span>, <span class="number">2</span>, <span class="number">15</span>),</span><br><span class="line">             datetime.date(<span class="number">2009</span>, <span class="number">4</span>, <span class="number">1</span>), ]</span><br><span class="line">values = [-<span class="number">10000</span>,</span><br><span class="line">        <span class="number">2750</span>,</span><br><span class="line">        <span class="number">4250</span>,</span><br><span class="line">        <span class="number">3250</span>,</span><br><span class="line">        <span class="number">2750</span>,</span><br><span class="line">        ]</span><br><span class="line">xirr = XIRR()</span><br><span class="line">xirr(values, dates)     <span class="comment"># 0.3733625335188317</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.microsoft.com/zh-cn/office/xirr-%E5%87%BD%E6%95%B0-de1242ec-6477-445b-b11b-a303ad9adc9d">XIRR 函数 - Office 支持</a></p>
+<h3 id="MIRR（Modified-Internal-Rate-of-Return）"><a href="#MIRR（Modified-Internal-Rate-of-Return）" class="headerlink" title="MIRR（Modified Internal Rate of Return）"></a>MIRR（Modified Internal Rate of Return）</h3><blockquote>
+<p>返回一系列定期现金流的修改内部收益率。 MIRR 同时考虑投资成本和在重新投资现金时收到的利息。</p>
+</blockquote>
+<p>IRR 到底有何缺点，需要去修正呢？主要的原因是 IRR 并未考虑期间领回现金再投资问题！IRR 的现金流量里可分为正值及负值两大类，正值部分属于投资期中投资者拿回去的现金，这些期中拿回去的现金该如何运用，会影响报酬率的。负值部分属于投资期中额外再投入的资金，这些资金的取得也有融资利率方面要考虑。</p>
+<p>MIRR 使用的方式是将期间所有的现金流入，全部以“再投资利率”计算终值 FV。期间所有的现金流出，全部以“融资利率”计算现值 PV。</p>
+<h4 id="计算公式-3"><a href="#计算公式-3" class="headerlink" title="计算公式"></a>计算公式</h4><p><img src="/img/loading.svg" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/mathpix 2021-01-24 22-56-24.png" alt="MIRR"><br>其中：</p>
+<ul>
+<li>n 为现金流的次数</li>
+<li>frate 为 finance_rate</li>
+<li>rrate 为 reinvest_rate</li>
+</ul>
+<h4 id="备注-2"><a href="#备注-2" class="headerlink" title="备注"></a>备注</h4><ul>
+<li>MIRR 使用值的顺序来说明现金流的顺序。 一定要按您需要的顺序输入支出值和收益值，并使用正确的符号。<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.microsoft.com/zh-cn/office/mirr-%E5%87%BD%E6%95%B0-b020f038-7492-4fb4-93c1-35c345b53524">MIRR 函数 - Office 支持</a></li>
+</ul>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>现金流正负问题<br>使用这些函数时，请特别注意如何处理第一期开始时发生的即时现金流以及期初发生的所有其他现金流。现金流指定为负值、正值或零值。</li>
+<li>时间很重要<br>在计算时，要保持最先日期在前，按照时间顺序填入，否则可能计算结果与实际大相径庭</li>
+<li>使用者定义期间长短<br>IRR 的参数并没有绝对日期，只有“一期”的概念。每一期可以是一年、一个月或一天，随著使用者自行定义。如果每一格是代表一个“月”的现金流量，那麽传回的报酬率就是“月报酬率”；如果每一格是代表一个“年”的现金流量，那麽传回的报酬率就是“年报酬率”。</li>
+<li>guess——猜测报酬率可能的落点<br>guess 是个有趣的参数，IRR 函数的目的不就是要解出报酬率的值吗，怎么会要我们自己猜测报酬率的落点呢？这不是很奇怪吗，Excel 计算功能那么强，难道 IRR 函数无法直接解出来？没错， IRR 是无法解的！以[-100, -102, -104, -106, 450]这一组现金流量为例，等于得求出下列方程式中 rate 的解：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0 &#x3D; -100+(-102&#x2F;(1+rate)^1)+(-104&#x2F;(1+rate)^2)+ (-106&#x2F;(1+rate)^3)+ (450&#x2F;(1+rate)^4)</span><br></pre></td></tr></table></figure>
+这就难了！因为有 4 次方。假若现金流量的期数更多，那就更复杂了，而且使用者会输入几期还不知道。还好虽然无法直接求解，Excel 使用代入逼近法，先假设一个可能的 rate(10%)，然后代入上面式子看看是否吻合，如果不是就变动 rate 的值，然后慢慢逼近、反复计算，直到误差小于 0.00001% 为止。如果真正的解和预设值差距过远，运算超过 20 次还是无法求得答案，IRR 函数会传回错误值 #NUM!。这时使用者就必须使用较接近的 guess 值，然后再试一次。<br>所以 guess 参数只是 IRR 函数开始寻找答案的起始点而已，跟找到的答案是无关。下面三个 IRR 公式，同样的现金流量，但是 guess 参数都不同，结果答案却都一样是 3.60%。<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x3D;IRR(&#123;-100, -102, -104, -106, 450&#125;)</span><br><span class="line">&#x3D;IRR(&#123;-100, -102, -104, -106, 450&#125;, 1% )</span><br><span class="line">&#x3D;IRR(&#123;-100, -102, -104, -106, 450&#125;, 2% )</span><br></pre></td></tr></table></figure>
+guess 是选项参数<br>guess 参数可以省略不输入，这时 Excel 会使用预设值 10%。通常这是一年为一期报酬率都落在这附近，如果要计算月报酬率最好输入 1%，依此类推。<br>参阅<a target="_blank" rel="external nofollow noopener noreferrer" href="https://zhidao.baidu.com/question/1541287445672685307.html">Excel 在投资理财中的应用</a></li>
+</ul>
+<h3 id="复利终值和年金复利终值什么区别"><a href="#复利终值和年金复利终值什么区别" class="headerlink" title="复利终值和年金复利终值什么区别"></a>复利终值和年金复利终值什么区别</h3><blockquote>
+<p>年金：金额相等，间隔时间相等<br>复利：利滚利</p>
+</blockquote>
+<p>复利终值，是针对一次性款项计算的未来时点的价值，比如说 2010 年发生一笔投入 100 元，问 2015 年的价值，这时则用复利终值系数计算。</p>
+<p>年金终值，是一系列等额等间隔发生的款项的未来时点的价值，比如说 2010 年，2011 年，2012 年每年年末分别投入 100 元，则 2012 年的终值要用年金终值系数来计算。</p>
+<p>年金终值就是在已知等额收付款金额、利率(这里我们默认为年利率)和计息期数 n 时，考虑货币的时间价值，计算出的这些收付款到到期时的等价票面金额。</p>
+<p>复利终值指一定量的本金按照复利计算若干期后的本利和。复利是计算利息的一种方法。</p>
+<p>按照这种方法，每经过一个计息期，要将所生利息加入本金再计利息，逐期滚算，俗称”利滚利”。这里所说的计息期是指相邻两次计息的时间间隔，如年、月、日等。除非特别指明，计息期为 1 年。</p>
+<ul>
+<li><p>复利现值和年金现值</p>
+<p>假定利率的 5%，期限是 3 年。</p>
+<ol>
+<li><p>年金现值系数是：（P/A，5%，3），它的意思是说，未来 3 年里，每年年末都收到（支出）1 块钱，求这 3 年里总共收到（支出）的这些钱的现值是多少。（P/A，5%，3）*1 就表示这 3 年里总共收到（支出）的这些钱的现值。</p>
+</li>
+<li><p>复利现值系数是（P/F，5%，3），它的意思是说，未来的第 3 年年末将收到（支出）1 块钱，求 1 块钱的现值是多少。（P/F，5%，3）*1 就表示第 3 年年末收到（支出）1 块钱的现值。</p>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.canet.com.cn/shiwu/688174.html">复利终值和年金复利终值什么区别？_中国会计网</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zhuanlan.zhihu.com/p/67753967">年金与复利现值及终值的区别 - 知乎</a></li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>数字不会说谎。知道收益回报率对理财来说很重要，明确收益才能知道一项投资是否值得我们倾注时间和资产。长坡厚雪，时间的积累会在平凡中给我们意外的惊喜。</p>
+<blockquote>
+<p>My papa once told me, “Son, it’s better to get your money as soon as possible and hold on to it as long as possible.” Later in life, I learned why. You can invest this money at a compounded interest rate, which means that your money can make you more money — and then some. In other words, when cash goes out or comes in is just as important as how much cash goes out or comes in.</p>
+<p>我的父亲曾经告诉我：“儿子，最好尽快把钱装进口袋，并尽可能长久地持有下去。” 后来，我知道了缘由：我们可以按照复利投资这笔钱，这意味着您的钱可以使您赚更多钱——然后是更多。 换句话说，何时现金流出或流入与现金流出或流入多少同等重要。</p>
+</blockquote>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><h3 id="概念相关"><a href="#概念相关" class="headerlink" title="概念相关"></a>概念相关</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://zh.wikipedia.org/wiki/%E5%85%A7%E9%83%A8%E5%A0%B1%E9%85%AC%E7%8E%87">内部回报率 - 维基百科，自由的百科全书</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.microsoft.com/en-us/office/go-with-the-cash-flow-calculate-npv-and-irr-in-excel-9e3d78bb-f1de-4f8e-a20e-b8955851690c">Go with the cash flow: Calculate NPV and IRR in Excel - Excel</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.microsoft.com/zh-cn/office/%E9%87%87%E7%94%A8%E7%8E%B0%E9%87%91%E6%B5%81%EF%BC%9A%E5%9C%A8-excel-%E4%B8%AD%E8%AE%A1%E7%AE%97-npv-%E5%92%8C-irr-9e3d78bb-f1de-4f8e-a20e-b8955851690c">采用现金流：在 Excel 中计算 NPV 和 IRR - Excel</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://support.microsoft.com/zh-cn/office/%E8%B4%A2%E5%8A%A1%E5%87%BD%E6%95%B0%EF%BC%88%E5%8F%82%E8%80%83%EF%BC%89-5658d81e-6035-4f24-89c1-fbf124c2b1d8">财务函数（参考） - Office 支持</a></li>
+</ul>
+<h3 id="代码相关"><a href="#代码相关" class="headerlink" title="代码相关"></a>代码相关</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/Tacombel/XIRR.py">Tacombel/XIRR.py: XIRR function for PYTHON</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tarioch/xirr/">tarioch/xirr</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/peliot/XIRR-and-XNPV">peliot/XIRR-and-XNPV: python implementation of Microsoft Excel’s XNPV and XIRR</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.indiainfoline.com/article/research-articles/xirr-how-to-calculate-your-returns-38115077_1.html">XIRR: How to calculate your returns</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/questions/8919718/financial-python-library-that-has-xirr-and-xnpv-function">financial python library that has xirr and xnpv function? - Stack Overflow</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/qq_34105362/article/details/89146711">计算 XIRR_喜东东的博客-CSDN 博客_xirr 计算原理</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/questions/46668172/calculating-xirr-in-python">pandas - Calculating XIRR in Python - Stack Overflow</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/RayDeCampo/nodejs-xirr">RayDeCampo/nodejs-xirr: Compute the internal rate of return of a sequences of transactions made at irregular periods.</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://www.justdopython.com/2021/01/04/python-rate-of-return/">做时间的朋友，必须知道收益咋算 | Python 技术</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jianshu.com/p/9ad131856078">Python 数据分析_Numpy 中的金融函数 - 简书</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:immoyao@gmail.com" rel="external nofollow noopener noreferrer" target="_blank">imoyao</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.masantu.com/blog/2021-01-23/calculate-cash-flow-with-python/">https://www.masantu.com/blog/2021-01-23/calculate-cash-flow-with-python/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.masantu.com" target="_blank">别院牧志</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/TODO/">TODO</a><a class="post-meta__tags" href="/tags/IRR/">IRR</a><a class="post-meta__tags" href="/tags/XIRR/">XIRR</a><a class="post-meta__tags" href="/tags/MIRR/">MIRR</a><a class="post-meta__tags" href="/tags/XNPV/">XNPV</a><a class="post-meta__tags" href="/tags/%E7%90%86%E8%B4%A2/">理财</a><a class="post-meta__tags" href="/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/">经济学</a></div><div class="post_share"><div class="social-share" data-image="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechatpay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/wechatpay.jpg" alt="wechat"></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/img/alipay.jpg" alt="alipay"></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/"><img class="next-cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="onerror=null;src='/img/post_loadding.svg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/blog/2020-01-12/Python-Tinify-images/" title="使用 Python 压缩图片(借助 TinyPng 的接口)"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-12</div><div class="title">使用 Python 压缩图片(借助 TinyPng 的接口)</div></div></a></div><div><a href="/blog/2019-12-27/python-split-list-into-lists-by-particular-value/" title="🐍PyTricks | Python 中如何把一个列表切分成指定大小的子列表"><img class="cover" data-lazy-src="/images/Python/Python-snake.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-12-27</div><div class="title">🐍PyTricks | Python 中如何把一个列表切分成指定大小的子列表</div></div></a></div><div><a href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img class="cover" data-lazy-src="https://img.xjh.me/random_img.php?type=bg&ctype=nature&return=302" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-12-12</div><div class="title">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</div></div></a></div><div><a href="/blog/2020-09-03/use-python-decorator-prudently/" title="三思而后行：谨慎使用你的装饰器"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/Let-The-Bullets-Fly/Snipaste_2020-09-07_00-03-21.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-03</div><div class="title">三思而后行：谨慎使用你的装饰器</div></div></a></div><div><a href="/blog/2020-05-01/python-OCR/" title="如何用 Python 识别图片文字（基于百度 OCR API）"><img class="cover" data-lazy-src="/images/gO1532084224753.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-01</div><div class="title">如何用 Python 识别图片文字（基于百度 OCR API）</div></div></a></div><div><a href="/blog/2019-12-25/active-PyCharm/" title="PyCharm 最新专业版（2020.2.2）激活"><img class="cover" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics@master/images/PyCharm.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-12-25</div><div class="title">PyCharm 最新专业版（2020.2.2）激活</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/imoyao.jpg" onerror="this.onerror=null;this.src='/img/Ellipsis-5s-210px.svg'" alt="avatar"><div class="author-info__name">imoyao</div><div class="author-info__description">深深别院，潜潜牧志。一个独立博客，本人使用 Python 语言开发，致力于写出 Pythonic 的代码。</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">101</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://zhihu.com/imoyao"><i class="fab fa-zhihu"></i><span>来知乎和我互动</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/imoyao" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.masantu.com" target="_blank" title="自留地"><i class="fas fa-feather-alt"></i></a><a class="social-icon" href="/immoyao@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content"><h3>💃Be my guest!👋~</h3>🧐你对我的好奇心均可在 <a href="/about/">关于我</a> 页面得到满足；如果没有，你有困难我帮忙，我住隔壁我姓王。😜<br>欢迎关注个人公众号 <strong>别院牧志</strong>。<br><img alt="idealyard" title="别院牧志" data-src="https://open.weixin.qq.com/qr/code?username=idealyard" class="lazyloaded" src="https://open.weixin.qq.com/qr/code?username=idealyard"></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PMT"><span class="toc-number">1.1.</span> <span class="toc-text">PMT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NPV%EF%BC%88Net-Present-Value%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">NPV（Net Present Value）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">计算公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%B4%E7%8E%B0%E7%8E%87-%E6%8A%98%E7%8E%B0%E7%8E%87%EF%BC%88discount-rate%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">贴现率&#x2F;折现率（discount rate）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IRR-Internal-Rate-of-Return"><span class="toc-number">1.3.</span> <span class="toc-text">IRR(Internal Rate of Return)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">计算公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8"><span class="toc-number">1.3.2.</span> <span class="toc-text">备注</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IRR-%E5%92%8C-NPV-%E8%81%94%E7%B3%BB"><span class="toc-number">1.3.3.</span> <span class="toc-text">IRR 和 NPV 联系</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XIRR"><span class="toc-number">1.4.</span> <span class="toc-text">XIRR</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F-2"><span class="toc-number">1.4.1.</span> <span class="toc-text">计算公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8-1"><span class="toc-number">1.4.2.</span> <span class="toc-text">备注</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B-2"><span class="toc-number">1.4.3.</span> <span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MIRR%EF%BC%88Modified-Internal-Rate-of-Return%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">MIRR（Modified Internal Rate of Return）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F-3"><span class="toc-number">1.5.1.</span> <span class="toc-text">计算公式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8-2"><span class="toc-number">1.5.2.</span> <span class="toc-text">备注</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">2.</span> <span class="toc-text">注意</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%88%A9%E7%BB%88%E5%80%BC%E5%92%8C%E5%B9%B4%E9%87%91%E5%A4%8D%E5%88%A9%E7%BB%88%E5%80%BC%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB"><span class="toc-number">2.1.</span> <span class="toc-text">复利终值和年金复利终值什么区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">参考链接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5%E7%9B%B8%E5%85%B3"><span class="toc-number">4.1.</span> <span class="toc-text">概念相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%9B%B8%E5%85%B3"><span class="toc-number">4.2.</span> <span class="toc-text">代码相关</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2021-01-23/calculate-cash-flow-with-python/" title="使用 Python 计算你的现金流收益率"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 计算你的现金流收益率"></a><div class="content"><a class="title" href="/blog/2021-01-23/calculate-cash-flow-with-python/" title="使用 Python 计算你的现金流收益率">使用 Python 计算你的现金流收益率</a><time datetime="2021-01-23T02:14:41.988Z" title="发表于 2021-01-23 10:14:41">2021-01-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名"></a><div class="content"><a class="title" href="/blog/2020-12-12/recurse-rename-dirname-and-file-with-python/" title="使用 Python 递归目录并按照特定规则修改其下文件夹及文件名">使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</a><time datetime="2020-12-12T13:47:47.000Z" title="发表于 2020-12-12 21:47:47">2020-12-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来"><img data-lazy-src="https://cdn.jsdelivr.net/gh/masantu/statics/images/pine-watt-dUbKcgu0zjw-unsplash.jpg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="把两个 Git 仓库合并起来"></a><div class="content"><a class="title" href="/blog/2020-12-07/merge-repos-with-git/" title="把两个 Git 仓库合并起来">把两个 Git 仓库合并起来</a><time datetime="2020-12-07T14:08:18.000Z" title="发表于 2020-12-07 22:08:18">2020-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案"><img data-lazy-src="https://img.xjh.me/random_img.php?type=bg&amp;ctype=nature&amp;return=302" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="免费个人博客图床解决方案"></a><div class="content"><a class="title" href="/blog/2020-12-06/images-hosting/" title="免费个人博客图床解决方案">免费个人博客图床解决方案</a><time datetime="2020-12-06T02:52:09.000Z" title="发表于 2020-12-06 10:52:09">2020-12-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破"><img data-lazy-src="/images/plan.jpeg" onerror="this.onerror=null;this.src='/img/post_loadding.svg'" alt="庖丁解牛 | 任务分解，各个击破"></a><div class="content"><a class="title" href="/blog/2020-12-05/browse-your-tasks/" title="庖丁解牛 | 任务分解，各个击破">庖丁解牛 | 任务分解，各个击破</a><time datetime="2020-12-05T01:59:43.000Z" title="发表于 2020-12-05 09:59:43">2020-12-05</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/images/footer.svg)"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By imoyao</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'tVPRVDtsAXHH6pVaD2ymi5CY-MdYXbMMI',
+      appKey: 'CARePe7R247vdXACFg1fhk4E',
+      placeholder: '我们期待并欢迎理性、友好而和谐的声音……',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script>(function(){
+  const bp = document.createElement('script');
+  const curProtocol = window.location.protocol.split(':')[0];
+  if (curProtocol === 'https') {
+    bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+  }
+  else{
+    bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+  }
+  bp.dataset.pjax = ''
+  const s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(bp, s);
+})()</script></div></body></html>

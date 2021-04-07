@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.masantu.com/"/>
-  <updated>2021-01-20T15:07:51.617Z</updated>
+  <updated>2021-01-27T15:57:56.842Z</updated>
   <id>https://www.masantu.com/</id>
   
   <author>
@@ -15,6 +15,45 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用 Python 计算你的现金流收益率</title>
+    <link href="https://www.masantu.com/blog/2021-01-23/calculate-cash-flow-with-python/"/>
+    <id>https://www.masantu.com/blog/2021-01-23/calculate-cash-flow-with-python/</id>
+    <published>2021-01-23T02:14:41.988Z</published>
+    <updated>2021-01-27T15:57:56.842Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
+    
+      <category term="TODO" scheme="https://www.masantu.com/tags/TODO/"/>
+    
+      <category term="IRR" scheme="https://www.masantu.com/tags/IRR/"/>
+    
+      <category term="XIRR" scheme="https://www.masantu.com/tags/XIRR/"/>
+    
+      <category term="MIRR" scheme="https://www.masantu.com/tags/MIRR/"/>
+    
+      <category term="XNPV" scheme="https://www.masantu.com/tags/XNPV/"/>
+    
+      <category term="理财" scheme="https://www.masantu.com/tags/%E7%90%86%E8%B4%A2/"/>
+    
+      <category term="经济学" scheme="https://www.masantu.com/tags/%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>使用 Python 递归目录并按照特定规则修改其下文件夹及文件名</title>
@@ -331,6 +370,35 @@
   </entry>
   
   <entry>
+    <title>一种基于 DRBD 实现的 ALUA 解决方案</title>
+    <link href="https://www.masantu.com/blog/2020-07-22/alua-with-drbd/"/>
+    <id>https://www.masantu.com/blog/2020-07-22/alua-with-drbd/</id>
+    <published>2020-07-22T02:19:18.000Z</published>
+    <updated>2021-04-07T14:19:38.069Z</updated>
+    
+    <summary type="html">
+    
+      有东西被加密了, 请输入密码查看！
+    
+    </summary>
+    
+    
+      <category term="项目相关" scheme="https://www.masantu.com/categories/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3/"/>
+    
+    
+      <category term="DRBD" scheme="https://www.masantu.com/tags/DRBD/"/>
+    
+      <category term="存储" scheme="https://www.masantu.com/tags/%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="高可用" scheme="https://www.masantu.com/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/"/>
+    
+      <category term="ALUA" scheme="https://www.masantu.com/tags/ALUA/"/>
+    
+      <category term="双活" scheme="https://www.masantu.com/tags/%E5%8F%8C%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python 如何实现跨主机文件目录同步？（基于 watchdog 和 rsync）</title>
     <link href="https://www.masantu.com/blog/2020-07-22/monitor-files-for-changes-with-python/"/>
     <id>https://www.masantu.com/blog/2020-07-22/monitor-files-for-changes-with-python/</id>
@@ -356,38 +424,11 @@
   </entry>
   
   <entry>
-    <title>一种基于 DRBD 实现的 ALUA 解决方案</title>
-    <link href="https://www.masantu.com/blog/2020-07-22/alua-with-drbd/"/>
-    <id>https://www.masantu.com/blog/2020-07-22/alua-with-drbd/</id>
-    <published>2020-07-22T02:19:18.000Z</published>
-    <updated>2021-01-20T14:14:12.576Z</updated>
-    
-    <summary type="html">
-    
-      有东西被加密了, 请输入密码查看！
-    
-    </summary>
-    
-    
-      <category term="项目相关" scheme="https://www.masantu.com/categories/%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3/"/>
-    
-    
-      <category term="DRBD" scheme="https://www.masantu.com/tags/DRBD/"/>
-    
-      <category term="存储" scheme="https://www.masantu.com/tags/%E5%AD%98%E5%82%A8/"/>
-    
-      <category term="ALUA" scheme="https://www.masantu.com/tags/ALUA/"/>
-    
-      <category term="双活" scheme="https://www.masantu.com/tags/%E5%8F%8C%E6%B4%BB/"/>
-    
-  </entry>
-  
-  <entry>
     <title>2020 面试记录（持续更新）</title>
     <link href="https://www.masantu.com/blog/2020-06-09/interview-2020/"/>
     <id>https://www.masantu.com/blog/2020-06-09/interview-2020/</id>
     <published>2020-06-09T01:23:06.000Z</published>
-    <updated>2021-01-20T14:14:12.658Z</updated>
+    <updated>2021-03-21T09:45:09.614Z</updated>
     
     <summary type="html">
     
@@ -594,35 +635,6 @@
       <category term="色系" scheme="https://www.masantu.com/tags/%E8%89%B2%E7%B3%BB/"/>
     
       <category term="颜色" scheme="https://www.masantu.com/tags/%E9%A2%9C%E8%89%B2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>中国传统色 | 朱砂痣还是白月光，哪个才是我们的心头好？</title>
-    <link href="https://www.masantu.com/blog/2020-04-13/Traditional-Chinese-Colors/"/>
-    <id>https://www.masantu.com/blog/2020-04-13/Traditional-Chinese-Colors/</id>
-    <published>2020-04-13T13:15:00.000Z</published>
-    <updated>2021-01-20T14:14:12.570Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;script src=&quot;\assets\js\APlayer.min.js&quot;&gt; &lt;/script&gt;&lt;h2 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="Projects" scheme="https://www.masantu.com/categories/Projects/"/>
-    
-      <category term="GUSCSS" scheme="https://www.masantu.com/categories/Projects/GUSCSS/"/>
-    
-    
-      <category term="Python" scheme="https://www.masantu.com/tags/Python/"/>
     
   </entry>
   

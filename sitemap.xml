@@ -2,6 +2,83 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.masantu.com/links/index.html</loc>
+    
+    <lastmod>2021-04-07T14:29:33.431Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2018-04-10/late-binding-of-Python/</loc>
+    
+    <lastmod>2021-04-07T14:19:38.079Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2020-07-22/alua-with-drbd/</loc>
+    
+    <lastmod>2021-04-07T14:19:38.069Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2020-06-09/interview-2020/</loc>
+    
+    <lastmod>2021-03-21T09:45:09.614Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2018-04-28/the-underline-of-Python/</loc>
+    
+    <lastmod>2021-03-17T14:16:31.704Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2019-04-13/python-pass-by-object-reference/</loc>
+    
+    <lastmod>2021-03-17T14:16:31.682Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2019-10-18/interview-2019/</loc>
+    
+    <lastmod>2021-03-17T14:16:31.661Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2019-07-03/flask-sqlalchemy-many-to-many/</loc>
+    
+    <lastmod>2021-03-17T14:16:31.643Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2020-03-16/ceph-deploy-install-a-specific-minor-version-ceph/</loc>
+    
+    <lastmod>2021-03-17T14:16:31.587Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2021-01-23/calculate-cash-flow-with-python/</loc>
+    
+    <lastmod>2021-01-27T15:57:56.842Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.masantu.com/blog/2019-12-27/python-split-list-into-lists-by-particular-value/</loc>
+    
+    <lastmod>2021-01-27T14:52:00.913Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.masantu.com/blog/2020-12-06/images-hosting/</loc>
     
     <lastmod>2021-01-20T15:14:04.053Z</lastmod>
@@ -26,13 +103,6 @@
     <loc>https://www.masantu.com/tags/index.html</loc>
     
     <lastmod>2021-01-20T14:14:18.154Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/links/index.html</loc>
-    
-    <lastmod>2021-01-20T14:14:18.151Z</lastmod>
     
   </url>
   
@@ -86,13 +156,6 @@
   </url>
   
   <url>
-    <loc>https://www.masantu.com/blog/2018-04-28/the-underline-of-Python/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.765Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.masantu.com/blog/2019-11-19/the-detail-of-ping-a-domain/</loc>
     
     <lastmod>2021-01-20T14:14:12.735Z</lastmod>
@@ -110,13 +173,6 @@
     <loc>https://www.masantu.com/blog/2019-09-20/tcp-connection-3-way-handshake-and-termination-4-way-handshake/</loc>
     
     <lastmod>2021-01-20T14:14:12.731Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/blog/2017-12-27/storcli-command-share/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.729Z</lastmod>
     
   </url>
   
@@ -145,20 +201,6 @@
     <loc>https://www.masantu.com/blog/2017-12-03/recommend-books-for-Python-learner/</loc>
     
     <lastmod>2021-01-20T14:14:12.695Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/blog/2019-12-27/python-split-list-into-lists-by-particular-value/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.693Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/blog/2019-04-13/python-pass-by-object-reference/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.691Z</lastmod>
     
   </url>
   
@@ -243,34 +285,6 @@
     <loc>https://www.masantu.com/blog/2020-12-07/merge-repos-with-git/</loc>
     
     <lastmod>2021-01-20T14:14:12.665Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/blog/2017-11-20/megacli-command-share/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.663Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/blog/2018-04-10/late-binding-of-Python/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.660Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/blog/2020-06-09/interview-2020/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.658Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/blog/2019-10-18/interview-2019/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.656Z</lastmod>
     
   </url>
   
@@ -401,13 +415,6 @@
   </url>
   
   <url>
-    <loc>https://www.masantu.com/blog/2019-07-03/flask-sqlalchemy-many-to-many/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.616Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.masantu.com/blog/2018-05-10/executing-select-where-in-using-mysqldb/</loc>
     
     <lastmod>2021-01-20T14:14:12.614Z</lastmod>
@@ -478,13 +485,6 @@
   </url>
   
   <url>
-    <loc>https://www.masantu.com/blog/2020-03-16/ceph-deploy-install-a-specific-minor-version-ceph/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.590Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.masantu.com/blog/2019-10-23/ceph-calamari-install-guide/</loc>
     
     <lastmod>2021-01-20T14:14:12.588Z</lastmod>
@@ -516,13 +516,6 @@
     <loc>https://www.masantu.com/blog/2020-09-23/atomic-writing-to-file-with-python/</loc>
     
     <lastmod>2021-01-20T14:14:12.579Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://www.masantu.com/blog/2020-07-22/alua-with-drbd/</loc>
-    
-    <lastmod>2021-01-20T14:14:12.576Z</lastmod>
     
   </url>
   
